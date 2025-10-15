@@ -112,7 +112,7 @@ export default {
     async handleLogin() {
       try {
         await this.authStore.login(this.form);
-        this.$router.push('/dashboard');
+        this.$router.push('/');
       } catch (error) {
         console.error('Login error:', error);
       }

@@ -154,7 +154,7 @@ export default {
     async handleRegister() {
       try {
         await this.authStore.register(this.form);
-        this.$router.push('/dashboard');
+        this.$router.push('/');
       } catch (error) {
         console.error('Registration error:', error);
       }
