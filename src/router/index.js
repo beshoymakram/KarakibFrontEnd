@@ -23,6 +23,9 @@ const routes = [
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
 
+  { path: '/logout', name: 'Logout', meta: { requiresAuth: true } },
+
+
   // Redirect unknown paths
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
@@ -34,8 +37,13 @@ const router = createRouter({
 })
 
 // Navigation guard
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
+
+  if (to.name === 'Logout') {
+    authStore.logout()
+    return next('/login')
+  }
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login')
