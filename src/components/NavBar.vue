@@ -1,76 +1,103 @@
 <template>
-  <div>
-    <div class="navbar bg-gray-100 shadow-lg">
-      <div class="flex-1 px-4">
-        <router-link to="/" class="btn btn-ghost text-3xl text-green-700">
-          Karakib
-        </router-link>
-      </div>
+<nav class="relative bg-white shadow-sm dark:bg-gray-800/50 dark:shadow-none dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 justify-between">
+      <div class="flex">
+        <div class="mr-2 -ml-2 flex items-center md:hidden">
+          <!-- Mobile menu button -->
+          <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-[#2C702C] focus:ring-2 focus:ring-indigo-600 focus:outline-hidden focus:ring-inset dark:hover:bg-white/5 dark:hover:text-white dark:focus:ring-white">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 in-aria-expanded:hidden">
+              <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 not-in-aria-expanded:hidden">
+              <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex shrink-0 items-center">
+          <img src="/public/logos/logo_horizontal.svg" alt="Your Company" class="h-20 w-auto dark:hidden" />
+          <img src="/public/logos/logo_horizontal.svg" alt="Your Company" class="h-20 w-auto not-dark:hidden" />
+        </div>
+        <div class="hidden md:ml-6 md:flex md:space-x-8">
+          <router-link to="/" class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] dark:border-indigo-500 dark:text-white">Home</router-link>
+          <router-link to="/shop" class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0] dark:text-gray-300 dark:hover:border-white/20 dark:hover:text-white">Shop</router-link>
+          <router-link to="/add-waste" class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0] dark:text-gray-300 dark:hover:border-white/20 dark:hover:text-white">Waste</router-link>
+          <router-link to="/about" class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0] dark:text-gray-300 dark:hover:border-white/20 dark:hover:text-white">About Us</router-link>
+          <router-link to="/ar" class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0] dark:text-gray-300 dark:hover:border-white/20 dark:hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
+</svg>
 
-      <div class="flex-7 space-x-2">
-        <router-link
-          to="/"
-          class="btn btn-ghost btn-sm text-xl text-green-700 rounded-btn"
-        >
-          Home
-        </router-link>
-        <router-link
-          to="/about"
-          class="btn btn-ghost btn-sm text-xl text-green-700 rounded-btn"
-        >
-          About
-        </router-link>
-        <router-link
-          to="/add-waste"
-          class="btn btn-ghost btn-sm text-xl text-green-700 rounded-btn"
-        >
-          Services
-        </router-link>
-        <router-link
-          to="/contact"
-          class="btn btn-ghost btn-sm text-xl text-green-700 rounded-btn"
-        >
-          Contact
-        </router-link>
-        <router-link
-          to="/shop"
-          class="btn btn-ghost btn-sm text-xl text-green-700 rounded-btn"
-        >
-          Shop
-        </router-link>
+          </router-link>
+        </div>
       </div>
-
-      <div class="flex-none">
-        <button class="btn btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block h-5 w-5 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-            />
-          </svg>
-        </button>
+      <div class="flex items-center">
+        <div class="shrink-0"  v-if="!auth.isAuthenticated">
+          <router-link to="/login" class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer text-[#2C702C] border-1 border-[#2C702C] px-3 py-2 text-sm font-semibold shadow-xs hover:bg-[#2C702C] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">
+            Login
+          </router-link>
+          <router-link to="/register" class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">
+            Register
+          </router-link>
+        </div>
+        <div class="shrink-0"  v-if="auth.isAuthenticated">
+          <router-link to="/logout" class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">
+            Logout
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
+
+  <el-disclosure id="mobile-menu" hidden class="block md:hidden">
+    <div class="space-y-1 pt-2 pb-3">
+      <!-- Current: "bg-indigo-50 border-indigo-600 text-indigo-700 dark:border-indigo-500 dark:bg-indigo-600/10 dark:text-indigo-400", Default: "border-transparent text-[#2C702C] hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 dark:hover:border-white/20 dark:hover:bg-white/5 dark:hover:text-white" -->
+      <router-link to="/" class="block border-l-4 border-indigo-600 bg-indigo-50 py-2 pr-4 pl-3 text-base font-medium text-indigo-700 sm:pr-6 sm:pl-5 dark:border-indigo-500 dark:bg-indigo-600/10 dark:text-indigo-400 bg-[#E0EBE0]">Home</router-link>
+      <router-link to="/" class="block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 sm:pr-6 sm:pl-5 dark:text-gray-300 dark:hover:border-white/20 dark:hover:bg-white/5 dark:hover:text-white">Shop</router-link>
+      <router-link to="/" class="block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 sm:pr-6 sm:pl-5 dark:text-gray-300 dark:hover:border-white/20 dark:hover:bg-white/5 dark:hover:text-white">Waste</router-link>
+      <router-link to="/" class="block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 sm:pr-6 sm:pl-5 dark:text-gray-300 dark:hover:border-white/20 dark:hover:bg-white/5 dark:hover:text-white">About Us</router-link>
+    </div>
+    <div class="border-t border-gray-200 pt-4 pb-3 dark:border-white/10">
+      <div class="flex items-center px-4 sm:px-6">
+        <div class="shrink-0">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-10 rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10" />
+        </div>
+        <div class="ml-3">
+          <div class="text-base font-medium text-gray-800 dark:text-white">Tom Cook</div>
+          <div class="text-sm font-medium text-[#2C702C] dark:text-gray-400">tom@example.com</div>
+        </div>
+        <button type="button" class="relative ml-auto shrink-0 rounded-full p-1 text-gray-400 hover:text-[#2C702C] focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 dark:hover:text-white dark:focus:outline-indigo-500">
+          <span class="absolute -inset-1.5"></span>
+          <span class="sr-only">View notifications</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+            <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-3 space-y-1">
+        <router-link to="/" class="block px-4 py-2 text-base font-medium text-[#2C702C] hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">Your profile</router-link>
+        <router-link to="/" class="block px-4 py-2 text-base font-medium text-[#2C702C] hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">Settings</router-link>
+        <router-link to="/" class="block px-4 py-2 text-base font-medium text-[#2C702C] hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">Sign out</router-link>
+      </div>
+    </div>
+  </el-disclosure>
+</nav>
 </template>
 
 <script>
+import authService from '@/services/authService';
+
 export default {
   name: 'NavBar'
 }
 </script>
 
+
 <style scoped>
 /* Optional active link styling */
 .router-link-exact-active {
-  background-color: #16a34a; /* Tailwind green-600 */
-  color: white !important;
+  background-color: #E0EBE0;
 }
 </style>

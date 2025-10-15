@@ -1,11 +1,6 @@
 <template>
-  <div id="app" class="min-h-screen bg-gray-50">
-    <!-- Navbar (always visible) -->
-    <NavBar />
-
-    <!-- Page content rendered here -->
-    <router-view />
-  </div>
+  <NavBar />
+  <router-view />
 </template>
 
 <script>
@@ -20,9 +15,5 @@ export default {
 </script>
 
 <style>
-/* You can put global styles here or leave it empty if you’re using Tailwind */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-}
+
 </style>
