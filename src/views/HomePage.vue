@@ -1,16 +1,17 @@
 <template>
+  <main>
   <!-- hero section  -->
   <div
-    class="hero min-h-[calc(100vh-80px)] w-[95vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
-    style="background-image: url('/public/images/delivery-service-truck-isolated.png')"
+    class="hero min-h-[calc(100vh-80px)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
+    style="background-image: url('/images/delivery-service-truck-isolated.png')"
   >
     <div class="hero-overlay bg-white/30"></div>
     <div class="hero-content text-center items-start justify-start pt-14">
       <div class="max-w-3xl">
-        <h1 class="text-4xl text-[#2C702C] font-medium drop-shadow-lg">
+        <h1 class="text-4xl text-[#2C702C] font-bold drop-shadow-lg">
           Turn Your Waste Into Worth
         </h1>
-        <p class="py-6 text-md font-medium text-[#BFD6BF]">
+        <p class="py-6 text-md font-medium text-[#439a43]">
           Karakib makes it easy to collect waste, earn points, and turn your actions into real
           rewards — because sustainability should pay off.
         </p>
@@ -30,7 +31,7 @@
       <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-1.png"
+            src="/images/step-1.png"
             alt="step-1"
             class="w-[290px] h-[271px] object-cover rounded-[50px]"
           />
@@ -46,7 +47,7 @@
       <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-2.png"
+            src="/images/step-2.png"
             alt="step-2"
             class="w-[290px] h-[271px] object-cover rounded-[50px]"
           />
@@ -62,7 +63,7 @@
       <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-3.png"
+            src="/images/step-3.png"
             alt="step-3"
             class="w-[290px] h-[271px] object-cover rounded-[50px]"
           />
@@ -78,7 +79,7 @@
       <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-4.png"
+            src="/images/step-4.png"
             alt="step-4"
             class="w-[290px] h-[271px] object-cover rounded-[50px]"
           />
@@ -91,6 +92,7 @@
       </div>
     </div>
   </section>
+  </main>
 </template>
 
 <script>
