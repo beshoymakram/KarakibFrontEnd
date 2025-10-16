@@ -60,10 +60,6 @@ button:disabled {
   <div class="register-container w-3/5">
     <h1 class="font-extrabold text-3xl text-main text-shadow-lg text-center mb-10">Register</h1>
 
-    <div v-if="authStore.error" class="error-message">
-      {{ authStore.error }}
-    </div>
-
     <form @submit.prevent="handleRegister" class="w-full flex flex-col items-center">
       <div class="form-group mb-5 flex justify-center w-full flex-col">
         <label class="pb-2 font-medium" for="name">Name</label>
@@ -152,6 +148,7 @@ button:disabled {
 
 <script>
 import { useAuthStore } from '@/stores/auth';
+import { nextTick } from 'vue';
 
 export default {
   name: 'RegisterPage',
@@ -178,9 +175,16 @@ export default {
     async handleRegister() {
       try {
         await this.authStore.register(this.form);
-        this.$router.push('/');
+        await this.$router.push('/');
+        nextTick(()=>{
+          this.$toast.success('Registered successfully!');
+        })
       } catch (error) {
         console.error('Registration error:', error);
+        this.$toast.error(this.authStore.error);
+        setTimeout(() => {
+        this.authStore.error = null;
+      }, 5000);
       }
     },
   },

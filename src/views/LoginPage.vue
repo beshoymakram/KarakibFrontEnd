@@ -21,11 +21,6 @@
       <div class="sm:w-1/2 xs:w-full px-4 py-5 sm:p-6 sm:rounded-br-xl sm:rounded-tr-xl xs:rounded-xl bg-white flex justify-center items-center">
               <div class="login-container w-3/5" v-if="!authStore.isAuthenticated">
         <h1 class="font-extrabold text-3xl text-main text-shadow-lg text-center mb-10">Login</h1>
-
-            <div v-if="authStore.error" class="error-message">
-              {{ authStore.error }}
-            </div>
-
             <form @submit.prevent="handleLogin" class="w-full flex flex-col items-center">
               <div class="form-group mb-5 flex justify-center w-full flex-col">
                 <label class="pb-2 font-medium" for="email">Email</label>
@@ -70,6 +65,7 @@
 
 <script>
 import { useAuthStore } from '@/stores/auth';
+import { nextTick } from 'vue';
 
 export default {
   name: 'LoginView',
@@ -96,9 +92,14 @@ export default {
     async handleLogin() {
       try {
         await this.authStore.login(this.form);
-        this.$router.push('/');
+
+        await this.$router.push('/');
+        nextTick(()=>{
+          this.$toast.success('Logged in successfully!');
+        })
       } catch (error) {
-        console.error('Login error:', error);
+        // console.error('Login error:', error);
+        this.$toast.error(this.authStore.error)
         setTimeout(() => {
         this.authStore.error = null;
       }, 5000);
