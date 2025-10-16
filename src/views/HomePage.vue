@@ -24,68 +24,70 @@
   </div>
 
   <!-- Steps Section -->
-  <section class="px-16 py-12 bg-base-200">
-    <div class="flex flex-wrap justify-between gap-8">
+
+  <section class="px-16 py-14 bg-base-200">
+    <p class="text-4xl text-[#2C702C] font-semibold text-center pb-14">How it works</p>
+    <div class="flex flex-wrap gap-4 justify-around">
       <!-- Step 1 -->
-      <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
             src="/public/images/step-1.png"
             alt="step-1"
-            class="w-[290px] h-[271px] object-cover rounded-[50px]"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
         </figure>
         <div class="card-body text-center">
           <h2 class="font-semibold text-[#317C31]">Step 1</h2>
-          <p class="card-title">Create Account</p>
+          <p class="card-title mx-auto">Create Account</p>
           <p>Sign up to become a member of our recycling community.</p>
         </div>
       </div>
 
       <!-- Step 2 -->
-      <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
             src="/public/images/step-2.png"
             alt="step-2"
-            class="w-[290px] h-[271px] object-cover rounded-[50px]"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
         </figure>
         <div class="card-body text-center">
           <h2 class="font-semibold text-[#317C31]">Step 2</h2>
-          <p class="card-title">Collect Waste</p>
+          <p class="card-title mx-auto">Collect Waste</p>
           <p>Sort and store your recyclables to prepare them for pickup.</p>
         </div>
       </div>
 
       <!-- Step 3 -->
-      <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
             src="/public/images/step-3.png"
             alt="step-3"
-            class="w-[290px] h-[271px] object-cover rounded-[50px]"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
         </figure>
         <div class="card-body text-center">
           <h2 class="font-semibold text-[#317C31]">Step 3</h2>
-          <p class="card-title">Request Pickup</p>
+          <p class="card-title mx-auto">Request Pickup</p>
           <p>Schedule a collection through the app for convenient service.</p>
         </div>
       </div>
 
       <!-- Step 4 -->
-      <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
             src="/public/images/step-4.png"
             alt="step-4"
-            class="w-[290px] h-[271px] object-cover rounded-[50px]"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
         </figure>
         <div class="card-body text-center">
           <h2 class="font-semibold text-[#317C31]">Step 4</h2>
-          <p class="card-title">Earn Rewards</p>
+          <p class="card-title mx-auto">Earn Rewards</p>
           <p>Get rewarded for your effort with points and exclusive benefits.</p>
         </div>
       </div>
