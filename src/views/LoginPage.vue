@@ -11,7 +11,7 @@
 
 
 <template>
-  <div class="bg-[#BFD6BF]">
+  <div class="bg-[#BFD6BF] py-8">
     <div class="overflow-hidden w-11/12 flex flex-wrap p-4 mx-auto dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
       <div class="sm:w-1/2 xs:w-full px-4 py-5 sm:p-6 sm:rounded-bl-xl sm:rounded-tl-xl xs:rounded-xl bg-[#EAF2EA] text-center text-main">
         <img class="h-100 mx-auto" src="/public/images/login.png" alt="Login Banner">
