@@ -21,7 +21,7 @@
           <img src="/public/logos/logo_horizontal.svg" alt="Your Company" class="h-20 w-auto not-dark:hidden" />
         </div>
         <div class="hidden md:ml-6 md:flex md:space-x-8">
-          <router-link to="/" class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] dark:border-indigo-500 dark:text-white">Home</router-link>
+          <router-link to="/" class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0] dark:border-indigo-500 dark:text-white">Home</router-link>
           <router-link to="/shop" class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0] dark:text-gray-300 dark:hover:border-white/20 dark:hover:text-white">Shop</router-link>
           <router-link to="/add-waste" class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0] dark:text-gray-300 dark:hover:border-white/20 dark:hover:text-white">Waste</router-link>
           <router-link to="/about" class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0] dark:text-gray-300 dark:hover:border-white/20 dark:hover:text-white">About Us</router-link>

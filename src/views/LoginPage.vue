@@ -1,42 +1,5 @@
 
 <style scoped>
-.login-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
 .error-message {
   background-color: #f44336;
   color: white;
@@ -55,19 +18,20 @@ button:disabled {
         <h1 class="font-extrabold text-3xl text-main text-shadow-lg">Welcome to Karakib</h1>
         <p class="font-semibold text-xl">Every small act of recycling creates a cleaner tomorrow</p>
       </div>
-      <div class="sm:w-1/2 xs:w-full px-4 py-5 sm:p-6 sm:rounded-br-xl sm:rounded-tr-xl xs:rounded-xl bg-white">
+      <div class="sm:w-1/2 xs:w-full px-4 py-5 sm:p-6 sm:rounded-br-xl sm:rounded-tr-xl xs:rounded-xl bg-white flex justify-center items-center">
               <div class="login-container" v-if="!authStore.isAuthenticated">
-        <h1 class="font-extrabold text-3xl text-main text-shadow-lg text-center">Login</h1>
+        <h1 class="font-extrabold text-3xl text-main text-shadow-lg text-center mb-10">Login</h1>
 
             <div v-if="authStore.error" class="error-message">
               {{ authStore.error }}
             </div>
 
-            <form @submit.prevent="handleLogin">
-              <div class="form-group mb-25">
-                <label for="email">Email</label>
+            <form @submit.prevent="handleLogin" class="w-full flex flex-col items-center">
+              <div class="form-group mb-5 flex justify-center w-full flex-col">
+                <label class="pb-2 font-medium" for="email">Email</label>
                 <input
-                class="shadow-xl border-0"
+                class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-3 rounded-lg active:border-0"
+                placeholder="email@gmail.com"
                   id="email"
                   v-model="form.email"
                   type="email"
@@ -75,10 +39,11 @@ button:disabled {
                 />
               </div>
 
-              <div class="form-group mb-25">
-                <label for="password">Password</label>
+              <div class="form-group mb-5 flex justify-center w-full flex-col">
+                <label class="pb-2 font-medium" for="password">Password</label>
                 <input
-                class="shadow-xl border-0"
+                class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-3 rounded-lg active:border-0"
+                placeholder="Password"
                   id="password"
                   v-model="form.password"
                   type="password"
@@ -86,14 +51,14 @@ button:disabled {
                 />
               </div>
 
-              <button type="submit" :disabled="authStore.loading">
+              <button type="submit" :disabled="authStore.loading" class="bg-[#317C31] font-medium cursor-pointer text-white px-3 py-2 rounded-lg my-4 text-center">
                 {{ authStore.loading ? 'Loading...' : 'Login' }}
               </button>
             </form>
 
-            <p>
+            <p class="text-center font-medium">
               Don't have an account?
-              <router-link to="/register">Register here</router-link>
+              <router-link to="/register" class="text-[#317C31]">Register here</router-link>
             </p>
           </div>
       </div>
