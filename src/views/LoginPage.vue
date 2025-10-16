@@ -48,44 +48,59 @@ button:disabled {
 
 
 <template>
-  <div class="login-container" v-if="!authStore.isAuthenticated">
-    <h2>Login</h2>
-
-    <div v-if="authStore.error" class="error-message">
-      {{ authStore.error }}
-    </div>
-
-    <form @submit.prevent="handleLogin">
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input
-          id="email"
-          v-model="form.email"
-          type="email"
-          required
-        />
+  <div class="bg-[#BFD6BF]">
+    <div class="overflow-hidden w-11/12 flex p-4 mx-auto dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
+      <div class="w-1/2 px-4 py-5 sm:p-6 rounded-bl-xl rounded-tl-xl bg-[#EAF2EA] text-center text-main">
+        <img class="h-100 mx-auto" src="/public/images/login.png" alt="Login Banner">
+        <h1 class="font-extrabold text-3xl text-main text-shadow-lg">Welcome to Karakib</h1>
+        <p class="font-semibold text-xl">Every small act of recycling creates a cleaner tomorrow</p>
       </div>
+      <div class="w-1/2 px-4 py-5 sm:p-6 rounded-br-xl rounded-tr-xl bg-white">
+              <div class="login-container" v-if="!authStore.isAuthenticated">
+        <h1 class="font-extrabold text-3xl text-main text-shadow-lg text-center">Login</h1>
 
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input
-          id="password"
-          v-model="form.password"
-          type="password"
-          required
-        />
+            <div v-if="authStore.error" class="error-message">
+              {{ authStore.error }}
+            </div>
+
+            <form @submit.prevent="handleLogin">
+              <div class="form-group mb-25">
+                <label for="email">Email</label>
+                <input
+                class="shadow-xl border-0"
+                  id="email"
+                  v-model="form.email"
+                  type="email"
+                  required
+                />
+              </div>
+
+              <div class="form-group mb-25">
+                <label for="password">Password</label>
+                <input
+                class="shadow-xl border-0"
+                  id="password"
+                  v-model="form.password"
+                  type="password"
+                  required
+                />
+              </div>
+
+              <button type="submit" :disabled="authStore.loading">
+                {{ authStore.loading ? 'Loading...' : 'Login' }}
+              </button>
+            </form>
+
+            <p>
+              Don't have an account?
+              <router-link to="/register">Register here</router-link>
+            </p>
+          </div>
       </div>
-
-      <button type="submit" :disabled="authStore.loading">
-        {{ authStore.loading ? 'Loading...' : 'Login' }}
-      </button>
-    </form>
-
-    <p>
-      Don't have an account?
-      <router-link to="/register">Register here</router-link>
-    </p>
   </div>
+</div>
+
+
 </template>
 
 <script>

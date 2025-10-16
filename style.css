@@ -8,3 +8,7 @@
   font-family: "Poppins", sans-serif;
   transition: all 0.3s ease-in-out;
 }
+
+.text-main {
+  color: #317C31;
+}
