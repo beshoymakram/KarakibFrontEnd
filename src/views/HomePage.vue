@@ -1,116 +1,230 @@
 <template>
-  <main>
-    <!-- Hero Section -->
+  <!-- Hero Section -->
+  <div
+    class="hero min-h-[calc(100vh-80px)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
+    style="background-image: url('/images/delivery-service-truck-isolated.png')"
+  >
+    <div class="hero-overlay bg-white/30"></div>
+    <div class="hero-content text-center items-start justify-start pt-14">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl text-[#2C702C] font-bold drop-shadow-lg">Turn Your Waste Into Worth</h1>
+        <p class="py-6 text-md font-medium text-[#439a43]">
+          Karakib makes it easy to collect waste, earn points, and turn your actions into real
+          rewards — because sustainability should pay off.
+        </p>
+        <button
+          class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+          text-lg
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Steps Section -->
+
+  <section class="px-16 py-14 bg-base-200">
+    <p class="text-4xl text-[#2C702C] font-semibold text-center pb-14">How it works</p>
+    <div class="flex flex-wrap gap-4 justify-around">
+      <!-- Step 1 -->
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
+        <figure class="p-4">
+          <img
+            src="/public/images/step-1.png"
+            alt="step-1"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
+          />
+        </figure>
+        <div class="card-body text-center">
+          <h2 class="font-semibold text-[#317C31]">Step 1</h2>
+          <p class="card-title mx-auto">Create Account</p>
+          <p>Sign up to become a member of our recycling community.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
+        <figure class="p-4">
+          <img
+            src="/public/images/step-2.png"
+            alt="step-2"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
+          />
+        </figure>
+        <div class="card-body text-center">
+          <h2 class="font-semibold text-[#317C31]">Step 2</h2>
+          <p class="card-title mx-auto">Collect Waste</p>
+          <p>Sort and store your recyclables to prepare them for pickup.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
+        <figure class="p-4">
+          <img
+            src="/public/images/step-3.png"
+            alt="step-3"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
+          />
+        </figure>
+        <div class="card-body text-center">
+          <h2 class="font-semibold text-[#317C31]">Step 3</h2>
+          <p class="card-title mx-auto">Request Pickup</p>
+          <p>Schedule a collection through the app for convenient service.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
+        <figure class="p-4">
+          <img
+            src="/public/images/step-4.png"
+            alt="step-4"
+            class="w-[280px] h-[261px] object-cover rounded-[50px]"
+          />
+        </figure>
+        <div class="card-body text-center">
+          <h2 class="font-semibold text-[#317C31]">Step 4</h2>
+          <p class="card-title mx-auto">Earn Rewards</p>
+          <p>Get rewarded for your effort with points and exclusive benefits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waste Carousel Section -->
+  <section class="bg-white px-16 py-16 relative">
+    <p class="text-4xl text-[#2C702C] font-semibold text-center">Discover Waste Types</p>
+    <p class="text-3xl text-[#163816] text-center pt-5 pb-10 font-normal">
+      Learn about the different kinds of waste you can recycle
+    </p>
+
+    <!-- Carousel Wrapper -->
+    <div class="relative max-w-6xl mx-auto flex items-center justify-center">
+      <!-- Left Arrow -->
+      <button
+        @click="scrollPrev"
+        class="absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+
+      <!-- Carousel (Scrollable Container) -->
+      <div
+        ref="carousel"
+        class="carousel carousel-center bg-white rounded-box space-x-6 p-10 flex overflow-x-auto scroll-smooth"
+      >
+        <div
+          v-for="(item, index) in wasteItems"
+          :key="index"
+          class="carousel-item flex flex-col items-center flex-shrink-0"
+        >
+          <img
+            :src="item.src"
+            :alt="item.name"
+            class="w-[268px] h-[268px] object-cover rounded-full bg-[#EAF2EA]"
+          />
+          <p class="mt-4 text-2xl font-semibold text-[#2C702C]">{{ item.name }}</p>
+        </div>
+      </div>
+
+      <!-- Right Arrow -->
+      <button
+        @click="scrollNext"
+        class="absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+    </div>
+  </section>
+  <!--  hero merch -->
+  <div class="hero bg-[#BFD6BF] min-h-[35vh]">
+    <div class="hero-content text-center">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl text-[#2C702C] font-medium drop-shadow-lg">
+          Our Exclusive Merchandise
+        </h1>
+        <p class="py-6 text-[#163816]">
+          Show your support with our premium collection of branded merchandise
+        </p>
+        <button
+          class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+        >
+          Shop Now
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- merch -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6"
+  >
     <div
-      class="hero min-h-[calc(100vh-80px)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
-      style="background-image: url('/images/delivery-service-truck-isolated.png')"
+      v-for="(item, index) in merchItems"
+      :key="index"
+      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
     >
-      <div class="hero-overlay bg-white/30"></div>
-      <div class="hero-content text-center items-start justify-start pt-14">
-        <div class="max-w-3xl">
-        <h1 class="text-4xl text-[#2C702C] font-bold drop-shadow-lg">
-            Turn Your Waste Into Worth
-          </h1>
-          <p class="py-6 text-md font-medium text-[#439a43]">
-            Karakib makes it easy to collect waste, earn points, and turn your actions into real
-            rewards — because sustainability should pay off.
-          </p>
+      <figure>
+        <img :src="item.image" :alt="item.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
+      </figure>
+
+      <div class="px-4 pt-2 pb-2">
+        <!-- Title + Price -->
+        <div class="flex justify-between items-center w-full">
+          <h2 class="text-[#2C702C] font-semibold text-xl">{{ item.name }}</h2>
+          <p class="text-[#2C702C] font-semibold text-lg">${{ item.price }}</p>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-600 text-sm">{{ item.description }}</p>
+
+        <!-- Actions -->
+        <div class="flex justify-between items-center mt-1">
+          <button class="text-[#2C702C] hover:text-[#265C26]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-7 h-7"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.1-4.5-4.688-4.5-1.936 0-3.58 1.14-4.312 2.79C11.268 4.89 9.624 3.75 7.688 3.75 5.1 3.75 3 5.765 3 8.25c0 7.004 9 12 9 12s9-4.996 9-12z"
+              />
+            </svg>
+          </button>
+
           <button
-            class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
-   text-lg        >
-            Get Started
+            class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
+          >
+            Add to Cart
           </button>
         </div>
       </div>
     </div>
-
-    <!-- Steps Section -->
-    <section class="px-16 py-12 bg-base-200">
-      <div class="flex flex-wrap justify-center gap-8">
-        <!-- Step 1 -->
-        <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
-          <figure class="p-4 pb-0">
-            <img
-              src="/images/step-1.png"
-              alt="step-1"
-              class="w-full h-60 object-cover rounded-[50px]"
-            />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="font-semibold text-xl text-[#317C31]">1</h2>
-            <p class="font-semibold text-lg">Create Account</p>
-            <p>Sign up to become a member of our recycling community.</p>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
-          <figure class="p-4 pb-0">
-            <img
-              src="/images/step-2.png"
-              alt="step-2"
-              class="w-full h-60 object-cover rounded-[50px]"
-            />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="font-semibold text-xl text-[#317C31]">2</h2>
-            <p class="font-semibold text-lg">Collect Waste</p>
-            <p>Sort and store your recyclables to prepare them for pickup.</p>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
-          <figure class="p-4 pb-0">
-            <img
-              src="/images/step-3.png"
-              alt="step-3"
-              class="w-full h-60 object-cover rounded-[50px]"
-            />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="font-semibold text-xl text-[#317C31]">3</h2>
-            <p class="font-semibold text-lg">Request Pickup</p>
-            <p>Schedule a collection through the app for convenient service.</p>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="card bg-base-100 shadow-sm w-[290px] rounded-[50px]">
-          <figure class="p-4 pb-0">
-            <img
-              src="/images/step-4.png"
-              alt="stepx-4"
-              class="w-full h-60 object-cover rounded-[50px]"
-            />
-          </figure>
-          <div class="card-body text-center">
-            <h2 class="font-semibold text-xl text-[#317C31]">4</h2>
-            <p class="font-semibold text-lg">Earn Rewards</p>
-            <p>Get rewarded for your effort with points and exclusive benefits.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="text-center py-16 px-8 bg-white">
-      <h2 class="text-3xl font-bold text-[#2C702C] mb-4">Discover Waste Types</h2>
-      <p class="text-gray-600 mb-10">
-        Learn about the different kinds of waste you can recycle
-      </p>
-
-      <div class="flex flex-wrap justify-center gap-10">
-        <div v-for="(item, index) in wasteTypes" :key="index" class="flex flex-col items-center">
-          <div
-            class="w-[130px] h-[130px] bg-[#F5F7F5] rounded-full flex items-center justify-center overflow-hidden shadow-sm"
-          >
-            <img :src="item.image" :alt="item.name" class="w-[100px] h-[100px] object-cover" />
-          </div>
-          <p class="mt-4 text-[#2C702C] font-semibold">{{ item.name }}</p>
-        </div>
-      </div>
-    </section>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -118,15 +232,69 @@ export default {
   name: "homePage",
   data() {
     return {
-      wasteTypes: [
-        { name: "Plastics", image: "/images/plastics.png" },
-        { name: "Antiques", image: "/images/antiques.png" },
-        { name: "Cooking Oils", image: "/images/cooking-oils.png" },
-        { name: "Metals", image: "/images/metals.png" },
-        { name: "Papers", image: "/images/papers.png" },
-        { name: "E-Waste", image: "/images/e-waste.png" },
+      wasteItems: [
+        { name: "Plastic", src: "/public/images/waste/bottles.png" },
+        { name: "Cartons", src: "/public/images/waste/cartons.png" },
+        { name: "Clothes", src: "/public/images/waste/clothes.png" },
+        { name: "Metals", src: "/public/images/waste/metals.png" },
+        { name: "Woods", src: "/public/images/waste/woods.png" },
+        { name: "Cooking Oil", src: "/public/images/waste/cooking-oil.png" },
+        { name: "Home Appliances", src: "/public/images/waste/home-appliances.png" },
+      ],
+      merchItems: [
+        {
+          name: "Karakib T-Shirt",
+          price: 25,
+          description: "Lightweight and breathable cotton t-shirt.",
+          image: "/public/images/merch/T shirt K.png",
+        },
+        {
+          name: "Classic Tee",
+          price: 22,
+          description: "Lightweight and breathable cotton t-shirt.",
+          image: "/public/images/merch/T shirt K2.png",
+        },
+        {
+          name: "Eco Tote Bag",
+          price: 18,
+          description: "Durable and reusable eco-friendly tote bag.",
+          image: "/public/images/merch/Tote Bag.png",
+        },
+        {
+          name: "Canvas Tote",
+          price: 20,
+          description: "Stylish canvas tote bag for everyday use.",
+          image: "/public/images/merch/Tote Bag1.png",
+        },
+        {
+          name: "Karakib Mug",
+          price: 15,
+          description: "Ceramic mug featuring the Karakib logo.",
+          image: "/public/images/merch/Tote Bag.png",
+        },
+        {
+          name: "Eco Mug",
+          price: 16,
+          description: "Eco-friendly bamboo mug for daily use.",
+          image: "/public/images/merch/Tote Bag.png",
+        },
       ],
     };
+  },
+  methods: {
+    scrollNext() {
+      const carousel = this.$refs.carousel;
+      if (carousel) {
+        carousel.scrollBy({ left: 300, behavior: "smooth" });
+      }
+    },
+
+    scrollPrev() {
+      const carousel = this.$refs.carousel;
+      if (carousel) {
+        carousel.scrollBy({ left: -300, behavior: "smooth" });
+      }
+    },
   },
 };
 </script>
