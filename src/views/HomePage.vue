@@ -23,8 +23,7 @@
   </div>
 
   <!-- Steps Section -->
-
-  <section class="px-16 py-14 bg-base-200">
+  <section class="px-16 py-14 bg-[#E9EBF8]">
     <p class="text-4xl text-[#2C702C] font-semibold text-center pb-14">How it works</p>
     <div class="flex flex-wrap gap-4 justify-around">
       <!-- Step 1 -->
@@ -96,7 +95,7 @@
   <!-- Waste Carousel Section -->
   <section class="bg-white px-16 py-16 relative">
     <p class="text-4xl text-[#2C702C] font-semibold text-center">Discover Waste Types</p>
-    <p class="text-3xl text-[#163816] text-center pt-5 pb-10 font-normal">
+    <p class="text-2xl text-[#163816] text-center pt-5 pb-10 font-normal">
       Learn about the different kinds of waste you can recycle
     </p>
 
@@ -156,14 +155,13 @@
       </button>
     </div>
   </section>
+
   <!--  hero merch -->
-  <div class="hero bg-[#BFD6BF] min-h-[35vh]">
+  <div class="hero py-14 bg-[#BFD6BF] min-h-[35vh]">
     <div class="hero-content text-center">
-      <div class="max-w-3xl">
-        <h1 class="text-4xl text-[#2C702C] font-medium drop-shadow-lg">
-          Our Exclusive Merchandise
-        </h1>
-        <p class="py-6 text-[#163816]">
+      <div class="">
+        <h1 class="text-4xl text-[#2C702C] font-semibold">Our Exclusive Merchandise</h1>
+        <p class="text-2xl py-6 text-[#163816]">
           Show your support with our premium collection of branded merchandise
         </p>
         <button
@@ -175,56 +173,63 @@
     </div>
   </div>
   <!-- merch -->
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6"
-  >
-    <div
-      v-for="(item, index) in merchItems"
-      :key="index"
-      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
-    >
-      <figure>
-        <img :src="item.image" :alt="item.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
-      </figure>
+  <section class="bg-white py-14 px-3 lg:px-6 relative">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+      <div
+        v-for="(item, index) in merchItems"
+        :key="index"
+        class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
+      >
+        <figure>
+          <img :src="item.image" :alt="item.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
+        </figure>
 
-      <div class="px-4 pt-2 pb-2">
-        <!-- Title + Price -->
-        <div class="flex justify-between items-center w-full">
-          <h2 class="text-[#2C702C] font-semibold text-xl">{{ item.name }}</h2>
-          <p class="text-[#2C702C] font-semibold text-lg">${{ item.price }}</p>
-        </div>
+        <div class="px-4 pt-2 pb-2">
+          <!-- Title + Price -->
+          <div class="flex justify-between items-center w-full">
+            <h2 class="text-[#2C702C] font-semibold text-xl">{{ item.name }}</h2>
+            <p class="text-[#2C702C] font-semibold text-lg">${{ item.price }}</p>
+          </div>
 
-        <!-- Description -->
-        <p class="text-gray-600 text-sm">{{ item.description }}</p>
+          <!-- Description -->
+          <p class="text-gray-600 text-sm">{{ item.description }}</p>
 
-        <!-- Actions -->
-        <div class="flex justify-between items-center mt-1">
-          <button class="text-[#2C702C] hover:text-[#265C26]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-7 h-7"
+          <!-- Actions -->
+          <div class="flex justify-between items-center mt-1">
+            <button class="text-[#2C702C] hover:text-[#265C26]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-7 h-7"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.1-4.5-4.688-4.5-1.936 0-3.58 1.14-4.312 2.79C11.268 4.89 9.624 3.75 7.688 3.75 5.1 3.75 3 5.765 3 8.25c0 7.004 9 12 9 12s9-4.996 9-12z"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 8.25c0-2.485-2.1-4.5-4.688-4.5-1.936 0-3.58 1.14-4.312 2.79C11.268 4.89 9.624 3.75 7.688 3.75 5.1 3.75 3 5.765 3 8.25c0 7.004 9 12 9 12s9-4.996 9-12z"
-              />
-            </svg>
-          </button>
-
-          <button
-            class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
-          >
-            Add to Cart
-          </button>
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <!-- macke differance section -->
+  <section class="bg-[#E9EBF8] px-16 py-16 relative">
+    <p class="text-4xl text-[#2C702C] font-semibold text-center">Make a Difference</p>
+    <p class="text-2xl text-[#163816] text-center pt-5 pb-10 font-normal">
+      Convert your recycling points into donations for charitable organizations
+    </p>
+  </section>
 </template>
 
 <script>
