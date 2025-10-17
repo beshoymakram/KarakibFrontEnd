@@ -30,7 +30,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-1.png"
+            src="/images/step-1.png"
             alt="step-1"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
@@ -46,7 +46,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-2.png"
+            src="/images/step-2.png"
             alt="step-2"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
@@ -62,7 +62,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-3.png"
+            src="/images/step-3.png"
             alt="step-3"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
@@ -78,7 +78,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="/public/images/step-4.png"
+            src="/images/step-4.png"
             alt="step-4"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
@@ -129,7 +129,7 @@
           class="carousel-item flex flex-col items-center flex-shrink-0"
         >
           <img
-            :src="item.src"
+            :src="item.image_url"
             :alt="item.name"
             class="w-[268px] h-[268px] object-cover rounded-full bg-[#EAF2EA]"
           />
@@ -233,55 +233,49 @@
 </template>
 
 <script>
+import wasteService from '@/services/wasteService';
+
 export default {
   name: "homePage",
   data() {
     return {
-      wasteItems: [
-        { name: "Plastic", src: "/public/images/waste/bottles.png" },
-        { name: "Cartons", src: "/public/images/waste/cartons.png" },
-        { name: "Clothes", src: "/public/images/waste/clothes.png" },
-        { name: "Metals", src: "/public/images/waste/metals.png" },
-        { name: "Woods", src: "/public/images/waste/woods.png" },
-        { name: "Cooking Oil", src: "/public/images/waste/cooking-oil.png" },
-        { name: "Home Appliances", src: "/public/images/waste/home-appliances.png" },
-      ],
+      wasteItems: [],
       merchItems: [
         {
           name: "Karakib T-Shirt",
           price: 25,
           description: "Lightweight and breathable cotton t-shirt.",
-          image: "/public/images/merch/T shirt K.png",
+          image: "/images/merch/T shirt K.png",
         },
         {
           name: "Classic Tee",
           price: 22,
           description: "Lightweight and breathable cotton t-shirt.",
-          image: "/public/images/merch/T shirt K2.png",
+          image: "/images/merch/T shirt K2.png",
         },
         {
           name: "Eco Tote Bag",
           price: 18,
           description: "Durable and reusable eco-friendly tote bag.",
-          image: "/public/images/merch/Tote Bag.png",
+          image: "/images/merch/Tote Bag.png",
         },
         {
           name: "Canvas Tote",
           price: 20,
           description: "Stylish canvas tote bag for everyday use.",
-          image: "/public/images/merch/Tote Bag1.png",
+          image: "/images/merch/Tote Bag1.png",
         },
         {
           name: "Karakib Mug",
           price: 15,
           description: "Ceramic mug featuring the Karakib logo.",
-          image: "/public/images/merch/Tote Bag.png",
+          image: "/images/merch/Tote Bag.png",
         },
         {
           name: "Eco Mug",
           price: 16,
           description: "Eco-friendly bamboo mug for daily use.",
-          image: "/public/images/merch/Tote Bag.png",
+          image: "/images/merch/Tote Bag.png",
         },
       ],
     };
@@ -300,7 +294,19 @@ export default {
         carousel.scrollBy({ left: -300, behavior: "smooth" });
       }
     },
+
+    async fetchWasteItems() {
+      try {
+        const response = await wasteService.getTypes();
+        this.wasteItems = response.data.data || response.data;
+      } catch (error) {
+        console.error("Error fetching waste items:", error);
+      }
+    },
   },
+  mounted(){
+        this.fetchWasteItems();
+  }
 };
 </script>
 
