@@ -1,15 +1,21 @@
 <template>
-  <NavBar />
-  <router-view class="" />
+  <div id="app">
+    <NavBar />
+
+    <router-view class="" />
+        <FooterSection />
+  </div>
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue' // adjust path if NavBar.vue is in a different folder
+import FooterSection from './components/FooterSection.vue';
+import NavBar from './components/NavBar.vue'
 
 export default {
   name: 'App',
   components: {
-    NavBar
+    NavBar,
+    FooterSection
   }
 }
 </script>
