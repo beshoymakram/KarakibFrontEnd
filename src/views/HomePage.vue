@@ -17,7 +17,10 @@
           </p>
           <button
             class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+<<<<<<< HEAD
             text-lg
+=======
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
           >
             Get Started
           </button>
@@ -29,6 +32,7 @@
     <section class="px-16 py-14 bg-[#E9EBF8]">
       <p class="text-4xl text-[#2C702C] font-semibold text-center pb-14">How it works</p>
       <div class="flex flex-wrap gap-4 justify-around">
+<<<<<<< HEAD
         <!-- Step 1 -->
         <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
           <figure class="p-4">
@@ -123,6 +127,49 @@
 
         <!-- Carousel (Scrollable Container) -->
         <div
+=======
+        <div
+          v-for="(step, i) in steps"
+          :key="i"
+          class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]"
+        >
+          <figure class="p-4">
+            <img
+              :src="step.image"
+              :alt="step.title"
+              class="w-[280px] h-[261px] object-cover rounded-[50px]"
+            />
+          </figure>
+          <div class="card-body text-center">
+            <h2 class="font-semibold text-[#317C31]">{{ step.title }}</h2>
+            <p class="card-title mx-auto">{{ step.heading }}</p>
+            <p>{{ step.desc }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waste Carousel Section -->
+    <section class="bg-white px-16 py-16 relative">
+      <p class="text-4xl text-[#2C702C] font-semibold text-center">Discover Waste Types</p>
+      <p class="text-2xl text-[#163816] text-center pt-5 pb-10 font-normal">
+        Learn about the different kinds of waste you can recycle
+      </p>
+
+      <div class="relative max-w-6xl mx-auto flex items-center justify-center">
+        <button
+          @click="scrollPrev"
+          class="absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="2" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"/>
+          </svg>
+        </button>
+
+        <div
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
           ref="carousel"
           class="carousel carousel-center bg-white rounded-box space-x-6 p-10 flex overflow-x-auto scroll-smooth"
         >
@@ -140,11 +187,15 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <!-- Right Arrow -->
+=======
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
         <button
           @click="scrollNext"
           class="absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
         >
+<<<<<<< HEAD
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -154,27 +205,45 @@
             class="size-6"
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+=======
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="2" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
           </svg>
         </button>
       </div>
     </section>
 
+<<<<<<< HEAD
     <!--  hero merch -->
     <div class="hero py-14 bg-[#BFD6BF] min-h-[35vh]">
       <div class="hero-content text-center">
         <div class="">
+=======
+    <!-- Merch Section -->
+    <div class="hero py-14 bg-[#BFD6BF] min-h-[35vh]">
+      <div class="hero-content text-center">
+        <div>
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
           <h1 class="text-4xl text-[#2C702C] font-semibold">Our Exclusive Merchandise</h1>
           <p class="text-2xl py-6 text-[#163816]">
             Show your support with our premium collection of branded merchandise
           </p>
           <button
+<<<<<<< HEAD
             class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+=======
+            class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-[#265C26]"
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
           >
             Shop Now
           </button>
         </div>
       </div>
     </div>
+<<<<<<< HEAD
     <!-- merch -->
     <section class="bg-white py-14 px-3 lg:px-6 relative">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
@@ -241,6 +310,60 @@
         <div
           v-for="(card, index) in infoCards"
           :key="index"
+=======
+
+    <section class="bg-white py-14 px-3 lg:px-6 relative">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+        <div
+          v-for="item in merchItems"
+          :key="item.id"
+          class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
+        >
+          <figure>
+            <img :src="item.image" :alt="item.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
+          </figure>
+
+          <div class="px-4 pt-2 pb-2">
+            <div class="flex justify-between items-center w-full">
+              <h2 class="text-[#2C702C] font-semibold text-xl">{{ item.name }}</h2>
+              <p class="text-[#2C702C] font-semibold text-lg">${{ item.price }}</p>
+            </div>
+
+            <p class="text-gray-600 text-sm">{{ item.description }}</p>
+
+            <div class="flex justify-between items-center mt-1">
+              <button class="text-[#2C702C] hover:text-[#265C26]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     stroke-width="2" stroke="currentColor" class="w-7 h-7">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.1-4.5-4.688-4.5-1.936 0-3.58 1.14-4.312 2.79C11.268 4.89 9.624 3.75 7.688 3.75 5.1 3.75 3 5.765 3 8.25c0 7.004 9 12 9 12s9-4.996 9-12z"/>
+                </svg>
+              </button>
+
+              <button
+                @click="handleAddToCart(item)"
+                class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Make a Difference Section -->
+    <section class="bg-[#E9EBF8] px-16 py-16 relative">
+      <p class="text-4xl text-[#2C702C] font-semibold text-center">Make a Difference</p>
+      <p class="text-2xl text-[#163816] text-center pt-5 pb-10 font-normal">
+        Convert your recycling points into donations for charitable organizations
+      </p>
+
+      <div class="flex flex-col lg:flex-row justify-center items-stretch gap-8 p-8">
+        <div
+          v-for="(card, index) in infoCards"
+          :key="index"
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
           class="border-2 border-[#BFD6BF] rounded-xl p-6 text-center flex-1 bg-white"
         >
           <img
@@ -248,6 +371,7 @@
             :alt="card.title"
             class="mx-auto w-20 h-20 mb-4 bg-[#E9EBF8] full rounded-full p-3"
           />
+<<<<<<< HEAD
           <h3 class="text-[#163816] font-semibold text-xl mb-2">
             {{ card.title }}
           </h3>
@@ -257,6 +381,11 @@
           <button
             class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition"
           >
+=======
+          <h3 class="text-[#163816] font-semibold text-xl mb-2">{{ card.title }}</h3>
+          <p class="text-[#8E98A8] mb-4">{{ card.description }}</p>
+          <button class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition">
+>>>>>>> e64140fcd4c9d9eb69c29f4bb804e0890f669092
             {{ card.buttonText }}
           </button>
         </div>
@@ -267,87 +396,43 @@
 
 <script>
 import wasteService from "@/services/wasteService";
+import { useCartStore } from "@/stores/cart";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 export default {
   name: "homePage",
   data() {
     return {
       wasteItems: [],
+      steps: [
+        { image: "/images/step-1.png", title: "Step 1", heading: "Create Account", desc: "Sign up to become a member of our recycling community." },
+        { image: "/images/step-2.png", title: "Step 2", heading: "Collect Waste", desc: "Sort and store your recyclables to prepare them for pickup." },
+        { image: "/images/step-3.png", title: "Step 3", heading: "Request Pickup", desc: "Schedule a collection through the app for convenient service." },
+        { image: "/images/step-4.png", title: "Step 4", heading: "Earn Rewards", desc: "Get rewarded for your effort with points and exclusive benefits." },
+      ],
       merchItems: [
-        {
-          name: "Karakib T-Shirt",
-          price: 25,
-          description: "Lightweight and breathable cotton t-shirt.",
-          image: "/images/merch/T shirt K.png",
-        },
-        {
-          name: "Classic Tee",
-          price: 22,
-          description: "Lightweight and breathable cotton t-shirt.",
-          image: "/images/merch/T shirt K2.png",
-        },
-        {
-          name: "Eco Tote Bag",
-          price: 18,
-          description: "Durable and reusable eco-friendly tote bag.",
-          image: "/images/merch/Tote Bag.png",
-        },
-        {
-          name: "Canvas Tote",
-          price: 20,
-          description: "Stylish canvas tote bag for everyday use.",
-          image: "/images/merch/Tote Bag1.png",
-        },
-        {
-          name: "Karakib Mug",
-          price: 15,
-          description: "Ceramic mug featuring the Karakib logo.",
-          image: "/images/merch/Tote Bag.png",
-        },
-        {
-          name: "Eco Mug",
-          price: 16,
-          description: "Eco-friendly bamboo mug for daily use.",
-          image: "/images/merch/Tote Bag.png",
-        },
+        { id: 1, name: "Karakib T-Shirt", price: 25, description: "Lightweight and breathable cotton t-shirt.", image: "/images/merch/T shirt K.png" },
+        { id: 2, name: "Classic Tee", price: 22, description: "Lightweight and breathable cotton t-shirt.", image: "/images/merch/T shirt K2.png" },
+        { id: 3, name: "Eco Tote Bag", price: 18, description: "Durable and reusable eco-friendly tote bag.", image: "/images/merch/Tote Bag.png" },
+        { id: 4, name: "Canvas Tote", price: 20, description: "Stylish canvas tote bag for everyday use.", image: "/images/merch/Tote Bag1.png" },
+        { id: 5, name: "Karakib Mug", price: 15, description: "Ceramic mug featuring the Karakib logo.", image: "/images/merch/Mug1.png" },
+        { id: 6, name: "Eco Mug", price: 16, description: "Eco-friendly bamboo mug for daily use.", image: "/images/merch/Mug2.png" },
       ],
       infoCards: [
-        {
-          image: "/images/Graduation Cap.png",
-          title: "Education Fund",
-          description: "Support underprivileged children's education",
-          buttonText: "Donate Points",
-        },
-        {
-          image: "/images/Tree Planting.png",
-          title: "  Reforestation",
-          description: "Plant trees and restore natural habitats",
-          buttonText: "Donate Points",
-        },
-        {
-          image: "/images/Heart Health.png",
-          title: "Community Health",
-          description: "Support underprivileged children's education",
-          buttonText: "Donate Points",
-        },
+        { image: "/images/Graduation Cap.png", title: "Education Fund", description: "Support underprivileged children's education", buttonText: "Donate Points" },
+        { image: "/images/Tree Planting.png", title: "Reforestation", description: "Plant trees and restore natural habitats", buttonText: "Donate Points" },
+        { image: "/images/Heart Health.png", title: "Community Health", description: "Support underprivileged children's education", buttonText: "Donate Points" },
       ],
     };
   },
   methods: {
     scrollNext() {
-      const carousel = this.$refs.carousel;
-      if (carousel) {
-        carousel.scrollBy({ left: 300, behavior: "smooth" });
-      }
+      this.$refs.carousel?.scrollBy({ left: 300, behavior: "smooth" });
     },
-
     scrollPrev() {
-      const carousel = this.$refs.carousel;
-      if (carousel) {
-        carousel.scrollBy({ left: -300, behavior: "smooth" });
-      }
+      this.$refs.carousel?.scrollBy({ left: -300, behavior: "smooth" });
     },
-
     async fetchWasteItems() {
       try {
         const response = await wasteService.getTypes();
@@ -355,6 +440,18 @@ export default {
       } catch (error) {
         console.error("Error fetching waste items:", error);
       }
+    },
+    handleAddToCart(item) {
+      const cartStore = useCartStore();
+      cartStore.addToCart(item);
+
+      Toastify({
+        text: `${item.name} added to cart 🛒`,
+        duration: 2500,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#2C702C",
+      }).showToast();
     },
   },
   mounted() {
