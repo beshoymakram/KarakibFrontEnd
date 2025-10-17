@@ -13,7 +13,7 @@
           rewards — because sustainability should pay off.
         </p>
         <button
-          class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+          class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
           text-lg
         >
           Get Started
