@@ -1,5 +1,6 @@
 <template>
   <!-- Hero Section -->
+   <div>
   <div
     class="hero min-h-[calc(100vh-80px)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
     style="background-image: url('/images/delivery-service-truck-isolated.png')"
@@ -230,6 +231,7 @@
       Convert your recycling points into donations for charitable organizations
     </p>
   </section>
+  </div>
 </template>
 
 <script>
