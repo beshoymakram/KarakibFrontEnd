@@ -106,7 +106,7 @@
           >
             <img :src="item.image" :alt="item.name" class="w-[100px] h-[100px] object-cover" />
           </div>
-          <p class="mt-4 text-[#2C702C] font-semibold">{{ item.name }}</p>
+          <p class="mt-4 text-[#2C702C] font-semibold s">{{ item.name }}</p>
         </div>
       </div>
     </section>
