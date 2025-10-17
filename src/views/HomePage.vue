@@ -1,21 +1,20 @@
 <template>
-  <!-- hero section  -->
+  <!-- Hero Section -->
   <div
-    class="hero min-h-[calc(100vh-80px)] w-[95vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
-    style="background-image: url('/public/images/delivery-service-truck-isolated.png')"
+    class="hero min-h-[calc(100vh-80px)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
+    style="background-image: url('/images/delivery-service-truck-isolated.png')"
   >
     <div class="hero-overlay bg-white/30"></div>
     <div class="hero-content text-center items-start justify-start pt-14">
       <div class="max-w-3xl">
-        <h1 class="text-4xl text-[#2C702C] font-medium drop-shadow-lg">
-          Turn Your Waste Into Worth
-        </h1>
-        <p class="py-6 text-md font-medium text-[#BFD6BF]">
+        <h1 class="text-4xl text-[#2C702C] font-bold drop-shadow-lg">Turn Your Waste Into Worth</h1>
+        <p class="py-6 text-md font-medium text-[#439a43]">
           Karakib makes it easy to collect waste, earn points, and turn your actions into real
           rewards — because sustainability should pay off.
         </p>
         <button
-          class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+          class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+          text-lg
         >
           Get Started
         </button>
