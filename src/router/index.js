@@ -9,6 +9,7 @@ import AddWaste from '@/views/AddWaste.vue'
 import ShopMerch from '@/views/ShopMerch.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import RegisterPage from '@/views/RegisterPage.vue'
+import CartPage from '@/views/CartPage.vue'
 
 // Define routes
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
   { path: '/contact', name: 'Contact', component: ContactUs },
   { path: '/add-waste', name: 'AddWaste', component: AddWaste },
   { path: '/shop', name: 'Shop', component: ShopMerch },
+  {path: '/cart', name: 'cart', component: CartPage},
 
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
