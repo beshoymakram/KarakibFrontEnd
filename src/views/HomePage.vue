@@ -130,7 +130,7 @@
           class="carousel-item flex flex-col items-center flex-shrink-0"
         >
           <img
-            :src="item.src"
+            :src="item.image_url"
             :alt="item.name"
             class="w-[268px] h-[268px] object-cover rounded-full bg-[#EAF2EA]"
           />
@@ -228,19 +228,13 @@
 </template>
 
 <script>
+import wasteService from '@/services/wasteService';
+
 export default {
   name: "homePage",
   data() {
     return {
-      wasteItems: [
-        { name: "Plastic", src: "/public/images/waste/bottles.png" },
-        { name: "Cartons", src: "/public/images/waste/cartons.png" },
-        { name: "Clothes", src: "/public/images/waste/clothes.png" },
-        { name: "Metals", src: "/public/images/waste/metals.png" },
-        { name: "Woods", src: "/public/images/waste/woods.png" },
-        { name: "Cooking Oil", src: "/public/images/waste/cooking-oil.png" },
-        { name: "Home Appliances", src: "/public/images/waste/home-appliances.png" },
-      ],
+      wasteItems: [],
       merchItems: [
         {
           name: "Karakib T-Shirt",
@@ -295,7 +289,19 @@ export default {
         carousel.scrollBy({ left: -300, behavior: "smooth" });
       }
     },
+
+    async fetchWasteItems() {
+      try {
+        const response = await wasteService.getTypes();
+        this.wasteItems = response.data.data || response.data;
+      } catch (error) {
+        console.error("Error fetching waste items:", error);
+      }
+    },
   },
+  mounted(){
+        this.fetchWasteItems();
+  }
 };
 </script>
 
