@@ -229,11 +229,34 @@
     <p class="text-2xl text-[#163816] text-center pt-5 pb-10 font-normal">
       Convert your recycling points into donations for charitable organizations
     </p>
+
+    <div class="flex flex-col lg:flex-row justify-center items-stretch gap-8 p-8">
+      <div
+        v-for="(card, index) in infoCards"
+        :key="index"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 text-center flex-1 bg-white"
+      >
+        <img
+          :src="card.image"
+          :alt="card.title"
+          class="mx-auto w-20 h-20 mb-4 bg-[#E9EBF8] full rounded-full p-3"
+        />
+        <h3 class="text-[#163816] font-semibold text-xl mb-2">
+          {{ card.title }}
+        </h3>
+        <p class="text-[#8E98A8] mb-4">
+          {{ card.description }}
+        </p>
+        <button class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition">
+          {{ card.buttonText }}
+        </button>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
-import wasteService from '@/services/wasteService';
+import wasteService from "@/services/wasteService";
 
 export default {
   name: "homePage",
@@ -278,6 +301,26 @@ export default {
           image: "/images/merch/Tote Bag.png",
         },
       ],
+      infoCards: [
+        {
+          image: "/images/Graduation Cap.png",
+          title: "Education Fund",
+          description: "Support underprivileged children's education",
+          buttonText: "Donate Points",
+        },
+        {
+          image: "/images/Tree Planting.png",
+          title: "  Reforestation",
+          description: "Plant trees and restore natural habitats",
+          buttonText: "Donate Points",
+        },
+        {
+          image: "/images/Heart Health.png",
+          title: "Community Health",
+          description: "Support underprivileged children's education",
+          buttonText: "Donate Points",
+        },
+      ],
     };
   },
   methods: {
@@ -304,9 +347,9 @@ export default {
       }
     },
   },
-  mounted(){
-        this.fetchWasteItems();
-  }
+  mounted() {
+    this.fetchWasteItems();
+  },
 };
 </script>
 
