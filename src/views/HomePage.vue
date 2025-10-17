@@ -31,7 +31,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="//images/step-1.png"
+            src="/images/step-1.png"
             alt="step-1"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
@@ -47,7 +47,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="//images/step-2.png"
+            src="/images/step-2.png"
             alt="step-2"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
@@ -63,7 +63,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="//images/step-3.png"
+            src="/images/step-3.png"
             alt="step-3"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
@@ -79,7 +79,7 @@
       <div class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]">
         <figure class="p-4">
           <img
-            src="//images/step-4.png"
+            src="/images/step-4.png"
             alt="step-4"
             class="w-[280px] h-[261px] object-cover rounded-[50px]"
           />
