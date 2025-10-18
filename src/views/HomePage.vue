@@ -132,7 +132,7 @@
           <img
             :src="item.image_url"
             :alt="item.name"
-            class="w-[268px] h-[268px] object-cover rounded-full bg-[#EAF2EA]"
+            class="w-[198px] h-[198px] object-cover rounded-full bg-[#EAF2EA]"
           />
           <p class="mt-4 text-2xl font-semibold text-[#2C702C]">{{ item.name }}</p>
         </div>
