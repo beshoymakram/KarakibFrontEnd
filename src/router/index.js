@@ -10,6 +10,10 @@ import ShopMerch from '@/views/ShopMerch.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import RegisterPage from '@/views/RegisterPage.vue'
 import CartPage from '@/views/CartPage.vue'
+import AdminLayout from '@/views/Admin/AdminLayout.vue'
+import Users from '@/views/Admin/Users.vue'
+import WasteItems from '@/views/Admin/WasteItems.vue'
+import WasteTypes from '@/views/Admin/WasteTypes.vue'
 
 // Define routes
 const routes = [
@@ -19,7 +23,30 @@ const routes = [
   { path: '/contact', name: 'Contact', component: ContactUs },
   { path: '/add-waste', name: 'AddWaste', component: AddWaste },
   { path: '/shop', name: 'Shop', component: ShopMerch },
-  {path: '/cart', name: 'cart', component: CartPage},
+  { path: '/cart', name: 'cart', component: CartPage },
+  { path: '/admin', redirect: '/admin/users' },
+  {
+    path: '/admin',
+    component: AdminLayout,
+    // meta: { requiresAuth: true, requiresAdmin: true },
+    children: [
+      {
+        path: 'users',
+        name: 'AdminUsers',
+        component: Users
+      },
+      {
+        path: 'waste-types',
+        name: 'AdminWasteTypes',
+        component: WasteTypes
+      },
+      {
+        path: 'waste-items',
+        name: 'AdminWasteItems',
+        component: WasteItems
+      },
+    ]
+  },
 
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
@@ -51,7 +78,11 @@ router.beforeEach(async (to, from, next) => {
     next('/login')
   } else if (to.meta.requiresGuest && authStore.isAuthenticated) {
     next('/')
-  } else {
+
+  } else if (to.meta.requiresAdmin && !authStore.isAdmin) {
+    next('/')
+  }
+  else {
     next()
   }
 })

@@ -17,7 +17,7 @@ export default {
     return apiClient.get('/waste-types/' + id);
   },
 
-  getTypes(id) {
+  getTypes() {
     return apiClient.get('/waste-types');
   },
 };
