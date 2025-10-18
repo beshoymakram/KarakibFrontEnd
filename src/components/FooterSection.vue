@@ -20,7 +20,7 @@
         <h3 class="font-semibold text-gray-900 mb-3">Karakib</h3>
         <ul class="space-y-1 text-sm text-gray-700">
           <li><RouterLink to="/about" class="hover:text-green-700">About us</RouterLink></li>
-          <li><RouterLink to="/privacy-policy" class="hover:text-green-700">Privacy Policy</RouterLink></li>
+          <li><RouterLink to="/about" class="hover:text-green-700">Privacy Policy</RouterLink></li>
         </ul>
       </div>
 
@@ -34,11 +34,12 @@
       <div>
         <h3 class="font-semibold text-gray-900 mb-3">Support & Help</h3>
         <ul class="space-y-1 text-sm text-gray-700">
-          <li><RouterLink to="/faq" class="hover:text-green-700">FAQ</RouterLink></li>
-          <li><RouterLink to="/inquiry" class="hover:text-green-700">Send Inquiry</RouterLink></li>
-          <li><RouterLink to="/terms" class="hover:text-green-700">Terms & Conditions</RouterLink></li>
-          <li><RouterLink to="/contact" class="hover:text-green-700">Contact Us</RouterLink></li>
+          <li><RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">FAQ</RouterLink></li>
+          <li><RouterLink :to="{ path: '/about', hash: '#inquiry' }" class="hover:text-green-700">Send Inquiry</RouterLink></li>
+          <li><RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">Terms & Conditions</RouterLink></li>
+          <li><RouterLink :to="{ path: '/about', hash: '#contact' }" class="hover:text-green-700">Contact Us</RouterLink></li>
         </ul>
+
       </div>
     </div>
 
