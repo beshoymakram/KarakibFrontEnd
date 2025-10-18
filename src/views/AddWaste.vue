@@ -65,6 +65,54 @@
       </button>
     </div>
   </section>
+  <!-- wast types points -->
+  <section class="px-10 py-12 bg-white text-center">
+    <h2 class="text-3xl font-bold text-[#2C702C] mb-8">Shop Items</h2>
+
+    <div class="carousel w-full overflow-hidden relative">
+      <div
+        v-for="(page, pageIndex) in paginatedItems"
+        :key="pageIndex"
+        v-show="currentPage === pageIndex"
+        class="carousel-item w-full flex flex-wrap justify-center gap-6 transition-all duration-500"
+      >
+        <div
+          v-for="(item, index) in page"
+          :key="index"
+          class="w-64 bg-[#EAF2EA] p-6 rounded-lg shadow-md text-[#2C702C]"
+        >
+          <img :src="item.src" alt="item" class="w-full h-40 object-cover rounded-md mb-4" />
+          <h3 class="text-xl font-semibold">{{ item.title }}</h3>
+          <p class="mt-2 text-base">{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center gap-2 py-6 items-center">
+      <button @click="prevPageGroup" :disabled="visibleStart === 1" class="btn btn-xs">Prev</button>
+
+      <button
+        v-for="page in visiblePages"
+        :key="page"
+        @click="goToPage(page - 1)"
+        class="btn btn-xs"
+        :class="{ 'btn-active bg-[#2C702C] text-white': currentPage + 1 === page }"
+      >
+        {{ page }}
+      </button>
+
+      <span v-if="hasMorePages" class="px-2 text-lg">...</span>
+
+      <button
+        v-if="hasMorePages"
+        @click="nextPageGroup"
+        class="btn btn-xs bg-[#EAF2EA] text-[#2C702C]"
+      >
+        Next
+      </button>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -72,7 +120,7 @@ export default {
   name: "wastePage",
   data() {
     return {
-      selectedValue: null,
+      selectedValue: "plastic",
       wasteItems: [
         { name: "Plastic", value: "plastic", src: "/images/waste/bottles.png" },
         { name: "Cartons", value: "cartons", src: "/images/waste/cartons.png" },
@@ -86,7 +134,116 @@ export default {
           src: "/images/waste/home-appliances.png",
         },
       ],
+      currentPage: 0,
+      visibleStart: 1, // Start of visible page range
+      items: [
+        { title: "Item 1", description: "Eco-friendly product", src: "/images/waste/bottles.png" },
+        { title: "Item 2", description: "Eco-friendly product", src: "/images/waste/cartons.png" },
+        { title: "Item 3", description: "Eco-friendly product", src: "/images/waste/clothes.png" },
+        { title: "Item 4", description: "Eco-friendly product", src: "/images/waste/metals.png" },
+        { title: "Item 5", description: "Eco-friendly product", src: "/images/waste/woods.png" },
+        {
+          title: "Item 6",
+          description: "Eco-friendly product",
+          src: "/images/waste/cooking-oil.png",
+        },
+        {
+          title: "Item 7",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        { title: "Item 8", description: "Eco-friendly product", src: "/images/waste/bottles.png" },
+        { title: "Item 9", description: "Eco-friendly product", src: "/images/waste/cartons.png" },
+        { title: "Item 10", description: "Eco-friendly product", src: "/images/waste/clothes.png" },
+        { title: "Item 11", description: "Eco-friendly product", src: "/images/waste/metals.png" },
+        { title: "Item 12", description: "Eco-friendly product", src: "/images/waste/woods.png" },
+        {
+          title: "Item 13",
+          description: "Eco-friendly product",
+          src: "/images/waste/cooking-oil.png",
+        },
+        {
+          title: "Item 14",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 15",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 16",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 17",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 18",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 19",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 19",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 19",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 19",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 19",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 19",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+        {
+          title: "Item 19",
+          description: "Eco-friendly product",
+          src: "/images/waste/home-appliances.png",
+        },
+      ],
     };
+  },
+  computed: {
+    paginatedItems() {
+      const chunkSize = 6;
+      const pages = [];
+      for (let i = 0; i < this.items.length; i += chunkSize) {
+        pages.push(this.items.slice(i, i + chunkSize));
+      }
+      return pages;
+    },
+    totalPages() {
+      return this.paginatedItems.length;
+    },
+    visiblePages() {
+      const end = Math.min(this.visibleStart + 3, this.totalPages);
+      return Array.from({ length: end - this.visibleStart + 1 }, (_, i) => this.visibleStart + i);
+    },
+    hasMorePages() {
+      return this.visibleStart + 3 < this.totalPages;
+    },
   },
   methods: {
     scrollNext() {
@@ -104,6 +261,20 @@ export default {
     selectItem(value) {
       this.selectedValue = value;
       console.log("Selected waste type:", value);
+    },
+
+    goToPage(index) {
+      if (index >= 0 && index < this.totalPages) {
+        this.currentPage = index;
+      }
+    },
+    nextPageGroup() {
+      if (this.visibleStart + 4 <= this.totalPages) {
+        this.visibleStart += 4;
+      }
+    },
+    prevPageGroup() {
+      this.visibleStart = Math.max(1, this.visibleStart - 4);
     },
   },
 };
