@@ -10,7 +10,6 @@ import 'vue3-toastify/dist/index.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook, faInstagram, faLinkedin, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
-import 'toastify-js/src/toastify.css'
 
 const app = createApp(App)
 const pinia = createPinia()
