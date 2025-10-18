@@ -360,6 +360,16 @@ export default {
         console.error("Error deleting user:", error);
       }
     },
+
+    editUser(user) {
+      console.log('Edit user:', user);
+    },
+
+    deleteUser(user) {
+      if (confirm(`Are you sure you want to delete ${user.name}?`)) {
+        console.log('Delete user:', user);
+      }
+    }
   },
   mounted() {
     this.fetchUsers();

@@ -14,6 +14,8 @@ import AdminLayout from '@/views/Admin/AdminLayout.vue'
 import Users from '@/views/Admin/Users.vue'
 import WasteItems from '@/views/Admin/WasteItems.vue'
 import WasteTypes from '@/views/Admin/WasteTypes.vue'
+import ProfileLayout from '@/views/Profile/ProfileLayout.vue'
+import PersonalInfo from '@/views/Profile/PersonalInfo.vue'
 
 // Define routes
 const routes = [
@@ -25,6 +27,34 @@ const routes = [
   { path: '/shop', name: 'Shop', component: ShopMerch },
   { path: '/cart', name: 'cart', component: CartPage },
   { path: '/admin', redirect: '/admin/users' },
+  { path: '/profile', redirect: '/profile/personal-info' },
+  {
+    path: '/profile',
+    component: ProfileLayout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'personal-info',
+        name: 'PersonalInfo',
+        component: PersonalInfo
+      },
+      {
+        path: 'my-requests',
+        name: 'MyRequests',
+        component: WasteTypes
+      },
+      {
+        path: 'my-orders',
+        name: 'MyOrders',
+        component: WasteItems
+      },
+      {
+        path: 'my-points',
+        name: 'MyPoints',
+        component: WasteItems
+      },
+    ]
+  },
   {
     path: '/admin',
     component: AdminLayout,

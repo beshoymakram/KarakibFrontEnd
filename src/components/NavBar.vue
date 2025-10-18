@@ -3,40 +3,47 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-20 justify-between">
         <div class="flex">
+          <!-- Mobile menu button -->
           <div class="mr-2 -ml-2 flex items-center md:hidden">
-            <button type="button" command="--toggle" commandfor="mobile-menu"
+            <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
               class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-[#2C702C] focus:ring-2 focus:ring-[#2C702C] focus:outline-hidden focus:ring-inset">
-              <span class="absolute -inset-0.5"></span>
-              <span class="sr-only">Open main menu</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon"
-                aria-hidden="true" class="size-6 in-aria-expanded:hidden">
+              <svg v-if="!mobileMenuOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                class="size-6">
                 <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon"
-                aria-hidden="true" class="size-6 not-in-aria-expanded:hidden">
+              <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-6">
                 <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
           </div>
+
+
           <div class="flex shrink-0 items-center">
-            <router-link to="/" custom v-slot="{ navigate }">
-              <img src="/public/logos/logo_horizontal.svg" alt="Your Company" class="h-20 w-auto cursor-pointer"
-                @click="navigate" />
+            <router-link to="/" class="logo-link">
+              <img src="/public/logos/logo_horizontal.svg" alt="Karakib" class="h-20 w-auto cursor-pointer" />
             </router-link>
           </div>
 
+          <!-- Desktop Navigation -->
           <div class="hidden md:ml-6 md:flex md:space-x-8">
             <router-link to="/"
-              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">Home</router-link>
+              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
+              Home
+            </router-link>
             <router-link to="/shop"
-              class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0]">Shop</router-link>
+              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
+              Shop
+            </router-link>
             <router-link to="/add-waste"
-              class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0]">Waste</router-link>
+              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
+              Waste
+            </router-link>
             <router-link to="/about"
-              class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0]">About
-              Us</router-link>
+              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
+              About Us
+            </router-link>
             <router-link to="/ar"
-              class="inline-flex items-center border-transparent px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:border-gray-300 hover:bg-[#E0EBE0]">
+              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -45,60 +52,134 @@
             </router-link>
           </div>
         </div>
-        <div class="flex items-center">
-          <div class="shrink-0" v-if="!auth.isAuthenticated">
+
+        <div class="flex items-center space-x-4">
+          <div v-if="auth.isAuthenticated" class="relative" ref="profileDropdown">
+            <button @click="profileDropdownOpen = !profileDropdownOpen"
+              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:ring-offset-2">
+              <img :src="auth.user?.avatar || 'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')"
+                alt="Profile" class="size-8 rounded-full bg-gray-100" />
+            </button>
+
+            <Transition enter-active-class="transition ease-out duration-200"
+              enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+              leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
+              leave-to-class="transform opacity-0 scale-95">
+              <div v-if="profileDropdownOpen" @click="profileDropdownOpen = false"
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <router-link to="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Your Profile
+                </router-link>
+                <router-link to="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Settings
+                </router-link>
+                <button @click="handleLogout"
+                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Sign out
+                </button>
+              </div>
+            </Transition>
+          </div>
+
+          <!-- Auth Buttons -->
+          <div v-if="!auth.isAuthenticated" class="flex space-x-3">
             <router-link to="/login"
-              class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer text-[#2C702C] border-1 border-[#2C702C] px-3 py-2 text-sm font-semibold shadow-xs hover:bg-[#2C702C] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+              class="inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors">
               Login
             </router-link>
             <router-link to="/register"
-              class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+              class="inline-flex items-center rounded-md bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white hover:bg-[#1a4d1a] transition-colors">
               Register
             </router-link>
           </div>
-          <div class="shrink-0" v-if="auth.isAuthenticated && auth.isAdmin">
-            <router-link to="/admin"
-              class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer text-[#2C702C] border-1 border-[#2C702C] px-3 py-2 text-sm font-semibold shadow-xs hover:bg-[#2C702C] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-              Dashboard
-            </router-link>
-          </div>
-          <div class="shrink-0" v-if="auth.isAuthenticated">
-            <router-link to="/logout"
-              class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-              Logout
-            </router-link>
-          </div>
+
+          <!-- Dashboard Button (Admin only) -->
+          <router-link v-if="auth.isAuthenticated && auth.isAdmin" to="/admin"
+            class="inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors">
+            Dashboard
+          </router-link>
         </div>
       </div>
     </div>
 
-    <el-disclosure id="mobile-menu" hidden class="block md:hidden">
-      <div class="space-y-1 pt-2 pb-3">
-        <router-link to="/"
-          class="block border-l-4 py-2 pr-4 pl-3 text-base font-medium text-[#2C702C] sm:pr-6 sm:pl-5 bg-[#E0EBE0]">Home</router-link>
-        <router-link to="/"
-          class="block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 sm:pr-6 sm:pl-5">Shop</router-link>
-        <router-link to="/"
-          class="block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 sm:pr-6 sm:pl-5">Waste</router-link>
-        <router-link to="/"
-          class="block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 sm:pr-6 sm:pl-5">About
-          Us</router-link>
+    <!-- Mobile menu -->
+    <Transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0"
+      enter-to-class="opacity-100" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100"
+      leave-to-class="opacity-0">
+      <div v-if="mobileMenuOpen" class="md:hidden">
+        <div class="space-y-1 pt-2 pb-3">
+          <router-link to="/" @click="mobileMenuOpen = false"
+            class="block border-l-4 border-[#2C702C] bg-[#E0EBE0] py-2 pl-3 pr-4 text-base font-medium text-[#2C702C]">
+            Home
+          </router-link>
+          <router-link to="/shop" @click="mobileMenuOpen = false"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50">
+            Shop
+          </router-link>
+          <router-link to="/add-waste" @click="mobileMenuOpen = false"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50">
+            Waste
+          </router-link>
+          <router-link to="/about" @click="mobileMenuOpen = false"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50">
+            About Us
+          </router-link>
+        </div>
       </div>
-    </el-disclosure>
+    </Transition>
   </nav>
 </template>
 
 <script>
-/* import authService from "@/services/authService"; */ /* uncomment at use  //maryam */
+import { useAuthStore } from '@/stores/auth';
 
 export default {
   name: "NavBar",
+
+  data() {
+    return {
+      mobileMenuOpen: false,
+      profileDropdownOpen: false
+    }
+  },
+
+  computed: {
+    auth() {
+      return useAuthStore();
+    }
+  },
+
+  methods: {
+    async handleLogout() {
+      await this.auth.logout();
+      this.$router.push('/login');
+    },
+
+    handleClickOutside(event) {
+      const dropdown = this.$refs.profileDropdown;
+      if (dropdown && !dropdown.contains(event.target)) {
+        this.profileDropdownOpen = false;
+      }
+    }
+  },
+
+
+  mounted() {
+    document.addEventListener('click', this.handleClickOutside);
+  },
+
+  beforeUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
 };
 </script>
 
 <style scoped>
-/* Optional active link styling */
 .router-link-exact-active {
   background-color: #e0ebe0;
+}
+
+.logo-link.router-link-exact-active {
+  background-color: transparent !important;
 }
 </style>
