@@ -20,12 +20,12 @@
     <img
       src="/images/Shop Page Background.png"
       alt="Background"
-      class="absolute inset-0 w-3xl h-lg object-cover -z-10 mx-auto"
+      class="absolute inset-0 w-2xl h-sm object-cover -z-10 mx-auto"
     />
 
     <!-- content -->
     <div
-      class="relative flex flex-col lg:flex-row items-center justify-between text-center lg:text-left gap-8 px-10 py-16 pb-20 z-10"
+      class="relative flex flex-col lg:flex-row items-center justify-between text-center lg:text-left gap-8 px-10 py-16 pb-24 z-10"
     >
       <!-- Logo -->
       <img
@@ -44,28 +44,28 @@
     </div>
 
     <!-- links -->
-    <div class="px-16 relative z-20 flex flex-wrap gap-4">
-      <a
-        class="rounded-md cursor-pointer bg-white text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
-      >
-        View all
-      </a>
-      <a
-        class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm bg-white/60 hover:bg-white"
-      >
-        T-Shirts
-      </a>
-      <a
-        class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm bg-white/60 hover:bg-white"
-      >
-        Mugs
-      </a>
-      <a
-        class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm bg-white/60 hover:bg-white"
-      >
-        Tote Bags
-      </a>
-    </div>
+  </div>
+  <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-8">
+    <a
+      class="rounded-md cursor-pointer bg-white text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+    >
+      View all
+    </a>
+    <a
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+    >
+      T-Shirts
+    </a>
+    <a
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+    >
+      Mugs
+    </a>
+    <a
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+    >
+      Tote Bags
+    </a>
   </div>
   <!-- all merch sec -->
 
