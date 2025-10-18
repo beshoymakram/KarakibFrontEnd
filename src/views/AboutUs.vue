@@ -164,7 +164,7 @@
       </div>
     </section>
     <section class="w-full mx-auto bg-[#BFD6BF] shadow p-8">
-        <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8">
+        <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="Faq">
       <h2 class="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
 
       <div class="grid md:grid-cols-2 gap-6">
@@ -198,7 +198,7 @@
         </div>
       </div>
     </section>
-     <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8">
+     <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="terms">
       <h2 class="text-2xl font-semibold mb-4">Terms and Conditions</h2>
 
       <p class="text-gray-600 mb-4 flex items-start">
@@ -221,7 +221,7 @@
       </div>
     </section>
 
-     <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8">
+     <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="inquiry">
       <h2 class="text-2xl font-semibold mb-4">Send an Inquiry</h2>
       <p class="text-gray-600 mb-6">We’re happy to answer any questions or partnership requests.</p>
 
@@ -265,7 +265,7 @@
     </section>
 
     <!-- Contact Us -->
-    <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8">
+    <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="contact">
       <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
       <p class="text-gray-600 mb-6">We’re here to help you make the planet cleaner!</p>
 
