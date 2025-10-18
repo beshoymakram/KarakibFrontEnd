@@ -84,7 +84,7 @@ export default {
   name: "AdminLayout",
   data() {
     return {
-      activeTab: 'users',
+      activeTab: '',
       tabs: [
         { id: 'users', label: 'Users' },
         { id: 'waste-types', label: 'Waste Types' },
@@ -99,4 +99,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.router-link-exact-active {
+  background-color: #e0ebe0;
+}
+</style>

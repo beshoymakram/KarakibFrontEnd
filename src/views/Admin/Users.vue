@@ -67,7 +67,7 @@
               {{ user.type }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-              <span class="px-2 py-1 rounded-full text-xs font-medium" :class="user.status === 'Active'
+              <span class="px-2 py-1 rounded-full text-xs font-medium" :class="user.status === 'active'
                 ? 'text-green-800 bg-green-100'
                 : 'text-red-800 bg-red-100'">
                 {{ user.status }}
@@ -143,6 +143,115 @@
         </div>
       </div>
     </div>
+
+  </Teleport>
+
+  <Teleport to="body">
+    <div v-if="showEditModal"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
+      @click="showEditModal = false">
+      <div class="relative p-4 w-full max-w-2xl" @click.stop>
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              Edit User
+            </h3>
+            <button type="button" @click="showEditModal = false"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+
+          <!-- Body -->
+          <form @submit.prevent="confirmEdit" class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <!-- Name -->
+              <div class="col-span-2">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Name
+                </label>
+                <input type="text" id="name" v-model="editForm.name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter user name" required />
+              </div>
+
+              <!-- Email -->
+              <div class="col-span-2 sm:col-span-1">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Email
+                </label>
+                <input type="email" id="email" v-model="editForm.email"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="user@example.com" required />
+              </div>
+
+              <!-- Phone -->
+              <div class="col-span-2 sm:col-span-1">
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Phone
+                </label>
+                <input type="tel" id="phone" v-model="editForm.phone"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="01234567890" required />
+              </div>
+
+              <!-- Role -->
+              <div class="col-span-2 sm:col-span-1">
+                <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Role
+                </label>
+                <select id="role" v-model="editForm.type"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  required>
+                  <option value="user">User</option>
+                  <option value="courier">Courier</option>
+                </select>
+              </div>
+
+              <div class="col-span-2 sm:col-span-1">
+                <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Status
+                </label>
+                <select id="role" v-model="editForm.status"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  required>
+                  <option value="active">Active</option>
+                  <option value="suspended">Suspended</option>
+                </select>
+              </div>
+
+              <!-- Points (if user) -->
+              <div class="col-span-2 sm:col-span-1" v-if="editForm.type === 'user'">
+                <label for="points" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Points
+                </label>
+                <input type="number" id="points" v-model.number="editForm.points"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="0" min="0" />
+              </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex justify-end space-x-3">
+              <button @click="showEditModal = false" type="button"
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                Cancel
+              </button>
+              <button type="submit"
+                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </Teleport>
 
 </template>
@@ -160,6 +269,15 @@ export default {
       selectedUser: '',
       showDeleteModal: false,
       showEditModal: false,
+      editForm: {
+        id: null,
+        name: '',
+        email: '',
+        phone: '',
+        status: '',
+        type: 'user',
+        points: 0
+      },
       currentPage: 1,
       filters: {
         role: '',
@@ -207,8 +325,31 @@ export default {
     },
 
     openEditModal(user) {
-      this.selectedUser = user.id;
+      // Copy user data to edit form
+      this.editForm = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        type: user.type,
+        status: user.status,
+        points: user.points || 0
+      };
       this.showEditModal = true;
+    },
+
+    async confirmEdit() {
+      try {
+        const response = await usersService.updateUser(this.editForm.id, this.editForm);
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+        });
+        this.showEditModal = false;
+        this.fetchUsers();
+      } catch (error) {
+        console.error("Error updating user:", error);
+        this.$toast.error('Failed to update user');
+      }
     },
 
 

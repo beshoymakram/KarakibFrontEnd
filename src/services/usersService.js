@@ -2,7 +2,7 @@ import apiClient from '../config/api';
 
 export default {
   updateUser(id, data) {
-    return apiClient.post('/users/' + id, data);
+    return apiClient.put('/users/' + id, data);
   },
 
   deleteUser(id) {
