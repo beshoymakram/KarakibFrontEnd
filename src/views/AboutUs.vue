@@ -163,14 +163,181 @@
         </div>
       </div>
     </section>
+    <section class="w-full mx-auto bg-[#BFD6BF] shadow p-8">
+        <section class="max-w-6xl mx-auto my-4 bg-white rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <button
+            v-for="(faq, index) in faqs"
+            :key="index"
+            @click="toggleFaq(index)"
+            class="w-full flex justify-between items-center bg-gray-100 px-4 py-3 rounded-lg text-left hover:bg-green-50 transition"
+          >
+            <span class="font-medium">{{ faq.question }}</span>
+            <svg
+              :class="{'rotate-180': openFaq === index}"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          class="bg-green-50 border border-green-100 rounded-lg p-6 text-gray-700"
+          v-if="openFaq !== null"
+        >
+          <p>{{ faqs[openFaq].answer }}</p>
+        </div>
+      </div>
+    </section>
+     <section class="max-w-6xl mx-auto my-4 bg-white rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4">Terms and Conditions</h2>
+
+      <p class="text-gray-600 mb-4 flex items-start">
+        <span class="text-green-600 mr-2 text-xl">⚠️</span>
+        Please read carefully before using Karakib.
+      </p>
+
+      <ul class="list-disc list-inside space-y-2 text-gray-700">
+        <li>By using Karakib, you agree to take responsibility for recycling waste materials in an environmentally friendly manner.</li>
+        <li>Users are also responsible for the safety and quality of waste they submit through the platform.</li>
+        <li>Karakib will not be held responsible for losses or damages that occur as a result of improper waste handling before our team reviews or collects it.</li>
+        <li>Any misuse of the platform, including providing false information, will result in immediate suspension of the user’s account.</li>
+        <li>We may update these terms at any time. You are responsible for reviewing them periodically.</li>
+      </ul>
+
+      <div class="mt-6">
+        <button class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+          Read Full Policy
+        </button>
+      </div>
+    </section>
+
+     <section class="max-w-6xl mx-auto my-4 bg-white rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4">Send an Inquiry</h2>
+      <p class="text-gray-600 mb-6">We’re happy to answer any questions or partnership requests.</p>
+
+      <form @submit.prevent="submitForm" class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block mb-1 font-medium">First Name</label>
+          <input v-model="form.firstName" type="text" placeholder="Enter first name"
+            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
+        </div>
+
+        <div>
+          <label class="block mb-1 font-medium">Last Name</label>
+          <input v-model="form.lastName" type="text" placeholder="Enter last name"
+            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
+        </div>
+
+        <div>
+          <label class="block mb-1 font-medium">Email</label>
+          <input v-model="form.email" type="email" placeholder="Enter email"
+            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
+        </div>
+
+        <div>
+          <label class="block mb-1 font-medium">Subject</label>
+          <input v-model="form.subject" type="text" placeholder="Enter subject"
+            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block mb-1 font-medium">Message Box</label>
+          <textarea v-model="form.message" rows="4" placeholder="Enter message"
+            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"></textarea>
+        </div>
+
+        <div class="md:col-span-2 flex justify-center mt-4">
+          <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Contact Us -->
+    <section class="max-w-6xl mx-auto my-4 bg-white rounded-2xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
+      <p class="text-gray-600 mb-6">We’re here to help you make the planet cleaner!</p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Contact Info -->
+        <div>
+          <h3 class="font-semibold mb-2">Ways to Reach Us</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li>📍 Address: Cairo, Egypt</li>
+            <li>📞 Phone: +20 100 000 0000</li>
+            <li>📧 Email: karakib@gmail.com</li>
+          </ul>
+        </div>
+
+        <!-- Social Media -->
+        <div>
+          <h3 class="font-semibold mb-2">Connect With Us on Social Media</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li><font-awesome-icon :icon="['fab', 'twitter']" /> @karakib</li>
+            <li><font-awesome-icon :icon="['fab', 'facebook']" /> @Karakib</li>
+            <li><font-awesome-icon :icon="['fab', 'instagram']" />  @Karakib</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    </section>
+
   </div>
 </template>
 
 <script>
 export default {
   name: "AboutUs",
+
+  data() {
+    return {
+      openFaq: null,
+      faqs: [
+        { question: 'How does Karakib work?', answer: 'You can recycle by submitting your waste and scheduling a pickup via our platform.' },
+        { question: 'What type of waste can I recycle?', answer: 'We currently accept plastic, metals, paper, e-waste, glass, and more.' },
+        { question: 'How can I track my earnings?', answer: 'You can view your earnings and history directly from your Karakib profile.' },
+        { question: 'How do I redeem my points?', answer: 'You can redeem your collected points for cash or rewards through our partners.' }
+      ],
+      form: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: '',
+        message: ''
+      }
+    }
+  },
+
+  methods: {
+    toggleFaq(index) {
+      this.openFaq = this.openFaq === index ? null : index;
+    },
+
+    submitForm() {
+      alert(`Thanks, ${this.form.firstName}! Your message has been sent.`);
+      this.form = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: '',
+        message: ''
+      };
+    }
+  }
 };
 </script>
+
 
 <style scoped>
 /* Add any custom styles here if needed */
