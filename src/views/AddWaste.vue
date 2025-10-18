@@ -38,7 +38,7 @@
           <img
             :src="item.src"
             :alt="item.name"
-            class="w-[268px] h-[268px] object-cover rounded-full bg-[#EAF2EA] transition-transform duration-300 hover:scale-105"
+            class="w-[198px] h-[198px] object-cover rounded-full bg-[#EAF2EA] transition-transform duration-300 hover:scale-105"
             :class="{
               'outline  outline-[#2C702C] rounded-full': selectedValue === item.value,
             }"
