@@ -38,7 +38,7 @@
 
   <div class="bg-white rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
-      <table class="w-full">
+      <table class="w-full table-fixed">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
@@ -91,21 +91,6 @@
       </table>
     </div>
 
-    <!-- Pagination -->
-    <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
-      <div class="flex items-center justify-center space-x-2">
-        <button v-for="page in totalPages" :key="page" @click="currentPage = page"
-          class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all" :class="currentPage === page
-            ? 'bg-[#2C702C] text-white'
-            : 'text-gray-700 hover:bg-gray-200'">
-          {{ page }}
-        </button>
-        <button v-if="currentPage < totalPages" @click="currentPage++"
-          class="w-8 h-8 rounded-full flex items-center justify-center bg-[#2C702C] text-white hover:bg-[#1a4d1a]">
-          →
-        </button>
-      </div>
-    </div>
   </div>
 
   <Teleport to="body">

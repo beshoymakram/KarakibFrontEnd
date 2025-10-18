@@ -8,9 +8,28 @@
         </button>
       </div>
 
+      <div class="relative">
+        <select v-model="filters.waste_type_id"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">All Types</option>
+          <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
+
+      <div class="relative">
+        <select v-model="filters.unit"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">All Units</option>
+          <option value="kg">KG</option>
+          <option value="piece">By Piece</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
+
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
-          <input v-model="searchQuery" type="text" placeholder="Search by name"
+          <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
@@ -24,17 +43,20 @@
 
   <div class="bg-white rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
-      <table class="w-full">
+      <table class="w-full table-fixed">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points per unit
+            </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-if="filteredItems.length === 0">
-            <td colspan="3" class="px-4 py-4 text-center text-gray-500">
+            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
@@ -42,6 +64,12 @@
           <tr v-for="item in filteredItems" :key="item.id" class="hover:bg-gray-50 transition-colors">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
               {{ item.name }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+              {{ item.waste_type.name }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+              {{ item.points_per_unit }}/{{ item.unit }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-[#2C702C]">
               <img class="w-10 h-10 rounded-full" :src="item.image_url" :alt="item.name">
@@ -61,21 +89,6 @@
       </table>
     </div>
 
-    <!-- Pagination -->
-    <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
-      <div class="flex items-center justify-center space-x-2">
-        <button v-for="page in totalPages" :key="page" @click="currentPage = page"
-          class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all" :class="currentPage === page
-            ? 'bg-[#2C702C] text-white'
-            : 'text-gray-700 hover:bg-gray-200'">
-          {{ page }}
-        </button>
-        <button v-if="currentPage < totalPages" @click="currentPage++"
-          class="w-8 h-8 rounded-full flex items-center justify-center bg-[#2C702C] text-white hover:bg-[#1a4d1a]">
-          →
-        </button>
-      </div>
-    </div>
   </div>
 
   <Teleport to="body">
@@ -121,9 +134,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Create item
-            </h3>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Create Item</h3>
             <button type="button" @click="showCreateModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -131,42 +142,66 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
               </svg>
-              <span class="sr-only">Close modal</span>
             </button>
           </div>
 
           <!-- Body -->
-          <form @submit.prevent="confirmCreate" class="p-4 md:p-5">
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <!-- Name -->
-              <div class="col-span-2">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
-                </label>
-                <input type="text" id="name" v-model="createForm.name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter user name" required />
+          <form @submit.prevent="confirmCreate" class="p-4 md:p-5 space-y-4">
+            <!-- Name -->
+            <div>
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+              <input type="text" id="name" v-model="createForm.name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
+                placeholder="Enter item name" required />
+            </div>
+
+            <!-- Type / Unit / Points per unit -->
+            <div class="grid grid-cols-3 gap-4">
+              <div>
+                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                <select id="type" v-model="createForm.waste_type_id"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
+                  required>
+                  <option value="" disabled selected>Select type</option>
+                  <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
+                </select>
               </div>
 
-              <!-- Image -->
-              <div class="col-span-2 sm:col-span-1">
-                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Image
-                </label>
-                <input type="file" id="image" @change="handleImageUpload" accept="image/*"
+              <div>
+                <label for="unit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
+                <select id="unit" v-model="createForm.unit"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  required />
+                  required>
+                  <option value="" disabled selected>Select unit</option>
+                  <option value="kg">KG</option>
+                  <option value="piece">By Piece</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="points_per_unit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Points per unit
+                </label>
+                <input type="number" id="points_per_unit" v-model="createForm.points_per_unit"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
+                  placeholder="Enter points" required />
               </div>
             </div>
 
-            <!-- Footer Buttons -->
-            <div class="flex justify-end space-x-3">
+            <div>
+              <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+              <input type="file" id="image" @change="handleImageUpload" accept="image/*"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
+                required />
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-3">
               <button @click="showCreateModal = false" type="button"
-                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-[#2C702C]">
                 Cancel
               </button>
               <button type="submit"
-                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">
                 Save Changes
               </button>
             </div>
@@ -175,6 +210,7 @@
       </div>
     </div>
 
+
     <div v-if="showEditModal"
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showEditModal = false">
@@ -182,9 +218,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Edit User
-            </h3>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Edit Item</h3>
             <button type="button" @click="showEditModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -192,48 +226,71 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
               </svg>
-              <span class="sr-only">Close modal</span>
             </button>
           </div>
 
-          <form @submit.prevent="confirmEdit" class="p-4 md:p-5">
-            <div class="grid gap-4 mb-4">
-              <!-- Name -->
+          <form @submit.prevent="confirmEdit" class="p-4 md:p-5 space-y-4">
+            <!-- Name -->
+            <div>
+              <label for="edit-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+              <input type="text" id="edit-name" v-model="editForm.name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
+                placeholder="Enter item name" required />
+            </div>
+
+            <!-- Type / Unit / Points per unit -->
+            <div class="grid grid-cols-3 gap-4">
               <div>
-                <label for="edit-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
+                <label for="edit-type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                <select id="edit-type" v-model="editForm.waste_type_id"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5">
+                  <option value="" disabled>Select type</option>
+                  <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="edit-unit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
+                <select id="edit-unit" v-model="editForm.unit"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5">
+                  <option value="" disabled>Select unit</option>
+                  <option value="kg">KG</option>
+                  <option value="piece">By Piece</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="edit-points" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Points per unit
                 </label>
-                <input type="text" id="edit-name" v-model="editForm.name"
+                <input type="number" id="edit-points" v-model="editForm.points_per_unit"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  placeholder="Enter type name" required />
-              </div>
-
-              <!-- Current Image Preview -->
-              <div v-if="editForm.image">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Current Image
-                </label>
-                <img :src="editForm.image" class="w-20 h-20 rounded-lg object-cover mb-2" alt="Current image" />
-              </div>
-
-              <!-- New Image Upload -->
-              <div>
-                <label for="edit-image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Change Image (optional)
-                </label>
-                <input type="file" id="edit-image" @change="handleImageUpload" accept="image/*"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5" />
+                  placeholder="Enter points" />
               </div>
             </div>
 
-            <!-- Footer Buttons -->
-            <div class="flex justify-end space-x-3">
+            <!-- Image (full width) -->
+            <div>
+              <label for="edit-image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Change
+                Image (optional)</label>
+              <input type="file" id="edit-image" @change="handleImageUpload" accept="image/*"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5" />
+            </div>
+
+            <!-- Current Image Preview -->
+            <div v-if="editForm.image">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Image</label>
+              <img :src="editForm.image" class="w-20 h-20 rounded-lg object-cover" alt="Current image" />
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end space-x-3 pt-3">
               <button @click="showEditModal = false" type="button"
-                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C]">
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-[#2C702C]">
                 Cancel
               </button>
               <button type="submit"
-                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">
                 Save Changes
               </button>
             </div>
@@ -247,6 +304,7 @@
 
 <script>
 import wasteItemsService from '@/services/wasteItemsService';
+import wasteTypesService from '@/services/wasteTypesService';
 import { nextTick } from 'vue';
 
 export default {
@@ -260,24 +318,47 @@ export default {
       showEditModal: false,
       showCreateModal: false,
       imageFile: null,
+      filters: {
+        waste_type_id: '',
+        unit: '',
+      },
       createForm: {
         id: null,
+        waste_type_id: '',
+        points_per_unit: '',
+        unit: '',
         name: '',
         image: '',
       },
       editForm: {
         id: null,
+        waste_type_id: '',
+        points_per_unit: '',
+        unit: '',
         name: '',
         image: '',
       },
       currentPage: 1,
-      items: []
+      items: [],
+      types: []
     }
   },
 
   computed: {
     filteredItems() {
       let filtered = this.items;
+
+      if (this.filters.waste_type_id) {
+        filtered = filtered.filter(item =>
+          item.waste_type_id === this.filters.waste_type_id
+        );
+      }
+
+      if (this.filters.unit) {
+        filtered = filtered.filter(item =>
+          item.unit === this.filters.unit
+        );
+      }
 
       if (this.searchQuery) {
         filtered = filtered.filter(item =>
@@ -306,6 +387,9 @@ export default {
       this.editForm = {
         id: item.id,
         name: item.name,
+        unit: item.unit,
+        waste_type_id: item.waste_type_id,
+        points_per_unit: item.points_per_unit,
         image: item.image_url,
       };
       this.showEditModal = true;
@@ -319,6 +403,9 @@ export default {
       try {
         const formData = new FormData();
         formData.append('name', this.createForm.name);
+        formData.append('waste_type_id', this.createForm.waste_type_id);
+        formData.append('points_per_unit', this.createForm.points_per_unit);
+        formData.append('unit', this.createForm.unit);
 
         if (this.imageFile) {
           formData.append('image', this.imageFile);
@@ -341,6 +428,9 @@ export default {
         const formData = new FormData();
         formData.append('_method', 'PUT');
         formData.append('name', this.editForm.name);
+        formData.append('waste_type_id', this.editForm.waste_type_id);
+        formData.append('points_per_unit', this.editForm.points_per_unit);
+        formData.append('unit', this.editForm.unit);
 
         if (this.imageFile) {
           formData.append('image', this.imageFile);
@@ -358,6 +448,14 @@ export default {
       }
     },
 
+    async fetchTypes() {
+      try {
+        const response = await wasteTypesService.getTypes();
+        this.types = response.data.data || response.data;
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
+    },
 
     async fetchItems() {
       try {
@@ -393,6 +491,7 @@ export default {
     }
   },
   mounted() {
+    this.fetchTypes();
     this.fetchItems();
   }
 }

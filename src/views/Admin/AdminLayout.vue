@@ -85,6 +85,8 @@ export default {
   data() {
     return {
       activeTab: '',
+      usersCount: '',
+      ordersCount: '',
       tabs: [
         { id: 'users', label: 'Users' },
         { id: 'waste-types', label: 'Waste Types' },

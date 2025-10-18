@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/admin',
     component: AdminLayout,
-    // meta: { requiresAuth: true, requiresAdmin: true },
+    meta: { requiresAuth: true, requiresAdmin: true },
     children: [
       {
         path: 'users',

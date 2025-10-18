@@ -56,6 +56,12 @@
               Register
             </router-link>
           </div>
+          <div class="shrink-0" v-if="auth.isAuthenticated && auth.isAdmin">
+            <router-link to="/admin"
+              class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer text-[#2C702C] border-1 border-[#2C702C] px-3 py-2 text-sm font-semibold shadow-xs hover:bg-[#2C702C] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+              Dashboard
+            </router-link>
+          </div>
           <div class="shrink-0" v-if="auth.isAuthenticated">
             <router-link to="/logout"
               class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
