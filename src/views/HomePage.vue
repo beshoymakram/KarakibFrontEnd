@@ -198,24 +198,7 @@
         <p class="text-gray-600 text-sm">{{ item.description }}</p>
 
         <!-- Actions -->
-        <div class="flex justify-between items-center mt-1">
-          <button class="text-[#2C702C] hover:text-[#265C26]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-7 h-7"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 8.25c0-2.485-2.1-4.5-4.688-4.5-1.936 0-3.58 1.14-4.312 2.79C11.268 4.89 9.624 3.75 7.688 3.75 5.1 3.75 3 5.765 3 8.25c0 7.004 9 12 9 12s9-4.996 9-12z"
-              />
-            </svg>
-          </button>
-
+        <div class="flex items-center mt-1 justify-end">
           <button
             class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
           >
@@ -228,7 +211,7 @@
 </template>
 
 <script>
-import wasteService from '@/services/wasteService';
+import wasteService from "@/services/wasteService";
 
 export default {
   name: "homePage",
@@ -299,9 +282,9 @@ export default {
       }
     },
   },
-  mounted(){
-        this.fetchWasteItems();
-  }
+  mounted() {
+    this.fetchWasteItems();
+  },
 };
 </script>
 
