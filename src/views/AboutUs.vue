@@ -2,7 +2,7 @@
   <div class="flex flex-col min-h-screen">
     <!-- Hero Section -->
     <section
-      class="relative bg-[#E9EBF8] flex items-center justify-center text-center py-20 px-6 overflow-hidden"
+      class="relative bg-[#E9EBF8] flex items-center justify-center text-center py-20 px-6 overflow-hidden mt-14"
       style="background-image: url('/images/abouthero.png'); background-size: cover; background-position: center;"
     >
       <div class="absolute inset-0 bg-white/70"></div>
