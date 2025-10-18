@@ -67,8 +67,6 @@
   </section>
   <!-- wast types points -->
   <section class="px-10 py-12 bg-white text-center">
-    <h2 class="text-3xl font-bold text-[#2C702C] mb-8">Shop Items</h2>
-
     <div class="carousel w-full overflow-hidden relative">
       <div
         v-for="(page, pageIndex) in paginatedItems"
