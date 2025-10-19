@@ -45,24 +45,24 @@
 
     <!-- links -->
   </div>
-  <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-8">
+  <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-1">
     <a
-      class="rounded-md cursor-pointer bg-white text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+      class="rounded-md cursor-pointer bg-white text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
     >
       View all
     </a>
     <a
-      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
     >
       T-Shirts
     </a>
     <a
-      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
     >
       Mugs
     </a>
     <a
-      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-white"
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
     >
       Tote Bags
     </a>
@@ -170,4 +170,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
