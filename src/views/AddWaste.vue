@@ -78,7 +78,7 @@
       {{ selectedLabel }}
     </p>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6 overflow-auto scroll-smooth outline-1 outline-[#2C702C] rounded-2xl"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6 overflow-auto scroll-smooth rounded-2xl"
     >
       <div
         v-for="(item, index) in displayedItems"
