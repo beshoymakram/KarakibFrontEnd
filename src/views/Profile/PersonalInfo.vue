@@ -223,12 +223,14 @@ export default {
         nextTick(() => {
           this.$toast.success(response.data.message);
           this.auth.logout();
+          setTimeout(() => {
+            this.$router.push('/');
+          }, 1000);
         });
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
       this.showDeleteModal = false;
-      this.$router.push('/');
     },
 
     loadUserData() {
