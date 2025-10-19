@@ -57,7 +57,7 @@
           <div v-if="auth.isAuthenticated" class="relative" ref="profileDropdown">
             <button @click="profileDropdownOpen = !profileDropdownOpen"
               class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:ring-offset-2">
-              <img :src="auth.user?.avatar || 'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')"
+              <img :src="auth.user?.avatar_url || 'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')"
                 alt="Profile" class="size-8 rounded-full bg-gray-100" />
             </button>
 

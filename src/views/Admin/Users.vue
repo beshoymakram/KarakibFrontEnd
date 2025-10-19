@@ -18,6 +18,7 @@
           <option value="">All Status</option>
           <option value="active">Active</option>
           <option value="suspended">Suspended</option>
+          <option value="deleted">Deleted</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>

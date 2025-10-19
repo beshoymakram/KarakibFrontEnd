@@ -139,8 +139,15 @@ export default {
     return {
       editMode: false,
       showDeleteModal: false,
+      imageFile: null, // Store actual File object
       profileImage: null,
-      newInfo: {}
+      newInfo: {
+        name: '',
+        email: '',
+        phone: '',
+        avatar: null
+      },
+      originalInfo: {}
     }
   },
 
@@ -161,44 +168,86 @@ export default {
     handleImageUpload(event) {
       const file = event.target.files[0];
       if (file) {
+        this.imageFile = file;
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.profileImage = e.target.result;
-          this.$toast.success('Profile image updated');
-          // TODO: Upload to server
+          this.newInfo.avatar = e.target.result;
         };
         reader.readAsDataURL(file);
+
+        this.confirmEdit();
       }
     },
 
     cancelEdit() {
-      this.user = { ...this.originalUser };
+      this.newInfo = { ...this.originalInfo };
+      this.imageFile = null;
       this.editMode = false;
     },
 
     async confirmEdit() {
       try {
-        const response = await profileService.updateMyAccount(this.newInfo);
+        const formData = new FormData();
+        formData.append('_method', 'PUT');
+        formData.append('name', this.newInfo.name);
+        formData.append('email', this.newInfo.email);
+        formData.append('phone', this.newInfo.phone);
+
+        console.log(formData)
+        if (this.imageFile) {
+          formData.append('avatar', this.imageFile);
+        }
+        const response = await profileService.updateMyAccount(formData);
+
+        this.auth.user = {
+          ...this.auth.user,
+          ...response.data.user
+        };
+        localStorage.setItem('user', JSON.stringify(this.auth.user));
+
+        this.originalInfo = { ...this.newInfo };
+        this.imageFile = null;
+        this.editMode = false;
+
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
-        this.showEditModal = false;
-        this.fetchUsers();
       } catch (error) {
-        console.error("Error updating user:", error);
-        this.$toast.error('Failed to update user');
+        this.$toast.error(error.response.data.message);
       }
     },
 
-    deleteAccount() {
-      this.$toast.success('Account deleted');
+    async deleteAccount() {
+      try {
+        const response = await profileService.deleteMyAccount();
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+          this.auth.logout();
+        });
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
       this.showDeleteModal = false;
       this.$router.push('/');
+    },
+
+    loadUserData() {
+      if (this.auth.user) {
+        this.newInfo = {
+          name: this.auth.user.name || '',
+          email: this.auth.user.email || '',
+          phone: this.auth.user.phone || '',
+          avatar: this.auth.user.avatar_url || this.auth.user.avatar || null
+        };
+        this.originalInfo = { ...this.newInfo };
+      }
     }
   },
 
   mounted() {
-    this.newInfo = { ...this.auth.user }
+    // this.newInfo = { ...this.auth.user }
+    this.loadUserData();
+
   }
 }
 </script>

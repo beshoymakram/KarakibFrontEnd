@@ -1,8 +1,12 @@
 import apiClient from '../config/api';
 
 export default {
-  updateMyAccount() {
-    return apiClient.put('/profile/');
+  updateMyAccount(data) {
+    return apiClient.post('/profile/', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   },
 
   deleteMyAccount() {
