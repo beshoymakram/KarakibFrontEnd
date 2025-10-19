@@ -132,7 +132,7 @@
           <img
             :src="item.image_url"
             :alt="item.name"
-            class="w-[198px] h-[198px] object-cover rounded-full bg-[#EAF2EA]"
+            class="w-[192px] h-[192px] object-cover rounded-full bg-[#EAF2EA]"
           />
           <p class="mt-4 text-2xl font-semibold text-[#2C702C]">{{ item.name }}</p>
         </div>
@@ -208,7 +208,7 @@
       </div>
     </div>
   </div>
-  <!-- macke differance section -->
+  <!-- make differance section -->
   <section class="bg-[#E9EBF8] px-16 py-16 relative">
     <p class="text-4xl text-[#2C702C] font-semibold text-center">Make a Difference</p>
     <p class="text-2xl text-[#163816] text-center pt-5 pb-10 font-normal">
