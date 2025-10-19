@@ -274,9 +274,15 @@
         <div>
           <h3 class="font-semibold mb-2">Ways to Reach Us</h3>
           <ul class="space-y-2 text-gray-700">
-            <li>📍 Address: Cairo, Egypt</li>
-            <li>📞 Phone: +20 100 000 0000</li>
-            <li>📧 Email: karakib@gmail.com</li>
+            <li>
+              <font-awesome-icon :icon="['fas', 'location-dot']" /> Address: Cairo, Egypt
+            </li>
+            <li>
+              <font-awesome-icon :icon="['fas', 'phone']" /> Phone: +20 100 000 0000
+            </li>
+            <li>
+              <font-awesome-icon :icon="['fas', 'envelope']" /> Email: karakib@gmail.com
+            </li>
           </ul>
         </div>
 

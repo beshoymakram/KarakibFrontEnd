@@ -9,13 +9,15 @@ import Vue3Toastify, { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faFacebook, faInstagram, faLinkedin, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faInstagram, faLinkedin, faTwitter, faWhatsapp} from '@fortawesome/free-brands-svg-icons'
+import { faPhone, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
+
 
 const app = createApp(App)
 const pinia = createPinia()
 app.use(pinia)
 app.use(router)
-library.add(faFacebook, faInstagram, faLinkedin, faTwitter, faWhatsapp)
+library.add(faFacebook, faInstagram, faLinkedin, faTwitter, faWhatsapp, faPhone, faEnvelope, faLocationDot)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 const authStore = useAuthStore()
