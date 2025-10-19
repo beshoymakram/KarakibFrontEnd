@@ -202,7 +202,7 @@
       <h2 class="text-2xl font-semibold mb-4">Terms and Conditions</h2>
 
       <p class="text-gray-600 mb-4 flex items-start">
-        <span class="text-green-600 mr-2 text-xl">⚠️</span>
+        <span class="text-green-600 mr-2 text-xl"><font-awesome-icon :icon="['fas', 'triangle-exclamation']" /></span>
         Please read carefully before using Karakib.
       </p>
 
