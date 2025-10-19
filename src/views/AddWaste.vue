@@ -74,12 +74,14 @@
   </section>
   <!-- wast types points -->
   <section class="px-10 bg-white text-center pb-8">
-    <p class="text-4xl font-medium font-stretch-extra-expanded pb-8 text-[#112B11]">Plastic</p>
+    <p class="text-4xl font-medium font-stretch-extra-expanded pb-8 text-[#112B11]">
+      {{ selectedLabel }}
+    </p>
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6 overflow-auto scroll-smooth outline-1 outline-[#2C702C] rounded-2xl"
     >
       <div
-        v-for="(item, index) in plasticItems"
+        v-for="(item, index) in displayedItems"
         :key="index"
         class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
       >
@@ -130,6 +132,11 @@ export default {
         { name: "Woods", value: "woods", src: "/images/waste/woods.png" },
         { name: "Cooking Oil", value: "cooking-oil", src: "/images/waste/cooking-oil.png" },
         {
+          name: "E-waste",
+          value: "e-waste",
+          src: "/images/waste/e-waste.png",
+        },
+        {
           name: "Home Appliances",
           value: "home-appliances",
           src: "/images/waste/home-appliances.png",
@@ -139,115 +146,147 @@ export default {
       plasticItems: [
         {
           name: "Plastic Bottles",
-          image: "/images/waste/bottles.png",
+          image: "/images/plastic-waste/bottles.png",
           points: 123,
           egp: 30,
           unit: "kilogram",
         },
         {
-          name: "Cartons",
-          image: "/images/waste/bottles.png",
+          name: "Plastic Chair",
+          image: "/images/plastic-waste/chair.png",
           points: 90,
           egp: 25,
           unit: "piece",
         },
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
+          name: "Plastic Barrel",
+          image: "/images/plastic-waste/barrel.png",
+          points: 150,
+          egp: 40,
+          unit: "Piece",
+        },
+        {
+          name: "Solid Plastic",
+          image: "/images/plastic-waste/solid plastic.png",
+          points: 123,
+          egp: 30,
+          unit: "kilogram",
+        },
+        {
+          name: "Plastic Coleman tank",
+          image: "/images/plastic-waste/coleman tank.png",
           points: 150,
           egp: 40,
           unit: "liter",
         },
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
+          name: "Plastic Toys",
+          image: "/images/plastic-waste/toys.png",
+          points: 123,
+          egp: 30,
+          unit: "kilogram",
+        },
+      ],
+      cartonsItems: [
+        {
+          name: "Cardboard Box",
+          image: "/images/carton-waste/cardboard-box.jpg",
+          points: 20,
+          egp: 5,
+          unit: "piece",
         },
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
+          name: "Paper Carton",
+          image: "/images/carton-waste/paper-carton.jpg",
+          points: 15,
+          egp: 4,
+          unit: "piece",
         },
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
+          name: "Papers",
+          image: "/images/carton-waste/thin-paper.jpg",
+          points: 200,
+          egp: 50,
+          unit: "piece",
+        },
+      ],
+
+      clothesItems: [
+        {
+          name: "Old T-Shirt",
+          image: "/images/clothes-waste/old-t-shirt.jpg",
+          points: 10,
+          egp: 3,
+          unit: "piece",
         },
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
+          name: "Jacket",
+          image: "/images/clothes-waste/jacket.jpg",
+          points: 30,
+          egp: 8,
+          unit: "piece",
+        },
+      ],
+
+      metalItems: [
+        {
+          name: "Aluminum Cans",
+          image: "/images/metal-waste/alu-cans.png",
+          points: 200,
+          egp: 50,
+          unit: "kilogram",
         },
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
+          name: "Copper Wire",
+          image: "/images/metal-waste/copper-plastic-cable.jpg",
+          points: 400,
+          egp: 100,
+          unit: "kilogram",
+        },
+      ],
+
+      woodsItems: [
+        {
+          name: "Wooden peices",
+          image: "/images/wood-waste/wood-pieces.jpg",
+          points: 300,
+          egp: 75,
+          unit: "Kilogram",
+        },
+      ],
+
+      cookingOilItems: [
+        {
+          name: "Used Cooking Oil (1L)",
+          image: "/images/cooking-oil-waste/old-cooking-oil.jpg",
+          points: 50,
+          egp: 12,
           unit: "liter",
         },
+      ],
+      eWasteItems: [
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
+          name: "Keyboard",
+          image: "/images/e-waste-waste/keyboard.jpg",
+          points: 50,
+          egp: 12,
+          unit: "piece",
+        },
+      ],
+      homeAppliancesItems: [
+        {
+          name: "Toaster",
+          image: "/images/appliance-waste/toaster.jpg",
+          points: 300,
+          egp: 75,
+          unit: "piece",
         },
         {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
-        },
-        {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
-        },
-        {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
-        },
-        {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
-        },
-        {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
-        },
-        {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
-        },
-        {
-          name: "Cooking Oil",
-          image: "/images/waste/bottles.png",
-          points: 150,
-          egp: 40,
-          unit: "liter",
+          name: "Fan",
+          image: "/images/appliance-waste/fan.jpg",
+          points: 340,
+          egp: 85,
+          unit: "piece",
         },
       ],
     };
@@ -269,6 +308,35 @@ export default {
     selectItem(value) {
       this.selectedValue = value;
       console.log("Selected waste type:", value);
+    },
+  },
+  computed: {
+    displayedItems() {
+      switch (this.selectedValue) {
+        case "plastic":
+          return this.plasticItems;
+        case "cartons":
+          return this.cartonsItems;
+        case "clothes":
+          return this.clothesItems;
+        case "metals":
+          return this.metalItems;
+        case "woods":
+          return this.woodsItems;
+        case "cooking-oil":
+          return this.cookingOilItems;
+        case "home-appliances":
+          return this.homeAppliancesItems;
+        case "e-waste":
+          return this.eWasteItems;
+        default:
+          return this.plasticItems;
+      }
+    },
+    selectedLabel() {
+      // human friendly title for the lower section
+      const found = this.wasteItems.find((w) => w.value === this.selectedValue);
+      return found ? found.name : "Items";
     },
   },
 };
