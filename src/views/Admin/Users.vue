@@ -77,7 +77,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-yellow-600">
               {{ user.points || '--' }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+            <td v-if="user.status !== 'deleted'" class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(user)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                 Edit
