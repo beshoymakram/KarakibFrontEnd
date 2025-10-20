@@ -253,7 +253,7 @@ export default {
         name: '',
         image: '',
       },
-      currentPage: 1,
+
       types: []
     }
   },
@@ -271,9 +271,7 @@ export default {
       return filtered;
     },
 
-    totalPages() {
-      return 4;
-    }
+
   },
 
   methods: {

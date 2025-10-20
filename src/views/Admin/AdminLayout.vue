@@ -91,6 +91,8 @@ export default {
         { id: 'users', label: 'Users' },
         { id: 'waste-types', label: 'Waste Types' },
         { id: 'waste-items', label: 'Waste Items' },
+        { id: 'products-categories', label: 'Products Categories' },
+        { id: 'products', label: 'Products' },
         { id: 'requests', label: 'Collection Requests' },
         { id: 'donation', label: 'Donation' },
         { id: 'shops', label: 'Shops' },

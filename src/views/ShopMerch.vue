@@ -3,9 +3,7 @@
   <div class="relative px-8 pb-6">
     <!-- Gradient overlay at the TOP only -->
     <!-- Custom layered gradient overlay -->
-    <div
-      class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent"
-      style="
+    <div class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent" style="
         background: linear-gradient(
           to bottom,
           rgba(233, 235, 248, 0.8) 0%,
@@ -13,26 +11,17 @@
           rgba(233, 235, 248, 0.7) 95%,
           rgba(233, 235, 248, 0) 100%
         );
-      "
-    ></div>
+      "></div>
 
     <!-- Background image -->
-    <img
-      src="/images/Shop Page Background.png"
-      alt="Background"
-      class="absolute inset-0 w-2xl h-sm object-cover -z-10 mx-auto"
-    />
+    <img src="/images/Shop Page Background.png" alt="Background"
+      class="absolute inset-0 w-2xl h-sm object-cover -z-10 mx-auto" />
 
     <!-- content -->
     <div
-      class="relative flex flex-col lg:flex-row items-center justify-between text-center lg:text-left gap-8 px-10 py-16 pb-24 z-10"
-    >
+      class="relative flex flex-col lg:flex-row items-center justify-between text-center lg:text-left gap-8 px-10 py-16 pb-24 z-10">
       <!-- Logo -->
-      <img
-        src="/logos/K.png"
-        alt="Karakib Logo"
-        class="w-48 lg:w-60 drop-shadow-lg flex-shrink-0"
-      />
+      <img src="/logos/K.png" alt="Karakib Logo" class="w-48 lg:w-60 drop-shadow-lg flex-shrink-0" />
 
       <!-- Text -->
       <div class="text-[#2C702C] max-w-2xl flex-grow lg:max-w-6xl">
@@ -46,56 +35,42 @@
     <!-- links -->
   </div>
   <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-1">
-    <a
-      class="rounded-md cursor-pointer bg-white text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
-    >
+    <a @click="selectedCategory = ''"
+      class="rounded-md cursor-pointer bg-white text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100">
       View all
     </a>
-    <a
-      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
-    >
-      T-Shirts
-    </a>
-    <a
-      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
-    >
-      Mugs
-    </a>
-    <a
-      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
-    >
-      Tote Bags
+    <a v-for="category in categories" :key="category.id" @click="selectedCategory = category.id"
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100">
+      {{ category.name }}
     </a>
   </div>
   <!-- all merch sec -->
 
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6"
-  >
-    <div
-      v-for="(item, index) in merchItems"
-      :key="index"
-      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
-    >
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6">
+    <div class="col-span-3">
+      <h5 v-if="filteredProducts.length === 0" class="px-4 py-4 mx-auto text-gray-500 font-bold text-center">
+        No products in this category
+      </h5>
+    </div>
+    <div v-for="(product, index) in filteredProducts" :key="index"
+      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300">
       <figure>
-        <img :src="item.image" :alt="item.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
+        <img :src="product.image_url" :alt="product.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
       </figure>
 
       <div class="px-4 pt-2 pb-2">
         <!-- Title + Price -->
         <div class="flex justify-between items-center w-full">
-          <h2 class="text-[#2C702C] font-semibold text-xl">{{ item.name }}</h2>
-          <p class="text-[#2C702C] font-semibold text-lg">${{ item.price }}</p>
+          <h2 class="text-[#2C702C] font-semibold text-xl">{{ product.name }}</h2>
+          <p class="text-[#2C702C] font-semibold text-lg">${{ product.price }}</p>
         </div>
 
         <!-- Description -->
-        <p class="text-gray-600 text-sm">{{ item.description }}</p>
+        <p class="text-gray-600 text-sm">{{ product.description }}</p>
 
         <!-- Actions -->
         <div class="flex items-center mt-1 justify-end">
-          <button
-            class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
-          >
+          <button class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold">
             Add to Cart
           </button>
         </div>
@@ -105,70 +80,54 @@
 </template>
 
 <script>
+import productsCategoriesService from '@/services/productsCategoriesService';
+import productsService from '@/services/productsService';
+
 export default {
   name: "shopPage",
   data() {
     return {
-      merchItems: [
-        {
-          name: "Karakib T-Shirt",
-          price: 25,
-          description: "Lightweight and breathable cotton t-shirt.",
-          image: "/images/merch/T shirt K.png",
-        },
-        {
-          name: "Classic Tee",
-          price: 22,
-          description: "Lightweight and breathable cotton t-shirt.",
-          image: "/images/merch/T shirt K2.png",
-        },
-        {
-          name: "Eco Tote Bag",
-          price: 18,
-          description: "Durable and reusable eco-friendly tote bag.",
-          image: "/images/merch/Tote Bag.png",
-        },
-        {
-          name: "Canvas Tote",
-          price: 20,
-          description: "Stylish canvas tote bag for everyday use.",
-          image: "/images/merch/Tote Bag1.png",
-        },
-        {
-          name: "Karakib Mug",
-          price: 15,
-          description: "Ceramic mug featuring the Karakib logo.",
-          image: "/images/merch/Tote Bag.png",
-        },
-        {
-          name: "Eco Mug",
-          price: 16,
-          description: "Eco-friendly bamboo mug for daily use.",
-          image: "/images/merch/Tote Bag.png",
-        },
-        {
-          name: "Eco Mug",
-          price: 16,
-          description: "Eco-friendly bamboo mug for daily use.",
-          image: "/images/merch/Tote Bag.png",
-        },
-        {
-          name: "Eco Mug",
-          price: 16,
-          description: "Eco-friendly bamboo mug for daily use.",
-          image: "/images/merch/Tote Bag.png",
-        },
-        {
-          name: "Eco Mug",
-          price: 16,
-          description: "Eco-friendly bamboo mug for daily use.",
-          image: "/images/merch/Tote Bag.png",
-        },
-      ],
+      selectedCategory: '',
+      categories: [],
+      products: []
     };
   },
+  computed: {
+    filteredProducts() {
+      let filtered = this.products;
+
+      if (this.selectedCategory) {
+        filtered = filtered.filter(product =>
+          product.category_id == this.selectedCategory)
+      }
+
+      return filtered;
+    }
+  },
+  methods: {
+    async fetchCategories() {
+      try {
+        const response = await productsCategoriesService.getCategories();
+        this.categories = response.data.data || response.data;
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
+    },
+
+    async fetchProducts() {
+      try {
+        const response = await productsService.getProducts();
+        this.products = response.data.data || response.data;
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
+    },
+  },
+  mounted() {
+    this.fetchCategories();
+    this.fetchProducts();
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

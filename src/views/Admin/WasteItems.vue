@@ -338,7 +338,7 @@ export default {
         name: '',
         image: '',
       },
-      currentPage: 1,
+
       items: [],
       types: []
     }
@@ -369,9 +369,7 @@ export default {
       return filtered;
     },
 
-    totalPages() {
-      return 4;
-    }
+
   },
 
   methods: {

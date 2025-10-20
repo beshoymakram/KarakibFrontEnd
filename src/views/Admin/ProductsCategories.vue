@@ -4,7 +4,7 @@
       <div class="relative">
         <button @click="openCreateModal()"
           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          Create new type
+          Create new category
         </button>
       </div>
 
@@ -28,30 +28,26 @@
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-if="filteredTypes.length === 0">
-            <td colspan="3" class="px-4 py-4 text-center text-gray-500">
+          <tr v-if="filteredCategories.length === 0">
+            <td colspan="2" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
 
-          <tr v-for="type in filteredTypes" :key="type.id" class="hover:bg-gray-50 transition-colors">
+          <tr v-for="category in filteredCategories" :key="category.id" class="hover:bg-gray-50 transition-colors">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ type.name }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-[#2C702C]">
-              <img class="w-10 h-10 rounded-full" :src="type.image_url" :alt="type.name">
+              {{ category.name }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              <button @click="openEditModal(type)"
+              <button @click="openEditModal(category)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                 Edit
               </button>
-              <button @click="openDeleteModal(type)"
+              <button @click="openDeleteModal(category)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                 Delete
               </button>
@@ -84,7 +80,7 @@
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this type?
+              Are you sure you want to delete this category?
             </h3>
             <button @click="confirmDelete" type="button"
               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
@@ -107,7 +103,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Create type
+              Create Product Category
             </h3>
             <button type="button" @click="showCreateModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -132,18 +128,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Enter user name" required />
               </div>
-
-              <!-- Image -->
-              <div class="col-span-2">
-                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Image
-                </label>
-                <input type="file" id="image" @change="handleImageUpload" accept="image/*"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  required />
-              </div>
             </div>
-
             <!-- Footer Buttons -->
             <div class="flex justify-end space-x-3">
               <button @click="showCreateModal = false" type="button"
@@ -184,28 +169,13 @@
           <form @submit.prevent="confirmEdit" class="p-4 md:p-5">
             <div class="grid gap-4 mb-4">
               <!-- Name -->
-              <div>
+              <div class="col-span-2">
                 <label for="edit-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Name
                 </label>
                 <input type="text" id="edit-name" v-model="editForm.name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
                   placeholder="Enter type name" required />
-              </div>
-
-              <div>
-                <label for="edit-image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Change Image (optional)
-                </label>
-                <input type="file" id="edit-image" @change="handleImageUpload" accept="image/*"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5" />
-              </div>
-
-              <div v-if="editForm.image">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Current Image
-                </label>
-                <img :src="editForm.image" class="w-20 h-20 rounded-lg object-cover mb-2" alt="Current image" />
               </div>
             </div>
 
@@ -229,16 +199,16 @@
 </template>
 
 <script>
-import wasteTypesService from '@/services/wasteTypesService';
+import productsCategoriesService from '@/services/productsCategoriesService';
 import { nextTick } from 'vue';
 
 export default {
-  name: 'WasteTypes',
+  name: 'ProductsCategories',
 
   data() {
     return {
       searchQuery: '',
-      selectedType: '',
+      selectedCategory: '',
       showDeleteModal: false,
       showEditModal: false,
       showCreateModal: false,
@@ -246,48 +216,46 @@ export default {
       createForm: {
         id: null,
         name: '',
-        image: '',
       },
       editForm: {
         id: null,
         name: '',
-        image: '',
       },
-
-      types: []
+      categories: []
     }
   },
 
   computed: {
-    filteredTypes() {
-      let filtered = this.types;
+    filteredCategories() {
+      let filtered = this.categories;
 
       if (this.searchQuery) {
-        filtered = filtered.filter(type =>
-          type.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        filtered = filtered.filter(category =>
+          category.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
 
       return filtered;
     },
-
-
   },
 
   methods: {
     handleImageUpload(event) {
       this.imageFile = event.target.files[0];
     },
-    openDeleteModal(type) {
-      this.selectedType = type.id;
+    openDeleteModal(category) {
+      this.selectedCategory = category.id;
       this.showDeleteModal = true;
     },
 
-    openEditModal(type) {
+    openEditModal(category) {
       this.editForm = {
-        id: type.id,
-        name: type.name,
-        image: type.image_url,
+        id: category.id,
+        name: category.name,
+        description: category.description,
+        price: category.price,
+        stock: category.stock,
+        image: category.image_url,
       };
       this.showEditModal = true;
     },
@@ -300,17 +268,12 @@ export default {
       try {
         const formData = new FormData();
         formData.append('name', this.createForm.name);
-
-        if (this.imageFile) {
-          formData.append('image', this.imageFile);
-        }
-        const response = await wasteTypesService.createType(formData);
+        const response = await productsCategoriesService.createCategory(formData);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
         this.showCreateModal = false;
-        this.fetchTypes();
-        this.imageFile = null;
+        this.fetchCategories();
         this.createForm.name = '';
       } catch (error) {
         this.$toast.error(error.response.data.message);
@@ -322,17 +285,12 @@ export default {
         const formData = new FormData();
         formData.append('_method', 'PUT');
         formData.append('name', this.editForm.name);
-
-        if (this.imageFile) {
-          formData.append('image', this.imageFile);
-        }
-        const response = await wasteTypesService.postUpdateType(this.editForm.id, formData);
+        const response = await productsCategoriesService.postUpdateCategory(this.editForm.id, formData);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
         this.showEditModal = false;
-        this.fetchTypes();
-        this.imageFile = null;
+        this.fetchCategories();
         this.editForm.name = '';
       } catch (error) {
         this.$toast.error(error.response.data.message);
@@ -340,10 +298,10 @@ export default {
     },
 
 
-    async fetchTypes() {
+    async fetchCategories() {
       try {
-        const response = await wasteTypesService.getTypes();
-        this.types = response.data.data || response.data;
+        const response = await productsCategoriesService.getCategories();
+        this.categories = response.data.data || response.data;
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
@@ -351,30 +309,30 @@ export default {
 
     async confirmDelete() {
       try {
-        const response = await wasteTypesService.deleteType(this.selectedType);
+        const response = await productsCategoriesService.deleteCategory(this.selectedCategory);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
-        this.selectedType = '';
-        this.fetchTypes();
+        this.selectedCategory = '';
+        this.fetchCategories();
         this.showDeleteModal = false;
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
     },
 
-    editType(type) {
-      console.log('Edit type:', type);
+    editCategory(product) {
+      console.log('Edit product:', product);
     },
 
-    deleteType(type) {
-      if (confirm(`Are you sure you want to delete ${type.name}?`)) {
-        console.log('Delete type:', type);
+    deleteCategory(product) {
+      if (confirm(`Are you sure you want to delete ${category.name}?`)) {
+        console.log('Delete product:', product);
       }
     }
   },
   mounted() {
-    this.fetchTypes();
+    this.fetchCategories();
   }
 }
 </script>

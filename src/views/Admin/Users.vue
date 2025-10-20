@@ -264,7 +264,7 @@ export default {
         type: 'user',
         points: 0
       },
-      currentPage: 1,
+
       filters: {
         role: '',
         status: ''
@@ -299,9 +299,7 @@ export default {
       return filtered;
     },
 
-    totalPages() {
-      return 4;
-    }
+
   },
 
   methods: {

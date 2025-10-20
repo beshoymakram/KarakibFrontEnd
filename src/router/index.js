@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/auth'
 // Import all views
 import HomePage from '@/views/HomePage.vue'
 import AboutUs from '@/views/AboutUs.vue'
-import ContactUs from '@/views/ContactUs.vue'
+// import ContactUs from '@/views/ContactUs.vue'
 import AddWaste from '@/views/AddWaste.vue'
 import ShopMerch from '@/views/ShopMerch.vue'
 import LoginPage from '@/views/LoginPage.vue'
@@ -16,13 +16,15 @@ import WasteItems from '@/views/Admin/WasteItems.vue'
 import WasteTypes from '@/views/Admin/WasteTypes.vue'
 import ProfileLayout from '@/views/Profile/ProfileLayout.vue'
 import PersonalInfo from '@/views/Profile/PersonalInfo.vue'
+import Products from '@/views/Admin/Products.vue'
+import ProductsCategories from '@/views/Admin/ProductsCategories.vue'
 
 // Define routes
 const routes = [
   // Public routes (accessible without login)
   { path: '/', name: 'Home', component: HomePage },
   { path: '/about', name: 'About', component: AboutUs },
-  { path: '/contact', name: 'Contact', component: ContactUs },
+  // { path: '/contact', name: 'Contact', component: ContactUs },
   { path: '/add-waste', name: 'AddWaste', component: AddWaste },
   { path: '/shop', name: 'Shop', component: ShopMerch },
   { path: '/cart', name: 'cart', component: CartPage },
@@ -74,6 +76,16 @@ const routes = [
         path: 'waste-items',
         name: 'AdminWasteItems',
         component: WasteItems
+      },
+      {
+        path: 'products',
+        name: 'AdminProducts',
+        component: Products
+      },
+      {
+        path: 'products-categories',
+        name: 'AdminProductsCategories',
+        component: ProductsCategories
       },
     ]
   },
