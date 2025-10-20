@@ -66,7 +66,7 @@
               {{ item.name }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ item.waste_type.name }}
+              {{ item.waste_type?.name }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
               {{ item.points_per_unit }}/{{ item.unit }}
