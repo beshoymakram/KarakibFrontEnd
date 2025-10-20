@@ -10,6 +10,9 @@ const apiClient = axios.create({
   },
 });
 
+axios.defaults.headers.get['header-name'] = 'value'
+
+
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('auth-token');

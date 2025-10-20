@@ -2,7 +2,7 @@ import apiClient from '../config/api';
 
 export default {
   createItem(data) {
-    return apiClient.post('/waste-items/', data, {
+    return apiClient.post('/waste-items', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

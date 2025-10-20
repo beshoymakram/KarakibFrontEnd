@@ -2,7 +2,7 @@ import apiClient from '../config/api';
 
 export default {
   createType(data) {
-    return apiClient.post('/waste-types/', data, {
+    return apiClient.post('/waste-types', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
