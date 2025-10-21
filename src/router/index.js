@@ -21,6 +21,7 @@ import ProductsCategories from '@/views/Admin/ProductsCategories.vue'
 import ProductDesc from '@/views/ProductDesc.vue'
 import CheckOut from '@/views/CheckOut.vue'
 import TestPayment from '@/views/Admin/TestPayment.vue'
+import MyAddresses from '@/views/Profile/MyAddresses.vue'
 import PmtFailure from '@/views/PmtFailure.vue'
 import PmtSuccess from '@/views/PmtSuccess.vue'
 import WastesDesc from '@/views/WastesDesc.vue'
@@ -46,6 +47,11 @@ const routes = [
         path: 'personal-info',
         name: 'PersonalInfo',
         component: PersonalInfo
+      },
+      {
+        path: 'my-addresses',
+        name: 'MyAddresses',
+        component: MyAddresses
       },
       {
         path: 'my-requests',
@@ -115,15 +121,15 @@ const routes = [
     component: CheckOut,
   },
   {
-  path: '/payment-success',
-  name: 'PmtSuccess',
-  component: PmtSuccess,
-},
-{
-  path: '/payment-failure',
-  name: 'PmtFailure',
-  component: PmtFailure,
-},
+    path: '/payment-success',
+    name: 'PmtSuccess',
+    component: PmtSuccess,
+  },
+  {
+    path: '/payment-failure',
+    name: 'PmtFailure',
+    component: PmtFailure,
+  },
 
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
