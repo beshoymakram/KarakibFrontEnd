@@ -12,4 +12,20 @@ export default {
   deleteMyAccount() {
     return apiClient.delete('/profile/destroy');
   },
+
+  createAddress(data) {
+    return apiClient.post('/profile/addresses', data);
+  },
+
+  updateAddress(id, data) {
+    return apiClient.put('/profile/addresses/' + id, data);
+  },
+
+  deleteAddress(id) {
+    return apiClient.delete('/profile/addresses/' + id);
+  },
+
+  getAddresses() {
+    return apiClient.get('/profile/addresses');
+  },
 };

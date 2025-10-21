@@ -23,6 +23,7 @@ export default {
       activeTab: '',
       tabs: [
         { id: 'personal-info', label: 'Personal Info' },
+        { id: 'my-addresses', label: 'My Addresses' },
         { id: 'my-requests', label: 'My Requests' },
         { id: 'my-orders', label: 'My Orders' },
         { id: 'my-points', label: 'My Points' },

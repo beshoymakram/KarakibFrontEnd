@@ -21,6 +21,7 @@ import ProductsCategories from '@/views/Admin/ProductsCategories.vue'
 import ProductDesc from '@/views/ProductDesc.vue'
 import CheckOut from '@/views/CheckOut.vue'
 import TestPayment from '@/views/Admin/TestPayment.vue'
+import MyAddresses from '@/views/Profile/MyAddresses.vue'
 
 // Define routes
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
         path: 'personal-info',
         name: 'PersonalInfo',
         component: PersonalInfo
+      },
+      {
+        path: 'my-addresses',
+        name: 'MyAddresses',
+        component: MyAddresses
       },
       {
         path: 'my-requests',
@@ -101,9 +107,7 @@ const routes = [
     props: true // lets ProductDesc receive `id` as a prop
   },
   {
-    path: '/checkout',
-    name: 'checkout',
-    component: CheckOut,
+    path: '/checkout', name: 'checkout', component: CheckOut, meta: { requiresAuth: true }
   },
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
