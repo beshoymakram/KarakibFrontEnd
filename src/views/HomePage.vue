@@ -193,21 +193,35 @@
         <img :src="card.image" :alt="card.title" class="mx-auto w-20 h-20 mb-4 bg-[#E9EBF8] full rounded-full p-3" />
         <h3 class="text-[#163816] font-semibold text-xl mb-2">{{ card.title }}</h3>
         <p class="text-[#8E98A8] mb-4">{{ card.description }}</p>
-        <button class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition">
+        <button 
+          @click="openDonationModal(card.title)"
+          class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition">
           {{ card.buttonText }}
         </button>
       </div>
     </div>
   </section>
+
+  <!-- Donation Modal -->
+  <DonationModal 
+    :isOpen="isModalOpen"
+    :fundName="selectedFund"
+    @close="closeModal"
+    @donate="handleDonation"
+  />
 </template>
 
 <script>
 import productsService from "@/services/productsService";
 import wasteService from "@/services/wasteService";
 import { useCartStore } from "@/stores/cart";
+import DonationModal from "@/components/DonationModal.vue";
 
 export default {
   name: "homePage",
+  components: {
+    DonationModal
+  },
   data() {
     return {
       wasteItems: [],
@@ -254,22 +268,24 @@ export default {
           image: "/images/Graduation Cap.png",
           title: "Education Fund",
           description: "Support underprivileged children's education",
-          buttonText: "Donate Points",
+          buttonText: "Donate",
         },
         {
           image: "/images/Tree Planting.png",
           title: "Reforestation",
           description: "Plant trees and restore natural habitats",
-          buttonText: "Donate Points",
+          buttonText: "Donate",
         },
         {
           image: "/images/Heart Health.png",
           title: "Community Health",
           description: "Support underprivileged children's education",
-          buttonText: "Donate Points",
+          buttonText: "Donate",
         },
       ],
-      products: []
+      products: [],
+      isModalOpen: false,
+      selectedFund: ''
     };
   },
   methods: {
@@ -314,6 +330,24 @@ export default {
         this.$toast.error('Failed to add to cart');
       }
     },
+
+    openDonationModal(fundName) {
+      this.selectedFund = fundName;
+      this.isModalOpen = true;
+    },
+
+    closeModal() {
+      this.isModalOpen = false;
+    },
+
+    handleDonation(donationData) {
+      console.log('Donation received:', donationData);
+      // Here you can add logic to:
+      // 1. Send donation to your backend API
+      // 2. Show success message
+      // 3. Update user's points, etc.
+      this.$toast.success(`Thank you for donating ${donationData.amount} EGP to ${donationData.fund}!`);
+    }
   },
   computed: {
     cartStore() {
@@ -323,7 +357,6 @@ export default {
   mounted() {
     this.fetchWasteItems();
     this.fetchProducts();
-
   },
 };
 </script>
