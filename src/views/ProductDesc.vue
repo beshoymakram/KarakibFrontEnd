@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen bg-[#BFD6BF] py-6 px-4">
     <div v-if="product" class="max-w-7xl mx-auto">
-      <div class="p-8 px-16 bg-[#F6F7FB] rounded-lg shadow-sm">
+      <div class="p-16 bg-[#F6F7FB] rounded-lg shadow-sm">
         <!-- Product Section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <!-- Image Gallery -->
           <div>
-            <div class="bg-white rounded-2xl overflow-hidden mb-4 shadow-sm max-w-lg">
+            <div class="bg-white rounded-2xl overflow-hidden mb-4 shadow-sm max-w-[480px]">
               <img :src="selectedImage" alt="Product" class="w-full h-[400px] object-cover" />
             </div>
             <div class="flex gap-2">
