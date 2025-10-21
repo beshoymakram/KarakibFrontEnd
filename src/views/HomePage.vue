@@ -284,7 +284,7 @@ export default {
       ],
       products: [],
       isModalOpen: false,
-      selectedFund: ''
+      selectedFund: '',
       steps: [
         {
           number: "Step 1",
