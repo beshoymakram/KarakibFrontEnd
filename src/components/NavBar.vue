@@ -160,6 +160,8 @@ export default {
   methods: {
     async handleLogout() {
       await this.auth.logout();
+      const cartStore = useCartStore();
+      await cartStore.fetchCart();
       this.$router.push('/login');
     },
 
