@@ -53,31 +53,36 @@
   </div>
   <div
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center justify-center py-14 px-3 lg:px-6">
-    <div v-for="(product, index) in filteredProducts" :key="index"
-      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300">
-      <figure>
-        <img :src="product.image_url" :alt="product.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
-      </figure>
+   <div
+  v-for="(product, index) in filteredProducts"
+  :key="index"
+  class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
+>
+  <router-link :to="{ name: 'product-desc', params: { id: product.id } }">
+    <figure>
+      <img :src="product.image_url" :alt="product.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
+    </figure>
+  </router-link>
 
-      <div class="px-4 pt-2 pb-2">
-        <!-- Title + Price -->
-        <div class="flex justify-between items-center w-full">
-          <h2 class="text-[#2C702C] font-semibold text-xl">{{ product.name }}</h2>
-          <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} EGP</p>
-        </div>
-
-        <!-- Description -->
-        <p class="text-gray-600 text-sm">{{ product.description }}</p>
-
-        <!-- Actions -->
-        <div class="flex items-center mt-1 justify-end">
-          <button @click="addToCart(product.id)"
-            class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold">
-            Add to Cart
-          </button>
-        </div>
-      </div>
+  <div class="px-4 pt-2 pb-2">
+    <div class="flex justify-between items-center w-full">
+      <h2 class="text-[#2C702C] font-semibold text-xl">{{ product.name }}</h2>
+      <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} EGP</p>
     </div>
+
+    <p class="text-gray-600 text-sm">{{ product.description }}</p>
+
+    <div class="flex items-center mt-1 justify-end">
+      <button
+        @click.stop="addToCart(product.id)"
+        class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
+
   </div>
 </template>
 
