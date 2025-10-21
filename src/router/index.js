@@ -23,6 +23,7 @@ import CheckOut from '@/views/CheckOut.vue'
 import TestPayment from '@/views/Admin/TestPayment.vue'
 import PmtFailure from '@/views/PmtFailure.vue'
 import PmtSuccess from '@/views/PmtSuccess.vue'
+import WastesDesc from '@/views/WastesDesc.vue'
 
 // Define routes
 const routes = [
@@ -102,6 +103,12 @@ const routes = [
     component: ProductDesc,
     props: true // lets ProductDesc receive `id` as a prop
   },
+  {
+  path: '/waste/:id',
+  name: 'WasteDesc',
+  component: WastesDesc,
+  props: true
+},
   {
     path: '/checkout',
     name: 'checkout',
