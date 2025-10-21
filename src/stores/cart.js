@@ -42,7 +42,7 @@ export const useCartStore = defineStore('cart', {
           localStorage.setItem('cart_session', this.sessionId);
         }
       } catch (error) {
-        this.$toast.error(error.response?.data.message || error);
+        toast.error(error.response?.data.message || error);
       } finally {
         this.loading = false;
       }
@@ -62,7 +62,7 @@ export const useCartStore = defineStore('cart', {
         await this.fetchCart();
         return true;
       } catch (error) {
-        this.$toast.error(error.response?.data.message || error);
+        toast.error(error.response?.data.message || error);
         return false;
       }
     },
@@ -75,8 +75,9 @@ export const useCartStore = defineStore('cart', {
           }
         });
         await this.fetchCart();
+        return true;
       } catch (error) {
-        this.$toast.error(error.response?.data.message || error);
+        toast.error(error.response?.data.message || error);
       }
     },
 
@@ -88,8 +89,9 @@ export const useCartStore = defineStore('cart', {
           }
         });
         await this.fetchCart();
+        return true;
       } catch (error) {
-        this.$toast.error(error.response?.data.message || error);
+        toast.error(error.response?.data.message || error);
       }
     },
 
@@ -104,7 +106,7 @@ export const useCartStore = defineStore('cart', {
         this.total = 0;
         this.count = 0;
       } catch (error) {
-        this.$toast.error(error.response?.data.message || error);
+        toast.error(error.response?.data.message || error);
       }
     },
 
@@ -127,7 +129,7 @@ export const useCartStore = defineStore('cart', {
 
         await this.fetchCart();
       } catch (error) {
-        this.$toast.error(error.response?.data.message || error);
+        toast.error(error.response?.data.message || error);
       }
     }
   }

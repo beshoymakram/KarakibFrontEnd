@@ -14,7 +14,7 @@
 
         <div class="flex items-center gap-2">
           <p>Qty: {{ item.quantity }}</p>
-          <button @click="remove(item.id)" class="text-red-500">Remove</button>
+          <button @click="removeItem(item.id)" class="text-red-500 cursor-pointer">Remove</button>
         </div>
       </div>
 
@@ -32,7 +32,6 @@
 
 <script>
 import { useCartStore } from '@/stores/cart'
-import { mapState, mapActions } from 'pinia'
 
 export default {
   name: 'CartPage',
@@ -42,6 +41,15 @@ export default {
     },
   },
   methods: {
+    async removeItem(itemId) {
+      const success = await this.cartStore.removeItem(itemId);
+
+      if (success) {
+        this.$toast.success('Item removed!');
+      } else {
+        this.$toast.error('Failed to remove item');
+      }
+    },
   },
 }
 </script>
