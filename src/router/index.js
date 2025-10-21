@@ -20,6 +20,7 @@ import Products from '@/views/Admin/Products.vue'
 import ProductsCategories from '@/views/Admin/ProductsCategories.vue'
 import ProductDesc from '@/views/ProductDesc.vue'
 import CheckOut from '@/views/CheckOut.vue'
+import TestPayment from '@/views/Admin/TestPayment.vue'
 
 // Define routes
 const routes = [
@@ -32,6 +33,7 @@ const routes = [
   { path: '/cart', name: 'cart', component: CartPage },
   { path: '/admin', redirect: '/admin/users' },
   { path: '/profile', redirect: '/profile/personal-info' },
+  { path: '/test-payment', component: TestPayment },
   {
     path: '/profile',
     component: ProfileLayout,
@@ -92,17 +94,17 @@ const routes = [
       },
     ]
   },
-     {
+  {
     path: '/product/:id', // dynamic route with product ID
     name: 'product-desc',
     component: ProductDesc,
     props: true // lets ProductDesc receive `id` as a prop
   },
   {
-  path: '/checkout',
-  name: 'checkout',
-  component: CheckOut,
-},
+    path: '/checkout',
+    name: 'checkout',
+    component: CheckOut,
+  },
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },

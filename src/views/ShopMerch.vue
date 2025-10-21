@@ -24,7 +24,7 @@
 
     <!-- content -->
     <div
-      class="relative flex flex-col lg:flex-row items-center justify-between text-center lg:text-left gap-8 px-10 py-16 z-2"
+      class="relative flex flex-col lg:flex-row items-center justify-around text-center lg:text-left gap-8 px-10 py-16 z-2"
     >
       <!-- Logo -->
       <img
@@ -36,31 +36,30 @@
       <!-- Text -->
 
       <p
-        class="max-w-2xl text-xl lg:text-3xl flex-grow text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit"
+        class="max-w-2xl text-xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit"
       >
         Support Karakib’s mission by buying eco-friendly merchandise. <br />
         Every purchase funds our recycling and community projects.
       </p>
     </div>
-
-    <!-- links -->
   </div>
+
+  <!-- links -->
   <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-1">
-    <a
-      @click="selectedCategory = ''"
-      class="rounded-md cursor-pointer bg-white text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
-    >
-      View all
-    </a>
     <a
       v-for="category in categories"
       :key="category.id"
       @click="selectedCategory = category.id"
-      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm hover:bg-green-100"
+      class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm transition-colors duration-300"
+      :class="{
+        'bg-[#2C702C] text-white': selectedCategory === category.id,
+        'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== category.id,
+      }"
     >
       {{ category.name }}
     </a>
   </div>
+
   <!-- all merch sec -->
 
   <div>

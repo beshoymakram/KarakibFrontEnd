@@ -3,16 +3,20 @@
     <div class="container mx-auto px-4 max-w-6xl">
       <h1 class="text-3xl font-bold text-[#2C702C] mb-8">Checkout Orders</h1>
 
-      <div class="grid md:grid-cols-2 gap-6 bg-[#E9EBE9] p-6 rounded-2xl shadow-lg">
+      <div
+        class="grid md:grid-cols-2 gap-6 bg-[#E9EBE9] p-6 rounded-2xl shadow-lg"
+      >
         <!-- LEFT SIDE - ORDER DETAILS -->
         <div class="bg-white rounded-xl p-6 shadow">
-          <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">Order Details</h2>
+          <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">
+            Order Details
+          </h2>
 
           <div v-if="cartStore.items.length > 0" class="space-y-4">
             <div
               v-for="item in cartStore.items"
               :key="item.id"
-              class="flex justify-between items-center border-b pb-3"
+              class="flex justify-between items-center border-t pb-3"
             >
               <div class="flex items-center gap-4">
                 <img
@@ -21,7 +25,9 @@
                   class="w-14 h-14 rounded-md object-cover"
                 />
                 <div>
-                  <p class="font-semibold text-gray-800">{{ item.product.name }}</p>
+                  <p class="font-semibold text-gray-800">
+                    {{ item.product.name }}
+                  </p>
                   <p class="text-sm text-gray-500">Colour: White</p>
                   <p class="text-sm text-gray-500">
                     {{ item.product.price }} EGP × {{ item.quantity }}
@@ -37,13 +43,15 @@
             <div class="pt-4 border-t mt-4">
               <div class="flex justify-between mb-2">
                 <span>{{ cartStore.items.length }} items</span>
-                <span>{{ cartStore.subtotal }} EGP</span>
+                <span>{{ cartStore.total }} EGP</span>
               </div>
               <div class="flex justify-between mb-2">
                 <span>Delivery fee</span>
                 <span>20 EGP</span>
               </div>
-              <div class="flex justify-between text-xl font-bold text-[#2C702C]">
+              <div
+                class="flex justify-between text-xl font-bold text-[#2C702C]"
+              >
                 <span>Total amount</span>
                 <span>{{ cartStore.total + 20 }} EGP</span>
               </div>
@@ -52,12 +60,16 @@
 
           <div v-else class="text-center text-gray-500 mt-6">
             Your cart is empty.
-            <router-link to="/shop" class="text-[#2C702C] underline">Go shopping</router-link>.
+            <router-link to="/shop" class="text-[#2C702C] underline"
+              >Go shopping</router-link
+            >.
           </div>
         </div>
 
         <!-- RIGHT SIDE - CHECKOUT -->
-        <div class="bg-white rounded-xl p-6 shadow flex flex-col justify-between">
+        <div
+          class="bg-white rounded-xl p-6 shadow flex flex-col justify-between"
+        >
           <div>
             <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">Checkout</h2>
 
@@ -150,7 +162,9 @@
       class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
     >
       <div class="bg-white rounded-lg p-6 w-[90%] max-w-md">
-        <h3 class="text-xl font-semibold text-[#2C702C] mb-4">Enter Delivery Address</h3>
+        <h3 class="text-xl font-semibold text-[#2C702C] mb-4">
+          Enter Delivery Address
+        </h3>
 
         <form @submit.prevent="saveAddress" class="space-y-3">
           <input
@@ -193,24 +207,50 @@
         </form>
       </div>
     </div>
+    <!-- ✅ Order Confirmation Modal -->
+    <div
+      v-if="showConfirmation"
+      class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl"
+      >
+        <img
+          src="/images/delivery.png"
+          alt="Delivery Truck"
+          class="w-48 mx-auto mb-4"
+        />
+        <p class="text-[#2C702C] text-lg font-semibold">
+          Thank you for supporting Karakib 🌱 <br />
+          Your order helps make the world cleaner.
+        </p>
+        <button
+          @click="closeConfirmation"
+          class="mt-6 px-6 py-2 bg-[#2C702C] text-white rounded-md hover:bg-[#1a4d1a]"
+        >
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { useCartStore } from '@/stores/cart';
+import { useCartStore } from "@/stores/cart";
 
 export default {
-  name: 'CheckoutPage',
+  name: "CheckoutPage",
   data() {
     return {
       showAddressModal: false,
+      showConfirmation: false,
       shipping: {
-        name: '',
-        phone: '',
-        address: '',
+        name: "",
+        phone: "",
+        address: "",
       },
-      paymentMethod: 'cash',
-      deliveryNotes: '',
+      paymentMethod: "cash",
+      deliveryNotes: "",
     };
   },
   computed: {
@@ -220,16 +260,20 @@ export default {
   },
   methods: {
     saveAddress() {
-      if (!this.shipping.name || !this.shipping.phone || !this.shipping.address) {
-        this.$toast.error('Please fill in all address fields.');
+      if (
+        !this.shipping.name ||
+        !this.shipping.phone ||
+        !this.shipping.address
+      ) {
+        this.$toast.error("Please fill in all address fields.");
         return;
       }
       this.showAddressModal = false;
-      this.$toast.success('Address saved successfully!');
+      this.$toast.success("Address saved successfully!");
     },
     placeOrder() {
       if (!this.shipping.address) {
-        this.$toast.error('Please enter your delivery address.');
+        this.$toast.error("Please enter your delivery address.");
         return;
       }
       const order = {
@@ -239,10 +283,14 @@ export default {
         payment: this.paymentMethod,
         notes: this.deliveryNotes,
       };
-      console.log('Order placed:', order);
-      this.$toast.success('Order placed successfully!');
+      console.log("Order placed:", order);
+      this.$toast.success("Order placed successfully!");
       this.cartStore.clearCart();
-      this.$router.push('/');
+      this.showConfirmation = true; // ✅ add this line
+    },
+    closeConfirmation() {
+      this.showConfirmation = false;
+      this.$router.push("/");
     },
   },
   mounted() {
@@ -253,6 +301,6 @@ export default {
 
 <style scoped>
 .checkout-page {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 </style>
