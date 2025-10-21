@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook, faInstagram, faLinkedin, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { faPhone, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { useCartStore } from './stores/cart'
 
 
 const app = createApp(App)
@@ -29,5 +30,6 @@ app.use(Vue3Toastify, {
   autoClose: 3000,
 });
 app.config.globalProperties.$toast = toast
-
+const cartStore = useCartStore();
+cartStore.fetchCart();
 app.mount('#app')

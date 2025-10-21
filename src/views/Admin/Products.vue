@@ -8,7 +8,16 @@
         </button>
       </div>
 
+      <div class="relative">
+        <select v-model="filters.category_id"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">All Types</option>
+          <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
       <div class="flex-1 max-w-md ml-auto">
+
         <div class="relative">
           <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
@@ -37,7 +46,7 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-if="filteredProducts.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+            <td colspan="6" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
@@ -321,6 +330,9 @@ export default {
       showEditModal: false,
       showCreateModal: false,
       imageFile: null,
+      filters: {
+        category_id: '',
+      },
       createForm: {
         id: null,
         name: '',
@@ -347,6 +359,12 @@ export default {
   computed: {
     filteredProducts() {
       let filtered = this.products;
+
+      if (this.filters.category_id) {
+        filtered = filtered.filter(item =>
+          item.category_id === this.filters.category_id
+        );
+      }
 
       if (this.searchQuery) {
         filtered = filtered.filter(product =>

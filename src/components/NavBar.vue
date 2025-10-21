@@ -42,6 +42,10 @@
               class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
               About Us
             </router-link>
+            <router-link to="/cart"
+              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
+              Cart <span class="text-warning px-2"> ({{ cartStore.count }}) </span>
+            </router-link>
             <router-link to="/ar"
               class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -132,6 +136,7 @@
 
 <script>
 import { useAuthStore } from '@/stores/auth';
+import { useCartStore } from '@/stores/cart';
 
 export default {
   name: "NavBar",
@@ -146,6 +151,9 @@ export default {
   computed: {
     auth() {
       return useAuthStore();
+    },
+    cartStore() {
+      return useCartStore();
     }
   },
 

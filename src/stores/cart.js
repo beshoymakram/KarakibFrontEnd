@@ -1,57 +1,140 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+import apiClient from '@/config/api';
+import { useAuthStore } from './auth';
+import { toast } from 'vue3-toastify'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    cartItems: JSON.parse(localStorage.getItem('cartItems')) || [],
-    checkoutData: JSON.parse(localStorage.getItem('checkoutData')) || null,
+    items: [],
+    total: 0,
+    count: 0,
+    sessionId: null,
+    loading: false
   }),
 
-  getters: {
-    totalItems: (state) => state.cartItems.reduce((sum, item) => sum + item.quantity, 0),
-    totalPrice: (state) => state.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-  },
-
   actions: {
-    addToCart(product, type) {
-      const existingItem = this.cartItems.find(item => item.id === product.id && item.type === type)
-      if (existingItem) {
-        existingItem.quantity++
-      } else {
-        this.cartItems.push({ ...product, type, quantity: 1 })
+    getSessionId() {
+      if (!this.sessionId) {
+        this.sessionId = localStorage.getItem('cart_session');
+        if (!this.sessionId) {
+          this.sessionId = crypto.randomUUID();
+          localStorage.setItem('cart_session', this.sessionId);
+        }
       }
-      this.saveToLocalStorage()
+      return this.sessionId;
     },
 
-    removeFromCart(productId, type) {
-      this.cartItems = this.cartItems.filter(item => !(item.id === productId && item.type === type))
-      this.saveToLocalStorage()
+    async fetchCart() {
+      this.loading = true;
+      try {
+        const response = await apiClient.get('/cart', {
+          headers: {
+            'X-Cart-Session': this.getSessionId()
+          }
+        });
+
+        this.items = response.data.items;
+        this.total = response.data.total;
+        this.count = response.data.count;
+
+        if (response.data.session_id) {
+          this.sessionId = response.data.session_id;
+          localStorage.setItem('cart_session', this.sessionId);
+        }
+      } catch (error) {
+        toast.error('Error fetching cart:', error);
+        console.error('Error fetching cart:', error);
+      } finally {
+        this.loading = false;
+      }
     },
 
-    clearCart() {
-      this.cartItems = []
-      localStorage.removeItem('cartItems')
+    async addToCart(productId, quantity = 1) {
+      try {
+        await apiClient.post('/cart', {
+          product_id: productId,
+          quantity
+        }, {
+          headers: {
+            'X-Cart-Session': this.getSessionId()
+          }
+        });
+
+        await this.fetchCart();
+        return true;
+      } catch (error) {
+        toast.error('Error adding to cart:', error);
+        console.error('Error adding to cart:', error);
+        return false;
+      }
     },
 
-    getCheckoutData() {
-      const merchItems = this.cartItems
-        .filter(item => item.type === 'merch')
-        .map(({ id, quantity }) => ({ id, quantity }))
-
-      const wasteItems = this.cartItems
-        .filter(item => item.type === 'waste')
-        .map(({ id, quantity }) => ({ id, quantity }))
-
-      return { merchItems, wasteItems }
+    async updateQuantity(itemId, quantity) {
+      try {
+        await apiClient.put(`/cart/${itemId}`, { quantity }, {
+          headers: {
+            'X-Cart-Session': this.getSessionId()
+          }
+        });
+        await this.fetchCart();
+      } catch (error) {
+        toast.error('Error updating cart:', error);
+        console.error('Error updating cart:', error);
+      }
     },
 
-    saveCheckoutData() {
-      const data = this.getCheckoutData()
-      this.checkoutData = data
-      localStorage.setItem('checkoutData', JSON.stringify(data))
+    async removeItem(itemId) {
+      try {
+        await apiClient.delete(`/cart/${itemId}`, {
+          headers: {
+            'X-Cart-Session': this.getSessionId()
+          }
+        });
+        await this.fetchCart();
+      } catch (error) {
+        toast.error('Error removing item:', error);
+        console.error('Error removing item:', error);
+      }
     },
 
-    saveToLocalStorage() {
-      localStorage.setItem('cartItems', JSON.stringify(this.cartItems))
+    async clearCart() {
+      try {
+        await apiClient.delete('/cart', {
+          headers: {
+            'X-Cart-Session': this.getSessionId()
+          }
+        });
+        this.items = [];
+        this.total = 0;
+        this.count = 0;
+      } catch (error) {
+        toast.error('Error clearing cart:', error);
+        console.error('Error clearing cart:', error);
+      }
     },
-  },
-})
+
+    async mergeOnLogin() {
+      const authStore = useAuthStore();
+
+      if (!authStore.isAuthenticated) {
+        return;
+      }
+
+      try {
+        await apiClient.post('/cart/merge', {}, {
+          headers: {
+            'X-Cart-Session': this.getSessionId()
+          }
+        });
+
+        localStorage.removeItem('cart_session');
+        this.sessionId = null;
+
+        await this.fetchCart();
+      } catch (error) {
+        toast.error('Error merging cart:', error);
+        console.error('Error merging cart:', error);
+      }
+    }
+  }
+});
