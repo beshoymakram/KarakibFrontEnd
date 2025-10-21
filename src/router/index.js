@@ -18,6 +18,7 @@ import ProfileLayout from '@/views/Profile/ProfileLayout.vue'
 import PersonalInfo from '@/views/Profile/PersonalInfo.vue'
 import Products from '@/views/Admin/Products.vue'
 import ProductsCategories from '@/views/Admin/ProductsCategories.vue'
+import ProductDesc from '@/views/ProductDesc.vue'
 
 // Define routes
 const routes = [
@@ -55,6 +56,12 @@ const routes = [
         name: 'MyPoints',
         component: WasteItems
       },
+        {
+    path: '/product/:id', // dynamic route with product ID
+    name: 'product-desc',
+    component: ProductDesc,
+    props: true // lets ProductDesc receive `id` as a prop
+  }
     ]
   },
   {
