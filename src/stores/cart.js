@@ -42,8 +42,7 @@ export const useCartStore = defineStore('cart', {
           localStorage.setItem('cart_session', this.sessionId);
         }
       } catch (error) {
-        toast.error('Error fetching cart:', error);
-        console.error('Error fetching cart:', error);
+        this.$toast.error(error.response?.data.message || error);
       } finally {
         this.loading = false;
       }
@@ -63,8 +62,7 @@ export const useCartStore = defineStore('cart', {
         await this.fetchCart();
         return true;
       } catch (error) {
-        toast.error('Error adding to cart:', error);
-        console.error('Error adding to cart:', error);
+        this.$toast.error(error.response?.data.message || error);
         return false;
       }
     },
@@ -78,8 +76,7 @@ export const useCartStore = defineStore('cart', {
         });
         await this.fetchCart();
       } catch (error) {
-        toast.error('Error updating cart:', error);
-        console.error('Error updating cart:', error);
+        this.$toast.error(error.response?.data.message || error);
       }
     },
 
@@ -92,8 +89,7 @@ export const useCartStore = defineStore('cart', {
         });
         await this.fetchCart();
       } catch (error) {
-        toast.error('Error removing item:', error);
-        console.error('Error removing item:', error);
+        this.$toast.error(error.response?.data.message || error);
       }
     },
 
@@ -108,8 +104,7 @@ export const useCartStore = defineStore('cart', {
         this.total = 0;
         this.count = 0;
       } catch (error) {
-        toast.error('Error clearing cart:', error);
-        console.error('Error clearing cart:', error);
+        this.$toast.error(error.response?.data.message || error);
       }
     },
 
@@ -132,8 +127,7 @@ export const useCartStore = defineStore('cart', {
 
         await this.fetchCart();
       } catch (error) {
-        toast.error('Error merging cart:', error);
-        console.error('Error merging cart:', error);
+        this.$toast.error(error.response?.data.message || error);
       }
     }
   }
