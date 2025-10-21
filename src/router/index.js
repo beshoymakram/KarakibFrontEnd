@@ -56,12 +56,7 @@ const routes = [
         name: 'MyPoints',
         component: WasteItems
       },
-        {
-    path: '/product/:id', // dynamic route with product ID
-    name: 'product-desc',
-    component: ProductDesc,
-    props: true // lets ProductDesc receive `id` as a prop
-  }
+
     ]
   },
   {
@@ -96,7 +91,12 @@ const routes = [
       },
     ]
   },
-
+     {
+    path: '/product/:id', // dynamic route with product ID
+    name: 'product-desc',
+    component: ProductDesc,
+    props: true // lets ProductDesc receive `id` as a prop
+  },
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
