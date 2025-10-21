@@ -254,7 +254,7 @@ export default {
       console.log("Order placed:", order);
       this.$toast.success("Order placed successfully!");
       this.cartStore.clearCart();
-      this.showConfirmation = true; // ✅ add this line
+      this.showConfirmation = true; 
     },
     closeConfirmation() {
       this.showConfirmation = false;
