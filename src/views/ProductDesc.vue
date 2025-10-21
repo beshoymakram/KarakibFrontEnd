@@ -1,21 +1,21 @@
 <template>
-  <div class="min-h-screen bg-[#BFD6BF] py-8 px-6">
-    <div class="max-w-7xl mx-auto">
-      <div class="p-14 bg-[#F6F7FB] rounded-lg shadow-sm">
+  <div class="min-h-screen bg-[#BFD6BF] py-6 px-4">
+    <div v-if="product" class="max-w-7xl mx-auto">
+      <div class="p-8 px-16 bg-[#F6F7FB] rounded-lg shadow-sm">
         <!-- Product Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <!-- Image Gallery -->
           <div>
-            <div class="bg-white rounded-2xl overflow-hidden mb-4 shadow-sm">
-              <img :src="selectedImage" alt="Product" class="w-full h-[500px] object-cover" />
+            <div class="bg-white rounded-2xl overflow-hidden mb-4 shadow-sm max-w-lg">
+              <img :src="selectedImage" alt="Product" class="w-full h-[400px] object-cover" />
             </div>
-            <div class="flex gap-3">
+            <div class="flex gap-2">
               <button
-                v-for="(image, index) in product.images"
+                v-for="(image, index) in productImages"
                 :key="index"
                 @click="selectedImage = image"
                 :class="[
-                  'w-24 h-24 rounded-lg overflow-hidden border-2 transition-all',
+                  'w-20 h-20 rounded-lg overflow-hidden border-2 transition-all',
                   selectedImage === image ? 'border-[#2C702C]' : 'border-gray-200',
                 ]"
               >
@@ -26,7 +26,7 @@
 
           <!-- Product Info -->
           <div>
-            <h1 class="text-4xl font-bold text-[#112B11] mb-3">{{ product.name }}</h1>
+            <h1 class="text-3xl font-bold text-[#112B11] mb-2">{{ product.name }}</h1>
             <div class="flex items-center gap-4 mb-4">
               <div class="flex items-center gap-2">
                 <div class="flex">
@@ -34,7 +34,7 @@
                     v-for="i in 5"
                     :key="i"
                     class="w-5 h-5"
-                    :class="i <= Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'"
+                    :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -43,20 +43,20 @@
                     />
                   </svg>
                 </div>
-                <span class="text-gray-600 font-medium">{{ product.rating }}/5</span>
+                <span class="text-gray-600 font-medium">{{ productRating }}/5</span>
               </div>
               <span class="text-gray-400">|</span>
-              <span class="text-gray-600">{{ product.sold }} Sold</span>
+              <span class="text-gray-600">{{ productSold }} Sold</span>
             </div>
-            <div class="text-4xl font-bold text-[#2C702C] mb-6">${{ product.price }}</div>
-            <p class="text-gray-600 leading-relaxed mb-8">{{ product.description }}</p>
+            <div class="text-4xl font-bold text-[#2C702C] mb-6">{{ product.price }} EGP</div>
+            <p class="text-gray-600 leading-relaxed mb-6">{{ product.description }}</p>
 
             <!-- Color Selection -->
-            <div class="mb-6">
+            <div v-if="productColors.length > 0" class="mb-4">
               <h3 class="text-lg font-semibold text-[#112B11] mb-3">Select Color</h3>
               <div class="flex gap-3">
                 <button
-                  v-for="color in product.colors"
+                  v-for="color in productColors"
                   :key="color.value"
                   @click="selectedColor = color.value"
                   :class="[
@@ -72,11 +72,11 @@
             </div>
 
             <!-- Size Selection -->
-            <div class="mb-8">
+            <div v-if="productSizes.length > 0" class="mb-6">
               <h3 class="text-lg font-semibold text-[#112B11] mb-3">Select Size</h3>
               <div class="flex gap-3">
                 <button
-                  v-for="size in product.sizes"
+                  v-for="size in productSizes"
                   :key="size"
                   @click="selectedSize = size"
                   :class="[
@@ -94,12 +94,13 @@
             <!-- Action Buttons -->
             <div class="flex gap-4">
               <button
-                class="flex-1 bg-[#2C702C] text-white py-4 rounded-lg font-semibold hover:bg-[#234d23] transition-all shadow-md"
+                @click="addToCart(product.id)"
+                class="flex-1 bg-[#2C702C] text-white py-3 rounded-lg font-semibold hover:bg-[#234d23] transition-all shadow-md"
               >
                 Add to Cart
               </button>
               <button
-                class="flex-1 bg-[#112B11] py-4 rounded-lg font-semibold hover:bg-[#0a1a0a] transition-all shadow-md text-red-500"
+                class="flex-1 bg-[#112B11] text-white py-3 rounded-lg font-semibold hover:bg-[#0a1a0a] transition-all shadow-md"
               >
                 Checkout Now
               </button>
@@ -109,19 +110,19 @@
 
         <!-- Reviews Section -->
         <div>
-          <h2 class="text-3xl font-bold text-[#112B11] mb-8">Customer Reviews</h2>
+          <h2 class="text-2xl font-bold text-[#112B11] mb-6">Customer Reviews</h2>
 
           <!-- Rating Overview -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <!-- Average Rating Card -->
-            <div class="bg-[#EAF2EA] rounded-2xl p-8 text-center">
-              <div class="text-6xl font-bold text-[#2C702C] mb-2">{{ product.rating }}</div>
+            <div class="bg-[#EAF2EA] rounded-2xl p-6 text-center">
+              <div class="text-5xl font-bold text-[#2C702C] mb-2">{{ productRating }}</div>
               <div class="flex justify-center mb-2">
                 <svg
                   v-for="i in 5"
                   :key="i"
                   class="w-6 h-6"
-                  :class="i <= Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'"
+                  :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -199,35 +200,20 @@
         </div>
       </div>
     </div>
+    <p v-else class="text-center text-gray-500 mt-20">Loading product details...</p>
   </div>
 </template>
 
 <script>
+import productsService from "@/services/productsService";
+import { useCartStore } from "@/stores/cart";
+
 export default {
   name: "ProductDetails",
+  props: ["id"],
   data() {
     return {
-      product: {
-        name: "Premium Organic Cotton T-Shirt",
-        price: 49.99,
-        rating: 4.8,
-        sold: 1247,
-        description:
-          "Experience ultimate comfort with our premium organic cotton t-shirt. Crafted from 100% certified organic cotton, this versatile piece features a modern fit and superior breathability. Perfect for everyday wear, it combines sustainability with style.",
-        images: [
-          "/images/wh-tshirt/full.png",
-          "/images/wh-tshirt/shoulder.png",
-          "/images/wh-tshirt/front.png",
-          "/images/wh-tshirt/back.png",
-        ],
-        colors: [
-          { name: "Forest Green", value: "#2C702C" },
-          { name: "Navy Blue", value: "#1e3a8a" },
-          { name: "Charcoal", value: "#374151" },
-          { name: "White", value: "#ffffff" },
-        ],
-        sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-      },
+      product: null,
       reviews: [
         {
           id: 1,
@@ -271,11 +257,70 @@ export default {
       selectedSize: "M",
     };
   },
+  computed: {
+    cartStore() {
+      return useCartStore();
+    },
+    productImages() {
+      // If API returns images array, use it; otherwise use image_url as single image
+      if (this.product.images && this.product.images.length > 0) {
+        return this.product.images;
+      } else if (this.product.image_url) {
+        return [this.product.image_url];
+      }
+      return [];
+    },
+    productColors() {
+      // Use colors from API if available, otherwise use default colors
+      if (this.product.colors && this.product.colors.length > 0) {
+        return this.product.colors;
+      }
+      return [
+        { name: "Forest Green", value: "#2C702C" },
+        { name: "Navy Blue", value: "#1e3a8a" },
+        { name: "Charcoal", value: "#374151" },
+        { name: "White", value: "#ffffff" },
+      ];
+    },
+    productSizes() {
+      // Use sizes from API if available, otherwise use default sizes
+      if (this.product.sizes && this.product.sizes.length > 0) {
+        return this.product.sizes;
+      }
+      return ["XS", "S", "M", "L", "XL", "XXL"];
+    },
+    productRating() {
+      return this.product.rating || 4.8;
+    },
+    productSold() {
+      return this.product.sold || 0;
+    },
+  },
   mounted() {
-    this.selectedImage = this.product.images[0];
-    this.selectedColor = this.product.colors[0].value;
+    this.fetchProduct();
   },
   methods: {
+    async fetchProduct() {
+      try {
+        const response = await productsService.getProduct(this.id);
+        this.product = response.data.data || response.data;
+
+        // Initialize selected values after product is loaded
+        if (this.productImages.length > 0) {
+          this.selectedImage = this.productImages[0];
+        }
+        if (this.productColors.length > 0) {
+          this.selectedColor = this.productColors[0].value;
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        this.$toast?.error(error.response?.data?.message || "Failed to load product");
+      }
+    },
+    async addToCart(productId) {
+      const success = await this.cartStore.addToCart(productId, 1);
+      success ? this.$toast.success("Added to cart!") : this.$toast.error("Failed to add to cart");
+    },
     getRatingPercentage(rating) {
       const count = this.reviews.filter((r) => Math.floor(r.rating) === rating).length;
       return (count / this.reviews.length) * 100;
