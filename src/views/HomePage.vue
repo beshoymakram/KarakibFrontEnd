@@ -123,42 +123,64 @@
         <p class="py-6 text-[#163816]">
           Show your support with our premium collection of branded merchandise
         </p>
+        <router-link to="/shop">
         <button
           class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]">
           Shop Now
         </button>
+        </router-link>
       </div>
     </div>
   </div>
   <!-- merch -->
+<!-- merch -->
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center justify-center py-14 px-3 lg:px-6"
+>
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center justify-center py-14 px-3 lg:px-6">
-    <div v-for="(product, index) in products" :key="index"
-      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300">
+    v-for="(product, index) in products"
+    :key="index"
+    class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
+  >
+    <!-- ROUTER LINK - navigate to product description -->
+    <router-link
+      :to="{ name: 'product-desc', params: { id: product.id } }"
+      class="block"
+    >
       <figure>
-        <img :src="product.image_url" :alt="product.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
+        <img
+          :src="product.image_url"
+          :alt="product.name"
+          class="w-full size-75 bg-[#E0EBE0] object-fill"
+        />
       </figure>
 
       <div class="px-4 pt-2 pb-2">
-        <!-- Title + Price -->
         <div class="flex justify-between items-center w-full">
-          <h2 class="text-[#2C702C] font-semibold text-xl">{{ product.name }}</h2>
-          <p class="text-[#2C702C] font-semibold text-lg">${{ product.price }}</p>
+          <h2 class="text-[#2C702C] font-semibold text-xl">
+            {{ product.name }}
+          </h2>
+          <p class="text-[#2C702C] font-semibold text-lg">
+            {{ product.price }} EGP
+          </p>
         </div>
 
-        <!-- Description -->
         <p class="text-gray-600 text-sm">{{ product.description }}</p>
-
-        <!-- Actions -->
-        <div class="flex items-center mt-1 justify-end">
-          <button @click="addToCart(product.id)"
-            class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold">
-            Add to Cart
-          </button>
-        </div>
       </div>
+    </router-link>
+
+    <!-- ADD TO CART - stays clickable without navigation -->
+    <div class="flex items-center mt-1 justify-end px-4 pb-2">
+      <button
+        @click.stop="addToCart(product.id)"
+        class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
+      >
+        Add to Cart
+      </button>
     </div>
   </div>
+</div>
+
   <!-- make differance section -->
   <section class="bg-[#E9EBF8] px-16 py-16 relative">
     <p class="text-4xl text-[#2C702C] font-semibold text-center">Make a Difference</p>
