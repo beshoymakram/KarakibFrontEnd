@@ -12,7 +12,7 @@
             <div
               v-for="item in cartStore.items"
               :key="item.id"
-              class="flex justify-between items-center border-b pb-3"
+              class="flex justify-between items-center border-t pb-3"
             >
               <div class="flex items-center gap-4">
                 <img
@@ -37,7 +37,7 @@
             <div class="pt-4 border-t mt-4">
               <div class="flex justify-between mb-2">
                 <span>{{ cartStore.items.length }} items</span>
-                <span>{{ cartStore.subtotal }} EGP</span>
+                <span>{{ cartStore.total }} EGP</span>
               </div>
               <div class="flex justify-between mb-2">
                 <span>Delivery fee</span>
