@@ -21,6 +21,8 @@ import ProductsCategories from '@/views/Admin/ProductsCategories.vue'
 import ProductDesc from '@/views/ProductDesc.vue'
 import CheckOut from '@/views/CheckOut.vue'
 import TestPayment from '@/views/Admin/TestPayment.vue'
+import PmtFailure from '@/views/PmtFailure.vue'
+import PmtSuccess from '@/views/PmtSuccess.vue'
 
 // Define routes
 const routes = [
@@ -105,6 +107,17 @@ const routes = [
     name: 'checkout',
     component: CheckOut,
   },
+  {
+  path: '/payment-success',
+  name: 'PmtSuccess',
+  component: PmtSuccess,
+},
+{
+  path: '/payment-failure',
+  name: 'PmtFailure',
+  component: PmtFailure,
+},
+
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
