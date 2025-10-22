@@ -5,12 +5,12 @@
       <img
         src="/public/logos/K.png"
         alt="Logo"
-        class="w-32 h-32 animate-bounce mb-6"
+        class="w-28 h-28 animate-bounce mb-6"
       />
 
       <!-- Moving Text -->
       <div class="flex flex-col items-center space-y-2">
-        <p class="text-2xl font-semibold text-[#2C702C] animate-text-bounce">
+        <p class="text-xl font-semibold text-[#2C702C] animate-text-bounce">
           Loading Karakib...
         </p>
         <div class="flex space-x-2 mt-3">
