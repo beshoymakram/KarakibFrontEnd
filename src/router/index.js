@@ -168,7 +168,7 @@ router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
   const loadingStore = useLoadingStore();
 
-  loadingStore.start();
+  loadingStore.show();
 
   if (to.name === 'Logout') {
     authStore.logout()
@@ -186,10 +186,11 @@ router.beforeEach(async (to, from, next) => {
   else {
     next()
   }
+
+})
   router.afterEach(() => {
   const loadingStore = useLoadingStore();
-  setTimeout(() => loadingStore.stop(), 500);
+  setTimeout(() => loadingStore.hide(), 200);
 });
-})
 
 export default router
