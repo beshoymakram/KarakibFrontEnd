@@ -47,6 +47,15 @@
   <!-- links -->
   <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-1">
     <a
+      @click="selectedCategory = ''"
+      class="rounded-md cursor-pointer px-4 py-3 font-semibold text-xl shadow-sm"
+      :class="{
+        'bg-[#2C702C] text-white': selectedCategory === '',
+        'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== '',
+      }"
+    >
+      View all </a
+    ><a
       v-for="category in categories"
       :key="category.id"
       @click="selectedCategory = category.id"
