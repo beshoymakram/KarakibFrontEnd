@@ -17,35 +17,50 @@
       </div>
 
       <div>
-        <h3 class="font-semibold text-gray-900 mb-3">Karakib</h3>
+        <h3 class="font-semibold text-[#2C702C] mb-3">Karakib</h3>
         <ul class="space-y-1 text-sm text-gray-700">
-          <li><RouterLink to="/about" class="hover:text-green-700">About us</RouterLink></li>
-          <li><RouterLink to="/about" class="hover:text-green-700">Privacy Policy</RouterLink></li>
+          <li>
+            <RouterLink to="/about" class="hover:text-green-700">About us</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/about" class="hover:text-green-700">Privacy Policy</RouterLink>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h3 class="font-semibold text-gray-900 mb-3">Are You a Collector?</h3>
+        <h3 class="font-semibold text-[#2C702C] mb-3">Are You a Collector?</h3>
         <ul class="space-y-1 text-sm text-gray-700">
-          <li><RouterLink to="/join" class="hover:text-green-700">Join Karakib’s collectors</RouterLink></li>
+          <li>
+            <RouterLink to="/join" class="hover:text-green-700">Join Karakib’s collectors</RouterLink>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h3 class="font-semibold text-gray-900 mb-3">Support & Help</h3>
+        <h3 class="font-semibold text-[#2C702C] mb-3">Support & Help</h3>
         <ul class="space-y-1 text-sm text-gray-700">
-          <li><RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">FAQ</RouterLink></li>
-          <li><RouterLink :to="{ path: '/about', hash: '#inquiry' }" class="hover:text-green-700">Send Inquiry</RouterLink></li>
-          <li><RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">Terms & Conditions</RouterLink></li>
-          <li><RouterLink :to="{ path: '/about', hash: '#contact' }" class="hover:text-green-700">Contact Us</RouterLink></li>
+          <li>
+            <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">FAQ</RouterLink>
+          </li>
+          <li>
+            <RouterLink :to="{ path: '/about', hash: '#inquiry' }" class="hover:text-green-700">Send Inquiry
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">Terms & Conditions
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink :to="{ path: '/about', hash: '#contact' }" class="hover:text-green-700">Contact Us</RouterLink>
+          </li>
         </ul>
 
       </div>
     </div>
 
     <div
-      class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-green-200 pt-6 text-sm text-gray-700"
-    >
+      class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-green-200 pt-6 text-sm text-gray-700">
       <p class="mb-4 md:mb-0">
         &copy; {{ currentYear }} Karakib. All rights reserved.
       </p>
@@ -85,5 +100,4 @@ export default {
 </script>
 
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -26,6 +26,7 @@ import PaymentSuccess from '@/views/PaymentSuccess.vue'
 import PaymentFailure from '@/views/PaymentFailure.vue'
 import WastesDesc from '@/views/WastesDesc.vue'
 import { useLoadingStore } from '@/stores/loading';
+import MyOrders from '@/views/Profile/MyOrders.vue'
 
 // Define routes
 const routes = [
@@ -55,14 +56,14 @@ const routes = [
         component: MyAddresses
       },
       {
+        path: 'my-orders',
+        name: 'MyOrders',
+        component: MyOrders
+      },
+      {
         path: 'my-requests',
         name: 'MyRequests',
         component: WasteTypes
-      },
-      {
-        path: 'my-orders',
-        name: 'MyOrders',
-        component: WasteItems
       },
       {
         path: 'my-points',
@@ -187,9 +188,9 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
   router.afterEach(() => {
-  const loadingStore = useLoadingStore();
-  setTimeout(() => loadingStore.stop(), 500);
-});
+    const loadingStore = useLoadingStore();
+    setTimeout(() => loadingStore.stop(), 500);
+  });
 })
 
 export default router

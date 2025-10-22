@@ -28,4 +28,12 @@ export default {
   getAddresses() {
     return apiClient.get('/profile/addresses');
   },
+
+  getOrders() {
+    return apiClient.get('/profile/orders');
+  },
+
+  cancelOrder(id) {
+    return apiClient.put('/profile/orders/' + id + '/cancel');
+  },
 };
