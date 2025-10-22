@@ -166,9 +166,9 @@ const router = createRouter({
 // Navigation guard
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
-  const loadingStore = useLoadingStore(); // 👈 initialize loading store
+  const loadingStore = useLoadingStore();
 
-  loadingStore.start(); // 👈 show loader as soon as navigation starts
+  loadingStore.start();
 
   if (to.name === 'Logout') {
     authStore.logout()
@@ -188,7 +188,7 @@ router.beforeEach(async (to, from, next) => {
   }
   router.afterEach(() => {
   const loadingStore = useLoadingStore();
-  setTimeout(() => loadingStore.stop(), 300); // 👈 stop loader with small delay for smoothness
+  setTimeout(() => loadingStore.stop(), 500);
 });
 })
 
