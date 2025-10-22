@@ -22,8 +22,8 @@ import ProductDesc from '@/views/ProductDesc.vue'
 import CheckOut from '@/views/CheckOut.vue'
 import TestPayment from '@/views/Admin/TestPayment.vue'
 import MyAddresses from '@/views/Profile/MyAddresses.vue'
-import PmtFailure from '@/views/PmtFailure.vue'
-import PmtSuccess from '@/views/PmtSuccess.vue'
+import PaymentSuccess from '@/views/PaymentSuccess.vue'
+import PaymentFailure from '@/views/PaymentFailure.vue'
 
 // Define routes
 const routes = [
@@ -112,14 +112,16 @@ const routes = [
     path: '/checkout', name: 'checkout', component: CheckOut, meta: { requiresAuth: true }
   },
   {
-    path: '/payment-success',
-    name: 'PmtSuccess',
-    component: PmtSuccess,
+    path: '/checkout/success',
+    name: 'PaymentSuccess',
+    component: PaymentSuccess,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/payment-failure',
-    name: 'PmtFailure',
-    component: PmtFailure,
+    path: '/checkout/failed',
+    name: 'PaymentFailure',
+    component: PaymentFailure,
+    meta: { requiresAuth: true }
   },
 
   // Auth-related routes

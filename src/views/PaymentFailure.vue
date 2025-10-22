@@ -1,11 +1,7 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-[#E9EBF8]">
+  <div class="flex items-center justify-center py-5 bg-[#E9EBF8]">
     <div class="bg-white rounded-2xl shadow-lg p-8 text-center max-w-md w-full">
-      <img
-        src="/images/pmtfailure.png"
-        alt="Payment failed"
-        class="w-32 mx-auto mb-4"
-      />
+      <img src="/images/pmtfailure.png" alt="Payment failed" class="w-32 mx-auto mb-4" />
       <h2 class="text-2xl font-bold text-green-700 mb-2">Oops!</h2>
       <p class="text-gray-600 mb-6">
         Something went wrong with your transaction.
@@ -16,17 +12,12 @@
         <p><span class="font-semibold text-green-700">Transaction ID:</span> {{ transactionId }}</p>
       </div>
 
-      <router-link
-        to="/checkout"
-        class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition"
-      >
+      <router-link to="/checkout"
+        class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition">
         Try again
       </router-link>
 
-      <button
-        @click="$router.push('/')"
-        class="block mx-auto mt-3 text-gray-500 text-sm hover:text-green-600"
-      >
+      <button @click="$router.push('/')" class="block mx-auto mt-3 text-gray-500 text-sm hover:text-green-600">
         Close
       </button>
     </div>
@@ -37,6 +28,6 @@
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const orderNumber = route.query.order || 'N/A'
-const transactionId = route.query.tx || 'N/A'
+const orderNumber = route.query.order_number || 'N/A'
+const transactionId = route.query.transaction_id || 'N/A'
 </script>
