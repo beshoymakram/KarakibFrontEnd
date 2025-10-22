@@ -10,6 +10,7 @@
 import FooterSection from './components/FooterSection.vue';
 import NavBar from './components/NavBar.vue'
 import SkeletonLoader from './views/SkeletonLoader.vue';
+import { useLoadingStore } from "@/stores/loading";
 
 export default {
   name: 'App',
@@ -17,6 +18,11 @@ export default {
     NavBar,
     FooterSection,
     SkeletonLoader
+  }
+  ,
+  setup() {
+    const loadingStore = useLoadingStore();
+    return { loadingStore };
   }
 }
 </script>
