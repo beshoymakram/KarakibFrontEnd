@@ -1,8 +1,8 @@
 <template>
   <!-- Hero Section -->
   <div
-    class="hero min-h-[calc(100vh-80px)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
-    style="background-image: url('/images/delivery-service-truck-isolated.png')"
+    class="hero min-h-[calc(100vh-2vh)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
+    style="background-image: url('/images/homebg.jpg')"
   >
     <div class="hero-overlay bg-white/30"></div>
     <div class="hero-content text-center items-start justify-start pt-14">
@@ -32,10 +32,10 @@
       <div
         v-for="(step, index) in steps"
         :key="index"
-        class="card bg-base-100 shadow-sm w-[280px] rounded-[50px]"
+        class="card bg-base-100 shadow-sm w-2xs rounded-3xl"
       >
-        <figure class="p-4">
-          <img :src="step.image" :alt="step.title" class="object-cover rounded-[40px] size-60" />
+        <figure class="p-5">
+          <img :src="step.image" :alt="step.title" class="object-cover rounded-4xl size-60" />
         </figure>
         <div class="card-body text-center">
           <h2 class="font-semibold text-[#317C31] -mt-5">{{ step.number }}</h2>
@@ -132,12 +132,12 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center justify-center py-14 px-3 lg:px-6"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center justify-center py-14 px-3 lg:px-6"
   >
     <div
       v-for="(product, index) in products"
       :key="index"
-      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-base-100 w-84 md:w-88 lg:w-76 shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block">
@@ -145,7 +145,7 @@
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full size-75 bg-[#E0EBE0] object-fill"
+            class="w-full size-75 bg-[#E0EBE0] object-fill rounded-t-xl"
           />
         </figure>
 
@@ -192,9 +192,10 @@
         />
         <h3 class="text-[#163816] font-semibold text-xl mb-2">{{ card.title }}</h3>
         <p class="text-[#8E98A8] mb-4">{{ card.description }}</p>
-        <button 
+        <button
           @click="openDonationModal(card.title)"
-          class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition">
+          class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition"
+        >
           {{ card.buttonText }}
         </button>
       </div>
@@ -202,7 +203,7 @@
   </section>
 
   <!-- Donation Modal -->
-  <DonationModal 
+  <DonationModal
     :isOpen="isModalOpen"
     :fundName="selectedFund"
     @close="closeModal"
@@ -219,7 +220,7 @@ import DonationModal from "@/components/DonationModal.vue";
 export default {
   name: "homePage",
   components: {
-    DonationModal
+    DonationModal,
   },
   data() {
     return {
@@ -284,7 +285,7 @@ export default {
       ],
       products: [],
       isModalOpen: false,
-      selectedFund: '',
+      selectedFund: "",
       steps: [
         {
           number: "Step 1",
@@ -372,13 +373,15 @@ export default {
     },
 
     handleDonation(donationData) {
-      console.log('Donation received:', donationData);
+      console.log("Donation received:", donationData);
       // Here you can add logic to:
       // 1. Send donation to your backend API
       // 2. Show success message
       // 3. Update user's points, etc.
-      this.$toast.success(`Thank you for donating ${donationData.amount} EGP to ${donationData.fund}!`);
-    }
+      this.$toast.success(
+        `Thank you for donating ${donationData.amount} EGP to ${donationData.fund}!`
+      );
+    },
   },
   computed: {
     cartStore() {
