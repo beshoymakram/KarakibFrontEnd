@@ -54,10 +54,10 @@ export default {
     this.donationNumber = route.query.donation_number
     this.transactionId = route.query.transaction_id
 
-    if (this.orderNumber != undefined && this.transactionId != undefined) {
+    if (this.orderNumber && this.transactionId) {
       this.verifyPayment()
     }
-    else if (this.donationNumber != undefined && this.transactionId != undefined) {
+    else if (this.donationNumber && this.transactionId) {
       this.verifyDonation()
     }
     else {
