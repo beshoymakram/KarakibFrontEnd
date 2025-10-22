@@ -51,9 +51,18 @@ export default {
   mounted() {
     const route = useRoute()
     this.orderNumber = route.query.order_number
+    this.donationNumber = route.query.donation_number
     this.transactionId = route.query.transaction_id
 
-    this.verifyPayment()
+    if (this.orderNumber != undefined && this.transactionId != undefined) {
+      this.verifyPayment()
+    }
+    else if (this.donationNumber != undefined && this.transactionId != undefined) {
+      this.verifyDonation()
+    }
+    else {
+      this.$router.push('/')
+    }
   },
   methods: {
     async verifyPayment() {
@@ -61,6 +70,19 @@ export default {
         const response = await apiClient.get('/verify-payment', {
           params: {
             order_number: this.orderNumber,
+            transaction_id: this.transactionId
+          }
+        })
+      } catch (err) {
+        this.$router.push('/')
+      }
+    },
+
+    async verifyDonation() {
+      try {
+        const response = await apiClient.get('/verify-donation', {
+          params: {
+            donation_number: this.donationNumber,
             transaction_id: this.transactionId
           }
         })
