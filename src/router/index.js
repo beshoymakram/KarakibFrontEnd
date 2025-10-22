@@ -27,6 +27,7 @@ import PaymentFailure from '@/views/PaymentFailure.vue'
 import WastesDesc from '@/views/WastesDesc.vue'
 import { useLoadingStore } from '@/stores/loading';
 import MyOrders from '@/views/Profile/MyOrders.vue'
+import Orders from '@/views/Admin/Orders.vue'
 
 // Define routes
 const routes = [
@@ -99,6 +100,11 @@ const routes = [
         component: Products
       },
       {
+        path: 'orders',
+        name: 'AdminOrders',
+        component: Orders
+      },
+      {
         path: 'products-categories',
         name: 'AdminProductsCategories',
         component: ProductsCategories
@@ -121,6 +127,7 @@ const routes = [
     path: '/checkout',
     name: 'checkout',
     component: CheckOut,
+    meta: { requiresAuth: true }
   },
   {
     path: '/checkout/success',
@@ -130,6 +137,18 @@ const routes = [
   },
   {
     path: '/checkout/failed',
+    name: 'PaymentFailure',
+    component: PaymentFailure,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/donate/success',
+    name: 'PaymentSuccess',
+    component: PaymentSuccess,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/donate/failed',
     name: 'PaymentFailure',
     component: PaymentFailure,
     meta: { requiresAuth: true }

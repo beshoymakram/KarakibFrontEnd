@@ -15,7 +15,7 @@
       <div class="relative">
         <select v-model="filters.status"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Status</option>
+          <option value="">All Statuses</option>
           <option value="active">Active</option>
           <option value="suspended">Suspended</option>
           <option value="deleted">Deleted</option>

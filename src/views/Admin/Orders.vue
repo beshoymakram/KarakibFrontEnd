@@ -1,6 +1,27 @@
 <template>
   <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
     <div class="flex flex-wrap items-center gap-4">
+      <div class="relative">
+        <select v-model="filters.status"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">All Statuses</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
+
+      <div class="relative">
+        <select v-model="filters.payment_method"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">All Payment Methods</option>
+          <option value="cash">Cash</option>
+          <option value="card">Card</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
+
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
           <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
@@ -207,7 +228,7 @@
 </template>
 
 <script>
-import profileService from '@/services/profileService';
+import ordersService from '@/services/ordersService';
 import { nextTick } from 'vue';
 
 export default {
@@ -227,7 +248,10 @@ export default {
         payment_method: '',
         status: '',
       },
-
+      filters: {
+        payment_method: '',
+        status: '',
+      },
       orders: []
     }
   },
@@ -235,6 +259,18 @@ export default {
   computed: {
     filteredOrders() {
       let filtered = this.orders;
+
+      if (this.filters.payment_method) {
+        filtered = filtered.filter(item =>
+          item.payment_method === this.filters.payment_method
+        );
+      }
+
+      if (this.filters.status) {
+        filtered = filtered.filter(item =>
+          item.status === this.filters.status
+        );
+      }
 
       if (this.searchQuery) {
         filtered = filtered.filter(order =>
@@ -277,7 +313,7 @@ export default {
 
     async fetchOrders() {
       try {
-        const user = await profileService.getOrders();
+        const user = await ordersService.getOrders();
         this.orders = user.data.orders || user.data;
       } catch (error) {
         this.$toast.error(error?.response?.data.message || 'Failed to fetch addresses.');
@@ -286,7 +322,7 @@ export default {
 
     async confirmCancel() {
       try {
-        const response = await profileService.cancelOrder(this.selectedOrder);
+        const response = await ordersService.cancelOrder(this.selectedOrder);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
