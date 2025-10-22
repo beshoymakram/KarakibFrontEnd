@@ -8,37 +8,65 @@
     <!-- Carousel Wrapper -->
     <div class="relative max-w-6xl mx-auto flex items-center justify-center">
       <!-- Left Arrow -->
-      <button @click="scrollPrev"
-        class="absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-          class="size-6">
+      <button
+        @click="scrollPrev"
+        class="absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-6"
+        >
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
       </button>
 
       <!-- Carousel (Scrollable Container) -->
-      <a ref="carousel"
-        class="carousel carousel-center bg-white rounded-box space-x-6 p-10 flex overflow-x-auto scroll-smooth">
-        <div v-for="(type, index) in types" :key="index" @click="selectedType = type"
-          class="carousel-item flex flex-col items-center flex-shrink-0 cursor-pointer transition-all duration-300">
-          <img :src="type.image_url" :alt="type.name"
+      <a
+        ref="carousel"
+        class="carousel carousel-center bg-white rounded-box space-x-6 p-10 flex overflow-x-auto scroll-smooth"
+      >
+        <div
+          v-for="(type, index) in types"
+          :key="index"
+          @click="selectedType = type"
+          class="carousel-item flex flex-col items-center flex-shrink-0 cursor-pointer transition-all duration-300"
+        >
+          <img
+            :src="type.image_url"
+            :alt="type.name"
             class="w-[192px] h-[192px] object-cover rounded-full bg-[#EAF2EA] transition-transform duration-300 hover:scale-105"
             :class="{
               'outline-2  outline-[#2C702C] rounded-full': selectedValue === type.value,
-            }" />
-          <p class="mt-4 text-xl font-semibold text-[#2C702C]" :class="{
-            'text-[#112B11]': selectedValue === type.value,
-          }">
+            }"
+          />
+          <p
+            class="mt-4 text-xl font-semibold text-[#2C702C]"
+            :class="{
+              'text-[#112B11]': selectedValue === type.value,
+            }"
+          >
             {{ type.name }}
           </p>
         </div>
       </a>
 
       <!-- Right Arrow -->
-      <button @click="scrollNext"
-        class="absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-          class="size-6">
+      <button
+        @click="scrollNext"
+        class="absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-6"
+        >
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
       </button>
@@ -50,9 +78,13 @@
       {{ selectedType.name }}
     </p>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6 overflow-auto scroll-smooth rounded-2xl">
-      <div v-for="(item, index) in filteredItems" :key="index"
-        class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300">
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center py-14 px-3 lg:px-6 overflow-auto scroll-smooth rounded-2xl"
+    >
+      <div
+        v-for="(item, index) in filteredItems"
+        :key="index"
+        class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
+      >
         <figure>
           <router-link :to="`/waste/${item.id}`">
             <img
@@ -62,7 +94,6 @@
             />
           </router-link>
         </figure>
-
 
         <div class="px-4 pt-2 pb-2">
           <!-- Title -->
@@ -81,13 +112,12 @@
 
           <div class="flex justify-between items-center mt-2">
             <p class="text-[#8E98A8] text-sm font-semibold">per {{ item.unit }}</p>
-              <button
-                @click="addWasteToCart(item)"
-                class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
-              >
-                Add & Earn
-              </button>
-
+            <button
+              @click="addWasteToCart(item)"
+              class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
+            >
+              Add & Earn
+            </button>
           </div>
         </div>
       </div>
@@ -96,10 +126,9 @@
 </template>
 
 <script>
-import wasteItemsService from '@/services/wasteItemsService';
-import wasteTypesService from '@/services/wasteTypesService';
-import { useCartStore } from '@/stores/cart';
-
+import wasteItemsService from "@/services/wasteItemsService";
+import wasteTypesService from "@/services/wasteTypesService";
+import { useCartStore } from "@/stores/cart";
 
 export default {
   name: "wastePage",
@@ -130,7 +159,7 @@ export default {
       try {
         const response = await wasteTypesService.getTypes();
         this.types = response.data.data || response.data;
-        this.selectedType = this.types[0] || '';
+        this.selectedType = this.types[0] || "";
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
@@ -145,24 +174,23 @@ export default {
       }
     },
     async addWasteToCart(item) {
-  try {
-    const added = await this.cartStore.addToCart(item.id, 1);
-    if (added) {
-      this.$toast.success(`${item.name} added to your cart!`);
-    }
-  } catch (error) {
-    this.$toast.error("Failed to add waste item.");
-  }
-},
-
+      try {
+        const added = await this.cartStore.addToCart(item.id, 1);
+        if (added) {
+          this.$toast.success(`${item.name} added to your cart!`);
+        }
+      } catch {
+        //removes (error) no need for maryam
+        this.$toast.error("Failed to add waste item.");
+      }
+    },
   },
   computed: {
     filteredItems() {
       let filtered = this.items;
 
       if (this.selectedType) {
-        filtered = filtered.filter(item =>
-          item.waste_type_id == this.selectedType.id)
+        filtered = filtered.filter((item) => item.waste_type_id == this.selectedType.id);
       }
 
       return filtered;
