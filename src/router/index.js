@@ -25,6 +25,7 @@ import MyAddresses from '@/views/Profile/MyAddresses.vue'
 import PaymentSuccess from '@/views/PaymentSuccess.vue'
 import PaymentFailure from '@/views/PaymentFailure.vue'
 import WastesDesc from '@/views/WastesDesc.vue'
+import { useLoadingStore } from '@/stores/loading';
 
 // Define routes
 const routes = [
@@ -165,6 +166,9 @@ const router = createRouter({
 // Navigation guard
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
+  const loadingStore = useLoadingStore(); // 👈 initialize loading store
+
+  loadingStore.start(); // 👈 show loader as soon as navigation starts
 
   if (to.name === 'Logout') {
     authStore.logout()
@@ -182,6 +186,10 @@ router.beforeEach(async (to, from, next) => {
   else {
     next()
   }
+  router.afterEach(() => {
+  const loadingStore = useLoadingStore();
+  setTimeout(() => loadingStore.stop(), 300); // 👈 stop loader with small delay for smoothness
+});
 })
 
 export default router
