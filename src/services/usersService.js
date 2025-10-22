@@ -16,4 +16,5 @@ export default {
   getUsers() {
     return apiClient.get('/users');
   },
+
 };

@@ -21,6 +21,10 @@ import ProductsCategories from '@/views/Admin/ProductsCategories.vue'
 import ProductDesc from '@/views/ProductDesc.vue'
 import CheckOut from '@/views/CheckOut.vue'
 import TestPayment from '@/views/Admin/TestPayment.vue'
+import MyAddresses from '@/views/Profile/MyAddresses.vue'
+import PaymentSuccess from '@/views/PaymentSuccess.vue'
+import PaymentFailure from '@/views/PaymentFailure.vue'
+import WastesDesc from '@/views/WastesDesc.vue'
 
 // Define routes
 const routes = [
@@ -43,6 +47,11 @@ const routes = [
         path: 'personal-info',
         name: 'PersonalInfo',
         component: PersonalInfo
+      },
+      {
+        path: 'my-addresses',
+        name: 'MyAddresses',
+        component: MyAddresses
       },
       {
         path: 'my-requests',
@@ -101,10 +110,29 @@ const routes = [
     props: true // lets ProductDesc receive `id` as a prop
   },
   {
+    path: '/waste/:id',
+    name: 'WasteDesc',
+    component: WastesDesc,
+    props: true
+  },
+  {
     path: '/checkout',
     name: 'checkout',
     component: CheckOut,
   },
+  {
+    path: '/checkout/success',
+    name: 'PaymentSuccess',
+    component: PaymentSuccess,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/checkout/failed',
+    name: 'PaymentFailure',
+    component: PaymentFailure,
+    meta: { requiresAuth: true }
+  },
+
   // Auth-related routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
