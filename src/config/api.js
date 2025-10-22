@@ -2,7 +2,8 @@
 import axios from 'axios'
 import { useLoadingStore } from '@/stores/loading'
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -16,7 +17,11 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     const loading = useLoadingStore()
-    loading.show()
+
+    // ✅ Only show loader for GET requests
+    if (config.method?.toLowerCase() === 'get') {
+      loading.show()
+    }
 
     const token = localStorage.getItem('auth-token')
     if (token) {
@@ -36,12 +41,21 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => {
     const loading = useLoadingStore()
-    loading.hide()
+
+    // ✅ Hide loader only if it was triggered by GET
+    if (response.config.method?.toLowerCase() === 'get') {
+      loading.hide()
+    }
+
     return response
   },
   (error) => {
     const loading = useLoadingStore()
-    loading.hide()
+
+    // ✅ Hide loader only if it was triggered by GET
+    if (error.config?.method?.toLowerCase() === 'get') {
+      loading.hide()
+    }
 
     // Handle unauthorized user (401)
     if (error.response && error.response.status === 401) {

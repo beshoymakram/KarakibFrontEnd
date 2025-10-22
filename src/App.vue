@@ -2,7 +2,7 @@
     <NavBar/>
     <router-view/>
     <FooterSection/>
-      <SkeletonLoader />
+    <SkeletonLoader v-if="loadingStore.isLoading" />
 
 </template>
 
