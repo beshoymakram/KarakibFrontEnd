@@ -226,7 +226,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Edit User
+              Edit Product
             </h3>
             <button type="button" @click="showEditModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -242,15 +242,24 @@
           <form @submit.prevent="confirmEdit" class="p-4 md:p-5">
             <div class="grid gap-4 mb-4">
               <!-- Name -->
-              <div class="col-span-2">
-                <label for="edit-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <div>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Name
                 </label>
-                <input type="text" id="edit-name" v-model="editForm.name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  placeholder="Enter type name" required />
+                <input type="text" id="name" v-model="editForm.name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter user name" required />
               </div>
-
+              <div>
+                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                <select id="type" v-model="editForm.category_id"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
+                  required>
+                  <option value="" disabled selected>Select category</option>
+                  <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}
+                  </option>
+                </select>
+              </div>
 
               <div class="col-span-2">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -278,6 +287,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
                   placeholder="Enter stock" required />
               </div>
+
 
               <div class="col-span-2">
                 <label for="edit-image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -434,7 +444,7 @@ export default {
         const formData = new FormData();
         formData.append('_method', 'PUT');
         formData.append('name', this.editForm.name);
-        formData.append('category_id', this.createForm.category_id);
+        formData.append('category_id', this.editForm.category_id);
         formData.append('description', this.editForm.description);
         formData.append('price', this.editForm.price);
         formData.append('stock', this.editForm.stock);
