@@ -16,14 +16,14 @@
       </div>
 
       <h2 class="text-xl font-semibold text-green-700 mb-2">
-        Your payment has been processed successfully!
+        Your donation payment has been processed successfully!
       </h2>
       <p class="text-gray-600 mb-6">
-        Thank you for supporting Karakib and our green mission
+        Thank you for your donation & supporting Karakib and our green mission
       </p>
 
       <div class="bg-[#F7F9FC] rounded-lg p-4 mb-6 text-left text-sm text-gray-700">
-        <p><span class="font-semibold text-green-700">Order Number:</span> {{ orderNumber }}</p>
+        <p><span class="font-semibold text-green-700">Donation Number:</span> {{ donationNumber }}</p>
         <p class="break-all"><span class="font-semibold text-green-700">Transaction ID:</span> {{ transactionId }}</p>
       </div>
 
@@ -37,20 +37,19 @@
 
 <script>
 import apiClient from '@/config/api'
-import { nextTick } from 'vue';
 import { useRoute } from 'vue-router'
 
 export default {
-  name: 'PaymentSuccess',
+  name: 'DonationSuccess',
   data() {
     return {
-      orderNumber: '',
+      donationNumber: '',
       transactionId: ''
     }
   },
   mounted() {
     const route = useRoute()
-    this.orderNumber = route.query.order_number
+    this.donationNumber = route.query.donation_number
     this.transactionId = route.query.transaction_id
 
     this.verifyPayment()
@@ -58,9 +57,9 @@ export default {
   methods: {
     async verifyPayment() {
       try {
-        const response = await apiClient.get('/verify-payment', {
+        const response = await apiClient.get('/verify-donation', {
           params: {
-            order_number: this.orderNumber,
+            donation_number: this.donationNumber,
             transaction_id: this.transactionId
           }
         })

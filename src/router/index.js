@@ -28,6 +28,8 @@ import PaymentFailure from '@/views/PaymentFailure.vue'
 import WastesDesc from '@/views/WastesDesc.vue'
 import MyOrders from '@/views/Profile/MyOrders.vue'
 import Orders from '@/views/Admin/Orders.vue'
+import DonationSuccess from '@/views/DonationSuccess.vue'
+import GoogleCallback from '@/views/GoogleCallback.vue'
 
 // Define routes
 const routes = [
@@ -124,15 +126,13 @@ const routes = [
   },
   {
     path: '/donate/success',
-    name: 'PaymentSuccess',
-    component: PaymentSuccess,
-    meta: { requiresAuth: true }
+    name: 'DonationSuccess',
+    component: DonationSuccess,
   },
   {
     path: '/donate/failed',
     name: 'PaymentFailure',
     component: PaymentFailure,
-    meta: { requiresAuth: true }
   },
 
   { path: '/product/:id', name: 'product-desc', component: ProductDesc, props: true },
@@ -145,7 +145,11 @@ const routes = [
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
   { path: '/logout', name: 'Logout', meta: { requiresAuth: true } },
-
+  {
+    path: '/auth/callback',
+    name: 'AuthCallback',
+    component: GoogleCallback,
+  },
   // Fallback
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
