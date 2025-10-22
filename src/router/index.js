@@ -24,6 +24,7 @@ import TestPayment from '@/views/Admin/TestPayment.vue'
 import MyAddresses from '@/views/Profile/MyAddresses.vue'
 import PaymentSuccess from '@/views/PaymentSuccess.vue'
 import PaymentFailure from '@/views/PaymentFailure.vue'
+import WastesDesc from '@/views/WastesDesc.vue'
 
 // Define routes
 const routes = [
@@ -109,7 +110,15 @@ const routes = [
     props: true // lets ProductDesc receive `id` as a prop
   },
   {
-    path: '/checkout', name: 'checkout', component: CheckOut, meta: { requiresAuth: true }
+    path: '/waste/:id',
+    name: 'WasteDesc',
+    component: WastesDesc,
+    props: true
+  },
+  {
+    path: '/checkout',
+    name: 'checkout',
+    component: CheckOut,
   },
   {
     path: '/checkout/success',

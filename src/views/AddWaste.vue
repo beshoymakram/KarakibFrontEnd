@@ -54,8 +54,15 @@
       <div v-for="(item, index) in filteredItems" :key="index"
         class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300">
         <figure>
-          <img :src="item.image_url" :alt="item.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
+          <router-link :to="`/waste/${item.id}`">
+            <img
+              :src="item.image_url"
+              :alt="item.name"
+              class="w-full size-75 bg-[#E0EBE0] object-fill hover:opacity-90 transition"
+            />
+          </router-link>
         </figure>
+
 
         <div class="px-4 pt-2 pb-2">
           <!-- Title -->
@@ -74,9 +81,13 @@
 
           <div class="flex justify-between items-center mt-2">
             <p class="text-[#8E98A8] text-sm font-semibold">per {{ item.unit }}</p>
-            <button class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold">
-              Add & Earn
-            </button>
+              <button
+                @click="addWasteToCart(item)"
+                class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
+              >
+                Add & Earn
+              </button>
+
           </div>
         </div>
       </div>
@@ -87,6 +98,8 @@
 <script>
 import wasteItemsService from '@/services/wasteItemsService';
 import wasteTypesService from '@/services/wasteTypesService';
+import { useCartStore } from '@/stores/cart';
+
 
 export default {
   name: "wastePage",
@@ -96,6 +109,7 @@ export default {
       selectedType: "",
       types: [],
       items: [],
+      cartStore: useCartStore(),
     };
   },
 
@@ -130,6 +144,17 @@ export default {
         this.$toast.error(error.response.data.message);
       }
     },
+    async addWasteToCart(item) {
+  try {
+    const added = await this.cartStore.addToCart(item.id, 1);
+    if (added) {
+      this.$toast.success(`${item.name} added to your cart!`);
+    }
+  } catch (error) {
+    this.$toast.error("Failed to add waste item.");
+  }
+},
+
   },
   computed: {
     filteredItems() {
