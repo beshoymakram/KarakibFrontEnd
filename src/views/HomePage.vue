@@ -32,7 +32,8 @@
       <div
         v-for="(step, index) in steps"
         :key="index"
-        class="card bg-base-100 shadow-sm w-2xs rounded-3xl"
+        class="card bg-base-100 shadow-sm w-2xs rounded-3xl cursor-pointer hover:shadow-md transition"
+         @click="handleStepClick(step)"
       >
         <figure class="p-5">
           <img :src="step.image" :alt="step.title" class="object-cover rounded-4xl size-60" />
@@ -284,24 +285,28 @@ export default {
           title: "Create Account",
           description: "Sign up to become a member of our recycling community.",
           image: "/images/step-1.png",
+          route: "/register",
         },
         {
           number: "Step 2",
           title: "Collect Waste",
           description: "Sort and store your recyclables to prepare them for pickup.",
           image: "/images/step-2.png",
+          route: "/add-waste",
         },
         {
           number: "Step 3",
           title: "Request Pickup",
           description: "Schedule a collection through the app for convenient service.",
           image: "/images/step-3.png",
+          route: "/cart",
         },
         {
           number: "Step 4",
           title: "Earn Rewards",
           description: "Get rewarded for your effort with points and exclusive benefits.",
           image: "/images/step-4.png",
+          route: "/shop",
         },
       ],
     };
@@ -404,6 +409,12 @@ export default {
         this.$toast.error(error.response.data.message);
       }
     },
+    handleStepClick(step) {
+      if (step.route) {
+        this.$router.push(step.route);
+      }
+    }
+
   },
   computed: {
     cartStore() {
