@@ -27,6 +27,8 @@
         </p>
         <button
           class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-6 py-3 rounded-md text-lg transition"
+            @click="openModal('Karakib simplifies recycling by connecting users to collection points, scheduling pickups, and rewarding eco-friendly actions through our green points system. Every step you take with Karakib brings us closer to a cleaner Egypt!')"
+
         >
           Learn More
         </button>
@@ -69,6 +71,8 @@
             </p>
             <button
               class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm"
+              @click="openModal('We collaborate with communities, NGOs, and local businesses to create awareness and provide incentives for sustainable habits. Karakib empowers individuals to make a lasting impact together.')"
+
             >
               Learn More
             </button>
@@ -106,6 +110,8 @@
             </p>
             <button
               class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm"
+              @click="openModal('Karakib collaborates with communities, NGOs, and local businesses to create awareness and provide incentives for sustainable habits. Karakib empowers individuals to make a lasting impact together.')"
+
             >
               Learn More
             </button>
@@ -143,6 +149,8 @@
             </p>
             <button
               class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm"
+             @click="openModal('we use technology to streamline recycling processes, making it easier for users to participate and track their contributions. Our innovative solutions aim to foster a culture of sustainability and environmental responsibility.')"
+
             >
               Learn More
             </button>
@@ -215,7 +223,10 @@
       </ul>
 
       <div class="mt-6">
-        <button class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+        <button class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+        @click="openModal('our full Terms and Conditions cover all aspects of using Karakib, including user responsibilities, platform usage guidelines, and legal disclaimers. We encourage all users to read the complete document to understand their rights and obligations while using our services.')"
+
+        >
           Read Full Policy
         </button>
       </div>
@@ -298,7 +309,33 @@
       </div>
     </section>
     </section>
+  <!-- Modal -->
+<div
+  v-if="showModal"
+  class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+  @click.self="closeModal"
+>
+  <div
+    class="bg-white rounded-2xl shadow-lg p-8 max-w-lg w-full text-center relative animate-fadeIn"
+  >
+    <button
+      @click="closeModal"
+      class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-xl"
+    >
+      ✕
+    </button>
 
+    <h2 class="text-2xl font-semibold text-[#2C702C] mb-4">More About Us</h2>
+    <p class="text-[#163816] leading-relaxed mb-6">{{ modalContent }}</p>
+
+    <button
+      @click="closeModal"
+      class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition"
+    >
+      Close
+    </button>
+  </div>
+</div>
   </div>
 </template>
 
@@ -321,7 +358,9 @@ export default {
         email: '',
         subject: '',
         message: ''
-      }
+      },
+      showModal: false,
+      modalContent: '',
     }
   },
 
@@ -339,12 +378,24 @@ export default {
         subject: '',
         message: ''
       };
-    }
+    },
+        openModal(content) {
+      this.modalContent = content
+      this.showModal = true
+    },
+    closeModal() {
+      this.showModal = false
+    },
   }
 };
 </script>
 
 
 <style scoped>
-/* Add any custom styles here if needed */
-</style>
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}</style>
