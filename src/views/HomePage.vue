@@ -1,7 +1,7 @@
 <template>
   <!-- Hero Section -->
   <div
-    class="hero min-h-[calc(100vh-2vh)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
+    class="hero min-h-[calc(100vh-2vh)] w-[95vw] md:w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
     style="background-image: url('/images/homebg.jpg')"
   >
     <div class="hero-overlay bg-white/30"></div>
