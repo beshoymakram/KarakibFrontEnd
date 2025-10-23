@@ -3,7 +3,7 @@
     <div v-if="product" class="max-w-6xl mx-auto">
       <div class="px-6 py-8 lg:py-12 bg-[#F6F7FB] rounded-lg shadow-sm">
         <!-- Product Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 px-4 sm:px-8">
           <!-- Image Gallery -->
           <div>
             <div class="bg-white rounded-2xl overflow-hidden mb-4 shadow-sm max-w-[480px]">
