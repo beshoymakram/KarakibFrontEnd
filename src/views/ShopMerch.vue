@@ -3,13 +3,13 @@
   <div class="relative px-8 pb-6">
     <!-- Custom layered gradient overlay -->
     <div
-      class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent"
+      class="absolute inset-0 bg-gradient-to-b"
       style="
         background: linear-gradient(
           to bottom,
           rgba(233, 235, 248, 0.8) 0%,
           rgba(233, 235, 248, 0.75) 50%,
-          rgba(233, 235, 248, 0.7) 95%,
+          rgba(233, 235, 248, 0.7) 85%,
           rgba(233, 235, 248, 0) 100%
         );
       "
@@ -45,7 +45,7 @@
   </div>
 
   <!-- links -->
-  <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-1">
+  <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-5">
     <a
       @click="selectedCategory = ''"
       class="rounded-md cursor-pointer px-4 py-3 font-semibold text-xl shadow-sm"
