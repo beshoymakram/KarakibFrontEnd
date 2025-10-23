@@ -1,3 +1,4 @@
+// src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
@@ -25,10 +26,14 @@ import MyAddresses from '@/views/Profile/MyAddresses.vue'
 import PaymentSuccess from '@/views/PaymentSuccess.vue'
 import PaymentFailure from '@/views/PaymentFailure.vue'
 import WastesDesc from '@/views/WastesDesc.vue'
+import MyOrders from '@/views/Profile/MyOrders.vue'
+import Orders from '@/views/Admin/Orders.vue'
+import DonationSuccess from '@/views/DonationSuccess.vue'
+import GoogleCallback from '@/views/GoogleCallback.vue'
 
 // Define routes
 const routes = [
-  // Public routes (accessible without login)
+  // Public routes
   { path: '/', name: 'Home', component: HomePage },
   { path: '/about', name: 'About', component: AboutUs },
   // { path: '/contact', name: 'Contact', component: ContactUs },
@@ -38,39 +43,20 @@ const routes = [
   { path: '/admin', redirect: '/admin/users' },
   { path: '/profile', redirect: '/profile/personal-info' },
   { path: '/test-payment', component: TestPayment },
+
   {
     path: '/profile',
     component: ProfileLayout,
     meta: { requiresAuth: true },
     children: [
-      {
-        path: 'personal-info',
-        name: 'PersonalInfo',
-        component: PersonalInfo
-      },
-      {
-        path: 'my-addresses',
-        name: 'MyAddresses',
-        component: MyAddresses
-      },
-      {
-        path: 'my-requests',
-        name: 'MyRequests',
-        component: WasteTypes
-      },
-      {
-        path: 'my-orders',
-        name: 'MyOrders',
-        component: WasteItems
-      },
-      {
-        path: 'my-points',
-        name: 'MyPoints',
-        component: WasteItems
-      },
-
-    ]
+      { path: 'personal-info', name: 'PersonalInfo', component: PersonalInfo },
+      { path: 'my-addresses', name: 'MyAddresses', component: MyAddresses },
+      { path: 'my-orders', name: 'MyOrders', component: MyOrders },
+      { path: 'my-requests', name: 'MyRequests', component: WasteTypes },
+      { path: 'my-points', name: 'MyPoints', component: WasteItems },
+    ],
   },
+
   {
     path: '/admin',
     component: AdminLayout,
@@ -97,6 +83,11 @@ const routes = [
         component: Products
       },
       {
+        path: 'orders',
+        name: 'AdminOrders',
+        component: Orders
+      },
+      {
         path: 'products-categories',
         name: 'AdminProductsCategories',
         component: ProductsCategories
@@ -119,6 +110,7 @@ const routes = [
     path: '/checkout',
     name: 'checkout',
     component: CheckOut,
+    meta: { requiresAuth: true }
   },
   {
     path: '/checkout/success',
@@ -132,15 +124,33 @@ const routes = [
     component: PaymentFailure,
     meta: { requiresAuth: true }
   },
+  {
+    path: '/donate/success',
+    name: 'DonationSuccess',
+    component: DonationSuccess,
+  },
+  {
+    path: '/donate/failed',
+    name: 'PaymentFailure',
+    component: PaymentFailure,
+  },
 
-  // Auth-related routes
+  { path: '/product/:id', name: 'product-desc', component: ProductDesc, props: true },
+  { path: '/waste/:id', name: 'WasteDesc', component: WastesDesc, props: true },
+  { path: '/checkout', name: 'checkout', component: CheckOut },
+  { path: '/checkout/success', name: 'PaymentSuccess', component: PaymentSuccess, meta: { requiresAuth: true } },
+  { path: '/checkout/failed', name: 'PaymentFailure', component: PaymentFailure, meta: { requiresAuth: true } },
+
+  // Auth routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
-
   { path: '/logout', name: 'Logout', meta: { requiresAuth: true } },
-
-
-  // Redirect unknown paths
+  {
+    path: '/auth/callback',
+    name: 'AuthCallback',
+    component: GoogleCallback,
+  },
+  // Fallback
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
@@ -149,16 +159,14 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else if (to.hash) {
+    if (savedPosition) return savedPosition
+    if (to.hash) {
       return {
         el: to.hash,
         behavior: 'smooth',
       }
-    } else {
-      return { top: 0 }
     }
+    return { top: 0 }
   },
 })
 
@@ -175,11 +183,9 @@ router.beforeEach(async (to, from, next) => {
     next('/login')
   } else if (to.meta.requiresGuest && authStore.isAuthenticated) {
     next('/')
-
   } else if (to.meta.requiresAdmin && !authStore.isAdmin) {
     next('/')
-  }
-  else {
+  } else {
     next()
   }
 })

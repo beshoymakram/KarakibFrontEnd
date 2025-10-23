@@ -122,7 +122,7 @@
 import productsCategoriesService from "@/services/productsCategoriesService";
 import productsService from "@/services/productsService";
 import { useCartStore } from "@/stores/cart";
-
+import { useLoadingStore } from "@/stores/loading";
 export default {
   name: "shopPage",
   data() {
@@ -130,6 +130,7 @@ export default {
       selectedCategory: "",
       categories: [],
       products: [],
+      loadingStore: useLoadingStore(),
     };
   },
   computed: {
@@ -159,20 +160,27 @@ export default {
 
     async fetchCategories() {
       try {
+        this.loadingStore.show();
         const response = await productsCategoriesService.getCategories();
         this.categories = response.data.data || response.data;
       } catch (error) {
         this.$toast.error(error.response.data.message);
+      } finally {
+        this.loadingStore.hide();
       }
     },
 
     async fetchProducts() {
       try {
+        this.loadingStore.show()
         const response = await productsService.getProducts();
         this.products = response.data.data || response.data;
       } catch (error) {
         this.$toast.error(error.response.data.message);
+      }finally {
+        this.loadingStore.hide(); 
       }
+
     },
   },
   mounted() {

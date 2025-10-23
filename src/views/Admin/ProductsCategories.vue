@@ -24,7 +24,7 @@
 
   <div class="bg-white rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
-      <table class="w-full table-fixed">
+      <table class="w-full table-auto">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
@@ -102,7 +102,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
               Create Product Category
             </h3>
             <button type="button" @click="showCreateModal = false"
@@ -152,8 +152,8 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Edit User
+            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+              Edit Product Category
             </h3>
             <button type="button" @click="showEditModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
