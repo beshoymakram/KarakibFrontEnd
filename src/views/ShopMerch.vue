@@ -172,15 +172,14 @@ export default {
 
     async fetchProducts() {
       try {
-        this.loadingStore.show()
+        this.loadingStore.show();
         const response = await productsService.getProducts();
         this.products = response.data.data || response.data;
       } catch (error) {
         this.$toast.error(error.response.data.message);
-      }finally {
-        this.loadingStore.hide(); 
+      } finally {
+        this.loadingStore.hide();
       }
-
     },
   },
   mounted() {
