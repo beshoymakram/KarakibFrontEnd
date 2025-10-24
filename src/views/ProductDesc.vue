@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen bg-[#BFD6BF] py-6 px-4">
-    <div v-if="product" class="max-w-7xl mx-auto">
-      <div class="p-16 bg-[#F6F7FB] rounded-lg shadow-sm">
+  <div class="min-h-screen bg-[#BFD6BF] py-8 px-4">
+    <div v-if="product" class="max-w-6xl mx-auto">
+      <div class="px-6 py-8 lg:py-12 bg-[#F6F7FB] rounded-lg shadow-sm">
         <!-- Product Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 px-4 sm:px-8">
           <!-- Image Gallery -->
           <div>
             <div class="bg-white rounded-2xl overflow-hidden mb-4 shadow-sm max-w-[480px]">
@@ -48,8 +48,8 @@
               <span class="text-gray-400">|</span>
               <span class="text-gray-600">{{ productSold }} Sold</span>
             </div>
-            <div class="text-4xl font-bold text-[#2C702C] mb-6">
-              {{ product.price }} {{ $t("common.currency") }}
+            <div class="text-3xl font-bold text-[#2C702C] mb-6">
+              {{ product.price }} {{ "common.currency" }}EGP
             </div>
             <p class="text-gray-600 leading-relaxed mb-6">{{ product.description }}</p>
 
@@ -62,7 +62,7 @@
                   :key="color.value"
                   @click="selectedColor = color.value"
                   :class="[
-                    'w-10 h-10 rounded-full border-2 transition-all',
+                    'w-8 h-8 rounded-full border-2 transition-all',
                     selectedColor === color.value
                       ? 'border-[#2C702C] ring-2 ring-[#2C702C] ring-offset-2'
                       : 'border-gray-300',
@@ -82,7 +82,7 @@
                   :key="size"
                   @click="selectedSize = size"
                   :class="[
-                    'px-6 py-3 rounded-lg font-medium transition-all',
+                    'px-4 py-1 rounded-lg font-medium transition-all',
                     selectedSize === size
                       ? 'bg-[#2C702C] text-white'
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-[#2C702C]',
@@ -111,13 +111,13 @@
         </div>
 
         <!-- Reviews Section -->
-        <div>
+        <div class="px-8">
           <h2 class="text-2xl font-bold text-[#112B11] mb-6">Customer Reviews</h2>
 
           <!-- Rating Overview -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 px-4">
             <!-- Average Rating Card -->
-            <div class="bg-[#EAF2EA] rounded-2xl p-6 text-center">
+            <div class="bg-[#EAF2EA] rounded-2xl p-6 text-center px-4">
               <div class="text-5xl font-bold text-[#2C702C] mb-2">{{ productRating }}</div>
               <div class="flex justify-center mb-2">
                 <svg
@@ -137,7 +137,7 @@
             </div>
 
             <!-- Rating Bars -->
-            <div class="md:col-span-2 space-y-3">
+            <div class="md:col-span-2 space-y-3 px-4">
               <div v-for="rating in [5, 4, 3, 2, 1]" :key="rating" class="flex items-center gap-4">
                 <span class="text-sm font-medium text-gray-700 w-8">{{ rating }}★</span>
                 <div class="flex-1 h-3 bg-gray-200 rounded-full overflow-hidden">
@@ -154,7 +154,7 @@
           </div>
 
           <!-- Review List -->
-          <div class="space-y-6">
+          <div class="space-y-6 px-4">
             <div
               v-for="review in displayedReviews"
               :key="review.id"
