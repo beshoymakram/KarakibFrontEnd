@@ -267,6 +267,7 @@
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'phone']" /> {{ $t('common.phoneNumber') }}
+                <span v-if="contactPhone"> - {{ formattedContactPhone }}</span>
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'envelope']" />karakib@gmail.com
@@ -331,6 +332,23 @@ export default {
     }
   },
 
+  computed: {
+    contactPhone() {
+      // translation key that holds the raw phone number (no label)
+      return this.$t('common.contactPhone') || '';
+    },
+    formattedContactPhone() {
+      const phone = String(this.contactPhone || '');
+      if (!phone) return '';
+      // detect Arabic locale (vue-i18n v8/v9 compatibility)
+      const locale = (this.$i18n && (this.$i18n.locale || (this.$i18n.global && this.$i18n.global.locale && this.$i18n.global.locale.value))) || '';
+      if (String(locale).toLowerCase().startsWith('ar')) {
+        return this.toArabicDigits(phone);
+      }
+      return phone;
+    }
+  },
+
   methods: {
     toggleFaq(index) {
       this.openFaq = this.openFaq === index ? null : index;
@@ -352,6 +370,10 @@ export default {
     },
     closeModal() {
       this.showModal = false
+    },
+    toArabicDigits(str) {
+      const map = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+      return String(str).replace(/\d/g, d => map[Number(d)]);
     },
   }
 };
