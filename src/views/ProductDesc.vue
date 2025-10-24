@@ -49,7 +49,7 @@
               <span class="text-gray-600">{{ productSold }} Sold</span>
             </div>
             <div class="text-3xl font-bold text-[#2C702C] mb-6">
-              {{ order.total }} {{ $t("common.currency") }}
+              {{ product.price }} {{ $t("common.currency") }}
             </div>
             <p class="text-gray-600 leading-relaxed mb-6">{{ product.description }}</p>
 
