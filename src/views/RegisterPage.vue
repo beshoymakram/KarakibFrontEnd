@@ -17,16 +17,19 @@
         <div
           class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-[#EAF2EA] text-center flex flex-col items-center justify-center rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none order-1 lg:order-1">
           <img class="w-full max-w-xs lg:max-w-md mx-auto mb-6" src="/public/images/register.png" alt="Register Banner">
-          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main text-shadow-lg mb-3">{{ $t('common.welcomeToKarakib') }}
+          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main text-shadow-lg mb-3">{{
+            $t('common.welcomeToKarakib') }}
           </h1>
-          <p class="font-semibold text-base lg:text-xl px-4">{{ $t('common.everySmallActOfRecyclingCreatesCleanerTomorrow') }}</p>
+          <p class="font-semibold text-base lg:text-xl px-4">{{
+            $t('common.everySmallActOfRecyclingCreatesCleanerTomorrow') }}</p>
         </div>
 
         <!-- Right Side - Form -->
         <div
           class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-white flex justify-center items-center rounded-b-xl lg:rounded-r-xl lg:rounded-bl-none order-2 lg:order-2">
           <div class="w-full max-w-md">
-            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-shadow-lg text-center mb-6 lg:mb-8">{{ $t('common.register') }}
+            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-shadow-lg text-center mb-6 lg:mb-8">{{
+              $t('common.register') }}
             </h1>
 
             <!-- Google Register Button -->
@@ -74,7 +77,7 @@
                   <label class="pb-2 font-medium text-sm lg:text-base" for="email">{{ $t('common.email') }}</label>
                   <input
                     class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
-                    :placeholder="$t('common.emailPlaceholder')" id="email" v-model="form.email" type="email" required />
+                    placeholder="email@gmail.com" id="email" v-model="form.email" type="email" required />
                 </div>
               </div>
 
@@ -89,19 +92,22 @@
               <!-- Password and Confirm Password Row (Desktop) -->
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div class="form-group flex flex-col w-full">
-                  <label class="pb-2 font-medium text-sm lg:text-base" for="password">{{ $t('common.password') }}</label>
+                  <label class="pb-2 font-medium text-sm lg:text-base" for="password">{{ $t('common.password')
+                  }}</label>
                   <input
                     class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
-                    :placeholder="$t('common.passwordPlaceholder')" id="password" v-model="form.password" type="password" required />
+                    :placeholder="$t('common.passwordPlaceholder')" id="password" v-model="form.password"
+                    type="password" required />
                 </div>
 
                 <div class="form-group flex flex-col w-full">
-                  <label class="pb-2 font-medium text-sm lg:text-base" for="password_confirmation">{{ $t('common.confirmPassword') }}
+                  <label class="pb-2 font-medium text-sm lg:text-base" for="password_confirmation">{{
+                    $t('common.confirmPassword') }}
                   </label>
                   <input
                     class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
-                    :placeholder="$t('common.confirmPasswordPlaceholder')" id="password_confirmation" v-model="form.password_confirmation"
-                    type="password" required />
+                    :placeholder="$t('common.confirmPasswordPlaceholder')" id="password_confirmation"
+                    v-model="form.password_confirmation" type="password" required />
                 </div>
               </div>
 
@@ -113,7 +119,8 @@
 
             <p class="text-center font-medium text-xs lg:text-base mt-4">
               {{ $t('common.alreadyHaveAnAccount') }}
-              <router-link to="/login" class="text-[#317C31] hover:underline font-semibold">{{ $t('common.loginHere') }}</router-link>
+              <router-link to="/login" class="text-[#317C31] hover:underline font-semibold">{{ $t('common.loginHere')
+              }}</router-link>
             </p>
           </div>
         </div>

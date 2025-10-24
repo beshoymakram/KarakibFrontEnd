@@ -10,7 +10,7 @@
         </p>
         <p class="text-sm font-semibold text-gray-800">
           {{ $t('common.emailLabel') }}
-          <span class="font-normal text-gray-700">{{ $t('common.karakibGmailCom') }}</span>
+          <span class="font-normal text-gray-700">karakib@gmail.com</span>
         </p>
       </div>
 
@@ -39,18 +39,22 @@
         <h3 class="font-semibold text-[#2C702C] mb-3">{{ $t('common.supportHelp') }}</h3>
         <ul class="space-y-1 text-sm text-gray-700">
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">{{ $t('common.faq') }}</RouterLink>
-          </li>
-          <li>
-            <RouterLink :to="{ path: '/about', hash: '#inquiry' }" class="hover:text-green-700">{{ $t('common.sendInquiry') }}
+            <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">{{ $t('common.faq') }}
             </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">{{ $t('common.termsConditions') }}
+            <RouterLink :to="{ path: '/about', hash: '#inquiry' }" class="hover:text-green-700">{{
+              $t('common.sendInquiry') }}
             </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#contact' }" class="hover:text-green-700">{{ $t('common.contactUs') }}</RouterLink>
+            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">{{
+              $t('common.termsConditions') }}
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink :to="{ path: '/about', hash: '#contact' }" class="hover:text-green-700">{{
+              $t('common.contactUs') }}</RouterLink>
           </li>
         </ul>
 
