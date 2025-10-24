@@ -23,6 +23,9 @@ apiClient.interceptors.request.use(
       loading.show()
     }
 
+    const locale = localStorage.getItem('locale') || 'en'
+    config.headers['Accept-Language'] = locale
+
     const token = localStorage.getItem('auth-token')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
