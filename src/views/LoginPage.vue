@@ -17,16 +17,16 @@
         <div
           class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-[#EAF2EA] text-center flex flex-col items-center justify-center rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none">
           <img class="w-full max-w-xs lg:max-w-md mx-auto mb-6" src="/public/images/login.png" alt="Login Banner">
-          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main text-shadow-lg mb-3">Welcome to Karakib
+          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main text-shadow-lg mb-3">{{ $t('common.welcomeToKarakib') }}
           </h1>
-          <p class="font-semibold text-base lg:text-xl px-4">Every small act of recycling creates a cleaner tomorrow</p>
+          <p class="font-semibold text-base lg:text-xl px-4">{{ $t('common.everySmallActOfRecyclingCreatesCleanerTomorrow') }}</p>
         </div>
 
         <!-- Right Side - Form -->
         <div
           class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-white flex justify-center items-center rounded-b-xl lg:rounded-r-xl lg:rounded-bl-none">
           <div class="w-full max-w-md" v-if="!authStore.isAuthenticated">
-            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-shadow-lg text-center mb-8">Login</h1>
+            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-shadow-lg text-center mb-8">{{ $t('common.login') }}</h1>
 
             <!-- Google Login Button -->
             <button @click="handleGoogleLogin" type="button"
@@ -45,7 +45,7 @@
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                   fill="#EA4335" />
               </svg>
-              Continue with Google
+              {{ $t('common.continueWithGoogle') }}
             </button>
 
             <!-- Divider -->
@@ -54,36 +54,36 @@
                 <div class="w-full border-t border-gray-300"></div>
               </div>
               <div class="relative flex justify-center text-sm">
-                <span class="px-4 bg-white text-gray-500 font-medium">Or continue with email</span>
+                <span class="px-4 bg-white text-gray-500 font-medium">{{ $t('common.orContinueWithEmail') }}</span>
               </div>
             </div>
 
             <!-- Login Form -->
             <form @submit.prevent="handleLogin" class="w-full flex flex-col">
               <div class="form-group mb-5 flex flex-col w-full">
-                <label class="pb-2 font-medium text-sm lg:text-base" for="email">Email</label>
+                <label class="pb-2 font-medium text-sm lg:text-base" for="email">{{ $t('common.email') }}</label>
                 <input
                   class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31]"
-                  placeholder="email@gmail.com" id="email" v-model="form.email" type="email" required />
+                  :placeholder="$t('common.emailPlaceholder')" id="email" v-model="form.email" type="email" required />
               </div>
 
               <div class="form-group mb-5 flex flex-col w-full">
-                <label class="pb-2 font-medium text-sm lg:text-base" for="password">Password</label>
+                <label class="pb-2 font-medium text-sm lg:text-base" for="password">{{ $t('common.password') }}</label>
                 <input
                   class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31]"
-                  placeholder="Password" id="password" v-model="form.password" type="password" required />
+                  :placeholder="$t('common.passwordPlaceholder')" id="password" v-model="form.password" type="password" required />
               </div>
 
               <button type="submit" :disabled="authStore.loading"
                 class="w-full bg-[#317C31] hover:bg-[#275a27] transition-colors font-medium cursor-pointer text-white px-4 py-3 rounded-lg my-4 text-center disabled:bg-gray-400 disabled:cursor-not-allowed">
-                {{ authStore.loading ? 'Loading...' : 'Login' }}
+                {{ authStore.loading ? $t('common.loading') : $t('common.login') }}
               </button>
             </form>
 
             <p class="text-center font-medium text-sm lg:text-base mt-4">
-              Don't have an account?
-              <router-link to="/register" class="text-[#317C31] hover:underline font-semibold">Register
-                here</router-link>
+              {{ $t('common.dontHaveAnAccount') }}
+              <router-link to="/register" class="text-[#317C31] hover:underline font-semibold">{{ $t('common.registerHere') }}
+              </router-link>
             </p>
           </div>
         </div>

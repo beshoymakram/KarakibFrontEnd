@@ -59,7 +59,7 @@
               {{ product.category?.name }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ product.price }} EGP
+              {{ product.price }} {{ $t('common.currency') }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
               {{ product.stock }}

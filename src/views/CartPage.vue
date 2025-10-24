@@ -1,7 +1,7 @@
 <template>
   <div class="cart-page bg-[#F5F7F5] min-h-screen py-10">
     <div class="container mx-auto px-4 max-w-6xl">
-      <h1 class="text-4xl font-bold text-[#2C702C] mb-8">Your Cart</h1>
+      <h1 class="text-4xl font-bold text-[#2C702C] mb-8">{{ $t('common.yourCart') }}</h1>
 
       <!-- Products Section -->
       <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -11,9 +11,9 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
           </svg>
-          <h2 class="text-2xl font-bold text-[#2C702C]">Shop Products</h2>
+          <h2 class="text-2xl font-bold text-[#2C702C]">{{ $t('common.shopProducts') }}</h2>
           <span class="ml-auto bg-[#2C702C] text-white px-3 py-1 rounded-full text-sm font-semibold">
-            {{ cartStore.items.length }} items
+            {{ cartStore.items.length }} {{ $t('common.items') }}
           </span>
         </div>
 
@@ -28,7 +28,7 @@
             <div class="flex-1">
               <h3 class="font-bold text-lg text-[#2C702C]">{{ item.product.name }}</h3>
               <p class="text-gray-600 text-sm">{{ item.product.description }}</p>
-              <p class="text-[#2C702C] font-bold text-lg mt-2">{{ item.product.price }} EGP</p>
+              <p class='text-[#2C702C] font-bold text-lg mt-2'>{{ item.product.price }} {{ $t('common.currency') }}</p>
             </div>
 
             <!-- Quantity Controls -->
@@ -55,7 +55,7 @@
             <!-- Subtotal & Remove -->
             <div class="text-right">
               <p class="font-bold text-xl text-[#2C702C] mb-2">
-                {{ (item.product.price * item.quantity).toFixed(2) }} EGP
+                {{ (item.product.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
               </p>
               <button @click="removeItem(item.id)"
                 class="text-red-600 hover:text-red-800 text-sm font-semibold flex items-center gap-1 ml-auto">
@@ -72,8 +72,8 @@
           <!-- Total & Checkout -->
           <div class="bg-[#E0EBE0] rounded-lg p-6 mt-6">
             <div class="flex justify-between items-center mb-4">
-              <span class="text-xl font-semibold text-gray-700">Subtotal:</span>
-              <span class="text-3xl font-bold text-[#2C702C]">{{ cartStore.total }} EGP</span>
+              <span class="text-xl font-semibold text-gray-700">{{ $t('common.subtotal') }}</span>
+              <span class='text-3xl font-bold text-[#2C702C]'>{{ cartStore.total }} {{ $t('common.currency') }}</span>
             </div>
             <button @click="checkoutProducts"
               class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] text-white font-bold py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
@@ -82,7 +82,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
               </svg>
-              Proceed to Checkout
+              {{ $t('common.proceedToCheckout') }}
             </button>
           </div>
         </div>
@@ -93,10 +93,10 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z" />
           </svg>
-          <p class="text-gray-500 text-lg mb-4">Your shopping cart is empty</p>
+          <p class="text-gray-500 text-lg mb-4">{{ $t('common.yourShoppingCartIsEmpty') }}</p>
           <router-link to="/shop"
             class="inline-block bg-[#2C702C] text-white px-6 py-3 rounded-lg hover:bg-[#1a4d1a] transition-colors">
-            Continue Shopping
+            {{ $t('common.continueShopping') }}
           </router-link>
         </div>
       </div>
@@ -109,9 +109,9 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
           </svg>
-          <h2 class="text-2xl font-bold text-[#2C702C]">Waste Collection Request</h2>
+          <h2 class="text-2xl font-bold text-[#2C702C]">{{ $t('common.wasteCollectionRequest') }}</h2>
           <span class="ml-auto bg-[#2C702C] text-white px-3 py-1 rounded-full text-sm font-semibold">
-            {{ wasteItems.length }} items
+            {{ wasteItems.length }} {{ $t('common.items') }}
           </span>
         </div>
 
@@ -136,7 +136,7 @@
 
             <!-- Points Estimate -->
             <div class="text-right">
-              <p class="text-sm text-gray-500">Estimated Points</p>
+              <p class="text-sm text-gray-500">{{ $t('common.estimatedPoints') }}</p>
               <p class="font-bold text-2xl text-green-600">+{{ item.estimated_points }}</p>
             </div>
 
@@ -152,7 +152,7 @@
           <!-- Request Collection Button -->
           <div class="bg-green-50 rounded-lg p-6 mt-6">
             <div class="flex justify-between items-center mb-4">
-              <span class="text-xl font-semibold text-gray-700">Total Estimated Points:</span>
+              <span class="text-xl font-semibold text-gray-700">{{ $t('common.totalEstimatedPoints') }}</span>
               <span class="text-3xl font-bold text-green-600">+{{ totalWastePoints }}</span>
             </div>
             <button @click="requestCollection"
@@ -162,7 +162,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V11.25m-8.25.75h.008v.008h-.008V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
               </svg>
-              Request Collection
+              {{ $t('common.requestCollection') }}
             </button>
           </div>
         </div>
@@ -173,10 +173,10 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
           </svg>
-          <p class="text-gray-500 text-lg mb-4">No waste collection requests yet</p>
+          <p class="text-gray-500 text-lg mb-4">{{ $t('common.noWasteCollectionRequestsYet') }}</p>
           <router-link to="/add-waste"
             class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
-            Add Waste Items
+            {{ $t('common.addWasteItems') }}
           </router-link>
         </div>
       </div>

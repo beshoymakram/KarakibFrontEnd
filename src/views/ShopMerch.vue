@@ -38,8 +38,7 @@
       <p
         class="max-w-2xl text-xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit"
       >
-        Support Karakib’s mission by buying eco-friendly merchandise. <br />
-        Every purchase funds our recycling and community projects.
+        {{ $t('common.supportKarakibMission') }}
       </p>
     </div>
   </div>
@@ -54,7 +53,7 @@
         'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== '',
       }"
     >
-      View all </a
+      {{ $t('common.viewAll') }} </a
     ><a
       v-for="category in categories"
       :key="category.id"
@@ -76,7 +75,7 @@
       v-if="filteredProducts.length === 0"
       class="px-4 py-4 mx-auto text-gray-500 font-bold text-center"
     >
-      No products in this category
+      {{ $t('common.noProductsInCategory') }}
     </h5>
   </div>
   <div
@@ -100,7 +99,7 @@
       <div class="px-4 pt-2 pb-2">
         <div class="flex justify-between items-center w-full">
           <h2 class="text-[#2C702C] font-semibold text-xl">{{ product.name }}</h2>
-          <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} EGP</p>
+          <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} {{ $t('common.currency') }}</p>
         </div>
 
         <p class="text-gray-600 text-sm">{{ product.description }}</p>
@@ -110,7 +109,7 @@
             @click.stop="addToCart(product.id)"
             class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
           >
-            Add to Cart
+            {{ $t('common.addToCart') }}
           </button>
         </div>
       </div>
@@ -178,7 +177,7 @@ export default {
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }finally {
-        this.loadingStore.hide(); 
+        this.loadingStore.hide();
       }
 
     },

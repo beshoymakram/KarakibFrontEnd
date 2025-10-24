@@ -20,15 +20,14 @@
       </div>
 
       <div class="relative z-10 max-w-3xl mx-auto">
-        <h1 class="text-5xl font-bold text-[#2C702C] mb-4 drop-shadow-lg">About Us</h1>
+        <h1 class="text-5xl font-bold text-[#2C702C] mb-4 drop-shadow-lg">{{ $t('common.aboutUs') }}</h1>
         <p class="text-[#265C26] text-lg font-medium leading-relaxed">
-          Karakib is an eco-friendly platform that rewards recycling and supports a sustainable future.
-          Join our mission to keep Egypt clean and green.
+          {{ $t('common.karakibIsEcoFriendlyPlatform') }}
         </p>
         <button
           class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-6 py-3 rounded-md text-lg transition"
         >
-          Learn More
+          {{ $t('common.learnMore') }}
         </button>
       </div>
     </section>
@@ -47,7 +46,7 @@
       </div>
 
       <h2 class="text-3xl md:text-4xl text-[#2C702C] font-semibold text-center mb-14 relative z-10">
-        Working Together for a Cleaner Future
+        {{ $t('common.workingTogetherForCleanerFuture') }}
       </h2>
 
       <div class="space-y-16 relative z-10">
@@ -61,16 +60,15 @@
               </svg>
             </div>
             <h3 class="text-2xl font-semibold text-[#2C702C] mb-3">
-              Making Recycling Easy and Rewarding
+              {{ $t('common.makingRecyclingEasyAndRewarding') }}
             </h3>
             <p class="text-[#163816] mb-5">
-              Karakib simplifies the recycling process by allowing users to collect, schedule pickups, and
-              earn points effortlessly. We believe sustainability should be accessible and rewarding for everyone.
+              {{ $t('common.karakibSimplifiesRecyclingProcess') }}
             </p>
             <button
               class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm"
             >
-              Learn More
+              {{ $t('common.learnMore') }}
             </button>
           </div>
           <div class="md:w-1/2 flex justify-center relative">
@@ -98,16 +96,15 @@
               </svg>
             </div>
             <h3 class="text-2xl font-semibold text-[#2C702C] mb-3">
-              Supporting a Greener Community
+              {{ $t('common.supportingGreenerCommunity') }}
             </h3>
             <p class="text-[#163816] mb-5">
-              Our goal is to build a network of individuals and organizations working together toward
-              a greener, more sustainable Egypt. Recycling isn't just a habit — it's a lifestyle.
+              {{ $t('common.ourGoalIsToBuildNetwork') }}
             </p>
             <button
               class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm"
             >
-              Learn More
+              {{ $t('common.learnMore') }}
             </button>
           </div>
           <div class="md:w-1/2 flex justify-center relative">
@@ -135,16 +132,15 @@
               </svg>
             </div>
             <h3 class="text-2xl font-semibold text-[#2C702C] mb-3">
-              Innovation with a Purpose
+              {{ $t('common.innovationWithPurpose') }}
             </h3>
             <p class="text-[#163816] mb-5">
-              Karakib combines technology and environmental care to make recycling smarter.
-              We continuously improve our platform to create a positive impact for both users and the planet.
+              {{ $t('common.karakibCombinesTechnologyAndEnvironmentalCare') }}
             </p>
             <button
               class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm"
             >
-              Learn More
+              {{ $t('common.learnMore') }}
             </button>
           </div>
           <div class="md:w-1/2 flex justify-center relative">
@@ -165,7 +161,7 @@
     </section>
     <section class="w-full mx-auto bg-[#BFD6BF] shadow p-8">
         <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="Faq">
-      <h2 class="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
+      <h2 class="text-2xl font-semibold mb-6">{{ $t('common.frequentlyAskedQuestions') }}</h2>
 
       <div class="grid md:grid-cols-2 gap-6">
         <div class="space-y-4">
@@ -199,66 +195,66 @@
       </div>
     </section>
      <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="terms">
-      <h2 class="text-2xl font-semibold mb-4">Terms and Conditions</h2>
+      <h2 class="text-2xl font-semibold mb-4">{{ $t('common.termsAndConditions') }}</h2>
 
       <p class="text-gray-600 mb-4 flex items-start">
         <span class="text-green-600 mr-2 text-xl"><font-awesome-icon :icon="['fas', 'triangle-exclamation']" /></span>
-        Please read carefully before using Karakib.
+        {{ $t('common.pleaseReadCarefullyBeforeUsingKarakib') }}
       </p>
 
       <ul class="list-disc list-inside space-y-2 text-gray-700">
-        <li>By using Karakib, you agree to take responsibility for recycling waste materials in an environmentally friendly manner.</li>
-        <li>Users are also responsible for the safety and quality of waste they submit through the platform.</li>
-        <li>Karakib will not be held responsible for losses or damages that occur as a result of improper waste handling before our team reviews or collects it.</li>
-        <li>Any misuse of the platform, including providing false information, will result in immediate suspension of the user’s account.</li>
-        <li>We may update these terms at any time. You are responsible for reviewing them periodically.</li>
+        <li>{{ $t('common.byUsingKarakibYouAgree') }}</li>
+        <li>{{ $t('common.usersAreAlsoResponsible') }}</li>
+        <li>{{ $t('common.karakibWillNotBeHeldResponsible') }}</li>
+        <li>{{ $t('common.anyMisuseOfPlatform') }}</li>
+        <li>{{ $t('common.weMayUpdateTheseTerms') }}</li>
       </ul>
 
       <div class="mt-6">
         <button class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-          Read Full Policy
+          {{ $t('common.readFullPolicy') }}
         </button>
       </div>
     </section>
 
      <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="inquiry">
-      <h2 class="text-2xl font-semibold mb-4">Send an Inquiry</h2>
-      <p class="text-gray-600 mb-6">We’re happy to answer any questions or partnership requests.</p>
+      <h2 class="text-2xl font-semibold mb-4">{{ $t('common.sendAnInquiry') }}</h2>
+      <p class="text-gray-600 mb-6">{{ $t('common.weAreHappyToAnswerQuestions') }}</p>
 
       <form @submit.prevent="submitForm" class="grid md:grid-cols-2 gap-4">
         <div>
-          <label class="block mb-1 font-medium">First Name</label>
-          <input v-model="form.firstName" type="text" placeholder="Enter first name"
+          <label class="block mb-1 font-medium">{{ $t('common.firstName') }}</label>
+          <input v-model="form.firstName" type="text" :placeholder="$t('common.enterFirstName')"
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
         </div>
 
         <div>
-          <label class="block mb-1 font-medium">Last Name</label>
-          <input v-model="form.lastName" type="text" placeholder="Enter last name"
+          <label class="block mb-1 font-medium">{{ $t('common.lastName') }}</label>
+          <input v-model="form.lastName" type="text" :placeholder="$t('common.enterLastName')"
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
         </div>
 
         <div>
-          <label class="block mb-1 font-medium">Email</label>
-          <input v-model="form.email" type="email" placeholder="Enter email"
+          <label class="block mb-1 font-medium">{{ $t('common.email') }}</label>
+          <input v-model="form.email" type="email" :placeholder="$t('common.enterEmail')"
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
         </div>
 
         <div>
-          <label class="block mb-1 font-medium">Subject</label>
-          <input v-model="form.subject" type="text" placeholder="Enter subject"
+          <label class="block mb-1 font-medium">{{ $t('common.subject') }}</label>
+          <input v-model="form.subject" type="text" :placeholder="$t('common.enterSubject')"
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
         </div>
 
         <div class="md:col-span-2">
-          <label class="block mb-1 font-medium">Message Box</label>
-          <textarea v-model="form.message" rows="4" placeholder="Enter message"
+          <label class="block mb-1 font-medium">{{ $t('common.messageBox') }}</label>
+          <textarea v-model="form.message" rows="4" :placeholder="$t('common.enterMessage')"
             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"></textarea>
         </div>
 
         <div class="md:col-span-2 flex justify-center mt-4">
           <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-            Send Message
+            {{ $t('common.sendMessage') }}
           </button>
         </div>
       </form>
@@ -266,29 +262,29 @@
 
     <!-- Contact Us -->
     <section class="max-w-6xl mx-auto my-8 bg-white rounded-2xl shadow p-8" id="contact">
-      <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
-      <p class="text-gray-600 mb-6">We’re here to help you make the planet cleaner!</p>
+      <h2 class="text-2xl font-semibold mb-4">{{ $t('common.contactUs') }}</h2>
+      <p class="text-gray-600 mb-6">{{ $t('common.weAreHereToHelpYou') }}</p>
 
       <div class="grid md:grid-cols-2 gap-6">
         <!-- Contact Info -->
         <div>
-          <h3 class="font-semibold mb-2">Ways to Reach Us</h3>
+          <h3 class="font-semibold mb-2">{{ $t('common.waysToReachUs') }}</h3>
           <ul class="space-y-2 text-gray-700">
             <li>
-              <font-awesome-icon :icon="['fas', 'location-dot']" /> Address: Cairo, Egypt
+              <font-awesome-icon :icon="['fas', 'location-dot']" /> {{ $t('common.address') }}
             </li>
             <li>
-              <font-awesome-icon :icon="['fas', 'phone']" /> Phone: +20 100 000 0000
+              <font-awesome-icon :icon="['fas', 'phone']" /> {{ $t('common.phoneNumber') }}
             </li>
             <li>
-              <font-awesome-icon :icon="['fas', 'envelope']" /> Email: karakib@gmail.com
+              <font-awesome-icon :icon="['fas', 'envelope']" /> {{ $t('common.emailAddress') }}
             </li>
           </ul>
         </div>
 
         <!-- Social Media -->
         <div>
-          <h3 class="font-semibold mb-2">Connect With Us on Social Media</h3>
+          <h3 class="font-semibold mb-2">{{ $t('common.connectWithUsOnSocialMedia') }}</h3>
           <ul class="space-y-2 text-gray-700">
             <li><font-awesome-icon :icon="['fab', 'twitter']" /> @karakib</li>
             <li><font-awesome-icon :icon="['fab', 'facebook']" /> @Karakib</li>
@@ -310,10 +306,10 @@ export default {
     return {
       openFaq: null,
       faqs: [
-        { question: 'How does Karakib work?', answer: 'You can recycle by submitting your waste and scheduling a pickup via our platform.' },
-        { question: 'What type of waste can I recycle?', answer: 'We currently accept plastic, metals, paper, e-waste, glass, and more.' },
-        { question: 'How can I track my earnings?', answer: 'You can view your earnings and history directly from your Karakib profile.' },
-        { question: 'How do I redeem my points?', answer: 'You can redeem your collected points for cash or rewards through our partners.' }
+        { question: this.$t('common.howDoesKarakibWork'), answer: this.$t('common.youCanRecycleBySubmittingWaste') },
+        { question: this.$t('common.whatTypeOfWasteCanIRecycle'), answer: this.$t('common.weCurrentlyAcceptPlasticMetalsPaper') },
+        { question: this.$t('common.howCanITrackMyEarnings'), answer: this.$t('common.youCanViewYourEarningsAndHistory') },
+        { question: this.$t('common.howDoIRedeemMyPoints'), answer: this.$t('common.youCanRedeemYourCollectedPoints') }
       ],
       form: {
         firstName: '',

@@ -5,15 +5,14 @@
     <div class="hero-overlay bg-white/30"></div>
     <div class="hero-content text-center items-start justify-start pt-14">
       <div class="max-w-3xl">
-        <h1 class="text-4xl text-[#2C702C] font-bold drop-shadow-lg">Turn Your Waste Into Worth</h1>
+        <h1 class="text-4xl text-[#2C702C] font-bold drop-shadow-lg">{{ $t('common.turnYourWasteIntoWorth') }}</h1>
         <p class="py-6 text-md font-medium text-[#439a43]">
-          Karakib makes it easy to collect waste, earn points, and turn your actions into real
-          rewards — because sustainability should pay off.
+          {{ $t('common.karakibMakesItEasyToCollectWaste') }}
         </p>
         <button @click="scrollToHowItWorks"
           class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
           text-lg>
-          Get Started
+          {{ $t('common.getStarted') }}
         </button>
       </div>
     </div>
@@ -22,7 +21,7 @@
   <!-- Steps Section -->
 
   <section class="px-16 py-14 bg-base-200" ref="howItWorksSection">
-    <p class="text-4xl text-[#2C702C] font-semibold text-center pb-14">How it works</p>
+    <p class="text-4xl text-[#2C702C] font-semibold text-center pb-14">{{ $t('common.howItWorks') }}</p>
 
     <div class="flex flex-wrap gap-4 justify-around">
       <div v-for="(step, index) in steps" :key="index" class="card bg-base-100 shadow-sm w-2xs rounded-3xl">
@@ -40,9 +39,9 @@
 
   <!-- Waste Carousel Section -->
   <section class="bg-white px-16 py-16 relative">
-    <p class="text-4xl text-[#2C702C] font-semibold text-center">Discover Waste Types</p>
+    <p class="text-4xl text-[#2C702C] font-semibold text-center">{{ $t('common.discoverWasteTypes') }}</p>
     <p class="text-3xl text-[#163816] text-center pt-5 pb-10 font-normal">
-      Learn about the different kinds of waste you can recycle
+      {{ $t('common.learnAboutDifferentKindsOfWaste') }}
     </p>
 
     <!-- Carousel Wrapper -->
@@ -82,15 +81,15 @@
     <div class="hero-content text-center">
       <div class="max-w-3xl">
         <h1 class="text-4xl text-[#2C702C] font-medium drop-shadow-lg">
-          Our Exclusive Merchandise
+          {{ $t('common.ourExclusiveMerchandise') }}
         </h1>
         <p class="py-6 text-[#163816]">
-          Show your support with our premium collection of branded merchandise
+          {{ $t('common.showYourSupportWithPremiumCollection') }}
         </p>
         <router-link to="/shop">
           <button
             class="btn rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]">
-            Shop Now
+            {{ $t('common.shopNow') }}
           </button>
         </router-link>
       </div>
@@ -114,7 +113,7 @@
             <h2 class="text-[#2C702C] font-semibold text-xl">
               {{ product.name }}
             </h2>
-            <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} EGP</p>
+            <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} {{ $t('common.currency') }}</p>
           </div>
 
           <p class="text-gray-600 text-sm">{{ product.description }}</p>
@@ -125,7 +124,7 @@
       <div class="flex items-center mt-1 justify-end px-4 pb-2">
         <button @click.stop="addToCart(product.id)"
           class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold">
-          Add to Cart
+          {{ $t('common.addToCart') }}
         </button>
       </div>
     </div>
@@ -133,9 +132,9 @@
 
   <!-- make differance section -->
   <section class="bg-[#E9EBF8] px-16 py-16 relative">
-    <p class="text-4xl text-[#2C702C] font-semibold text-center">Make a Difference</p>
+    <p class="text-4xl text-[#2C702C] font-semibold text-center">{{ $t('common.makeADifference') }}</p>
     <p class="text-2xl text-[#163816] text-center pt-5 pb-10 font-normal">
-      Convert your recycling points into donations for charitable organizations
+      {{ $t('common.convertRecyclingPointsIntoDonations') }}
     </p>
     <div class="flex flex-col lg:flex-row justify-center items-stretch gap-8 p-8">
       <div v-for="(card, index) in infoCards" :key="index"
@@ -145,7 +144,7 @@
         <p class="text-[#8E98A8] mb-4">{{ card.description }}</p>
         <button @click="openDonationModal(card.title)"
           class="bg-[#2C702C] text-white px-4 py-2 rounded-md hover:bg-[#1D4A1D] transition">
-          {{ card.buttonText }}
+          {{ $t('common.donate') }}
         </button>
       </div>
     </div>
@@ -171,7 +170,7 @@
           </svg>
           <span class="sr-only">Loading...</span>
         </div>
-        <small>Your are being redirected to complete your payment.</small>
+        <small>{{ $t('common.youAreBeingRedirectedToCompletePayment') }}</small>
       </div>
     </div>
   </div>
@@ -196,21 +195,21 @@ export default {
       infoCards: [
         {
           image: "/images/Graduation Cap.png",
-          title: "Education Fund",
-          description: "Support underprivileged children's education",
-          buttonText: "Donate",
+          title: this.$t('common.educationFund'),
+          description: this.$t('common.supportUnderprivilegedChildrenEducation'),
+          buttonText: this.$t('common.donate'),
         },
         {
           image: "/images/Tree Planting.png",
-          title: "Reforestation",
-          description: "Plant trees and restore natural habitats",
-          buttonText: "Donate",
+          title: this.$t('common.reforestation'),
+          description: this.$t('common.plantTreesAndRestoreNaturalHabitats'),
+          buttonText: this.$t('common.donate'),
         },
         {
           image: "/images/Heart Health.png",
-          title: "Community Health",
-          description: "Support underprivileged children's education",
-          buttonText: "Donate",
+          title: this.$t('common.communityHealth'),
+          description: this.$t('common.supportUnderprivilegedChildrenEducation'),
+          buttonText: this.$t('common.donate'),
         },
       ],
       products: [],
@@ -218,27 +217,27 @@ export default {
       selectedFund: "",
       steps: [
         {
-          number: "Step 1",
-          title: "Create Account",
-          description: "Sign up to become a member of our recycling community.",
+          number: this.$t('common.step1'),
+          title: this.$t('common.createAccount'),
+          description: this.$t('common.signUpToBecomeMember'),
           image: "/images/step-1.png",
         },
         {
-          number: "Step 2",
-          title: "Collect Waste",
-          description: "Sort and store your recyclables to prepare them for pickup.",
+          number: this.$t('common.step2'),
+          title: this.$t('common.collectWaste'),
+          description: this.$t('common.sortAndStoreRecyclables'),
           image: "/images/step-2.png",
         },
         {
-          number: "Step 3",
-          title: "Request Pickup",
-          description: "Schedule a collection through the app for convenient service.",
+          number: this.$t('common.step3'),
+          title: this.$t('common.requestPickup'),
+          description: this.$t('common.scheduleCollectionThroughApp'),
           image: "/images/step-3.png",
         },
         {
-          number: "Step 4",
-          title: "Earn Rewards",
-          description: "Get rewarded for your effort with points and exclusive benefits.",
+          number: this.$t('common.step4'),
+          title: this.$t('common.earnRewards'),
+          description: this.$t('common.getRewardedForYourEffort'),
           image: "/images/step-4.png",
         },
       ],

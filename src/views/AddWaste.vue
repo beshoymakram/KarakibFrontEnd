@@ -1,9 +1,9 @@
 <template>
   <section class="bg-white px-16 py-14 relative">
     <p class="text-4xl text-[#2C702C] font-semibold text-center drop-shadow-2xl">
-      Recycling Waste Types
+      {{ $t('common.recyclingWasteTypes') }}
     </p>
-    <p class="text-2xl text-[#163816] pt-5 pb-10 font-semibold text-start">Select a Waste Type</p>
+    <p class="text-2xl text-[#163816] pt-5 pb-10 font-semibold text-start">{{ $t('common.selectAWasteType') }}</p>
 
     <!-- Carousel Wrapper -->
     <div class="relative max-w-6xl mx-auto flex items-center justify-center">
@@ -105,18 +105,18 @@
           <p class="flex gap-1 mb-1 text-[#FFC400] font-semibold text-sm">
             <img src="/images/Coins.svg" class="size-5" />
 
-            {{ item.points_per_unit }} points
+            {{ item.points_per_unit }} {{ $t('common.points') }}
           </p>
 
           <!-- Actions -->
 
           <div class="flex justify-between items-center mt-2">
-            <p class="text-[#8E98A8] text-sm font-semibold">per {{ item.unit }}</p>
+            <p class="text-[#8E98A8] text-sm font-semibold">{{ $t('common.per') }} {{ item.unit }}</p>
             <button
               @click="addWasteToCart(item)"
               class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
             >
-              Add & Earn
+              {{ $t('common.addAndEarn') }}
             </button>
           </div>
         </div>

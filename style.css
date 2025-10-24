@@ -9,6 +9,26 @@
   transition: all 0.3s ease-in-out;
 }
 
+/* Arabic font for Arabic language */
+html[lang="ar"] {
+  font-family: 'Noto Sans Arabic', 'Cairo', 'Amiri', 'Scheherazade New', 'Arial Unicode MS', sans-serif;
+}
+
+/* English font for English language */
+html[lang="en"] {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Ensure proper inheritance for Arabic */
+html[lang="ar"] * {
+  font-family: inherit;
+}
+
+/* Optional: Adjust line height for better Arabic readability */
+html[lang="ar"] {
+  line-height: 1.6;
+}
+
 .text-main {
   color: #317c31;
 }

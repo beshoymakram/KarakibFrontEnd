@@ -28,32 +28,25 @@
           <div class="hidden md:ml-6 md:flex md:space-x-8">
             <router-link to="/"
               class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
-              Home
+              {{ $t('common.home') }}
             </router-link>
             <router-link to="/shop"
               class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
-              Shop
+              {{ $t('common.shop') }}
             </router-link>
             <router-link to="/add-waste"
               class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
-              Waste
+              {{ $t('common.waste') }}
             </router-link>
             <router-link to="/about"
               class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
-              About Us
+              {{ $t('common.about') }}
             </router-link>
             <router-link to="/cart"
               class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
-              Cart <span class="text-warning px-2"> ({{ cartStore.count }}) </span>
+              {{ $t('common.cart') }} <span class="text-warning px-2"> ({{ cartStore.count }}) </span>
             </router-link>
-            <router-link to="/ar"
-              class="inline-flex items-center px-4 my-3 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
-              </svg>
-            </router-link>
+            <LanguageSwitcher />
           </div>
         </div>
 
@@ -72,14 +65,14 @@
               <div v-if="profileDropdownOpen" @click="profileDropdownOpen = false"
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <router-link to="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  Your Profile
+                  {{ $t('common.profile') }}
                 </router-link>
                 <router-link to="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  Settings
+                  {{ $t('common.settings') }}
                 </router-link>
                 <button @click="handleLogout"
                   class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  Sign out
+                  {{ $t('common.signOut') }}
                 </button>
               </div>
             </Transition>
@@ -89,18 +82,18 @@
           <div v-if="!auth.isAuthenticated" class="flex space-x-3">
             <router-link to="/login"
               class="inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors">
-              Login
+              {{ $t('common.login') }}
             </router-link>
             <router-link to="/register"
               class="inline-flex items-center rounded-md bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white hover:bg-[#1a4d1a] transition-colors">
-              Register
+              {{ $t('common.register') }}
             </router-link>
           </div>
 
           <!-- Dashboard Button (Admin only) -->
           <router-link v-if="auth.isAuthenticated && auth.isAdmin" to="/admin"
             class="inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors">
-            Dashboard
+            {{ $t('common.dashboard') }}
           </router-link>
         </div>
       </div>
@@ -110,24 +103,67 @@
     <Transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0"
       enter-to-class="opacity-100" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100"
       leave-to-class="opacity-0">
-      <div v-if="mobileMenuOpen" class="md:hidden">
-        <div class="space-y-1 pt-2 pb-3">
+      <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-200">
+        <div class="px-4 py-2 space-y-1 max-h-96 overflow-y-auto">
           <router-link to="/" @click="mobileMenuOpen = false"
             class="block border-l-4 border-[#2C702C] bg-[#E0EBE0] py-2 pl-3 pr-4 text-base font-medium text-[#2C702C]">
-            Home
+            {{ $t('common.home') }}
           </router-link>
           <router-link to="/shop" @click="mobileMenuOpen = false"
             class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50">
-            Shop
+            {{ $t('common.shop') }}
           </router-link>
           <router-link to="/add-waste" @click="mobileMenuOpen = false"
             class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50">
-            Waste
+            {{ $t('common.waste') }}
           </router-link>
           <router-link to="/about" @click="mobileMenuOpen = false"
             class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50">
-            About Us
+            {{ $t('common.about') }}
           </router-link>
+          <router-link to="/cart" @click="mobileMenuOpen = false"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50">
+            {{ $t('common.cart') }} <span class="text-warning px-2">({{ cartStore.count }})</span>
+          </router-link>
+
+          <!-- Mobile Auth Buttons -->
+          <div v-if="!auth.isAuthenticated" class="pt-2 pb-2 border-t border-gray-200">
+            <router-link to="/login" @click="mobileMenuOpen = false"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50">
+              {{ $t('common.login') }}
+            </router-link>
+            <router-link to="/register" @click="mobileMenuOpen = false"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50">
+              {{ $t('common.register') }}
+            </router-link>
+          </div>
+
+          <!-- Mobile Profile Links -->
+          <div v-if="auth.isAuthenticated" class="pt-2 pb-2 border-t border-gray-200">
+            <router-link to="/profile" @click="mobileMenuOpen = false"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50">
+              {{ $t('common.profile') }}
+            </router-link>
+            <router-link to="/settings" @click="mobileMenuOpen = false"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50">
+              {{ $t('common.settings') }}
+            </router-link>
+            <router-link v-if="auth.isAdmin" to="/admin" @click="mobileMenuOpen = false"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50">
+              {{ $t('common.dashboard') }}
+            </router-link>
+            <button @click="handleLogout; mobileMenuOpen = false"
+              class="block w-full text-left py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50">
+              {{ $t('common.signOut') }}
+            </button>
+          </div>
+
+          <!-- Language Switcher in Mobile -->
+          <div class="pt-2 pb-2 border-t border-gray-200">
+            <div class="px-3 py-2">
+              <LanguageSwitcher />
+            </div>
+          </div>
         </div>
       </div>
     </Transition>
@@ -137,6 +173,8 @@
 <script>
 import { useAuthStore } from '@/stores/auth';
 import { useCartStore } from '@/stores/cart';
+import LanguageSwitcher from './LanguageSwitcher.vue'
+
 
 export default {
   name: "NavBar",
@@ -146,6 +184,10 @@ export default {
       mobileMenuOpen: false,
       profileDropdownOpen: false
     }
+  },
+
+  components: {
+    LanguageSwitcher
   },
 
   computed: {

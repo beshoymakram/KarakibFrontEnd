@@ -46,7 +46,7 @@
               {{ order.created_at }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ order.total }} EGP
+              {{ order.total }} {{ $t('common.currency') }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
               {{ order.payment_method }}
@@ -185,7 +185,7 @@
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Total</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
-                  {{ details.total }} EGP
+                  {{ details.total }} {{ $t('common.currency') }}
                 </p>
               </div>
             </div>
