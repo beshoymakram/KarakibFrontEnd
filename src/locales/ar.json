@@ -200,5 +200,18 @@
         "wasteItemRemoved": "تم حذف عنصر النفايات",
         "currency": "جنيه",
         "recycleNow": "أعد التدوير الآن"
+    },
+    "waste": {
+        "plastic": "بلاستيك",
+        "plastics": "بلاستيك",
+        "carton": "كرتون",
+        "cartons": "كرتون",
+        "clothes": "ملابس",
+        "cooking oil": "زيت الطبخ",
+        "e-waste": "نفايات إلكترونية",
+        "home appliances": "أجهزة منزلية",
+        "metals": "معادن",
+        "papers": "أوراق",
+        "woods": "أخشاب"
     }
 }

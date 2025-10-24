@@ -200,5 +200,18 @@
     "wasteItemRemoved": "Waste item removed",
     "currency": "EGP",
     "recycleNow": "Recycle Now"
+  },
+  "waste": {
+    "plastic": "Plastic",
+    "plastics": "Plastics",
+    "carton": "Carton",
+    "cartons": "Cartons",
+    "clothes": "Clothes",
+    "cooking oil": "Cooking Oil",
+    "e-waste": "E-Waste",
+    "home appliances": "Home Appliances",
+    "metals": "Metals",
+    "papers": "Papers",
+    "woods": "Woods"
   }
 }

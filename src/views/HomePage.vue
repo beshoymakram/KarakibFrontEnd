@@ -71,7 +71,7 @@
           class="carousel-item flex flex-col items-center flex-shrink-0">
           <img :src="item.image_url" :alt="item.name"
             class="w-[192px] h-[192px] object-cover rounded-full bg-[#EAF2EA]" />
-          <p class="mt-4 text-2xl font-semibold text-[#2C702C]">{{ item.name }}</p>
+          <p class="mt-4 text-2xl font-semibold text-[#2C702C]">{{ $t(`waste.${item.name.toLowerCase()}`) }}</p>
         </div>
       </div>
 
