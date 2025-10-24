@@ -243,8 +243,14 @@ export default {
     }
   },
 
-  mounted() {
-    this.cartStore.fetchCart();
+ mounted() {
+  this.cartStore.fetchCart();
+
+  // Load waste items from localStorage to handle the waste process statically
+  const stored = localStorage.getItem('cart_waste_items');
+  if (stored) {
+    this.wasteItems = JSON.parse(stored);
   }
+}
 };
 </script>

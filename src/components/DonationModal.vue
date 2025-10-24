@@ -1,10 +1,18 @@
 <template>
   <!-- DaisyUI Modal -->
-  <div v-if="isOpen" class="modal modal-open">
-    <div class="modal-box relative max-w-md bg-white p-0 rounded-2xl overflow-hidden">
+  <div
+    v-if="isOpen"
+    class="fixed inset-0 flex items-center justify-center bg-black/50 z-50 px-4 py-8 overflow-y-auto"
+  >
+    <div
+      class="relative w-full max-w-md bg-white p-0 rounded-2xl shadow-lg flex flex-col overflow-hidden mt-28"
+      style="border-radius: 1.25rem"
+    >
       <!-- Close button -->
-      <button @click="closeModal"
-        class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 text-gray-500 hover:bg-gray-200 z-10">
+      <button
+        @click="closeModal"
+        class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 text-gray-500 hover:bg-gray-200 z-10"
+      >
         ✕
       </button>
 
@@ -12,10 +20,19 @@
       <div class="bg-[#2C702C] text-white text-center py-8 px-6">
         <div class="flex justify-center mb-3">
           <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+              />
             </svg>
           </div>
         </div>
@@ -26,11 +43,22 @@
       <!-- White Content Section -->
       <div class="bg-white px-6 py-6">
         <!-- Security Info -->
-        <div class="flex items-center justify-center gap-2 text-sm text-gray-700 mb-6 pb-4 border-b border-gray-200">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#2C702C]" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        <div
+          class="flex items-center justify-center gap-2 text-sm text-gray-700 mb-6 pb-4 border-b border-gray-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-[#2C702C]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
           </svg>
           <span class="font-medium">{{ $t('common.yourTransactionIsProtected') }}</span>
         </div>
@@ -53,7 +81,6 @@
               class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg ..." />
           </div>
 
-
           <!-- Quick Amount Buttons -->
           <div class="grid grid-cols-4 gap-3">
             <button v-for="amount in quickAmounts" :key="amount" @click="selectAmount(amount)" :class="[
@@ -68,10 +95,23 @@
         </div>
 
         <!-- Complete Donation Button -->
-        <button @click="completeDonation"
-          class="btn w-full bg-[#2C702C] hover:bg-[#265C26] text-white border-0 rounded-lg py-3.5 text-base font-semibold mb-3 flex items-center justify-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        <button
+          @click="completeDonation"
+          class="btn w-full bg-[#2C702C] hover:bg-[#265C26] text-white border-0 rounded-lg py-3.5 text-base font-semibold mb-3 flex items-center justify-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
           </svg>
           {{ $t('common.completeSecureDonation') }}
         </button>
@@ -81,64 +121,61 @@
     <!-- Modal backdrop - clicking outside closes modal -->
     <div class="modal-backdrop" @click="closeModal"></div>
   </div>
-
-
 </template>
 
 <script>
 export default {
-  name: 'DonationModal',
+  name: "DonationModal",
   props: {
     isOpen: {
       type: Boolean,
-      required: true
+      required: true,
     },
     fundName: {
       type: String,
-      required: true
+      required: true,
     },
   },
   data() {
     return {
       donationAmount: null,
-      quickAmounts: [25, 50, 100, 250]
-    }
+      quickAmounts: [25, 50, 100, 250],
+    };
   },
   methods: {
     closeModal() {
-      this.$emit('close');
+      this.$emit("close");
     },
     selectAmount(amount) {
       this.donationAmount = amount;
     },
     completeDonation() {
       if (this.donationAmount && this.donationAmount > 0) {
-        this.$emit('donate', {
+        this.$emit("donate", {
           amount: this.donationAmount,
-          fund_name: this.fundName
+          fund_name: this.fundName,
         });
         this.closeModal();
       } else {
-        this.$toast.error('Please enter a valid donation amount');
+        this.$toast.error("Please enter a valid donation amount");
       }
     },
-
   },
   watch: {
     isOpen(newVal) {
       // Prevent body scroll when modal is open
       if (newVal) {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       } else {
-        document.body.style.overflow = '';
+        document.body.style.overflow = "";
       }
-    }
+    },
   },
   beforeUnmount() {
     // Cleanup: restore body scroll
-    document.body.style.overflow = '';
-  }
-}
+    document.body.style.overflow = "";
+  },
+};
 </script>
 
 <style scoped>
