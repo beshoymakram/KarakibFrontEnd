@@ -4,28 +4,52 @@
     <button @click="dropdownOpen = !dropdownOpen" class="lang-current-btn">
       <img :src="currentLanguage.flag" :alt="currentLanguage.name" class="flag-img" />
       <span class="lang-code">{{ currentLanguage.code }}</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="chevron-icon"
-        :class="{ 'rotate-180': dropdownOpen }">
-        <path fill-rule="evenodd"
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="chevron-icon"
+        :class="{ 'rotate-180': dropdownOpen }"
+      >
+        <path
+          fill-rule="evenodd"
           d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-          clip-rule="evenodd" />
+          clip-rule="evenodd"
+        />
       </svg>
     </button>
 
     <!-- Dropdown Menu -->
-    <Transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75"
-      leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+    <Transition
+      enter-active-class="transition ease-out duration-200"
+      enter-from-class="transform opacity-0 scale-95"
+      enter-to-class="transform opacity-100 scale-100"
+      leave-active-class="transition ease-in duration-75"
+      leave-from-class="transform opacity-100 scale-100"
+      leave-to-class="transform opacity-0 scale-95"
+    >
       <div v-if="dropdownOpen" class="lang-dropdown">
-        <button v-for="lang in languages" :key="lang.code" @click="switchLanguage(lang.locale)" class="lang-option"
-          :class="{ 'active': $i18n.locale === lang.locale }">
+        <button
+          v-for="lang in languages"
+          :key="lang.code"
+          @click="switchLanguage(lang.locale)"
+          class="lang-option"
+          :class="{ active: $i18n.locale === lang.locale }"
+        >
           <img :src="lang.flag" :alt="lang.name" class="flag-img" />
           <span class="lang-name">{{ lang.name }}</span>
-          <svg v-if="$i18n.locale === lang.locale" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-            fill="currentColor" class="check-icon">
-            <path fill-rule="evenodd"
+          <svg
+            v-if="$i18n.locale === lang.locale"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="check-icon"
+          >
+            <path
+              fill-rule="evenodd"
               d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-              clip-rule="evenodd" />
+              clip-rule="evenodd"
+            />
           </svg>
         </button>
       </div>
@@ -35,58 +59,58 @@
 
 <script>
 export default {
-  name: 'LanguageSwitcher',
+  name: "LanguageSwitcher",
   data() {
     return {
       dropdownOpen: false,
       languages: [
         {
-          code: 'EN',
-          locale: 'en',
-          name: 'English',
-          flag: 'https://flagcdn.com/w40/gb.png'
+          code: "EN",
+          locale: "en",
+          name: "English",
+          flag: "https://flagcdn.com/w40/gb.png",
         },
         {
-          code: 'AR',
-          locale: 'ar',
-          name: 'العربية',
-          flag: 'https://flagcdn.com/w40/eg.png'
-        }
-      ]
-    }
+          code: "AR",
+          locale: "ar",
+          name: "العربية",
+          flag: "https://flagcdn.com/w40/eg.png",
+        },
+      ],
+    };
   },
   computed: {
     currentLanguage() {
-      return this.languages.find(lang => lang.locale === this.$i18n.locale) || this.languages[0]
-    }
+      return this.languages.find((lang) => lang.locale === this.$i18n.locale) || this.languages[0];
+    },
   },
   methods: {
     switchLanguage(lang) {
-      this.$i18n.locale = lang
-      localStorage.setItem('locale', lang)
+      this.$i18n.locale = lang;
+      localStorage.setItem("locale", lang);
 
-      document.documentElement.setAttribute('lang', lang)
-      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr')
+      document.documentElement.setAttribute("lang", lang);
+      document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 
-      this.dropdownOpen = false
+      this.dropdownOpen = false;
 
       // Reload to apply RTL/LTR changes fully
-      window.location.reload()
+      window.location.reload();
     },
     handleClickOutside(event) {
-      const dropdown = this.$refs.langDropdown
+      const dropdown = this.$refs.langDropdown;
       if (dropdown && !dropdown.contains(event.target)) {
-        this.dropdownOpen = false
+        this.dropdownOpen = false;
       }
-    }
+    },
   },
   mounted() {
-    document.addEventListener('click', this.handleClickOutside)
+    document.addEventListener("click", this.handleClickOutside);
   },
   beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside)
-  }
-}
+    document.removeEventListener("click", this.handleClickOutside);
+  },
+};
 </script>
 
 <style scoped>
@@ -99,8 +123,8 @@ export default {
 .lang-current-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
+  gap: 0.4rem;
+  padding: 0.4rem 0.65rem;
   background: white;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
@@ -108,20 +132,21 @@ export default {
   transition: all 0.2s ease;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2C702C;
+  color: #2c702c;
   height: 38px;
+  width: 68px;
 }
 
 .lang-current-btn:hover {
-  background: #E0EBE0;
-  border-color: #2C702C;
+  background: #e0ebe0;
+  border-color: #2c702c;
 }
 
 .flag-img {
-  width: 24px;
-  height: 18px;
+  width: 1rem;
+  height: 1rem;
   object-fit: cover;
-  border-radius: 2px;
+  border-radius: 100%;
   display: block;
 }
 
@@ -166,15 +191,15 @@ export default {
 
 /* Medium screen adjustments */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .lang-current-btn {
+  /* .lang-current-btn {
     padding: 0.375rem 0.5rem;
     font-size: 0.75rem;
     height: 32px;
-  }
+  } */
 
   .flag-img {
-    width: 20px;
-    height: 15px;
+    width: 1rem;
+    height: 1rem;
   }
 
   .lang-code {
@@ -207,7 +232,7 @@ export default {
 }
 
 .lang-option:hover {
-  background: #E0EBE0;
+  background: #e0ebe0;
 }
 
 .lang-option.active {
@@ -226,14 +251,14 @@ export default {
 }
 
 .lang-option.active .lang-name {
-  color: #2C702C;
+  color: #2c702c;
   font-weight: 600;
 }
 
 .check-icon {
   width: 18px;
   height: 18px;
-  color: #2C702C;
+  color: #2c702c;
   flex-shrink: 0;
 }
 
