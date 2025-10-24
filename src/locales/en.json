@@ -132,8 +132,8 @@
     "sendMessage": "Send Message",
     "weAreHereToHelpYou": "We're here to help you make the planet cleaner!",
     "waysToReachUs": "Ways to Reach Us",
-    "address": "Address: Cairo, Egypt",
-    "phoneNumber": "Phone: +20 100 000 0000",
+  "address": "Address: Cairo, Egypt",
+  "contactPhone": "+20 100 000 0000",
     "emailAddress": "Email: karakib{'@'}gmail.com",
     "connectWithUsOnSocialMedia": "Connect With Us on Social Media",
     "karakibIsEcoFriendlyPlatformFooter": "Karakib is an eco-friendly platform that rewards recycling and supports a sustainable future. Join our mission to keep Egypt clean and green.",
@@ -171,7 +171,7 @@
     "addDeliveryNotes": "Add delivery notes",
     "enterDeliveryAddress": "Enter Delivery Address",
     "fullName": "Full Name",
-    "phoneNumber": "Phone Number",
+  "phoneNumber": "Phone Number",
     "streetAddress": "Street Address",
     "city": "City",
     "save": "Save",
@@ -200,5 +200,18 @@
     "wasteItemRemoved": "Waste item removed",
     "currency": "EGP",
     "recycleNow": "Recycle Now"
+  },
+  "waste": {
+    "plastic": "Plastic",
+    "plastics": "Plastics",
+    "carton": "Carton",
+    "cartons": "Cartons",
+    "clothes": "Clothes",
+    "cooking oil": "Cooking Oil",
+    "e-waste": "E-Waste",
+    "home appliances": "Home Appliances",
+    "metals": "Metals",
+    "papers": "Papers",
+    "woods": "Woods"
   }
 }

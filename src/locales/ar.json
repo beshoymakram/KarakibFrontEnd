@@ -132,8 +132,8 @@
         "sendMessage": "إرسال الرسالة",
         "weAreHereToHelpYou": "نحن هنا لمساعدتك في جعل الكوكب أنظف!",
         "waysToReachUs": "طرق الوصول إلينا",
-        "address": "العنوان: القاهرة، مصر",
-        "phoneNumber": "الهاتف: +20 100 000 0000",
+    "address": "العنوان: القاهرة، مصر",
+    "contactPhone": "+20 100 000 0000",
         "emailAddress": "البريد الإلكتروني: karakib{'@'}gmail.com",
         "connectWithUsOnSocialMedia": "تواصل معنا على وسائل التواصل الاجتماعي",
         "karakibIsEcoFriendlyPlatformFooter": "كراكيب منصة صديقة للبيئة تكافئ إعادة التدوير وتدعم مستقبلاً مستداماً. انضم إلى مهمتنا للحفاظ على مصر نظيفة وخضراء.",
@@ -200,5 +200,18 @@
         "wasteItemRemoved": "تم حذف عنصر النفايات",
         "currency": "جنيه",
         "recycleNow": "أعد التدوير الآن"
+    },
+    "waste": {
+        "plastic": "بلاستيك",
+        "plastics": "بلاستيك",
+        "carton": "كرتون",
+        "cartons": "كرتون",
+        "clothes": "ملابس",
+        "cooking oil": "زيت الطبخ",
+        "e-waste": "نفايات إلكترونية",
+        "home appliances": "أجهزة منزلية",
+        "metals": "معادن",
+        "papers": "أوراق",
+        "woods": "أخشاب"
     }
 }
