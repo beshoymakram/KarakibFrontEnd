@@ -24,7 +24,7 @@
     <p class="text-4xl text-[#2C702C] font-semibold text-center pb-14">{{ $t('common.howItWorks') }}</p>
 
     <div class="flex flex-wrap gap-4 justify-around">
-      <div v-for="(step, index) in steps" :key="index" class="card bg-base-100 shadow-sm w-2xs rounded-3xl">
+      <div v-for="(step, index) in steps" :key="index" class="card bg-base-100 shadow-sm w-2xs rounded-3xl cursor-pointer hover:shadow-md transition" @click="handleStepClick(step)">
         <figure class="p-5">
           <img :src="step.image" :alt="step.title" class="object-cover rounded-4xl size-60" />
         </figure>
@@ -43,6 +43,15 @@
     <p class="text-3xl text-[#163816] text-center pt-5 pb-10 font-normal">
       {{ $t('common.learnAboutDifferentKindsOfWaste') }}
     </p>
+    <div class="text-center mt-4 mb-12">
+      <router-link to="/add-waste">
+        <button
+          class="btn rounded-lg cursor-pointer bg-[#2C702C] px-4 py-5 font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
+        >
+          {{ $t('common.recycleNow') }}
+        </button>
+      </router-link>
+    </div>
 
     <!-- Carousel Wrapper -->
     <div class="relative max-w-6xl mx-auto flex items-center justify-center">
@@ -221,24 +230,28 @@ export default {
           title: this.$t('common.createAccount'),
           description: this.$t('common.signUpToBecomeMember'),
           image: "/images/step-1.png",
+          route: "/register",
         },
         {
           number: this.$t('common.step2'),
           title: this.$t('common.collectWaste'),
           description: this.$t('common.sortAndStoreRecyclables'),
           image: "/images/step-2.png",
+          route: "/add-waste",
         },
         {
           number: this.$t('common.step3'),
           title: this.$t('common.requestPickup'),
           description: this.$t('common.scheduleCollectionThroughApp'),
           image: "/images/step-3.png",
+          route: "/cart",
         },
         {
           number: this.$t('common.step4'),
           title: this.$t('common.earnRewards'),
           description: this.$t('common.getRewardedForYourEffort'),
           image: "/images/step-4.png",
+          route: "/shop",
         },
       ],
     };
@@ -341,6 +354,12 @@ export default {
 
       } catch (error) {
         this.$toast.error(error.response.data.message);
+      }
+    },
+
+    handleStepClick(step) {
+      if (step.route) {
+        this.$router.push(step.route);
       }
     },
   },

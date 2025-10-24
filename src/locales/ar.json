@@ -205,6 +205,7 @@
         "registeredSuccessfully": "تم التسجيل بنجاح!",
         "itemRemovedFromCart": "تم حذف العنصر من السلة",
         "wasteItemRemoved": "تم حذف عنصر النفايات",
-        "currency": "جنيه"
+        "currency": "جنيه",
+        "recycleNow": "أعد التدوير الآن"
     }
 }
