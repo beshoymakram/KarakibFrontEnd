@@ -6,53 +6,55 @@
           <img src="/logos/logo_horizontal.png" alt="Karakib Logo" class="w-32" />
         </div>
         <p class="text-gray-700 text-sm mb-3 leading-relaxed font-semibold">
-          Karakib is an eco-friendly platform that rewards recycling and supports a sustainable future.
-          <br />
-          Join our mission to keep Egypt clean and green.
+          {{ $t('common.karakibIsEcoFriendlyPlatformFooter') }}
         </p>
         <p class="text-sm font-semibold text-gray-800">
-          Email:
+          {{ $t('common.emailLabel') }}
           <span class="font-normal text-gray-700">karakib@gmail.com</span>
         </p>
       </div>
 
       <div>
-        <h3 class="font-semibold text-[#2C702C] mb-3">Karakib</h3>
+        <h3 class="font-semibold text-[#2C702C] mb-3">{{ $t('common.karakib') }}</h3>
         <ul class="space-y-1 text-sm text-gray-700">
           <li>
-            <RouterLink to="/about" class="hover:text-green-700">About us</RouterLink>
+            <RouterLink to="/about" class="hover:text-green-700">{{ $t('common.aboutUs') }}</RouterLink>
           </li>
           <li>
-            <RouterLink to="/about" class="hover:text-green-700">Privacy Policy</RouterLink>
+            <RouterLink to="/about" class="hover:text-green-700">{{ $t('common.privacyPolicy') }}</RouterLink>
           </li>
         </ul>
       </div>
 
       <div>
-        <h3 class="font-semibold text-[#2C702C] mb-3">Are You a Collector?</h3>
+        <h3 class="font-semibold text-[#2C702C] mb-3">{{ $t('common.areYouACollector') }}</h3>
         <ul class="space-y-1 text-sm text-gray-700">
           <li>
-            <RouterLink to="/join" class="hover:text-green-700">Join Karakib’s collectors</RouterLink>
+            <RouterLink to="/join" class="hover:text-green-700">{{ $t('common.joinKarakibCollectors') }}</RouterLink>
           </li>
         </ul>
       </div>
 
       <div>
-        <h3 class="font-semibold text-[#2C702C] mb-3">Support & Help</h3>
+        <h3 class="font-semibold text-[#2C702C] mb-3">{{ $t('common.supportHelp') }}</h3>
         <ul class="space-y-1 text-sm text-gray-700">
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">FAQ</RouterLink>
-          </li>
-          <li>
-            <RouterLink :to="{ path: '/about', hash: '#inquiry' }" class="hover:text-green-700">Send Inquiry
+            <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">{{ $t('common.faq') }}
             </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">Terms & Conditions
+            <RouterLink :to="{ path: '/about', hash: '#inquiry' }" class="hover:text-green-700">{{
+              $t('common.sendInquiry') }}
             </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#contact' }" class="hover:text-green-700">Contact Us</RouterLink>
+            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">{{
+              $t('common.termsConditions') }}
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink :to="{ path: '/about', hash: '#contact' }" class="hover:text-green-700">{{
+              $t('common.contactUs') }}</RouterLink>
           </li>
         </ul>
 
@@ -62,10 +64,10 @@
     <div
       class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-green-200 pt-6 text-sm text-gray-700">
       <p class="mb-4 md:mb-0">
-        &copy; {{ currentYear }} Karakib. All rights reserved.
+        &copy; {{ currentYear }} {{ $t('common.karakib') }}. {{ $t('common.allRightsReserved') }}
       </p>
       <div class="flex items-center space-x-4">
-        <p class="font-semibold">Follow Karakib on social media</p>
+        <p class="font-semibold">{{ $t('common.followKarakibOnSocialMedia') }}</p>
         <div class="flex space-x-3 text-green-800 text-xl">
           <a href="#" target="_blank" aria-label="Facebook" class="hover:text-green-600 transition">
             <font-awesome-icon :icon="['fab', 'facebook']" />

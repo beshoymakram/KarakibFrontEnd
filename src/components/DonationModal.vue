@@ -36,7 +36,7 @@
             </svg>
           </div>
         </div>
-        <h2 class="text-2xl font-bold mb-1">Secure Donation</h2>
+        <h2 class="text-2xl font-bold mb-1">{{ $t('common.secureDonation') }}</h2>
         <p class="text-sm text-white/90">{{ fundName }}</p>
       </div>
 
@@ -60,50 +60,36 @@
               d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
             />
           </svg>
-          <span class="font-medium">Your transaction is protected by 256-bit SSL encryption</span>
+          <span class="font-medium">{{ $t('common.yourTransactionIsProtected') }}</span>
         </div>
 
         <!-- Info Box -->
         <div class="bg-gray-50 rounded-lg p-5 mb-6 text-sm text-gray-600 leading-relaxed space-y-2">
-          <p>
-            Your donation is completely secure and protected. We use bank-level encryption to ensure
-            your personal and payment information remains safe. Every contribution goes directly to
-            the organization you've chosen to support.
-          </p>
+          <p>{{ $t('common.yourDonationIsCompletelySecure') }}</p>
         </div>
 
         <!-- Donation Amount Section -->
         <div class="mb-6">
-          <label class="block text-base font-bold text-gray-900 mb-3"> Donation Amount </label>
+          <label class="block text-base font-bold text-gray-900 mb-3">
+            {{ $t('common.donationAmount') }}
+          </label>
 
           <!-- Amount Input -->
           <div class="relative mb-4">
-            <span
-              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-700 font-semibold text-lg"
-              >E£</span
-            >
-            <input
-              type="number"
-              v-model="donationAmount"
-              placeholder="Enter amount"
-              class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg ..."
-            />
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-700 font-semibold text-lg">E£</span>
+            <input type="number" v-model="donationAmount" :placeholder="$t('common.enterAmount')"
+              class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg ..." />
           </div>
 
           <!-- Quick Amount Buttons -->
           <div class="grid grid-cols-4 gap-3">
-            <button
-              v-for="amount in quickAmounts"
-              :key="amount"
-              @click="selectAmount(amount)"
-              :class="[
-                'py-2.5 px-3 rounded-lg border-2 font-semibold text-sm transition-all',
-                donationAmount === amount
-                  ? 'bg-gray-900 text-white border-gray-900'
-                  : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400',
-              ]"
-            >
-              {{ amount }} EGP
+            <button v-for="amount in quickAmounts" :key="amount" @click="selectAmount(amount)" :class="[
+              'py-2.5 px-3 rounded-lg border-2 font-semibold text-sm transition-all',
+              donationAmount === amount
+                ? 'bg-gray-900 text-white border-gray-900'
+                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+            ]">
+              {{ amount }} {{ $t('common.currency') }}
             </button>
           </div>
         </div>
@@ -127,7 +113,7 @@
               d="M5 13l4 4L19 7"
             />
           </svg>
-          Complete Secure Donation
+          {{ $t('common.completeSecureDonation') }}
         </button>
       </div>
     </div>

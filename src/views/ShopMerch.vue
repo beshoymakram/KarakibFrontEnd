@@ -3,13 +3,13 @@
   <div class="relative px-8 pb-6">
     <!-- Custom layered gradient overlay -->
     <div
-      class="absolute inset-0 bg-gradient-to-b"
+      class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent"
       style="
         background: linear-gradient(
           to bottom,
           rgba(233, 235, 248, 0.8) 0%,
           rgba(233, 235, 248, 0.75) 50%,
-          rgba(233, 235, 248, 0.7) 85%,
+          rgba(233, 235, 248, 0.7) 95%,
           rgba(233, 235, 248, 0) 100%
         );
       "
@@ -38,14 +38,13 @@
       <p
         class="max-w-2xl text-xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit"
       >
-        Support Karakib’s mission by buying eco-friendly merchandise. <br />
-        Every purchase funds our recycling and community projects.
+        {{ $t('common.supportKarakibMission') }}
       </p>
     </div>
   </div>
 
   <!-- links -->
-  <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-5">
+  <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-1">
     <a
       @click="selectedCategory = ''"
       class="rounded-md cursor-pointer px-4 py-3 font-semibold text-xl shadow-sm"
@@ -54,7 +53,7 @@
         'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== '',
       }"
     >
-      View all </a
+      {{ $t('common.viewAll') }} </a
     ><a
       v-for="category in categories"
       :key="category.id"
@@ -76,7 +75,7 @@
       v-if="filteredProducts.length === 0"
       class="px-4 py-4 mx-auto text-gray-500 font-bold text-center"
     >
-      No products in this category
+      {{ $t('common.noProductsInCategory') }}
     </h5>
   </div>
   <div
@@ -100,7 +99,7 @@
       <div class="px-4 pt-2 pb-2">
         <div class="flex justify-between items-center w-full">
           <h2 class="text-[#2C702C] font-semibold text-xl">{{ product.name }}</h2>
-          <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} EGP</p>
+          <p class="text-[#2C702C] font-semibold text-lg">{{ product.price }} {{ $t('common.currency') }}</p>
         </div>
 
         <p class="text-gray-600 text-sm">{{ product.description }}</p>
@@ -110,7 +109,7 @@
             @click.stop="addToCart(product.id)"
             class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
           >
-            Add to Cart
+            {{ $t('common.addToCart') }}
           </button>
         </div>
       </div>
@@ -172,14 +171,15 @@ export default {
 
     async fetchProducts() {
       try {
-        this.loadingStore.show();
+        this.loadingStore.show()
         const response = await productsService.getProducts();
         this.products = response.data.data || response.data;
       } catch (error) {
         this.$toast.error(error.response.data.message);
-      } finally {
+      }finally {
         this.loadingStore.hide();
       }
+
     },
   },
   mounted() {

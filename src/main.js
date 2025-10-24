@@ -13,9 +13,17 @@ import { faFacebook, faInstagram, faLinkedin, faTwitter, faWhatsapp } from '@for
 import { faPhone, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { useCartStore } from './stores/cart'
+import i18n from './i18n'
+
 
 
 const app = createApp(App)
+
+app.use(i18n)
+const locale = localStorage.getItem('locale') || 'en'
+document.documentElement.setAttribute('lang', locale)
+document.documentElement.setAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr')
+
 const pinia = createPinia()
 app.use(pinia)
 app.use(router)
@@ -25,6 +33,8 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 const authStore = useAuthStore()
 authStore.initAuth()
 app.config.globalProperties.auth = authStore
+
+
 
 app.use(Vue3Toastify, {
   autoClose: 3000,

@@ -1,13 +1,13 @@
 <template>
   <div class="checkout-page bg-[#F5F7F5] min-h-screen py-10">
     <div class="container mx-auto px-4 max-w-6xl">
-      <h1 class="text-3xl font-bold text-[#2C702C] mb-8">Checkout Orders</h1>
+      <h1 class="text-3xl font-bold text-[#2C702C] mb-8">{{ $t('common.checkoutOrders') }}</h1>
 
       <div class="grid md:grid-cols-2 gap-6 bg-[#E9EBE9] p-6 rounded-2xl shadow-lg">
         <!-- LEFT SIDE - ORDER DETAILS -->
         <div class="bg-white rounded-xl p-6 shadow">
           <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">
-            Order Details
+            {{ $t('common.orderDetails') }}
           </h2>
 
           <div v-if="cartStore.items.length > 0" class="space-y-4">
@@ -18,52 +18,52 @@
                   <p class="font-semibold text-gray-800">
                     {{ item.product.name }}
                   </p>
-                  <p class="text-sm text-gray-500">Colour: White</p>
+                  <p class="text-sm text-gray-500">{{ $t('common.colourWhite') }}</p>
                   <p class="text-sm text-gray-500">
-                    {{ item.product.price }} EGP × {{ item.quantity }}
+                    {{ item.product.price }} {{ $t('common.currency') }} × {{ item.quantity }}
                   </p>
                 </div>
               </div>
               <p class="text-[#2C702C] font-semibold">
-                {{ (item.product.price * item.quantity).toFixed(2) }} EGP
+                {{ (item.product.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
               </p>
             </div>
 
             <!-- Totals -->
             <div class="pt-4 border-t mt-4">
               <div class="flex justify-between mb-2">
-                <span>{{ cartStore.items.length }} items</span>
-                <span>{{ cartStore.total }} EGP</span>
+                <span>{{ cartStore.items.length }} {{ $t('common.items') }}</span>
+                <span>{{ cartStore.total }} {{ $t('common.currency') }}</span>
               </div>
               <div class="flex justify-between mb-2">
-                <span>Delivery fee</span>
-                <span>20 EGP</span>
+                <span>{{ $t('common.deliveryFee') }}</span>
+                <span>20 {{ $t('common.currency') }}</span>
               </div>
               <div class="flex justify-between text-xl font-bold text-[#2C702C]">
-                <span>Total amount</span>
-                <span>{{ cartStore.total + 20 }} EGP</span>
+                <span>{{ $t('common.totalAmount') }}</span>
+                <span>{{ cartStore.total + 20 }} {{ $t('common.currency') }}</span>
               </div>
             </div>
           </div>
 
           <div v-else class="text-center text-gray-500 mt-6">
-            Your cart is empty.
-            <router-link to="/shop" class="text-[#2C702C] underline">Go shopping</router-link>.
+            {{ $t('common.yourCartIsEmpty') }}
+            <router-link to="/shop" class="text-[#2C702C] underline">{{ $t('common.goShopping') }}</router-link>.
           </div>
         </div>
 
         <!-- RIGHT SIDE - CHECKOUT -->
         <div class="bg-white rounded-xl p-6 shadow flex flex-col justify-between">
           <div>
-            <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">Checkout</h2>
+            <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">{{ $t('common.proceedToCheckout') }}</h2>
 
             <!-- Address Section -->
             <div class="mb-6">
               <div class="flex justify-between items-center mb-2">
-                <h3 class="font-semibold text-[#2C702C]">Delivery Address</h3>
+                <h3 class="font-semibold text-[#2C702C]">{{ $t('common.deliveryAddress') }}</h3>
                 <button @click="showAddressModal = true"
                   class="bg-[#2C702C] text-white px-4 py-1 rounded-md hover:bg-[#215921] cursor-pointer">
-                  Enter new address
+                  {{ $t('common.enterNewAddress') }}
                 </button>
               </div>
 
@@ -88,7 +88,7 @@
               </div>
 
               <div v-else class="text-gray-400 text-sm">
-                No address added yet.
+                {{ $t('common.noAddressAddedYet') }}
               </div>
             </div>
 
@@ -96,7 +96,7 @@
 
             <!-- Payment Section -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">Payment Method</h3>
+              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.paymentMethod') }}</h3>
               <div class="flex gap-3">
                 <button @click="paymentMethod = 'cash'" :class="[
                   'px-4 py-2 rounded-md border cursor-pointer',
@@ -104,7 +104,7 @@
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
                     : 'border-gray-300 text-gray-700',
                 ]">
-                  Cash on delivery
+                  {{ $t('common.cashOnDelivery') }}
                 </button>
                 <button @click="paymentMethod = 'card'" :class="[
                   'px-4 py-2 rounded-md border cursor-pointer',
@@ -112,15 +112,15 @@
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
                     : 'border-gray-300 text-gray-700',
                 ]">
-                  Card
+                  {{ $t('common.card') }}
                 </button>
               </div>
             </div>
 
             <!-- Notes -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">Delivery Notes</h3>
-              <textarea v-model="deliveryNotes" placeholder="Add delivery notes"
+              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.deliveryNotes') }}</h3>
+              <textarea v-model="deliveryNotes" :placeholder="$t('common.addDeliveryNotes')"
                 class="w-full border border-gray-300 rounded-md p-2 text-sm" rows="3"></textarea>
             </div>
           </div>
@@ -129,10 +129,10 @@
           <div class="mt-4">
             <button @click="placeOrder"
               class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] text-white font-bold py-3 rounded-md transition-all">
-              Confirm Order
+              {{ $t('common.confirmOrder') }}
             </button>
             <router-link to="/cart" class="block mt-3 btn text-center text-[#2C702C] hover:underline text-sm">
-              ← go back
+              {{ $t('common.goBack') }}
             </router-link>
           </div>
         </div>
@@ -143,25 +143,25 @@
     <div v-if="showAddressModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg p-6 w-[90%] max-w-md">
         <h3 class="text-xl font-semibold text-[#2C702C] mb-4">
-          Enter Delivery Address
+          {{ $t('common.enterDeliveryAddress') }}
         </h3>
 
         <form @submit.prevent="confirmCreate" class="space-y-3">
-          <input v-model="createForm.name" type="text" placeholder="Full Name" required
+          <input v-model="createForm.name" type="text" :placeholder="$t('common.fullName')" required
             class="w-full border border-gray-300 rounded-md px-3 py-2" />
-          <input v-model="createForm.phone" type="text" placeholder="Phone Number" required
+          <input v-model="createForm.phone" type="text" :placeholder="$t('common.phoneNumber')" required
             class="w-full border border-gray-300 rounded-md px-3 py-2" />
-          <input v-model="createForm.street_address" type="text" placeholder="Street Address" required
+          <input v-model="createForm.street_address" type="text" :placeholder="$t('common.streetAddress')" required
             class="w-full border border-gray-300 rounded-md px-3 py-2" />
-          <input v-model="createForm.city" type="text" placeholder="City" required
+          <input v-model="createForm.city" type="text" :placeholder="$t('common.city')" required
             class="w-full border border-gray-300 rounded-md px-3 py-2" />
 
           <div class="flex justify-end gap-3 pt-3">
             <button type="button" @click="showAddressModal = false" class="px-4 py-2 border border-gray-300 rounded-md">
-              Cancel
+              {{ $t('common.cancel') }}
             </button>
             <button type="submit" class="px-4 py-2 bg-[#2C702C] text-white rounded-md hover:bg-[#215921]">
-              Save
+              {{ $t('common.save') }}
             </button>
           </div>
         </form>
@@ -172,11 +172,10 @@
       <div class="bg-white rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl">
         <img src="/images/delivery.png" alt="Delivery Truck" class="w-48 mx-auto mb-4" />
         <p class="text-[#2C702C] text-lg font-semibold">
-          Thank you for supporting Karakib 🌱 <br />
-          Your order helps make the world cleaner.
+          {{ $t('common.thankYouForSupportingKarakib') }}
         </p>
         <button @click="closeConfirmation" class="mt-6 px-6 py-2 bg-[#2C702C] text-white rounded-md hover:bg-[#1a4d1a]">
-          Close
+          {{ $t('common.close') }}
         </button>
       </div>
     </div>
@@ -198,7 +197,7 @@
             </svg>
             <span class="sr-only">Loading...</span>
           </div>
-          <small>Your are being redirected to complete your payment.</small>
+          <small>{{ $t('common.youAreBeingRedirectedToCompletePayment') }}</small>
         </div>
       </div>
     </div>
