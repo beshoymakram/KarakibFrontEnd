@@ -53,7 +53,15 @@
     <p class="text-3xl text-[#163816] text-center pt-5 pb-10 font-normal">
       Learn about the different kinds of waste you can recycle
     </p>
-
+  <div class="text-center mt-4 mb-12">
+  <router-link to="/add-waste">
+    <button
+      class="btn rounded-lg cursor-pointer bg-[#2C702C] px-4 py-5 font-semibold text-xl text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
+    >
+     Recycle Now
+    </button>
+  </router-link>
+</div>
     <!-- Carousel Wrapper -->
     <div class="relative max-w-6xl mx-auto flex items-center justify-center">
       <!-- Left Arrow -->
