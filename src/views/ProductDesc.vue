@@ -154,7 +154,7 @@
           <!-- Review List -->
           <div class="space-y-6 px-4">
             <div
-              v-for="review in reviews"
+              v-for="review in displayedReviews"
               :key="review.id"
               class="bg-white rounded-xl p-6 shadow-sm"
             >
@@ -183,7 +183,19 @@
                       />
                     </svg>
                   </div>
-                  <p class="text-gray-600 leading-relaxed">{{ review.comment }}</p>
+                  <p
+                    class="text-gray-600 leading-relaxed"
+                    :class="expandedReviews[review.id] ? '' : 'line-clamp-2'"
+                  >
+                    {{ review.comment }}
+                  </p>
+                  <button
+                    v-if="review.comment.length > 100"
+                    @click="toggleReviewExpansion(review.id)"
+                    class="text-[#2C702C] text-sm font-medium mt-2 hover:underline"
+                  >
+                    {{ expandedReviews[review.id] ? "See less" : "See more" }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -192,9 +204,11 @@
           <!-- View More Button -->
           <div class="text-center mt-8">
             <button
+              v-if="reviews.length > 3"
+              @click="toggleShowAllReviews"
               class="px-8 py-3 border-2 border-[#2C702C] text-[#2C702C] rounded-lg font-semibold hover:bg-[#2C702C] hover:text-white transition-all"
             >
-              View More Reviews
+              {{ showAllReviews ? "Show Less Reviews" : "View More Reviews" }}
             </button>
           </div>
         </div>
@@ -251,10 +265,30 @@ export default {
             "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
           date: "3 weeks ago",
         },
+        {
+          id: 5,
+          name: "Michael Thompson",
+          avatar: "https://i.pravatar.cc/150?img=12",
+          rating: 5,
+          comment:
+            "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
+          date: "3 weeks ago",
+        },
+        {
+          id: 6,
+          name: "Michael Thompson",
+          avatar: "https://i.pravatar.cc/150?img=12",
+          rating: 5,
+          comment:
+            "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
+          date: "3 weeks ago",
+        },
       ],
       selectedImage: "",
       selectedColor: "",
       selectedSize: "M",
+      showAllReviews: false,
+      expandedReviews: {},
     };
   },
   computed: {
@@ -295,6 +329,9 @@ export default {
     productSold() {
       return this.product.sold || 0;
     },
+    displayedReviews() {
+      return this.showAllReviews ? this.reviews : this.reviews.slice(0, 3);
+    },
   },
   mounted() {
     this.fetchProduct();
@@ -328,6 +365,24 @@ export default {
     getRatingCount(rating) {
       return this.reviews.filter((r) => Math.floor(r.rating) === rating).length;
     },
+    toggleShowAllReviews() {
+      this.showAllReviews = !this.showAllReviews;
+    },
+    toggleReviewExpansion(reviewId) {
+      this.expandedReviews = {
+        ...this.expandedReviews,
+        [reviewId]: !this.expandedReviews[reviewId],
+      };
+    },
   },
 };
 </script>
+<style scoped>
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-clamp: 2; /* Standard property for future compatibility */
+}
+</style>
