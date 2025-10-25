@@ -13,22 +13,23 @@
           </svg>
           <h2 class="text-2xl font-bold text-[#2C702C]">{{ $t('common.shopProducts') }}</h2>
           <span class="ml-auto bg-[#2C702C] text-white px-3 py-1 rounded-full text-sm font-semibold">
-            {{ cartStore.items.length }} {{ $t('common.items') }}
+            {{ cartStore.products?.length }} {{ $t('common.items') }}
           </span>
         </div>
 
-        <div v-if="cartStore.items.length > 0" class="space-y-4">
-          <div v-for="item in cartStore.items" :key="item.id"
+        <div v-if="cartStore.products?.length > 0" class="space-y-4">
+          <div v-for="item in cartStore.products" :key="item.id"
             class="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-all duration-200">
             <!-- Product Image -->
-            <img :src="item.product.image_url" :alt="item.product.name"
+            <img :src="item.cartable?.image_url" :alt="item.cartable?.name"
               class="w-24 h-24 object-cover rounded-lg bg-[#E0EBE0]" />
 
             <!-- Product Info -->
             <div class="flex-1">
-              <h3 class="font-bold text-lg text-[#2C702C]">{{ item.product.name }}</h3>
-              <p class="text-gray-600 text-sm">{{ item.product.description }}</p>
-              <p class='text-[#2C702C] font-bold text-lg mt-2'>{{ item.product.price }} {{ $t('common.currency') }}</p>
+              <h3 class="font-bold text-lg text-[#2C702C]">{{ item.cartable?.name }}</h3>
+              <p class="text-gray-600 text-sm">{{ item.cartable?.description }}</p>
+              <p class='text-[#2C702C] font-bold text-lg mt-2'>{{ item.cartable?.price }} {{ $t('common.currency') }}
+              </p>
             </div>
 
             <!-- Quantity Controls -->
@@ -55,7 +56,7 @@
             <!-- Subtotal & Remove -->
             <div class="text-right">
               <p class="font-bold text-xl text-[#2C702C] mb-2">
-                {{ (item.product.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
+                {{ (item.cartable?.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
               </p>
               <button @click="removeItem(item.id)"
                 class="text-red-600 hover:text-red-800 text-sm font-semibold flex items-center gap-1 ml-auto">
@@ -111,49 +112,69 @@
           </svg>
           <h2 class="text-2xl font-bold text-[#2C702C]">{{ $t('common.wasteCollectionRequest') }}</h2>
           <span class="ml-auto bg-[#2C702C] text-white px-3 py-1 rounded-full text-sm font-semibold">
-            {{ wasteItems.length }} {{ $t('common.items') }}
+            {{ cartStore.waste?.length }} {{ $t('common.items') }}
           </span>
         </div>
 
-        <div v-if="wasteItems.length > 0" class="space-y-4">
-          <div v-for="(item, index) in wasteItems" :key="index"
+        <div v-if="cartStore.waste?.length > 0" class="space-y-4">
+          <div v-for="item in cartStore.waste" :key="item.id"
             class="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-all duration-200">
             <!-- Waste Type Icon -->
-            <div class="w-20 h-20 bg-[#E0EBE0] rounded-lg flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-10 h-10 text-[#2C702C]">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-              </svg>
-            </div>
+            <img :src="item.cartable?.image_url" :alt="item.cartable?.name"
+              class="w-24 h-24 object-cover rounded-lg bg-[#E0EBE0]" />
 
             <!-- Waste Info -->
             <div class="flex-1">
-              <h3 class="font-bold text-lg text-[#2C702C]">{{ item.waste_type }}</h3>
-              <p class="text-gray-600 text-sm">{{ item.description }}</p>
-              <p class="text-[#2C702C] font-bold mt-2">Estimated: {{ item.weight }} kg</p>
+              <h3 class="font-bold text-lg text-[#2C702C]">{{ item.cartable?.name }}</h3>
+              <p class="text-gray-600 text-sm">{{ item.cartable?.unit }}</p>
+              <p class="text-[#2C702C] font-bold mt-2">
+                {{ item.cartable?.points_per_unit }} {{ $t('common.points') }} {{ $t('common.per') }} {{
+                  item.cartable?.unit }}
+              </p>
             </div>
 
-            <!-- Points Estimate -->
+            <!-- Quantity Controls -->
+            <div class="flex items-center gap-3">
+              <button @click="decrementQuantity(item.id, item.quantity)"
+                class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                </svg>
+              </button>
+
+              <span class="w-12 text-center font-bold text-lg">{{ item.quantity }}</span>
+
+              <button @click="incrementQuantity(item.id, item.quantity)"
+                class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Points Estimate & Remove -->
             <div class="text-right">
-              <p class="text-sm text-gray-500">{{ $t('common.estimatedPoints') }}</p>
-              <p class="font-bold text-2xl text-green-600">+{{ item.estimated_points }}</p>
+              <p class="text-sm text-gray-500 mb-1">{{ $t('common.estimatedPoints') }}</p>
+              <p class="font-bold text-2xl text-green-600 mb-2">+{{ item.points }}</p>
+              <button @click="removeItem(item.id)"
+                class="text-red-600 hover:text-red-800 text-sm font-semibold flex items-center gap-1 ml-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                </svg>
+                Remove
+              </button>
             </div>
-
-            <!-- Remove -->
-            <button @click="removeWasteItem(index)" class="text-red-600 hover:text-red-800">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-              </svg>
-            </button>
           </div>
 
           <!-- Request Collection Button -->
           <div class="bg-green-50 rounded-lg p-6 mt-6">
             <div class="flex justify-between items-center mb-4">
               <span class="text-xl font-semibold text-gray-700">{{ $t('common.totalEstimatedPoints') }}</span>
-              <span class="text-3xl font-bold text-green-600">+{{ totalWastePoints }}</span>
+              <span class="text-3xl font-bold text-green-600">+{{ cartStore.totalPoints }}</span>
             </div>
             <button @click="requestCollection"
               class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
@@ -243,14 +264,14 @@ export default {
     }
   },
 
- mounted() {
-  this.cartStore.fetchCart();
+  mounted() {
+    this.cartStore.fetchCart();
 
-  // Load waste items from localStorage to handle the waste process statically
-  const stored = localStorage.getItem('cart_waste_items');
-  if (stored) {
-    this.wasteItems = JSON.parse(stored);
+    // Load waste items from localStorage to handle the waste process statically
+    const stored = localStorage.getItem('cart_waste_items');
+    if (stored) {
+      this.wasteItems = JSON.parse(stored);
+    }
   }
-}
 };
 </script>

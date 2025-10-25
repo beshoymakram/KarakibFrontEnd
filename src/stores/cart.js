@@ -34,8 +34,11 @@ export const useCartStore = defineStore('cart', {
         });
 
         this.items = response.data.items;
-        this.total = response.data.total;
-        this.count = response.data.count;
+        this.products = response.data.products.items;
+        this.waste = response.data.waste.items;
+        this.total = response.data.products.total;
+        this.totalPoints = response.data.waste.points;
+        this.count = response.data.products.count + response.data.waste.count;
 
         if (response.data.session_id) {
           this.sessionId = response.data.session_id;
@@ -48,11 +51,12 @@ export const useCartStore = defineStore('cart', {
       }
     },
 
-    async addToCart(productId, quantity = 1) {
+    async addToCart(itemId, quantity = 1, type) {
       try {
         await apiClient.post('/cart', {
-          product_id: productId,
-          quantity
+          item_id: itemId,
+          quantity,
+          type
         }, {
           headers: {
             'X-Cart-Session': this.getSessionId()
