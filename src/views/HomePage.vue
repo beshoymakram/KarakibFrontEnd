@@ -85,7 +85,7 @@
       <!-- Left Arrow -->
       <button
         @click="scrollPrev"
-        class="absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden sm:block absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@
       <!-- Right Arrow -->
       <button
         @click="scrollNext"
-        class="absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden sm:block absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -227,12 +227,12 @@
       {{ $t("common.convertRecyclingPointsIntoDonations") }}
     </p>
     <div
-      class="flex flex-col lg:flex-row justify-center items-stretch gap-6 md:gap-8 px-4 sm:px-6 md:px-8"
+      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 justify-center items-stretch gap-6 md:gap-8 px-4 sm:px-6 md:px-8"
     >
       <div
         v-for="(card, index) in infoCards"
         :key="index"
-        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center flex-1 bg-white"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-white w-full md:w-8/10 xl:w-full mx-auto"
       >
         <img
           :src="card.image"
@@ -400,7 +400,7 @@ export default {
     },
 
     async addToCart(productId) {
-      const success = await this.cartStore.addToCart(productId, 1, 'product');
+      const success = await this.cartStore.addToCart(productId, 1, "product");
 
       if (success) {
         this.$toast.success("Added to cart!");
