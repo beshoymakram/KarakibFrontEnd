@@ -83,7 +83,7 @@
           <!-- Cart (Always visible) -->
           <router-link
             to="/cart"
-            class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-md font-bold text-[#2C702C] hover:bg-[#E0EBE0] rounded-lg"
+            class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-md font-bold no-active-style text-[#2C702C] rounded-lg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -339,7 +339,8 @@ export default {
 </script>
 
 <style scoped>
-.router-link-exact-active {
+.router-link-exact-active:not(.no-active-style) {
+  padding: 10px ;
   background-color: #e0ebe0;
 }
 
@@ -357,4 +358,5 @@ export default {
   color: #265c26;
   transform: scale(1.1);
 }
+
 </style>

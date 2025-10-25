@@ -400,7 +400,7 @@ export default {
     },
 
     async addToCart(productId) {
-      const success = await this.cartStore.addToCart(productId, 1);
+      const success = await this.cartStore.addToCart(productId, 1, 'product');
 
       if (success) {
         this.$toast.success("Added to cart!");
