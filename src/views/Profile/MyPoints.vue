@@ -4,20 +4,11 @@
       <div class="relative">
         <button @click="openCreateModal()"
           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          Create new product
+          {{ $t('common.Convert points to balance') }}
         </button>
       </div>
 
-      <div class="relative">
-        <select v-model="filters.category_id"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Types</option>
-          <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-        </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
-      </div>
       <div class="flex-1 max-w-md ml-auto">
-
         <div class="relative">
           <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
@@ -36,43 +27,40 @@
       <table class="w-full table-auto">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Desccription
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-if="filteredProducts.length === 0">
-            <td colspan="6" class="px-4 py-4 text-center text-gray-500">
+          <tr v-if="filteredPoints.length === 0">
+            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
 
-          <tr v-for="product in filteredProducts" :key="product.id" class="hover:bg-gray-50 transition-colors">
+          <tr v-for="point in filteredPoints" :key="point.id" class="hover:bg-gray-50 transition-colors">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ product.name }}
+              {{ point.points }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ product.category?.name }}
+              {{ point.type }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ product.price }} {{ $t('common.currency') }}
+              {{ point.created_at }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
-              {{ product.stock }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-[#2C702C]">
-              <img class="w-10 h-10 rounded-full" :src="product.image_url" :alt="product.name">
+              {{ point.description }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              <button @click="openEditModal(product)"
+              <button @click="openEditModal(point)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                 Edit
               </button>
-              <button @click="openDeleteModal(product)"
+              <button @click="openDeleteModal(point)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                 Delete
               </button>
@@ -105,7 +93,7 @@
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this product?
+              Are you sure you want to delete this address?
             </h3>
             <button @click="confirmDelete" type="button"
               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
@@ -128,7 +116,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Create Product
+              {{ $t('common.Convert points to balance') }}
             </h3>
             <button type="button" @click="showCreateModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -142,63 +130,36 @@
           </div>
 
           <!-- Body -->
-          <form @submit.prevent="confirmCreate" class="p-4 md:p-5">
+          <form @submit.prevent="confirmConvert" class="p-4 md:p-5">
             <div class="grid gap-4 mb-4 grid-cols-2">
               <!-- Name -->
-              <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
-                </label>
-                <input type="text" id="name" v-model="createForm.name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter user name" required />
-              </div>
-              <div>
-                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select id="type" v-model="createForm.category_id"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  required>
-                  <option value="" disabled selected>Select category</option>
-                  <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}
-                  </option>
-                </select>
-              </div>
-
               <div class="col-span-2">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Description
-                </label>
-                <textarea type="text" id="description" v-model="createForm.description"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter description" required></textarea>
+                <h2 class="text-center font-bold text-[#2C702C]">Aviable Points</h2>
+                <h1 class="text-center">{{ auth.user.points }}</h1>
               </div>
-
-              <div>
-                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Price
-                </label>
-                <input type="number" id="price" v-model="createForm.price"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  placeholder="Enter price" required />
-              </div>
-
-              <div>
-                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Stock
-                </label>
-                <input type="number" id="stock" v-model="createForm.stock"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  placeholder="Enter stock" required />
-              </div>
-
-              <!-- Image -->
               <div class="col-span-2">
-                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Image
+                <label for="points" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Points to convert
                 </label>
-                <input type="file" id="image" @change="handleImageUpload" accept="image/*"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  required />
+                <input type="number" id="points" v-model="createForm.points"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter points" required />
+              </div>
+              <div class="col-span-2">
+                <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Street Address
+                </label>
+                <input type="text" id="street_address" v-model="createForm.street_address"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter user street_address" required />
+              </div>
+              <div class="col-span-2">
+                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  City
+                </label>
+                <input type="text" id="city" v-model="createForm.city"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter user city" required />
               </div>
             </div>
 
@@ -226,7 +187,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Edit Product
+              Edit address
             </h3>
             <button type="button" @click="showEditModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -242,66 +203,37 @@
           <form @submit.prevent="confirmEdit" class="p-4 md:p-5">
             <div class="grid gap-4 mb-4">
               <!-- Name -->
-              <div>
+              <div class="col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
+                  Full Name
                 </label>
                 <input type="text" id="name" v-model="editForm.name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Enter user name" required />
               </div>
-              <div>
-                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select id="type" v-model="editForm.category_id"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  required>
-                  <option value="" disabled selected>Select category</option>
-                  <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}
-                  </option>
-                </select>
-              </div>
-
               <div class="col-span-2">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Description
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Phone
                 </label>
-                <textarea type="text" id="description" v-model="editForm.description"
+                <input type="text" id="phone" v-model="editForm.phone"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter description" required></textarea>
+                  placeholder="Enter user phone" required />
               </div>
-
-              <div>
-                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Price
-                </label>
-                <input type="number" id="price" v-model="editForm.price"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  placeholder="Enter price" required />
-              </div>
-
-              <div>
-                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Stock
-                </label>
-                <input type="number" id="stock" v-model="editForm.stock"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  placeholder="Enter stock" required />
-              </div>
-
-
               <div class="col-span-2">
-                <label for="edit-image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Change Image (optional)
+                <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Street Address
                 </label>
-                <input type="file" id="edit-image" @change="handleImageUpload" accept="image/*"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5" />
+                <input type="text" id="street_address" v-model="editForm.street_address"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter user street_address" required />
               </div>
-
-              <div v-if="editForm.image">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Current Image
+              <div class="col-span-2">
+                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  City
                 </label>
-                <img :src="editForm.image" class="w-20 h-20 rounded-lg object-cover mb-2" alt="Current image" />
+                <input type="text" id="city" v-model="editForm.city"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter user city" required />
               </div>
             </div>
 
@@ -325,60 +257,48 @@
 </template>
 
 <script>
-import productsCategoriesService from '@/services/productsCategoriesService';
-import productsService from '@/services/productsService';
+import userPointsService from '@/services/userPointsService';
 import { nextTick } from 'vue';
 
 export default {
-  name: 'Products',
+  name: 'MyPoints',
 
   data() {
     return {
       searchQuery: '',
-      selectedProduct: '',
+      selectedType: '',
       showDeleteModal: false,
       showEditModal: false,
       showCreateModal: false,
-      imageFile: null,
-      filters: {
-        category_id: '',
-      },
       createForm: {
         id: null,
         name: '',
-        category_id: '',
-        description: '',
-        price: '',
-        stock: '',
-        image: '',
+        phone: '',
+        street_address: '',
+        city: '',
       },
       editForm: {
         id: null,
         name: '',
-        category_id: '',
-        description: '',
-        price: '',
-        stock: '',
-        image: '',
+        phone: '',
+        street_address: '',
+        city: '',
       },
-      products: [],
-      categories: []
+
+      points: []
     }
   },
 
   computed: {
-    filteredProducts() {
-      let filtered = this.products;
-
-      if (this.filters.category_id) {
-        filtered = filtered.filter(item =>
-          item.category_id === this.filters.category_id
-        );
-      }
+    filteredPoints() {
+      let filtered = this.points;
 
       if (this.searchQuery) {
-        filtered = filtered.filter(product =>
-          product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        filtered = filtered.filter(point =>
+          point.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          point.street_point.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          point.phone.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          point.city.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
 
@@ -389,23 +309,18 @@ export default {
   },
 
   methods: {
-    handleImageUpload(event) {
-      this.imageFile = event.target.files[0];
-    },
-    openDeleteModal(product) {
-      this.selectedProduct = product.id;
+    openDeleteModal(point) {
+      this.selectedAddress = point.id;
       this.showDeleteModal = true;
     },
 
-    openEditModal(product) {
+    openEditModal(point) {
       this.editForm = {
-        id: product.id,
-        name: product.name,
-        category_id: product.category_id,
-        description: product.description,
-        price: product.price,
-        stock: product.stock,
-        image: product.image_url,
+        id: point.id,
+        name: point.name,
+        city: point.city,
+        phone: point.phone,
+        street_address: point.street_address,
       };
       this.showEditModal = true;
     },
@@ -414,26 +329,18 @@ export default {
       this.showCreateModal = true;
     },
 
-    async confirmCreate() {
+    async confirmConvert() {
       try {
-        const formData = new FormData();
-        formData.append('name', this.createForm.name);
-        formData.append('category_id', this.createForm.category_id);
-        formData.append('description', this.createForm.description);
-        formData.append('price', this.createForm.price);
-        formData.append('stock', this.createForm.stock);
-
-        if (this.imageFile) {
-          formData.append('image', this.imageFile);
-        }
-        const response = await productsService.createProduct(formData);
+        const response = await userPointsService.createAddress(this.createForm);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
         this.showCreateModal = false;
-        this.fetchProducts();
-        this.imageFile = null;
         this.createForm.name = '';
+        this.createForm.phone = '';
+        this.createForm.street_address = '';
+        this.createForm.city = '';
+        this.fetchPointsHistory();
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
@@ -441,76 +348,47 @@ export default {
 
     async confirmEdit() {
       try {
-        const formData = new FormData();
-        formData.append('_method', 'PUT');
-        formData.append('name', this.editForm.name);
-        formData.append('category_id', this.editForm.category_id);
-        formData.append('description', this.editForm.description);
-        formData.append('price', this.editForm.price);
-        formData.append('stock', this.editForm.stock);
-
-        if (this.imageFile) {
-          formData.append('image', this.imageFile);
-        }
-        const response = await productsService.postUpdateProduct(this.editForm.id, formData);
+        const response = await userPointsService.updateAddress(this.editForm.id, this.editForm);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
         this.showEditModal = false;
-        this.fetchProducts();
-        this.imageFile = null;
         this.editForm.name = '';
+        this.editForm.phone = '';
+        this.editForm.street_address = '';
+        this.editForm.city = '';
+        this.fetchPointsHistory();
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
     },
 
 
-    async fetchProducts() {
+    async fetchPointsHistory() {
       try {
-        const response = await productsService.getProducts();
-        this.products = response.data.data || response.data;
+        const user = await userPointsService.getPoints();
+        this.points = user.data.points || user.data;
       } catch (error) {
-        this.$toast.error(error.response.data.message);
-      }
-    },
-
-    async fetchCategories() {
-      try {
-        const response = await productsCategoriesService.getCategories();
-        this.categories = response.data.data || response.data;
-      } catch (error) {
-        this.$toast.error(error.response.data.message);
+        this.$toast.error(error?.response?.data.message || 'Failed to fetch points history.');
       }
     },
 
     async confirmDelete() {
       try {
-        const response = await productsService.deleteProduct(this.selectedProduct);
+        const response = await userPointsService.deleteAddress(this.selectedAddress);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
-        this.selectedProduct = '';
-        this.fetchProducts();
+        this.selectedAddress = '';
+        this.fetchPointsHistory();
         this.showDeleteModal = false;
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
     },
-
-    editProduct(product) {
-      console.log('Edit product:', product);
-    },
-
-    deleteProduct(product) {
-      if (confirm(`Are you sure you want to delete ${product.name}?`)) {
-        console.log('Delete product:', product);
-      }
-    }
   },
   mounted() {
-    this.fetchProducts();
-    this.fetchCategories();
+    this.fetchPointsHistory();
   }
 }
 </script>

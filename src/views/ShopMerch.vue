@@ -2,9 +2,7 @@
   <!-- head shop section -->
   <div class="relative px-8 pb-6">
     <!-- Custom layered gradient overlay -->
-    <div
-      class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent"
-      style="
+    <div class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent" style="
         background: linear-gradient(
           to bottom,
           rgba(233, 235, 248, 0.8) 0%,
@@ -12,32 +10,21 @@
           rgba(233, 235, 248, 0.7) 95%,
           rgba(233, 235, 248, 0) 100%
         );
-      "
-    ></div>
+      "></div>
 
     <!-- Background image -->
-    <img
-      src="/images/Shop Page Background.png"
-      alt="Background"
-      class="absolute inset-0 w-lg object-cover -z-10 mx-auto"
-    />
+    <img src="/images/Shop Page Background.png" alt="Background"
+      class="absolute inset-0 w-lg object-cover -z-10 mx-auto" />
 
     <!-- content -->
     <div
-      class="relative flex flex-col lg:flex-row items-center justify-around text-center lg:text-left gap-8 px-10 py-16 z-2"
-    >
+      class="relative flex flex-col lg:flex-row items-center justify-around text-center lg:text-left gap-8 px-10 py-16 z-2">
       <!-- Logo -->
-      <img
-        src="/logos/K.png"
-        alt="Karakib Logo"
-        class="w-40 lg:w-48 drop-shadow-lg flex-shrink-0"
-      />
+      <img src="/logos/K.png" alt="Karakib Logo" class="w-40 lg:w-48 drop-shadow-lg flex-shrink-0" />
 
       <!-- Text -->
 
-      <p
-        class="max-w-2xl text-xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit"
-      >
+      <p class="max-w-2xl text-xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit">
         {{ $t('common.supportKarakibMission') }}
       </p>
     </div>
@@ -45,25 +32,18 @@
 
   <!-- links -->
   <div class="px-16 relative z-20 flex flex-wrap gap-4 -mt-1">
-    <a
-      @click="selectedCategory = ''"
-      class="rounded-md cursor-pointer px-4 py-3 font-semibold text-xl shadow-sm"
+    <a @click="selectedCategory = ''" class="rounded-md cursor-pointer px-4 py-3 font-semibold text-xl shadow-sm"
       :class="{
         'bg-[#2C702C] text-white': selectedCategory === '',
         'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== '',
-      }"
-    >
-      {{ $t('common.viewAll') }} </a
-    ><a
-      v-for="category in categories"
-      :key="category.id"
+      }">
+      {{ $t('common.viewAll') }} </a><a v-for="category in categories" :key="category.id"
       @click="selectedCategory = category.id"
       class="rounded-md cursor-pointer text-[#112B11] px-4 py-3 font-semibold text-xl shadow-sm transition-colors duration-300"
       :class="{
         'bg-[#2C702C] text-white': selectedCategory === category.id,
         'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== category.id,
-      }"
-    >
+      }">
       {{ category.name }}
     </a>
   </div>
@@ -71,28 +51,17 @@
   <!-- all merch sec -->
 
   <div>
-    <h5
-      v-if="filteredProducts.length === 0"
-      class="px-4 py-4 mx-auto text-gray-500 font-bold text-center"
-    >
+    <h5 v-if="filteredProducts.length === 0" class="px-4 py-4 mx-auto text-gray-500 font-bold text-center">
       {{ $t('common.noProductsInCategory') }}
     </h5>
   </div>
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center justify-center py-14 px-3 lg:px-6"
-  >
-    <div
-      v-for="(product, index) in filteredProducts"
-      :key="index"
-      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300"
-    >
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 justify-items-center justify-center py-14 px-3 lg:px-6">
+    <div v-for="(product, index) in filteredProducts" :key="index"
+      class="card bg-base-100 w-84 sm:w-72 md:w-80 shadow-sm hover:shadow-lg transition-transform duration-300">
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }">
         <figure>
-          <img
-            :src="product.image_url"
-            :alt="product.name"
-            class="w-full size-75 bg-[#E0EBE0] object-fill"
-          />
+          <img :src="product.image_url" :alt="product.name" class="w-full size-75 bg-[#E0EBE0] object-fill" />
         </figure>
       </router-link>
 
@@ -105,11 +74,13 @@
         <p class="text-gray-600 text-sm">{{ product.description }}</p>
 
         <div class="flex items-center mt-1 justify-end">
-          <button
-            @click.stop="addToCart(product.id)"
-            class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold"
-          >
-            {{ $t('common.addToCart') }}
+          <button v-if="product.stock > 0" @click.stop="addToCart(product.id)"
+            class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold">
+            {{ $t("common.addToCart") }}
+          </button>
+          <button v-if="product.stock < 1"
+            class="btn rounded-md bg-gray-500 text-white hover:bg-[#265C26] px-4 py-2 text-sm font-semibold" disabled>
+            {{ $t("common.outOfStock") }}
           </button>
         </div>
       </div>
@@ -176,7 +147,7 @@ export default {
         this.products = response.data.data || response.data;
       } catch (error) {
         this.$toast.error(error.response.data.message);
-      }finally {
+      } finally {
         this.loadingStore.hide();
       }
 

@@ -30,6 +30,7 @@ import MyOrders from '@/views/Profile/MyOrders.vue'
 import Orders from '@/views/Admin/Orders.vue'
 import DonationSuccess from '@/views/DonationSuccess.vue'
 import GoogleCallback from '@/views/GoogleCallback.vue'
+import MyPoints from '@/views/Profile/MyPoints.vue'
 
 // Define routes
 const routes = [
@@ -53,7 +54,7 @@ const routes = [
       { path: 'my-addresses', name: 'MyAddresses', component: MyAddresses },
       { path: 'my-orders', name: 'MyOrders', component: MyOrders },
       { path: 'my-requests', name: 'MyRequests', component: WasteTypes },
-      { path: 'my-points', name: 'MyPoints', component: WasteItems },
+      { path: 'my-points', name: 'MyPoints', component: MyPoints },
     ],
   },
 

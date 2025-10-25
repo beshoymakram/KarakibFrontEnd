@@ -71,10 +71,10 @@
       <!-- Save/Cancel Buttons -->
       <div v-if="editMode" class="flex justify-end gap-3 mb-6">
         <button @click="cancelEdit" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
-          Cancel
+          {{ $t('common.Cancel') }}
         </button>
         <button @click="confirmEdit" class="px-6 py-2 bg-[#2C702C] text-white rounded-lg hover:bg-[#1a4d1a]">
-          Save Changes
+          {{ $t('common.Save Changes') }}
         </button>
       </div>
 
@@ -117,7 +117,7 @@
               </button>
               <button @click="showDeleteModal = false"
                 class="text-gray-500 bg-white hover:bg-gray-100 border border-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
-                Cancel
+                {{ $t('common.Cancel') }}
               </button>
             </div>
           </div>

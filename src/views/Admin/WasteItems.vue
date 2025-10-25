@@ -116,11 +116,11 @@
             </h3>
             <button @click="confirmDelete" type="button"
               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-              Yes, I'm sure
+              {{ $t("common.YesSure") }}
             </button>
             <button @click="showDeleteModal = false" type="button"
               class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-              No, cancel
+              {{ $t('common.No, Cancel') }}
             </button>
           </div>
         </div>
@@ -198,11 +198,11 @@
             <div class="flex justify-end space-x-3 pt-3">
               <button @click="showCreateModal = false" type="button"
                 class="py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-[#2C702C]">
-                Cancel
+                {{ $t('common.Cancel') }}
               </button>
               <button type="submit"
                 class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                Save Changes
+                {{ $t('common.Save Changes') }}
               </button>
             </div>
           </form>
@@ -287,11 +287,11 @@
             <div class="flex justify-end space-x-3 pt-3">
               <button @click="showEditModal = false" type="button"
                 class="py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-[#2C702C]">
-                Cancel
+                {{ $t('common.Cancel') }}
               </button>
               <button type="submit"
                 class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                Save Changes
+                {{ $t('common.Save Changes') }}
               </button>
             </div>
           </form>
