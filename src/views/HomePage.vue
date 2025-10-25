@@ -176,7 +176,7 @@
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-fill rounded-t-xl"
+            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-cover rounded-t-xl"
           />
         </figure>
 

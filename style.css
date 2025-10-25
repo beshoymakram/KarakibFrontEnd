@@ -11,7 +11,8 @@
 
 /* Arabic font for Arabic language */
 html[lang="ar"] {
-  font-family: 'Noto Sans Arabic', 'Cairo', 'Amiri', 'Scheherazade New', 'Arial Unicode MS', sans-serif;
+  font-family: "Noto Sans Arabic", "Cairo", "Amiri", "Scheherazade New", "Arial Unicode MS",
+    sans-serif;
 }
 
 /* English font for English language */
