@@ -1,14 +1,15 @@
 <template>
   <nav class="relative bg-white shadow-sm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-20 justify-between">
-        <div class="flex">
-          <!-- Mobile menu button -->
+      <div class="flex h-20 justify-between items-center">
+        <!-- Left Section -->
+        <div class="flex items-center">
+          <!-- Mobile Menu Button -->
           <div class="mr-2 -ml-2 flex items-center md:hidden">
             <button
               type="button"
               @click="mobileMenuOpen = !mobileMenuOpen"
-              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-[#2C702C] focus:ring-2 focus:ring-[#2C702C] focus:outline-hidden focus:ring-inset"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-[#2C702C] focus:ring-[#2C702C] focus:outline-hidden focus:ring-inset cursor-pointer"
             >
               <svg
                 v-if="!mobileMenuOpen"
@@ -37,6 +38,7 @@
             </button>
           </div>
 
+          <!-- Logo -->
           <div class="flex shrink-0 items-center">
             <router-link to="/" class="logo-link">
               <img
@@ -73,15 +75,15 @@
             >
               {{ $t("common.about") }}
             </router-link>
-
           </div>
         </div>
 
+        <!-- Right Section -->
         <div class="flex items-center space-x-4">
-<!------ Cart  ------->
+          <!-- Cart (Always visible) -->
           <router-link
             to="/cart"
-            class="relative inline-flex items-center justify-center px-2 my-4 text-sm font-bold text-[#2C702C] hover:bg-[#E0EBE0] rounded-lg"
+            class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-md font-bold text-[#2C702C] hover:bg-[#E0EBE0] rounded-lg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -91,22 +93,22 @@
               stroke-width="32"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="cart-icon size-6"
+              class="cart-icon size-7"
             >
               <path
                 d="M160 416a48 48 0 1 0 48 48 48 48 0 0 0-48-48Zm288 0a48 48 0 1 0 48 48 48 48 0 0 0-48-48Zm-279.6-96h281.2a32 32 0 0 0 31.1-24.3l47.6-208A16 16 0 0 0 512 80H128L112.5 16.5A16 16 0 0 0 97 8H24A8 8 0 0 0 16 16v16a8 8 0 0 0 8 8h58.8l70.3 281.2A32 32 0 0 0 168.4 320Z"
               />
             </svg>
-
             <span
               v-if="cartStore.count > 0"
-              class="absolute -top-2 -right-2 bg-green-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center"
+              class="absolute -top-3 -right-0 bg-green-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center"
             >
               {{ cartStore.count }}
             </span>
           </router-link>
 
-          <div v-if="auth.isAuthenticated" class="relative" ref="profileDropdown">
+          <!-- Authenticated User Dropdown -->
+          <div v-if="auth.isAuthenticated" class="relative hidden md:block" ref="profileDropdown">
             <button
               @click="profileDropdownOpen = !profileDropdownOpen"
               class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:ring-offset-2"
@@ -156,8 +158,8 @@
             </Transition>
           </div>
 
-          <!-- Auth Buttons -->
-          <div v-if="!auth.isAuthenticated" class="flex space-x-3">
+          <!-- Desktop Auth Buttons -->
+          <div v-if="!auth.isAuthenticated" class="hidden md:flex space-x-3">
             <router-link
               to="/login"
               class="inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors"
@@ -171,12 +173,15 @@
               {{ $t("common.register") }}
             </router-link>
           </div>
+
+          <!-- Language (always visible) -->
           <LanguageSwitcher />
-          <!-- Dashboard Button (Admin only) -->
+
+          <!-- Dashboard (Admin only) -->
           <router-link
             v-if="auth.isAuthenticated && auth.isAdmin"
             to="/admin"
-            class="inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors"
+            class="hidden md:inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors"
           >
             {{ $t("common.dashboard") }}
           </router-link>
@@ -184,7 +189,7 @@
       </div>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile Menu -->
     <Transition
       enter-active-class="transition ease-out duration-200"
       enter-from-class="opacity-0"
@@ -223,15 +228,8 @@
           >
             {{ $t("common.about") }}
           </router-link>
-          <router-link
-            to="/cart"
-            @click="mobileMenuOpen = false"
-            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50"
-          >
-            {{ $t("common.cart") }} <span class="text-warning px-2">({{ cartStore.count }})</span>
-          </router-link>
 
-          <!-- Mobile Auth Buttons -->
+          <!-- Mobile Auth -->
           <div v-if="!auth.isAuthenticated" class="pt-2 pb-2 border-t border-gray-200">
             <router-link
               to="/login"
@@ -249,7 +247,7 @@
             </router-link>
           </div>
 
-          <!-- Mobile Profile Links -->
+          <!-- Mobile Profile -->
           <div v-if="auth.isAuthenticated" class="pt-2 pb-2 border-t border-gray-200">
             <router-link
               to="/profile"
@@ -274,21 +272,11 @@
               {{ $t("common.dashboard") }}
             </router-link>
             <button
-              @click="
-                handleLogout;
-                mobileMenuOpen = false;
-              "
+              @click="handleLogout(); mobileMenuOpen = false"
               class="block w-full text-left py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50"
             >
               {{ $t("common.signOut") }}
             </button>
-          </div>
-
-          <!-- Language Switcher in Mobile -->
-          <div class="pt-2 pb-2 border-t border-gray-200">
-            <div class="px-3 py-2">
-              <LanguageSwitcher />
-            </div>
           </div>
         </div>
       </div>
@@ -358,6 +346,7 @@ export default {
 .logo-link.router-link-exact-active {
   background-color: transparent !important;
 }
+
 .cart-icon {
   color: #2c702c;
   cursor: pointer;
