@@ -197,6 +197,8 @@
         "addedToYourCart": "تمت الإضافة لسلتك!",
         "failedToAddWasteItem": "فشل في إضافة عنصر النفايات.",
         "loggedInSuccessfully": "تم تسجيل الدخول بنجاح!",
+        "loggedInWithGoogleSuccessfully": "تم تسجيل الدخول بنجاح مع جوجل!",
+        "authFailedWithGoogle": "فشل التحقق من الهوية. يرجى المحاولة مرة أخرى.",
         "registeredSuccessfully": "تم التسجيل بنجاح!",
         "wasteItemRemoved": "تم حذف عنصر النفايات",
         "currency": "جنيه",
@@ -208,7 +210,9 @@
         "Save Changes": "حفظ التغييرات",
         "Cancel": "إلغاء",
         "No, Cancel": "لا، إلغاء",
-        "YesSure": "نعم، أنا متأكد"
+        "YesSure": "نعم، أنا متأكد",
+        "paymentProcessedSuccessfully!": "تمت معالجة الدفع بنجاح!",
+        "inCart": "في السلة"
     },
     "waste": {
         "plastic": "بلاستيك",

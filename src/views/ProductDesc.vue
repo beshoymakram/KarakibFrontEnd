@@ -301,7 +301,7 @@ export default {
     },
     async addToCart(productId) {
       const success = await this.cartStore.addToCart(productId, 1, 'product');
-      success ? this.$toast.success("Added to cart!") : this.$toast.error("Failed to add to cart");
+      success ? this.$toast.success(this.$t('common.addedToCart')) : this.$toast.error(this.$t('common.failedToAddToCart'));
     },
     getRatingPercentage(rating) {
       const count = this.reviews.filter((r) => Math.floor(r.rating) === rating).length;

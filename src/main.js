@@ -37,6 +37,7 @@ app.config.globalProperties.auth = authStore
 
 
 app.use(Vue3Toastify, {
+  rtl: locale == 'ar' ? true : false,
   autoClose: 3000,
 });
 app.config.globalProperties.$toast = toast

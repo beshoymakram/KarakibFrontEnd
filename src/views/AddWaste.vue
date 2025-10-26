@@ -140,11 +140,11 @@ export default {
       try {
         const added = await this.cartStore.addToCart(item.id, 1, 'waste');
         if (added) {
-          this.$toast.success(`${item.name} added to your cart!`);
+          this.$toast.success(`${item.name} ` + this.$t('common.addedToYourCart'));
         }
       } catch {
         //removes (error) no need for maryam
-        this.$toast.error("Failed to add waste item.");
+        this.$toast.error(this.$t('common.failedToAddWasteItem'));
       }
     },
   },

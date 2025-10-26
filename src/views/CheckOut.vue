@@ -10,29 +10,30 @@
             {{ $t('common.orderDetails') }}
           </h2>
 
-          <div v-if="cartStore.items.length > 0" class="space-y-4">
-            <div v-for="item in cartStore.items" :key="item.id" class="flex justify-between items-center border-t pb-3">
+          <div v-if="cartStore.products?.length > 0" class="space-y-4">
+            <div v-for="item in cartStore.products" :key="item.id"
+              class="flex justify-between items-center border-t pb-3">
               <div class="flex items-center gap-4">
-                <img :src="item.product.image_url" alt="Product" class="w-14 h-14 rounded-md object-cover" />
+                <img :src="item.cartable.image_url" alt="Product" class="w-14 h-14 rounded-md object-cover" />
                 <div>
                   <p class="font-semibold text-gray-800">
-                    {{ item.product.name }}
+                    {{ item.cartable.name }}
                   </p>
                   <p class="text-sm text-gray-500">{{ $t('common.colourWhite') }}</p>
                   <p class="text-sm text-gray-500">
-                    {{ item.product.price }} {{ $t('common.currency') }} × {{ item.quantity }}
+                    {{ item.cartable.price }} {{ $t('common.currency') }} × {{ item.quantity }}
                   </p>
                 </div>
               </div>
               <p class="text-[#2C702C] font-semibold">
-                {{ (item.product.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
+                {{ (item.cartable.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
               </p>
             </div>
 
             <!-- Totals -->
             <div class="pt-4 border-t mt-4">
               <div class="flex justify-between mb-2">
-                <span>{{ cartStore.items.length }} {{ $t('common.items') }}</span>
+                <span>{{ cartStore.products?.length }} {{ $t('common.items') }}</span>
                 <span>{{ cartStore.total }} {{ $t('common.currency') }}</span>
               </div>
               <div class="flex justify-between mb-2">
@@ -209,7 +210,6 @@ import checkoutService from "@/services/checkoutService";
 import profileService from "@/services/profileService";
 import { useAuthStore } from "@/stores/auth";
 import { useCartStore } from "@/stores/cart";
-import { nextTick } from "vue";
 
 export default {
   name: "CheckoutPage",
@@ -265,12 +265,12 @@ export default {
     },
     async placeOrder() {
       if (!this.selectedAddressId) {
-        this.$toast.error("Please select delivery address.");
+        this.$toast.error(this.$t('common.pleaseSelectDeliveryAddress'));
         return;
       }
 
       if (!this.paymentMethod) {
-        this.$toast.error("Please select payment method.");
+        this.$toast.error(this.$t('common.pleaseSelectPaymentMethod'));
         return;
       }
 
@@ -294,7 +294,6 @@ export default {
         // });
 
         if (this.paymentMethod === 'cash') {
-          this.cartStore.clearCart();
           this.showConfirmation = true;
         }
 
@@ -309,7 +308,7 @@ export default {
   },
   async mounted() {
     await this.cartStore.fetchCart();
-    if (this.cartStore.items.length === 0) {
+    if (this.cartStore.products?.length === 0) {
       this.$router.push("/cart");
     }
     this.fetchAddresses();

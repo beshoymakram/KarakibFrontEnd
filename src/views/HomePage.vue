@@ -1,25 +1,19 @@
 <template>
   <!-- Hero Section -->
-  <div
-    class="hero min-h-[calc(100vh-2vh)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
-    style="background-image: url('/images/homebg.jpg')"
-  >
+  <div class="hero min-h-[calc(100vh-2vh)] w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
+    style="background-image: url('/images/homebg.jpg')">
     <div class="hero-overlay bg-white/30"></div>
     <div class="hero-content text-center items-start justify-start pt-12 md:pt-16 lg:pt-20 px-4">
       <div class="max-w-3xl">
-        <h1
-          class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-bold drop-shadow-lg"
-        >
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-bold drop-shadow-lg">
           {{ $t("common.turnYourWasteIntoWorth") }}
         </h1>
         <p class="py-4 md:py-6 text-sm sm:text-base md:text-lg font-medium text-[#439a43]">
           {{ $t("common.karakibMakesItEasyToCollectWaste") }}
         </p>
-        <button
-          @click="scrollToHowItWorks"
+        <button @click="scrollToHowItWorks"
           class="btn rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
-          text-lg
-        >
+          text-lg>
           {{ $t("common.getStarted") }}
         </button>
       </div>
@@ -30,24 +24,17 @@
 
   <section class="px-16 py-14 bg-base-200" ref="howItWorksSection">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center mb-10 md:mb-12 lg:mb-16"
-    >
+      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center mb-10 md:mb-12 lg:mb-16">
       {{ $t("common.howItWorks") }}
     </p>
 
     <div class="flex flex-wrap gap-6 md:gap-8 justify-center">
-      <div
-        v-for="(step, index) in steps"
-        :key="index"
+      <div v-for="(step, index) in steps" :key="index"
         class="card bg-base-100 shadow-sm w-full sm:w-80 md:w-72 lg:w-68 rounded-3xl cursor-pointer hover:shadow-md transition"
-        @click="handleStepClick(step)"
-      >
+        @click="handleStepClick(step)">
         <figure class="p-4 md:p-6">
-          <img
-            :src="step.image"
-            :alt="step.title"
-            class="object-cover rounded-3xl size-50 md:size-70 mt-4 md:mt-0 md:h-60"
-          />
+          <img :src="step.image" :alt="step.title"
+            class="object-cover rounded-3xl size-50 md:size-70 mt-4 md:mt-0 md:h-60" />
         </figure>
         <div class="card-body text-center">
           <h2 class="font-semibold text-[#317C31] -mt-5">{{ step.number }}</h2>
@@ -60,21 +47,16 @@
 
   <!-- Waste Carousel Section -->
   <section class="bg-white px-16 py-16 relative">
-    <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center"
-    >
+    <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center">
       {{ $t("common.discoverWasteTypes") }}
     </p>
-    <p
-      class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#163816] text-center pt-5 pb-10 font-normal"
-    >
+    <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#163816] text-center pt-5 pb-10 font-normal">
       {{ $t("common.learnAboutDifferentKindsOfWaste") }}
     </p>
     <div class="text-center mt-4 mb-8 md:mb-12">
       <router-link to="/add-waste">
         <button
-          class="btn rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
-        >
+          class="btn rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition">
           {{ $t("common.recycleNow") }}
         </button>
       </router-link>
@@ -83,56 +65,32 @@
     <!-- Carousel Wrapper -->
     <div class="relative max-w-6xl mx-auto flex items-center justify-center px-4 sm:px-0">
       <!-- Left Arrow -->
-      <button
-        @click="scrollPrev"
-        class="hidden sm:block absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-5 h-5 sm:w-6 sm:h-6size-6"
-        >
+      <button @click="scrollPrev"
+        class="hidden sm:block absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="w-5 h-5 sm:w-6 sm:h-6size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
       </button>
 
       <!-- Carousel (Scrollable Container) -->
-      <div
-        ref="carousel"
-        class="carousel carousel-center bg-white rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
-      >
-        <div
-          v-for="(item, index) in wasteItems"
-          :key="index"
-          class="carousel-item flex flex-col items-center flex-shrink-0"
-        >
-          <img
-            :src="item.image_url"
-            :alt="item.name"
-            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-[#EAF2EA]"
-          />
+      <div ref="carousel"
+        class="carousel carousel-center bg-white rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth">
+        <div v-for="(item, index) in wasteItems" :key="index"
+          class="carousel-item flex flex-col items-center flex-shrink-0">
+          <img :src="item.image_url" :alt="item.name"
+            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-[#EAF2EA]" />
           <p class="mt-3 md:mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-[#2C702C]">
-            {{ $t(`waste.${item.name.toLowerCase()}`) }}
+            {{ item.name }}
           </p>
         </div>
       </div>
 
       <!-- Right Arrow -->
-      <button
-        @click="scrollNext"
-        class="hidden sm:block absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-5 h-5 sm:w-6 sm:h-6"
-        >
+      <button @click="scrollNext"
+        class="hidden sm:block absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="w-5 h-5 sm:w-6 sm:h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
       </button>
@@ -142,9 +100,7 @@
   <div class="hero bg-[#BFD6BF] min-h-[30vh] sm:min-h-[35vh] py-12 md:py-16">
     <div class="hero-content text-center">
       <div class="max-w-3xl">
-        <h1
-          class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-medium drop-shadow-lg"
-        >
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-medium drop-shadow-lg">
           {{ $t("common.ourExclusiveMerchandise") }}
         </h1>
         <p class="py-4 md:py-6 text-sm sm:text-base md:text-lg text-[#163816]">
@@ -152,8 +108,7 @@
         </p>
         <router-link to="/shop">
           <button
-            class="btn rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
-          >
+            class="btn rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]">
             {{ $t("common.shopNow") }}
           </button>
         </router-link>
@@ -163,21 +118,14 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12"
-  >
-    <div
-      v-for="(product, index) in products"
-      :key="index"
-      class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
-    >
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12">
+    <div v-for="(product, index) in products" :key="index"
+      class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300">
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block">
         <figure>
-          <img
-            :src="product.image_url"
-            :alt="product.name"
-            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-cover rounded-t-xl"
-          />
+          <img :src="product.image_url" :alt="product.name"
+            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-cover rounded-t-xl" />
         </figure>
 
         <div class="px-4 pt-3 pb-2">
@@ -194,20 +142,49 @@
         </div>
       </router-link>
 
-      <!-- ADD TO CART - stays clickable without navigation -->
+      <!-- ADD TO CART / QUANTITY CONTROLS -->
       <div class="flex items-center mt-2 justify-end px-4 pb-3">
-        <button
-          v-if="product.stock > 0"
-          @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
-        >
+        <!-- Show quantity controls if item is in cart -->
+        <div v-if="getCartItem(product.id)" class="flex items-center gap-2">
+          <button @click.stop="decrementCartItem(product.id)"
+            class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+            </svg>
+          </button>
+
+          <span class="w-10 text-center font-bold text-[#2C702C]">
+            {{ getCartItem(product.id).quantity }}
+          </span>
+
+          <button @click.stop="incrementCartItem(product.id)"
+            class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </button>
+
+          <div class="flex items-center gap-1 ml-2 text-green-600 text-xs font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+              stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+            <span>{{ $t("common.inCart") }}</span>
+          </div>
+        </div>
+
+        <!-- Show add to cart button if not in cart -->
+        <button v-else-if="product.stock > 0" @click.stop="addToCart(product.id)"
+          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold">
           {{ $t("common.addToCart") }}
         </button>
-        <button
-          v-if="product.stock < 1"
-          class="btn rounded-md bg-gray-500 text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
-          disabled
-        >
+
+        <!-- Out of stock button -->
+        <button v-else
+          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
+          disabled>
           {{ $t("common.outOfStock") }}
         </button>
       </div>
@@ -216,37 +193,24 @@
 
   <!-- make differance section -->
   <section class="bg-[#E9EBF8] px-4 sm:px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
-    <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center"
-    >
+    <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center">
       {{ $t("common.makeADifference") }}
     </p>
-    <p
-      class="text-lg sm:text-xl md:text-2xl text-[#163816] text-center pt-4 md:pt-5 pb-8 md:pb-10 font-normal"
-    >
+    <p class="text-lg sm:text-xl md:text-2xl text-[#163816] text-center pt-4 md:pt-5 pb-8 md:pb-10 font-normal">
       {{ $t("common.convertRecyclingPointsIntoDonations") }}
     </p>
     <div
-      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 justify-center items-stretch gap-6 md:gap-8 px-4 sm:px-6 md:px-8"
-    >
-      <div
-        v-for="(card, index) in infoCards"
-        :key="index"
-        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-white w-full md:w-8/10 xl:w-full mx-auto"
-      >
-        <img
-          :src="card.image"
-          :alt="card.title"
-          class="mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-[#E9EBF8] rounded-full p-3"
-        />
+      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 justify-center items-stretch gap-6 md:gap-8 px-4 sm:px-6 md:px-8">
+      <div v-for="(card, index) in infoCards" :key="index"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-white w-full md:w-8/10 xl:w-full mx-auto">
+        <img :src="card.image" :alt="card.title"
+          class="mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-[#E9EBF8] rounded-full p-3" />
         <h3 class="text-[#163816] font-semibold text-lg sm:text-xl md:text-2xl mb-2 md:mb-3">
           {{ card.title }}
         </h3>
         <p class="text-[#8E98A8] mb-4">{{ card.description }}</p>
-        <button
-          @click="openDonationModal(card.title)"
-          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition"
-        >
+        <button @click="openDonationModal(card.name, card.title)"
+          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition">
           {{ $t("common.donate") }}
         </button>
       </div>
@@ -254,42 +218,27 @@
   </section>
 
   <!-- Donation Modal -->
-  <DonationModal
-    :isOpen="isModalOpen"
-    :fundName="selectedFund"
-    @close="closeModal"
-    @donate="handleDonation"
-  />
+  <DonationModal :isOpen="isModalOpen" :fundName="selectedFund" :fundTitle="selectedFundTitle" @close="closeModal"
+    @donate="handleDonation" />
 
-  <div
-    v-if="isRedirecting"
-    class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4"
-  >
-    <div class="bg-white rounded-2xl p-6 md:p-8 w-full text-center shadow-xl">
+  <div v-if="isRedirecting" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl">
       <!-- <img src="/images/delivery.png" alt="Delivery Truck" class="w-48 mx-auto mb-4" /> -->
-      <div class="text-[#2C702C] text-base md:text-lg font-semibold">
+      <div class="text-[#2C702C] text-lg font-semibold">
         <div role="status" class="mx-auto text-center">
-          <svg
-            aria-hidden="true"
-            class="w-8 h-8 md:w-10 md:h-10 text-gray-200 animate-spin dark:text-gray-600 fill-[#2C702C] mx-auto my-3 md:my-4"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg aria-hidden="true"
+            class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-[#2C702C] mx-auto my-3"
+            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="currentColor"
-            />
+              fill="currentColor" />
             <path
               d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentFill"
-            />
+              fill="currentFill" />
           </svg>
           <span class="sr-only">Loading...</span>
         </div>
-        <small class="text-xs sm:text-sm">{{
-          $t("common.youAreBeingRedirectedToCompletePayment")
-        }}</small>
+        <small>{{ $t("common.youAreBeingRedirectedToCompletePayment") }}</small>
       </div>
     </div>
   </div>
@@ -315,18 +264,21 @@ export default {
         {
           image: "/images/Graduation Cap.png",
           title: this.$t("common.educationFund"),
+          name: "Education Fund",
           description: this.$t("common.supportUnderprivilegedChildrenEducation"),
           buttonText: this.$t("common.donate"),
         },
         {
           image: "/images/Tree Planting.png",
           title: this.$t("common.reforestation"),
+          name: "Reforestation",
           description: this.$t("common.plantTreesAndRestoreNaturalHabitats"),
           buttonText: this.$t("common.donate"),
         },
         {
           image: "/images/Heart Health.png",
           title: this.$t("common.communityHealth"),
+          name: "Community Health",
           description: this.$t("common.supportUnderprivilegedChildrenEducation"),
           buttonText: this.$t("common.donate"),
         },
@@ -334,6 +286,7 @@ export default {
       products: [],
       isModalOpen: false,
       selectedFund: "",
+      selectedFundTitle: "",
       steps: [
         {
           number: this.$t("common.step1"),
@@ -399,13 +352,38 @@ export default {
       }
     },
 
+    getCartItem(productId) {
+      return this.cartStore.products?.find(
+        item => item.cartable_id === productId
+      );
+    },
+
+    async incrementCartItem(productId) {
+      const cartItem = this.getCartItem(productId);
+      if (cartItem) {
+        await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity + 1);
+      }
+    },
+
+    async decrementCartItem(productId) {
+      const cartItem = this.getCartItem(productId);
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity - 1);
+        } else {
+          await this.cartStore.removeItem(cartItem.id);
+          this.$toast.success(this.$t('common.itemRemovedFromCart'));
+        }
+      }
+    },
+
     async addToCart(productId) {
       const success = await this.cartStore.addToCart(productId, 1, "product");
 
       if (success) {
-        this.$toast.success("Added to cart!");
+        this.$toast.success(this.$t('common.addedToCart'));
       } else {
-        this.$toast.error("Failed to add to cart");
+        this.$toast.error(this.$t('common.failedToAddToCart'));
       }
     },
     scrollToHowItWorks() {
@@ -415,8 +393,9 @@ export default {
       }
     },
 
-    openDonationModal(fundName) {
+    openDonationModal(fundName, fundTitle) {
       this.selectedFund = fundName;
+      this.selectedFundTitle = fundTitle;
       this.isModalOpen = true;
     },
 
@@ -426,7 +405,7 @@ export default {
 
     async handleDonation(donationData) {
       if (!donationData.amount) {
-        this.$toast.error("Please enter the amount you want to donate.");
+        this.$toast.error(this.$t('common.pleaseEnterTheAmountYouWantToDonate'));
         return;
       }
       this.isRedirecting = true;
@@ -447,7 +426,7 @@ export default {
 
     async placeDonation() {
       if (!this.donationAmount) {
-        this.$toast.error("Please enter the amount you want to donate.");
+        this.$toast.error(this.$t('common.pleaseEnterTheAmountYouWantToDonate'));
         return;
       }
       this.isRedirecting = true;
@@ -479,6 +458,8 @@ export default {
   mounted() {
     this.fetchWasteItems();
     this.fetchProducts();
+    this.cartStore.fetchCart(); // Add this line
+
   },
 };
 </script>

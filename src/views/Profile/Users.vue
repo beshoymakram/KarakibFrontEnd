@@ -331,7 +331,7 @@ export default {
         this.fetchUsers();
       } catch (error) {
         console.error("Error updating user:", error);
-        this.$toast.error('Failed to update user');
+        this.$toast.error(this.$t('common.failedToUpdateUser'));
       }
     },
 

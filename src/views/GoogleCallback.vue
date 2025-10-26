@@ -51,15 +51,15 @@ export default {
           await this.$router.push('/');
 
           setTimeout(() => {
-            this.$toast.success('Successfully logged in with Google!');
+            this.$toast.success(this.$t('common.loggedInWithGoogleSuccessfully'));
           }, 100);
         } catch (err) {
           console.error('Auth callback error:', err);
-          this.$toast.error('Authentication failed. Please try again.');
+          this.$toast.error(this.$t('common.authFailedWithGoogle'));
           this.$router.push('/login');
         }
       } else {
-        this.$toast.error('Invalid authentication response');
+        this.$toast.error(this.$t('common.invalidAuth'));
         this.$router.push('/login');
       }
     },

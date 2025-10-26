@@ -92,7 +92,7 @@ export default {
 
         this.paymentSuccess = true;
         this.transactionId = response.data.transaction.transaction_id;
-        this.$toast.success('Payment processed successfully!');
+        this.$toast.success(this.$t('common.paymentProcessedSuccessfully'));
 
         // Reset form
         setTimeout(() => {

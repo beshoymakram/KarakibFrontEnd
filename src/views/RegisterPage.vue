@@ -163,7 +163,7 @@ export default {
         await cartStore.mergeOnLogin();
         await this.$router.push('/');
         nextTick(() => {
-          this.$toast.success('Registered successfully!');
+          this.$toast.success(this.$t('common.registeredSuccessfully'));
         })
       } catch (error) {
         console.error('Registration error:', error);

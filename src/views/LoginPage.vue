@@ -133,9 +133,10 @@ export default {
 
         await this.$router.push('/');
         nextTick(() => {
-          this.$toast.success('Logged in successfully!');
+          this.$toast.success(this.$t('common.loggedInSuccessfully'));
         })
       } catch (error) {
+        this.$toast.error(error)
         this.$toast.error(this.authStore.error)
         setTimeout(() => {
           this.authStore.error = null;

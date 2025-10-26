@@ -196,6 +196,9 @@
     "addedToYourCart": "added to your cart!",
     "failedToAddWasteItem": "Failed to add waste item.",
     "loggedInSuccessfully": "Logged in successfully!",
+    "loggedInWithGoogleSuccessfully": "Successfully logged in with Google!",
+    "authFailedWithGoogle": "Authentication failed. Please try again.",
+    "invalidAuth": "Invalid authentication response",
     "registeredSuccessfully": "Registered successfully!",
     "itemRemovedFromCart": "Item removed from cart",
     "wasteItemRemoved": "Waste item removed",
@@ -208,7 +211,10 @@
     "Save Changes": "Save Changes",
     "Cancel": "Cancel",
     "No, Cancel": "No, Cancel",
-    "YesSure": "Yes, I'm sure"
+    "YesSure": "Yes, I'm sure",
+    "paymentProcessedSuccessfully!": "Payment processed successfully!",
+    "failedToUpdateUser": "Failed to update user.",
+    "inCart": "In Cart"
   },
   "waste": {
     "plastic": "Plastic",
