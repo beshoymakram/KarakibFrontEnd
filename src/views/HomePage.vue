@@ -59,7 +59,7 @@
   </section>
 
   <!-- Waste Carousel Section -->
-  <section class="bg-white px-16 py-16 relative">
+  <section class="bg-white px-4 md:px-12 py-16 relative">
     <p
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center"
     >
@@ -85,7 +85,7 @@
       <!-- Left Arrow -->
       <button
         @click="scrollPrev"
-        class="hidden sm:block absolute left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden sm:block absolute left-0 sm:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@
           viewBox="0 0 24 24"
           stroke-width="2"
           stroke="currentColor"
-          class="w-5 h-5 sm:w-6 sm:h-6size-6"
+          class="w-5 h-5 sm:w-6 sm:h-6"
         >
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
@@ -123,7 +123,7 @@
       <!-- Right Arrow -->
       <button
         @click="scrollNext"
-        class="hidden sm:block absolute right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden sm:block absolute right-0 sm:right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
