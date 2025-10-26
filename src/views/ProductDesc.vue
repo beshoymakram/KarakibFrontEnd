@@ -248,9 +248,7 @@
         </div>
       </div>
     </div>
-    <p v-else class="text-center text-sm sm:text-base text-[#2C702C] mt-16 md:mt-20">
-      Loading product details...
-    </p>
+    <p v-else class="text-center text-sm sm:text-base text-[#2C702C] mt-16 md:mt-20">Loading product details...</p>
   </div>
 </template>
 
