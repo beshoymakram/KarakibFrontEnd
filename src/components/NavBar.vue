@@ -53,25 +53,25 @@
           <div class="hidden md:ml-4 md:flex lg:space-x-6 md:space-x-1">
             <router-link
               to="/"
-              class="inline-flex items-center px-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
             >
               {{ $t("common.home") }}
             </router-link>
             <router-link
               to="/shop"
-              class="inline-flex items-center px-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
             >
               {{ $t("common.shop") }}
             </router-link>
             <router-link
               to="/add-waste"
-              class="inline-flex items-center px-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
             >
               {{ $t("common.waste") }}
             </router-link>
             <router-link
               to="/about"
-              class="inline-flex items-center px-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
             >
               {{ $t("common.about") }}
             </router-link>
