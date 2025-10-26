@@ -2,7 +2,9 @@
   <!-- head shop section -->
   <div class="relative px-4 sm:px-6 md:px-8 pb-0 md:pb-2">
     <!-- Custom layered gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent" style="
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent"
+      style="
         background: linear-gradient(
           to bottom,
           rgba(233, 235, 248, 0.8) 0%,
@@ -10,42 +12,60 @@
           rgba(233, 235, 248, 0.7) 95%,
           rgba(233, 235, 248, 0) 100%
         );
-      "></div>
+      "
+    ></div>
 
     <!-- Background image -->
-    <img src="/images/Shop Page Background.png" alt="Background"
-      class="absolute inset-0 w-lg object-cover -z-10 mx-auto" />
+    <img
+      src="/images/Shop Page Background.png"
+      alt="Background"
+      class="absolute inset-0 w-lg object-cover -z-10 mx-auto"
+    />
 
     <!-- content -->
     <div
-      class="relative flex flex-col lg:flex-row items-center justify-around text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-12 md:py-16 lg:py-20 z-2">
+      class="relative flex flex-col lg:flex-row items-center justify-around text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 z-2"
+    >
       <!-- Logo -->
-      <img src="/logos/K.png" alt="Karakib Logo" class="w-32 sm:w-36 md:w-40 lg:w-48 drop-shadow-lg flex-shrink-0" />
+      <img
+        src="/logos/K.png"
+        alt="Karakib Logo"
+        class="w-32 sm:w-36 md:w-40 lg:w-48 drop-shadow-lg flex-shrink-0"
+      />
 
       <!-- Text -->
 
       <p
-        class="max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit">
+        class="max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit"
+      >
         {{ $t("common.supportKarakibMission") }}
       </p>
     </div>
   </div>
 
   <!-- links -->
-  <div class="px-4 sm:px-6 md:px-12 lg:px-16 relative z-20 flex flex-wrap gap-3 md:gap-4 -mt-1 mb-6 md:mb-8">
-    <a @click="selectedCategory = ''"
-      class="rounded-md cursor-pointer text-[#112B11] px-3 sm:px-4 py-2 md:py-3 font-semibold text-xl shadow-sm transition-colors duration-300"
+  <div
+    class="px-4 sm:px-6 md:px-12 lg:px-16 relative z-20 flex flex-wrap gap-3 md:gap-4 -mt-1 mb-2 md:mb-4"
+  >
+    <a
+      @click="selectedCategory = ''"
+      class="rounded-md cursor-pointer text-[#112B11] px-2 sm:px-3 py-1 md:py-2 font-semibold text-md md:text-lg shadow-sm transition-colors duration-300"
       :class="{
         'bg-[#2C702C] text-white': selectedCategory === '',
         'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== '',
-      }">
-      {{ $t("common.viewAll") }} </a><a v-for="category in categories" :key="category.id"
+      }"
+    >
+      {{ $t("common.viewAll") }} </a
+    ><a
+      v-for="category in categories"
+      :key="category.id"
       @click="selectedCategory = category.id"
-      class="rounded-md cursor-pointer text-[#112B11] px-3 sm:px-4 py-2 md:py-3 font-semibold text-xl shadow-sm transition-colors duration-300"
+      class="rounded-md cursor-pointer text-[#112B11] px-2 sm:px-3 py-1 md:py-2 font-semibold text-md md:text-lg shadow-sm transition-colors duration-300"
       :class="{
         'bg-[#2C702C] text-white': selectedCategory === category.id,
         'bg-white text-[#112B11] hover:bg-green-100': selectedCategory !== category.id,
-      }">
+      }"
+    >
       {{ category.name }}
     </a>
   </div>
@@ -53,21 +73,30 @@
   <!-- all merch sec -->
 
   <div>
-    <h5 v-if="filteredProducts.length === 0"
-      class="px-4 text-base sm:text-lg md:text-xl text-gray-500 font-bold text-center">
+    <h5
+      v-if="filteredProducts.length === 0"
+      class="px-4 text-base sm:text-lg md:text-xl text-gray-500 font-bold text-center"
+    >
       {{ $t("common.noProductsInCategory") }}
     </h5>
   </div>
 
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12">
-    <div v-for="(product, index) in filteredProducts" :key="index"
-      class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300">
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
+  >
+    <div
+      v-for="(product, index) in filteredProducts"
+      :key="index"
+      class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+    >
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block">
         <figure>
-          <img :src="product.image_url" :alt="product.name"
-            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-cover rounded-t-xl" />
+          <img
+            :src="product.image_url"
+            :alt="product.name"
+            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-cover rounded-t-xl"
+          />
         </figure>
 
         <div class="px-4 pt-3 pb-2">
@@ -88,10 +117,18 @@
       <div class="flex items-center mt-2 justify-end px-4 pb-3">
         <!-- Show quantity controls if item is in cart -->
         <div v-if="getCartItem(product.id)" class="flex items-center gap-2">
-          <button @click.stop="decrementCartItem(product.id)"
-            class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-              stroke="currentColor" class="w-4 h-4">
+          <button
+            @click.stop="decrementCartItem(product.id)"
+            class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
             </svg>
           </button>
@@ -100,17 +137,31 @@
             {{ getCartItem(product.id).quantity }}
           </span>
 
-          <button @click.stop="incrementCartItem(product.id)"
-            class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-              stroke="currentColor" class="w-4 h-4">
+          <button
+            @click.stop="incrementCartItem(product.id)"
+            class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </button>
 
           <div class="flex items-center gap-1 ml-2 text-green-600 text-xs font-semibold">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-              stroke="currentColor" class="w-4 h-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
               <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
             </svg>
             <span>{{ $t("common.inCart") }}</span>
@@ -118,15 +169,20 @@
         </div>
 
         <!-- Show add to cart button if not in cart -->
-        <button v-else-if="product.stock > 0" @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold">
+        <button
+          v-else-if="product.stock > 0"
+          @click.stop="addToCart(product.id)"
+          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
+        >
           {{ $t("common.addToCart") }}
         </button>
 
         <!-- Out of stock button -->
-        <button v-else
+        <button
+          v-else
           class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
-          disabled>
+          disabled
+        >
           {{ $t("common.outOfStock") }}
         </button>
       </div>
@@ -165,9 +221,7 @@ export default {
   },
   methods: {
     getCartItem(productId) {
-      return this.cartStore.products?.find(
-        item => item.cartable_id === productId
-      );
+      return this.cartStore.products?.find((item) => item.cartable_id === productId);
     },
 
     async incrementCartItem(productId) {
@@ -184,7 +238,7 @@ export default {
           await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity - 1);
         } else {
           await this.cartStore.removeItem(cartItem.id);
-          this.$toast.success(this.$t('common.itemRemovedFromCart'));
+          this.$toast.success(this.$t("common.itemRemovedFromCart"));
         }
       }
     },
@@ -192,9 +246,9 @@ export default {
       const success = await this.cartStore.addToCart(productId, 1, "product");
 
       if (success) {
-        this.$toast.success(this.$t('common.addedToCart'));
+        this.$toast.success(this.$t("common.addedToCart"));
       } else {
-        this.$toast.error(this.$t('common.failedToAddToCart'));
+        this.$toast.error(this.$t("common.failedToAddToCart"));
       }
     },
 
