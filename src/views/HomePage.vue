@@ -4,15 +4,15 @@
     class="hero min-h-[calc(100vh-2vh)] w-[95vw] md:w-[90vw] lg:w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
     style="background-image: url('/images/Homebg.png')"
   >
-    <div class="hero-overlay bg-white/25"></div>
+    <div class="hero-overlay bg-transparent"></div>
     <div class="hero-content text-center items-start justify-start pt-12 md:pt-16 lg:pt-20 px-4">
       <div class="max-w-3xl">
         <h1
-          class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-bold drop-shadow-lg"
+          class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl text-primary font-bold drop-shadow-lg"
         >
           {{ $t("common.turnYourWasteIntoWorth") }}
         </h1>
-        <p class="py-4 md:py-6 text-sm sm:text-base md:text-lg font-medium text-[#439a43]">
+        <p class="py-4 mt-2 md:py-6 text-sm sm:text-base md:text-lg font-medium text-hero">
           {{ $t("common.karakibMakesItEasyToCollectWaste") }}
         </p>
         <button
@@ -30,7 +30,7 @@
 
   <section class="px-16 py-14 bg-base-200" ref="howItWorksSection">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center mb-10 md:mb-12 lg:mb-16"
+      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center mb-10 md:mb-12 lg:mb-16"
     >
       {{ $t("common.howItWorks") }}
     </p>
@@ -50,7 +50,7 @@
           />
         </figure>
         <div class="card-body text-center">
-          <h2 class="font-semibold text-[#317C31] -mt-5">{{ step.number }}</h2>
+          <h2 class="font-semibold text-primary -mt-5">{{ step.number }}</h2>
           <p class="card-title mx-auto">{{ step.title }}</p>
           <p>{{ step.description }}</p>
         </div>
@@ -59,14 +59,14 @@
   </section>
 
   <!-- Waste Carousel Section -->
-  <section class="bg-white px-4 md:px-12 py-16 relative">
+  <section class="px-4 md:px-12 py-16 relative bg-base-200">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center"
+      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center"
     >
       {{ $t("common.discoverWasteTypes") }}
     </p>
     <p
-      class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#163816] text-center pt-5 pb-10 font-normal"
+      class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-secondary text-center pt-5 pb-10 font-normal"
     >
       {{ $t("common.learnAboutDifferentKindsOfWaste") }}
     </p>
@@ -102,7 +102,7 @@
       <!-- Carousel (Scrollable Container) -->
       <div
         ref="carousel"
-        class="carousel carousel-center bg-white rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
+        class="carousel carousel-center bg-base-200 rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
       >
         <div
           v-for="(item, index) in wasteItems"
@@ -114,7 +114,7 @@
             :alt="item.name"
             class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-[#EAF2EA]"
           />
-          <p class="mt-3 md:mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-[#2C702C]">
+          <p class="mt-3 md:mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary">
             {{ item.name }}
           </p>
         </div>
@@ -139,7 +139,7 @@
     </div>
   </section>
   <!--  hero merch -->
-  <div class="hero bg-[#BFD6BF] min-h-[30vh] sm:min-h-[35vh] py-12 md:py-16">
+  <div class="hero bg-merch min-h-[30vh] sm:min-h-[35vh] py-12 md:py-16">
     <div class="hero-content text-center">
       <div class="max-w-3xl">
         <h1
@@ -168,10 +168,10 @@
     <div
       v-for="(product, index) in products"
       :key="index"
-      class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-base-200 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
-      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block">
+      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block bg-base-200">
         <figure>
           <img
             :src="product.image_url"
@@ -182,15 +182,15 @@
 
         <div class="px-4 pt-3 pb-2">
           <div class="flex justify-between items-center w-full mb-2">
-            <h2 class="text-[#2C702C] font-semibold sm:text-lg md:text-xl">
+            <h2 class="text-primary font-semibold sm:text-lg md:text-xl">
               {{ product.name }}
             </h2>
-            <p class="text-[#2C702C] font-semibold text-sm sm:text-base md:text-lg">
+            <p class="text-primary font-semibold text-sm sm:text-base md:text-lg">
               {{ product.price }} {{ $t("common.currency") }}
             </p>
           </div>
 
-          <p class="text-gray-600 text-xs sm:text-sm">{{ product.description }}</p>
+          <p class="text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
         </div>
       </router-link>
 
@@ -271,14 +271,14 @@
   </div>
 
   <!-- make differance section -->
-  <section class="bg-[#E9EBF8] px-4 sm:px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
+  <section class="bg-base-200 px-4 sm:px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center"
+      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center"
     >
       {{ $t("common.makeADifference") }}
     </p>
     <p
-      class="text-lg sm:text-xl md:text-2xl text-[#163816] text-center pt-4 md:pt-5 pb-8 md:pb-10 font-normal"
+      class="text-lg sm:text-xl md:text-2xl text-secondary text-center pt-4 md:pt-5 pb-8 md:pb-10 font-normal"
     >
       {{ $t("common.convertRecyclingPointsIntoDonations") }}
     </p>
@@ -288,14 +288,14 @@
       <div
         v-for="(card, index) in infoCards"
         :key="index"
-        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-white w-full md:w-8/10 xl:w-full mx-auto"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full md:w-8/10 xl:w-full mx-auto"
       >
         <img
           :src="card.image"
           :alt="card.title"
           class="mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-[#E9EBF8] rounded-full p-3"
         />
-        <h3 class="text-[#163816] font-semibold text-lg sm:text-xl md:text-2xl mb-2 md:mb-3">
+        <h3 class="text-primary font-semibold text-lg sm:text-xl md:text-2xl mb-2 md:mb-3">
           {{ card.title }}
         </h3>
         <p class="text-[#8E98A8] mb-4">{{ card.description }}</p>
@@ -564,4 +564,43 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-primary {
+  color: #2C702C !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.text-hero {
+  color: #2C702C !important;
+}
+[data-theme="forest"] .text-hero {
+  color: #b4f7b5 !important;
+}
+.bg-merch {
+  background-color: #BFD6BF !important;
+}
+[data-theme="forest"] .bg-merch {
+  background-color: #5fc285 !important;
+}
+</style>
