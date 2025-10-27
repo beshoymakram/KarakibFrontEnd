@@ -81,6 +81,8 @@
         <!-- Right Section -->
         <div class="flex items-center space-x-4">
           <!-- Cart (Always visible) -->
+           <!-- theme button -->
+            <button class="btn" @click="toggleTheme">Toggle Theme</button>
           <router-link
             to="/cart"
             class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-md font-bold no-active-style text-[#2C702C] rounded-lg"
@@ -325,6 +327,12 @@ export default {
       if (dropdown && !dropdown.contains(event.target)) {
         this.profileDropdownOpen = false;
       }
+    },
+    toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'forest' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
     },
   },
 
