@@ -9,7 +9,7 @@
             <button
               type="button"
               @click="mobileMenuOpen = !mobileMenuOpen"
-              class="relative inline-flex items-center justify-center rounded-md p-2 text-base-content/60 hover:bg-base-200 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-green-100 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer"
             >
               <svg
                 v-if="!mobileMenuOpen"
@@ -82,7 +82,46 @@
         <div class="flex items-center space-x-4">
           <!-- Cart (Always visible) -->
            <!-- theme button -->
-            <button class="btn btn-outline" @click="toggleTheme">Toggle Theme</button>
+        <button
+          @click="toggleTheme"
+          class="btn btn-ghost btn-circle transition-all duration-300 hover:bg-base-200"
+          aria-label="Toggle theme"
+        >
+          <!-- Light Mode Icon -->
+          <svg
+            v-if="currentTheme === 'forest'"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 md:w-7 md:h-7 text-yellow-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3v1m0 16v1m8.485-8.485l-.707.707M4.222 4.222l.707.707M21 12h1M2 12H1m16.97 6.97l.707.707M4.222 19.778l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+            />
+          </svg>
+
+          <!-- Dark Mode Icon -->
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 md:w-7 md:h-7 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+            />
+          </svg>
+        </button>
+
           <router-link
             to="/cart"
             class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-md font-bold no-active-style text-primary rounded-lg"
@@ -113,7 +152,7 @@
           <div v-if="auth.isAuthenticated" class="relative hidden md:block" ref="profileDropdown">
             <button
               @click="profileDropdownOpen = !profileDropdownOpen"
-              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
             >
               <img
                 :src="
@@ -140,19 +179,19 @@
               >
                 <router-link
                   to="/profile"
-                  class="block px-4 py-2 text-sm text-base-content hover:bg-base-200"
+                  class="block px-3 py-2 text-sm text-primary hover:bg-base-200"
                 >
                   {{ $t("common.profile") }}
                 </router-link>
                 <router-link
                   to="/settings"
-                  class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  class="block px-3 py-2 text-sm text-primary dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {{ $t("common.settings") }}
                 </router-link>
                 <button
                   @click="handleLogout"
-                  class="block w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  class="block w-full text-left px-3 py-2 text-sm text-primary dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {{ $t("common.signOut") }}
                 </button>
@@ -212,21 +251,21 @@
           <router-link
             to="/shop"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-base-200"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-green-100"
           >
             {{ $t("common.shop") }}
           </router-link>
           <router-link
             to="/add-waste"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-base-200"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-green-100"
           >
             {{ $t("common.waste") }}
           </router-link>
           <router-link
             to="/about"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-base-200"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-green-100"
           >
             {{ $t("common.about") }}
           </router-link>
@@ -236,14 +275,14 @@
             <router-link
               to="/login"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100"
             >
               {{ $t("common.login") }}
             </router-link>
             <router-link
               to="/register"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100"
             >
               {{ $t("common.register") }}
             </router-link>
@@ -254,14 +293,14 @@
             <router-link
               to="/profile"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100"
             >
               {{ $t("common.profile") }}
             </router-link>
             <router-link
               to="/settings"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100"
             >
               {{ $t("common.settings") }}
             </router-link>
@@ -269,7 +308,7 @@
               v-if="auth.isAdmin"
               to="/admin"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100"
             >
               {{ $t("common.dashboard") }}
             </router-link>
@@ -298,6 +337,8 @@ export default {
     return {
       mobileMenuOpen: false,
       profileDropdownOpen: false,
+      currentTheme: "light",
+
     };
   },
 
@@ -328,11 +369,11 @@ export default {
         this.profileDropdownOpen = false;
       }
     },
-    toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'forest' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+     toggleTheme() {
+      const newTheme = this.currentTheme === "light" ? "forest" : "light";
+      document.documentElement.dataset.theme = newTheme; // ✅ use dataset
+      this.currentTheme = newTheme;
+      localStorage.setItem("theme", newTheme);
     },
   },
 
@@ -342,6 +383,9 @@ export default {
 
   beforeUnmount() {
     document.removeEventListener("click", this.handleClickOutside);
+    const savedTheme = localStorage.getItem("theme") || "light";
+    this.currentTheme = savedTheme;
+    document.documentElement.dataset.theme = savedTheme;
   },
 };
 </script>
@@ -382,7 +426,27 @@ export default {
 }
 
 [data-theme="forest"] .text-primary {
-  color: #10b981 !important;
+  color: #16af3f !important;
 }
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
 
 </style>
