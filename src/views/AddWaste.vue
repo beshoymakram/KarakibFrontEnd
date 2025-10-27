@@ -1,6 +1,6 @@
 <template>
   <!-- Recycling Waste Types Section -->
-  <section class="bg-base-200 px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
+  <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
     <p
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8"
     >
@@ -33,7 +33,7 @@
       <!-- Carousel (Scrollable Container) -->
       <a
         ref="carousel"
-        class="carousel carousel-center bg-base-200 rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
+        class="carousel carousel-center bg-primary rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
       >
         <div
           v-for="(type, index) in types"
@@ -79,8 +79,8 @@
     </div>
   </section>
   <!-- Waste Types Points Section -->
-  <section class="px-4 sm:px-6 md:px-10 lg:px-12 bg-base-200 text-center pb-12 md:pb-16 lg:pb-20">
-    <p class="text-2xl sm:text-3xl md:text-4xl font-medium pb-6 md:pb-8 text-secondary">
+  <section class="px-4 sm:px-6 md:px-10 lg:px-12 bg-secondary text-center pb-12 md:pb-16 lg:pb-20">
+    <p class="text-2xl pt-7 sm:text-3xl md:text-4xl font-medium pb-6 md:pb-8 text-secondary">
       {{ selectedType.name }}
     </p>
     <div
@@ -222,10 +222,16 @@ export default {
 }
 
 .bg-primary {
-  background-color: rgb(235, 255, 235) !important;
+  background-color: rgb(238, 254, 238) !important;
 }
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(41, 41, 41)!important;
+  background-color: rgb(30, 30, 30)!important;
+}
+.bg-secondary {
+  background-color: rgb(236, 246, 236) !important;
+}
+[data-theme="forest"] .bg-secondary {
+  background-color: rgb(34, 33, 33)!important;
 }
 .text-secondary {
   color: #2c702c !important;
