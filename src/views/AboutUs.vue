@@ -66,7 +66,7 @@
     </section>
 
     <section
-      class="flex-1 bg-[#BFD6BF] py-20 px-6 md:px-16 relative overflow-hidden dark:bg-base-200"
+      class="flex-1 bg-dark py-20 px-6 md:px-16 relative overflow-hidden"
     >
       <!-- Background Doodles -->
       <div class="absolute top-5 right-5 w-32 h-12 opacity-40">
@@ -315,10 +315,10 @@
         </div>
       </div>
     </section>
-    <section class="w-full mx-auto bg-[#BFD6BF] shadow p-4 sm:p-6 md:p-8 bg-base-200">
+    <section class="w-full mx-auto bg-dark shadow p-4 sm:p-6 md:p-8">
       <!-- FAQs -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary text-black rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary text-primary rounded-2xl shadow p-4 sm:p-6 md:p-8"
         id="Faq"
       >
         <h2
@@ -406,7 +406,7 @@
 
       <!-- Inquiry Form -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8 bg-primary text-section"
+        class="max-w-6xl mx-auto my-6 sm:my-8 rounded-2xl shadow p-4 sm:p-6 md:p-8 bg-primary text-section"
         id="inquiry"
       >
         <h2
@@ -724,5 +724,11 @@ export default {
 }
 [data-theme="forest"] .text-section {
   color: white !important;
+}
+.bg-dark {
+  background-color: #BFD6BF !important;
+}
+[data-theme="forest"] .bg-dark {
+  background-color: #252625 !important;
 }
 </style>

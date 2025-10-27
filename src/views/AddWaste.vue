@@ -1,13 +1,13 @@
 <template>
   <!-- Recycling Waste Types Section -->
-  <section class="bg-white px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
+  <section class="bg-base-200 px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-semibold text-center drop-shadow-2xl mb-6 md:mb-8"
+      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8"
     >
       {{ $t("common.recyclingWasteTypes") }}
     </p>
     <p
-      class="text-lg sm:text-xl md:text-2xl text-[#163816] pt-4 md:pt-5 pb-8 md:pb-10 font-semibold text-center md:text-start"
+      class="text-lg sm:text-xl md:text-2xl text-primary pt-4 md:pt-5 pb-8 md:pb-10 font-semibold text-center md:text-start"
     >
       {{ $t("common.selectAWasteType") }}
     </p>
@@ -33,7 +33,7 @@
       <!-- Carousel (Scrollable Container) -->
       <a
         ref="carousel"
-        class="carousel carousel-center bg-white rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
+        class="carousel carousel-center bg-base-200 rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
       >
         <div
           v-for="(type, index) in types"
@@ -52,7 +52,7 @@
           <p
             class="mt-3 md:mt-4 text-base sm:text-lg md:text-xl font-semibold text-[#2C702C]"
             :class="{
-              'text-[#112B11] ': selectedType.id === type.id,
+              'text-primary ': selectedType.id === type.id,
             }"
           >
             {{ type.name }}
@@ -79,8 +79,8 @@
     </div>
   </section>
   <!-- Waste Types Points Section -->
-  <section class="px-4 sm:px-6 md:px-10 lg:px-12 bg-white text-center pb-12 md:pb-16 lg:pb-20">
-    <p class="text-2xl sm:text-3xl md:text-4xl font-medium pb-6 md:pb-8 text-[#112B11]">
+  <section class="px-4 sm:px-6 md:px-10 lg:px-12 bg-base-200 text-center pb-12 md:pb-16 lg:pb-20">
+    <p class="text-2xl sm:text-3xl md:text-4xl font-medium pb-6 md:pb-8 text-secondary">
       {{ selectedType.name }}
     </p>
     <div
@@ -103,7 +103,7 @@
 
         <div class="px-4 pt-3 pb-3">
           <!-- Title -->
-          <h2 class="text-[#2C702C] font-semibold text-base sm:text-lg md:text-xl mb-2 text-start">
+          <h2 class="text-primary font-semibold text-base sm:text-lg md:text-xl mb-2 text-start">
             {{ item.name }}
           </h2>
 
@@ -212,5 +212,31 @@ export default {
 <style scoped>
 .carousel::-webkit-scrollbar {
   display: none;
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
 }
 </style>
