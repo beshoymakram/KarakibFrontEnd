@@ -1,8 +1,50 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: light --default;
+  themes: light --default, forest --prefersdark;
 }
+
+/* Force override DaisyUI's default primary color */
+:root,
+[data-theme="light"],
+html {
+  --p: 142 76% 36% !important; /* Your green color #2C702C */
+  --pf: 120 44% 20% !important; /* Darker green for hover */
+  --pc: 0 0% 100% !important; /* White text on primary */
+  --s: 120 44% 25% !important; /* Secondary same as primary */
+  --sf: 120 44% 20% !important; /* Secondary focus */
+  --sc: 0 0% 100% !important; /* Secondary content */
+  --a: 120 44% 25% !important; /* Accent same as primary */
+  --af: 120 44% 20% !important; /* Accent focus */
+  --ac: 0 0% 100% !important; /* Accent content */
+  --n: 0 0% 0% !important; /* Neutral */
+  --nf: 0 0% 0% !important; /* Neutral focus */
+  --nc: 0 0% 100% !important; /* Neutral content */
+  --b1: 0 0% 100% !important; /* Base 100 */
+  --b2: 0 0% 95% !important; /* Base 200 */
+  --b3: 0 0% 90% !important; /* Base 300 */
+  --bc: 0 0% 20% !important; /* Base content */
+}
+
+[data-theme="forest"] {
+  --p: 142 76% 36%; /* Forest green */
+  --pf: 142 76% 30%; /* Forest green focus */
+  --pc: 0 0% 100%; /* White text on primary */
+  --s: 142 76% 36%; /* Secondary same as primary */
+  --sf: 142 76% 30%; /* Secondary focus */
+  --sc: 0 0% 100%; /* Secondary content */
+  --a: 142 76% 36%; /* Accent same as primary */
+  --af: 142 76% 30%; /* Accent focus */
+  --ac: 0 0% 100%; /* Accent content */
+  --n: 0 0% 0%; /* Neutral */
+  --nf: 0 0% 0%; /* Neutral focus */
+  --nc: 0 0% 100%; /* Neutral content */
+  --b1: 0 0% 9%; /* Base 100 dark */
+  --b2: 0 0% 15%; /* Base 200 dark */
+  --b3: 0 0% 20%; /* Base 300 dark */
+  --bc: 0 0% 80%; /* Base content light */
+}
+
 
 * {
   font-family: "Poppins", sans-serif;

@@ -1,5 +1,5 @@
 <template>
-  <nav class="relative bg-white shadow-sm">
+  <nav class="relative bg-base-100 shadow-sm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-20 justify-between items-center">
         <!-- Left Section -->
@@ -9,7 +9,7 @@
             <button
               type="button"
               @click="mobileMenuOpen = !mobileMenuOpen"
-              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-[#2C702C] focus:ring-[#2C702C] focus:outline-hidden focus:ring-inset cursor-pointer"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-base-content/60 hover:bg-base-200 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer"
             >
               <svg
                 v-if="!mobileMenuOpen"
@@ -53,25 +53,25 @@
           <div class="hidden md:ml-4 md:flex lg:space-x-6 md:space-x-1">
             <router-link
               to="/"
-              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-primary hover:bg-[#E0EBE0]"
             >
               {{ $t("common.home") }}
             </router-link>
             <router-link
               to="/shop"
-              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-primary hover:bg-[#E0EBE0]"
             >
               {{ $t("common.shop") }}
             </router-link>
             <router-link
               to="/add-waste"
-              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-primary hover:bg-[#E0EBE0]"
             >
               {{ $t("common.waste") }}
             </router-link>
             <router-link
               to="/about"
-              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-[#2C702C] hover:bg-[#E0EBE0]"
+              class="inline-flex items-center px-2 py-2 my-4 text-sm font-bold rounded-lg text-primary hover:bg-[#E0EBE0]"
             >
               {{ $t("common.about") }}
             </router-link>
@@ -81,9 +81,11 @@
         <!-- Right Section -->
         <div class="flex items-center space-x-4">
           <!-- Cart (Always visible) -->
+           <!-- theme button -->
+            <button class="btn btn-outline" @click="toggleTheme">Toggle Theme</button>
           <router-link
             to="/cart"
-            class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-md font-bold no-active-style text-[#2C702C] rounded-lg"
+            class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-md font-bold no-active-style text-primary rounded-lg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +113,7 @@
           <div v-if="auth.isAuthenticated" class="relative hidden md:block" ref="profileDropdown">
             <button
               @click="profileDropdownOpen = !profileDropdownOpen"
-              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:ring-offset-2"
+              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               <img
                 :src="
@@ -119,7 +121,7 @@
                   'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')
                 "
                 alt="Profile"
-                class="size-8 rounded-full bg-gray-100"
+                class="size-8 rounded-full bg-base-200"
               />
             </button>
 
@@ -134,23 +136,23 @@
               <div
                 v-if="profileDropdownOpen"
                 @click="profileDropdownOpen = false"
-                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-base-100 py-1 shadow-lg ring-1 ring-base-content/10 focus:outline-none"
               >
                 <router-link
                   to="/profile"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  class="block px-4 py-2 text-sm text-base-content hover:bg-base-200"
                 >
                   {{ $t("common.profile") }}
                 </router-link>
                 <router-link
                   to="/settings"
-                  class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {{ $t("common.settings") }}
                 </router-link>
                 <button
                   @click="handleLogout"
-                  class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  class="block w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {{ $t("common.signOut") }}
                 </button>
@@ -162,13 +164,13 @@
           <div v-if="!auth.isAuthenticated" class="hidden md:flex space-x-3">
             <router-link
               to="/login"
-              class="inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors"
+              class="inline-flex items-center rounded-md border border-primary px-3 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-content transition-colors"
             >
               {{ $t("common.login") }}
             </router-link>
             <router-link
               to="/register"
-              class="inline-flex items-center rounded-md bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white hover:bg-[#1a4d1a] transition-colors"
+              class="inline-flex items-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors"
             >
               {{ $t("common.register") }}
             </router-link>
@@ -181,7 +183,7 @@
           <router-link
             v-if="auth.isAuthenticated && auth.isAdmin"
             to="/admin"
-            class="hidden md:inline-flex items-center rounded-md border border-[#2C702C] px-3 py-2 text-sm font-semibold text-[#2C702C] hover:bg-[#2C702C] hover:text-white transition-colors"
+            class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors"
           >
             {{ $t("common.dashboard") }}
           </router-link>
@@ -198,68 +200,68 @@
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-200">
+      <div v-if="mobileMenuOpen" class="md:hidden bg-base-100 border-t border-base-300">
         <div class="px-4 py-2 space-y-1 max-h-96 overflow-y-auto">
           <router-link
             to="/"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-[#2C702C] bg-[#E0EBE0] py-2 pl-3 pr-4 text-base font-medium text-[#2C702C]"
+            class="block border-l-4 border-primary bg-primary/10 py-2 pl-3 pr-4 text-base font-medium "
           >
             {{ $t("common.home") }}
           </router-link>
           <router-link
             to="/shop"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-base-200"
           >
             {{ $t("common.shop") }}
           </router-link>
           <router-link
             to="/add-waste"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-base-200"
           >
             {{ $t("common.waste") }}
           </router-link>
           <router-link
             to="/about"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:border-gray-300 hover:bg-gray-50"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-base-content hover:border-base-300 hover:bg-base-200"
           >
             {{ $t("common.about") }}
           </router-link>
 
           <!-- Mobile Auth -->
-          <div v-if="!auth.isAuthenticated" class="pt-2 pb-2 border-t border-gray-200">
+          <div v-if="!auth.isAuthenticated" class="pt-2 pb-2 border-t border-base-300">
             <router-link
               to="/login"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
             >
               {{ $t("common.login") }}
             </router-link>
             <router-link
               to="/register"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
             >
               {{ $t("common.register") }}
             </router-link>
           </div>
 
           <!-- Mobile Profile -->
-          <div v-if="auth.isAuthenticated" class="pt-2 pb-2 border-t border-gray-200">
+          <div v-if="auth.isAuthenticated" class="pt-2 pb-2 border-t border-base-300">
             <router-link
               to="/profile"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
             >
               {{ $t("common.profile") }}
             </router-link>
             <router-link
               to="/settings"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
             >
               {{ $t("common.settings") }}
             </router-link>
@@ -267,13 +269,13 @@
               v-if="auth.isAdmin"
               to="/admin"
               @click="mobileMenuOpen = false"
-              class="block py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-base-200"
             >
               {{ $t("common.dashboard") }}
             </router-link>
             <button
               @click="handleLogout(); mobileMenuOpen = false"
-              class="block w-full text-left py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] hover:bg-gray-50"
+              class="block w-full text-left py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] dark:text-green-400 hover:bg-gray-50 dark:hover:bg-gray-800"
             >
               {{ $t("common.signOut") }}
             </button>
@@ -326,6 +328,12 @@ export default {
         this.profileDropdownOpen = false;
       }
     },
+    toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'forest' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    },
   },
 
   mounted() {
@@ -344,19 +352,37 @@ export default {
   background-color: #e0ebe0;
 }
 
+/* Custom hover effect for navigation links */
+.router-link:not(.router-link-exact-active):hover {
+  background-color: #e0ebe0 !important;
+}
+
+[data-theme="forest"] .router-link:not(.router-link-exact-active):hover {
+  background-color: hsl(var(--b2)) !important;
+}
+
 .logo-link.router-link-exact-active {
   background-color: transparent !important;
 }
 
 .cart-icon {
-  color: #2c702c;
+  color: hsl(var(--p));
   cursor: pointer;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .cart-icon:hover {
-  color: #265c26;
+  color: hsl(var(--p) / 0.8);
   transform: scale(1.1);
+}
+
+/* Force override DaisyUI primary colors */
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #10b981 !important;
 }
 
 </style>
