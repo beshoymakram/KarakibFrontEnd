@@ -4,11 +4,7 @@
       <div v-if="waste" class="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row gap-10">
         <!-- Image -->
         <div class="flex-shrink-0 md:w-1/2">
-          <img
-            :src="waste.image_url"
-            :alt="waste.name"
-            class="w-full h-80 object-cover rounded-xl bg-[#EAF2EA]"
-          />
+          <img :src="waste.image_url" :alt="waste.name" class="w-full h-80 object-cover rounded-xl bg-[#EAF2EA]" />
         </div>
 
         <!-- Details -->
@@ -26,17 +22,13 @@
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 mt-6">
-            <button
-              @click="addAndEarn"
-              class="bg-[#2C702C] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#215921]"
-            >
+            <button @click="addAndEarn"
+              class="bg-[#2C702C] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#215921]">
               Add & Earn
             </button>
 
-            <router-link
-              to="/add-waste"
-              class="border border-[#2C702C] text-[#2C702C] px-6 py-3 rounded-md font-semibold hover:bg-[#EAF2EA] text-center"
-            >
+            <router-link to="/add-waste"
+              class="border border-[#2C702C] text-[#2C702C] px-6 py-3 rounded-md font-semibold hover:bg-[#EAF2EA] text-center">
               ← Back to Waste Types
             </router-link>
           </div>
@@ -79,5 +71,6 @@ export default {
 <style scoped>
 .container {
   font-family: 'Poppins', sans-serif;
+
 }
 </style>
