@@ -8,7 +8,7 @@
 :root,
 [data-theme="light"],
 html {
-  --p: 120 44% 25% !important; /* Your green color #2C702C */
+  --p: 142 76% 36% !important; /* Your green color #2C702C */
   --pf: 120 44% 20% !important; /* Darker green for hover */
   --pc: 0 0% 100% !important; /* White text on primary */
   --s: 120 44% 25% !important; /* Secondary same as primary */

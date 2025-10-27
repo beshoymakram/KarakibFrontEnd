@@ -183,7 +183,7 @@
           <router-link
             v-if="auth.isAuthenticated && auth.isAdmin"
             to="/admin"
-            class="hidden md:inline-flex items-center rounded-md border border-primary px-3 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-content transition-colors"
+            class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors"
           >
             {{ $t("common.dashboard") }}
           </router-link>
@@ -205,7 +205,7 @@
           <router-link
             to="/"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-primary bg-primary/10 py-2 pl-3 pr-4 text-base font-medium text-primary"
+            class="block border-l-4 border-primary bg-primary/10 py-2 pl-3 pr-4 text-base font-medium "
           >
             {{ $t("common.home") }}
           </router-link>

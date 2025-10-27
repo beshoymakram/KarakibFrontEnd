@@ -1,15 +1,11 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
     <!-- Hero Section -->
     <section
-      class="relative bg-[#E9EBF8] flex flex-col items-center justify-center text-center py-16 md:py-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-14"
-      style="
-        background-image: url('/images/abouthero.png');
-        background-size: cover;
-        background-position: center;
-      "
+      class="relative flex flex-col items-center justify-center text-center py-16 md:py-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-0 bg-base-100"
+      style="background-image: url('/images/abouthero.png'); background-size: cover; background-position: center;"
     >
-      <div class="absolute inset-0 bg-white/70"></div>
+      <div class="absolute inset-0 bg-base-100/80 dark:bg-base-300/50"></div>
 
       <!-- Doodles in Hero Section -->
       <div
@@ -47,12 +43,12 @@
       <!-- Content -->
       <div class="relative z-10 max-w-3xl mx-auto px-2 sm:px-0">
         <h1
-          class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2C702C] mb-3 sm:mb-4 drop-shadow-lg"
+          class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 sm:mb-4 drop-shadow-lg"
         >
           {{ $t("common.aboutUs") }}
         </h1>
         <p
-          class="text-[#265C26] text-base sm:text-lg md:text-xl font-medium leading-relaxed px-2"
+          class="text-[#265C26] text-base sm:text-lg md:text-xl font-medium leading-relaxed px-2 text-secondary"
         >
           {{ $t("common.karakibIsEcoFriendlyPlatform") }}
         </p>
@@ -70,7 +66,7 @@
     </section>
 
     <section
-      class="flex-1 bg-[#BFD6BF] py-20 px-6 md:px-16 relative overflow-hidden"
+      class="flex-1 bg-[#BFD6BF] py-20 px-6 md:px-16 relative overflow-hidden dark:bg-base-200"
     >
       <!-- Background Doodles -->
       <div class="absolute top-5 right-5 w-32 h-12 opacity-40">
@@ -103,7 +99,7 @@
       </div>
 
       <h2
-        class="text-3xl md:text-4xl text-[#2C702C] font-semibold text-center mb-14 relative z-10"
+        class="text-3xl md:text-4xl text-[#2C702C] font-semibold text-center mb-14 relative z-10 text-primary"
       >
         {{ $t("common.workingTogetherForCleanerFuture") }}
       </h2>
@@ -117,7 +113,7 @@
           <div class="md:w-1/2 w-full relative">
             <!-- Doodle for section 1 -->
             <div
-              class="absolute -top-6 -left-6 w-10 h-10 opacity-70 hidden sm:block"
+              class="absolute -top-25 -left-6 w-10 h-10 opacity-70 hidden sm:block"
             >
               <svg
                 width="64"
@@ -133,10 +129,10 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl font-semibold text-[#2C702C] mb-3 leading-snug">
+            <h3 class="text-2xl font-semibold text-[#2C702C] mb-3 leading-snug text-primary">
               {{ $t("common.makingRecyclingEasyAndRewarding") }}
             </h3>
-            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed">
+            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed text-secondary">
               {{ $t("common.karakibSimplifiesRecyclingProcess") }}
             </p>
             <button
@@ -175,7 +171,7 @@
             <img
               src="/images/about1.png"
               alt="Making Recycling Easy"
-              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover bg-[#EAF2EA] p-4"
+              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover bg-[#EAF2EA] p-4 bg-base-100"
             />
           </div>
         </div>
@@ -203,10 +199,10 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl font-semibold text-[#2C702C] mb-3 leading-snug">
+            <h3 class="text-2xl font-semibold text-[#2C702C] mb-3 leading-snug text-primary">
               {{ $t("common.supportingGreenerCommunity") }}
             </h3>
-            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed">
+            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed text-secondary">
               {{ $t("common.ourGoalIsToBuildNetwork") }}
             </p>
             <button
@@ -245,7 +241,7 @@
             <img
               src="/images/about2.png"
               alt="Supporting a Greener Community"
-              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover bg-[#EAF2EA] p-4"
+              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover bg-[#EAF2EA] p-4 bg-base-100"
             />
           </div>
         </div>
@@ -273,10 +269,10 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl sm:text-3xl font-semibold text-[#2C702C] mb-3">
+            <h3 class="text-2xl sm:text-3xl font-semibold text-[#2C702C] mb-3 text-primary">
               {{ $t("common.innovationWithPurpose") }}
             </h3>
-            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed">
+            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed text-secondary">
               {{ $t("common.karakibCombinesTechnologyAndEnvironmentalCare") }}
             </p>
             <button
@@ -313,16 +309,16 @@
             <img
               src="/images/about3.png"
               alt="Innovation with a Purpose"
-              class="rounded-full w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover bg-[#EAF2EA] p-4"
+              class="rounded-full w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover bg-[#EAF2EA] p-4 bg-base-100"
             />
           </div>
         </div>
       </div>
     </section>
-    <section class="w-full mx-auto bg-[#BFD6BF] shadow p-4 sm:p-6 md:p-8">
+    <section class="w-full mx-auto bg-[#BFD6BF] shadow p-4 sm:p-6 md:p-8 bg-base-200">
       <!-- FAQs -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary text-black rounded-2xl shadow p-4 sm:p-6 md:p-8"
         id="Faq"
       >
         <h2
@@ -371,17 +367,17 @@
 
       <!-- Terms and Conditions -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary rounded-2xl shadow p-4 sm:p-6 md:p-8 text-section"
         id="terms"
       >
         <h2
-          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left"
+          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
         >
           {{ $t("common.termsAndConditions") }}
         </h2>
 
         <p
-          class="text-gray-600 mb-3 sm:mb-4 flex items-start text-sm sm:text-base"
+          class="text-gray-600 mb-3 sm:mb-4 flex items-start text-sm sm:text-base text-section"
         >
           <span class="text-green-600 mr-2 text-lg sm:text-xl">
             <font-awesome-icon :icon="['fas', 'triangle-exclamation']" />
@@ -390,7 +386,7 @@
         </p>
 
         <ul
-          class="list-disc list-inside space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base"
+          class="list-disc list-inside space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-section"
         >
           <li>{{ $t("common.byUsingKarakibYouAgree") }}</li>
           <li>{{ $t("common.usersAreAlsoResponsible") }}</li>
@@ -410,16 +406,16 @@
 
       <!-- Inquiry Form -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8 bg-primary text-section"
         id="inquiry"
       >
         <h2
-          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left"
+          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
         >
           {{ $t("common.sendAnInquiry") }}
         </h2>
         <p
-          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base text-center sm:text-left"
+          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base text-center sm:text-left text-section"
         >
           {{ $t("common.weAreHappyToAnswerQuestions") }}
         </p>
@@ -501,16 +497,16 @@
 
       <!-- Contact Us -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8 bg-primary text-section"
         id="contact"
       >
         <h2
-          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left"
+          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
         >
           {{ $t("common.contactUs") }}
         </h2>
         <p
-          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base text-center sm:text-left"
+          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base text-center sm:text-left text-section"
         >
           {{ $t("common.weAreHereToHelpYou") }}
         </p>
@@ -524,7 +520,7 @@
               {{ $t("common.waysToReachUs") }}
             </h3>
             <ul
-              class="space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-center sm:text-left"
+              class="space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-center sm:text-left text-section"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'location-dot']" />
@@ -550,7 +546,7 @@
               {{ $t("common.connectWithUsOnSocialMedia") }}
             </h3>
             <ul
-              class="space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-center sm:text-left"
+              class="space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-center sm:text-left text-section"
             >
               <li><font-awesome-icon :icon="['fab', 'twitter']" /> @karakib</li>
               <li>
@@ -702,5 +698,31 @@ export default {
 
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-out;
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: #ffffff !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(52, 68, 52)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
 }
 </style>
