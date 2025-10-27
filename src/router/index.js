@@ -31,6 +31,8 @@ import Orders from '@/views/Admin/Orders.vue'
 import DonationSuccess from '@/views/DonationSuccess.vue'
 import GoogleCallback from '@/views/GoogleCallback.vue'
 import MyPoints from '@/views/Profile/MyPoints.vue'
+import Collect from '@/views/Collect.vue'
+import MyRequests from '@/views/Profile/MyRequests.vue'
 
 // Define routes
 const routes = [
@@ -53,7 +55,7 @@ const routes = [
       { path: 'personal-info', name: 'PersonalInfo', component: PersonalInfo },
       { path: 'my-addresses', name: 'MyAddresses', component: MyAddresses },
       { path: 'my-orders', name: 'MyOrders', component: MyOrders },
-      { path: 'my-requests', name: 'MyRequests', component: WasteTypes },
+      { path: 'my-requests', name: 'MyRequests', component: MyRequests },
       { path: 'my-points', name: 'MyPoints', component: MyPoints },
     ],
   },
@@ -109,8 +111,14 @@ const routes = [
   },
   {
     path: '/checkout',
-    name: 'checkout',
+    name: 'Checkout',
     component: CheckOut,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/collect',
+    name: 'collect',
+    component: Collect,
     meta: { requiresAuth: true }
   },
   {

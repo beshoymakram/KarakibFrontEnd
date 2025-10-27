@@ -33,7 +33,15 @@ export default {
     return apiClient.get('/profile/orders');
   },
 
+  getRequests() {
+    return apiClient.get('/profile/requests');
+  },
+
   cancelOrder(id) {
     return apiClient.put('/profile/orders/' + id + '/cancel');
+  },
+
+  cancelRequest(id) {
+    return apiClient.put('/profile/requests/' + id + '/cancel');
   },
 };

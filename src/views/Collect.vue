@@ -1,55 +1,49 @@
 <template>
   <div class="checkout-page bg-[#F5F7F5] min-h-screen py-10">
     <div class="container mx-auto px-4 max-w-6xl">
-      <h1 class="text-3xl font-bold text-[#2C702C] mb-8">{{ $t('common.checkoutOrders') }}</h1>
+      <h1 class="text-3xl font-bold text-[#2C702C] mb-8">{{ $t('common.checkoutRequests') }}</h1>
 
       <div class="grid md:grid-cols-2 gap-6 bg-[#E9EBE9] p-6 rounded-2xl shadow-lg">
         <!-- LEFT SIDE - ORDER DETAILS -->
         <div class="bg-white rounded-xl p-6 shadow">
           <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">
-            {{ $t('common.orderDetails') }}
+            {{ $t('common.requestDetails') }}
           </h2>
 
-          <div v-if="cartStore.products?.length > 0" class="space-y-4">
-            <div v-for="item in cartStore.products" :key="item.id"
-              class="flex justify-between items-center border-t pb-3">
+          <div v-if="cartStore.waste?.length > 0" class="space-y-4">
+            <div v-for="item in cartStore.waste" :key="item.id" class="flex justify-between items-center border-t pb-3">
               <div class="flex items-center gap-4">
                 <img :src="item.cartable.image_url" alt="Product" class="w-14 h-14 rounded-md object-cover" />
                 <div>
                   <p class="font-semibold text-gray-800">
                     {{ item.cartable.name }}
                   </p>
-                  <p class="text-sm text-gray-500">{{ $t('common.colourWhite') }}</p>
                   <p class="text-sm text-gray-500">
-                    {{ item.cartable.price }} {{ $t('common.currency') }} × {{ item.quantity }}
+                    {{ item.cartable.points_per_unit }} {{ $t('common.points') }} × {{ item.quantity }}
                   </p>
                 </div>
               </div>
               <p class="text-[#2C702C] font-semibold">
-                {{ (item.cartable.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
+                {{ item.points }} {{ $t('common.points') }}
               </p>
             </div>
 
             <!-- Totals -->
             <div class="pt-4 border-t mt-4">
               <div class="flex justify-between mb-2">
-                <span>{{ cartStore.products?.length }} {{ $t('common.items') }}</span>
-                <span>{{ cartStore.total }} {{ $t('common.currency') }}</span>
-              </div>
-              <div class="flex justify-between mb-2">
-                <span>{{ $t('common.deliveryFee') }}</span>
-                <span>20 {{ $t('common.currency') }}</span>
+                <span>{{ cartStore.waste?.length }} {{ $t('common.items') }}</span>
+                <span>{{ cartStore.totalPoints }} {{ $t('common.points') }}</span>
               </div>
               <div class="flex justify-between text-xl font-bold text-[#2C702C]">
-                <span>{{ $t('common.totalAmount') }}</span>
-                <span>{{ cartStore.total + 20 }} {{ $t('common.currency') }}</span>
+                <span>{{ $t('common.totalPoints') }}</span>
+                <span>{{ cartStore.totalPoints }} {{ $t('common.points') }}</span>
               </div>
             </div>
           </div>
 
           <div v-else class="text-center text-gray-500 mt-6">
             {{ $t('common.yourCartIsEmpty') }}
-            <router-link to="/shop" class="text-[#2C702C] underline">{{ $t('common.goShopping') }}</router-link>.
+            <router-link to="/shop" class="text-[#2C702C] underline">{{ $t('common.addWaste') }}</router-link>.
           </div>
         </div>
 
@@ -61,7 +55,7 @@
             <!-- Address Section -->
             <div class="mb-6">
               <div class="flex justify-between items-center mb-2">
-                <h3 class="font-semibold text-[#2C702C]">{{ $t('common.deliveryAddress') }}</h3>
+                <h3 class="font-semibold text-[#2C702C]">{{ $t('common.pickupAddress') }}</h3>
                 <button @click="showAddressModal = true"
                   class="bg-[#2C702C] text-white px-4 py-1 rounded-md hover:bg-[#215921] cursor-pointer">
                   {{ $t('common.enterNewAddress') }}
@@ -75,7 +69,7 @@
                     ? 'bg-[#E9F7E9] border-[#2C702C]'
                     : 'bg-gray-100 text-gray-700 border-transparent hover:border-gray-300'">
                   <!-- Radio circle -->
-                  <input type="radio" name="deliveryAddress" :value="address.id" v-model="selectedAddressId" required
+                  <input type="radio" name="pickupAddress" :value="address.id" v-model="selectedAddressId" required
                     class="accent-[#2C702C] h-4 w-4 cursor-pointer mt-1 text-[#2C702C] focus:ring-[#2C702C] border-gray-300" />
 
                   <!-- Address info -->
@@ -97,31 +91,31 @@
 
             <!-- Payment Section -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.paymentMethod') }}</h3>
+              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.payoutMethod') }}</h3>
               <div class="flex gap-3">
-                <button @click="paymentMethod = 'cash'" :class="[
+                <button @click="payoutMethod = 'earn'" :class="[
                   'px-4 py-2 rounded-md border cursor-pointer',
-                  paymentMethod === 'cash'
+                  payoutMethod === 'earn'
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
                     : 'border-gray-300 text-gray-700',
                 ]">
-                  {{ $t('common.cashOnDelivery') }}
+                  {{ $t('common.earnPoints') }}
                 </button>
-                <button @click="paymentMethod = 'card'" :class="[
+                <button @click="payoutMethod = 'donate'" :class="[
                   'px-4 py-2 rounded-md border cursor-pointer',
-                  paymentMethod === 'card'
+                  payoutMethod === 'donate'
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
                     : 'border-gray-300 text-gray-700',
                 ]">
-                  {{ $t('common.card') }}
+                  {{ $t('common.donatePoints') }}
                 </button>
               </div>
             </div>
 
             <!-- Notes -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.deliveryNotes') }}</h3>
-              <textarea v-model="deliveryNotes" :placeholder="$t('common.addDeliveryNotes')"
+              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.pickupNotes') }}</h3>
+              <textarea v-model="pickupNotes" :placeholder="$t('common.addPickupNotes')"
                 class="w-full border border-gray-300 rounded-md p-2 text-sm" rows="3"></textarea>
             </div>
           </div>
@@ -144,7 +138,7 @@
     <div v-if="showAddressModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg p-6 w-[90%] max-w-md">
         <h3 class="text-xl font-semibold text-[#2C702C] mb-4">
-          {{ $t('common.enterDeliveryAddress') }}
+          {{ $t('common.enterpickupAddress') }}
         </h3>
 
         <form @submit.prevent="confirmCreate" class="space-y-3">
@@ -212,12 +206,11 @@ import { useAuthStore } from "@/stores/auth";
 import { useCartStore } from "@/stores/cart";
 
 export default {
-  name: "CheckoutPage",
+  name: "CollectPage",
   data() {
     return {
       showAddressModal: false,
       showConfirmation: false,
-      isRedirecting: false,
       selectedAddressId: '',
       addresses: [],
       createForm: {
@@ -227,8 +220,8 @@ export default {
         street_address: '',
         city: '',
       },
-      paymentMethod: "",
-      deliveryNotes: "",
+      payoutMethod: "",
+      pickupNotes: "",
     };
   },
   computed: {
@@ -266,41 +259,26 @@ export default {
     async placeOrder() {
       if (!this.selectedAddressId) {
         if (this.addresses.length < 1) {
-          this.$toast.error(this.$t('common.addDeliveryAddressFirst'));
+          this.$toast.error(this.$t('common.addPickupAddressFirst'));
           return;
         }
-        this.$toast.error(this.$t('common.pleaseSelectDeliveryAddress'));
+        this.$toast.error(this.$t('common.pleaseSelectpickupAddress'));
         return;
       }
 
-      if (!this.paymentMethod) {
-        this.$toast.error(this.$t('common.pleaseSelectPaymentMethod'));
+      if (!this.payoutMethod) {
+        this.$toast.error(this.$t('common.pleaseSelectpayoutMethod'));
         return;
-      }
-
-      if (this.paymentMethod === 'card') {
-        this.isRedirecting = true;
       }
 
       try {
-        const response = await checkoutService.checkout({
+        await checkoutService.collect({
           user_address_id: this.selectedAddressId,
-          payment_method: this.paymentMethod,
-          notes: this.deliveryNotes,
+          payout_method: this.payoutMethod,
+          notes: this.pickupNotes,
         });
 
-        if (response.data.url) {
-          window.location.href = response.data.url;
-        }
-
-        // nextTick(() => {
-        //   this.$toast.success(response.data.message);
-        // });
-
-        if (this.paymentMethod === 'cash') {
-          this.showConfirmation = true;
-        }
-
+        this.showConfirmation = true;
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
@@ -312,7 +290,7 @@ export default {
   },
   async mounted() {
     await this.cartStore.fetchCart();
-    if (this.cartStore.products?.length === 0) {
+    if (this.cartStore.waste?.length === 0) {
       this.$router.push("/cart");
     }
     this.fetchAddresses();
