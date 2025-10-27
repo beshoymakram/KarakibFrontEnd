@@ -203,6 +203,7 @@
         "pleaseSelectpickupAddress": "يرجى اختيار عنوان الاستلام.",
         "addPickupAddressFirst": "يرجى إضافة عنوان استلام أولاً.",
         "addDeliveryAddressFirst": "يرجى إضافة عنوان توصيل أولاً.",
+        "enterPickupAddress": "أضف عنوان استلام",
         "pleaseSelectPaymentMethod": "يرجى اختيار طريقة الدفع.",
         "pleaseSelectpayoutMethod": "يرجى اختيار طريقة الدفع.",
         "pleaseEnterTheAmountYouWantToDonate": "يرجى إدخال المبلغ الذي تريد التبرع به.",

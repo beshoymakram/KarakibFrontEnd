@@ -138,7 +138,7 @@
     <div v-if="showAddressModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg p-6 w-[90%] max-w-md">
         <h3 class="text-xl font-semibold text-[#2C702C] mb-4">
-          {{ $t('common.enterpickupAddress') }}
+          {{ $t('common.enterPickupAddress') }}
         </h3>
 
         <form @submit.prevent="confirmCreate" class="space-y-3">

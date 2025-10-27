@@ -202,6 +202,7 @@
     "pleaseSelectpickupAddress": "Please select pickup address.",
     "addPickupAddressFirst": "Please add a pickup address first.",
     "addDeliveryAddressFirst": "Please add a delivery address first.",
+    "enterPickupAddress": "Please enter pickup address.",
     "pleaseSelectPaymentMethod": "Please select payment method.",
     "pleaseSelectpayoutMethod": "Please select payout method.",
     "pleaseEnterTheAmountYouWantToDonate": "Please enter the amount you want to donate.",
