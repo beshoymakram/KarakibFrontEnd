@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-[#BFD6BF] py-6 md:py-8 px-4">
+  <div class="min-h-screen bg-prod py-6 md:py-8 px-4">
     <div v-if="product" class="max-w-6xl mx-auto">
-      <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 bg-[#F6F7FB] rounded-lg shadow-sm">
+      <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 bg-item rounded-lg shadow-sm">
         <!-- Product Section -->
         <div
           class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 mb-10 md:mb-12 lg:mb-16"
@@ -34,7 +34,7 @@
 
           <!-- Product Info -->
           <div>
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#112B11] mb-2 md:mb-3">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-2 md:mb-3">
               {{ product.name }}
             </h1>
             <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
@@ -53,23 +53,23 @@
                     />
                   </svg>
                 </div>
-                <span class="text-sm sm:text-base text-gray-600 font-medium"
+                <span class="text-sm sm:text-base text-secondary font-medium"
                   >{{ productRating }}/5</span
                 >
               </div>
               <span class="text-gray-400">|</span>
-              <span class="text-sm sm:text-base text-gray-600">{{ productSold }} Sold</span>
+              <span class="text-sm sm:text-base text-secondary">{{ productSold }} Sold</span>
             </div>
-            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C702C] mb-4 md:mb-6">
+            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 md:mb-6">
               {{ product.price }} {{ $t("common.currency") }}
             </div>
-            <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-5 md:mb-6">
+            <p class="text-sm sm:text-base text-primary leading-relaxed mb-5 md:mb-6">
               {{ product.description }}
             </p>
 
             <!-- Color Selection -->
             <div v-if="productColors.length > 0" class="mb-4 md:mb-5">
-              <h3 class="text-base sm:text-lg font-semibold text-[#112B11] mb-2 md:mb-3">
+              <h3 class="text-base sm:text-lg font-semibold text-secondary mb-2 md:mb-3">
                 Select Color
               </h3>
               <div class="flex gap-2 md:gap-3">
@@ -91,7 +91,7 @@
 
             <!-- Size Selection -->
             <div v-if="productSizes.length > 0" class="mb-6">
-              <h3 class="text-base sm:text-lg font-semibold text-[#112B11] mb-2 md:mb-3">
+              <h3 class="text-base sm:text-lg font-semibold text-secondary mb-2 md:mb-3">
                 Select Size
               </h3>
               <div class="flex flex-wrap gap-2 md:gap-3">
@@ -120,7 +120,7 @@
                 Add to Cart
               </button>
               <button
-                class="flex-1 bg-[#112B11] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md"
+                class="flex-1 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md"
               >
                 Checkout Now
               </button>
@@ -130,7 +130,7 @@
 
         <!-- Reviews Section -->
         <div class="px-2 sm:px-4 md:px-6 lg:px-8">
-          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#112B11] mb-5 md:mb-6 lg:mb-8">
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-secondary mb-5 md:mb-6 lg:mb-8">
             Customer Reviews
           </h2>
 
@@ -165,7 +165,7 @@
             <!-- Rating Bars -->
             <div class="md:col-span-2 space-y-2 md:space-y-3">
               <div v-for="rating in [5, 4, 3, 2, 1]" :key="rating" class="flex items-center gap-4">
-                <span class="text-xs sm:text-sm font-medium text-gray-700 w-6 sm:w-8"
+                <span class="text-xs sm:text-sm font-medium text-primary w-6 sm:w-8"
                   >{{ rating }}★</span
                 >
                 <div class="flex-1 h-2 sm:h-3 bg-gray-200 rounded-full overflow-hidden">
@@ -174,7 +174,7 @@
                     :style="{ width: getRatingPercentage(rating) + '%' }"
                   ></div>
                 </div>
-                <span class="text-xs sm:text-sm text-gray-600 w-8 sm:w-12 text-right">{{
+                <span class="text-xs sm:text-sm text-primary w-8 sm:w-12 text-right">{{
                   getRatingCount(rating)
                 }}</span>
               </div>
@@ -186,7 +186,7 @@
             <div
               v-for="review in displayedReviews"
               :key="review.id"
-              class="bg-white rounded-xl p-4 md:p-6 shadow-sm"
+              class="bg-[#f5f1e0] rounded-xl p-4 md:p-6 shadow-sm"
             >
               <div class="flex items-start gap-3 md:gap-4">
                 <img
@@ -421,5 +421,43 @@ export default {
   overflow: hidden;
   line-clamp: 2;
   /* Standard property for future compatibility */
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #1d491d !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.bg-prod {
+  background-color: #BFD6BF;
+}
+[data-theme="forest"] .bg-prod {
+  background-color: #4b4a4a;
+}
+.bg-item {
+  background-color: #FFFFFF;
+}
+[data-theme="forest"] .bg-item {
+  background-color: #393636;
 }
 </style>
