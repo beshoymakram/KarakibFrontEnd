@@ -23,6 +23,20 @@
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
 
+      <div class="relative">
+        <button @click="openCreateAdminModal()"
+          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+          Add new admin
+        </button>
+      </div>
+
+      <div class="relative">
+        <button @click="openCreateCourierModal()"
+          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+          Add new courier
+        </button>
+      </div>
+
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
           <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
@@ -197,6 +211,7 @@
                   required>
                   <option value="user">User</option>
                   <option value="courier">Courier</option>
+                  <option value="admin">Admin</option>
                 </select>
               </div>
 
@@ -207,6 +222,7 @@
                 <select id="role" v-model="editForm.status"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   required>
+                  <option value="">Select Status</option>
                   <option value="active">Active</option>
                   <option value="suspended">Suspended</option>
                 </select>
@@ -238,11 +254,173 @@
         </div>
       </div>
     </div>
+
+    <div v-if="showCreateAdminModal"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
+      @click="showCreateAdminModal = false">
+      <div class="relative p-4 w-full max-w-2xl" @click.stop>
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+              Add Admin
+            </h3>
+            <button type="button" @click="showCreateAdminModal = false"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+
+          <!-- Body -->
+          <form @submit.prevent="confirmCreateAdmin" class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <!-- Name -->
+              <div class="col-span-2">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Name
+                </label>
+                <input type="text" id="name" v-model="createAdminForm.name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter admin name" required />
+              </div>
+
+              <!-- Email -->
+              <div class="col-span-2 sm:col-span-1">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Email
+                </label>
+                <input type="email" id="email" v-model="createAdminForm.email"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="user@example.com" required />
+              </div>
+
+              <!-- Phone -->
+              <div class="col-span-2 sm:col-span-1">
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Phone
+                </label>
+                <input type="tel" id="phone" v-model="createAdminForm.phone"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="01234567890" required />
+              </div>
+
+              <div class="col-span-2">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Password
+                </label>
+                <input type="password" id="password" v-model="createAdminForm.password"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Password" required />
+              </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex justify-end space-x-3">
+              <button @click="showCreateAdminModal = false" type="button"
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                Cancel
+              </button>
+              <button type="submit"
+                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                {{ $t('common.Save Changes') }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="showCreateCourierModal"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
+      @click="showCreateCourierModal = false">
+      <div class="relative p-4 w-full max-w-2xl" @click.stop>
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+              Add Courier
+            </h3>
+            <button type="button" @click="showCreateCourierModal = false"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+
+          <!-- Body -->
+          <form @submit.prevent="confirmCreateCourier" class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <!-- Name -->
+              <div class="col-span-2">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Name
+                </label>
+                <input type="text" id="name" v-model="createCourierForm.name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter courier name" required />
+              </div>
+
+              <!-- Email -->
+              <div class="col-span-2 sm:col-span-1">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Email
+                </label>
+                <input type="email" id="email" v-model="createCourierForm.email"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="user@example.com" required />
+              </div>
+
+              <!-- Phone -->
+              <div class="col-span-2 sm:col-span-1">
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Phone
+                </label>
+                <input type="tel" id="phone" v-model="createCourierForm.phone"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="01234567890" required />
+              </div>
+
+              <div class="col-span-2">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Password
+                </label>
+                <input type="password" id="password" v-model="createCourierForm.password"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Password" required />
+              </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex justify-end space-x-3">
+              <button @click="showCreateCourierModal = false" type="button"
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                Cancel
+              </button>
+              <button type="submit"
+                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                {{ $t('common.Save Changes') }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </Teleport>
 
 </template>
 
 <script>
+import adminsService from '@/services/adminsService';
+import couriersService from '@/services/couriersService';
 import usersService from '@/services/usersService';
 import { nextTick } from 'vue';
 
@@ -255,6 +433,22 @@ export default {
       selectedUser: '',
       showDeleteModal: false,
       showEditModal: false,
+      showCreateAdminModal: false,
+      showCreateCourierModal: false,
+      createAdminForm: {
+        name: '',
+        email: '',
+        phone: '',
+        type: 'admin',
+        points: 0
+      },
+      createCourierForm: {
+        name: '',
+        email: '',
+        phone: '',
+        type: 'courier',
+        points: 0
+      },
       editForm: {
         id: null,
         name: '',
@@ -303,6 +497,14 @@ export default {
   },
 
   methods: {
+    openCreateAdminModal() {
+      this.showCreateAdminModal = true;
+    },
+
+    openCreateCourierModal() {
+      this.showCreateCourierModal = true;
+    },
+
     openDeleteModal(user) {
       this.selectedUser = user.id;
       this.showDeleteModal = true;
@@ -331,8 +533,33 @@ export default {
         this.showEditModal = false;
         this.fetchUsers();
       } catch (error) {
-        console.error("Error updating user:", error);
-        this.$toast.error(this.$t('common.failedToUpdateUser'));
+        this.$toast.error(error.response.data.message);
+      }
+    },
+
+    async confirmCreateAdmin() {
+      try {
+        const response = await adminsService.registerAdmin(this.createAdminForm);
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+        });
+        this.showCreateAdminModal = false;
+        this.fetchUsers();
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
+    },
+
+    async confirmCreateCourier() {
+      try {
+        const response = await couriersService.registerCourier(this.createCourierForm);
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+        });
+        this.showCreateCourierModal = false;
+        this.fetchUsers();
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
       }
     },
 

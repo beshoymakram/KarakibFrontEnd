@@ -136,7 +136,7 @@ export default {
           this.$toast.success(this.$t('common.loggedInSuccessfully'));
         })
       } catch (error) {
-        this.$toast.error(error)
+        // this.$toast.error(error)
         this.$toast.error(this.authStore.error)
         setTimeout(() => {
           this.authStore.error = null;
@@ -145,7 +145,6 @@ export default {
     },
 
     async handleGoogleLogin() {
-      // Redirect to Laravel Google OAuth endpoint
       window.location.href = `${import.meta.env.VITE_URL}/auth/google/redirect`;
     },
   },
