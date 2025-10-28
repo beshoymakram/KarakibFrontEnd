@@ -3,10 +3,10 @@
     <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5">
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body">
-          <h3 class="text-lg font-semibold">Total Users</h3>
-          <p class="text-3xl font-bold text-[#2C702C]">2450</p>
+          <h3 class="text-lg font-semibold">{{ $t('common.totalUsers') }}</h3>
+          <p class="text-3xl font-bold text-[#2C702C]">{{ users.total }}</p>
           <div class="numbers flex">
-            <p class="text-xl font-bold text-gray-500">2304 Active</p>
+            <p class="text-xl font-bold text-gray-500">{{ users.new }} {{ $t('common.joinedLast24') }}</p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-6 text-[#2C702C]">
               <path fill-rule="evenodd"
@@ -18,10 +18,10 @@
       </div>
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body">
-          <h3 class="text-lg font-semibold">Total Orders</h3>
-          <p class="text-3xl font-bold text-[#2C702C]">2450</p>
+          <h3 class="text-lg font-semibold">{{ $t('common.totalOrders') }}</h3>
+          <p class="text-3xl font-bold text-[#2C702C]">{{ orders.total }}</p>
           <div class="numbers flex">
-            <p class="text-xl font-bold text-gray-500">2304 Active</p>
+            <p class="text-xl font-bold text-gray-500">{{ orders.new }} {{ $t('common.new') }}</p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-6 text-[#2C702C]">
               <path
@@ -34,10 +34,10 @@
       </div>
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body">
-          <h3 class="text-lg font-semibold">Total Users</h3>
-          <p class="text-3xl font-bold text-[#2C702C]">2450</p>
+          <h3 class="text-lg font-semibold">{{ $t('common.collectRequests') }}</h3>
+          <p class="text-3xl font-bold text-[#2C702C]">{{ requests.total }}</p>
           <div class="numbers flex">
-            <p class="text-xl font-bold text-gray-500">2304 Active</p>
+            <p class="text-xl font-bold text-gray-500">{{ requests.pending }} {{ $t('common.pending') }}</p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-6 text-[#2C702C]">
               <path fill-rule="evenodd"
@@ -49,10 +49,12 @@
       </div>
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body">
-          <h3 class="text-lg font-semibold">Total Users</h3>
-          <p class="text-3xl font-bold text-[#2C702C]">2450</p>
+          <h3 class="text-lg font-semibold">{{ $t('common.donatedPoints') }}</h3>
+          <p class="text-3xl font-bold text-[#2C702C]">{{ Math.abs(donatedPoints) }}</p>
           <div class="numbers flex">
-            <p class="text-xl font-bold text-gray-500">2304 Active</p>
+            <p class="text-xl font-bold text-gray-500">{{ $t('common.equivalentTo') }} {{ Math.abs(donatedPoints /
+              19).toFixed() }} {{ $t('common.currency') }}
+            </p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-6 text-[#2C702C]">
               <path fill-rule="evenodd"
@@ -80,6 +82,8 @@
 </template>
 
 <script>
+import adminNumbersService from '@/services/adminNumbersService';
+
 export default {
   name: "AdminLayout",
   data() {
@@ -87,6 +91,10 @@ export default {
       activeTab: '',
       usersCount: '',
       ordersCount: '',
+      users: '',
+      orders: '',
+      requests: '',
+      donatedPoints: '',
       tabs: [
         { id: 'users', label: 'Users' },
         { id: 'waste-types', label: 'Waste Types' },
@@ -100,6 +108,23 @@ export default {
       ],
     }
   },
+  methods: {
+
+    async getNumbers() {
+      try {
+        const response = await adminNumbersService.getNumbers();
+        this.users = response.data.users;
+        this.orders = response.data.orders;
+        this.requests = response.data.requests;
+        this.donatedPoints = response.data.donated_points;
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
+    },
+  },
+  mounted() {
+    this.getNumbers();
+  }
 };
 </script>
 

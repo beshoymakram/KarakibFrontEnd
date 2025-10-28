@@ -2,17 +2,6 @@
   <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
-        <select v-model="filters.type"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Types</option>
-          <option value="earn">{{ $t('common.earnedPoints') }}</option>
-          <option value="convert">{{ $t('common.convertedPoints') }}</option>
-          <option value="donate">{{ $t('common.donatedPoints') }}</option>
-        </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
-      </div>
-
-      <div class="relative">
         <button @click="openCreateModal()"
           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
           {{ $t('common.Convert points to balance') }}
@@ -208,7 +197,7 @@ import { useAuthStore } from '@/stores/auth';
 import { nextTick } from 'vue';
 
 export default {
-  name: 'MyPoints',
+  name: 'DonatedPoints',
 
   data() {
     return {
@@ -228,9 +217,6 @@ export default {
         payout_method: '',
         status: '',
       },
-      filters: {
-        type: '',
-      },
 
       points: []
     }
@@ -239,12 +225,6 @@ export default {
   computed: {
     filteredPoints() {
       let filtered = this.points;
-
-      if (this.filters.type) {
-        filtered = filtered.filter(item =>
-          item.type === this.filters.type
-        );
-      }
 
       if (this.searchQuery) {
         filtered = filtered.filter(point =>

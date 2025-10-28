@@ -38,7 +38,7 @@
         <div class="card-body flex flex-col justify-evenly">
           <h3 class="text-lg font-semibold">{{ $t('common.myOrders') }}</h3>
           <div class="numbers flex items-center">
-            <p class="text-3xl font-bold text-[#2C702C]">{{ auth.user.orders?.length }}</p>
+            <p class="text-3xl font-bold text-[#2C702C]">{{ auth.user.orders?.length || 0 }}</p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-6 text-[#2C702C]">
               <path
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import { useAuthStore } from '@/stores/auth';
+
 export default {
   name: "ProfileLayout",
   data() {
@@ -80,6 +82,9 @@ export default {
         { id: 'my-points', label: 'My Points' },
       ],
     }
+  },
+  mounted() {
+    useAuthStore().fetchUser();
   },
 };
 </script>
