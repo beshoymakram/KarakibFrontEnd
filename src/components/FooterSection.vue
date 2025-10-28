@@ -5,18 +5,18 @@
         <div class="flex items-center gap-2 mb-3">
           <img src="/logos/logo_horizontal.png" alt="Karakib Logo" class="w-32" />
         </div>
-        <p class="text-section text-sm mb-3 leading-relaxed font-semibold">
+        <p class="text-primary text-sm mb-3 leading-relaxed font-semibold">
           {{ $t('common.karakibIsEcoFriendlyPlatformFooter') }}
         </p>
-        <p class="text-sm font-semibold text-section">
+        <p class="text-sm font-semibold text-primary">
           {{ $t('common.emailLabel') }}
-          <span class="font-normal text-section">karakib@gmail.com</span>
+          <span class="font-normal text-secondary">karakib@gmail.com</span>
         </p>
       </div>
 
       <div>
-        <h3 class="font-semibold text-[#2C702C] mb-3">{{ $t('common.karakib') }}</h3>
-        <ul class="space-y-1 text-sm text-section">
+        <h3 class="font-semibold text-primary mb-3">{{ $t('common.karakib') }}</h3>
+        <ul class="space-y-1 text-sm text-secondary">
           <li>
             <RouterLink to="/about" class="hover:text-green-700">{{ $t('common.aboutUs') }}</RouterLink>
           </li>
@@ -27,8 +27,8 @@
       </div>
 
       <div>
-        <h3 class="font-semibold text-[#2C702C] mb-3">{{ $t('common.areYouACollector') }}</h3>
-        <ul class="space-y-1 text-sm text-section">
+        <h3 class="font-semibold text-primary mb-3">{{ $t('common.areYouACollector') }}</h3>
+        <ul class="space-y-1 text-sm text-secondary">
           <li>
             <RouterLink to="/join" class="hover:text-green-700">{{ $t('common.joinKarakibCollectors') }}</RouterLink>
           </li>
@@ -36,8 +36,8 @@
       </div>
 
       <div>
-        <h3 class="font-semibold text-[#2C702C] mb-3">{{ $t('common.supportHelp') }}</h3>
-        <ul class="space-y-1 text-sm text-section">
+        <h3 class="font-semibold text-primary mb-3">{{ $t('common.supportHelp') }}</h3>
+        <ul class="space-y-1 text-sm text-secondary">
           <li>
             <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">{{ $t('common.faq') }}
             </RouterLink>
@@ -62,7 +62,7 @@
     </div>
 
     <div
-      class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-green-200 pt-6 text-sm text-section">
+      class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-green-200 pt-6 text-sm text-primary">
       <p class="mb-4 md:mb-0">
         &copy; {{ currentYear }} {{ $t('common.karakib') }}. {{ $t('common.allRightsReserved') }}
       </p>

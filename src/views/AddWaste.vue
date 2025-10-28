@@ -44,9 +44,9 @@
           <img
             :src="type.image_url"
             :alt="type.name"
-            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-[#EAF2EA] transition-transform duration-300 hover:scale-105"
+            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-carousel transition-transform duration-300 hover:scale-105"
             :class="{
-              'outline-2 outline-[#2C702C]': selectedType.id === type.id,
+              'outline-4 outline-[#2C702C]': selectedType.id === type.id,
             }"
           />
           <p
@@ -244,5 +244,11 @@ export default {
 }
 [data-theme="forest"] .text-section {
   color: white !important;
+}
+.bg-carousel {
+  background-color: #EAF2EA !important;
+}
+[data-theme="forest"] .bg-carousel {
+  background-color: #272827 !important;
 }
 </style>

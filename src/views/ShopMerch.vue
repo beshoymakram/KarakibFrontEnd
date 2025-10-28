@@ -2,18 +2,15 @@
   <!-- head shop section -->
   <div class="relative px-4 sm:px-6 md:px-8 pb-0 md:pb-2">
     <!-- Custom layered gradient overlay -->
-    <div
-      class="absolute inset-0 bg-gradient-to-b from-[#E9EBF8]/[0.9] via-[#E9EBF8]/[0.8] to-transparent"
-      style="
-        background: linear-gradient(
-          to bottom,
-          rgba(233, 235, 248, 0.8) 0%,
-          rgba(233, 235, 248, 0.75) 50%,
-          rgba(233, 235, 248, 0.7) 95%,
-          rgba(233, 235, 248, 0) 100%
-        );
-      "
-    ></div>
+  <div
+    class="absolute inset-0"
+    :style="{
+      background:
+        theme === 'forest'
+          ? 'linear-gradient(to bottom, rgba(17,17,17,0.9) 0%, rgba(17,17,17,0.8) 50%, rgba(17,17,17,0.7) 95%, rgba(17,17,17,0) 100%)'
+          : 'linear-gradient(to bottom, rgba(233,235,248,0.8) 0%, rgba(233,235,248,0.75) 50%, rgba(233,235,248,0.7) 95%, rgba(233,235,248,0) 100%)',
+    }"
+  ></div>
 
     <!-- Background image -->
     <img
@@ -36,7 +33,7 @@
       <!-- Text -->
 
       <p
-        class="max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#2C702C] font-semibold leading-relaxed text-center lg:max-w-fit"
+        class="max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary font-semibold leading-relaxed text-center lg:max-w-fit"
       >
         {{ $t("common.supportKarakibMission") }}
       </p>
@@ -87,7 +84,7 @@
     <div
       v-for="(product, index) in filteredProducts"
       :key="index"
-      class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-primary w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block">
@@ -203,6 +200,8 @@ export default {
       categories: [],
       products: [],
       loadingStore: useLoadingStore(),
+      theme: document.documentElement.getAttribute("data-theme") || "light",
+
     };
   },
   computed: {
@@ -279,8 +278,43 @@ export default {
   mounted() {
     this.fetchCategories();
     this.fetchProducts();
+        const observer = new MutationObserver(() => {
+      this.theme = document.documentElement.getAttribute("data-theme");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+</style>

@@ -112,7 +112,7 @@
           <img
             :src="item.image_url"
             :alt="item.name"
-            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-[#EAF2EA]"
+            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-carousel"
           />
           <p class="mt-3 md:mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary">
             {{ item.name }}
@@ -602,5 +602,11 @@ export default {
 }
 [data-theme="forest"] .bg-merch {
   background-color: #5fc285 !important;
+}
+.bg-carousel {
+  background-color: #EAF2EA !important;
+}
+[data-theme="forest"] .bg-carousel {
+  background-color: #272827 !important;
 }
 </style>
