@@ -48,12 +48,12 @@
           {{ $t("common.aboutUs") }}
         </h1>
         <p
-          class="text-[#265C26] text-base sm:text-lg md:text-xl font-medium leading-relaxed px-2 text-secondary"
+          class=" text-base sm:text-lg md:text-xl font-medium leading-relaxed px-2 text-secondary"
         >
           {{ $t("common.karakibIsEcoFriendlyPlatform") }}
         </p>
         <button
-          class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-md text-base sm:text-lg transition"
+          class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-md text-base sm:text-lg transition cursor-pointer"
           @click="
             openModal(
               'Karakib simplifies recycling by connecting users to collection points, scheduling pickups, and rewarding eco-friendly actions through our green points system. Every step you take with Karakib brings us closer to a cleaner Egypt!'
@@ -99,7 +99,7 @@
       </div>
 
       <h2
-        class="text-3xl md:text-4xl text-[#2C702C] font-semibold text-center mb-14 relative z-10 text-primary"
+        class="text-3xl md:text-4xl font-semibold text-center mb-14 relative z-10 text-primary"
       >
         {{ $t("common.workingTogetherForCleanerFuture") }}
       </h2>
@@ -129,14 +129,14 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl font-semibold text-[#2C702C] mb-3 leading-snug text-primary">
+            <h3 class="text-2xl font-semibold mb-3 leading-snug text-primary">
               {{ $t("common.makingRecyclingEasyAndRewarding") }}
             </h3>
-            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed text-secondary">
+            <p class="mb-5 text-base sm:text-lg leading-relaxed text-secondary">
               {{ $t("common.karakibSimplifiesRecyclingProcess") }}
             </p>
             <button
-              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base"
+              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
               @click="
                 openModal(
                   'We collaborate with communities, NGOs, and local businesses to create awareness and provide incentives for sustainable habits. Karakib empowers individuals to make a lasting impact together.'
@@ -171,7 +171,7 @@
             <img
               src="/images/about1.png"
               alt="Making Recycling Easy"
-              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover bg-[#EAF2EA] p-4 bg-base-100"
+              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover p-4 bg-base-100"
             />
           </div>
         </div>
@@ -199,14 +199,14 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl font-semibold text-[#2C702C] mb-3 leading-snug text-primary">
+            <h3 class="text-2xl font-semibold mb-3 leading-snug text-primary">
               {{ $t("common.supportingGreenerCommunity") }}
             </h3>
-            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed text-secondary">
+            <p class="mb-5 text-base sm:text-lg leading-relaxed text-secondary">
               {{ $t("common.ourGoalIsToBuildNetwork") }}
             </p>
             <button
-              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base"
+              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
               @click="
                 openModal(
                   'Karakib collaborates with communities, NGOs, and local businesses to create awareness and provide incentives for sustainable habits. Karakib empowers individuals to make a lasting impact together.'
@@ -241,7 +241,7 @@
             <img
               src="/images/about2.png"
               alt="Supporting a Greener Community"
-              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover bg-[#EAF2EA] p-4 bg-base-100"
+              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover p-4 bg-base-100"
             />
           </div>
         </div>
@@ -269,14 +269,14 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl sm:text-3xl font-semibold text-[#2C702C] mb-3 text-primary">
+            <h3 class="text-2xl sm:text-3xl font-semibold mb-3 text-primary">
               {{ $t("common.innovationWithPurpose") }}
             </h3>
-            <p class="text-[#163816] mb-5 text-base sm:text-lg leading-relaxed text-secondary">
+            <p class=" mb-5 text-base sm:text-lg leading-relaxed text-secondary">
               {{ $t("common.karakibCombinesTechnologyAndEnvironmentalCare") }}
             </p>
             <button
-              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base transition"
+              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base transition cursor-pointer"
               @click="
                 openModal(
                   'we use technology to streamline recycling processes, making it easier for users to participate and track their contributions. Our innovative solutions aim to foster a culture of sustainability and environmental responsibility.'
@@ -309,7 +309,7 @@
             <img
               src="/images/about3.png"
               alt="Innovation with a Purpose"
-              class="rounded-full w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover bg-[#EAF2EA] p-4 bg-base-100"
+              class="rounded-full w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover p-4 bg-base-100"
             />
           </div>
         </div>
@@ -497,7 +497,7 @@
 
       <!-- Contact Us -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-white rounded-2xl shadow p-4 sm:p-6 md:p-8 bg-primary text-section"
+        class="max-w-6xl mx-auto my-6 sm:my-8 rounded-2xl shadow p-4 sm:p-6 md:p-8 bg-primary text-section"
         id="contact"
       >
         <h2
