@@ -225,7 +225,7 @@ export default {
   background-color: rgb(244, 244, 244) !important;
 }
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(30, 30, 30)!important;
+  background-color: rgb(50, 49, 49)!important;
 }
 .bg-secondary {
   background-color: rgb(240, 240, 240) !important;
@@ -249,6 +249,6 @@ export default {
   background-color: #EAF2EA !important;
 }
 [data-theme="forest"] .bg-carousel {
-  background-color: #272827 !important;
+  background-color: #637763 !important;
 }
 </style>
