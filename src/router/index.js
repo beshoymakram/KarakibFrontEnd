@@ -169,8 +169,8 @@ const routes = [
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
   { path: '/forgot-password', name: 'forgot-password', component: ForgotPassword, meta: { requiresGuest: true } },
-  { path: '/verify-code', name: 'verify-code', component: VerifyCode, meta: { requiresGuest: true } },
-  { path: '/reset-password', name: 'reset-password', component: CreatePassword, meta: { requiresGuest: true } },
+  { path: '/verify-code', name: 'verify-code', component: VerifyCode, meta: { requiresGuest: true, requiresEmail: true } },
+  { path: '/reset-password', name: 'reset-password', component: CreatePassword, meta: { requiresGuest: true, requiresResetToken: true } },
   { path: '/logout', name: 'Logout', meta: { requiresAuth: true } },
   {
     path: '/auth/callback',
@@ -206,6 +206,9 @@ router.beforeEach(async (to, from, next) => {
     return next('/login')
   }
 
+  const resetEmail = sessionStorage.getItem('reset_email')
+  const resetToken = sessionStorage.getItem('reset_token')
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login')
   } else if (to.meta.requiresGuest && authStore.isAuthenticated) {
@@ -214,6 +217,21 @@ router.beforeEach(async (to, from, next) => {
     next('/')
   } else {
     next()
+  }
+
+  if (to.meta.requiresEmail && !resetEmail) {
+    return next('/forgot-password')
+  }
+
+  if (to.meta.requiresResetToken && (!resetEmail || !resetToken)) {
+    return next('/forgot-password')
+  }
+
+  if (!to.meta.requiresEmail && !to.meta.requiresResetToken && to.name !== 'forgot-password') {
+    if (resetEmail || resetToken) {
+      sessionStorage.removeItem('reset_email')
+      sessionStorage.removeItem('reset_token')
+    }
   }
 })
 
