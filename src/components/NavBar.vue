@@ -91,7 +91,7 @@
           <svg
             v-if="currentTheme === 'forest'"
             xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6 md:w-7 md:h-7 text-yellow-500"
+            class="w-6 h-6 md:w-7 md:h-7 text-yellow-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -203,13 +203,13 @@
           <div v-if="!auth.isAuthenticated" class="hidden md:flex space-x-3">
             <router-link
               to="/login"
-              class="inline-flex items-center rounded-md border border-primary px-3 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-content transition-colors"
+              class="inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-100 hover:text-base-content transition-colors"
             >
               {{ $t("common.login") }}
             </router-link>
             <router-link
               to="/register"
-              class="inline-flex items-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors"
+              class="inline-flex items-center rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-600"
             >
               {{ $t("common.register") }}
             </router-link>
@@ -244,7 +244,7 @@
           <router-link
             to="/"
             @click="mobileMenuOpen = false"
-            class="block border-l-4 border-primary bg-primary/10 py-2 pl-3 pr-4 text-base font-medium "
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base text-base-content font-medium hover:border-base-300 hover:bg-green-100"
           >
             {{ $t("common.home") }}
           </router-link>
@@ -371,7 +371,7 @@ export default {
     },
      toggleTheme() {
       const newTheme = this.currentTheme === "light" ? "forest" : "light";
-      document.documentElement.dataset.theme = newTheme; // ✅ use dataset
+      document.documentElement.dataset.theme = newTheme;
       this.currentTheme = newTheme;
       localStorage.setItem("theme", newTheme);
     },
@@ -400,15 +400,17 @@ export default {
 .router-link:not(.router-link-exact-active):hover {
   background-color: #e0ebe0 !important;
 }
-
-[data-theme="forest"] .router-link:not(.router-link-exact-active):hover {
-  background-color: hsl(var(--b2)) !important;
+[data-theme="forest"] .router-link-exact-active:not(.no-active-style) {
+  background-color: rgb(62, 62, 62) !important;
 }
+
 
 .logo-link.router-link-exact-active {
   background-color: transparent !important;
 }
-
+[data-theme="forest"] .logo-link.router-link-exact-active {
+  background-color: transparent !important;
+}
 .cart-icon {
   color: hsl(var(--p));
   cursor: pointer;
@@ -434,6 +436,13 @@ export default {
 }
 [data-theme="forest"] .bg-primary {
   background-color: rgb(41, 41, 41)!important;
+}
+.bg-secondary {
+  background-color: #4b934b !important;
+  hover: #38a838 !important;
+}
+[data-theme="forest"] .bg-secondary {
+  background-color: rgb(38, 154, 73)!important;
 }
 .text-secondary {
   color: #2c702c !important;

@@ -222,13 +222,13 @@ export default {
 }
 
 .bg-primary {
-  background-color: rgb(238, 254, 238) !important;
+  background-color: rgb(244, 244, 244) !important;
 }
 [data-theme="forest"] .bg-primary {
   background-color: rgb(30, 30, 30)!important;
 }
 .bg-secondary {
-  background-color: rgb(236, 246, 236) !important;
+  background-color: rgb(240, 240, 240) !important;
 }
 [data-theme="forest"] .bg-secondary {
   background-color: rgb(34, 33, 33)!important;
