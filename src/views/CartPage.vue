@@ -1,34 +1,34 @@
 <template>
-  <div class="cart-page bg-[#F5F7F5] min-h-screen py-6 sm:py-8 md:py-10">
+  <div class="cart-page bg-primary min-h-screen py-6 sm:py-8 md:py-10">
     <div class="container mx-auto px-3 sm:px-4 max-w-6xl">
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C702C] mb-6 sm:mb-8">{{ $t('common.yourCart') }}
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6 sm:mb-8">{{ $t('common.yourCart') }}
       </h1>
 
-      <div class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
+      <div class="bg-cart rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
         <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-            class="w-6 h-6 sm:w-7 sm:h-7 text-[#2C702C] flex-shrink-0">
+            class="w-6 h-6 sm:w-7 sm:h-7 text-primary flex-shrink-0">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
           </svg>
-          <h2 class="text-xl sm:text-2xl font-bold text-[#2C702C] truncate">{{ $t('common.shopProducts') }}</h2>
+          <h2 class="text-xl sm:text-2xl font-bold text-primary truncate">{{ $t('common.shopProducts') }}</h2>
           <span
-            class="ml-auto bg-[#2C702C] text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold flex-shrink-0">
+            class="ml-auto bg-primary text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold flex-shrink-0">
             {{ cartStore.products?.length }} {{ $t('common.items') }}
           </span>
         </div>
 
         <div v-if="cartStore.products?.length > 0" class="space-y-3 sm:space-y-4">
           <div v-for="item in cartStore.products" :key="item.id"
-            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-200 rounded-lg hover:shadow-md transition-all duration-200 overflow-hidden">
+            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg hover:shadow-md transition-all duration-200 overflow-hidden">
             <img :src="item.cartable?.image_url" :alt="item.cartable?.name"
               class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover rounded-lg bg-[#E0EBE0] flex-shrink-0" />
 
             <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm sm:text-base md:text-lg text-[#2C702C] truncate">{{ item.cartable?.name }}
+              <h3 class="font-bold text-sm sm:text-base md:text-lg text-primary truncate">{{ item.cartable?.name }}
               </h3>
               <p class="text-gray-600 text-xs sm:text-sm line-clamp-1">{{ item.cartable?.description }}</p>
-              <p class='text-[#2C702C] font-bold text-sm sm:text-base md:text-lg mt-1'>{{ item.cartable?.price }} {{
+              <p class='text-primary font-bold text-sm sm:text-base md:text-lg mt-1'>{{ item.cartable?.price }} {{
                 $t('common.currency') }}</p>
             </div>
 
@@ -42,7 +42,7 @@
               </button>
               <span class="w-8 sm:w-10 text-center font-bold text-sm sm:text-base md:text-lg">{{ item.quantity }}</span>
               <button @click="incrementQuantity(item.id, item.quantity)"
-                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
+                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-primary hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -51,7 +51,7 @@
             </div>
 
             <div class="text-right flex-shrink-0">
-              <p class="font-bold text-base sm:text-lg md:text-xl text-[#2C702C] mb-1 sm:mb-2">
+              <p class="font-bold text-base sm:text-lg md:text-xl text-primary mb-1 sm:mb-2">
                 {{ (item.cartable?.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
               </p>
               <button @click="removeItem(item.id)"
@@ -66,10 +66,10 @@
             </div>
           </div>
 
-          <div class="bg-[#E0EBE0] rounded-lg p-4 sm:p-6 mt-4 sm:mt-6">
+          <div class="bg-primary rounded-lg p-4 sm:p-6 mt-4 sm:mt-6">
             <div class="flex justify-between items-center mb-3 sm:mb-4">
-              <span class="text-lg sm:text-xl font-semibold text-gray-700">{{ $t('common.subtotal') }}</span>
-              <span class='text-2xl sm:text-3xl font-bold text-[#2C702C]'>{{ cartStore.total }} {{ $t('common.currency')
+              <span class="text-lg sm:text-xl font-semibold text-primary">{{ $t('common.subtotal') }}</span>
+              <span class='text-2xl sm:text-3xl font-bold text-primary'>{{ cartStore.total }} {{ $t('common.currency')
                 }}</span>
             </div>
             <button @click="checkoutProducts"
@@ -98,32 +98,32 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+      <div class="bg-cart rounded-xl shadow-lg p-4 sm:p-6">
         <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-            class="w-6 h-6 sm:w-7 sm:h-7 text-[#2C702C] flex-shrink-0">
+            class="w-6 h-6 sm:w-7 sm:h-7 text-primary flex-shrink-0">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
           </svg>
-          <h2 class="text-xl sm:text-2xl font-bold text-[#2C702C] truncate">{{ $t('common.wasteCollectionRequest') }}
+          <h2 class="text-xl sm:text-2xl font-bold text-primary truncate">{{ $t('common.wasteCollectionRequest') }}
           </h2>
           <span
-            class="ml-auto bg-[#2C702C] text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold flex-shrink-0">
+            class="ml-auto bg-primary text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold flex-shrink-0">
             {{ cartStore.waste?.length }} {{ $t('common.items') }}
           </span>
         </div>
 
         <div v-if="cartStore.waste?.length > 0" class="space-y-3 sm:space-y-4">
           <div v-for="item in cartStore.waste" :key="item.id"
-            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-200 rounded-lg hover:shadow-md transition-all duration-200 overflow-hidden">
+            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg hover:shadow-md transition-all duration-200 overflow-hidden">
             <img :src="item.cartable?.image_url" :alt="item.cartable?.name"
               class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover rounded-lg bg-[#E0EBE0] flex-shrink-0" />
 
             <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm sm:text-base md:text-lg text-[#2C702C] truncate">{{ item.cartable?.name }}
+              <h3 class="font-bold text-sm sm:text-base md:text-lg text-primary truncate">{{ item.cartable?.name }}
               </h3>
               <p class="text-gray-600 text-xs sm:text-sm">{{ item.cartable?.unit }}</p>
-              <p class="text-[#2C702C] font-bold text-xs sm:text-sm mt-1">
+              <p class="text-primary font-bold text-xs sm:text-sm mt-1">
                 {{ item.cartable?.points_per_unit }} {{ $t('common.points') }} {{ $t('common.per') }} {{
                   item.cartable?.unit }}
               </p>
@@ -139,7 +139,7 @@
               </button>
               <span class="w-8 sm:w-10 text-center font-bold text-sm sm:text-base md:text-lg">{{ item.quantity }}</span>
               <button @click="incrementQuantity(item.id, item.quantity)"
-                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
+                class="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-primary hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -162,9 +162,9 @@
             </div>
           </div>
 
-          <div class="bg-green-50 rounded-lg p-4 sm:p-6 mt-4 sm:mt-6">
+          <div class="bg-primary rounded-lg p-4 sm:p-6 mt-4 sm:mt-6">
             <div class="flex justify-between items-center mb-3 sm:mb-4">
-              <span class="text-lg sm:text-xl font-semibold text-gray-700">{{ $t('common.totalEstimatedPoints')
+              <span class="text-lg sm:text-xl font-semibold text-primary">{{ $t('common.totalEstimatedPoints')
                 }}</span>
               <span class="text-2xl sm:text-3xl font-bold text-green-600">+{{ cartStore.totalPoints }}</span>
             </div>
@@ -252,3 +252,37 @@ export default {
   }
 };
 </script>
+<style scoped>
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(236, 240, 236) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(61, 60, 60)!important;
+}
+.bg-cart {
+  background-color: #ffffff !important;
+}
+[data-theme="forest"] .bg-cart {
+  background-color: #242323 !important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+</style>

@@ -179,19 +179,19 @@
               >
                 <router-link
                   to="/profile"
-                  class="block px-3 py-2 text-sm text-primary hover:bg-base-200"
+                  class="block px-3 py-2 text-sm text-primary  dark:hover:bg-gray-300"
                 >
                   {{ $t("common.profile") }}
                 </router-link>
                 <router-link
                   to="/settings"
-                  class="block px-3 py-2 text-sm text-primary dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  class="block px-3 py-2 text-sm text-primary dark:text-gray-200 dark:hover:bg-gray-300"
                 >
                   {{ $t("common.settings") }}
                 </router-link>
                 <button
                   @click="handleLogout"
-                  class="block w-full text-left px-3 py-2 text-sm text-primary dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  class="block w-full text-left px-3 py-2 text-sm text-primary dark:text-gray-200 dark:hover:bg-gray-300"
                 >
                   {{ $t("common.signOut") }}
                 </button>

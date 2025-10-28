@@ -1,7 +1,7 @@
 <template>
   <!-- Hero Section -->
   <div
-    class="hero min-h-[calc(100vh-2vh)] w-[95vw] md:w-[90vw] lg:w-[85vw] bg-cover bg-center bg-no-repeat items-start mx-auto"
+    class="hero min-h-[calc(100vh-2vh)] w-full md:w-full lg:w-full bg-cover bg-center bg-no-repeat bg-hero items-start mx-auto"
     style="background-image: url('/images/Homebg.png')"
   >
     <div class="hero-overlay bg-transparent"></div>
@@ -28,7 +28,7 @@
 
   <!-- Steps Section -->
 
-  <section class="px-16 py-14 bg-base-200" ref="howItWorksSection">
+  <section class="px-16 py-14 bg-steps" ref="howItWorksSection">
     <p
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center mb-10 md:mb-12 lg:mb-16"
     >
@@ -59,7 +59,7 @@
   </section>
 
   <!-- Waste Carousel Section -->
-  <section class="px-4 md:px-12 py-16 relative bg-base-200">
+  <section class="px-4 md:px-12 py-16 relative bg-hero">
     <p
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center"
     >
@@ -102,7 +102,7 @@
       <!-- Carousel (Scrollable Container) -->
       <div
         ref="carousel"
-        class="carousel carousel-center bg-base-200 rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
+        class="carousel carousel-center bg-hero rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
       >
         <div
           v-for="(item, index) in wasteItems"
@@ -163,7 +163,7 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12"
+    class="grid grid-cols-1 bg-steps sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12"
   >
     <div
       v-for="(product, index) in products"
@@ -271,7 +271,7 @@
   </div>
 
   <!-- make differance section -->
-  <section class="bg-base-200 px-4 sm:px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
+  <section class="bg-donate px-4 sm:px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
     <p
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center"
     >
@@ -607,6 +607,25 @@ export default {
   background-color: #EAF2EA !important;
 }
 [data-theme="forest"] .bg-carousel {
-  background-color: #272827 !important;
+  background-color: #748c74 !important;
+}
+.bg-hero {
+  background-color: #f5faf3 !important;
+}
+[data-theme="forest"] .bg-hero {
+  background-color: #2d2d2d !important;
+}
+
+.bg-steps {
+  background-color: #EAF2EA !important;
+}
+[data-theme="forest"] .bg-steps {
+  background-color: #3a3a3a !important;
+}
+.bg-donate {
+  background-color: #FFFFFF !important;
+}
+[data-theme="forest"] .bg-donate {
+  background-color: #201e1e !important;
 }
 </style>
