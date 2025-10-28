@@ -10,6 +10,9 @@ import AddWaste from '@/views/AddWaste.vue'
 import ShopMerch from '@/views/ShopMerch.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import RegisterPage from '@/views/RegisterPage.vue'
+import ForgotPassword from '@/views/ForgotPassword.vue'
+import VerifyCode from '@/views/VerifyCode.vue'
+import CreatePassword from '@/views/CreatePassword.vue'
 import CartPage from '@/views/CartPage.vue'
 import AdminLayout from '@/views/Admin/AdminLayout.vue'
 import Users from '@/views/Admin/Users.vue'
@@ -165,6 +168,9 @@ const routes = [
   // Auth routes
   { path: '/login', name: 'Login', component: LoginPage, meta: { requiresGuest: true } },
   { path: '/register', name: 'Register', component: RegisterPage, meta: { requiresGuest: true } },
+  { path: '/forgot-password', name: 'forgot-password', component: ForgotPassword, meta: { requiresGuest: true } },
+  { path: '/verify-code', name: 'verify-code', component: VerifyCode, meta: { requiresGuest: true } },
+  { path: '/reset-password', name: 'reset-password', component: CreatePassword, meta: { requiresGuest: true } },
   { path: '/logout', name: 'Logout', meta: { requiresAuth: true } },
   {
     path: '/auth/callback',

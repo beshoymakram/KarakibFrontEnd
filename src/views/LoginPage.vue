@@ -70,12 +70,19 @@
                   placeholder="email@gmail.com" id="email" v-model="form.email" type="email" required />
               </div>
 
-              <div class="form-group mb-5 flex flex-col w-full">
+              <div class="form-group mb-2 flex flex-col w-full">
                 <label class="pb-2 font-medium text-sm lg:text-base" for="password">{{ $t('common.password') }}</label>
                 <input
                   class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                   :placeholder="$t('common.passwordPlaceholder')" id="password" v-model="form.password" type="password"
                   required />
+              </div>
+
+              <!-- Forgot Password Link -->
+              <div class="mb-5 text-right">
+                <router-link to="/forgot-password" class="text-[#317C31] hover:underline font-medium text-sm lg:text-base">
+                  {{ $t('Forgot Password?') }}
+                </router-link>
               </div>
 
               <button type="submit" :disabled="authStore.loading"
