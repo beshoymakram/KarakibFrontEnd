@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-layout py-5 bg-[#BFD6BF]">
+  <div class="profile-layout py-5 bg-[#BFD6BF]" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5">
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body flex flex-col justify-evenly">
@@ -52,12 +52,12 @@
     </div>
 
     <div class="bg-white rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
-      <nav class="flex flex-wrap space-x-1 p-2 border-b-1">
+      <nav :class="['flex', 'flex-wrap', 'p-2', 'border-b-1', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
         <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
           class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
             ? 'bg-[#E0EBE0] text-[#2C702C]'
             : 'text-gray-600 hover:bg-gray-100'">
-          {{ tab.label }}
+          {{ $t(tab.labelKey) }}
         </router-link>
       </nav>
       <router-view></router-view>
@@ -75,11 +75,11 @@ export default {
     return {
       activeTab: '',
       tabs: [
-        { id: 'personal-info', label: 'Personal Info' },
-        { id: 'my-addresses', label: 'My Addresses' },
-        { id: 'my-requests', label: 'My Requests' },
-        { id: 'my-orders', label: 'My Orders' },
-        { id: 'my-points', label: 'My Points' },
+        { id: 'personal-info', labelKey: 'common.personalInfo' },
+        { id: 'my-addresses', labelKey: 'common.myAddresses' },
+        { id: 'my-requests', labelKey: 'common.myRequests' },
+        { id: 'my-orders', labelKey: 'common.myOrders' },
+        { id: 'my-points', labelKey: 'common.myPoints' },
       ],
     }
   },

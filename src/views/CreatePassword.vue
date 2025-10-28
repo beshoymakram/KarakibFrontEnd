@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#BFD6BF] min-h-screen py-8 px-4">
+  <div class="bg-[#BFD6BF] min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="w-full max-w-6xl mx-auto">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
@@ -8,11 +8,11 @@
           class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-white flex justify-center items-center rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none relative">
           <div class="w-full max-w-md">
             <h1 class="font-extrabold text-3xl lg:text-4xl text-[#317C31] mb-4">
-              Set password
+              {{ $t('common.resetPasswordTitle') }}
             </h1>
 
             <p class="text-gray-400 text-base lg:text-lg mb-8">
-              Your previous password has been reset. Please set a new password for your account.
+              {{ $t('common.resetPasswordDescription') }}
             </p>
 
             <!-- Password Form -->
@@ -20,11 +20,11 @@
               <!-- Create Password -->
               <div class="form-group mb-5 flex flex-col w-full">
                 <label class="pb-2 font-semibold text-base text-gray-800" for="password">
-                  Create Password
+                  {{ $t('common.createPassword') }}
                 </label>
                 <div class="relative">
                   <input id="password" v-model="password" :type="showPassword ? 'text' : 'password'"
-                    placeholder="Enter Password"
+                    :placeholder="$t('common.enterPassword')"
                     class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31] w-full pr-12"
                     required />
                   <button type="button" @click="togglePasswordVisibility"
@@ -49,11 +49,11 @@
               <!-- Re-enter Password -->
               <div class="form-group mb-5 flex flex-col w-full">
                 <label class="pb-2 font-semibold text-base text-gray-800" for="confirmPassword">
-                  Re-enter Password
+                  {{ $t('common.reenterPassword') }}
                 </label>
                 <div class="relative">
                   <input id="confirmPassword" v-model="confirmPassword" :type="showConfirm ? 'text' : 'password'"
-                    placeholder="Re-enter Password"
+                    :placeholder="$t('common.reenterPassword')"
                     class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31] w-full pr-12"
                     required />
                   <button type="button" @click="toggleConfirmVisibility"
@@ -73,14 +73,14 @@
                   </button>
                 </div>
                 <p v-if="passwordMismatch" class="text-red-500 text-sm mt-2">
-                  Passwords do not match.
+                  {{ $t('common.passwordsDoNotMatch') }}
                 </p>
               </div>
 
               <!-- Submit Button -->
               <button type="submit" :disabled="loading"
                 class="w-full bg-[#317C31] hover:bg-[#275a27] transition-colors font-semibold cursor-pointer text-white px-4 py-3 rounded-lg text-center disabled:bg-gray-400 disabled:cursor-not-allowed">
-                {{ loading ? 'Setting password...' : 'Set password' }}
+                {{ loading ? $t('common.settingPassword') : $t('common.setPassword') }}
               </button>
             </form>
           </div>
@@ -92,7 +92,7 @@
           <img class="w-full max-w-md mx-auto mb-8"
             src="../../public/images/young-guy-carrying-bag-with-garbage-trash-bin.png" alt="Recycling illustration" />
           <h2 class="font-extrabold text-2xl lg:text-3xl text-[#317C31] px-4">
-            Let's get you back on your green journey!
+            {{ $t('common.letsGetBackOnJourney') }}
           </h2>
         </div>
       </div>

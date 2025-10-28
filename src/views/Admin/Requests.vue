@@ -1,13 +1,13 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.status"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Statuses</option>
-          <option value="pending">Pending</option>
-          <option value="completed">Completed</option>
-          <option value="cancelled">Cancelled</option>
+          <option value="">{{ $t('common.allStatuses') }}</option>
+          <option value="pending">{{ $t('common.pending') }}</option>
+          <option value="completed">{{ $t('common.completed') }}</option>
+          <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
@@ -15,7 +15,7 @@
       <div class="relative">
         <select v-model="filters.payout_method"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Payout Methods</option>
+          <option value="">{{ $t('common.allPayoutMethods') }}</option>
           <option value="earn">{{ $t('common.earnedPoints') }}</option>
           <option value="donate">{{ $t('common.donatedPoints') }}</option>
         </select>
@@ -23,9 +23,9 @@
       </div>
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
-          <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
+          <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+          <svg :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -85,11 +85,11 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button v-if="request.status == 'pending'" @click="openCompleteModal(request)"
                 class="px-3 py-1 border border-green-300 rounded-md text-[#2C702C] hover:bg-green-50 transition-colors cursor-pointer">
-                Complete
+                {{ $t('common.complete') }}
               </button>
               <button @click="openDetailsModal(request)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
-                Details
+                {{ $t('common.details') }}
               </button>
               <button v-if="request.status == 'pending'" @click="openCancelModal(request)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
@@ -124,7 +124,7 @@
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to cancel this request?
+              {{ $t('common.areYouSureCancelRequest') }}
             </h3>
             <button @click="confirmCancel" type="button"
               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
@@ -159,8 +159,8 @@
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Points will be added to user's account.<br />
-              Are you sure you want to mark this request as completed?
+              {{ $t('common.pointsWillBeAdded') }}<br />
+              {{ $t('common.areYouSureCompleteRequest') }}
             </h3>
             <button @click="confirmComplete" type="button"
               class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
@@ -182,7 +182,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Request Details | {{ details.request_number }}
+              {{ $t('common.requestDetails') }} | {{ details.request_number }}
             </h3>
             <button type="button" @click="showDetailsModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -199,21 +199,21 @@
           <div class="p-4 md:p-5">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Full Name</h4>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.name }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Phone</h4>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.phone }}
                 </p>
               </div>
 
               <div class="sm:col-span-2">
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Street Address</h4>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.street_address }}
                 </p>
@@ -267,7 +267,7 @@
             <div class="flex justify-end">
               <button @click="showDetailsModal = false" type="button"
                 class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C]">
-                Close
+                {{ $t('common.close') }}
               </button>
             </div>
           </div>

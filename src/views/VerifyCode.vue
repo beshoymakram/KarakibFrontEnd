@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#BFD6BF] min-h-screen py-8 px-4">
+  <div class="bg-[#BFD6BF] min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="w-full max-w-6xl mx-auto">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
@@ -8,24 +8,24 @@
           class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-white flex justify-center items-center rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none relative">
           <div class="w-full max-w-md">
             <h1 class="font-extrabold text-3xl lg:text-4xl text-[#317C31] mb-4">
-              Verify code
+              {{ $t('common.verifyCodeTitle') }}
             </h1>
 
             <p class="text-gray-400 text-base lg:text-lg mb-8">
-              An authentication code has been sent to your email.
+              {{ $t('common.verifyCodeDescription') }}
             </p>
 
             <!-- Verification Code Form -->
             <form @submit.prevent="handleVerify" class="w-full flex flex-col">
               <div class="form-group mb-4 flex flex-col w-full">
-                <label class="pb-2 font-semibold text-base text-gray-800" for="code">Verification Code</label>
+                <label class="pb-2 font-semibold text-base text-gray-800" for="code">{{ $t('common.verificationCode') }}</label>
                 <div class="relative">
                   <input
                     class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31] w-full pr-12"
-                    placeholder="Enter Code" id="code" v-model="otp" type="text" required />
+                    :placeholder="$t('common.enterCode')" id="code" v-model="otp" type="text" required />
                   <!-- Eye Icon -->
                   <button type="button" @click="toggleCodeVisibility"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                    :class="['absolute', 'top-1/2', '-translate-y-1/2', 'text-gray-400', 'hover:text-gray-600', $i18n.locale === 'ar' ? 'left-4' : 'right-4']">
                     <svg v-if="showCode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                       viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -43,29 +43,29 @@
               </div>
 
               <!-- Resend Code -->
-              <div class="mb-6 text-left">
-                <span class="text-gray-400 text-sm">Didn't receive a code? </span>
+              <div class="mb-6" :class="$i18n.locale === 'ar' ? 'text-right' : 'text-left'">
+                <span class="text-gray-400 text-sm">{{ $t('common.didntReceiveCode') }} </span>
                 <button type="button" @click="handleResend" :disabled="resendLoading"
                   class="text-[#710900] hover:underline font-semibold text-sm">
-                  {{ resendLoading ? 'Sending...' : 'Resend' }}
+                  {{ resendLoading ? $t('common.sending') : $t('common.resend') }}
                 </button>
               </div>
 
               <button type="submit" :disabled="loading"
                 class="w-full bg-[#317C31] hover:bg-[#275a27] transition-colors font-semibold cursor-pointer text-white px-4 py-3 rounded-lg text-center disabled:bg-gray-400 disabled:cursor-not-allowed">
-                {{ loading ? 'Verifying...' : 'Verify' }}
+                {{ loading ? $t('common.verifying') : $t('common.verify') }}
               </button>
             </form>
           </div>
 
           <!-- Go Back Link -->
           <router-link to="/forgot-password"
-            class="absolute bottom-8 left-8 flex items-center gap-2 text-[#317C31] hover:underline font-semibold text-base">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+            :class="['absolute', 'bottom-8', $i18n.locale === 'ar' ? 'right-8' : 'left-8', 'flex', 'items-center', 'gap-2', 'text-[#317C31]', 'hover:underline', 'font-semibold', 'text-base']">
+            <svg xmlns="http://www.w3.org/2000/svg" :class="['h-5', 'w-5', $i18n.locale === 'ar' ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            go back
+            {{ $t('common.goBack') }}
           </router-link>
         </div>
 
@@ -77,7 +77,7 @@
             src="../../public/images/young-guy-carrying-bag-with-garbage-trash-bin.png" alt="Recycling illustration">
 
           <h2 class="font-extrabold text-2xl lg:text-3xl text-[#317C31] px-4">
-            Let's get you back on your green journey!
+            {{ $t('common.letsGetBackOnJourney') }}
           </h2>
         </div>
       </div>

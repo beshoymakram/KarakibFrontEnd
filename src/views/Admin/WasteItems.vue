@@ -1,17 +1,17 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <button @click="openCreateModal()"
           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          Create new item
+          {{ $t('common.createNewProduct') }}
         </button>
       </div>
 
       <div class="relative">
         <select v-model="filters.waste_type_id"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Types</option>
+          <option value="">{{ $t('common.allTypes') }}</option>
           <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
@@ -29,9 +29,9 @@
 
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
-          <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
+          <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+          <svg :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -77,11 +77,11 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(item)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
-                Edit
+                {{ $t('common.edit') }}
               </button>
               <button @click="openDeleteModal(item)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
-                Delete
+                {{ $t('common.delete') }}
               </button>
             </td>
           </tr>

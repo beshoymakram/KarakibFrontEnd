@@ -1,6 +1,6 @@
 <template>
-  <div class="payment-form max-w-md mx-auto p-6 bg-white rounded-lg shadow">
-    <h2 class="text-2xl font-bold mb-6 text-[#2C702C]">Payment Details</h2>
+  <div class="payment-form max-w-md mx-auto p-6 bg-white rounded-lg shadow" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+    <h2 class="text-2xl font-bold mb-6 text-[#2C702C]">{{ $t('common.paymentMethod') }}</h2>
 
     <form @submit.prevent="">
       <div class="mb-4">

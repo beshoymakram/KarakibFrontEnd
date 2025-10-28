@@ -1,13 +1,13 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.role"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Roles</option>
-          <option value="user">User</option>
-          <option value="courier">Courier</option>
-          <option value="admin">Admin</option>
+          <option value="">{{ $t('common.allRoles') }}</option>
+          <option value="user">{{ $t('common.user') }}</option>
+          <option value="courier">{{ $t('common.courier') }}</option>
+          <option value="admin">{{ $t('common.admin') }}</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
@@ -15,10 +15,10 @@
       <div class="relative">
         <select v-model="filters.status"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-          <option value="">All Statuses</option>
-          <option value="active">Active</option>
-          <option value="suspended">Suspended</option>
-          <option value="deleted">Deleted</option>
+          <option value="">{{ $t('common.allStatuses') }}</option>
+          <option value="active">{{ $t('common.active') }}</option>
+          <option value="suspended">{{ $t('common.suspended') }}</option>
+          <option value="deleted">{{ $t('common.deleted') }}</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
@@ -26,22 +26,22 @@
       <div class="relative">
         <button @click="openCreateAdminModal()"
           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          Add new admin
+          {{ $t('common.addNewAdmin') }}
         </button>
       </div>
 
       <div class="relative">
         <button @click="openCreateCourierModal()"
           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          Add new courier
+          {{ $t('common.addNewCourier') }}
         </button>
       </div>
 
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
-          <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
+          <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+          <svg :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -56,18 +56,18 @@
       <table class="w-full table-auto">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.name') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.email') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.role') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.status') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.points') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.action') }}</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-if="filteredUsers.length === 0">
             <td colspan="6" class="px-4 py-4 text-center text-gray-500">
-              No results match your search
+              {{ $t('common.noResultsMatchSearch') }}
             </td>
           </tr>
 
@@ -94,11 +94,11 @@
             <td v-if="user.status !== 'deleted'" class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(user)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
-                Edit
+                {{ $t('common.edit') }}
               </button>
               <button @click="openDeleteModal(user)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
-                Delete
+                {{ $t('common.delete') }}
               </button>
             </td>
           </tr>
@@ -129,7 +129,7 @@
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this user?
+              {{ $t('common.areYouSureDeleteUser') }}
             </h3>
             <button @click="confirmDelete" type="button"
               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
@@ -155,7 +155,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Edit User
+              {{ $t('common.editUser') }}
             </h3>
             <button type="button" @click="showEditModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -174,68 +174,68 @@
               <!-- Name -->
               <div class="col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
+                  {{ $t('common.name') }}
                 </label>
                 <input type="text" id="name" v-model="editForm.name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter user name" required />
+                  :placeholder="$t('common.enterUserName')" required />
               </div>
 
               <!-- Email -->
               <div class="col-span-2 sm:col-span-1">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Email
+                  {{ $t('common.email') }}
                 </label>
                 <input type="email" id="email" v-model="editForm.email"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="user@example.com" required />
+                  :placeholder="$t('common.userAtExampleCom')" required />
               </div>
 
               <!-- Phone -->
               <div class="col-span-2 sm:col-span-1">
                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Phone
+                  {{ $t('common.phone') }}
                 </label>
                 <input type="tel" id="phone" v-model="editForm.phone"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="01234567890" required />
+                  :placeholder="$t('common.phonePlaceholder')" required />
               </div>
 
               <!-- Role -->
               <div class="col-span-2 sm:col-span-1">
                 <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Role
+                  {{ $t('common.role') }}
                 </label>
                 <select id="role" v-model="editForm.type"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   required>
-                  <option value="user">User</option>
-                  <option value="courier">Courier</option>
-                  <option value="admin">Admin</option>
+                  <option value="user">{{ $t('common.user') }}</option>
+                  <option value="courier">{{ $t('common.courier') }}</option>
+                  <option value="admin">{{ $t('common.admin') }}</option>
                 </select>
               </div>
 
               <div class="col-span-2 sm:col-span-1">
-                <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Status
+                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  {{ $t('common.status') }}
                 </label>
-                <select id="role" v-model="editForm.status"
+                <select id="status" v-model="editForm.status"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   required>
-                  <option value="">Select Status</option>
-                  <option value="active">Active</option>
-                  <option value="suspended">Suspended</option>
+                  <option value="">{{ $t('common.selectStatus') }}</option>
+                  <option value="active">{{ $t('common.active') }}</option>
+                  <option value="suspended">{{ $t('common.suspended') }}</option>
                 </select>
               </div>
 
               <!-- Points (if user) -->
               <div class="col-span-2 sm:col-span-1" v-if="editForm.type === 'user'">
                 <label for="points" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Points
+                  {{ $t('common.points') }}
                 </label>
                 <input type="number" id="points" v-model.number="editForm.points"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="0" min="0" />
+                  :placeholder="$t('common.enterPoints')" min="0" />
               </div>
             </div>
 
@@ -243,7 +243,7 @@
             <div class="flex justify-end space-x-3">
               <button @click="showEditModal = false" type="button"
                 class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Cancel
+                {{ $t('common.Cancel') }}
               </button>
               <button type="submit"
                 class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
@@ -263,7 +263,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Add Admin
+              {{ $t('common.addAdmin') }}
             </h3>
             <button type="button" @click="showCreateAdminModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -282,40 +282,40 @@
               <!-- Name -->
               <div class="col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
+                  {{ $t('common.name') }}
                 </label>
                 <input type="text" id="name" v-model="createAdminForm.name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter admin name" required />
+                  :placeholder="$t('common.enterAdminName')" required />
               </div>
 
               <!-- Email -->
               <div class="col-span-2 sm:col-span-1">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Email
+                  {{ $t('common.email') }}
                 </label>
                 <input type="email" id="email" v-model="createAdminForm.email"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="user@example.com" required />
+                  :placeholder="$t('common.userAtExampleCom')" required />
               </div>
 
               <!-- Phone -->
               <div class="col-span-2 sm:col-span-1">
                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Phone
+                  {{ $t('common.phone') }}
                 </label>
                 <input type="tel" id="phone" v-model="createAdminForm.phone"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="01234567890" required />
+                  :placeholder="$t('common.phonePlaceholder')" required />
               </div>
 
               <div class="col-span-2">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Password
+                  {{ $t('common.password') }}
                 </label>
                 <input type="password" id="password" v-model="createAdminForm.password"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Password" required />
+                  :placeholder="$t('common.passwordPlaceholder')" required />
               </div>
             </div>
 
@@ -323,7 +323,7 @@
             <div class="flex justify-end space-x-3">
               <button @click="showCreateAdminModal = false" type="button"
                 class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Cancel
+                {{ $t('common.Cancel') }}
               </button>
               <button type="submit"
                 class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
@@ -343,7 +343,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Add Courier
+              {{ $t('common.addCourier') }}
             </h3>
             <button type="button" @click="showCreateCourierModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -362,40 +362,40 @@
               <!-- Name -->
               <div class="col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Name
+                  {{ $t('common.name') }}
                 </label>
                 <input type="text" id="name" v-model="createCourierForm.name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter courier name" required />
+                  :placeholder="$t('common.enterCourierName')" required />
               </div>
 
               <!-- Email -->
               <div class="col-span-2 sm:col-span-1">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Email
+                  {{ $t('common.email') }}
                 </label>
                 <input type="email" id="email" v-model="createCourierForm.email"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="user@example.com" required />
+                  :placeholder="$t('common.userAtExampleCom')" required />
               </div>
 
               <!-- Phone -->
               <div class="col-span-2 sm:col-span-1">
                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Phone
+                  {{ $t('common.phone') }}
                 </label>
                 <input type="tel" id="phone" v-model="createCourierForm.phone"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="01234567890" required />
+                  :placeholder="$t('common.phonePlaceholder')" required />
               </div>
 
               <div class="col-span-2">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Password
+                  {{ $t('common.password') }}
                 </label>
                 <input type="password" id="password" v-model="createCourierForm.password"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Password" required />
+                  :placeholder="$t('common.passwordPlaceholder')" required />
               </div>
             </div>
 
@@ -403,11 +403,11 @@
             <div class="flex justify-end space-x-3">
               <button @click="showCreateCourierModal = false" type="button"
                 class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Cancel
+                {{ $t('common.Cancel') }}
               </button>
               <button type="submit"
                 class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                {{ $t('common.Save Changes') }}
+                {{ $t('common.addCourier') }}
               </button>
             </div>
           </form>
