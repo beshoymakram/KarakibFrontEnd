@@ -5,7 +5,10 @@
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
         <!-- Form -->
         <div
-          class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-white flex justify-center items-center rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none relative">
+          :class="[
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-white', 'flex', 'justify-center', 'items-center', 'rounded-t-xl', 'relative',
+            $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none'
+          ]">
           <div class="w-full max-w-md">
             <h1 class="font-extrabold text-3xl lg:text-4xl text-[#317C31] mb-4">
               {{ $t('common.forgotPasswordTitle') }}
@@ -44,7 +47,10 @@
 
         <!-- Right Side - Banner -->
         <div
-          class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-[#EAF2EA] text-center flex flex-col items-center justify-center rounded-b-xl lg:rounded-r-xl lg:rounded-tl-none">
+          :class="[
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-[#EAF2EA]', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-b-xl',
+            $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-tl-none'
+          ]">
 
           <img class="w-full max-w-md mx-auto mb-8"
             src="../../public/images/young-guy-carrying-bag-with-garbage-trash-bin.png" alt="Recycling illustration">
