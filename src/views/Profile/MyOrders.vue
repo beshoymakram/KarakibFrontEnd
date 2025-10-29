@@ -1,9 +1,6 @@
 <template>
-<<<<<<< HEAD
   <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6">
-=======
   <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
     <div class="flex flex-wrap items-center gap-4">
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
@@ -24,7 +21,6 @@
       <table class="w-full table-auto">
         <thead class="bg-item border-b border-gray-200">
           <tr>
-<<<<<<< HEAD
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Order Number</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Orderd Date</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Total
@@ -34,25 +30,20 @@
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
             </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
-=======
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.orderNumber') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.orderedDate') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.total') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.paymentMethod') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.status') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.action') }}</th>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
           </tr>
         </thead>
         <tbody class="bg-myprofile divide-y divide-gray-200">
           <tr v-if="filteredOrders.length === 0">
-<<<<<<< HEAD
             <td colspan="5" class="px-4 py-4 text-center text-section">
               No results match your search
-=======
             <td colspan="5" class="px-4 py-4 text-center text-gray-500">
               {{ $t('common.noResultsMatchSearch') }}
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
             </td>
           </tr>
 
@@ -155,55 +146,40 @@
           <div class="p-4 md:p-5">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
-<<<<<<< HEAD
                 <h4 class="text-sm font-medium text-section dark:text-gray-300">Full Name</h4>
-=======
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.name }}
                 </p>
               </div>
 
               <div>
-<<<<<<< HEAD
                 <h4 class="text-sm font-medium text-section dark:text-gray-300">Phone</h4>
-=======
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.phone }}
                 </p>
               </div>
 
               <div class="sm:col-span-2">
-<<<<<<< HEAD
                 <h4 class="text-sm font-medium text-section dark:text-gray-300">Street Address</h4>
-=======
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.street_address }}
                 </p>
               </div>
 
               <div>
-<<<<<<< HEAD
                 <h4 class="text-sm font-medium text-section dark:text-gray-300">City</h4>
-=======
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.city') }}</h4>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.city }}
                 </p>
               </div>
 
               <div>
-<<<<<<< HEAD
                 <h4 class="text-sm font-medium text-section dark:text-gray-300">Order Status</h4>
-=======
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.orderStatus') }}</h4>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
                 <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
                   'bg-green-100 text-green-800': details.status === 'completed',
                   'bg-yellow-100 text-yellow-800': details.status === 'pending',
@@ -214,22 +190,16 @@
               </div>
 
               <div>
-<<<<<<< HEAD
                 <h4 class="text-sm font-medium text-section dark:text-gray-300">Created At</h4>
-=======
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.createdAt') }}</h4>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
                   {{ details.created_at }}
                 </p>
               </div>
 
               <div>
-<<<<<<< HEAD
                 <h4 class="text-sm font-medium text-section dark:text-gray-300">Total</h4>
-=======
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.total') }}</h4>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
                   {{ details.total }} {{ $t('common.currency') }}
                 </p>

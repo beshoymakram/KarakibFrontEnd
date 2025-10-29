@@ -1,9 +1,6 @@
 <template>
-<<<<<<< HEAD
   <div class="bg-item rounded-lg shadow-sm p-4 mb-6">
-=======
   <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <button @click="openCreateModal()"
@@ -31,32 +28,26 @@
       <table class="w-full table-auto">
         <thead class="bg-item border-b border-gray-200">
           <tr>
-<<<<<<< HEAD
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Name</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Phone</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Street Address
             </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">City</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
-=======
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.name') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.phone') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.streetAddress') }}
             </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.city') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.action') }}</th>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
           </tr>
         </thead>
         <tbody class="bg-item divide-y divide-gray-200">
           <tr v-if="filteredAddresses.length === 0">
-<<<<<<< HEAD
             <td colspan="5" class="px-4 py-4 text-center text-section">
               No results match your search
-=======
             <td colspan="5" class="px-4 py-4 text-center text-gray-500">
               {{ $t('common.noResultsMatchSearch') }}
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
             </td>
           </tr>
 
@@ -75,13 +66,10 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(address)"
-<<<<<<< HEAD
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 Edit
-=======
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                 {{ $t('common.edit') }}
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
               </button>
               <button @click="openDeleteModal(address)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">

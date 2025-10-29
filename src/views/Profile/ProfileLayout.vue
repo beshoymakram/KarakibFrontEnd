@@ -1,9 +1,6 @@
 <template>
-<<<<<<< HEAD
   <div class="profile-layout py-5 bg-myprofile">
-=======
   <div class="profile-layout py-5 bg-[#BFD6BF]" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
     <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5">
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body flex flex-col justify-evenly">
@@ -55,7 +52,6 @@
       </div>
     </div>
 
-<<<<<<< HEAD
     <div class="bg-tabs rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
       <nav class="flex flex-wrap space-x-1 p-2 border-b-1">
         <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
@@ -63,7 +59,6 @@
             ? 'bg-[#E0EBE0] text-primary'
             : 'text-primary hover:bg-gray-300'">
           {{ tab.label }}
-=======
     <div class="bg-white rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
       <nav :class="['flex', 'flex-wrap', 'p-2', 'border-b-1', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
         <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
@@ -71,7 +66,6 @@
             ? 'bg-[#E0EBE0] text-[#2C702C]'
             : 'text-gray-600 hover:bg-gray-100'">
           {{ $t(tab.labelKey) }}
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
         </router-link>
       </nav>
       <router-view></router-view>

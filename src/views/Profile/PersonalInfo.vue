@@ -30,11 +30,8 @@
     <!-- Personal Info Section -->
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center justify-between mb-6">
-<<<<<<< HEAD
         <h2 class="text-xl font-semibold text-primary">Personal Info</h2>
-=======
         <h2 class="text-xl font-semibold text-[#2C702C]">{{ $t('common.personalInfo') }}</h2>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
         <button @click="editMode = !editMode"
           class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

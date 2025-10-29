@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
@@ -9,7 +8,6 @@
           <option value="pending">Pending</option>
           <option value="completed">Completed</option>
           <option value="cancelled">Cancelled</option>
-=======
   <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
@@ -19,20 +17,16 @@
           <option value="pending">{{ $t('common.pending') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
 
       <div class="relative">
         <select v-model="filters.payout_method"
-<<<<<<< HEAD
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
           <option value="">All Payout Methods</option>
-=======
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
           <option value="">{{ $t('common.allPayoutMethods') }}</option>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
           <option value="earn">{{ $t('common.earnedPoints') }}</option>
           <option value="donate">{{ $t('common.donatedPoints') }}</option>
         </select>
@@ -57,7 +51,6 @@
       <table class="w-full table-auto">
         <thead class="bg-myprofile border-b border-gray-200">
           <tr>
-<<<<<<< HEAD
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Request Number
             </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Requested Date
@@ -69,25 +62,20 @@
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
             </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
-=======
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.requestNumber') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.requestedDate') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.total') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.payoutMethod') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.status') }}</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.action') }}</th>
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
           </tr>
         </thead>
         <tbody class="bg-myprofile divide-y divide-gray-200">
           <tr v-if="filteredRequests.length === 0">
-<<<<<<< HEAD
             <td colspan="5" class="px-4 py-4 text-center text-section">
               No results match your search
-=======
             <td colspan="5" class="px-4 py-4 text-center text-gray-500">
               {{ $t('common.noResultsMatchSearch') }}
->>>>>>> 8756f49fcff167adb491900606c473aad56a7899
             </td>
           </tr>
 
