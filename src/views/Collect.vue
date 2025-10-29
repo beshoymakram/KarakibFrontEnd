@@ -1,12 +1,12 @@
 <template>
-  <div class="checkout-page bg-[#F5F7F5] min-h-screen py-10">
+  <div class="checkout-page bg-secondary min-h-screen py-10">
     <div class="container mx-auto px-4 max-w-6xl">
-      <h1 class="text-3xl font-bold text-[#2C702C] mb-8">{{ $t('common.checkoutRequests') }}</h1>
+      <h1 class="text-3xl font-bold text-primary mb-8">{{ $t('common.checkoutRequests') }}</h1>
 
-      <div class="grid md:grid-cols-2 gap-6 bg-[#E9EBE9] p-6 rounded-2xl shadow-lg">
+      <div class="grid md:grid-cols-2 gap-6 bg-primary p-6 rounded-2xl shadow-lg">
         <!-- LEFT SIDE - ORDER DETAILS -->
-        <div class="bg-white rounded-xl p-6 shadow">
-          <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">
+        <div class="bg-secondary rounded-xl p-6 shadow">
+          <h2 class="text-2xl font-semibold text-primary mb-6">
             {{ $t('common.requestDetails') }}
           </h2>
 
@@ -23,7 +23,7 @@
                   </p>
                 </div>
               </div>
-              <p class="text-[#2C702C] font-semibold">
+              <p class="text-primary font-semibold">
                 {{ item.points }} {{ $t('common.points') }}
               </p>
             </div>
@@ -34,7 +34,7 @@
                 <span>{{ cartStore.waste?.length }} {{ $t('common.items') }}</span>
                 <span>{{ cartStore.totalPoints }} {{ $t('common.points') }}</span>
               </div>
-              <div class="flex justify-between text-xl font-bold text-[#2C702C]">
+              <div class="flex justify-between text-xl font-bold text-primary">
                 <span>{{ $t('common.totalPoints') }}</span>
                 <span>{{ cartStore.totalPoints }} {{ $t('common.points') }}</span>
               </div>
@@ -43,19 +43,19 @@
 
           <div v-else class="text-center text-gray-500 mt-6">
             {{ $t('common.yourCartIsEmpty') }}
-            <router-link to="/shop" class="text-[#2C702C] underline">{{ $t('common.addWaste') }}</router-link>.
+            <router-link to="/shop" class="text-primary underline">{{ $t('common.addWaste') }}</router-link>.
           </div>
         </div>
 
         <!-- RIGHT SIDE - CHECKOUT -->
-        <div class="bg-white rounded-xl p-6 shadow flex flex-col justify-between">
+        <div class="bg-secondary rounded-xl p-6 shadow flex flex-col justify-between">
           <div>
-            <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">{{ $t('common.proceedToCheckout') }}</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-6">{{ $t('common.proceedToCheckout') }}</h2>
 
             <!-- Address Section -->
             <div class="mb-6">
               <div class="flex justify-between items-center mb-2">
-                <h3 class="font-semibold text-[#2C702C]">{{ $t('common.pickupAddress') }}</h3>
+                <h3 class="font-semibold text-primary">{{ $t('common.pickupAddress') }}</h3>
                 <button @click="showAddressModal = true"
                   class="bg-[#2C702C] text-white px-4 py-1 rounded-md hover:bg-[#215921] cursor-pointer">
                   {{ $t('common.enterNewAddress') }}
@@ -66,8 +66,8 @@
                 <div v-for="address in addresses" :key="address.id" @click="selectedAddressId = address.id"
                   class="flex items-start gap-3 p-3 rounded-md text-sm my-2 cursor-pointer border transition-all duration-200"
                   :class="selectedAddressId === address.id
-                    ? 'bg-[#E9F7E9] border-[#2C702C]'
-                    : 'bg-gray-100 text-gray-700 border-transparent hover:border-gray-300'">
+                    ? 'bg-[#739273] border-[#2C702C]'
+                    : 'bg-address text-section border-transparent hover:border-gray-300'">
                   <!-- Radio circle -->
                   <input type="radio" name="pickupAddress" :value="address.id" v-model="selectedAddressId" required
                     class="accent-[#2C702C] h-4 w-4 cursor-pointer mt-1 text-[#2C702C] focus:ring-[#2C702C] border-gray-300" />
@@ -91,13 +91,13 @@
 
             <!-- Payment Section -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.payoutMethod') }}</h3>
+              <h3 class="font-semibold text-primary mb-2">{{ $t('common.payoutMethod') }}</h3>
               <div class="flex gap-3">
                 <button @click="payoutMethod = 'earn'" :class="[
                   'px-4 py-2 rounded-md border cursor-pointer',
                   payoutMethod === 'earn'
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
-                    : 'border-gray-300 text-gray-700',
+                    : 'border-gray-300 text-primary',
                 ]">
                   {{ $t('common.earnPoints') }}
                 </button>
@@ -105,7 +105,7 @@
                   'px-4 py-2 rounded-md border cursor-pointer',
                   payoutMethod === 'donate'
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
-                    : 'border-gray-300 text-gray-700',
+                    : 'border-gray-300 text-primary',
                 ]">
                   {{ $t('common.donatePoints') }}
                 </button>
@@ -114,7 +114,7 @@
 
             <!-- Notes -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.pickupNotes') }}</h3>
+              <h3 class="font-semibold text-primary mb-2">{{ $t('common.pickupNotes') }}</h3>
               <textarea v-model="pickupNotes" :placeholder="$t('common.addPickupNotes')"
                 class="w-full border border-gray-300 rounded-md p-2 text-sm" rows="3"></textarea>
             </div>
@@ -276,4 +276,43 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: #F5F7F5 !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(66, 66, 66)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.bg-secondary {
+  background-color: #ffff;
+}
+[data-theme="forest"] .bg-secondary {
+  background-color: rgb(43, 43, 43) !important;
+}
+.bg-address {
+  background-color: #E9F7E9
+}
+[data-theme="forest"] .bg-address {
+  background-color: rgb(21, 18, 18);
+}
+</style>
