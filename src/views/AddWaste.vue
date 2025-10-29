@@ -1,18 +1,18 @@
 <template>
   <!-- Recycling Waste Types Section -->
-  <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
+  <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8"
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8"
     >
       {{ $t("common.recyclingWasteTypes") }}
     </p>
     <p
-      class="text-lg sm:text-xl md:text-2xl text-primary pt-4 md:pt-5 pb-8 md:pb-10 font-semibold text-center md:text-start"
+      class="text-sm sm:text-lg md:text-xl text-primary pt-4 md:pt-5 pb-6 md:pb-8 font-semibold text-center md:text-start"
     >
       {{ $t("common.selectAWasteType") }}
     </p>
     <!-- Carousel Wrapper -->
-    <div class="relative max-w-6xl mx-auto flex items-center justify-center px-4 sm:px-0">
+    <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0">
       <!-- Left Arrow -->
       <button
         @click="scrollPrev"
@@ -44,9 +44,9 @@
           <img
             :src="type.image_url"
             :alt="type.name"
-            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-carousel transition-transform duration-300 hover:scale-105"
+            class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 object-cover rounded-full bg-carousel transition-transform duration-300 hover:scale-105"
             :class="{
-              'outline-4 outline-[#2C702C]': selectedType.id === type.id,
+              'outline-3 outline-[#2C702C]': selectedType.id === type.id,
             }"
           />
           <p
@@ -80,7 +80,7 @@
   </section>
   <!-- Waste Types Points Section -->
   <section class="px-4 sm:px-6 md:px-10 lg:px-12 bg-secondary text-center pb-12 md:pb-16 lg:pb-20">
-    <p class="text-2xl pt-7 sm:text-3xl md:text-4xl font-medium pb-6 md:pb-8 text-secondary">
+    <p class="text-xl pt-7 sm:text-2xl md:text-3xl font-medium pb-4 md:pb-6 text-secondary">
       {{ selectedType.name }}
     </p>
     <div
