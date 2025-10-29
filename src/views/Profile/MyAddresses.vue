@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+  <div class="bg-item rounded-lg shadow-sm p-4 mb-6">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <button @click="openCreateModal()"
@@ -22,42 +22,42 @@
     </div>
   </div>
 
-  <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <div class="bg-item rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
-        <thead class="bg-gray-50 border-b border-gray-200">
+        <thead class="bg-item border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Street Address
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Phone</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Street Address
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">City</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-item divide-y divide-gray-200">
           <tr v-if="filteredAddresses.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+            <td colspan="5" class="px-4 py-4 text-center text-section">
               No results match your search
             </td>
           </tr>
 
-          <tr v-for="address in filteredAddresses" :key="address.id" class="hover:bg-gray-50 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+          <tr v-for="address in filteredAddresses" :key="address.id" class="transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ address.name }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ address.phone }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ address.street_address }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ address.city }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(address)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 Edit
               </button>
               <button @click="openDeleteModal(address)"
@@ -400,5 +400,51 @@ export default {
 <style scoped>
 select {
   background-image: none;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-clamp: 2;
+  /* Standard property for future compatibility */
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #1d491d !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.bg-prod {
+  background-color: #BFD6BF;
+}
+[data-theme="forest"] .bg-prod {
+  background-color: #4b4a4a;
+}
+.bg-item {
+  background-color: #FFFFFF;
+}
+[data-theme="forest"] .bg-item {
+  background-color: #393636;
 }
 </style>

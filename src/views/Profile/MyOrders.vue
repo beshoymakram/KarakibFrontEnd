@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+  <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6">
     <div class="flex flex-wrap items-center gap-4">
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
@@ -15,40 +15,40 @@
     </div>
   </div>
 
-  <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <div class="bg-myprofile rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
-        <thead class="bg-gray-50 border-b border-gray-200">
+        <thead class="bg-item border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order Number</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Orderd Date</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Order Number</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Orderd Date</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Total
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Method
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Payment Method
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-myprofile divide-y divide-gray-200">
           <tr v-if="filteredOrders.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+            <td colspan="5" class="px-4 py-4 text-center text-section">
               No results match your search
             </td>
           </tr>
 
-          <tr v-for="order in filteredOrders" :key="order.id" class="hover:bg-gray-50 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+          <tr v-for="order in filteredOrders" :key="order.id" class="transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ order.order_number }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ order.created_at }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ order.total }} {{ $t('common.currency') }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ order.payment_method }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -62,7 +62,7 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openDetailsModal(order)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-200 transition-colors">
                 Details
               </button>
               <button v-if="order.status == 'pending'" @click="openCancelModal(order)"
@@ -97,7 +97,7 @@
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            <h3 class="mb-5 text-lg font-normal text-section dark:text-gray-400">
               Are you sure you want to cancel this order?
             </h3>
             <button @click="confirmCancel" type="button"
@@ -137,35 +137,35 @@
           <div class="p-4 md:p-5">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Full Name</h4>
+                <h4 class="text-sm font-medium text-section dark:text-gray-300">Full Name</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.name }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Phone</h4>
+                <h4 class="text-sm font-medium text-section dark:text-gray-300">Phone</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.phone }}
                 </p>
               </div>
 
               <div class="sm:col-span-2">
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Street Address</h4>
+                <h4 class="text-sm font-medium text-section dark:text-gray-300">Street Address</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.street_address }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">City</h4>
+                <h4 class="text-sm font-medium text-section dark:text-gray-300">City</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.city }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Order Status</h4>
+                <h4 class="text-sm font-medium text-section dark:text-gray-300">Order Status</h4>
                 <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
                   'bg-green-100 text-green-800': details.status === 'completed',
                   'bg-yellow-100 text-yellow-800': details.status === 'pending',
@@ -176,14 +176,14 @@
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Created At</h4>
+                <h4 class="text-sm font-medium text-section dark:text-gray-300">Created At</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
                   {{ details.created_at }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Total</h4>
+                <h4 class="text-sm font-medium text-section dark:text-gray-300">Total</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
                   {{ details.total }} {{ $t('common.currency') }}
                 </p>
@@ -307,5 +307,46 @@ export default {
 <style scoped>
 select {
   background-image: none;
+}
+.router-link-exact-active {
+  background-color: #e0ebe0;
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.bg-myprofile {
+  background-color: #ffffff;
+}
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+.bg-tabs {
+  background-color: #ffffff;
+}
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
 }
 </style>

@@ -78,7 +78,7 @@
                   :key="color.value"
                   @click="selectedColor = color.value"
                   :class="[
-                    'w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 transition-all',
+                    'w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 transition-all cursor-pointer',
                     selectedColor === color.value
                       ? 'border-[#2C702C] ring-2 ring-[#2C702C] ring-offset-2'
                       : 'border-gray-300',
@@ -100,7 +100,7 @@
                   :key="size"
                   @click="selectedSize = size"
                   :class="[
-                    'px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition-all',
+                    'px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition-all cursor-pointer',
                     selectedSize === size
                       ? 'bg-[#2C702C] text-white'
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-[#2C702C]',
@@ -115,12 +115,12 @@
             <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
               <button
                 @click="addToCart(product.id)"
-                class="flex-1 bg-[#2C702C] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#234d23] transition-all shadow-md"
+                class="flex-1 bg-[#2C702C] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#234d23] transition-all shadow-md cursor-pointer"
               >
                 Add to Cart
               </button>
               <button
-                class="flex-1 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md"
+                class="flex-1 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md cursor-pointer"
               >
                 Checkout Now
               </button>
@@ -240,7 +240,7 @@
             <button
               v-if="reviews.length > 3"
               @click="toggleShowAllReviews"
-              class="px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-[#2C702C] text-[#2C702C] rounded-lg text-sm sm:text-base font-semibold hover:bg-[#2C702C] hover:text-white transition-all"
+              class="px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-[#2C702C] text-[#2C702C] rounded-lg text-sm sm:text-base font-semibold hover:bg-[#2C702C] hover:text-white transition-all cursor-pointer"
             >
               {{ showAllReviews ? "Show Less Reviews" : "View More Reviews" }}
             </button>

@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+  <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
           <option value="">All Statuses</option>
           <option value="pending">Pending</option>
           <option value="completed">Completed</option>
@@ -14,7 +14,7 @@
 
       <div class="relative">
         <select v-model="filters.payout_method"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
           <option value="">All Payout Methods</option>
           <option value="earn">{{ $t('common.earnedPoints') }}</option>
           <option value="donate">{{ $t('common.donatedPoints') }}</option>
@@ -35,27 +35,27 @@
     </div>
   </div>
 
-  <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <div class="bg-myprofile rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
-        <thead class="bg-gray-50 border-b border-gray-200">
+        <thead class="bg-myprofile border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Request Number
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Request Number
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Requested Date
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Requested Date
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Total
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payout Method
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Payout Method
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-myprofile divide-y divide-gray-200">
           <tr v-if="filteredRequests.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+            <td colspan="5" class="px-4 py-4 text-center text-section">
               No results match your search
             </td>
           </tr>
@@ -358,5 +358,46 @@ export default {
 <style scoped>
 select {
   background-image: none;
+}
+.router-link-exact-active {
+  background-color: #e0ebe0;
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.bg-myprofile {
+  background-color: #ffffff;
+}
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+.bg-tabs {
+  background-color: #ffffff;
+}
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
 }
 </style>

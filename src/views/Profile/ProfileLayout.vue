@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-layout py-5 bg-[#BFD6BF]">
+  <div class="profile-layout py-5 bg-myprofile">
     <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5">
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body flex flex-col justify-evenly">
@@ -51,12 +51,12 @@
       </div>
     </div>
 
-    <div class="bg-white rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
+    <div class="bg-tabs rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
       <nav class="flex flex-wrap space-x-1 p-2 border-b-1">
         <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
           class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
-            ? 'bg-[#E0EBE0] text-[#2C702C]'
-            : 'text-gray-600 hover:bg-gray-100'">
+            ? 'bg-[#E0EBE0] text-primary'
+            : 'text-primary hover:bg-gray-300'">
           {{ tab.label }}
         </router-link>
       </nav>
@@ -92,5 +92,43 @@ export default {
 <style scoped>
 .router-link-exact-active {
   background-color: #e0ebe0;
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.bg-myprofile {
+  background-color: #BFD6BF;
+}
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+.bg-tabs {
+  background-color: #ffffff;
+}
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
 }
 </style>
