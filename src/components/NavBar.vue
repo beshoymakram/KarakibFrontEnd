@@ -131,6 +131,12 @@
               class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
               {{ $t("common.dashboard") }}
             </router-link>
+
+            <!-- Dashboard (Courier only) -->
+            <router-link v-if="auth.isAuthenticated && auth.isCourier" to="/courier"
+              class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
+              {{ $t("common.courierDashboard") }}
+            </router-link>
         </div>
       </div>
     </div>
@@ -183,6 +189,10 @@
             <router-link v-if="auth.isAdmin" to="/admin" @click="mobileMenuOpen = false"
               class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100">
               {{ $t("common.dashboard") }}
+            </router-link>
+            <router-link v-if="auth.isCourier" to="/courier" @click="mobileMenuOpen = false"
+              class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100">
+              {{ $t("common.courierDashboard") }}
             </router-link>
             <button @click="handleLogout(); mobileMenuOpen = false"
               class="block w-full text-left py-2 pl-3 pr-4 text-base font-medium text-[#2C702C] dark:text-green-400 hover:bg-gray-50 dark:hover:bg-gray-800">

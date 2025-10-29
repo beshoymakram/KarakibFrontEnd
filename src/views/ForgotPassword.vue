@@ -5,7 +5,10 @@
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
         <!-- Form -->
         <div
-          class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-white flex justify-center items-center rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none relative">
+          :class="[
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-white', 'flex', 'justify-center', 'items-center', 'rounded-t-xl', 'relative',
+            $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none'
+          ]">
           <div class="w-full max-w-md">
             <h1 class="font-extrabold text-3xl lg:text-4xl text-[#317C31] mb-4">
               {{ $t('common.forgotPasswordTitle') }}
@@ -21,7 +24,7 @@
                 <label class="pb-2 font-medium text-base" for="email">{{ $t('common.email') }}</label>
                 <input
                   class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31]"
-                  :placeholder="$t('common.emailPlaceholder')" id="email" v-model="email" type="email" required />
+                  placeholder="email@gmail.com" id="email" v-model="email" type="email" required />
               </div>
 
               <button type="submit" :disabled="loading"
@@ -34,8 +37,8 @@
           <!-- Go Back Link -->
           <router-link to="/login"
             :class="['absolute', 'bottom-8', $i18n.locale === 'ar' ? 'right-8' : 'left-8', 'flex', 'items-center', 'gap-2', 'text-[#317C31]', 'hover:underline', 'font-semibold', 'text-base']">
-            <svg xmlns="http://www.w3.org/2000/svg" :class="['h-5', 'w-5', $i18n.locale === 'ar' ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" :class="['h-5', 'w-5', $i18n.locale === 'ar' ? 'rotate-180' : '']"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             {{ $t('common.goBack') }}
@@ -44,7 +47,10 @@
 
         <!-- Right Side - Banner -->
         <div
-          class="w-full lg:w-1/2 px-6 py-8 lg:py-12 bg-[#EAF2EA] text-center flex flex-col items-center justify-center rounded-b-xl lg:rounded-r-xl lg:rounded-tl-none">
+          :class="[
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-[#EAF2EA]', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-b-xl',
+            $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-tl-none'
+          ]">
 
           <img class="w-full max-w-md mx-auto mb-8"
             src="../../public/images/young-guy-carrying-bag-with-garbage-trash-bin.png" alt="Recycling illustration">
