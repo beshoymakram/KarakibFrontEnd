@@ -4,7 +4,7 @@
     class="hero min-h-[calc(100vh-1vh)] w-full md:w-full lg:w-full bg-cover bg-center bg-no-repeat bg-hero items-start mx-auto"
     style="background-image: url('/images/Homebg.png')"
   >
-    <div class="hero-overlay bg-transparent"></div>
+    <div class="hero-overlay bg-base-100/80 dark:bg-base-200/50"></div>
     <div class="hero-content text-center items-start justify-start pt-12 md:pt-16 lg:pt-20 px-4">
       <div class="max-w-3xl">
         <h1
