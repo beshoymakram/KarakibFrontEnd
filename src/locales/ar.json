@@ -360,6 +360,12 @@
         "close": "إغلاق",
         "allUnits": "جميع الوحدات",
         "type": "النوع",
+        "courierDashboard": "لوحة المندوب",
+        "assignedRequests": "الطلبات الموكلة",
+        "collect": "استلام",
+        "scanQrToCollect": "امسح رمز QR للاستلام",
+        "openCamera": "فتح الكاميرا",
+        "closeScanner": "إغلاق الماسح",
         "wasteTypes": {
             "plastic": "بلاستيك",
             "plastics": "بلاستيك",

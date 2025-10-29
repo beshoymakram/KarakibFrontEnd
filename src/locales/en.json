@@ -362,6 +362,12 @@
     "close": "Close",
     "allUnits": "All Units",
     "type": "Type",
+    "courierDashboard": "Courier Dashboard",
+    "assignedRequests": "Assigned Requests",
+    "collect": "Collect",
+    "scanQrToCollect": "Scan QR to collect",
+    "openCamera": "Open Camera",
+    "closeScanner": "Close Scanner",
     "wasteTypes": {
       "plastic": "Plastic",
       "plastics": "Plastics",

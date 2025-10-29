@@ -38,6 +38,8 @@ import Collect from '@/views/Collect.vue'
 import MyRequests from '@/views/Profile/MyRequests.vue'
 import Requests from '@/views/Admin/Requests.vue'
 import DonatedPoints from '@/views/Admin/DonatedPoints.vue'
+import CourierLayout from '@/views/Courier/CourierLayout.vue'
+import AssignedRequests from '@/views/Courier/AssignedRequests.vue'
 
 // Define routes
 const routes = [
@@ -49,6 +51,7 @@ const routes = [
   { path: '/shop', name: 'Shop', component: ShopMerch },
   { path: '/cart', name: 'cart', component: CartPage },
   { path: '/admin', redirect: '/admin/users' },
+  { path: '/courier', redirect: '/courier/assigned-requests' },
   { path: '/profile', redirect: '/profile/personal-info' },
   { path: '/test-payment', component: TestPayment },
 
@@ -110,6 +113,18 @@ const routes = [
         name: 'AdminProductsCategories',
         component: ProductsCategories
       },
+    ]
+  },
+  {
+    path: '/courier',
+    component: CourierLayout,
+    meta: { requiresAuth: true, requiresCourier: true },
+    children: [
+      {
+        path: 'assigned-requests',
+        name: 'CourierAssignedRequests',
+        component: AssignedRequests
+      }
     ]
   },
   {
@@ -214,6 +229,8 @@ router.beforeEach(async (to, from, next) => {
   } else if (to.meta.requiresGuest && authStore.isAuthenticated) {
     next('/')
   } else if (to.meta.requiresAdmin && !authStore.isAdmin) {
+    next('/')
+  } else if (to.meta.requiresCourier && !authStore.isCourier) {
     next('/')
   } else {
     next()
