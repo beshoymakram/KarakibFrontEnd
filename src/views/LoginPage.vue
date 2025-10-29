@@ -80,8 +80,9 @@
 
               <!-- Forgot Password Link -->
               <div class="mb-5 text-right">
-                <router-link to="/forgot-password" class="text-[#317C31] hover:underline font-medium text-sm lg:text-base">
-                  {{ $t('Forgot Password?') }}
+                <router-link to="/forgot-password"
+                  class="text-[#317C31] hover:underline font-medium text-sm lg:text-base">
+                  {{ $t('common.forgotPassword') }}
                 </router-link>
               </div>
 

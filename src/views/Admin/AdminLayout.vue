@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-layout py-5 bg-[#BFD6BF]">
+  <div class="admin-layout py-5 bg-[#BFD6BF]" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5">
       <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
         <div class="card-body">
@@ -67,12 +67,12 @@
     </div>
 
     <div class="bg-white rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
-      <nav class="flex flex-wrap space-x-1 p-2 border-b-1">
+      <nav :class="['flex', 'flex-wrap', 'p-2', 'border-b-1', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
         <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
           class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
             ? 'bg-[#E0EBE0] text-[#2C702C]'
             : 'text-gray-600 hover:bg-gray-100'">
-          {{ tab.label }}
+          {{ $t(tab.labelKey) }}
         </router-link>
       </nav>
       <router-view></router-view>
@@ -96,15 +96,15 @@ export default {
       requests: '',
       donatedPoints: '',
       tabs: [
-        { id: 'users', label: 'Users' },
-        { id: 'waste-types', label: 'Waste Types' },
-        { id: 'waste-items', label: 'Waste Items' },
-        { id: 'products-categories', label: 'Products Categories' },
-        { id: 'products', label: 'Products' },
-        { id: 'requests', label: 'Collection Requests' },
-        { id: 'donation', label: 'Donation' },
-        { id: 'shops', label: 'Shops' },
-        { id: 'orders', label: 'Orders' }
+        { id: 'users', labelKey: 'common.user' },
+        { id: 'waste-types', labelKey: 'common.wasteTypes' },
+        { id: 'waste-items', labelKey: 'common.wasteItems' },
+        { id: 'products-categories', labelKey: 'common.productsCategories' },
+        { id: 'products', labelKey: 'common.products' },
+        { id: 'requests', labelKey: 'common.allRequests' },
+        { id: 'donation', labelKey: 'common.donate' },
+        { id: 'shops', labelKey: 'common.shops' },
+        { id: 'orders', labelKey: 'common.myOrders' }
       ],
     }
   },
