@@ -57,7 +57,7 @@
             <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
               class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
                 ? 'bg-[#E0EBE0] text-[#2C702C]'
-                : 'text-gray-600 hover:bg-gray-100'">
+                : 'text-primary hover:bg-gray-100'">
               {{ $t(tab.labelKey) }}
             </router-link>
           </nav>

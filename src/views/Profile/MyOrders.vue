@@ -21,17 +21,17 @@
         <table class="w-full table-auto">
           <thead class="bg-item border-b border-gray-200">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.orderNumber') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.orderedDate') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.total') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.paymentMethod') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.status') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.action') }}</th>
             </tr>
           </thead>

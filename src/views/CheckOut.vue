@@ -1,12 +1,12 @@
 <template>
-  <div class="checkout-page bg-[#F5F7F5] min-h-screen py-10">
+  <div class="checkout-page bg-primary min-h-screen py-10">
     <div class="container mx-auto px-4 max-w-6xl">
-      <h1 class="text-3xl font-bold text-[#2C702C] mb-8">{{ $t('common.checkoutOrders') }}</h1>
+      <h1 class="text-3xl font-bold text-primary mb-8">{{ $t('common.checkoutOrders') }}</h1>
 
-      <div class="grid md:grid-cols-2 gap-6 bg-[#E9EBE9] p-6 rounded-2xl shadow-lg">
+      <div class="grid md:grid-cols-2 gap-6 bg-secondary p-6 rounded-2xl shadow-lg">
         <!-- LEFT SIDE - ORDER DETAILS -->
-        <div class="bg-white rounded-xl p-6 shadow">
-          <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">
+        <div class="bg-primary rounded-xl p-6 shadow">
+          <h2 class="text-2xl font-semibold text-primary mb-6">
             {{ $t('common.orderDetails') }}
           </h2>
 
@@ -16,16 +16,16 @@
               <div class="flex items-center gap-4">
                 <img :src="item.cartable.image_url" alt="Product" class="w-14 h-14 rounded-md object-cover" />
                 <div>
-                  <p class="font-semibold text-gray-800">
+                  <p class="font-semibold text-primary">
                     {{ item.cartable.name }}
                   </p>
-                  <p class="text-sm text-gray-500">{{ $t('common.colourWhite') }}</p>
-                  <p class="text-sm text-gray-500">
+                  <p class="text-sm text-section">{{ $t('common.colourWhite') }}</p>
+                  <p class="text-sm text-section">
                     {{ item.cartable.price }} {{ $t('common.currency') }} × {{ item.quantity }}
                   </p>
                 </div>
               </div>
-              <p class="text-[#2C702C] font-semibold">
+              <p class="text-primary font-semibold">
                 {{ (item.cartable.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
               </p>
             </div>
@@ -40,30 +40,30 @@
                 <span>{{ $t('common.deliveryFee') }}</span>
                 <span>20 {{ $t('common.currency') }}</span>
               </div>
-              <div class="flex justify-between text-xl font-bold text-[#2C702C]">
+              <div class="flex justify-between text-xl font-bold text-primary">
                 <span>{{ $t('common.totalAmount') }}</span>
                 <span>{{ cartStore.total + 20 }} {{ $t('common.currency') }}</span>
               </div>
             </div>
           </div>
 
-          <div v-else class="text-center text-gray-500 mt-6">
+          <div v-else class="text-center text-section mt-6">
             {{ $t('common.yourCartIsEmpty') }}
-            <router-link to="/shop" class="text-[#2C702C] underline">{{ $t('common.goShopping') }}</router-link>.
+            <router-link to="/shop" class="text-primary underline">{{ $t('common.goShopping') }}</router-link>.
           </div>
         </div>
 
         <!-- RIGHT SIDE - CHECKOUT -->
-        <div class="bg-white rounded-xl p-6 shadow flex flex-col justify-between">
+        <div class="bg-primary rounded-xl p-6 shadow flex flex-col justify-between">
           <div>
-            <h2 class="text-2xl font-semibold text-[#2C702C] mb-6">{{ $t('common.proceedToCheckout') }}</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-6">{{ $t('common.proceedToCheckout') }}</h2>
 
             <!-- Address Section -->
             <div class="mb-6">
               <div class="flex justify-between items-center mb-2">
-                <h3 class="font-semibold text-[#2C702C]">{{ $t('common.deliveryAddress') }}</h3>
+                <h3 class="font-semibold text-primary">{{ $t('common.deliveryAddress') }}</h3>
                 <button @click="showAddressModal = true"
-                  class="bg-[#2C702C] text-white px-4 py-1 rounded-md hover:bg-[#215921] cursor-pointer">
+                  class="bg-green-500 text-section px-4 py-1 rounded-md hover:bg-[#216b21] cursor-pointer">
                   {{ $t('common.enterNewAddress') }}
                 </button>
               </div>
@@ -72,14 +72,14 @@
                 <div v-for="address in addresses" :key="address.id" @click="selectedAddressId = address.id"
                   class="flex items-start gap-3 p-3 rounded-md text-sm my-2 cursor-pointer border transition-all duration-200"
                   :class="selectedAddressId === address.id
-                    ? 'bg-[#E9F7E9] border-[#2C702C]'
-                    : 'bg-gray-100 text-gray-700 border-transparent hover:border-gray-300'">
+                    ? 'bg-[#E9F7E9] border-primary'
+                    : 'bg-primary text-section border-transparent hover:border-gray-300'">
                   <!-- Radio circle -->
                   <input type="radio" name="deliveryAddress" :value="address.id" v-model="selectedAddressId" required
-                    class="accent-[#2C702C] h-4 w-4 cursor-pointer mt-1 text-[#2C702C] focus:ring-[#2C702C] border-gray-300" />
+                    class="accent-primary h-4 w-4 cursor-pointer mt-1 text-primary focus:ring-primary border-gray-300" />
 
                   <!-- Address info -->
-                  <div>
+                  <div class="text-primary">
                     <span class="font-bold">Full Name:</span> {{ address.name }}<br />
                     <span class="font-bold">Phone:</span> {{ address.phone }}<br />
                     <span class="font-bold">Street Address:</span> {{ address.street_address }}<br />
@@ -88,7 +88,7 @@
                 </div>
               </div>
 
-              <div v-else class="text-gray-400 text-sm">
+              <div v-else class="text-primary text-sm">
                 {{ $t('common.noAddressAddedYet') }}
               </div>
             </div>
@@ -97,13 +97,13 @@
 
             <!-- Payment Section -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.paymentMethod') }}</h3>
+              <h3 class="font-semibold text-primary mb-2">{{ $t('common.paymentMethod') }}</h3>
               <div class="flex gap-3">
                 <button @click="paymentMethod = 'cash'" :class="[
                   'px-4 py-2 rounded-md border cursor-pointer',
                   paymentMethod === 'cash'
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
-                    : 'border-gray-300 text-gray-700',
+                    : 'border-gray-300 text-primary',
                 ]">
                   {{ $t('common.cashOnDelivery') }}
                 </button>
@@ -111,7 +111,7 @@
                   'px-4 py-2 rounded-md border cursor-pointer',
                   paymentMethod === 'card'
                     ? 'bg-[#2C702C] text-white border-[#2C702C]'
-                    : 'border-gray-300 text-gray-700',
+                    : 'border-gray-300 text-primary',
                 ]">
                   {{ $t('common.card') }}
                 </button>
@@ -120,7 +120,7 @@
 
             <!-- Notes -->
             <div class="mb-6">
-              <h3 class="font-semibold text-[#2C702C] mb-2">{{ $t('common.deliveryNotes') }}</h3>
+              <h3 class="font-semibold text-primary mb-2">{{ $t('common.deliveryNotes') }}</h3>
               <textarea v-model="deliveryNotes" :placeholder="$t('common.addDeliveryNotes')"
                 class="w-full border border-gray-300 rounded-md p-2 text-sm" rows="3"></textarea>
             </div>
@@ -320,4 +320,37 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: #F5F7F5 !important;
+}
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(66, 66, 66)!important;
+}
+.text-secondary {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+.text-section {
+  color: black !important;
+}
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+.bg-secondary {
+  background-color: #ffff;
+}
+[data-theme="forest"] .bg-secondary {
+  background-color: rgb(43, 43, 43) !important;
+}
+</style>

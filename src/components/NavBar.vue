@@ -259,13 +259,14 @@ export default {
 
   mounted() {
     document.addEventListener("click", this.handleClickOutside);
+    const savedTheme = localStorage.getItem("theme") || "light";
+    this.currentTheme = savedTheme;
+    document.documentElement.dataset.theme = savedTheme;
   },
 
   beforeUnmount() {
     document.removeEventListener("click", this.handleClickOutside);
-    const savedTheme = localStorage.getItem("theme") || "light";
-    this.currentTheme = savedTheme;
-    document.documentElement.dataset.theme = savedTheme;
+
   },
 };
 </script>

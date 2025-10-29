@@ -31,7 +31,7 @@
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-semibold text-primary">Personal Info</h2>
-        <h2 class="text-xl font-semibold text-[#2C702C]">{{ $t('common.personalInfo') }}</h2>
+        <h2 class="text-xl font-semibold text-primary">{{ $t('common.personalInfo') }}</h2>
         <button @click="editMode = !editMode"
           class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -46,7 +46,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <!-- Full Name -->
         <div>
-          <label class="block text-sm font-medium text-gray-500 mb-2">{{ $t('common.fullName') }}</label>
+          <label class="block text-sm font-medium text-section mb-2">{{ $t('common.fullName') }}</label>
           <input v-if="editMode" v-model="newInfo.name" type="text"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <p v-else class="text-lg font-semibold text-primary">{{ newInfo.name }}</p>
@@ -54,7 +54,7 @@
 
         <!-- Email -->
         <div>
-          <label class="block text-sm font-medium text-gray-500 mb-2">{{ $t('common.email') }}</label>
+          <label class="block text-sm font-medium text-section mb-2">{{ $t('common.email') }}</label>
           <input v-if="editMode" v-model="newInfo.email" type="email"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <p v-else class="text-lg font-semibold text-primary">{{ newInfo.email }}</p>
@@ -62,7 +62,7 @@
 
         <!-- Phone -->
         <div>
-          <label class="block text-sm font-medium text-gray-500 mb-2">{{ $t('common.phone') }}</label>
+          <label class="block text-sm font-medium text-section mb-2">{{ $t('common.phone') }}</label>
           <input v-if="editMode" v-model="newInfo.phone" type="tel"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <p v-else class="text-lg font-semibold text-primary">{{ newInfo.phone }}</p>
