@@ -1,7 +1,7 @@
 <template>
   <!-- Hero Section -->
   <div
-    class="hero min-h-[calc(100vh-2vh)] w-full md:w-full lg:w-full bg-cover bg-center bg-no-repeat bg-hero items-start mx-auto"
+    class="hero min-h-[calc(100vh-1vh)] w-full md:w-full lg:w-full bg-cover bg-center bg-no-repeat bg-hero items-start mx-auto"
     style="background-image: url('/images/Homebg.png')"
   >
     <div class="hero-overlay bg-transparent"></div>
@@ -39,27 +39,27 @@
       <div
         v-for="(step, index) in steps"
         :key="index"
-        class="card bg-base-100 shadow-sm w-full sm:w-80 md:w-72 lg:w-68 rounded-3xl cursor-pointer hover:shadow-md transition"
+        class="card bg-base-100 shadow-sm w-40 sm:w-80 md:w-72 lg:w-68 rounded-3xl cursor-pointer hover:shadow-md transition"
         @click="handleStepClick(step)"
       >
-        <figure class="p-4 md:p-6">
+        <figure class="px-2 md:p-4">
           <img
             :src="step.image"
             :alt="step.title"
-            class="object-cover rounded-3xl size-50 md:size-70 mt-4 md:mt-0 md:h-60"
+            class="object-cover rounded-3xl size-30 sm:34 md:size-70 mt-4 md:mt-0 md:h-60"
           />
         </figure>
         <div class="card-body text-center">
-          <h2 class="font-semibold text-primary -mt-5">{{ step.number }}</h2>
-          <p class="card-title mx-auto">{{ step.title }}</p>
-          <p>{{ step.description }}</p>
+          <h2 class="font-semibold text-xs  text-primary -mt-5">{{ step.number }}</h2>
+          <p class="card-title text-xs md:text-lg mx-auto">{{ step.title }}</p>
+          <p class="text-[10px] ">{{ step.description }}</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Waste Carousel Section -->
-  <section class="px-4 md:px-12 py-16 relative bg-hero">
+  <section class="px-4 md:px-12 py-12 relative bg-hero">
     <p
       class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center"
     >
