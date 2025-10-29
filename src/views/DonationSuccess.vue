@@ -16,20 +16,20 @@
       </div>
 
       <h2 class="text-xl font-semibold text-green-700 mb-2">
-        Your donation payment has been processed successfully!
+        {{ $t('common.donationSuccessTitle') }}
       </h2>
       <p class="text-gray-600 mb-6">
-        Thank you for your donation & supporting Karakib and our green mission
+        {{ $t('common.donationSuccessDescription') }}
       </p>
 
       <div class="bg-[#F7F9FC] rounded-lg p-4 mb-6 text-left text-sm text-gray-700">
-        <p><span class="font-semibold text-green-700">Donation Number:</span> {{ donationNumber }}</p>
-        <p class="break-all"><span class="font-semibold text-green-700">Transaction ID:</span> {{ transactionId }}</p>
+        <p><span class="font-semibold text-green-700">{{ $t('common.donationNumber') }}:</span> {{ donationNumber }}</p>
+        <p class="break-all"><span class="font-semibold text-green-700">{{ $t('common.transactionId') }}:</span> {{ transactionId }}</p>
       </div>
 
       <router-link to="/shop"
         class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition">
-        Continue Shopping
+        {{ $t('common.continueShopping') }}
       </router-link>
     </div>
   </div>
