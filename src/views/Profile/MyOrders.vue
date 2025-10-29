@@ -1,87 +1,94 @@
 <template>
   <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6">
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
-    <div class="flex flex-wrap items-center gap-4">
-      <div class="flex-1 max-w-md ml-auto">
-        <div class="relative">
-          <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
-            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <svg :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']" fill="none" stroke="currentColor"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+    <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="flex-1 max-w-md ml-auto">
+          <div class="relative">
+            <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
+              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+            <svg
+              :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="bg-myprofile rounded-lg shadow-sm overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full table-auto">
-        <thead class="bg-item border-b border-gray-200">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Order Number</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Orderd Date</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Total
-            </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Payment Method
-            </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
-            </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.orderNumber') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.orderedDate') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.total') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.paymentMethod') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.status') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody class="bg-myprofile divide-y divide-gray-200">
-          <tr v-if="filteredOrders.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-section">
-              No results match your search
-            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
-              {{ $t('common.noResultsMatchSearch') }}
-            </td>
-          </tr>
+    <div class="bg-myprofile rounded-lg shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full table-auto">
+          <thead class="bg-item border-b border-gray-200">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Order Number
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Orderd Date</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Total
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Payment Method
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                $t('common.orderNumber') }}</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                $t('common.orderedDate') }}</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                $t('common.total') }}</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                $t('common.paymentMethod') }}</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                $t('common.status') }}</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                $t('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody class="bg-myprofile divide-y divide-gray-200">
+            <tr v-if="filteredOrders.length === 0">
+              <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+                {{ $t('common.noResultsMatchSearch') }}
+              </td>
+            </tr>
 
-          <tr v-for="order in filteredOrders" :key="order.id" class="transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-              {{ order.order_number }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-              {{ order.created_at }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-              {{ order.total }} {{ $t('common.currency') }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-              {{ order.payment_method }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">
-              <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed',
-                'text-red-800 bg-red-100': order.status === 'cancelled',
-                'text-warning bg-yellow-100': order.status === 'pending'
-              }">
-                {{ order.status }}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              <button @click="openDetailsModal(order)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-200 transition-colors">
-                Details
-              </button>
-              <button v-if="order.status == 'pending'" @click="openCancelModal(order)"
-                class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
-                {{ $t('common.Cancel') }}
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            <tr v-for="order in filteredOrders" :key="order.id" class="transition-colors">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+                {{ order.order_number }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+                {{ order.created_at }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+                {{ order.total }} {{ $t('common.currency') }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+                {{ order.payment_method }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
+                  'text-green-800 bg-green-100': order.status === 'completed',
+                  'text-red-800 bg-red-100': order.status === 'cancelled',
+                  'text-warning bg-yellow-100': order.status === 'pending'
+                }">
+                  {{ order.status }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                <button @click="openDetailsModal(order)"
+                  class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-200 transition-colors">
+                  Details
+                </button>
+                <button v-if="order.status == 'pending'" @click="openCancelModal(order)"
+                  class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
+                  {{ $t('common.Cancel') }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>
@@ -324,9 +331,11 @@ export default {
 select {
   background-image: none;
 }
+
 .router-link-exact-active {
   background-color: #e0ebe0;
 }
+
 .text-primary {
   color: #2c702c !important;
 }
@@ -338,30 +347,39 @@ select {
 .bg-primary {
   background-color: rgb(235, 255, 235) !important;
 }
+
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(41, 41, 41)!important;
+  background-color: rgb(41, 41, 41) !important;
 }
+
 .text-secondary {
   color: #2c702c !important;
 }
+
 [data-theme="forest"] .text-secondary {
   color: rgb(9, 228, 75) !important;
 }
+
 .text-section {
   color: black !important;
 }
+
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
 .bg-myprofile {
   background-color: #ffffff;
 }
+
 [data-theme="forest"] .bg-myprofile {
   background-color: #424141;
 }
+
 .bg-tabs {
   background-color: #ffffff;
 }
+
 [data-theme="forest"] .bg-tabs {
   background-color: #2C2C2C;
 }
