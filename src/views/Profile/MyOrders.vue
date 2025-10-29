@@ -1,6 +1,5 @@
 <template>
-  <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6">
-    <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+    <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
       <div class="flex flex-wrap items-center gap-4">
         <div class="flex-1 max-w-md ml-auto">
           <div class="relative">
@@ -22,16 +21,6 @@
         <table class="w-full table-auto">
           <thead class="bg-item border-b border-gray-200">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Order Number
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Orderd Date</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Total
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Payment Method
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
                 $t('common.orderNumber') }}</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
@@ -91,7 +80,6 @@
       </div>
     </div>
 
-  </div>
 
   <Teleport to="body">
     <div v-if="showCancelModal"
@@ -153,7 +141,6 @@
           <div class="p-4 md:p-5">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
-                <h4 class="text-sm font-medium text-section dark:text-gray-300">Full Name</h4>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.name }}
@@ -161,7 +148,6 @@
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-section dark:text-gray-300">Phone</h4>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.phone }}
@@ -169,7 +155,6 @@
               </div>
 
               <div class="sm:col-span-2">
-                <h4 class="text-sm font-medium text-section dark:text-gray-300">Street Address</h4>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.street_address }}
@@ -177,7 +162,6 @@
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-section dark:text-gray-300">City</h4>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.city') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.city }}
@@ -185,7 +169,6 @@
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-section dark:text-gray-300">Order Status</h4>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.orderStatus') }}</h4>
                 <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
                   'bg-green-100 text-green-800': details.status === 'completed',
@@ -197,7 +180,6 @@
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-section dark:text-gray-300">Created At</h4>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.createdAt') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
                   {{ details.created_at }}
@@ -205,7 +187,6 @@
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-section dark:text-gray-300">Total</h4>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.total') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
                   {{ details.total }} {{ $t('common.currency') }}

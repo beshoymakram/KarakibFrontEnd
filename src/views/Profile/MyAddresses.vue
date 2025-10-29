@@ -1,6 +1,5 @@
 <template>
-  <div class="bg-item rounded-lg shadow-sm p-4 mb-6">
-    <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+    <div class="bg-item rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
       <div class="flex flex-wrap items-center gap-4">
         <div class="relative">
           <button @click="openCreateModal()"
@@ -29,28 +28,22 @@
         <table class="w-full table-auto">
           <thead class="bg-item border-b border-gray-200">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Name</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Phone</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Street Address
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">City</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.name') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.phone') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.streetAddress') }}
               </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.city') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.action') }}</th>
             </tr>
           </thead>
           <tbody class="bg-item divide-y divide-gray-200">
             <tr v-if="filteredAddresses.length === 0">
-              <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+              <td colspan="5" class="px-4 py-4 text-center text-section">
                 {{ $t('common.noResultsMatchSearch') }}
               </td>
             </tr>
@@ -86,7 +79,6 @@
       </div>
 
     </div>
-  </div>
 
   <Teleport to="body">
     <div v-if="showDeleteModal"

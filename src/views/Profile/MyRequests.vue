@@ -1,18 +1,9 @@
 <template>
-  <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6">
-    <div class="flex flex-wrap items-center gap-4">
-      <div class="relative">
-        <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
-          <option value="">All Statuses</option>
-          <option value="pending">Pending</option>
-          <option value="completed">Completed</option>
-          <option value="cancelled">Cancelled</option>
-          <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+          <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
             <div class="flex flex-wrap items-center gap-4">
               <div class="relative">
                 <select v-model="filters.status"
-                  class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+                  class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
                   <option value="">{{ $t('common.allStatuses') }}</option>
                   <option value="pending">{{ $t('common.pending') }}</option>
                   <option value="completed">{{ $t('common.completed') }}</option>
@@ -53,38 +44,23 @@
               <table class="w-full table-auto">
                 <thead class="bg-myprofile border-b border-gray-200">
                   <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Request
-                      Number
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Requested
-                      Date
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Total
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Payout
-                      Method
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Status
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                       $t('common.requestNumber') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                       $t('common.requestedDate') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                       $t('common.total') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                       $t('common.payoutMethod') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                       $t('common.status') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{
+                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
                       $t('common.action') }}</th>
                   </tr>
                 </thead>
                 <tbody class="bg-myprofile divide-y divide-gray-200">
                   <tr v-if="filteredRequests.length === 0">
-                    <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+                    <td colspan="5" class="px-4 py-4 text-center text-section">
                       {{ $t('common.noResultsMatchSearch') }}
                     </td>
                   </tr>
@@ -126,11 +102,7 @@
               </table>
             </div>
           </div>
-        </select>
-      </div>
-    </div>
 
-  </div>
 
   <Teleport to="body">
     <div v-if="showCancelModal"
