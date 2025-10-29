@@ -1,18 +1,22 @@
 <template>
+<<<<<<< HEAD
   <div class="bg-item rounded-lg shadow-sm p-4 mb-6">
+=======
+  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+>>>>>>> 8756f49fcff167adb491900606c473aad56a7899
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <button @click="openCreateModal()"
           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          Create new address
+          {{ $t('common.createNewAddress') }}
         </button>
       </div>
 
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
-          <input v-model="searchQuery" type="text" placeholder="Search by name or email..."
+          <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+          <svg :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -27,18 +31,32 @@
       <table class="w-full table-auto">
         <thead class="bg-item border-b border-gray-200">
           <tr>
+<<<<<<< HEAD
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Name</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Phone</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Street Address
             </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">City</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">Action</th>
+=======
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.name') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.phone') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.streetAddress') }}
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.city') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('common.action') }}</th>
+>>>>>>> 8756f49fcff167adb491900606c473aad56a7899
           </tr>
         </thead>
         <tbody class="bg-item divide-y divide-gray-200">
           <tr v-if="filteredAddresses.length === 0">
+<<<<<<< HEAD
             <td colspan="5" class="px-4 py-4 text-center text-section">
               No results match your search
+=======
+            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+              {{ $t('common.noResultsMatchSearch') }}
+>>>>>>> 8756f49fcff167adb491900606c473aad56a7899
             </td>
           </tr>
 
@@ -57,12 +75,17 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(address)"
+<<<<<<< HEAD
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 Edit
+=======
+                class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                {{ $t('common.edit') }}
+>>>>>>> 8756f49fcff167adb491900606c473aad56a7899
               </button>
               <button @click="openDeleteModal(address)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
-                Delete
+                {{ $t('common.delete') }}
               </button>
             </td>
           </tr>
@@ -93,7 +116,7 @@
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this address?
+              {{ $t('common.areYouSureDeleteAddress') }}
             </h3>
             <button @click="confirmDelete" type="button"
               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
@@ -116,7 +139,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Create address
+              {{ $t('common.createAddress') }}
             </h3>
             <button type="button" @click="showCreateModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -135,7 +158,7 @@
               <!-- Name -->
               <div class="col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Full Name
+                  {{ $t('common.fullName') }}
                 </label>
                 <input type="text" id="name" v-model="createForm.name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -143,7 +166,7 @@
               </div>
               <div class="col-span-2">
                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Phone
+                  {{ $t('common.phone') }}
                 </label>
                 <input type="text" id="phone" v-model="createForm.phone"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -151,7 +174,7 @@
               </div>
               <div class="col-span-2">
                 <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Street Address
+                  {{ $t('common.streetAddress') }}
                 </label>
                 <input type="text" id="street_address" v-model="createForm.street_address"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -191,7 +214,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-              Edit address
+              {{ $t('common.editAddress') }}
             </h3>
             <button type="button" @click="showEditModal = false"
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -209,7 +232,7 @@
               <!-- Name -->
               <div class="col-span-2">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Full Name
+                  {{ $t('common.fullName') }}
                 </label>
                 <input type="text" id="name" v-model="editForm.name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -217,7 +240,7 @@
               </div>
               <div class="col-span-2">
                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Phone
+                  {{ $t('common.phone') }}
                 </label>
                 <input type="text" id="phone" v-model="editForm.phone"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -225,7 +248,7 @@
               </div>
               <div class="col-span-2">
                 <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Street Address
+                  {{ $t('common.streetAddress') }}
                 </label>
                 <input type="text" id="street_address" v-model="editForm.street_address"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"

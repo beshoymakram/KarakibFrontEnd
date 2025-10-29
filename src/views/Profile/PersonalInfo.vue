@@ -1,5 +1,5 @@
 <template>
-  <div class="personal-info p-8">
+  <div class="personal-info p-8" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <!-- Profile Image Upload - Centered -->
     <div class="flex justify-center mb-8">
       <div class="relative">
@@ -30,7 +30,11 @@
     <!-- Personal Info Section -->
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center justify-between mb-6">
+<<<<<<< HEAD
         <h2 class="text-xl font-semibold text-primary">Personal Info</h2>
+=======
+        <h2 class="text-xl font-semibold text-[#2C702C]">{{ $t('common.personalInfo') }}</h2>
+>>>>>>> 8756f49fcff167adb491900606c473aad56a7899
         <button @click="editMode = !editMode"
           class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -38,14 +42,14 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
           </svg>
-          Edit
+          {{ $t('common.edit') }}
         </button>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <!-- Full Name -->
         <div>
-          <label class="block text-sm font-medium text-gray-500 mb-2">Full Name</label>
+          <label class="block text-sm font-medium text-gray-500 mb-2">{{ $t('common.fullName') }}</label>
           <input v-if="editMode" v-model="newInfo.name" type="text"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <p v-else class="text-lg font-semibold text-primary">{{ newInfo.name }}</p>
@@ -53,7 +57,7 @@
 
         <!-- Email -->
         <div>
-          <label class="block text-sm font-medium text-gray-500 mb-2">Email</label>
+          <label class="block text-sm font-medium text-gray-500 mb-2">{{ $t('common.email') }}</label>
           <input v-if="editMode" v-model="newInfo.email" type="email"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <p v-else class="text-lg font-semibold text-primary">{{ newInfo.email }}</p>
@@ -61,7 +65,7 @@
 
         <!-- Phone -->
         <div>
-          <label class="block text-sm font-medium text-gray-500 mb-2">Phone</label>
+          <label class="block text-sm font-medium text-gray-500 mb-2">{{ $t('common.phone') }}</label>
           <input v-if="editMode" v-model="newInfo.phone" type="tel"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <p v-else class="text-lg font-semibold text-primary">{{ newInfo.phone }}</p>
@@ -87,7 +91,7 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
           </svg>
-          Delete Account
+          {{ $t('common.deleteAccount') }}
         </button>
       </div>
     </div>
@@ -109,11 +113,11 @@
                   d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
               <h3 class="mb-5 text-lg font-normal text-gray-500">
-                Are you sure you want to delete your account? This action cannot be undone.
+                {{ $t('common.areYouSureDeleteAccount') }}
               </h3>
               <button @click="deleteAccount"
                 class="text-white bg-red-600 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2">
-                Yes, delete it
+                {{ $t('common.yesDeleteIt') }}
               </button>
               <button @click="showDeleteModal = false"
                 class="text-gray-500 bg-white hover:bg-gray-100 border border-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
