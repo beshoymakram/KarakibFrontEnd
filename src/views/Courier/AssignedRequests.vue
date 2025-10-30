@@ -80,10 +80,16 @@
 </template>
 
 <script>
+import ordersService from '@/services/ordersService';
+import requestsService from '@/services/requestsService';
+import { nextTick } from 'vue';
+
 export default {
   name: 'CourierAssignedRequests',
   data() {
     return {
+      selectedOrder: '',
+      showCompleteModal: false,
       requests: [
         { id: 1, number: 'REQ-1001', createdAt: '2025-10-20 10:30', address: 'Cairo, Nasr City' },
         { id: 2, number: 'REQ-1002', createdAt: '2025-10-21 11:15', address: 'Giza, Dokki' },
@@ -96,10 +102,27 @@ export default {
     }
   },
   methods: {
+    openCompleteModal(order) {
+      this.selectedOrder = order.id;
+      this.showCompleteModal = true;
+    },
     openScanner(req) {
       this.activeRequestId = req.id
       this.scannerOpen = true
       this.$nextTick(this.startCamera)
+    },
+    async confirmComplete() {
+      try {
+        const response = await ordersService.completeOrder(this.selectedOrder);
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+        });
+        this.selectedOrder = '';
+        this.fetchMyRequests();
+        this.showCompleteModal = false;
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
     },
     async startCamera() {
       try {
@@ -123,6 +146,18 @@ export default {
       this.scannerOpen = false
       this.activeRequestId = null
     },
+
+    async fetchMyRequests() {
+      try {
+        const user = await requestsService.getMyRequests();
+        this.requests = user.data.requests || user.data;
+      } catch (error) {
+        this.$toast.error(error?.response?.data.message || 'Failed to fetch requests.');
+      }
+    },
+  },
+  mounted() {
+    this.fetchMyRequests();
   }
 }
 </script>

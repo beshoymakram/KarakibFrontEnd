@@ -371,6 +371,9 @@
     "closeScanner": "Close Scanner",
     "createNewType": "Create New Type",
     "createNewCategory": "Create New Category",
-    "donations": "Donations"
+    "donations": "Donations",
+    "fundName": "Fund Name",
+    "amount": "Amount",
+    "today": "Today"
   }
 }
