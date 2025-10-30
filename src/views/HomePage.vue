@@ -4,7 +4,7 @@
     class="hero min-h-[calc(100vh-1vh)] w-full md:w-full lg:w-full bg-cover bg-center bg-no-repeat bg-hero items-start mx-auto"
     style="background-image: url('/images/Homebg.png')"
   >
-    <div class="hero-overlay bg-base-100/80 dark:bg-base-200/50"></div>
+    <div class="hero-overlay bg-base-100/50 dark:bg-base-200/50"></div>
     <div class="hero-content text-center items-start justify-start pt-12 md:pt-16 lg:pt-20 px-4">
       <div class="max-w-3xl">
         <h1
@@ -28,9 +28,9 @@
 
   <!-- Steps Section -->
 
-  <section class="px-16 py-14 bg-steps" ref="howItWorksSection">
+  <section class="px-16 py-12 bg-steps" ref="howItWorksSection">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center mb-10 md:mb-12 lg:mb-16"
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center mb-6 md:mb-8 lg:mb-10 pt-0"
     >
       {{ $t("common.howItWorks") }}
     </p>
@@ -39,20 +39,20 @@
       <div
         v-for="(step, index) in steps"
         :key="index"
-        class="card bg-base-100 shadow-sm w-40 sm:w-80 md:w-72 lg:w-68 rounded-3xl cursor-pointer hover:shadow-md transition"
+        class="card bg-base-100 shadow-sm w-40 sm:w-50 md:w-68  rounded-3xl cursor-pointer hover:shadow-md transition"
         @click="handleStepClick(step)"
       >
         <figure class="px-2 md:p-4">
           <img
             :src="step.image"
             :alt="step.title"
-            class="object-cover rounded-3xl size-30 sm:34 md:size-70 mt-4 md:mt-0 md:h-60"
+            class="object-cover rounded-3xl size-30 sm:size-44 md:size-70 mt-4 md:mt-0 md:h-60"
           />
         </figure>
         <div class="card-body text-center">
           <h2 class="font-semibold text-xs  text-primary -mt-5">{{ step.number }}</h2>
           <p class="card-title text-xs md:text-lg mx-auto">{{ step.title }}</p>
-          <p class="text-[10px] ">{{ step.description }}</p>
+          <p class="text-[10px] sm:text-xs font-normal">{{ step.description }}</p>
         </div>
       </div>
     </div>
@@ -61,16 +61,16 @@
   <!-- Waste Carousel Section -->
   <section class="px-4 md:px-12 py-12 relative bg-hero">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center"
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center"
     >
       {{ $t("common.discoverWasteTypes") }}
     </p>
     <p
-      class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-secondary text-center pt-5 pb-10 font-normal"
+      class="text-base sm:text-lg md:text-xl lg:text-2xl text-secondary text-center pt-5 pb-10 font-normal"
     >
       {{ $t("common.learnAboutDifferentKindsOfWaste") }}
     </p>
-    <div class="text-center mt-4 mb-8 md:mb-12">
+    <div class="text-center mt-4 mb-6 md:mb-10">
       <router-link to="/add-waste">
         <button
           class="btn rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
@@ -102,7 +102,7 @@
       <!-- Carousel (Scrollable Container) -->
       <div
         ref="carousel"
-        class="carousel carousel-center bg-hero rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
+        class="carousel carousel-center bg-hero rounded-box space-x-4 sm:space-x-6 pt-6 sm:pt-8 md:pt-10 flex overflow-x-auto scroll-smooth"
       >
         <div
           v-for="(item, index) in wasteItems"
@@ -112,7 +112,7 @@
           <img
             :src="item.image_url"
             :alt="item.name"
-            class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-cover rounded-full bg-carousel"
+            class="w-28 h-28 sm:w-38 sm:h-38 md:w-46 md:h-46 object-cover rounded-full bg-carousel"
           />
           <p class="mt-3 md:mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary">
             {{ item.name }}
