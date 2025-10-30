@@ -47,6 +47,7 @@
     "equivalentTo": "equivalent to",
     "collectRequests": "Collect Requests",
     "totalOrders": "Total Orders",
+    "orders": "Orders",
     "totalUsers": "Total Users",
     "forgotPassword": "Forgot Password?",
     "requestCollection": "Request Collection",
@@ -369,6 +370,7 @@
     "openCamera": "Open Camera",
     "closeScanner": "Close Scanner",
     "createNewType": "Create New Type",
-    "createNewCategory": "Create New Category"
+    "createNewCategory": "Create New Category",
+    "donations": "Donations"
   }
 }

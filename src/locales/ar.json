@@ -47,6 +47,7 @@
         "equivalentTo": "ما يعادل",
         "collectRequests": "طلبات الجمع",
         "totalOrders": "إجمالي الطلبات",
+        "orders": "الطلبات",
         "totalUsers": "إجمالي المستخدمين",
         "forgotPassword": "هل نسيت كلمة السر؟",
         "addWasteItems": "أضف عناصر النفايات",
@@ -367,6 +368,7 @@
         "openCamera": "فتح الكاميرا",
         "closeScanner": "إغلاق الماسح",
         "createNewType": "انشاء نوع جديد",
-        "createNewCategory": "انشاء فئة جديدة"
+        "createNewCategory": "انشاء فئة جديدة",
+        "donations": "التبرعات"
     }
 }

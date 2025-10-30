@@ -103,9 +103,8 @@ export default {
         { id: 'products-categories', labelKey: 'common.productsCategories' },
         { id: 'products', labelKey: 'common.products' },
         { id: 'requests', labelKey: 'common.allRequests' },
-        { id: 'donation', labelKey: 'common.donate' },
-        { id: 'shops', labelKey: 'common.shops' },
-        { id: 'orders', labelKey: 'common.myOrders' }
+        { id: 'orders', labelKey: 'common.orders' },
+        { id: 'donations', labelKey: 'common.donations' },
       ],
     }
   },

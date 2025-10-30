@@ -40,6 +40,8 @@ import Requests from '@/views/Admin/Requests.vue'
 import DonatedPoints from '@/views/Admin/DonatedPoints.vue'
 import CourierLayout from '@/views/Courier/CourierLayout.vue'
 import AssignedRequests from '@/views/Courier/AssignedRequests.vue'
+import Donations from '@/views/Admin/Donations.vue'
+import DonationFailure from '@/views/DonationFailure.vue'
 
 // Define routes
 const routes = [
@@ -97,6 +99,11 @@ const routes = [
         path: 'orders',
         name: 'AdminOrders',
         component: Orders
+      },
+      {
+        path: 'donations',
+        name: 'AdminDonations',
+        component: Donations
       },
       {
         path: 'requests',
@@ -170,8 +177,8 @@ const routes = [
   },
   {
     path: '/donate/failed',
-    name: 'PaymentFailure',
-    component: PaymentFailure,
+    name: 'DonationFailure',
+    component: DonationFailure,
   },
 
   { path: '/product/:id', name: 'product-desc', component: ProductDesc, props: true },
