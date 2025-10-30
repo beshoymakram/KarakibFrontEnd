@@ -366,18 +366,7 @@
         "scanQrToCollect": "امسح رمز QR للاستلام",
         "openCamera": "فتح الكاميرا",
         "closeScanner": "إغلاق الماسح",
-        "wasteTypes": {
-            "plastic": "بلاستيك",
-            "plastics": "بلاستيك",
-            "carton": "كرتون",
-            "cartons": "كرتون",
-            "clothes": "ملابس",
-            "cooking oil": "زيت الطبخ",
-            "e-waste": "نفايات إلكترونية",
-            "home appliances": "أجهزة منزلية",
-            "metals": "معادن",
-            "papers": "أوراق",
-            "woods": "أخشاب"
-        }
+        "createNewType": "انشاء نوع جديد",
+        "createNewCategory": "انشاء فئة جديدة"
     }
 }
