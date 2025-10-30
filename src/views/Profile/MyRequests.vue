@@ -65,17 +65,17 @@
                     </td>
                   </tr>
 
-                  <tr v-for="request in filteredRequests" :key="request.id" class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+                  <tr v-for="request in filteredRequests" :key="request.id" class="transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
                       {{ request.request_number }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
                       {{ request.created_at }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
                       {{ request.total }} {{ $t('common.points') }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
                       {{ request.payout_method == 'earn' ? $t('common.earnedPoints') : $t('common.donatedPoints') }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -89,7 +89,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
                       <button @click="openDetailsModal(request)"
-                        class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                        class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                         Details
                       </button>
                       <button v-if="request.status == 'pending'" @click="openCancelModal(request)"
