@@ -118,12 +118,40 @@
             <p class="text-[#8E98A8] text-xs sm:text-sm font-semibold">
               {{ $t("common.per") }} {{ item.unit }}
             </p>
-            <button
-              @click="addWasteToCart(item)"
-              class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold transition-colors duration-300"
-            >
-              {{ $t("common.addAndEarn") }}
-            </button>
+<!-- Quantity Controls -->
+<div v-if="getCartItem(item.id)" class="flex items-center gap-2">
+  <button
+    @click.stop="decrementCartItem(item.id)"
+    class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 text-green-500">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+    </svg>
+  </button>
+
+  <span class="w-10 text-center font-bold text-[#2C702C]">
+    {{ getCartItem(item.id).quantity }}
+  </span>
+
+  <button
+    @click.stop="incrementCartItem(item.id)"
+    class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+    </svg>
+  </button>
+</div>
+
+<!-- Add Button -->
+<button
+  v-else
+  @click.stop="addWasteToCart(item)"
+  class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold transition-colors duration-300"
+>
+  {{ $t("common.addAndEarn") }}
+</button>
+
           </div>
         </div>
       </div>
@@ -190,6 +218,28 @@ export default {
         this.$toast.error(this.$t("common.failedToAddWasteItem"));
       }
     },
+    getCartItem(wasteId) {
+  return this.cartStore.waste?.find((item) => item.cartable_id === wasteId);
+},
+
+async incrementCartItem(wasteId) {
+  const cartItem = this.getCartItem(wasteId);
+  if (cartItem) {
+    await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity + 1);
+  }
+},
+
+async decrementCartItem(wasteId) {
+  const cartItem = this.getCartItem(wasteId);
+  if (cartItem) {
+    if (cartItem.quantity > 1) {
+      await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity - 1);
+    } else {
+      await this.cartStore.removeItem(cartItem.id);
+      this.$toast.success(this.$t("common.itemRemovedFromCart"));
+    }
+  }
+},
   },
   computed: {
     filteredItems() {
