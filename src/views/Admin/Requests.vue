@@ -41,20 +41,20 @@
       <table class="w-full table-auto">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">
               Request Number
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">
               Requested Date
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Total
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Total
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Payout
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Payout
               Method
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Status
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Status
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
             </th>
           </tr>
         </thead>

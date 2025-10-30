@@ -28,11 +28,11 @@
       <table class="w-full table-auto">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Name
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Name
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Image
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Image
             </th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
             </th>
           </tr>
         </thead>
