@@ -107,7 +107,7 @@
         <div
           v-for="(item, index) in wasteItems"
           :key="index"
-          class="carousel-item flex flex-col items-center flex-shrink-0"
+          class="carousel-item flex flex-col items-center shrink-0"
         >
           <img
             :src="item.image_url"
