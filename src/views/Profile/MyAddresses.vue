@@ -64,8 +64,6 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
                 <button @click="openEditModal(address)"
                   class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
-                  Edit
-                  class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                   {{ $t('common.edit') }}
                 </button>
                 <button @click="openDeleteModal(address)"
