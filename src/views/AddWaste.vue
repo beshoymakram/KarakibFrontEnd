@@ -92,13 +92,11 @@
         class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300 rounded-xl"
       >
         <figure>
-          <router-link :to="`/waste/${item.id}`">
             <img
               :src="item.image_url"
               :alt="item.name"
               class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-fill hover:opacity-90 transition rounded-t-xl"
             />
-          </router-link>
         </figure>
 
         <div class="px-4 pt-3 pb-3">
