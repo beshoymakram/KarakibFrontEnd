@@ -369,6 +369,9 @@
         "closeScanner": "إغلاق الماسح",
         "createNewType": "انشاء نوع جديد",
         "createNewCategory": "انشاء فئة جديدة",
-        "donations": "التبرعات"
+        "donations": "التبرعات",
+        "fundName": "تبرع الي",
+        "amount": "المبلغ",
+        "today": "اليوم"
     }
 }

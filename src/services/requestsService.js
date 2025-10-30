@@ -27,6 +27,10 @@ export default {
     return apiClient.get('/requests');
   },
 
+  getMyRequests() {
+    return apiClient.get('/courier/assigned-requests');
+  },
+
   cancelRequest(id) {
     return apiClient.put('/requests/' + id + '/cancel');
   },

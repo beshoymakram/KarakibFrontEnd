@@ -261,7 +261,7 @@
               <div v-for="item, index in details.items" :key="item.id"
                 class="hover:bg-gray-50 transition-colors col-span-1">
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Item {{ index + 1 }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white  text-xs">
+                <p class="mt-1 font-semibold text-[#2C702C] dark:text-white  text-xs">
                   {{ item.item?.name }}<br />
                   {{ $t('common.quantity') }} = {{ item.quantity }}<br />
                   {{ $t('common.totalPoints') }}= {{ item.subtotal }} {{ $t('common.points') }}
