@@ -6,17 +6,68 @@
   margin-bottom: 15px;
   border-radius: 4px;
 }
+.router-link-exact-active {
+  background-color: #e0ebe0;
+}
+
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41) !important;
+}
+
+.text-secondary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+
+.text-section {
+  color: black !important;
+}
+
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+.bg-myprofile {
+  background-color: #BFD6BF;
+}
+
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+
+.bg-tabs {
+  background-color: #EAF2EA;
+}
+
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
+}
 </style>
 
 <template>
-  <div class="bg-[#BFD6BF] min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="bg-myprofile min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="w-full max-w-6xl mx-auto">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
         <!-- Left Side - Banner -->
         <div
           :class="[
-            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-[#EAF2EA]', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-t-xl', 'order-1', 'lg:order-1',
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-tabs', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-t-xl', 'order-1', 'lg:order-1',
             $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none'
           ]">
           <img class="w-full max-w-xs lg:max-w-md mx-auto mb-6" src="/public/images/register.png" alt="Register Banner">
@@ -30,7 +81,7 @@
         <!-- Right Side - Form -->
         <div
           :class="[
-            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-white', 'flex', 'justify-center', 'items-center', 'rounded-b-xl', 'order-2', 'lg:order-2',
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-primary', 'flex', 'justify-center', 'items-center', 'rounded-b-xl', 'order-2', 'lg:order-2',
             $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-bl-none'
           ]">
           <div class="w-full max-w-md">
@@ -40,7 +91,7 @@
 
             <!-- Google Register Button -->
             <button @click="handleGoogleRegister" type="button"
-              class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all font-medium text-gray-700 px-4 py-3 rounded-lg mb-6 shadow-sm">
+              class="w-full flex items-center justify-center gap-3 bg-tabs border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all font-medium text-section px-4 py-3 rounded-lg mb-6 shadow-sm">
               <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -75,14 +126,14 @@
                 <div class="form-group flex flex-col w-full">
                   <label class="pb-2 font-medium text-sm lg:text-base" for="name">{{ $t('common.name') }}</label>
                   <input
-                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
+                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                     :placeholder="$t('common.fullName')" id="name" v-model="form.name" type="text" required />
                 </div>
 
                 <div class="form-group flex flex-col w-full">
                   <label class="pb-2 font-medium text-sm lg:text-base" for="email">{{ $t('common.email') }}</label>
                   <input
-                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
+                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                     placeholder="email@gmail.com" id="email" v-model="form.email" type="email" required />
                 </div>
               </div>
@@ -91,7 +142,7 @@
               <div class="form-group mb-4 flex flex-col w-full">
                 <label class="pb-2 font-medium text-sm lg:text-base" for="phone">{{ $t('common.phone') }}</label>
                 <input
-                  class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
+                  class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                   :placeholder="$t('common.phonePlaceholder')" id="phone" v-model="form.phone" type="tel" required />
               </div>
 
@@ -101,7 +152,7 @@
                   <label class="pb-2 font-medium text-sm lg:text-base" for="password">{{ $t('common.password')
                   }}</label>
                   <input
-                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
+                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                     :placeholder="$t('common.passwordPlaceholder')" id="password" v-model="form.password"
                     type="password" required />
                 </div>
@@ -111,7 +162,7 @@
                     $t('common.confirmPassword') }}
                   </label>
                   <input
-                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
+                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-2.5 lg:py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                     :placeholder="$t('common.confirmPasswordPlaceholder')" id="password_confirmation"
                     v-model="form.password_confirmation" type="password" required />
                 </div>
