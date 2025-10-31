@@ -185,8 +185,8 @@ export default {
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .lang-dropdown {
-    right: auto;
-    left: 0;
+    right: 0;
+
     min-width: 140px;
   }
 }
@@ -215,7 +215,7 @@ export default {
 
   .lang-dropdown {
     min-width: 140px;
-    right: 0;
+    right: 2rem;
   }
 }
 
