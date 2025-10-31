@@ -182,7 +182,7 @@
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain rounded-t-xl"
+            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain hover:opacity-90 rounded-t-xl"
           />
         </figure>
 
@@ -214,7 +214,7 @@
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-4 h-4 sm:w-5 sm:h-5"
+              class="w-4 h-4 sm:w-5 sm:h-5 text-primary"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
             </svg>
