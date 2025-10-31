@@ -168,24 +168,24 @@
     <div
       v-for="(product, index) in products"
       :key="index"
-      class="card bg-base-200 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-base-200 w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
-      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block bg-base-200">
+      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block bg-base-200  rounded-t-xl">
         <figure>
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full h-64 sm:h-68 md:h-76 bg-[#E0EBE0] object-contain rounded-t-xl"
+            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain rounded-t-xl"
           />
         </figure>
 
         <div class="px-3 pt-3 pb-2">
-          <div class="flex justify-between flex-col  md:flex-row md:items-center w-full mb-2">
+          <div class="flex justify-between flex-col  md:flex-row md:items-center w-full md:mb-1">
             <h2 class="text-primary font-semibold sm:text-base md:text-lg lg:text-xl">
               {{ product.name }}
             </h2>
-            <p class="text-primary font-semibold text-sm sm:text-sm md:text-base lg:text-lg">
+            <p class="text-primary font-semibold text-sm sm:text-sm md:text-base  lg:text-lg">
               {{ product.price }} {{ $t("common.currency") }}
             </p>
           </div>
@@ -195,12 +195,12 @@
       </router-link>
 
       <!-- ADD TO CART / QUANTITY CONTROLS -->
-      <div class="flex items-center mt-2 justify-end px-4 pb-3">
+      <div class="flex items-center mt-2 justify-end px-3 pb-3">
         <!-- Show quantity controls if item is in cart -->
         <div v-if="getCartItem(product.id)" class="flex items-center gap-2">
           <button
             @click.stop="decrementCartItem(product.id)"
-            class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
+            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -208,19 +208,19 @@
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-4 h-4"
+              class="w-4 h-4 sm:w-5 sm:h-5"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
             </svg>
           </button>
 
-          <span class="w-6 md:w-10 text-center font-bold text-[#2C702C]">
+          <span class="w-4 sm:w-8 text-center font-bold text-[#2C702C]">
             {{ getCartItem(product.id).quantity }}
           </span>
 
           <button
             @click.stop="incrementCartItem(product.id)"
-            class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
+            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +228,7 @@
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-4 h-4"
+              class="w-4 h-4 sm:w-5 sm:h-5"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -241,11 +241,11 @@
               viewBox="0 0 24 24"
               stroke-width="2.5"
               stroke="currentColor"
-              class="w-4 h-4"
+              class="w-3 h-3 sm:w-4 sm:h-4"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
             </svg>
-            <span>{{ $t("common.inCart") }}</span>
+            <span class="text-[8px] sm:text-xs">{{ $t("common.inCart") }}</span>
           </div>
         </div>
 
@@ -253,7 +253,7 @@
         <button
           v-else-if="product.stock > 0"
           @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4  py-1 md:py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
         >
           {{ $t("common.addToCart") }}
         </button>
@@ -261,7 +261,7 @@
         <!-- Out of stock button -->
         <button
           v-else
-          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-3 md:px-4 py-1 md:py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
           disabled
         >
           {{ $t("common.outOfStock") }}
@@ -278,7 +278,7 @@
       {{ $t("common.makeADifference") }}
     </p>
     <p
-      class="text-base sm:text-lg md:text-xl text-secondary text-center pt-4 md:pt-5 pb-8 md:pb-10 font-normal"
+      class="text-sm sm:text-base md:text-lg text-secondary text-center pt-4 md:pt-5 pb-8 md:pb-10 "
     >
       {{ $t("common.convertRecyclingPointsIntoDonations") }}
     </p>
@@ -295,10 +295,10 @@
           :alt="card.title"
           class="mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-[#E9EBF8] rounded-full p-3"
         />
-        <h3 class="text-primary font-semibold text-lg sm:text-xl md:text-2xl mb-2 md:mb-3">
+        <h3 class="text-primary font-semibold text-base sm:text-lg md:text-xl mb-2 md:mb-3">
           {{ card.title }}
         </h3>
-        <p class="text-[#8E98A8] mb-4">{{ card.description }}</p>
+        <p class="text-[#8E98A8] text-xs sm:text-sm md:text-base lg:text-lg mb-4">{{ card.description }}</p>
         <button
           @click="openDonationModal(card.name, card.title)"
           class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition"
