@@ -1,7 +1,7 @@
 <template>
   <!-- Hero Section -->
   <div
-    class="hero min-h-[calc(100vh-1vh)] w-full md:w-full lg:w-full bg-cover bg-center bg-no-repeat bg-hero items-start mx-auto"
+    class="hero h-screen w-full  bg-center bg-no-repeat bg-hero items-start mx-auto bg-cover"
     style="background-image: url('/images/Homebg.png')"
   >
     <div class="hero-overlay bg-base-100/50 dark:bg-base-200/50"></div>
@@ -28,38 +28,44 @@
 
   <!-- Steps Section -->
 
-  <section class="px-16 py-12 bg-steps" ref="howItWorksSection">
-    <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold drop-shadow-lg text-center mb-6 md:mb-8 lg:mb-10 pt-0"
-    >
-      {{ $t("common.howItWorks") }}
-    </p>
+<section class="px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 bg-steps" ref="howItWorksSection">
+  <p
+    class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold drop-shadow-lg text-center mb-6 md:mb-8 lg:mb-10 pt-0"
+  >
+    {{ $t("common.howItWorks") }}
+  </p>
 
-    <div class="flex flex-wrap gap-6 md:gap-8 justify-center">
-      <div
-        v-for="(step, index) in steps"
-        :key="index"
-        class="card bg-base-100 shadow-sm w-40 sm:w-50 md:w-68  rounded-3xl cursor-pointer hover:shadow-md transition"
-        @click="handleStepClick(step)"
-      >
-        <figure class="px-2 md:p-4">
-          <img
-            :src="step.image"
-            :alt="step.title"
-            class="object-cover rounded-3xl size-30 sm:size-44 md:size-70 mt-4 md:mt-0 md:h-60"
-          />
-        </figure>
-        <div class="card-body text-center">
-          <h2 class="font-semibold text-xs  text-primary -mt-5">{{ step.number }}</h2>
-          <p class="card-title text-xs md:text-lg mx-auto">{{ step.title }}</p>
-          <p class="text-[10px] sm:text-xs font-normal">{{ step.description }}</p>
-        </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+    <div
+      v-for="(step, index) in steps"
+      :key="index"
+      class="card bg-base-100 shadow-sm rounded-3xl cursor-pointer hover:shadow-lg transition-all duration-300 mx-4 md:mx-0"
+      @click="handleStepClick(step)"
+    >
+      <figure class="p-4 md:p-5">
+        <img
+          :src="step.image"
+          :alt="step.title"
+          class="object-cover rounded-3xl w-50 h-44 sm:w-60 sm:h-48  md:h-56 lg:h-48"
+        />
+      </figure>
+      <div class="card-body text-center px-4 py-4">
+        <h2 class="text-xs sm:text-sm md:text-base font-semibold text-primary mb-1 -mt-4">
+          {{ step.number }}
+        </h2>
+        <p class="card-title text-sm sm:text-base md:text-lg mx-auto font-semibold mb-2">
+          {{ step.title }}
+        </p>
+        <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
+          {{ step.description }}
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Waste Carousel Section -->
-  <section class="px-4 md:px-12 py-12 relative bg-hero">
+  <section class="px-4 md:px-12 py-6 md:py-10 lg:py-12 relative bg-hero">
     <p
       class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
     >
@@ -139,8 +145,8 @@
     </div>
   </section>
   <!--  hero merch -->
-  <div class="hero bg-merch min-h-[30vh] sm:min-h-[35vh] py-8 md:py-12">
-    <div class="hero-content text-center">
+  <div class="hero  bg-merch min-h-[30vh] sm:min-h-[35vh]  py-6 md:py-10 lg:py-12">
+    <div class=" text-center">
       <div class="max-w-3xl">
         <p
           class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
@@ -152,7 +158,7 @@
         </p>
         <router-link to="/shop">
           <button
-            class="btn rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+            class="btn rounded-md cursor-pointer bg-[#2C702C]  text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
           >
             {{ $t("common.shopNow") }}
           </button>
@@ -163,20 +169,20 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-2 bg-steps sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
   >
     <div
       v-for="(product, index) in products"
       :key="index"
-      class="card bg-base-200 w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
-      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block bg-base-200  rounded-t-xl">
+      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block  rounded-t-xl">
         <figure>
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain rounded-t-xl"
+            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain hover:opacity-90 rounded-t-xl"
           />
         </figure>
 
@@ -208,13 +214,13 @@
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-4 h-4 sm:w-5 sm:h-5"
+              class="w-4 h-4 sm:w-5 sm:h-5 text-primary"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
             </svg>
           </button>
 
-          <span class="w-4 sm:w-8 text-center font-bold text-[#2C702C]">
+          <span class="w-4 sm:w-8 text-center font-bold text-primary">
             {{ getCartItem(product.id).quantity }}
           </span>
 
@@ -234,7 +240,7 @@
             </svg>
           </button>
 
-          <div class="flex items-center gap-1 ml-2 text-green-600 text-xs font-semibold">
+          <div class="flex items-center gap-1 ml-2 text-primary text-xs font-semibold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -271,7 +277,7 @@
   </div>
 
   <!-- make differance section -->
-  <section class="bg-donate px-4 sm:px-8 md:px-12 lg:px-16 py-4 md:py-8 lg:py-12 relative">
+  <section class="bg-donate px-4 sm:px-8 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative">
     <p
       class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
     >
@@ -288,7 +294,7 @@
       <div
         v-for="(card, index) in infoCards"
         :key="index"
-        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full md:w-8/10 xl:w-full mx-auto"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full sm:w-6/10 md:w-7/10 xl:w-full mx-auto"
       >
         <img
           :src="card.image"

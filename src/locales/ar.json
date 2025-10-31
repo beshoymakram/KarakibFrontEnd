@@ -87,7 +87,7 @@
         "yourDonationIsCompletelySecure": "تبرعك آمن ومحمي بالكامل. نستخدم تشفيراً على مستوى البنوك لضمان بقاء معلوماتك الشخصية ومعلومات الدفع آمنة. كل مساهمة تذهب مباشرة إلى المنظمة التي اخترت دعمها.",
         "turnYourWasteIntoWorth": "حول نفاياتك إلى قيمة",
         "karakibMakesItEasyToCollectWaste": "كراكيب يجعل جمع النفايات واكساب النقاط وتحويل أفعالك إلى مكافآت حقيقية أمراً سهلاً — لأن الاستدامة يجب أن تكون مجدية.",
-        "supportKarakibMission": "ادعم مهمة كراكيب بشراء المنتجات الصديقة للبيئة. كل عملية شراء تمول مشاريع إعادة التدوير والمجتمع.",
+        "supportKarakibMission": ". كل عملية شراء تمول مشاريع إعادة التدوير والمجتمع",
         "welcomeToKarakib": "مرحباً بك في كراكيب",
         "everySmallActOfRecyclingCreatesCleanerTomorrow": "كل فعل صغير من إعادة التدوير يخلق غداً أنظف",
         "continueWithGoogle": "المتابعة مع جوجل",
@@ -394,6 +394,10 @@
         "donations": "التبرعات",
         "fundName": "تبرع الي",
         "amount": "المبلغ",
+        "assignCourier": "تعيين مندوب",
+        "assign": "تعيين",
+        "unassign": "الغاء التعيين؟",
+        "selectCourier": "اختر مندوب",
         "today": "اليوم"
     }
 }

@@ -327,7 +327,10 @@ export default {
 
 .bg-secondary {
   background-color: #4b934b !important;
-  hover: #38a838 !important;
+}
+
+.bg-secondary:hover {
+  background-color: #38a838 !important;
 }
 
 [data-theme="forest"] .bg-secondary {

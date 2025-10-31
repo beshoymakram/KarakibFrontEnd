@@ -1,7 +1,7 @@
 <template>
   <div class="language-switcher" ref="langDropdown">
     <!-- Current Language Button -->
-    <button @click="dropdownOpen = !dropdownOpen" class="lang-current-btn transition-transform duration-100 hover:scale-110 ">
+    <button @click="dropdownOpen = !dropdownOpen" class="lang-current-btn transition-transform duration-100 hover:scale-120 drop-shadow-green-100 drop-shadow-sm ">
       <img :src="currentLanguage.flag" :alt="currentLanguage.name" class="flag-img" />
       <!-- <span class="lang-code text-[#16af3f]">{{ currentLanguage.code }}</span>
       <svg
@@ -148,7 +148,7 @@ export default {
   height: 1.2rem;
   object-fit: cover;
   border-radius: 100%;
-  border:1px solid #2c702c;
+
   display: block;
 }
 
@@ -185,8 +185,8 @@ export default {
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .lang-dropdown {
-    right: auto;
-    left: 0;
+    right: 0;
+
     min-width: 140px;
   }
 }
@@ -215,7 +215,7 @@ export default {
 
   .lang-dropdown {
     min-width: 140px;
-    right: 0;
+    right: 2rem;
   }
 }
 

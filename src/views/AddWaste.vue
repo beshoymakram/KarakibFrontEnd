@@ -1,18 +1,18 @@
 <template>
   <!-- Recycling Waste Types Section -->
-  <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative">
+  <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative ">
     <p
       class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8"
     >
       {{ $t("common.recyclingWasteTypes") }}
     </p>
     <p
-      class="text-sm sm:text-lg md:text-xl text-primary pt-4 md:pt-5 pb-6 md:pb-8 font-semibold text-center md:text-start"
+      class="text-sm sm:text-lg md:text-xl text-primary py-4 md:py-5 font-semibold text-center md:text-start"
     >
       {{ $t("common.selectAWasteType") }}
     </p>
     <!-- Carousel Wrapper -->
-    <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0">
+    <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0 -mb-10">
       <!-- Left Arrow -->
       <button
         @click="scrollPrev"
@@ -79,35 +79,35 @@
     </div>
   </section>
   <!-- Waste Types Points Section -->
-  <section class="px-4 sm:px-6 md:px-10 lg:px-12 bg-secondary text-center pb-12 md:pb-16 lg:pb-20">
-    <p class="text-xl pt-7 sm:text-2xl md:text-3xl font-medium pb-4 md:pb-6 text-secondary">
+  <section class=" bg-secondary text-center ">
+    <!-- <p class="text-xl pt-4 sm:text-2xl md:text-3xl font-medium pb-4 md:pb-6 text-secondary">
       {{ selectedType.name }}
-    </p>
+    </p> -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 justify-items-center py-8 md:py-12 lg:py-14 px-3 sm:px-4 lg:px-6 overflow-auto scroll-smooth rounded-2xl"
+      class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-6 md:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 overflow-auto scroll-smooth "
     >
       <div
         v-for="(item, index) in filteredItems"
         :key="index"
-        class="card bg-base-100 w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300 rounded-xl"
+        class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
       >
         <figure>
             <img
               :src="item.image_url"
               :alt="item.name"
-              class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-fill hover:opacity-90 transition rounded-t-xl"
+              class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain  hover:opacity-90 transition rounded-t-xl"
             />
         </figure>
 
-        <div class="px-4 pt-3 pb-3">
+        <div class="px-3 pt-3 pb-3">
           <!-- Title -->
-          <h2 class="text-primary font-semibold text-base sm:text-lg md:text-xl mb-2 text-start">
+          <h2 class="text-primary font-semibold sm:text-base md:text-lg lg:text-xl mb-1 text-start">
             {{ item.name }}
           </h2>
 
           <!-- Points and EGP -->
-          <p class="flex gap-1 mb-2 text-[#FFC400] font-semibold text-xs sm:text-sm items-center">
-            <img src="/images/Coins.svg" class="w-4 h-4 sm:w-5 sm:h-5" />
+          <p class="flex gap-1  text-[#FFC400] font-semibold text-xs sm:text-sm items-center">
+            <img src="/images/Coins.svg" class="w-3 h-3 sm:w-4 sm:h-4" />
             {{ item.points_per_unit }} {{ $t("common.points") }}
           </p>
 
@@ -120,22 +120,22 @@
 <div v-if="getCartItem(item.id)" class="flex items-center gap-2">
   <button
     @click.stop="decrementCartItem(item.id)"
-    class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
+    class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 text-green-500">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5 text-primary">
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
     </svg>
   </button>
 
-  <span class="w-10 text-center font-bold text-[#2C702C]">
+  <span class="w-4 sm:w-8 text-center font-bold text-primary">
     {{ getCartItem(item.id).quantity }}
   </span>
 
   <button
     @click.stop="incrementCartItem(item.id)"
-    class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+    class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
+          >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
     </svg>
   </button>
@@ -145,7 +145,7 @@
 <button
   v-else
   @click.stop="addWasteToCart(item)"
-  class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold transition-colors duration-300"
+  class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
 >
   {{ $t("common.addAndEarn") }}
 </button>
