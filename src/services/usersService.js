@@ -17,4 +17,7 @@ export default {
     return apiClient.get('/users');
   },
 
+  getCouriers() {
+    return apiClient.get('/users/couriers');
+  },
 };

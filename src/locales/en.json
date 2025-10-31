@@ -374,6 +374,10 @@
     "donations": "Donations",
     "fundName": "Fund Name",
     "amount": "Amount",
+    "assignCourier": "Assign Courier",
+    "assign": "Assign",
+    "unassign": "unassign?",
+    "selectCourier": "Select Courier",
     "today": "Today"
   }
 }
