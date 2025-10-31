@@ -47,25 +47,9 @@
         </div>
 
         <!-- Right Section -->
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-2 md:space-x-4">
           <!-- Cart (Always visible) -->
-          <!-- theme button -->
-          <button @click="toggleTheme" class="btn btn-ghost btn-circle transition-all duration-300 hover:bg-base-200"
-            aria-label="Toggle theme">
-            <!-- Light Mode Icon -->
-            <svg v-if="currentTheme === 'forest'" xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6 md:w-7 md:h-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-              stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 3v1m0 16v1m8.485-8.485l-.707.707M4.222 4.222l.707.707M21 12h1M2 12H1m16.97 6.97l.707.707M4.222 19.778l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
-            </svg>
 
-            <!-- Dark Mode Icon -->
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:w-7 md:h-7 text-primary " fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </svg>
-          </button>
 
           <router-link to="/cart"
             class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-sm font-bold no-active-style  rounded-lg">
@@ -109,6 +93,7 @@
                   </button>
                 </div>
               </Transition>
+
             </div>
 
             <!-- Desktop Auth Buttons -->
@@ -123,7 +108,24 @@
               </router-link>
             </div>
 
-            <!-- Language (always visible) -->
+            <!-- theme button -->
+          <button @click="toggleTheme" class=" rounded-full transition-all duration-300 hover:scale-110"
+            aria-label="Toggle theme">
+            <!-- Light Mode Icon -->
+            <svg v-if="currentTheme === 'forest'" xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 md:w-7 md:h-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 3v1m0 16v1m8.485-8.485l-.707.707M4.222 4.222l.707.707M21 12h1M2 12H1m16.97 6.97l.707.707M4.222 19.778l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+            </svg>
+
+            <!-- Dark Mode Icon -->
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:w-7 md:h-7 text-primary " fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          </button>
+          <!-- Language (always visible) -->
             <LanguageSwitcher />
 
             <!-- Dashboard (Admin only) -->
