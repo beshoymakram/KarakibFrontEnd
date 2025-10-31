@@ -1,6 +1,6 @@
 <template>
   <!-- head shop section -->
-  <div class="relative px-4 sm:px-6 md:px-8 pb-0 md:pb-2">
+  <div class="relative px-4 sm:px-6 md:px-8 pb-2 sm:pb-12  l  ">
     <!-- Custom layered gradient overlay -->
   <div
     class="absolute inset-0"
@@ -16,24 +16,24 @@
     <img
       src="/images/Shop Page Background.png"
       alt="Background"
-      class="absolute inset-0 w-lg object-cover -z-10 mx-auto"
+      class="absolute inset-0 w-xs sm:w-sm md:w-md lg:w-lg object-cover -z-10 mx-auto"
     />
 
     <!-- content -->
     <div
-      class="relative flex flex-col lg:flex-row items-center justify-around text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 z-2"
+      class="relative flex flex-col sm:flex-row items-center justify-around text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 z-2"
     >
       <!-- Logo -->
       <img
         src="/logos/K.png"
         alt="Karakib Logo"
-        class="w-32 sm:w-36 md:w-40 lg:w-48 drop-shadow-lg flex-shrink-0"
+        class="w-28 sm:w-32 md:w-36 lg:w-40 xl:w-44 drop-shadow-lg shrink-0"
       />
 
       <!-- Text -->
 
       <p
-        class="max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary font-semibold leading-relaxed text-center lg:max-w-fit"
+        class="max-w-6xl text-base sm:text-lg md:text-2xl lg:text-3xl text-primary font-semibold leading-relaxed text-center lg:max-w-fit"
       >
         {{ $t("common.supportKarakibMission") }}
       </p>
@@ -42,7 +42,7 @@
 
   <!-- links -->
   <div
-    class="px-4 sm:px-6 md:px-12 lg:px-16 relative z-20 flex flex-wrap gap-3 md:gap-4 -mt-1 mb-2 md:mb-4"
+    class="px-4 sm:px-6 md:px-12 lg:px-16 relative z-20 flex flex-wrap gap-3 md:gap-4 -mt-5 mb-2 md:mb-4"
   >
     <a
       @click="selectedCategory = ''"
@@ -72,7 +72,7 @@
   <div>
     <h5
       v-if="filteredProducts.length === 0"
-      class="px-4 text-base sm:text-lg md:text-xl text-gray-500 font-bold text-center"
+      class="px-4 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-500 font-bold text-center"
     >
       {{ $t("common.noProductsInCategory") }}
     </h5>
@@ -87,36 +87,36 @@
       class="card bg-primary w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
-      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block">
+      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block rounded-t-xl">
         <figure>
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-cover rounded-t-xl"
+            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain rounded-t-xl"
           />
         </figure>
 
-        <div class="px-4 pt-3 pb-2">
-          <div class="flex justify-between items-center w-full mb-2">
-            <h2 class="text-[#2C702C] font-semibold sm:text-lg md:text-xl">
+        <div class="px-3 pt-3 pb-2">
+          <div class="flex justify-between flex-col  md:flex-row md:items-center w-full md:mb-1">
+            <h2 class="text-primary font-semibold sm:text-base md:text-lg lg:text-xl">
               {{ product.name }}
             </h2>
-            <p class="text-[#2C702C] font-semibold text-sm sm:text-base md:text-lg">
+            <p class="text-primary font-semibold text-sm sm:text-sm md:text-base  lg:text-lg">
               {{ product.price }} {{ $t("common.currency") }}
             </p>
           </div>
 
-          <p class="text-gray-600 text-xs sm:text-sm">{{ product.description }}</p>
+          <p class="hidden md:block text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
         </div>
       </router-link>
 
       <!-- ADD TO CART / QUANTITY CONTROLS -->
-      <div class="flex items-center mt-2 justify-end px-4 pb-3">
+      <div class="flex items-center mt-2 justify-end px-3 pb-3">
         <!-- Show quantity controls if item is in cart -->
         <div v-if="getCartItem(product.id)" class="flex items-center gap-2">
           <button
             @click.stop="decrementCartItem(product.id)"
-            class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
+            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -124,19 +124,19 @@
               viewBox="0 0 24 24"
               stroke-width="3"
               stroke="currentColor"
-              class="w-4 h-4 text-green-500"
+              class="w-4 h-4 sm:w-5 sm:h-5 text-primary"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
             </svg>
           </button>
 
-          <span class="w-10 text-center font-bold text-[#2C702C]">
+          <span class="w-4 sm:w-8 text-center font-bold text-primary">
             {{ getCartItem(product.id).quantity }}
           </span>
 
           <button
             @click.stop="incrementCartItem(product.id)"
-            class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
+            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -144,20 +144,20 @@
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-4 h-4"
+              class="w-4 h-4 sm:w-5 sm:h-5"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </button>
 
-          <div class="flex items-center gap-1 ml-2 text-green-600 text-xs font-semibold">
+          <div class="flex items-center gap-1 ml-2 text-primary text-xs font-semibold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="2.5"
               stroke="currentColor"
-              class="w-4 h-4"
+              class="w-3 h-3 sm:w-4 sm:h-4"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
             </svg>
@@ -169,7 +169,7 @@
         <button
           v-else-if="product.stock > 0"
           @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
         >
           {{ $t("common.addToCart") }}
         </button>
@@ -177,7 +177,7 @@
         <!-- Out of stock button -->
         <button
           v-else
-          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
           disabled
         >
           {{ $t("common.outOfStock") }}

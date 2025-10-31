@@ -145,7 +145,7 @@
     </div>
   </section>
   <!--  hero merch -->
-  <div class=" bg-merch min-h-[30vh] sm:min-h-[35vh]  py-6 md:py-10 lg:py-12">
+  <div class="hero  bg-merch min-h-[30vh] sm:min-h-[35vh]  py-6 md:py-10 lg:py-12">
     <div class=" text-center">
       <div class="max-w-3xl">
         <p
@@ -169,7 +169,7 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-2 bg-steps sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
   >
     <div
       v-for="(product, index) in products"
@@ -177,7 +177,7 @@
       class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
-      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block bg-base-200  rounded-t-xl">
+      <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block  rounded-t-xl">
         <figure>
           <img
             :src="product.image_url"
@@ -220,7 +220,7 @@
             </svg>
           </button>
 
-          <span class="w-4 sm:w-8 text-center font-bold text-[#2C702C]">
+          <span class="w-4 sm:w-8 text-center font-bold text-primary">
             {{ getCartItem(product.id).quantity }}
           </span>
 
@@ -240,7 +240,7 @@
             </svg>
           </button>
 
-          <div class="flex items-center gap-1 ml-2 text-green-600 text-xs font-semibold">
+          <div class="flex items-center gap-1 ml-2 text-primary text-xs font-semibold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
