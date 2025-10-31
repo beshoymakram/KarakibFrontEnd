@@ -174,7 +174,7 @@
     <div
       v-for="(product, index) in products"
       :key="index"
-      class="card bg-base-200 w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block bg-base-200  rounded-t-xl">
