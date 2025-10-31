@@ -15,6 +15,14 @@ export default {
     });
   },
 
+  assignOrder(id, courier_id) {
+    return apiClient.post(`/orders/${id}/assign/${courier_id}`);
+  },
+
+  unassign(id) {
+    return apiClient.post(`/orders/${id}/unassign`);
+  },
+
   deleteOrder(id) {
     return apiClient.delete('/orders/' + id);
   },

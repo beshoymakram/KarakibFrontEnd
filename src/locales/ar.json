@@ -372,6 +372,10 @@
         "donations": "التبرعات",
         "fundName": "تبرع الي",
         "amount": "المبلغ",
+        "assignCourier": "تعيين مندوب",
+        "assign": "تعيين",
+        "unassign": "الغاء التعيين؟",
+        "selectCourier": "اختر مندوب",
         "today": "اليوم"
     }
 }
