@@ -1,9 +1,9 @@
 <template>
   <div class="language-switcher" ref="langDropdown">
     <!-- Current Language Button -->
-    <button @click="dropdownOpen = !dropdownOpen" class="lang-current-btn">
+    <button @click="dropdownOpen = !dropdownOpen" class="lang-current-btn transition-transform duration-100 hover:scale-110 ">
       <img :src="currentLanguage.flag" :alt="currentLanguage.name" class="flag-img" />
-      <span class="lang-code">{{ currentLanguage.code }}</span>
+      <!-- <span class="lang-code text-[#16af3f]">{{ currentLanguage.code }}</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
@@ -16,7 +16,7 @@
           d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
           clip-rule="evenodd"
         />
-      </svg>
+      </svg>-->
     </button>
 
     <!-- Dropdown Menu -->
@@ -123,49 +123,51 @@ export default {
 .lang-current-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  margin: 0;
   gap: 0.4rem;
-  padding: 0.4rem 0.65rem;
-  background: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  padding: 0.5rem 0rem ;
+  /*background: #e0ebe0;*/
+  /* border: 1px solid #d1d5db;
+  border-radius: 0.5rem; */
   cursor: pointer;
-  transition: all 0.2s ease;
+  /* transition: all 0.2s ease; */
   font-size: 0.875rem;
   font-weight: 600;
   color: #2c702c;
-  height: 38px;
-  width: 68px;
+
 }
 
-.lang-current-btn:hover {
+/* .lang-current-btn:hover {
   background: #e0ebe0;
   border-color: #2c702c;
-}
+} */
 
 .flag-img {
-  width: 1rem;
-  height: 1rem;
+  width: 1.2rem;
+  height: 1.2rem;
   object-fit: cover;
   border-radius: 100%;
+  border:1px solid #2c702c;
   display: block;
 }
 
-.lang-code {
-  font-weight: 600;
+/* .lang-code {
+  font-weight: 400;
   letter-spacing: 0.025em;
-  font-size: 0.875rem;
+  font-size: 1.1rem;
   line-height: 1;
-}
+} */
 
-.chevron-icon {
+/* .chevron-icon {
   width: 16px;
   height: 16px;
   transition: transform 0.2s ease;
-}
+} */
 
-.chevron-icon.rotate-180 {
+/* .chevron-icon.rotate-180 {
   transform: rotate(180deg);
-}
+} */
 
 .lang-dropdown {
   position: absolute;
@@ -198,18 +200,18 @@ export default {
   } */
 
   .flag-img {
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
-  .lang-code {
-    font-size: 0.75rem;
-  }
+ /*  .lang-code {
+    font-size: 1.25rem;
+  } */
 
-  .chevron-icon {
+  /* .chevron-icon {
     width: 14px;
     height: 14px;
-  }
+  } */
 
   .lang-dropdown {
     min-width: 140px;

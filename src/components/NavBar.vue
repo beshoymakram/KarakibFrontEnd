@@ -60,7 +60,7 @@
             </svg>
 
             <span v-if="cartStore.count > 0"
-              class="absolute -top-3 -right-0 bg-green-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+              class="absolute -top-3 right-0 bg-green-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
               {{ cartStore.count }}
             </span>
           </router-link>

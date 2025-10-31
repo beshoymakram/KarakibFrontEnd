@@ -39,7 +39,7 @@
           v-for="(type, index) in types"
           :key="index"
           @click="selectedType = type"
-          class="carousel-item flex flex-col items-center flex-shrink-0 cursor-pointer transition-all duration-300"
+          class="carousel-item flex flex-col items-center shrink-0 cursor-pointer transition-all duration-300"
         >
           <img
             :src="type.image_url"
