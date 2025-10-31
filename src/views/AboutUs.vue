@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <section
       class="relative flex flex-col items-center justify-center text-center py-16 md:py-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-0 bg-base-100"
-      style="background-image: url('/images/abouthero.png'); background-size: cover; background-position: center;"
+      style="background-image: url('/images/abouthero.jpg'); background-size: cover; background-position: center;"
     >
       <div class="absolute inset-0 bg-base-100/80 dark:bg-base-300/50"></div>
 
@@ -52,16 +52,13 @@
         >
           {{ $t("common.karakibIsEcoFriendlyPlatform") }}
         </p>
-        <button
-          class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-md text-base sm:text-lg transition cursor-pointer"
-          @click="
-            openModal(
-              'Karakib simplifies recycling by connecting users to collection points, scheduling pickups, and rewarding eco-friendly actions through our green points system. Every step you take with Karakib brings us closer to a cleaner Egypt!'
-            )
-          "
-        >
-          {{ $t("common.learnMore") }}
-        </button>
+<button
+  class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-md text-base sm:text-lg transition cursor-pointer"
+  @click="openModal($t('common.moreAboutUs'), $t('common.aboutUsDescription'))"
+>
+  {{ $t('common.learnMore') }}
+</button>
+
       </div>
     </section>
 
@@ -136,15 +133,11 @@
               {{ $t("common.karakibSimplifiesRecyclingProcess") }}
             </p>
             <button
-              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
-              @click="
-                openModal(
-                  'We collaborate with communities, NGOs, and local businesses to create awareness and provide incentives for sustainable habits. Karakib empowers individuals to make a lasting impact together.'
-                )
-              "
-            >
-              {{ $t("common.learnMore") }}
-            </button>
+  class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
+  @click="openModal($t('common.makingRecyclingEasyAndRewarding'), $t('common.recyclingPopup'))"
+>
+  {{ $t("common.learnMore") }}
+</button>
           </div>
 
           <div
@@ -206,15 +199,12 @@
               {{ $t("common.ourGoalIsToBuildNetwork") }}
             </p>
             <button
-              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
-              @click="
-                openModal(
-                  'Karakib collaborates with communities, NGOs, and local businesses to create awareness and provide incentives for sustainable habits. Karakib empowers individuals to make a lasting impact together.'
-                )
-              "
+            class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
+            @click="openModal($t('common.supportingGreenerCommunity'), $t('common.supportingGreenerCommunityDescription'))"
             >
-              {{ $t("common.learnMore") }}
+            {{ $t('common.learnMore') }}
             </button>
+
           </div>
 
           <div
@@ -276,15 +266,12 @@
               {{ $t("common.karakibCombinesTechnologyAndEnvironmentalCare") }}
             </p>
             <button
-              class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base transition cursor-pointer"
-              @click="
-                openModal(
-                  'we use technology to streamline recycling processes, making it easier for users to participate and track their contributions. Our innovative solutions aim to foster a culture of sustainability and environmental responsibility.'
-                )
-              "
+            class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
+            @click="openModal($t('common.innovationWithPurpose'), $t('common.innovationWithPurposeDescription'))"
             >
-              {{ $t("common.learnMore") }}
-            </button>
+            {{ $t('common.learnMore') }}
+          </button>
+
           </div>
 
           <div class="md:w-1/2 flex justify-center mt-8 md:mt-0 relative">
@@ -365,44 +352,46 @@
         </div>
       </section>
 
-      <!-- Terms and Conditions -->
-      <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary rounded-2xl shadow p-4 sm:p-6 md:p-8 text-section"
-        id="terms"
-      >
-        <h2
-          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
-        >
-          {{ $t("common.termsAndConditions") }}
-        </h2>
+<!-- Terms and Conditions -->
+<section
+  class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary rounded-2xl shadow p-4 sm:p-6 md:p-8 text-section"
+  id="terms"
+>
+  <h2
+    class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
+  >
+    {{ $t("common.termsAndConditions") }}
+  </h2>
 
-        <p
-          class="text-gray-600 mb-3 sm:mb-4 flex items-start text-sm sm:text-base text-section"
-        >
-          <span class="text-green-600 mr-2 text-lg sm:text-xl">
-            <font-awesome-icon :icon="['fas', 'triangle-exclamation']" />
-          </span>
-          {{ $t("common.pleaseReadCarefullyBeforeUsingKarakib") }}
-        </p>
+  <p
+    class="text-gray-600 mb-3 sm:mb-4 flex items-start text-sm sm:text-base text-section"
+  >
+    <span class="text-green-600 mr-2 text-lg sm:text-xl">
+      <font-awesome-icon :icon="['fas', 'triangle-exclamation']" />
+    </span>
+    {{ $t("common.pleaseReadCarefullyBeforeUsingKarakib") }}
+  </p>
 
-        <ul
-          class="list-disc list-inside space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-section"
-        >
-          <li>{{ $t("common.byUsingKarakibYouAgree") }}</li>
-          <li>{{ $t("common.usersAreAlsoResponsible") }}</li>
-          <li>{{ $t("common.karakibWillNotBeHeldResponsible") }}</li>
-          <li>{{ $t("common.anyMisuseOfPlatform") }}</li>
-          <li>{{ $t("common.weMayUpdateTheseTerms") }}</li>
-        </ul>
+  <ul
+    class="list-disc list-inside space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-section"
+  >
+    <li>{{ $t("common.byUsingKarakibYouAgree") }}</li>
+    <li>{{ $t("common.usersAreAlsoResponsible") }}</li>
+    <li>{{ $t("common.karakibWillNotBeHeldResponsible") }}</li>
+    <li>{{ $t("common.anyMisuseOfPlatform") }}</li>
+    <li>{{ $t("common.weMayUpdateTheseTerms") }}</li>
+  </ul>
 
-        <div class="mt-5 sm:mt-6 flex justify-center sm:justify-start">
-          <button
-            class="px-4 sm:px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm sm:text-base"
-          >
-            {{ $t("common.readFullPolicy") }}
-          </button>
-        </div>
-      </section>
+  <div class="mt-5 sm:mt-6 flex justify-center sm:justify-start">
+    <button
+      class="px-4 sm:px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm sm:text-base"
+      @click="openTermsModal"
+    >
+      {{ $t("common.readFullPolicy") }}
+    </button>
+  </div>
+</section>
+
 
       <!-- Inquiry Form -->
       <section
@@ -424,65 +413,85 @@
           @submit.prevent="submitForm"
           class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4"
         >
-          <div>
-            <label class="block mb-1 font-medium text-sm sm:text-base">{{
-              $t("common.firstName")
-            }}</label>
-            <input
-              v-model="form.firstName"
-              type="text"
-              :placeholder="$t('common.enterFirstName')"
-              class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
-            />
-          </div>
+<div>
+  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+    $t("common.firstName")
+  }}</label>
+  <input
+    v-model="form.firstName"
+    type="text"
+    :placeholder="$t('common.enterFirstName')"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    :class="{ 'border-red-500': formErrors.firstName }"
+  />
+  <p v-if="formErrors.firstName" class="text-red-500 text-xs mt-1">
+    {{ formErrors.firstName }}
+  </p>
+</div>
 
-          <div>
-            <label class="block mb-1 font-medium text-sm sm:text-base">{{
-              $t("common.lastName")
-            }}</label>
-            <input
-              v-model="form.lastName"
-              type="text"
-              :placeholder="$t('common.enterLastName')"
-              class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
-            />
-          </div>
+<div>
+  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+    $t("common.lastName")
+  }}</label>
+  <input
+    v-model="form.lastName"
+    type="text"
+    :placeholder="$t('common.enterLastName')"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    :class="{ 'border-red-500': formErrors.lastName }"
+  />
+  <p v-if="formErrors.lastName" class="text-red-500 text-xs mt-1">
+    {{ formErrors.lastName }}
+  </p>
+</div>
 
-          <div>
-            <label class="block mb-1 font-medium text-sm sm:text-base">{{
-              $t("common.email")
-            }}</label>
-            <input
-              v-model="form.email"
-              type="email"
-              :placeholder="$t('common.enterEmail')"
-              class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
-            />
-          </div>
+<div>
+  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+    $t("common.email")
+  }}</label>
+  <input
+    v-model="form.email"
+    type="email"
+    :placeholder="$t('common.enterEmail')"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    :class="{ 'border-red-500': formErrors.email }"
+  />
+  <p v-if="formErrors.email" class="text-red-500 text-xs mt-1">
+    {{ formErrors.email }}
+  </p>
+</div>
 
-          <div>
-            <label class="block mb-1 font-medium text-sm sm:text-base">{{
-              $t("common.subject")
-            }}</label>
-            <input
-              v-model="form.subject"
-              type="text"
-              :placeholder="$t('common.enterSubject')"
-              class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
-            />
-          </div>
+<div>
+  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+    $t("common.subject")
+  }}</label>
+  <input
+    v-model="form.subject"
+    type="text"
+    :placeholder="$t('common.enterSubject')"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    :class="{ 'border-red-500': formErrors.subject }"
+  />
+  <p v-if="formErrors.subject" class="text-red-500 text-xs mt-1">
+    {{ formErrors.subject }}
+  </p>
+</div>
 
-          <div class="md:col-span-2">
-            <label class="block mb-1 font-medium text-sm sm:text-base">{{
-              $t("common.messageBox")
-            }}</label>
-            <textarea
-              v-model="form.message"
-              rows="4"
-              :placeholder="$t('common.enterMessage')"
-              class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
-            ></textarea>
-          </div>
+<div class="md:col-span-2">
+  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+    $t("common.message")
+  }}</label>
+  <textarea
+    v-model="form.message"
+    rows="4"
+    :placeholder="$t('common.enterMessage')"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    :class="{ 'border-red-500': formErrors.message }"
+  ></textarea>
+  <p v-if="formErrors.message" class="text-red-500 text-xs mt-1">
+    {{ formErrors.message }}
+  </p>
+</div>
 
           <div class="md:col-span-2 flex justify-center mt-3 sm:mt-4">
             <button
@@ -561,35 +570,107 @@
       </section>
     </section>
 
-    <!-- Modal -->
-    <div
-      v-if="showModal"
-      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
-      @click.self="closeModal"
+<!-- Modal -->
+<div
+  v-if="showModal"
+  class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+  @click.self="closeModal"
+>
+  <div
+    class="bg-white rounded-2xl shadow-lg p-8 w-full relative animate-fadeIn max-h-[90vh] overflow-y-auto"
+    :class="[isTermsModal ? 'max-w-6xl' : 'max-w-lg']"
+    :dir="isRTL ? 'rtl' : 'ltr'"
+  >
+    <button
+      @click="closeModal"
+      class="absolute top-3 text-gray-500 hover:text-gray-800 text-xl"
+      :class="isRTL ? 'left-3' : 'right-3'"
     >
-      <div
-        class="bg-white rounded-2xl shadow-lg p-8 max-w-lg w-full text-center relative animate-fadeIn"
-      >
-        <button
-          @click="closeModal"
-          class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-xl"
-        >
-          ✕
-        </button>
+      ✕
+    </button>
 
-        <h2 class="text-2xl font-semibold text-[#2C702C] mb-4">
-          More About Us
-        </h2>
-        <p class="text-[#163816] leading-relaxed mb-6">{{ modalContent }}</p>
+    <h2 
+      class="text-2xl font-semibold text-[#2C702C] mb-4" 
+      :class="isTermsModal ? (isRTL ? 'text-right' : 'text-left') : 'text-center'"
+    >
+      {{ modalTitle }}
+    </h2>
 
-        <button
-          @click="closeModal"
-          class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition"
-        >
-          Close
-        </button>
+    <!-- Terms Modal Content -->
+    <div v-if="isTermsModal">
+      <p class="text-gray-600 mb-4 flex items-start text-sm sm:text-base">
+        <span class="text-green-600 text-lg sm:text-xl" :class="isRTL ? 'ml-2' : 'mr-2'">
+          <font-awesome-icon :icon="['fas', 'triangle-exclamation']" />
+        </span>
+        {{ $t("common.pleaseReadCarefullyBeforeUsingKarakib") }}
+      </p>
+
+      <ul class="space-y-2 text-gray-700 text-sm sm:text-base" :class="isRTL ? 'list-disc list-inside' : 'list-disc list-inside'">
+        <li>{{ $t("common.byUsingKarakibYouAgree") }}</li>
+        <li>{{ $t("common.usersAreAlsoResponsible") }}</li>
+        <li>{{ $t("common.karakibWillNotBeHeldResponsible") }}</li>
+        <li>{{ $t("common.anyMisuseOfPlatform") }}</li>
+        <li>{{ $t("common.weMayUpdateTheseTerms") }}</li>
+        <li>{{ $t("common.usersMustProvideAccurateInformation") }}</li>
+        <li>{{ $t("common.karakibReservesRightToModify") }}</li>
+        <li>{{ $t("common.allTransactionsThroughPlatform") }}</li>
+        <li>{{ $t("common.usersAreProhibitedFromSharing") }}</li>
+        <li>{{ $t("common.privacyPolicyGovernsCollection") }}</li>
+      </ul>
+    </div>
+
+    <!-- Regular Modal Content -->
+    <p v-else class="text-[#163816] leading-relaxed mb-6" :class="isRTL ? 'text-right' : 'text-center'">
+      {{ modalContent }}
+    </p>
+
+    <button
+      @click="closeModal"
+      class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition mt-6"
+    >
+      {{ $t("common.close") }}
+    </button>
+  </div>
+</div>
+<!-- Success Modal -->
+<div
+  v-if="showSuccessModal"
+  class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+  @click.self="closeSuccessModal"
+>
+  <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center relative animate-fadeIn">
+    <button
+      @click="closeSuccessModal"
+      class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-xl"
+    >
+      ✕
+    </button>
+
+    <!-- Success Icon -->
+    <div class="mb-4 flex justify-center">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
       </div>
     </div>
+
+    <h2 class="text-2xl font-semibold text-[#2C702C] mb-3">
+      {{ $t("common.messageSentSuccessfully") }}
+    </h2>
+
+    <p class="text-gray-600 mb-6">
+      {{ $t("common.thankYouForContacting") }}
+    </p>
+
+    <button
+      @click="closeSuccessModal"
+      class="bg-[#2C702C] hover:bg-[#265C26] text-white px-8 py-3 rounded-lg font-medium transition"
+    >
+      {{ $t("common.close") }}
+    </button>
+  </div>
+</div>
   </div>
 </template>
 
@@ -625,8 +706,18 @@ export default {
         subject: "",
         message: "",
       },
+      formErrors: { 
+      firstName: "",
+      lastName: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
       showModal: false,
       modalContent: "",
+      modalTitle: "",
+      isTermsModal: false,
+      showSuccessModal: false,
     };
   },
 
@@ -658,23 +749,92 @@ export default {
       this.openFaq = this.openFaq === index ? null : index;
     },
 
-    submitForm() {
-      alert(`Thanks, ${this.form.firstName}! Your message has been sent.`);
-      this.form = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        subject: "",
-        message: "",
-      };
-    },
-    openModal(content) {
+submitForm() {
+  
+  this.formErrors = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  };
+
+  let isValid = true;
+
+  // Validate First Name
+  if (!this.form.firstName.trim()) {
+    this.formErrors.firstName = this.$t("common.firstNameRequired");
+    isValid = false;
+  } else if (!/^[a-zA-Z\u0600-\u06FF\s]+$/.test(this.form.firstName)) {
+    this.formErrors.firstName = this.$t("common.firstNameLettersOnly");
+    isValid = false;
+  }
+
+  // Validate Last Name
+  if (!this.form.lastName.trim()) {
+    this.formErrors.lastName = this.$t("common.lastNameRequired");
+    isValid = false;
+  } else if (!/^[a-zA-Z\u0600-\u06FF\s]+$/.test(this.form.lastName)) {
+    this.formErrors.lastName = this.$t("common.lastNameLettersOnly");
+    isValid = false;
+  }
+
+  // Validate Email
+  if (!this.form.email.trim()) {
+    this.formErrors.email = this.$t("common.emailRequired");
+    isValid = false;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email)) {
+    this.formErrors.email = this.$t("common.emailInvalid");
+    isValid = false;
+  }
+
+  // Validate Subject
+  if (!this.form.subject.trim()) {
+    this.formErrors.subject = this.$t("common.subjectRequired");
+    isValid = false;
+  } else if (this.form.subject.trim().length < 3) {
+    this.formErrors.subject = this.$t("common.subjectMinLength");
+    isValid = false;
+  }
+
+  // Validate Message
+  if (!this.form.message.trim()) {
+    this.formErrors.message = this.$t("common.messageRequired");
+    isValid = false;
+  } else if (this.form.message.trim().length < 10) {
+    this.formErrors.message = this.$t("common.messageMinLength");
+    isValid = false;
+  }
+
+  if (isValid) {
+    this.showSuccessModal = true;
+    this.form = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      subject: "",
+      message: "",
+    };
+  }
+},
+    openModal(title, content) {
+      this.modalTitle = title;
       this.modalContent = content;
+      this.isTermsModal = false; 
       this.showModal = true;
     },
+    openTermsModal() {  
+    this.modalTitle = this.$t("common.termsAndConditions");
+    this.isTermsModal = true;
+    this.showModal = true;
+  },
     closeModal() {
       this.showModal = false;
+      this.isTermsModal = false;
     },
+    closeSuccessModal() {
+  this.showSuccessModal = false;
+},
     toArabicDigits(str) {
       const map = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
       return String(str).replace(/\d/g, (d) => map[Number(d)]);
