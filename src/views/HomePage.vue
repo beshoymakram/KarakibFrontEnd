@@ -30,7 +30,7 @@
 
   <section class="px-16 py-12 bg-steps" ref="howItWorksSection">
     <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center mb-6 md:mb-8 lg:mb-10 pt-0"
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold drop-shadow-lg text-center mb-6 md:mb-8 lg:mb-10 pt-0"
     >
       {{ $t("common.howItWorks") }}
     </p>
@@ -61,12 +61,12 @@
   <!-- Waste Carousel Section -->
   <section class="px-4 md:px-12 py-12 relative bg-hero">
     <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center"
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
     >
       {{ $t("common.discoverWasteTypes") }}
     </p>
     <p
-      class="text-base sm:text-lg md:text-xl lg:text-2xl text-secondary text-center pt-5 pb-10 font-normal"
+      class="text-sm sm:text-base md:text-lg lg:text-xl text-secondary text-center pt-5 pb-10 font-normal"
     >
       {{ $t("common.learnAboutDifferentKindsOfWaste") }}
     </p>
@@ -139,14 +139,14 @@
     </div>
   </section>
   <!--  hero merch -->
-  <div class="hero bg-merch min-h-[30vh] sm:min-h-[35vh] py-12 md:py-16">
+  <div class="hero bg-merch min-h-[30vh] sm:min-h-[35vh] py-8 md:py-12">
     <div class="hero-content text-center">
       <div class="max-w-3xl">
-        <h1
-          class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#2C702C] font-medium drop-shadow-lg"
+        <p
+          class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
         >
           {{ $t("common.ourExclusiveMerchandise") }}
-        </h1>
+      </p>
         <p class="py-4 md:py-6 text-sm sm:text-base md:text-lg text-[#163816]">
           {{ $t("common.showYourSupportWithPremiumCollection") }}
         </p>
@@ -163,7 +163,7 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-1 bg-steps sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12"
+    class="grid grid-cols-2 bg-steps sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
   >
     <div
       v-for="(product, index) in products"
@@ -176,21 +176,21 @@
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full h-64 sm:h-72 md:h-80 bg-[#E0EBE0] object-cover rounded-t-xl"
+            class="w-full h-64 sm:h-68 md:h-76 bg-[#E0EBE0] object-contain rounded-t-xl"
           />
         </figure>
 
-        <div class="px-4 pt-3 pb-2">
-          <div class="flex justify-between items-center w-full mb-2">
-            <h2 class="text-primary font-semibold sm:text-lg md:text-xl">
+        <div class="px-3 pt-3 pb-2">
+          <div class="flex justify-between flex-col  md:flex-row md:items-center w-full mb-2">
+            <h2 class="text-primary font-semibold sm:text-base md:text-lg lg:text-xl">
               {{ product.name }}
             </h2>
-            <p class="text-primary font-semibold text-sm sm:text-base md:text-lg">
+            <p class="text-primary font-semibold text-sm sm:text-sm md:text-base lg:text-lg">
               {{ product.price }} {{ $t("common.currency") }}
             </p>
           </div>
 
-          <p class="text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
+          <p class="hidden md:block text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
         </div>
       </router-link>
 
@@ -200,7 +200,7 @@
         <div v-if="getCartItem(product.id)" class="flex items-center gap-2">
           <button
             @click.stop="decrementCartItem(product.id)"
-            class="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
+            class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -214,13 +214,13 @@
             </svg>
           </button>
 
-          <span class="w-10 text-center font-bold text-[#2C702C]">
+          <span class="w-6 md:w-10 text-center font-bold text-[#2C702C]">
             {{ getCartItem(product.id).quantity }}
           </span>
 
           <button
             @click.stop="incrementCartItem(product.id)"
-            class="w-8 h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
+            class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +253,7 @@
         <button
           v-else-if="product.stock > 0"
           @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-3 md:px-4  py-1 md:py-2 text-xs sm:text-sm font-semibold"
         >
           {{ $t("common.addToCart") }}
         </button>
@@ -261,7 +261,7 @@
         <!-- Out of stock button -->
         <button
           v-else
-          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-3 md:px-4 py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-3 md:px-4 py-1 md:py-2 text-xs sm:text-sm font-semibold"
           disabled
         >
           {{ $t("common.outOfStock") }}
@@ -271,14 +271,14 @@
   </div>
 
   <!-- make differance section -->
-  <section class="bg-donate px-4 sm:px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 relative">
+  <section class="bg-donate px-4 sm:px-8 md:px-12 lg:px-16 py-4 md:py-8 lg:py-12 relative">
     <p
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center"
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
     >
       {{ $t("common.makeADifference") }}
     </p>
     <p
-      class="text-lg sm:text-xl md:text-2xl text-secondary text-center pt-4 md:pt-5 pb-8 md:pb-10 font-normal"
+      class="text-base sm:text-lg md:text-xl text-secondary text-center pt-4 md:pt-5 pb-8 md:pb-10 font-normal"
     >
       {{ $t("common.convertRecyclingPointsIntoDonations") }}
     </p>
