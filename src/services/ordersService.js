@@ -23,6 +23,10 @@ export default {
     return apiClient.post(`/orders/${id}/unassign`);
   },
 
+  getMyOrders() {
+    return apiClient.get('/assigned-orders');
+  },
+
   deleteOrder(id) {
     return apiClient.delete('/orders/' + id);
   },

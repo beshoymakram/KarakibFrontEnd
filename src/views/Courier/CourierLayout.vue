@@ -22,10 +22,17 @@
     </div>
 
     <div class="bg-white rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
-      <nav :class="['flex', 'flex-wrap', 'p-2', 'border-b-1', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
-        <router-link to="/courier/assigned-requests" class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200"
+      <nav
+        :class="['flex', 'flex-wrap', 'p-2', 'border-b-1', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
+        <router-link to="/courier/assigned-requests"
+          class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200"
           :class="$route.name === 'CourierAssignedRequests' ? 'bg-[#E0EBE0] text-[#2C702C]' : 'text-gray-600 hover:bg-gray-100'">
           {{ $t('common.assignedRequests') }}
+        </router-link>
+        <router-link to="/courier/assigned-orders"
+          class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200"
+          :class="$route.name === 'CourierAssignedOrders' ? 'bg-[#E0EBE0] text-[#2C702C]' : 'text-gray-600 hover:bg-gray-100'">
+          {{ $t('common.assignedOrders') }}
         </router-link>
       </nav>
       <router-view></router-view>
@@ -44,5 +51,3 @@ export default {
   background-color: #e0ebe0;
 }
 </style>
-
-

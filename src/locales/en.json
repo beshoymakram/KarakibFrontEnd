@@ -387,6 +387,7 @@
     "type": "Type",
     "courierDashboard": "Courier Dashboard",
     "assignedRequests": "Assigned Requests",
+    "assignedOrders": "Assigned Orders",
     "collect": "Collect",
     "scanQrToCollect": "Scan QR to collect",
     "openCamera": "Open Camera",
@@ -403,6 +404,8 @@
     "today": "Today",
     "assigned": "Assigned",
     "paid": "Paid",
-    "collected": "Collected"
+    "collected": "Collected",
+    "wasteItemsToCollect": "Waste Items to Collect",
+    "noWasteItems": "No waste items to collect"
   }
 }

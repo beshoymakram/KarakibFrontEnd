@@ -57,9 +57,9 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed',
+                'text-green-800 bg-green-100': order.status === 'paid' || order.status === 'completed',
                 'text-red-800 bg-red-100': order.status === 'cancelled',
-                'text-warning bg-yellow-100': order.status === 'pending'
+                'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
                 {{ $t(`common.${order.status}`) }}
               </span>
@@ -69,7 +69,8 @@
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-200 transition-colors">
                 Details
               </button>
-              <button v-if="order.status == 'pending'" @click="openCancelModal(order)"
+              <button v-if="order.status !== 'cancelled' && order.status !== 'completed'"
+                @click="openCancelModal(order)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                 {{ $t('common.Cancel') }}
               </button>
@@ -102,7 +103,7 @@
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <h3 class="mb-5 text-lg font-normal text-section dark:text-gray-400">
-              Are you sure you want to cancel this order?
+              {{ $t('common.areYouSureCancelOrder') }}
             </h3>
             <button @click="confirmCancel" type="button"
               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">

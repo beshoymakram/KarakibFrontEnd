@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="bg-tabs rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.role"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-primary">
           <option value="">{{ $t('common.allRoles') }}</option>
           <option value="user">{{ $t('common.user') }}</option>
           <option value="courier">{{ $t('common.courier') }}</option>
@@ -14,7 +14,7 @@
 
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-primary">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="active">{{ $t('common.active') }}</option>
           <option value="suspended">{{ $t('common.suspended') }}</option>
@@ -52,10 +52,10 @@
     </div>
   </div>
 
-  <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <div class="bg-tabs rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
-        <thead class="bg-gray-50 border-b border-gray-200">
+        <thead class="bg-tabs border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
               $t('common.name') }}</th>
@@ -71,21 +71,21 @@
               $t('common.action') }}</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-tabs divide-y divide-gray-200">
           <tr v-if="filteredUsers.length === 0">
             <td colspan="6" class="px-4 py-4 text-center text-gray-500">
               {{ $t('common.noResultsMatchSearch') }}
             </td>
           </tr>
 
-          <tr v-for="user in filteredUsers" :key="user.id" class="hover:bg-gray-50 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+          <tr v-for="user in filteredUsers" :key="user.id" class="transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ user.name }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
               {{ user.email }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-section">
               {{ user.type }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -100,7 +100,7 @@
             </td>
             <td v-if="user.status !== 'deleted'" class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(user)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 {{ $t('common.edit') }}
               </button>
               <button @click="openDeleteModal(user)"
@@ -603,5 +603,52 @@ export default {
 <style scoped>
 select {
   background-image: none;
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: #BFD6BF !important;
+}
+
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(57, 57, 57) !important;
+}
+
+.text-secondary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+
+.text-section {
+  color: black !important;
+}
+
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+.bg-myprofile {
+  background-color: #BFD6BF;
+}
+
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+
+.bg-tabs {
+  background-color: #ffffff;
+}
+
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
 }
 </style>
