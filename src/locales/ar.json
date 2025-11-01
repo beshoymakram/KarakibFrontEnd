@@ -384,7 +384,8 @@
         "allUnits": "جميع الوحدات",
         "type": "النوع",
         "courierDashboard": "لوحة المندوب",
-        "assignedRequests": "الطلبات الموكلة",
+        "assignedRequests": "طلبات الجمع الموكلة",
+        "assignedOrders": "الطلبات الموكلة",
         "collect": "استلام",
         "scanQrToCollect": "امسح رمز QR للاستلام",
         "openCamera": "فتح الكاميرا",
@@ -401,6 +402,8 @@
         "today": "اليوم",
         "assigned": "تم تعيين المندوب",
         "paid": "تم الدفع",
-        "collected": "تم الاستلام"
+        "collected": "تم الاستلام",
+        "wasteItemsToCollect": "عناصر النفايات المراد جمعها",
+        "noWasteItems": "لا توجد عناصر نفايات للجمع"
     }
 }

@@ -42,6 +42,7 @@ import CourierLayout from '@/views/Courier/CourierLayout.vue'
 import AssignedRequests from '@/views/Courier/AssignedRequests.vue'
 import Donations from '@/views/Admin/Donations.vue'
 import DonationFailure from '@/views/DonationFailure.vue'
+import AssignedOrders from '@/views/Courier/AssignedOrders.vue'
 
 // Define routes
 const routes = [
@@ -131,7 +132,12 @@ const routes = [
         path: 'assigned-requests',
         name: 'CourierAssignedRequests',
         component: AssignedRequests
-      }
+      },
+      {
+        path: 'assigned-orders',
+        name: 'CourierAssignedOrders',
+        component: AssignedOrders
+      },
     ]
   },
   {

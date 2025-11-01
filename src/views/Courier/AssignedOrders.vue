@@ -13,7 +13,7 @@
       </div>
 
       <div class="relative">
-        <select v-model="filters.payout_method"
+        <select v-model="filters.payment_method"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
           <option value="">{{ $t('common.allPayoutMethods') }}</option>
           <option value="earn">{{ $t('common.earnedPoints') }}</option>
@@ -54,26 +54,26 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-if="filteredRequests.length === 0">
+          <tr v-if="filteredOrders.length === 0">
             <td colspan="7" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
 
-          <tr v-for="request, index in filteredRequests" :key="request.id" class="hover:bg-gray-50 transition-colors">
+          <tr v-for="order, index in filteredOrders" :key="order.id" class="hover:bg-gray-50 transition-colors">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ index + 1 }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ request.request_number }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ request.created_at }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ order.order_number }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ order.created_at }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]"><a
-                :href="'tel:+' + request.address?.phone">{{
-                  request.address?.phone }}</a></td>
+                :href="'tel:+' + order.address?.phone">{{
+                  order.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': request.status === 'completed',
-                'text-red-800 bg-red-100': request.status === 'cancelled',
-                'text-warning bg-yellow-100': request.status === 'pending' || request.status === 'assigned'
+                'text-green-800 bg-green-100': order.status === 'completed',
+                'text-red-800 bg-red-100': order.status === 'cancelled',
+                'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
-                {{ $t(`common.${request.status}`) }}
+                {{ $t(`common.${order.status}`) }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
@@ -134,7 +134,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
-                {{ $t('common.orderDetails') }} | {{ details.request_number }}
+                {{ $t('common.orderDetails') }} | {{ details.order_number }}
               </h3>
               <button type="button" @click="showDetailsModal = false"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -201,7 +201,7 @@
               <!-- Waste Items Section -->
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
-                }}</h4>
+                  }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
@@ -261,64 +261,63 @@
 
 <script>
 import ordersService from '@/services/ordersService';
-import requestsService from '@/services/requestsService';
 import { nextTick } from 'vue';
 
 export default {
-  name: 'CourierAssignedRequests',
+  name: 'CourierAssignedOrders',
   data() {
     return {
       searchQuery: '',
-      selectedRequest: '',
+      selectedOrder: '',
       showCompleteModal: false,
-      requests: [],
+      orders: [],
       showDetailsModal: false,
       details: {
-        request_number: null,
+        order_number: null,
         name: '',
         address: '',
         total: '',
-        payout_method: '',
+        payment_method: '',
         status: '',
       },
       filters: {
-        payout_method: '',
+        payment_method: '',
         status: '',
       },
       scannerOpen: false,
       activeRequestId: null,
       stream: null,
-      infoText: 'Point your camera at the QR code on the request receipt.'
+      infoText: 'Point your camera at the QR code on the order receipt.'
     }
   },
 
   computed: {
-    filteredRequests() {
-      let filtered = this.requests;
+    filteredOrders() {
+      let filtered = this.orders;
 
-      if (this.filters.payout_method) {
-        filtered = filtered.filter(item =>
-          item.payout_method === this.filters.payout_method
+      if (this.filters.payment_method) {
+        filtered = filtered.filter(order =>
+          order.payment_method === this.filters.payment_method
         );
       }
 
       if (this.filters.status) {
-        filtered = filtered.filter(item =>
-          item.status === this.filters.status
+        filtered = filtered.filter(order =>
+          order.status === this.filters.status
         );
       }
 
       if (this.searchQuery) {
-        filtered = filtered.filter(request =>
-          request.request_number.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.address.street_address.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.address.phone.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.address.city.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.status.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.payout_method.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.total.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          request.created_at.toLowerCase().includes(this.searchQuery.toLowerCase())
+        filtered = filtered.filter(order =>
+          order.order_number.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.address.street_address.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.address.phone.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.address.city.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.status.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.payment_method.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.total.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          order.created_at.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
 
@@ -329,7 +328,7 @@ export default {
   },
   methods: {
     openCompleteModal(order) {
-      this.selectedRequest = order.id;
+      this.selectedOrder = order.id;
       this.showCompleteModal = true;
     },
     openScanner(req) {
@@ -339,27 +338,27 @@ export default {
     },
 
 
-    openDetailsModal(request) {
+    openDetailsModal(order) {
       this.details = {
-        request_number: request.request_number,
-        name: request.user?.name || 'N/A',
-        address: request.address,
-        total: request.total,
-        payout_method: request.payout_method,
-        status: request.status,
-        items: request.items || [],
-        created_at: request.created_at,
+        order_number: order.order_number,
+        name: order.user?.name || 'N/A',
+        address: order.address,
+        total: order.total,
+        payment_method: order.payment_method,
+        status: order.status,
+        items: order.items || [],
+        created_at: order.created_at,
       };
       this.showDetailsModal = true;
     },
     async confirmComplete() {
       try {
-        const response = await ordersService.completeOrder(this.selectedRequest);
+        const response = await ordersService.completeOrder(this.selectedOrder);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
-        this.selectedRequest = '';
-        this.fetchMyRequests();
+        this.selectedOrder = '';
+        this.fetchMyOrders();
         this.showCompleteModal = false;
       } catch (error) {
         this.$toast.error(error.response.data.message);
@@ -389,17 +388,17 @@ export default {
       this.activeRequestId = null
     },
 
-    async fetchMyRequests() {
+    async fetchMyOrders() {
       try {
-        const user = await requestsService.getMyRequests();
-        this.requests = user.data.requests || user.data;
+        const user = await ordersService.getMyOrders();
+        this.orders = user.data.orders || user.data;
       } catch (error) {
-        this.$toast.error(error?.response?.data.message || 'Failed to fetch requests.');
+        this.$toast.error(error?.response?.data.message || 'Failed to fetch orders.');
       }
     },
   },
   mounted() {
-    this.fetchMyRequests();
+    this.fetchMyOrders();
   }
 }
 </script>
