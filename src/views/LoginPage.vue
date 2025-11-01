@@ -208,7 +208,7 @@ export default {
 }
 
 .bg-tabs {
-  background-color: #EAF2EA;
+  background-color: #ffffff;
 }
 
 [data-theme="forest"] .bg-tabs {

@@ -63,7 +63,7 @@
               <div class="flex justify-between items-center mb-2">
                 <h3 class="font-semibold text-primary">{{ $t('common.deliveryAddress') }}</h3>
                 <button @click="showAddressModal = true"
-                  class="bg-green-500 text-section px-4 py-1 rounded-md hover:bg-[#216b21] cursor-pointer">
+                  class="bg-green-700 text-white px-4 py-1 rounded-md hover:bg-[#216b21] cursor-pointer">
                   {{ $t('common.enterNewAddress') }}
                 </button>
               </div>
@@ -72,11 +72,11 @@
                 <div v-for="address in addresses" :key="address.id" @click="selectedAddressId = address.id"
                   class="flex items-start gap-3 p-3 rounded-md text-sm my-2 cursor-pointer border transition-all duration-200"
                   :class="selectedAddressId === address.id
-                    ? 'bg-[#E9F7E9] border-primary'
-                    : 'bg-primary text-section border-transparent hover:border-gray-300'">
+                    ? 'bg-[#E9F7E9] border-[#E9F7E9]'
+                    : 'bg-address text-section border-gray-300 hover:border-gray-300'">
                   <!-- Radio circle -->
                   <input type="radio" name="deliveryAddress" :value="address.id" v-model="selectedAddressId" required
-                    class="accent-primary h-4 w-4 cursor-pointer mt-1 text-primary focus:ring-primary border-gray-300" />
+                    class="accent-[#16af3f] h-4 w-4 cursor-pointer mt-1 text-primary focus:ring-[#16af3f] border-gray-300" />
 
                   <!-- Address info -->
                   <div class="text-primary">
@@ -352,5 +352,11 @@ export default {
 }
 [data-theme="forest"] .bg-secondary {
   background-color: rgb(43, 43, 43) !important;
+}
+.bg-address {
+  background-color: #f6f9f6
+}
+[data-theme="forest"] .bg-address {
+  background-color: #545554;
 }
 </style>

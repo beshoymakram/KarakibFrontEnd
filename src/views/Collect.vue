@@ -66,8 +66,8 @@
                 <div v-for="address in addresses" :key="address.id" @click="selectedAddressId = address.id"
                   class="flex items-start gap-3 p-3 rounded-md text-sm my-2 cursor-pointer border transition-all duration-200"
                   :class="selectedAddressId === address.id
-                    ? 'bg-[#739273] border-[#2C702C]'
-                    : 'bg-address text-section border-transparent hover:border-gray-300'">
+                    ? 'bg-[#E9F7E9] border-green-400 text-primary'
+                    : 'bg-address text-primary border-transparent hover:border-gray-300'">
                   <!-- Radio circle -->
                   <input type="radio" name="pickupAddress" :value="address.id" v-model="selectedAddressId" required
                     class="accent-[#2C702C] h-4 w-4 cursor-pointer mt-1 text-[#2C702C] focus:ring-[#2C702C] border-gray-300" />
@@ -310,9 +310,9 @@ export default {
   background-color: rgb(43, 43, 43) !important;
 }
 .bg-address {
-  background-color: #E9F7E9
+  background-color: #f6f9f6
 }
 [data-theme="forest"] .bg-address {
-  background-color: rgb(21, 18, 18);
+  background-color: #545554;
 }
 </style>
