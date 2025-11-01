@@ -83,16 +83,16 @@
               <button v-if="order.courier" @click="unassign(order)" class="text-orange-700 cursor-pointer block">
                 {{ $t('common.unassign') }}
               </button>
-              <button v-if="!order.courier" @click="openAssignModal(order)"
+              <button v-if="!order.courier && order.status !== 'cancelled'" @click="openAssignModal(order)"
                 class="px-3 py-1 border border-green-300 rounded-md text-[#2C702C] hover:bg-green-50 transition-colors cursor-pointer">
                 {{ $t('common.assignCourier') }}
               </button>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed',
+                'text-green-800 bg-green-100': order.status === 'paid' || order.status === 'completed',
                 'text-red-800 bg-red-100': order.status === 'cancelled',
-                'text-warning bg-yellow-100': order.status === 'pending'
+                'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
                 {{ order.status }}
               </span>
@@ -106,7 +106,8 @@
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                 {{ $t('common.details') }}
               </button>
-              <button v-if="order.status == 'pending'" @click="openCancelModal(order)"
+              <button v-if="order.status !== 'cancelled' && order.status !== 'completed'"
+                @click="openCancelModal(order)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                 {{ $t('common.Cancel') }}
               </button>

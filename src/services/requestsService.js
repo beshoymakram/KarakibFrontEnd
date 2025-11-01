@@ -38,4 +38,12 @@ export default {
   completeRequest(id) {
     return apiClient.put('/requests/' + id + '/complete');
   },
+
+  assignRequest(id, courier_id) {
+    return apiClient.post(`/requests/${id}/assign/${courier_id}`);
+  },
+
+  unassign(id) {
+    return apiClient.post(`/requests/${id}/unassign`);
+  },
 };

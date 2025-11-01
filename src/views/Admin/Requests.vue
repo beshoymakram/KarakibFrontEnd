@@ -41,21 +41,21 @@
       <table class="w-full table-auto">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">
-              Request Number
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+              $t('common.orderNumber') }}</th>
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+              $t('common.orderedDate') }}</th>
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+              $t('common.total') }}
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">
-              Requested Date
-            </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Total
-            </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Payout
-              Method
-            </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Status
-            </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
-            </th>
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+              $t('common.payoutMethod') }}</th>
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+              $t('common.courier') }}</th>
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+              $t('common.status') }}</th>
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+              $t('common.action') }}</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -78,11 +78,21 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
               {{ request.payout_method == 'earn' ? $t('common.earnedPoints') : $t('common.donatedPoints') }}
             </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+              {{ request.courier?.name }}
+              <button v-if="request.courier" @click="unassign(request)" class="text-orange-700 cursor-pointer block">
+                {{ $t('common.unassign') }}
+              </button>
+              <button v-if="!request.courier && request.status !== 'cancelled'" @click="openAssignModal(request)"
+                class="px-3 py-1 border border-green-300 rounded-md text-[#2C702C] hover:bg-green-50 transition-colors cursor-pointer">
+                {{ $t('common.assignCourier') }}
+              </button>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
                 'text-green-800 bg-green-100': request.status === 'completed',
                 'text-red-800 bg-red-100': request.status === 'cancelled',
-                'text-warning bg-yellow-100': request.status === 'pending'
+                'text-warning bg-yellow-100': request.status === 'pending' || request.status === 'assigned'
               }">
                 {{ request.status }}
               </span>
@@ -96,7 +106,8 @@
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                 {{ $t('common.details') }}
               </button>
-              <button v-if="request.status == 'pending'" @click="openCancelModal(request)"
+              <button v-if="request.status !== 'cancelled' && request.status !== 'completed'"
+                @click="openCancelModal(request)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                 {{ $t('common.Cancel') }}
               </button>
@@ -140,6 +151,61 @@
               {{ $t('common.No, Cancel') }}
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="showAssignModal"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
+      @click="showAssignModal = false">
+      <div class="relative p-4 w-full max-w-2xl" @click.stop>
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+              {{ $t('common.assignCourier') }}
+            </h3>
+            <button type="button" @click="showAssignModal = false"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+
+          <!-- Body -->
+          <form @submit.prevent="confirmAssign" class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 grid-cols-2">
+
+              <div class="col-span-2">
+                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                  $t('common.courier') }}</label>
+                <select id="type" v-model="assignForm.courier_id"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
+                  required>
+                  <option value="" disabled selected>{{ $t('common.selectCourier') }}</option>
+                  <option v-for="courier in couriers" :key="courier.id" :value="courier.id">{{ courier.name }}
+                  </option>
+                </select>
+              </div>
+
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex justify-end space-x-3">
+              <button @click="showAssignModal = false" type="button"
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                {{ $t('common.Cancel') }}
+              </button>
+              <button type="submit"
+                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                {{ $t('common.assign') }}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -286,6 +352,7 @@
 
 <script>
 import requestsService from '@/services/requestsService';
+import usersService from '@/services/usersService';
 import { nextTick } from 'vue';
 
 export default {
@@ -298,6 +365,7 @@ export default {
       showCancelModal: false,
       showCompleteModal: false,
       showDetailsModal: false,
+      showAssignModal: false,
       details: {
         order_number: null,
         name: '',
@@ -306,6 +374,9 @@ export default {
         payout_method: '',
         status: '',
         items: [],
+      },
+      assignForm: {
+        courier_id: ''
       },
       filters: {
         payout_method: '',
@@ -362,6 +433,11 @@ export default {
       this.showCompleteModal = true;
     },
 
+    openAssignModal(order) {
+      this.selectedRequest = order.id;
+      this.showAssignModal = true;
+    },
+
     openDetailsModal(request) {
       this.details = {
         request_number: request.request_number,
@@ -382,6 +458,15 @@ export default {
         this.requests = user.data.requests || user.data;
       } catch (error) {
         this.$toast.error(error?.response?.data.message || 'Failed to fetch requests.');
+      }
+    },
+
+    async fetchCouriers() {
+      try {
+        const response = await usersService.getCouriers();
+        this.couriers = response.data.data || response.data;
+      } catch (error) {
+        console.error("Error fetching couriers:", error);
       }
     },
 
@@ -412,9 +497,42 @@ export default {
         this.$toast.error(error.response.data.message);
       }
     },
+
+    async confirmAssign() {
+      if (!this.assignForm.courier_id) {
+        this.$toast.error(this.$('assignCourier'));
+        return;
+      }
+      try {
+        const response = await requestsService.assignRequest(this.selectedRequest, this.assignForm.courier_id);
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+        });
+        this.selectedRequest = '';
+        this.assignForm.courier_id = '';
+        this.fetchRequests();
+        this.showAssignModal = false;
+      } catch (error) {
+        this.$toast.error(error);
+        this.$toast.error(error.response.data.message);
+      }
+    },
+
+    async unassign(order) {
+      try {
+        const response = await requestsService.unassign(order.id);
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+        });
+        this.fetchRequests();
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
+    },
   },
   mounted() {
     this.fetchRequests();
+    this.fetchCouriers();
   }
 }
 </script>
