@@ -16,7 +16,7 @@
       <!-- Left Arrow -->
       <button
         @click="scrollPrev"
-        class="hidden sm:block absolute left-0 sm:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,7 @@
           viewBox="0 0 24 24"
           stroke-width="2"
           stroke="currentColor"
-          class="w-5 h-5 sm:w-6 sm:h-6"
+          class="w-4 h-4 xl:w-5 xl:h-5"
         >
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
@@ -63,7 +63,7 @@
       <!-- Right Arrow -->
       <button
         @click="scrollNext"
-        class="hidden sm:block absolute right-0 sm:right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden md:block absolute right-0 md:-right-10 xl:right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@
           viewBox="0 0 24 24"
           stroke-width="2"
           stroke="currentColor"
-          class="w-5 h-5 sm:w-6 sm:h-6"
+          class="w-4 h-4 xl:w-5 xl:h-5"
         >
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>

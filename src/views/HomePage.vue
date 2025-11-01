@@ -34,26 +34,25 @@
   >
     {{ $t("common.howItWorks") }}
   </p>
-
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
     <div
       v-for="(step, index) in steps"
       :key="index"
-      class="card bg-base-100 shadow-sm rounded-3xl cursor-pointer hover:shadow-lg transition-all duration-300 mx-4 md:mx-0"
+      class="card bg-base-100 shadow-sm  w-68  md:w-74 lg:w-54 xl:w-64  rounded-3xl cursor-pointer hover:shadow-lg transition-all duration-300 mx-auto "
       @click="handleStepClick(step)"
     >
-      <figure class="p-4 md:p-5">
+      <figure class="p-4 lg:p-2 xl:p-4 md:p-5">
         <img
           :src="step.image"
           :alt="step.title"
-          class="object-cover rounded-3xl w-50 h-44 sm:w-60 sm:h-48  md:h-56 lg:h-48"
+          class="object-cover rounded-3xl size-40   sm:size-48   mt-2"
         />
       </figure>
       <div class="card-body text-center px-4 py-4">
-        <h2 class="text-xs sm:text-sm md:text-base font-semibold text-primary mb-1 -mt-4">
+        <h2 class="text-xs sm:text-sm md:text-base font-semibold text-primary -mt-4">
           {{ step.number }}
         </h2>
-        <p class="card-title text-sm sm:text-base md:text-lg mx-auto font-semibold mb-2">
+        <p class="card-title text-sm sm:text-base md:text-lg mx-auto font-semibold ">
           {{ step.title }}
         </p>
         <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
@@ -91,7 +90,7 @@
       <!-- Left Arrow -->
       <button
         @click="scrollPrev"
-        class="hidden sm:block absolute left-0 sm:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +98,7 @@
           viewBox="0 0 24 24"
           stroke-width="2"
           stroke="currentColor"
-          class="w-5 h-5 sm:w-6 sm:h-6"
+          class="w-4 h-4 xl:w-5 xl:h-5  "
         >
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
@@ -129,7 +128,7 @@
       <!-- Right Arrow -->
       <button
         @click="scrollNext"
-        class="hidden sm:block absolute right-0 sm:right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
+        class="hidden md:block absolute right-0 md:-right-10 xl:right-[-50px]  top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +136,7 @@
           viewBox="0 0 24 24"
           stroke-width="2"
           stroke="currentColor"
-          class="w-5 h-5 sm:w-6 sm:h-6"
+          class="w-4 h-4 xl:w-5 xl:h-5"
         >
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
