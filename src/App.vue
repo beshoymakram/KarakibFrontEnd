@@ -1,11 +1,13 @@
 <template>
   <NavBar />
   <router-view />
+  <ChatbotWidget/>
   <FooterSection />
   <SkeletonLoader v-if="loadingStore.isLoading" />
 </template>
 
 <script>
+import ChatbotWidget from './components/ChatbotWidget.vue'
 import FooterSection from './components/FooterSection.vue'
 import NavBar from './components/NavBar.vue'
 import SkeletonLoader from './views/SkeletonLoader.vue'
@@ -18,6 +20,7 @@ export default {
     NavBar,
     FooterSection,
     SkeletonLoader,
+    ChatbotWidget
   },
   setup() {
     const loadingStore = useLoadingStore()
