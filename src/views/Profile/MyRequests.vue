@@ -1,107 +1,107 @@
 <template>
-          <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
-            <div class="flex flex-wrap items-center gap-4">
-              <div class="relative">
-                <select v-model="filters.status"
-                  class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
-                  <option value="">{{ $t('common.allStatuses') }}</option>
-                  <option value="pending">{{ $t('common.pending') }}</option>
-                  <option value="completed">{{ $t('common.completed') }}</option>
-                  <option value="cancelled">{{ $t('common.cancelled') }}</option>
-                </select>
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
-              </div>
+  <div class="bg-myprofile rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+    <div class="flex flex-wrap items-center gap-4">
+      <div class="relative">
+        <select v-model="filters.status"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
+          <option value="">{{ $t('common.allStatuses') }}</option>
+          <option value="pending">{{ $t('common.pending') }}</option>
+          <option value="completed">{{ $t('common.completed') }}</option>
+          <option value="cancelled">{{ $t('common.cancelled') }}</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
 
-              <div class="relative">
-                <select v-model="filters.payout_method"
-                  class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
-                  <option value="">All Payout Methods</option>
-                  class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2
-                  focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
-                  <option value="">{{ $t('common.allPayoutMethods') }}</option>
-                  <option value="earn">{{ $t('common.earnedPoints') }}</option>
-                  <option value="donate">{{ $t('common.donatedPoints') }}</option>
-                </select>
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
-              </div>
-              <div class="flex-1 max-w-md ml-auto">
-                <div class="relative">
-                  <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
-                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-                  <svg
-                    :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="relative">
+        <select v-model="filters.payout_method"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
+          <option value="">All Payout Methods</option>
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2
+          focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">{{ $t('common.allPayoutMethods') }}</option>
+          <option value="earn">{{ $t('common.earnedPoints') }}</option>
+          <option value="donate">{{ $t('common.donatedPoints') }}</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
+      <div class="flex-1 max-w-md ml-auto">
+        <div class="relative">
+          <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+          <svg
+            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <div class="bg-myprofile rounded-lg shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full table-auto">
-                <thead class="bg-myprofile border-b border-gray-200">
-                  <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
-                      $t('common.requestNumber') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
-                      $t('common.requestedDate') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
-                      $t('common.total') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
-                      $t('common.payoutMethod') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
-                      $t('common.status') }}</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
-                      $t('common.action') }}</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-myprofile divide-y divide-gray-200">
-                  <tr v-if="filteredRequests.length === 0">
-                    <td colspan="5" class="px-4 py-4 text-center text-section">
-                      {{ $t('common.noResultsMatchSearch') }}
-                    </td>
-                  </tr>
+  <div class="bg-myprofile rounded-lg shadow-sm overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full table-auto">
+        <thead class="bg-myprofile border-b border-gray-200">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              $t('common.requestNumber') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              $t('common.requestedDate') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              $t('common.total') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              $t('common.payoutMethod') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              $t('common.status') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              $t('common.action') }}</th>
+          </tr>
+        </thead>
+        <tbody class="bg-myprofile divide-y divide-gray-200">
+          <tr v-if="filteredRequests.length === 0">
+            <td colspan="5" class="px-4 py-4 text-center text-section">
+              {{ $t('common.noResultsMatchSearch') }}
+            </td>
+          </tr>
 
-                  <tr v-for="request in filteredRequests" :key="request.id" class="transition-colors">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-                      {{ request.request_number }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-                      {{ request.created_at }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-                      {{ request.total }} {{ $t('common.points') }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
-                      {{ request.payout_method == 'earn' ? $t('common.earnedPoints') : $t('common.donatedPoints') }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                      <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                        'text-green-800 bg-green-100': request.status === 'completed',
-                        'text-red-800 bg-red-100': request.status === 'cancelled',
-                        'text-warning bg-yellow-100': request.status === 'pending'
-                      }">
-                        {{ request.status }}
-                      </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-                      <button @click="openDetailsModal(request)"
-                        class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
-                        Details
-                      </button>
-                      <button v-if="request.status == 'pending'" @click="openCancelModal(request)"
-                        class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
-                        {{ $t('common.Cancel') }}
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <tr v-for="request in filteredRequests" :key="request.id" class="transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+              {{ request.request_number }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+              {{ request.created_at }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+              {{ request.total }} {{ $t('common.points') }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+              {{ request.payout_method == 'earn' ? $t('common.earnedPoints') : $t('common.donatedPoints') }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm">
+              <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
+                'text-green-800 bg-green-100': request.status === 'completed',
+                'text-red-800 bg-red-100': request.status === 'cancelled',
+                'text-warning bg-yellow-100': request.status === 'pending'
+              }">
+                {{ $t(`common.${request.status}`) }}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+              <button @click="openDetailsModal(request)"
+                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
+                Details
+              </button>
+              <button v-if="request.status == 'pending'" @click="openCancelModal(request)"
+                class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
+                {{ $t('common.Cancel') }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
   <Teleport to="body">
@@ -174,13 +174,14 @@
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
-                  {{ details.address?.phone }}
+                  <a :href="'tel:+' + details.address?.phone">{{
+                    details.address?.phone }}</a>
                 </p>
               </div>
 
               <div class="sm:col-span-2">
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress')
-                  }}</h4>
+                }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.street_address }}
                 </p>
@@ -200,7 +201,7 @@
                   'bg-yellow-100 text-yellow-800': details.status === 'pending',
                   'bg-red-100 text-red-800': details.status === 'cancelled'
                 }">
-                  {{ details.status }}
+                  {{ $t(`common.${details.status}`) }}
                 </p>
               </div>
 

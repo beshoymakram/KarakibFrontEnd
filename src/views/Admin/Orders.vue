@@ -94,7 +94,7 @@
                 'text-red-800 bg-red-100': order.status === 'cancelled',
                 'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
-                {{ order.status }}
+                {{ $t(`common.${order.status}`) }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
@@ -278,7 +278,8 @@
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
-                  {{ details.address?.phone }}
+                  <a :href="'tel:+' + details.address?.phone">{{
+                    details.address?.phone }}</a>
                 </p>
               </div>
 
@@ -303,7 +304,7 @@
                   'bg-yellow-100 text-yellow-800': details.status === 'pending',
                   'bg-red-100 text-red-800': details.status === 'cancelled'
                 }">
-                  {{ details.status }}
+                  {{ $t(`common.${details.status}`) }}
                 </p>
               </div>
 

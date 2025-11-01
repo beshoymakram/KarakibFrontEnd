@@ -1,4 +1,40 @@
 <template>
+  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+    <div class="flex flex-wrap items-center gap-4">
+      <div class="relative">
+        <select v-model="filters.status"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">{{ $t('common.allStatuses') }}</option>
+          <option value="pending">{{ $t('common.pending') }}</option>
+          <option value="completed">{{ $t('common.completed') }}</option>
+          <option value="cancelled">{{ $t('common.cancelled') }}</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
+
+      <div class="relative">
+        <select v-model="filters.payout_method"
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          <option value="">{{ $t('common.allPayoutMethods') }}</option>
+          <option value="earn">{{ $t('common.earnedPoints') }}</option>
+          <option value="donate">{{ $t('common.donatedPoints') }}</option>
+        </select>
+        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+      </div>
+      <div class="flex-1 max-w-md ml-auto">
+        <div class="relative">
+          <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+          <svg
+            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="bg-white rounded-lg shadow-sm overflow-hidden" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
@@ -10,7 +46,7 @@
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
               $t('common.createdAt') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
-              $t('common.pickupAddress') }}</th>
+              $t('common.phone') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
               $t('common.status') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
@@ -18,21 +54,36 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="(req, idx) in requests" :key="req.id" class="hover:bg-gray-50 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ idx + 1 }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ req.number }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ req.createdAt }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ req.address }}</td>
+          <tr v-if="filteredRequests.length === 0">
+            <td colspan="7" class="px-4 py-4 text-center text-gray-500">
+              No results match your search
+            </td>
+          </tr>
+
+          <tr v-for="request, index in filteredRequests" :key="request.id" class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ index + 1 }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ request.request_number }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ request.created_at }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]"><a
+                :href="'tel:+' + request.address?.phone">{{
+                  request.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-              <span class="px-2 py-1 rounded-full text-xs font-medium capitalize text-warning bg-yellow-100">
-                {{ $t('common.pending') }}
+              <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
+                'text-green-800 bg-green-100': request.status === 'completed',
+                'text-red-800 bg-red-100': request.status === 'cancelled',
+                'text-warning bg-yellow-100': request.status === 'pending' || request.status === 'assigned'
+              }">
+                {{ $t(`common.${request.status}`) }}
               </span>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2"
-              :class="$i18n.locale === 'ar' ? 'text-left' : 'text-right'">
-              <button @click="openScanner(req)"
+            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+              <button @click="openScanner(request)"
                 class="px-3 py-1 border border-green-300 rounded-md text-[#2C702C] hover:bg-green-50 transition-colors cursor-pointer">
                 {{ $t('common.collect') }}
+              </button>
+              <button @click="openDetailsModal(request)"
+                class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                {{ $t('common.details') }}
               </button>
             </td>
           </tr>
@@ -75,6 +126,96 @@
           </div>
         </div>
       </div>
+      <div v-if="showDetailsModal"
+        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/30"
+        @click="showDetailsModal = false">
+        <div class="relative p-4 w-full max-w-2xl" @click.stop>
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+              <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+                {{ $t('common.orderDetails') }} | {{ details.request_number }}
+              </h3>
+              <button type="button" @click="showDetailsModal = false"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+
+            <!-- Details Content -->
+            <div class="p-4 md:p-5">
+              <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                <div>
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                    {{ details.name }}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                    <a :href="'tel:+' + details.address?.phone">{{
+                      details.address?.phone }}</a>
+                  </p>
+                </div>
+
+                <div class="sm:col-span-2">
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                    {{ details.address?.street_address }}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.city') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                    {{ details.address?.city }}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.orderStatus') }}</h4>
+                  <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
+                    'bg-green-100 text-green-800': details.status === 'completed',
+                    'bg-yellow-100 text-yellow-800': details.status === 'pending',
+                    'bg-red-100 text-red-800': details.status === 'cancelled'
+                  }">
+                    {{ $t(`common.${details.status}`) }}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.createdAt') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                    {{ details.created_at }}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.totalPoints') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                    {{ details.total }} {{ $t('common.points') }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="flex justify-end">
+                <button @click="showDetailsModal = false" type="button"
+                  class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C]">
+                  {{ $t('common.close') }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </Teleport>
   </div>
 </template>
@@ -88,22 +229,68 @@ export default {
   name: 'CourierAssignedRequests',
   data() {
     return {
-      selectedOrder: '',
+      searchQuery: '',
+      selectedRequest: '',
       showCompleteModal: false,
-      requests: [
-        { id: 1, number: 'REQ-1001', createdAt: '2025-10-20 10:30', address: 'Cairo, Nasr City' },
-        { id: 2, number: 'REQ-1002', createdAt: '2025-10-21 11:15', address: 'Giza, Dokki' },
-        { id: 3, number: 'REQ-1003', createdAt: '2025-10-22 09:05', address: 'Cairo, Maadi' },
-      ],
+      requests: [],
+      showDetailsModal: false,
+      details: {
+        request_number: null,
+        name: '',
+        address: '',
+        total: '',
+        payout_method: '',
+        status: '',
+      },
+      filters: {
+        payout_method: '',
+        status: '',
+      },
       scannerOpen: false,
       activeRequestId: null,
       stream: null,
       infoText: 'Point your camera at the QR code on the request receipt.'
     }
   },
+
+  computed: {
+    filteredRequests() {
+      let filtered = this.requests;
+
+      if (this.filters.payout_method) {
+        filtered = filtered.filter(item =>
+          item.payout_method === this.filters.payout_method
+        );
+      }
+
+      if (this.filters.status) {
+        filtered = filtered.filter(item =>
+          item.status === this.filters.status
+        );
+      }
+
+      if (this.searchQuery) {
+        filtered = filtered.filter(request =>
+          request.request_number.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.address.street_address.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.address.phone.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.address.city.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.status.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.payout_method.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.total.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          request.created_at.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+
+      return filtered;
+    },
+
+
+  },
   methods: {
     openCompleteModal(order) {
-      this.selectedOrder = order.id;
+      this.selectedRequest = order.id;
       this.showCompleteModal = true;
     },
     openScanner(req) {
@@ -111,13 +298,27 @@ export default {
       this.scannerOpen = true
       this.$nextTick(this.startCamera)
     },
+
+
+    openDetailsModal(request) {
+      this.details = {
+        request_number: request.request_number,
+        name: request.user?.name || 'N/A',
+        address: request.address,
+        total: request.total,
+        payout_method: request.payout_method,
+        status: request.status,
+        created_at: request.created_at,
+      };
+      this.showDetailsModal = true;
+    },
     async confirmComplete() {
       try {
-        const response = await ordersService.completeOrder(this.selectedOrder);
+        const response = await ordersService.completeOrder(this.selectedRequest);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
-        this.selectedOrder = '';
+        this.selectedRequest = '';
         this.fetchMyRequests();
         this.showCompleteModal = false;
       } catch (error) {

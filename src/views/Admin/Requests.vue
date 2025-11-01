@@ -60,7 +60,7 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-if="filteredRequests.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+            <td colspan="7" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
@@ -94,7 +94,7 @@
                 'text-red-800 bg-red-100': request.status === 'cancelled',
                 'text-warning bg-yellow-100': request.status === 'pending' || request.status === 'assigned'
               }">
-                {{ request.status }}
+                {{ $t(`common.${request.status}`) }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
@@ -279,7 +279,8 @@
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
-                  {{ details.address?.phone }}
+                  <a :href="'tel:+' + details.address?.phone">{{
+                    details.address?.phone }}</a>
                 </p>
               </div>
 
@@ -304,7 +305,7 @@
                   'bg-yellow-100 text-yellow-800': details.status === 'pending',
                   'bg-red-100 text-red-800': details.status === 'cancelled'
                 }">
-                  {{ details.status }}
+                  {{ $t(`common.${details.status}`) }}
                 </p>
               </div>
 
@@ -361,7 +362,6 @@ export default {
   data() {
     return {
       searchQuery: '',
-      selectedType: '',
       showCancelModal: false,
       showCompleteModal: false,
       showDetailsModal: false,
