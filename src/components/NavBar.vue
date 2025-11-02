@@ -50,7 +50,7 @@
         <div class="flex items-center space-x-2 md:space-x-4">
           <!-- Cart (Always visible) -->
 
-
+          <NotificationDropdown />
           <router-link to="/cart"
             class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-sm font-bold no-active-style  rounded-lg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="none" stroke="currentColor"
@@ -128,7 +128,7 @@
           </button>
           <!-- Language (always visible) -->
           <LanguageSwitcher />
-          <NotificationDropdown />
+
           <!-- Dashboard (Admin only) -->
           <router-link v-if="auth.isAuthenticated && auth.isAdmin" to="/admin"
             class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
@@ -228,6 +228,7 @@ export default {
 
   components: {
     LanguageSwitcher,
+    NotificationDropdown
   },
 
   computed: {
