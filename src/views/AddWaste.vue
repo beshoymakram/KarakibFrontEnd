@@ -2,77 +2,46 @@
   <!-- Recycling Waste Types Section -->
   <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative ">
     <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8"
-    >
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8">
       {{ $t("common.recyclingWasteTypes") }}
     </p>
-    <p
-      class="text-sm sm:text-lg md:text-xl text-primary py-4 md:py-5 font-semibold text-center md:text-start"
-    >
+    <p class="text-sm sm:text-lg md:text-xl text-primary py-4 md:py-5 font-semibold text-center md:text-start">
       {{ $t("common.selectAWasteType") }}
     </p>
     <!-- Carousel Wrapper -->
     <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0 -mb-10">
       <!-- Left Arrow -->
-      <button
-        @click="scrollPrev"
-        class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-4 h-4 xl:w-5 xl:h-5"
-        >
+      <button @click="scrollPrev"
+        class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="w-4 h-4 xl:w-5 xl:h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
       </button>
 
       <!-- Carousel (Scrollable Container) -->
-      <a
-        ref="carousel"
-        class="carousel carousel-center bg-primary rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth"
-      >
-        <div
-          v-for="(type, index) in types"
-          :key="index"
-          @click="selectedType = type"
-          class="carousel-item flex flex-col items-center shrink-0 cursor-pointer transition-all duration-300"
-        >
-          <img
-            :src="type.image_url"
-            :alt="type.name"
+      <a ref="carousel"
+        class="carousel carousel-center bg-primary rounded-box space-x-4 sm:space-x-6 p-6 sm:p-8 md:p-10 flex overflow-x-auto scroll-smooth">
+        <div v-for="(type, index) in types" :key="index" @click="selectedType = type"
+          class="carousel-item flex flex-col items-center shrink-0 cursor-pointer transition-all duration-300">
+          <img :src="type.image_url" :alt="type.name"
             class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 object-cover rounded-full bg-carousel transition-transform duration-300 hover:scale-105"
             :class="{
               'outline-3 outline-[#2C702C]': selectedType.id === type.id,
-            }"
-          />
-          <p
-            class="mt-3 md:mt-4 text-base sm:text-lg md:text-xl font-semibold text-[#2C702C]"
-            :class="{
-              'text-primary ': selectedType.id === type.id,
-            }"
-          >
+            }" />
+          <p class="mt-3 md:mt-4 text-base sm:text-lg md:text-xl font-semibold text-[#2C702C]" :class="{
+            'text-primary ': selectedType.id === type.id,
+          }">
             {{ type.name }}
           </p>
         </div>
       </a>
 
       <!-- Right Arrow -->
-      <button
-        @click="scrollNext"
-        class="hidden md:block absolute right-0 md:-right-10 xl:right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-4 h-4 xl:w-5 xl:h-5"
-        >
+      <button @click="scrollNext"
+        class="hidden md:block absolute right-0 md:-right-10 xl:right-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="w-4 h-4 xl:w-5 xl:h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
       </button>
@@ -84,19 +53,12 @@
       {{ selectedType.name }}
     </p> -->
     <div
-      class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-6 md:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 overflow-auto scroll-smooth "
-    >
-      <div
-        v-for="(item, index) in filteredItems"
-        :key="index"
-        class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
-      >
+      class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-6 md:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 overflow-auto scroll-smooth ">
+      <div v-for="(item, index) in filteredItems" :key="index"
+        class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300">
         <figure>
-            <img
-              :src="item.image_url"
-              :alt="item.name"
-              class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain  hover:opacity-90 transition rounded-t-xl"
-            />
+          <img :src="item.image_url" :alt="item.name"
+            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain  hover:opacity-90 transition rounded-t-xl" />
         </figure>
 
         <div class="px-3 pt-3 pb-3">
@@ -116,39 +78,34 @@
             <p class="text-[#8E98A8] text-xs sm:text-sm font-semibold">
               {{ $t("common.per") }} {{ item.unit }}
             </p>
-<!-- Quantity Controls -->
-<div v-if="getCartItem(item.id)" class="flex items-center gap-2">
-  <button
-    @click.stop="decrementCartItem(item.id)"
-    class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5 text-primary">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-    </svg>
-  </button>
+            <!-- Quantity Controls -->
+            <div v-if="getCartItem(item.id)" class="flex items-center gap-2">
+              <button @click.stop="decrementCartItem(item.id)"
+                class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                  stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5 text-primary">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                </svg>
+              </button>
 
-  <span class="w-4 sm:w-8 text-center font-bold text-primary">
-    {{ getCartItem(item.id).quantity }}
-  </span>
+              <span class="w-4 sm:w-8 text-center font-bold text-primary">
+                {{ getCartItem(item.id).quantity }}
+              </span>
 
-  <button
-    @click.stop="incrementCartItem(item.id)"
-    class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
-          >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
-  </button>
-</div>
+              <button @click.stop="incrementCartItem(item.id)"
+                class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+              </button>
+            </div>
 
-<!-- Add Button -->
-<button
-  v-else
-  @click.stop="addWasteToCart(item)"
-  class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
->
-  {{ $t("common.addAndEarn") }}
-</button>
+            <!-- Add Button -->
+            <button v-else @click.stop="addWasteToCart(item)"
+              class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
+              {{ $t("common.addAndEarn") }}
+            </button>
 
           </div>
         </div>
@@ -217,27 +174,27 @@ export default {
       }
     },
     getCartItem(wasteId) {
-  return this.cartStore.waste?.find((item) => item.cartable_id === wasteId);
-},
+      return this.cartStore.waste?.find((item) => item.cartable_id === wasteId);
+    },
 
-async incrementCartItem(wasteId) {
-  const cartItem = this.getCartItem(wasteId);
-  if (cartItem) {
-    await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity + 1);
-  }
-},
+    async incrementCartItem(wasteId) {
+      const cartItem = this.getCartItem(wasteId);
+      if (cartItem) {
+        await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity + 1);
+      }
+    },
 
-async decrementCartItem(wasteId) {
-  const cartItem = this.getCartItem(wasteId);
-  if (cartItem) {
-    if (cartItem.quantity > 1) {
-      await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity - 1);
-    } else {
-      await this.cartStore.removeItem(cartItem.id);
-      this.$toast.success(this.$t("common.itemRemovedFromCart"));
-    }
-  }
-},
+    async decrementCartItem(wasteId) {
+      const cartItem = this.getCartItem(wasteId);
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          await this.cartStore.updateQuantity(cartItem.id, cartItem.quantity - 1);
+        } else {
+          await this.cartStore.removeItem(cartItem.id);
+          this.$toast.success(this.$t("common.itemRemovedFromCart"));
+        }
+      }
+    },
   },
   computed: {
     filteredItems() {
@@ -261,6 +218,7 @@ async decrementCartItem(wasteId) {
 .carousel::-webkit-scrollbar {
   display: none;
 }
+
 .text-primary {
   color: #2c702c !important;
 }
@@ -272,30 +230,39 @@ async decrementCartItem(wasteId) {
 .bg-primary {
   background-color: rgb(244, 244, 244) !important;
 }
+
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(50, 49, 49)!important;
+  background-color: rgb(50, 49, 49) !important;
 }
+
 .bg-secondary {
   background-color: rgb(240, 240, 240) !important;
 }
+
 [data-theme="forest"] .bg-secondary {
-  background-color: rgb(34, 33, 33)!important;
+  background-color: rgb(34, 33, 33) !important;
 }
+
 .text-secondary {
   color: #2c702c !important;
 }
+
 [data-theme="forest"] .text-secondary {
   color: rgb(9, 228, 75) !important;
 }
+
 .text-section {
   color: black !important;
 }
+
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
 .bg-carousel {
   background-color: #EAF2EA !important;
 }
+
 [data-theme="forest"] .bg-carousel {
   background-color: #637763 !important;
 }

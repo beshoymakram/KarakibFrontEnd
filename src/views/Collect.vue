@@ -182,6 +182,7 @@ import checkoutService from "@/services/checkoutService";
 import profileService from "@/services/profileService";
 import { useAuthStore } from "@/stores/auth";
 import { useCartStore } from "@/stores/cart";
+import soundPlayer from '@/utils/sounds';
 
 export default {
   name: "CollectPage",
@@ -257,6 +258,7 @@ export default {
         });
 
         this.showConfirmation = true;
+        soundPlayer.play('success');
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
@@ -288,30 +290,39 @@ export default {
 .bg-primary {
   background-color: #F5F7F5 !important;
 }
+
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(66, 66, 66)!important;
+  background-color: rgb(66, 66, 66) !important;
 }
+
 .text-secondary {
   color: #2c702c !important;
 }
+
 [data-theme="forest"] .text-secondary {
   color: rgb(9, 228, 75) !important;
 }
+
 .text-section {
   color: black !important;
 }
+
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
 .bg-secondary {
   background-color: #ffff;
 }
+
 [data-theme="forest"] .bg-secondary {
   background-color: rgb(43, 43, 43) !important;
 }
+
 .bg-address {
   background-color: #f6f9f6
 }
+
 [data-theme="forest"] .bg-address {
   background-color: #545554;
 }

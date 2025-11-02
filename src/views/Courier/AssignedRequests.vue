@@ -263,6 +263,7 @@
 import requestsService from '@/services/requestsService';
 import jsQR from 'jsqr';
 import { nextTick } from 'vue';
+import soundPlayer from '@/utils/sounds';
 
 export default {
   name: 'CourierAssignedRequests',
@@ -415,8 +416,9 @@ export default {
 
         if (response.data.success) {
           this.$toast.success(response.data.message);
+          soundPlayer.play('success');
           this.closeScanner();
-          this.fetchMyOrders();
+          this.fetchMyRequests();
         }
       } catch (error) {
         this.$toast.error(error.response?.data?.message || 'Invalid QR code');
