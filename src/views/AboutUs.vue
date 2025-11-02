@@ -305,7 +305,7 @@
     <section class="w-full mx-auto bg-dark shadow p-4 sm:p-6 md:p-8">
       <!-- FAQs -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary text-primary rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary  rounded-2xl shadow p-4 sm:p-6 md:p-8"
         id="Faq"
       >
         <h2
@@ -624,12 +624,15 @@
       {{ modalContent }}
     </p>
 
-    <button
-      @click="closeModal"
-      class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition mt-6"
-    >
-      {{ $t("common.close") }}
-    </button>
+<div class="flex justify-center">
+  <button
+    @click="closeModal"
+    class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition mt-6"
+  >
+    {{ $t("common.close") }}
+  </button>
+</div>
+
   </div>
 </div>
 <!-- Success Modal -->
