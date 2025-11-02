@@ -320,8 +320,7 @@
               v-for="(faq, index) in faqs"
               :key="index"
               @click="toggleFaq(index)"
-              class="w-full flex justify-between items-center bg-gray-100 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left hover:bg-green-50 transition bg-dark"
-            >
+class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left text-section hover:bg-green-50 transition">
               <span class="font-medium text-sm sm:text-base">{{
                 faq.question
               }}</span>
@@ -589,8 +588,8 @@
       ✕
     </button>
 
-    <h2 
-      class="text-2xl font-semibold text-[#2C702C] mb-4" 
+    <h2
+      class="text-2xl font-semibold text-[#2C702C] mb-4"
       :class="isTermsModal ? (isRTL ? 'text-right' : 'text-left') : 'text-center'"
     >
       {{ modalTitle }}
@@ -709,7 +708,7 @@ export default {
         subject: "",
         message: "",
       },
-      formErrors: { 
+      formErrors: {
       firstName: "",
       lastName: "",
       email: "",
@@ -753,7 +752,7 @@ export default {
     },
 
 submitForm() {
-  
+
   this.formErrors = {
     firstName: "",
     lastName: "",
@@ -823,10 +822,10 @@ submitForm() {
     openModal(title, content) {
       this.modalTitle = title;
       this.modalContent = content;
-      this.isTermsModal = false; 
+      this.isTermsModal = false;
       this.showModal = true;
     },
-    openTermsModal() {  
+    openTermsModal() {
     this.modalTitle = this.$t("common.termsAndConditions");
     this.isTermsModal = true;
     this.showModal = true;
@@ -893,5 +892,11 @@ submitForm() {
 }
 [data-theme="forest"] .bg-dark {
   background-color: #252625 !important;
+}
+.bg-faq {
+  background-color: #f1f1f1
+}
+[data-theme="forest"] .bg-faq {
+  background-color: #2c702c !important;
 }
 </style>
