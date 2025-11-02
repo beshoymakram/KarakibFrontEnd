@@ -128,7 +128,7 @@
           </button>
           <!-- Language (always visible) -->
           <LanguageSwitcher />
-
+          <NotificationDropdown />
           <!-- Dashboard (Admin only) -->
           <router-link v-if="auth.isAuthenticated && auth.isAdmin" to="/admin"
             class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
@@ -212,6 +212,7 @@
 import { useAuthStore } from "@/stores/auth";
 import { useCartStore } from "@/stores/cart";
 import LanguageSwitcher from "./LanguageSwitcher.vue";
+import NotificationDropdown from "./NotificationDropdown.vue";
 
 export default {
   name: "NavBar",
