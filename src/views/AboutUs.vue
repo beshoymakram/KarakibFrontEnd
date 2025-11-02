@@ -305,7 +305,7 @@
     <section class="w-full mx-auto bg-dark shadow p-4 sm:p-6 md:p-8">
       <!-- FAQs -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary  rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary rounded-2xl shadow p-4 sm:p-6 md:p-8 text-section"
         id="Faq"
       >
         <h2
@@ -320,7 +320,7 @@
               v-for="(faq, index) in faqs"
               :key="index"
               @click="toggleFaq(index)"
-              class="w-full flex justify-between items-center bg-gray-100 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left hover:bg-green-50 transition"
+              class="w-full flex justify-between items-center bg-gray-100 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left hover:bg-green-50 transition bg-dark"
             >
               <span class="font-medium text-sm sm:text-base">{{
                 faq.question
