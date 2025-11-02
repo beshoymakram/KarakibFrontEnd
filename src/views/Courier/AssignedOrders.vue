@@ -260,6 +260,7 @@
 
 <script>
 import ordersService from '@/services/ordersService';
+import jsQR from 'jsqr';
 import { nextTick } from 'vue';
 
 export default {
@@ -372,12 +373,57 @@ export default {
         if (video) {
           video.srcObject = this.stream
           await video.play()
+
+          this.detectQrCode();
         }
       } catch (error) {
         this.$toast?.error?.(error)
         this.$toast?.error?.('Camera access was denied')
       }
     },
+
+    async detectQrCode() {
+      const video = this.$refs.videoEl;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      const scan = () => {
+        if (!this.stream) return;
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if (code) {
+          this.handleQrScan(code.data);
+        } else {
+          requestAnimationFrame(scan);
+        }
+      };
+
+      requestAnimationFrame(scan);
+    },
+
+    async handleQrScan(qrToken) {
+      this.infoText = 'Processing...';
+
+      try {
+        const response = await ordersService.scanQr({ qr_token: qrToken });
+
+        if (response.data.success) {
+          this.$toast.success(response.data.message);
+          this.closeScanner();
+          this.fetchMyOrders();
+        }
+      } catch (error) {
+        this.$toast.error(error.response?.data?.message || 'Invalid QR code');
+        this.infoText = 'Scan failed. Please try again.';
+      }
+    },
+
     async closeScanner() {
       if (this.stream) {
         this.stream.getTracks().forEach(t => t.stop())

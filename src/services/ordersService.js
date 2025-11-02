@@ -46,4 +46,12 @@ export default {
   completeOrder(id) {
     return apiClient.put('/orders/' + id + '/complete');
   },
+
+  scanQr(data) {
+    return apiClient.post('/orders/scan-qr', data);
+  },
+
+  verifyQr(data) {
+    return apiClient.post('/orders/verify-qr', data);
+  }
 };

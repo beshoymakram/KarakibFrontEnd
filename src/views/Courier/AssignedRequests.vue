@@ -201,7 +201,7 @@
               <!-- Waste Items Section -->
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
-                }}</h4>
+                  }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
@@ -262,6 +262,7 @@
 <script>
 import ordersService from '@/services/ordersService';
 import requestsService from '@/services/requestsService';
+import jsQR from 'jsqr';
 import { nextTick } from 'vue';
 
 export default {
@@ -374,10 +375,53 @@ export default {
         if (video) {
           video.srcObject = this.stream
           await video.play()
+
+          this.detectQrCode();
         }
       } catch (error) {
         this.$toast?.error?.(error)
         this.$toast?.error?.('Camera access was denied')
+      }
+    },
+    async detectQrCode() {
+      const video = this.$refs.videoEl;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      const scan = () => {
+        if (!this.stream) return;
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if (code) {
+          this.handleQrScan(code.data);
+        } else {
+          requestAnimationFrame(scan);
+        }
+      };
+
+      requestAnimationFrame(scan);
+    },
+
+    async handleQrScan(qrToken) {
+      this.infoText = 'Processing...';
+
+      try {
+        const response = await ordersService.scanQr({ qr_token: qrToken });
+
+        if (response.data.success) {
+          this.$toast.success(response.data.message);
+          this.closeScanner();
+          this.fetchMyOrders();
+        }
+      } catch (error) {
+        this.$toast.error(error.response?.data?.message || 'Invalid QR code');
+        this.infoText = 'Scan failed. Please try again.';
       }
     },
     async closeScanner() {
