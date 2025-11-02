@@ -1,0 +1,749 @@
+{
+  "company_info": {
+    "name": "Karakib",
+    "description": "An eco-friendly waste collection and recycling platform that rewards you for your environmental contributions",
+    "mission": "Making recycling accessible, rewarding, and impactful for everyone",
+    "vision": "Creating a cleaner, greener future through community-driven recycling initiatives",
+    "minimum_collection": "No minimum - collect any quantity of waste items",
+    "service_areas": ["Cairo", "Giza", "Alexandria"],
+    "operating_hours": "Sunday-Thursday, 9 AM - 5 PM",
+    "languages": ["Arabic", "English"],
+    "contact": {
+      "email": "karakib@gmail.com",
+      "phone": "19123",
+      "social_media": {
+        "facebook": "@Karakib",
+        "instagram": "@Karakib",
+        "twitter": "@karakib"
+      }
+    }
+  },
+  
+  "waste_types": [
+    {
+      "category": "Plastic",
+      "description": "Various plastic items that can be recycled",
+      "accepted_items": [
+        "Plastic bottles",
+        "Plastic containers",
+        "Plastic barrels",
+        "Plastic toys",
+        "Plastic chairs",
+        "Solid plastic items",
+        "Coleman tanks"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Clean and dry. Remove labels if possible. Flatten bottles to save space.",
+      "diy_suggestions": {
+        "single_item": [
+          "Plant pot: Cut plastic bottle in half, add soil and small plants",
+          "Organizer: Cut bottles to create desk organizers for pens and supplies",
+          "Bird feeder: Cut openings in bottle, add perches and fill with seeds",
+          "Sprinkler: Poke holes in cap and bottle for garden watering",
+          "Storage container: Clean and use for storing items like rice, pasta, or craft supplies"
+        ]
+      }
+    },
+    {
+      "category": "Paper & Cardboard",
+      "description": "Paper products and cardboard materials",
+      "accepted_items": [
+        "Newspapers",
+        "Magazines",
+        "Cardboard boxes",
+        "Paper cartons",
+        "Thin paper",
+        "Office paper",
+        "Books (without plastic covers)"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Keep dry. Remove any plastic, staples, or tape. Flatten boxes.",
+      "diy_suggestions": {
+        "single_item": [
+          "Origami art: Fold newspaper into decorative cranes or flowers",
+          "Gift wrapping: Use old magazines or newspaper with twine",
+          "Seed starter pots: Roll newspaper into small pots for seedlings",
+          "Papier-mâché: Create bowls, masks, or decorations with strips and glue",
+          "Drawer liner: Use clean paper to line drawers with decorative patterns"
+        ]
+      }
+    },
+    {
+      "category": "Metal",
+      "description": "Metallic items and aluminum products",
+      "accepted_items": [
+        "Aluminum cans",
+        "Steel cans",
+        "Metal wire",
+        "Copper and plastic cables",
+        "Metal pipes and fittings"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Rinse food cans. Remove labels. Separate aluminum from steel if possible.",
+      "diy_suggestions": {
+        "single_item": [
+          "Candle holder: Clean can, punch decorative holes, add tea light",
+          "Utensil holder: Decorate clean can for kitchen tools storage",
+          "Planter: Drill drainage holes, paint outside, add soil and plants",
+          "Wind chime: String multiple cans together with beads",
+          "Lantern: Punch patterns in can, add handle and candle"
+        ]
+      }
+    },
+    {
+      "category": "Wood",
+      "description": "Wooden items and wooden waste",
+      "accepted_items": [
+        "Wood pieces",
+        "Wooden furniture parts",
+        "Wooden scraps"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Remove any metal parts, nails, or screws. Keep dry. Remove paint or varnish if possible.",
+      "diy_suggestions": {
+        "single_item": [
+          "Plant markers: Cut into strips and label for garden",
+          "Wall art: Create geometric patterns or sculptures",
+          "Birdhouse: Build simple birdhouse with scrap wood",
+          "Garden edging: Use as border for flower beds",
+          "Fire starter: Use small pieces as kindling (safely)"
+        ]
+      }
+    },
+    {
+      "category": "Clothes",
+      "description": "Textile and clothing items",
+      "accepted_items": [
+        "Old t-shirts",
+        "Jackets",
+        "Clothing items",
+        "Textile waste"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Clean and dry. Remove buttons, zippers, or metal parts if possible. Sort by fabric type if possible.",
+      "diy_suggestions": {
+        "single_item": [
+          "Tote bag: Transform old t-shirt into reusable shopping bag",
+          "Rug: Braid strips of fabric into floor rug",
+          "Cleaning rags: Cut into squares for household cleaning",
+          "Pillow cover: Repurpose fabric into decorative pillow",
+          "Quilt: Combine multiple items into patchwork quilt"
+        ]
+      }
+    },
+    {
+      "category": "Cooking Oil",
+      "description": "Used cooking oil and grease",
+      "accepted_items": [
+        "Used cooking oil",
+        "Vegetable oil waste",
+        "Frying oil"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Store in clean, sealed container. Keep away from water contamination. Do not mix with other liquids.",
+      "note": "Used cooking oil is converted into biodiesel and other useful products"
+    },
+    {
+      "category": "E-Waste",
+      "description": "Electronic waste and devices",
+      "accepted_items": [
+        "Mobile phones",
+        "Tablets",
+        "Laptops",
+        "Computer parts",
+        "Keyboards",
+        "Cables and chargers",
+        "Small electronic devices"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Remove batteries. Delete personal data from devices. Include all parts if possible.",
+      "note": "We properly recycle hazardous materials like batteries and screens. E-waste contains valuable materials that can be recovered."
+    },
+    {
+      "category": "Home Appliances",
+      "description": "Household appliances and equipment",
+      "accepted_items": [
+        "Fans",
+        "Toasters",
+        "Small household appliances",
+        "Kitchen appliances"
+      ],
+      "points_system": "Points per unit (varies by item type)",
+      "unit": "kg or piece (depending on item)",
+      "preparation": "Unplug and ensure safety. Remove any detachable parts. Clean if possible.",
+      "note": "Appliances are properly dismantled and recycled for their metal and plastic components"
+    }
+  ],
+
+  "collection_process": {
+    "steps": [
+      {
+        "step": 1,
+        "title": "Create Account",
+        "description": "Sign up on Karakib using your email or Google account. Verify your phone number and add your collection address in your profile.",
+        "tips": ["Keep your contact information updated", "Add multiple addresses if needed", "Enable notifications for updates"]
+      },
+      {
+        "step": 2,
+        "title": "Add Waste to Cart",
+        "description": "Browse waste types on the 'Add Waste' page. Select specific waste items and add them to your cart. Each item shows points you'll earn per unit.",
+        "details": [
+          "Browse different waste type categories",
+          "Select specific waste items",
+          "See points per unit for each item",
+          "Add items to cart with quantity",
+          "Items can be measured in kg or by piece"
+        ]
+      },
+      {
+        "step": 3,
+        "title": "Review Cart",
+        "description": "Go to your cart page to review all waste items you've added. You can adjust quantities or remove items before proceeding.",
+        "features": [
+          "View all selected waste items",
+          "See total points you'll earn",
+          "Adjust item quantities",
+          "Remove unwanted items",
+          "Separate carts for waste items and shop products"
+        ]
+      },
+      {
+        "step": 4,
+        "title": "Request Collection",
+        "description": "Click 'Request Collection' to proceed to checkout. Select your pickup address, choose payout method (earn points or donate), and add any special notes.",
+        "requirements": [
+          "Valid pickup address in service area",
+          "Selection of payout method (earn points or donate)",
+          "Waste items ready for collection",
+          "Contact information verified"
+        ],
+        "payout_options": [
+          "Earn Points: Receive points to your account for redemption",
+          "Donate Points: Directly donate earned points to charitable causes"
+        ]
+      },
+      {
+        "step": 5,
+        "title": "Request Processing",
+        "description": "After submitting your request, it will be reviewed and assigned to a courier. You'll receive notifications about the status of your request.",
+        "process": [
+          "Request is submitted and confirmed",
+          "Admin reviews and assigns courier",
+          "Courier receives assignment",
+          "You get notified when courier is assigned",
+          "Courier contacts you to schedule pickup"
+        ]
+      },
+      {
+        "step": 6,
+        "title": "Courier Pickup",
+        "description": "Our courier arrives at your address, verifies the waste items, and collects them. You may receive a QR code for verification.",
+        "verification_process": [
+          "Courier arrives at scheduled time",
+          "Waste items verification",
+          "QR code scanning (if applicable)",
+          "Physical collection",
+          "Collection confirmation"
+        ]
+      },
+      {
+        "step": 7,
+        "title": "Points Credited",
+        "description": "After successful collection, points are credited to your account based on the waste items collected. You can immediately use these points.",
+        "features": [
+          "Instant point credit after collection",
+          "Points history tracking in your profile",
+          "Multiple redemption options",
+          "Track all point transactions",
+          "View point balance anytime"
+        ]
+      }
+    ],
+    "tracking": {
+      "features": [
+        "Request status tracking",
+        "Collection history",
+        "Points transaction history",
+        "Digital receipts",
+        "Request details in profile"
+      ]
+    },
+    "quality_guidelines": {
+      "acceptance_criteria": [
+        "Items match the waste type selected",
+        "Proper preparation (clean, dry when applicable)",
+        "Safe handling condition",
+        "Accessible collection location",
+        "Valid request submission"
+      ],
+      "rejection_reasons": [
+        "Items don't match waste type",
+        "Contaminated materials",
+        "Hazardous items not properly prepared",
+        "Inaccessible location",
+        "Invalid or incomplete request"
+      ]
+    },
+    "support_options": {
+      "pre_collection": [
+        "Help selecting waste items",
+        "Preparation guidelines",
+        "Address setup assistance"
+      ],
+      "during_collection": [
+        "Live courier contact",
+        "Request status updates",
+        "Collection assistance"
+      ],
+      "post_collection": [
+        "Points verification",
+        "Feedback submission",
+        "Issue resolution"
+      ]
+    }
+  },
+
+  "faqs": [
+    {
+      "category": "Getting Started",
+      "questions": [
+        {
+          "question": "How do I get started with Karakib?",
+          "answer": "Simply create an account using your email or Google sign-in, verify your phone number, and add your collection address. Then browse waste types on the 'Add Waste' page and start adding items to your cart!"
+        },
+        {
+          "question": "Do I need to sign up to use Karakib?",
+          "answer": "Yes, you need to create an account to request waste collection. Registration is free and quick - you can use email or Google sign-in. You'll need to verify your phone number and add at least one collection address."
+        },
+        {
+          "question": "What areas does Karakib serve?",
+          "answer": "We currently operate in Cairo, Giza, and Alexandria. We're actively working to expand to more areas. You can register your interest for new service areas through our website."
+        },
+        {
+          "question": "Is there a minimum amount of waste I need to collect?",
+          "answer": "No, there's no minimum requirement! You can collect any quantity of waste items. Each item earns points based on its type and unit (kg or piece). Add whatever waste you have to your cart."
+        }
+      ]
+    },
+    {
+      "category": "Waste Collection Process",
+      "questions": [
+        {
+          "question": "How does the waste collection process work?",
+          "answer": "First, add waste items to your cart from the 'Add Waste' page. Review your cart, then click 'Request Collection'. Select your pickup address, choose to earn points or donate them, and submit. After your request is approved, a courier will be assigned and will contact you to schedule pickup. Once collected, points are credited to your account."
+        },
+        {
+          "question": "How do I add waste to my cart?",
+          "answer": "Go to the 'Add Waste' page, browse waste types (Plastic, Paper, Metal, Wood, Clothes, Cooking Oil, E-Waste, or Home Appliances), select specific items, and click 'Add & Earn' to add them to your cart with the quantity you want."
+        },
+        {
+          "question": "Can I add different types of waste in one request?",
+          "answer": "Yes! You can add multiple different waste items to your cart and submit them all in one collection request. Each item type can be included together."
+        },
+        {
+          "question": "How long does it take for my request to be processed?",
+          "answer": "After submitting your collection request, it typically takes 1-2 business days for admin to review and assign a courier. The courier will then contact you to schedule the actual pickup time. Our service operates Sunday-Thursday, 9 AM - 5 PM."
+        },
+        {
+          "question": "Can I track my collection request?",
+          "answer": "Yes! You can view all your collection requests in your profile under 'My Requests'. You'll see the status of each request, collection history, and related points transactions."
+        },
+        {
+          "question": "What if I need to cancel or modify my request?",
+          "answer": "You can cancel your request before it's assigned to a courier. Once assigned, contact the courier or our support team. For modifications, you may need to cancel and create a new request with updated items."
+        }
+      ]
+    },
+    {
+      "category": "Waste Types & Items",
+      "questions": [
+        {
+          "question": "What types of waste does Karakib accept?",
+          "answer": "We accept Plastic (bottles, containers, barrels, toys, etc.), Paper & Cardboard (newspapers, boxes, cartons), Metal (cans, wires, cables), Wood (pieces, scraps), Clothes (old t-shirts, jackets, textiles), Cooking Oil (used oil), E-Waste (phones, laptops, keyboards), and Home Appliances (fans, toasters, small appliances)."
+        },
+        {
+          "question": "How do I know which waste items I can recycle?",
+          "answer": "Visit the 'Add Waste' page where you can browse all available waste types and specific items. Each item shows the points you'll earn and its unit (kg or piece). If you're unsure about a specific item, you can ask our chatbot Koko or contact support."
+        },
+        {
+          "question": "Do waste items need to be clean and prepared?",
+          "answer": "Yes, proper preparation helps ensure your waste is accepted and recycled properly. Plastic items should be clean and dry. Paper should be free of plastic, staples, and tape. Metal cans should be rinsed. Food containers should be cleaned. Check preparation guidelines for each waste type on the item details page."
+        },
+        {
+          "question": "Can I recycle broken or damaged items?",
+          "answer": "Yes, as long as the items are identifiable as the waste type they're categorized under. Broken electronics, damaged appliances, torn clothes, and similar items can still be recycled. Just make sure they're properly cleaned and prepared according to the guidelines."
+        },
+        {
+          "question": "What if I have a waste item that's not listed?",
+          "answer": "If you have a waste item that doesn't match any of our listed categories, contact our support team or use the chatbot to inquire. We may be able to add new waste types or guide you to the appropriate category."
+        }
+      ]
+    },
+    {
+      "category": "Points & Rewards",
+      "questions": [
+        {
+          "question": "How does the points system work?",
+          "answer": "You earn points based on the waste items you recycle. Each waste item has a specific points value per unit (either per kg or per piece). When you add items to your cart, you'll see how many points each item earns. After collection, points are credited to your account."
+        },
+        {
+          "question": "How are points calculated?",
+          "answer": "Points are calculated based on the waste item type and quantity. Each waste item shows 'points per unit' - this could be per kilogram (kg) or per piece, depending on the item. The total points = points_per_unit × quantity you add to cart."
+        },
+        {
+          "question": "What can I do with my points?",
+          "answer": "You can use points to: 1) Shop for merchandise in our store (eco-friendly products, branded items), 2) Convert points to cash through the points conversion feature, 3) Donate points to charitable causes (Education Fund, Reforestation, Community Health). Check your profile's 'My Points' section for options."
+        },
+        {
+          "question": "When do I receive my points?",
+          "answer": "Points are credited to your account immediately after your waste is successfully collected by the courier and the collection is confirmed in the system."
+        },
+        {
+          "question": "How do I view my points balance and history?",
+          "answer": "Go to your profile and click on 'My Points'. You'll see your current points balance, earned points history, converted points, donated points, and all point transactions."
+        },
+        {
+          "question": "Can I convert points to cash?",
+          "answer": "Yes! You can convert your points to cash. The conversion rate and minimum amount are available in your profile under 'My Points'. Simply select the amount you want to convert and follow the process."
+        },
+        {
+          "question": "Can I donate my points?",
+          "answer": "Absolutely! When submitting a collection request, you can choose 'Donate Points' as your payout method. You can also donate existing points from your profile to causes like Education Fund, Reforestation, or Community Health. Additionally, you can donate directly from the homepage."
+        },
+        {
+          "question": "Do points expire?",
+          "answer": "Currently, points don't have an expiration date. However, we recommend using your points regularly to take advantage of our shop products and donation opportunities. Check our terms for any policy updates."
+        },
+        {
+          "question": "Can I transfer points to another user?",
+          "answer": "Point transfers between users are not currently available. However, you can earn points through collections and use them for shopping, cash conversion, or donations."
+        }
+      ]
+    },
+    {
+      "category": "Shop & Products",
+      "questions": [
+        {
+          "question": "What can I buy with my points?",
+          "answer": "You can use points to purchase items from our shop, which includes eco-friendly products, branded merchandise (t-shirts, tote bags), and other sustainable items. Each product shows its price in points or EGP. Browse the 'Shop' page to see available products."
+        },
+        {
+          "question": "How do I shop with points?",
+          "answer": "Browse products in the 'Shop' page, add items to your cart, and proceed to checkout. You can pay using your points balance or other payment methods if the product accepts EGP. The checkout process is similar to regular online shopping."
+        },
+        {
+          "question": "Can I buy products without points?",
+          "answer": "Yes! Many products in our shop can be purchased with regular payment methods (EGP). Products show their price in both points and currency. You don't need points to shop - anyone can purchase our merchandise."
+        },
+        {
+          "question": "How do I track my orders?",
+          "answer": "All your product orders are tracked in your profile under 'My Orders'. You can see order status, shipping information, and order history there."
+        }
+      ]
+    },
+    {
+      "category": "Addresses & Pickup",
+      "questions": [
+        {
+          "question": "How do I add a collection address?",
+          "answer": "Go to your profile and click on 'My Addresses'. You can add multiple addresses with details like full name, phone number, street address, and city. You'll select which address to use when requesting collection."
+        },
+        {
+          "question": "Can I have multiple collection addresses?",
+          "answer": "Yes! You can save multiple addresses in your profile (home, office, etc.) and choose which one to use for each collection request. This is useful if you want to collect from different locations."
+        },
+        {
+          "question": "What information do I need for my address?",
+          "answer": "You'll need: Full name, Phone number, Street address (detailed address), and City. Make sure the information is accurate so the courier can find your location easily."
+        },
+        {
+          "question": "What happens after I submit a collection request?",
+          "answer": "Your request is reviewed by admin, then assigned to an available courier. The courier will contact you to schedule the pickup. You'll receive notifications about request status. Once the courier collects your waste, points are credited to your account."
+        },
+        {
+          "question": "Do I need to be home when the courier arrives?",
+          "answer": "Yes, you or someone you authorize should be available when the courier arrives for pickup. The courier will verify the waste items and complete the collection. Some items may require QR code verification."
+        }
+      ]
+    },
+    {
+      "category": "Account & Profile",
+      "questions": [
+        {
+          "question": "How do I update my personal information?",
+          "answer": "Go to your profile and click on 'Personal Info'. You can update your name, email, phone number, and other account details. Make sure to keep your information updated for smooth service."
+        },
+        {
+          "question": "Can I change my password?",
+          "answer": "Yes, you can change your password through your profile settings. If you forgot your password, use the 'Forgot Password' feature on the login page to reset it via email."
+        },
+        {
+          "question": "Where can I see my collection history?",
+          "answer": "In your profile, go to 'My Requests' to see all your collection requests, their status, and history. You can also check 'My Points' to see points earned from each collection."
+        },
+        {
+          "question": "How do I contact support?",
+          "answer": "You can reach us through: Email at karakib@gmail.com, Phone at 19123, Social media (@Karakib), or use our chatbot Koko on the website for immediate assistance. Our support operates during business hours: Sunday-Thursday, 9 AM - 5 PM."
+        }
+      ]
+    },
+    {
+      "category": "Donations",
+      "questions": [
+        {
+          "question": "What causes can I donate to?",
+          "answer": "You can donate to three main causes: Education Fund (supporting underprivileged children's education), Reforestation (planting trees and restoring natural habitats), and Community Health (supporting community health initiatives). You can donate from the homepage or when submitting collection requests."
+        },
+        {
+          "question": "How do I donate points?",
+          "answer": "You can donate in two ways: 1) When submitting a collection request, choose 'Donate Points' as your payout method, or 2) From your profile's 'My Points' section, select the donation option and choose your cause and amount."
+        },
+        {
+          "question": "Can I donate money instead of points?",
+          "answer": "Yes! From the homepage, you can click 'Donate' on any cause card and enter an amount in EGP. You'll be redirected to complete a secure payment. Donations are processed securely with bank-level encryption."
+        },
+        {
+          "question": "Are donations secure?",
+          "answer": "Absolutely! All donations are processed with 256-bit SSL encryption for maximum security. Your payment information is protected, and all transactions go directly to the chosen organization."
+        },
+        {
+          "question": "Can I see my donation history?",
+          "answer": "Yes, in your profile under 'My Points', you can see your donation history including which causes you've supported and the amounts donated."
+        }
+      ]
+    },
+    {
+      "category": "DIY & Small Items",
+      "questions": [
+        {
+          "question": "What should I do with small amounts of waste or single items?",
+          "answer": "For small quantities or single items, Koko (our chatbot) can suggest creative DIY recycling ideas! Upload an image of your waste item, and Koko will provide upcycling suggestions. You can also save items until you have more to add to your collection request."
+        },
+        {
+          "question": "Can the chatbot help me with DIY recycling ideas?",
+          "answer": "Yes! Our chatbot Koko is designed to help with DIY recycling. Upload an image of a waste item, and Koko will analyze it and suggest creative ways to repurpose or upcycle it at home. Perfect for single items or small quantities!"
+        },
+        {
+          "question": "Are there DIY suggestions for different waste types?",
+          "answer": "Yes! Each waste type has DIY suggestions available. For example, plastic bottles can become plant pots or organizers, old t-shirts can become tote bags, and metal cans can be turned into candle holders. Ask Koko or check item details for specific ideas!"
+        }
+      ]
+    },
+    {
+      "category": "Technical & App",
+      "questions": [
+        {
+          "question": "Does Karakib have a mobile app?",
+          "answer": "Currently, Karakib operates through our website. You can access it from any device with a web browser. We're working on expanding our platform availability."
+        },
+        {
+          "question": "What browsers are supported?",
+          "answer": "Karakib works on all modern web browsers including Chrome, Firefox, Safari, and Edge. Make sure your browser is updated to the latest version for the best experience."
+        },
+        {
+          "question": "Is my data secure?",
+          "answer": "Yes, we take data security seriously. All transactions are encrypted, and we follow best practices for protecting your personal information. Check our Terms and Conditions and Privacy Policy for details."
+        },
+        {
+          "question": "What should I do if I encounter a technical issue?",
+          "answer": "If you experience any technical problems, try refreshing the page or clearing your browser cache. If the issue persists, contact our support team at karakib@gmail.com or use the chatbot for assistance."
+        }
+      ]
+    }
+  ],
+
+  "environmental_tips": {
+    "recycling_impact": [
+      "One recycled plastic bottle saves enough energy to power a laptop for 3 hours",
+      "Recycling 1 ton of paper saves 17 trees and 7,000 gallons of water",
+      "Aluminum can be recycled infinitely without losing quality",
+      "Recycling one glass bottle saves enough energy to power a light bulb for 4 hours",
+      "Every ton of recycled plastic saves 16.3 barrels of oil",
+      "Recycling half of your household waste can reduce your carbon footprint by 730 kg per year",
+      "70% less energy is required to recycle paper compared to making it from raw materials",
+      "Every ton of e-waste recycled prevents 1.44 tons of CO2 emissions",
+      "Textile recycling reduces water consumption by 95% compared to producing new fabric",
+      "Recycling metal uses 74% less energy than producing new metal from ore",
+      "One ton of recycled cardboard saves 46 gallons of oil",
+      "Recycling cooking oil into biodiesel reduces greenhouse gas emissions by 86%"
+    ],
+    "daily_tips": [
+      "Use reusable bags instead of plastic bags for shopping",
+      "Opt for products with minimal packaging",
+      "Rinse and dry recyclables before collection to improve recycling quality",
+      "Sort your waste properly to ensure effective recycling",
+      "Choose products made from recycled materials to support the circular economy",
+      "Repair items when possible instead of replacing them",
+      "Donate usable items instead of throwing them away",
+      "Use a reusable water bottle instead of disposable ones",
+      "Start composting your food waste to reduce landfill impact",
+      "Educate others about proper recycling practices",
+      "Save small items for creative DIY projects instead of throwing them away",
+      "Check if items can be upcycled before discarding them"
+    ],
+    "fact_of_the_day": [
+      "Egypt produces over 21 million tons of waste annually",
+      "Plastic takes up to 1000 years to decompose naturally",
+      "The average Egyptian household produces 1kg of waste per day",
+      "Recycling creates 10 times more jobs than landfilling",
+      "Paper can be recycled up to 7 times before fibers become too short",
+      "90% of e-waste is illegally traded or dumped globally",
+      "Recycling one aluminum can saves enough energy to run a TV for 3 hours",
+      "The Great Pacific Garbage Patch is three times the size of France",
+      "Only 9% of all plastic ever made has been recycled",
+      "Metal recycling reduces mining waste by 97%",
+      "Textile waste accounts for 5% of landfill space",
+      "One ton of recycled cooking oil can produce 1,000 liters of biodiesel"
+    ],
+    "eco_challenges": [
+      {
+        "title": "Zero Waste Week",
+        "description": "Try to produce zero waste for one week by planning meals, using reusable containers, and avoiding disposable items"
+      },
+      {
+        "title": "Plastic-Free Month",
+        "description": "Avoid single-use plastics for a month and discover sustainable alternatives"
+      },
+      {
+        "title": "Recycling Champion",
+        "description": "Properly sort and recycle all recyclable waste for a month and track your impact"
+      },
+      {
+        "title": "Upcycling Challenge",
+        "description": "Create something useful from items you would normally throw away"
+      },
+      {
+        "title": "Community Clean-up",
+        "description": "Organize or participate in a local community clean-up event"
+      },
+      {
+        "title": "DIY Master",
+        "description": "Upcycle 5 waste items into useful products using Koko's DIY suggestions"
+      }
+    ]
+  },
+  
+  "rewards_program": {
+    "points_system": {
+      "earning": {
+        "recycling": {
+          "description": "Points are earned per unit (kg or piece) based on waste item type",
+          "examples": [
+            "Plastic items: Varies by item (bottles, containers, etc.)",
+            "Paper items: Varies by item (newspapers, boxes, cartons, etc.)",
+            "Metal items: Varies by item (cans, wires, cables, etc.)",
+            "Wood items: Varies by item",
+            "Clothes items: Varies by item",
+            "Cooking oil: Varies by quantity",
+            "E-waste: Varies by item (higher value for electronics)",
+            "Home appliances: Varies by item"
+          ],
+          "note": "Each waste item displays its specific points_per_unit value when you browse"
+        },
+        "bonuses": {
+          "regular_recycler": "Regular users may receive special promotions and bonuses",
+          "referral": "Refer friends to earn bonus points (check current promotions)",
+          "bulk_quantities": "Large quantities may qualify for special rates"
+        }
+      },
+      "redemption": {
+        "shop_products": {
+          "description": "Use points to purchase items from our shop",
+          "products": [
+            "Eco-friendly products",
+            "Branded merchandise (t-shirts, tote bags)",
+            "Sustainable items",
+            "Karakib branded products"
+          ]
+        },
+        "cash_conversion": {
+          "description": "Convert points to cash",
+          "minimum_redemption": "Check your profile for current minimum and conversion rates",
+          "payment_methods": [
+            "Mobile wallet",
+            "Bank transfer",
+            "Other available methods"
+          ]
+        },
+        "donations": {
+          "environmental": [
+            "Reforestation programs",
+            "Tree planting initiatives"
+          ],
+          "community": [
+            "Education Fund (supporting underprivileged children)",
+            "Community Health initiatives",
+            "Local recycling education programs"
+          ]
+        }
+      }
+    },
+    "features": {
+      "point_tracking": "Track all point transactions in your profile",
+      "instant_credit": "Points credited immediately after collection",
+      "flexible_redemption": "Multiple ways to use your points",
+      "donation_options": "Easily donate to causes you care about",
+      "shop_integration": "Seamless shopping experience with points"
+    }
+  },
+
+  "courier_system": {
+    "how_it_works": [
+      "Admin reviews and approves collection requests",
+      "Courier is assigned to approved requests",
+      "Courier contacts user to schedule pickup",
+      "Courier arrives at specified address",
+      "Waste items are verified and collected",
+      "Collection is confirmed in system",
+      "Points are credited to user account"
+    ],
+    "verification": [
+      "QR code scanning may be used for verification",
+      "Physical inspection of waste items",
+      "Quantity and type verification",
+      "Collection confirmation"
+    ],
+    "user_experience": [
+      "Receive notification when courier is assigned",
+      "Courier contacts you to coordinate pickup time",
+      "Real-time updates on request status",
+      "Collection confirmation and receipt"
+    ]
+  },
+
+  "additional_resources": {
+    "preparation_guides": {
+      "plastic": "Clean and dry. Remove labels. Flatten to save space. Separate by type if possible.",
+      "paper": "Keep dry. Remove plastic covers, staples, and tape. Flatten boxes.",
+      "metal": "Rinse food containers. Remove labels. Separate aluminum from steel if possible.",
+      "wood": "Remove metal parts, nails, screws. Keep dry. Remove paint if possible.",
+      "clothes": "Clean and dry. Remove buttons, zippers, metal parts if possible.",
+      "cooking_oil": "Store in clean, sealed container. Keep away from water. Don't mix with other liquids.",
+      "e_waste": "Remove batteries. Delete personal data. Include all parts.",
+      "appliances": "Unplug safely. Remove detachable parts. Clean if possible."
+    },
+    "service_features": [
+      "No minimum collection requirement",
+      "Multiple waste types in one request",
+      "Flexible payout options (earn or donate)",
+      "Points system with multiple redemption options",
+      "Eco-friendly merchandise shop",
+      "Charitable donation options",
+      "AI chatbot assistance (Koko)",
+      "Comprehensive tracking system"
+    ],
+    "support_channels": [
+      "Email: karakib@gmail.com",
+      "Phone: 19123",
+      "Chatbot: Koko (available on website)",
+      "Social Media: @Karakib (Facebook, Instagram, Twitter)"
+    ]
+  }
+}
