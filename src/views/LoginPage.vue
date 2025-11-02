@@ -3,6 +3,7 @@
     <div class="w-full max-w-6xl mx-auto">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
+        
         <!-- Left Side - Banner -->
         <div
           :class="[
@@ -10,11 +11,12 @@
             $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none'
           ]">
           <img class="w-full max-w-xs lg:max-w-md mx-auto mb-6" src="/public/images/login.png" alt="Login Banner">
-          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main text-shadow-lg mb-3">{{
-            $t('common.welcomeToKarakib') }}
+          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main text-shadow-lg mb-3">
+            {{ $t('common.welcomeToKarakib') }}
           </h1>
-          <p class="font-semibold text-base lg:text-xl px-4">{{
-            $t('common.everySmallActOfRecyclingCreatesCleanerTomorrow') }}</p>
+          <p class="font-semibold text-base lg:text-xl px-4">
+            {{ $t('common.everySmallActOfRecyclingCreatesCleanerTomorrow') }}
+          </p>
         </div>
 
         <!-- Right Side - Form -->
@@ -23,9 +25,11 @@
             'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-primary', 'flex', 'justify-center', 'items-center', 'rounded-b-xl',
             $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-bl-none'
           ]">
+          
           <div class="w-full max-w-md" v-if="!authStore.isAuthenticated">
-            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-shadow-lg text-center mb-8">{{
-              $t('common.login') }}</h1>
+            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-shadow-lg text-center mb-8">
+              {{ $t('common.login') }}
+            </h1>
 
             <!-- Google Login Button -->
             <button @click="handleGoogleLogin" type="button"
@@ -59,19 +63,33 @@
 
             <!-- Login Form -->
             <form @submit.prevent="handleLogin" class="w-full flex flex-col">
+              <!-- Error Message -->
+              <transition name="fade">
+                <p v-if="errorMessage" class="text-red-600 text-center mb-4 font-medium">
+                  {{ errorMessage }}
+                </p>
+              </transition>
+
               <div class="form-group mb-5 flex flex-col w-full">
                 <label class="pb-2 font-medium text-sm lg:text-base" for="email">{{ $t('common.email') }}</label>
                 <input
-                  class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-3 rounded-lg focus:outline-none bg-tabs focus:ring-2 focus:ring-[#317C31]"
-                  placeholder="email@gmail.com" id="email" v-model="form.email" type="email" required />
+                  :class="[
+                    'shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] px-3 py-3 rounded-lg focus:outline-none bg-tabs focus:ring-2 transition-all',
+                    errorMessage ? 'border border-red-500' : 'border-0 focus:ring-[#317C31]'
+                  ]"
+                  placeholder="email@gmail.com" id="email" v-model="form.email" type="email"
+                  @input="clearError" required />
               </div>
 
               <div class="form-group mb-2 flex flex-col w-full">
                 <label class="pb-2 font-medium text-sm lg:text-base" for="password">{{ $t('common.password') }}</label>
                 <input
-                  class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-3 py-3 rounded-lg focus:outline-none bg-tabs focus:ring-2 focus:ring-[#317C31]"
+                  :class="[
+                    'shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] px-3 py-3 rounded-lg focus:outline-none bg-tabs focus:ring-2 transition-all',
+                    errorMessage ? 'border border-red-500' : 'border-0 focus:ring-[#317C31]'
+                  ]"
                   :placeholder="$t('common.passwordPlaceholder')" id="password" v-model="form.password" type="password"
-                  required />
+                  @input="clearError" required />
               </div>
 
               <!-- Forgot Password Link -->
@@ -90,8 +108,8 @@
 
             <p class="text-center font-medium text-sm lg:text-base mt-4">
               {{ $t('common.dontHaveAnAccount') }}
-              <router-link to="/register" class="text-[#317C31] hover:underline font-semibold">{{
-                $t('common.registerHere') }}
+              <router-link to="/register" class="text-[#317C31] hover:underline font-semibold">
+                {{ $t('common.registerHere') }}
               </router-link>
             </p>
           </div>
@@ -115,6 +133,7 @@ export default {
         email: '',
         password: '',
       },
+      errorMessage: '', // error state
     };
   },
 
@@ -128,7 +147,19 @@ export default {
   },
 
   methods: {
+    clearError() {
+      this.errorMessage = '';
+    },
+
     async handleLogin() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Validate email and password
+      if (!emailRegex.test(this.form.email) || this.form.password.length < 3) {
+        this.errorMessage = 'Wrong email or password';
+        return;
+      }
+
       try {
         await this.authStore.login(this.form);
 
@@ -138,13 +169,9 @@ export default {
         await this.$router.push('/');
         nextTick(() => {
           this.$toast.success(this.$t('common.loggedInSuccessfully'));
-        })
+        });
       } catch (error) {
-        // this.$toast.error(error)
-        this.$toast.error(this.authStore.error)
-        setTimeout(() => {
-          this.authStore.error = null;
-        }, 5000);
+        this.errorMessage = 'Wrong email or password';
       }
     },
 
@@ -156,13 +183,16 @@ export default {
 </script>
 
 <style scoped>
-.error-message {
-  background-color: #f44336;
-  color: white;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 4px;
+/* smooth fade for error message */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s;
 }
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .router-link-exact-active {
   background-color: #e0ebe0;
 }
@@ -215,3 +245,4 @@ export default {
   background-color: #2C2C2C;
 }
 </style>
+

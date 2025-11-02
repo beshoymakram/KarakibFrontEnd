@@ -2,7 +2,7 @@
   <div class="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
     <!-- Hero Section -->
     <section
-      class="relative flex flex-col items-center justify-center text-center py-16 md:py-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-0 bg-base-100"
+      class="relative flex flex-col items-center justify-center text-center  p-12  md:py-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-0 bg-base-100"
       style="background-image: url('/images/abouthero.jpg'); background-size: cover; background-position: center;"
     >
       <div class="absolute inset-0 bg-base-100/80 dark:bg-base-300/50"></div>
@@ -43,17 +43,17 @@
       <!-- Content -->
       <div class="relative z-10 max-w-3xl mx-auto px-2 sm:px-0">
         <h1
-          class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 sm:mb-4 drop-shadow-lg"
+          class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-3 sm:mb-4 drop-shadow-lg"
         >
           {{ $t("common.aboutUs") }}
         </h1>
         <p
-          class=" text-base sm:text-lg md:text-xl font-medium leading-relaxed px-2 text-secondary"
+          class=" text-sm sm:text-base md:text-lg  font-normal leading-relaxed px-2 text-secondary"
         >
           {{ $t("common.karakibIsEcoFriendlyPlatform") }}
         </p>
 <button
-  class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-md text-base sm:text-lg transition cursor-pointer"
+  class="mt-6 bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-md text-sm sm:text-base transition cursor-pointer"
   @click="openModal($t('common.moreAboutUs'), $t('common.aboutUsDescription'))"
 >
   {{ $t('common.learnMore') }}
@@ -63,10 +63,10 @@
     </section>
 
     <section
-      class="flex-1 bg-dark py-20 px-6 md:px-16 relative overflow-hidden"
+      class="flex-1 bg-dark px-6 md:px-12 lg:px-16 py-6 md:py-12 lg:py-16 relative overflow-hidden"
     >
       <!-- Background Doodles -->
-      <div class="absolute top-5 right-5 w-32 h-12 opacity-40">
+      <div class="absolute top-5 right-5 w-32 h-12 opacity-35">
         <svg
           width="285"
           height="45"
@@ -80,7 +80,7 @@
           />
         </svg>
       </div>
-      <div class="absolute bottom-10 left-5 w-16 h-16 opacity-40">
+      <div class="absolute bottom-10 left-5 w-16 h-16 opacity-35">
         <svg
           width="36"
           height="39"
@@ -96,13 +96,12 @@
       </div>
 
       <h2
-        class="text-3xl md:text-4xl font-semibold text-center mb-14 relative z-10 text-primary"
+        class=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-center mb-14 relative z-10 text-primary"
       >
         {{ $t("common.workingTogetherForCleanerFuture") }}
       </h2>
 
       <div class="space-y-16 relative z-10">
-        <!-- Section 1 -->
         <!-- Section 1 -->
         <div
           class="flex flex-col md:flex-row items-center gap-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left"
@@ -110,7 +109,7 @@
           <div class="md:w-1/2 w-full relative">
             <!-- Doodle for section 1 -->
             <div
-              class="absolute -top-25 -left-6 w-10 h-10 opacity-70 hidden sm:block"
+              class="absolute -top-25 -left-6 w-10 h-10 opacity-50 hidden sm:block"
             >
               <svg
                 width="64"
@@ -126,14 +125,14 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-3 leading-snug text-primary">
+            <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold mb-3 leading-snug text-primary">
               {{ $t("common.makingRecyclingEasyAndRewarding") }}
             </h3>
-            <p class="mb-5 text-base sm:text-lg leading-relaxed text-secondary">
+            <p class="mb-5 text-sm sm:text-base md:text-lg lg:text-lg leading-relaxed text-secondary font-light">
               {{ $t("common.karakibSimplifiesRecyclingProcess") }}
             </p>
             <button
-  class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
+  class="text-xs sm:text-sm md:text-base  bg-[#2C702C] hover:bg-[#265C26] text-white   px-5 py-2 rounded-md  cursor-pointer font-semibold"
   @click="openModal($t('common.makingRecyclingEasyAndRewarding'), $t('common.recyclingPopup'))"
 >
   {{ $t("common.learnMore") }}
@@ -145,7 +144,7 @@
           >
             <!-- Doodle for image 1 -->
             <div
-              class="absolute -top-3 -right-3 w-8 h-8 opacity-80 hidden sm:block"
+              class="absolute -top-3 -right-3 w-8 h-8 opacity-60 hidden sm:block"
             >
               <svg
                 width="36"
@@ -164,7 +163,7 @@
             <img
               src="/images/about1.png"
               alt="Making Recycling Easy"
-              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover p-4 bg-base-100"
+              class="rounded-full w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover p-4 bg-base-100"
             />
           </div>
         </div>
@@ -176,7 +175,7 @@
           <div class="md:w-1/2 w-full relative">
             <!-- Doodle for section 2 -->
             <div
-              class="absolute -top-4 -right-4 w-10 h-10 opacity-70 hidden sm:block"
+              class="absolute -top-4 -right-4 w-10 h-10 opacity-50 hidden sm:block"
             >
               <svg
                 width="64"
@@ -192,14 +191,14 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-3 leading-snug text-primary">
+            <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold mb-3 leading-snug text-primary">
               {{ $t("common.supportingGreenerCommunity") }}
             </h3>
-            <p class="mb-5 text-base sm:text-lg leading-relaxed text-secondary">
+            <p class="mb-5 text-sm sm:text-base md:text-lg lg:text-lg leading-relaxed text-secondary font-light">
               {{ $t("common.ourGoalIsToBuildNetwork") }}
             </p>
             <button
-            class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
+            class="text-xs sm:text-sm md:text-base  bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md cursor-pointer"
             @click="openModal($t('common.supportingGreenerCommunity'), $t('common.supportingGreenerCommunityDescription'))"
             >
             {{ $t('common.learnMore') }}
@@ -212,7 +211,7 @@
           >
             <!-- Doodle for image 2 -->
             <div
-              class="absolute -bottom-3 -left-3 w-8 h-8 opacity-80 hidden sm:block"
+              class="absolute -bottom-3 -left-3 w-8 h-8 opacity-60 hidden sm:block"
             >
               <svg
                 width="36"
@@ -231,7 +230,7 @@
             <img
               src="/images/about2.png"
               alt="Supporting a Greener Community"
-              class="rounded-full w-64 h-64 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] object-cover p-4 bg-base-100"
+              class="rounded-full w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover p-4 bg-base-100"
             />
           </div>
         </div>
@@ -243,7 +242,7 @@
           <div class="md:w-1/2 relative">
             <!-- Doodle for section 3 -->
             <div
-              class="absolute -bottom-10 right-0 w-10 h-10 md:w-12 md:h-12 opacity-70"
+              class="absolute -bottom-10 right-0 w-10 h-10 md:w-12 md:h-12 opacity-50"
             >
               <svg
                 width="64"
@@ -259,14 +258,14 @@
               </svg>
             </div>
 
-            <h3 class="text-2xl sm:text-3xl font-semibold mb-3 text-primary">
+            <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold mb-3 text-primary">
               {{ $t("common.innovationWithPurpose") }}
             </h3>
-            <p class=" mb-5 text-base sm:text-lg leading-relaxed text-secondary">
+            <p class=" mb-5 text-sm sm:text-base md:text-lg lg:text-lg leading-relaxed text-secondary font-light">
               {{ $t("common.karakibCombinesTechnologyAndEnvironmentalCare") }}
             </p>
             <button
-            class="bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md text-sm sm:text-base cursor-pointer"
+            class= "text-xs sm:text-sm md:text-base  bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md  cursor-pointer"
             @click="openModal($t('common.innovationWithPurpose'), $t('common.innovationWithPurposeDescription'))"
             >
             {{ $t('common.learnMore') }}
@@ -277,7 +276,7 @@
           <div class="md:w-1/2 flex justify-center mt-8 md:mt-0 relative">
             <!-- Doodle for image 3 -->
             <div
-              class="absolute -top-3 -right-3 w-8 h-8 md:w-10 md:h-10 opacity-80"
+              class="absolute -top-3 -right-3 w-8 h-8 md:w-10 md:h-10 opacity-60"
             >
               <svg
                 width="36"
@@ -296,7 +295,7 @@
             <img
               src="/images/about3.png"
               alt="Innovation with a Purpose"
-              class="rounded-full w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover p-4 bg-base-100"
+              class="rounded-full w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover p-4 bg-base-100"
             />
           </div>
         </div>
@@ -309,25 +308,23 @@
         id="Faq"
       >
         <h2
-          class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center sm:text-left"
+          class="text-xl sm:text-2xl md:3xl font-semibold mb-4 sm:mb-6 text-center sm:text-left"
         >
           {{ $t("common.frequentlyAskedQuestions") }}
         </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div class="grid grid-cols-1  gap-0">
           <div class="space-y-3 sm:space-y-4">
             <button
               v-for="(faq, index) in faqs"
               :key="index"
               @click="toggleFaq(index)"
-class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left text-section hover:bg-green-50 transition">
-              <span class="font-medium text-sm sm:text-base">{{
-                faq.question
-              }}</span>
+              class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left text-section hover:bg-green-50 transition">
+              <span class="font-normal text-xs sm:text-sm md:text-base">{{ faq.question }}</span>
               <svg
                 :class="{ 'rotate-180': openFaq === index }"
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 sm:h-5 sm:w-5 transition-transform"
+                class="h-3 w-3 md:h-4 md:w-4 transition-transform"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -346,7 +343,7 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
             class="bg-green-50 border border-green-100 rounded-lg p-4 sm:p-6 text-gray-700"
             v-if="openFaq !== null"
           >
-            <p class="text-sm sm:text-base">{{ faqs[openFaq].answer }}</p>
+            <p class="text-xs sm:text-sm md:text-base font-light">{{ faqs[openFaq].answer }}</p>
           </div>
         </div>
       </section>
@@ -357,13 +354,13 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
   id="terms"
 >
   <h2
-    class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
+    class="text-xl sm:text-2xl md:3xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
   >
     {{ $t("common.termsAndConditions") }}
   </h2>
 
   <p
-    class="text-gray-600 mb-3 sm:mb-4 flex items-start text-sm sm:text-base text-section"
+    class="text-gray-600 mb-3 sm:mb-4 flex items-start text-sm sm:text-base md:text-lg text-section"
   >
     <span class="text-green-600 mr-2 text-lg sm:text-xl">
       <font-awesome-icon :icon="['fas', 'triangle-exclamation']" />
@@ -372,7 +369,7 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
   </p>
 
   <ul
-    class="list-disc list-inside space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base text-section"
+    class="list-disc list-inside space-y-1 sm:space-y-2 text-gray-700 text-xs sm:text-sm md:text-base text-section"
   >
     <li>{{ $t("common.byUsingKarakibYouAgree") }}</li>
     <li>{{ $t("common.usersAreAlsoResponsible") }}</li>
@@ -383,7 +380,7 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
 
   <div class="mt-5 sm:mt-6 flex justify-center sm:justify-start">
     <button
-      class="px-4 sm:px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm sm:text-base"
+      class="px-4 sm:px-5 py-2 bg-green-600 text-white  font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
       @click="openTermsModal"
     >
       {{ $t("common.readFullPolicy") }}
@@ -398,12 +395,12 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
         id="inquiry"
       >
         <h2
-          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
+          class="text-xl sm:text-2xl md:3xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
         >
           {{ $t("common.sendAnInquiry") }}
         </h2>
         <p
-          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base text-center sm:text-left text-section"
+          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base md:text-lg text-center sm:text-left text-section"
         >
           {{ $t("common.weAreHappyToAnswerQuestions") }}
         </p>
@@ -413,81 +410,81 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
           class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4"
         >
 <div>
-  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+  <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
     $t("common.firstName")
   }}</label>
   <input
     v-model="form.firstName"
     type="text"
     :placeholder="$t('common.enterFirstName')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
     :class="{ 'border-red-500': formErrors.firstName }"
   />
-  <p v-if="formErrors.firstName" class="text-red-500 text-xs mt-1">
+  <p v-if="formErrors.firstName" class="text-red-500 text-xs  md:text-sm mt-1">
     {{ formErrors.firstName }}
   </p>
 </div>
 
 <div>
-  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+  <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
     $t("common.lastName")
   }}</label>
   <input
     v-model="form.lastName"
     type="text"
     :placeholder="$t('common.enterLastName')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
     :class="{ 'border-red-500': formErrors.lastName }"
   />
-  <p v-if="formErrors.lastName" class="text-red-500 text-xs mt-1">
+  <p v-if="formErrors.lastName" class="text-red-500 text-xs  md:text-sm mt-1">
     {{ formErrors.lastName }}
   </p>
 </div>
 
 <div>
-  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+  <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
     $t("common.email")
   }}</label>
   <input
     v-model="form.email"
     type="email"
     :placeholder="$t('common.enterEmail')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
     :class="{ 'border-red-500': formErrors.email }"
   />
-  <p v-if="formErrors.email" class="text-red-500 text-xs mt-1">
+  <p v-if="formErrors.email" class="text-red-500 text-xs md:text-sm mt-1">
     {{ formErrors.email }}
   </p>
 </div>
 
 <div>
-  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+  <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
     $t("common.subject")
   }}</label>
   <input
     v-model="form.subject"
     type="text"
     :placeholder="$t('common.enterSubject')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
     :class="{ 'border-red-500': formErrors.subject }"
   />
-  <p v-if="formErrors.subject" class="text-red-500 text-xs mt-1">
+  <p v-if="formErrors.subject" class="text-red-500 text-xs  md:text-sm mt-1">
     {{ formErrors.subject }}
   </p>
 </div>
 
 <div class="md:col-span-2">
-  <label class="block mb-1 font-medium text-sm sm:text-base">{{
+  <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
     $t("common.message")
   }}</label>
   <textarea
     v-model="form.message"
     rows="4"
     :placeholder="$t('common.enterMessage')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm sm:text-base"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
     :class="{ 'border-red-500': formErrors.message }"
   ></textarea>
-  <p v-if="formErrors.message" class="text-red-500 text-xs mt-1">
+  <p v-if="formErrors.message" class="text-red-500 text-xs  md:text-sm mt-1">
     {{ formErrors.message }}
   </p>
 </div>
@@ -495,7 +492,7 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
           <div class="md:col-span-2 flex justify-center mt-3 sm:mt-4">
             <button
               type="submit"
-              class="px-5 sm:px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm sm:text-base"
+              class="px-5 sm:px-6 py-2 font-semibold bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
             >
               {{ $t("common.sendMessage") }}
             </button>
@@ -509,12 +506,12 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
         id="contact"
       >
         <h2
-          class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
+          class="text-xl sm:text-2xl md:3xl font-semibold mb-3 sm:mb-4 text-center sm:text-left text-section"
         >
           {{ $t("common.contactUs") }}
         </h2>
         <p
-          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base text-center sm:text-left text-section"
+          class="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base md:text-lg text-center sm:text-left text-section"
         >
           {{ $t("common.weAreHereToHelpYou") }}
         </p>

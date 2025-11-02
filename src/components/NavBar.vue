@@ -50,7 +50,7 @@
         <div class="flex items-center space-x-2 md:space-x-4">
           <!-- Cart (Always visible) -->
 
-
+          <NotificationDropdown />
           <router-link to="/cart"
             class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-sm font-bold no-active-style  rounded-lg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="none" stroke="currentColor"
@@ -212,6 +212,7 @@
 import { useAuthStore } from "@/stores/auth";
 import { useCartStore } from "@/stores/cart";
 import LanguageSwitcher from "./LanguageSwitcher.vue";
+import NotificationDropdown from "./NotificationDropdown.vue";
 
 export default {
   name: "NavBar",
@@ -227,6 +228,7 @@ export default {
 
   components: {
     LanguageSwitcher,
+    NotificationDropdown
   },
 
   computed: {
