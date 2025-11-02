@@ -320,7 +320,7 @@
               v-for="(faq, index) in faqs"
               :key="index"
               @click="toggleFaq(index)"
-              class="w-full flex justify-between items-center bg-faq px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left hover:bg-green-50 transition"
+              class="w-full flex justify-between items-center bg-faq px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-section hover:bg-green-50 transition"
             >
               <span class="font-medium text-sm sm:text-base">{{
                 faq.question
