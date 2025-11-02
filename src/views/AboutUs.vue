@@ -132,7 +132,7 @@
               {{ $t("common.karakibSimplifiesRecyclingProcess") }}
             </p>
             <button
-  class="text-xs sm:text-sm md:text-base lg:text-lg bg-[#2C702C] hover:bg-[#265C26] text-white   px-5 py-2 rounded-md  cursor-pointer font-semibold"
+  class="text-xs sm:text-sm md:text-base  bg-[#2C702C] hover:bg-[#265C26] text-white   px-5 py-2 rounded-md  cursor-pointer font-semibold"
   @click="openModal($t('common.makingRecyclingEasyAndRewarding'), $t('common.recyclingPopup'))"
 >
   {{ $t("common.learnMore") }}
@@ -198,7 +198,7 @@
               {{ $t("common.ourGoalIsToBuildNetwork") }}
             </p>
             <button
-            class="text-xs sm:text-sm md:text-base lg:text-lg bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md cursor-pointer"
+            class="text-xs sm:text-sm md:text-base  bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md cursor-pointer"
             @click="openModal($t('common.supportingGreenerCommunity'), $t('common.supportingGreenerCommunityDescription'))"
             >
             {{ $t('common.learnMore') }}
@@ -265,7 +265,7 @@
               {{ $t("common.karakibCombinesTechnologyAndEnvironmentalCare") }}
             </p>
             <button
-            class= "text-xs sm:text-sm md:text-base lg:text-lg bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md  cursor-pointer"
+            class= "text-xs sm:text-sm md:text-base  bg-[#2C702C] hover:bg-[#265C26] text-white font-semibold px-5 py-2 rounded-md  cursor-pointer"
             @click="openModal($t('common.innovationWithPurpose'), $t('common.innovationWithPurposeDescription'))"
             >
             {{ $t('common.learnMore') }}
@@ -319,8 +319,8 @@
               v-for="(faq, index) in faqs"
               :key="index"
               @click="toggleFaq(index)"
-class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left text-section hover:bg-green-50 transition">
-              <span class="font-medium text-sm sm:text-base">{{ faq.question}}</span>
+              class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left text-section hover:bg-green-50 transition">
+              <span class="font-normal text-xs sm:text-sm md:text-base">{{ faq.question }}</span>
               <svg
                 :class="{ 'rotate-180': openFaq === index }"
                 xmlns="http://www.w3.org/2000/svg"
@@ -380,7 +380,7 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
 
   <div class="mt-5 sm:mt-6 flex justify-center sm:justify-start">
     <button
-      class="px-4 sm:px-5 py-2 bg-green-600 text-white  font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base lg:text-lg"
+      class="px-4 sm:px-5 py-2 bg-green-600 text-white  font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
       @click="openTermsModal"
     >
       {{ $t("common.readFullPolicy") }}
@@ -492,7 +492,7 @@ class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2
           <div class="md:col-span-2 flex justify-center mt-3 sm:mt-4">
             <button
               type="submit"
-              class="px-5 sm:px-6 py-2 font-semibold bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base lg:text-lg"
+              class="px-5 sm:px-6 py-2 font-semibold bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
             >
               {{ $t("common.sendMessage") }}
             </button>
