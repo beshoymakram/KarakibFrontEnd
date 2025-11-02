@@ -37,10 +37,6 @@
           <!-- Go Back Link -->
           <router-link to="/login"
             :class="['absolute', 'bottom-8', $i18n.locale === 'ar' ? 'right-8' : 'left-8', 'flex', 'items-center', 'gap-2', 'text-[#317C31]', 'hover:underline', 'font-semibold', 'text-base']">
-            <svg xmlns="http://www.w3.org/2000/svg" :class="['h-5', 'w-5', $i18n.locale === 'ar' ? 'rotate-180' : '']"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
             {{ $t('common.goBack') }}
           </router-link>
         </div>
