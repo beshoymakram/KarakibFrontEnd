@@ -69,7 +69,7 @@
                   order.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed',
+                'text-green-800 bg-green-100': order.status === 'completed' || request.status === 'collected',
                 'text-red-800 bg-red-100': order.status === 'cancelled',
                 'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
@@ -77,11 +77,11 @@
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              <button @click="openScanner(request)"
+              <button @click="openScanner(order)"
                 class="px-3 py-1 border border-green-300 rounded-md text-[#2C702C] hover:bg-green-50 transition-colors cursor-pointer">
                 {{ $t('common.collect') }}
               </button>
-              <button @click="openDetailsModal(request)"
+              <button @click="openDetailsModal(order)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                 {{ $t('common.details') }}
               </button>
@@ -201,23 +201,22 @@
               <!-- Waste Items Section -->
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
-                  }}</h4>
+                }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <!-- Item Image -->
-                    <img :src="item.item?.image_url" :alt="item.item?.name"
+                    <img :src="item.product?.image_url" :alt="item.product?.name"
                       class="w-16 h-16 object-cover rounded-lg bg-white border border-gray-200" />
 
                     <!-- Item Details -->
                     <div class="flex-1">
-                      <h5 class="font-semibold text-[#2C702C]">{{ item.item?.name }}</h5>
+                      <h5 class="font-semibold text-[#2C702C]">{{ item.product?.name }}</h5>
                       <p class="text-sm text-gray-600">
-                        {{ $t('common.quantity') }}: <span class="font-semibold">{{ item.quantity }}</span> {{
-                          item.item?.unit }}
+                        {{ $t('common.quantity') }}: <span class="font-semibold">{{ item.quantity }}</span>
                       </p>
                       <p class="text-sm text-green-600 font-medium">
-                        {{ item.subtotal }} {{ $t('common.points') }}
+                        {{ item.price }} {{ $t('common.currency') }}
                       </p>
                     </div>
                   </div>
@@ -239,7 +238,7 @@
                 <div class="flex justify-between items-center">
                   <h4 class="text-sm font-medium text-gray-700">{{ $t('common.totalPoints') }}</h4>
                   <p class="text-2xl font-bold text-green-600">
-                    {{ details.total }} {{ $t('common.points') }}
+                    {{ details.total }} {{ $t('common.currency') }}
                   </p>
                 </div>
               </div>
@@ -261,6 +260,7 @@
 
 <script>
 import ordersService from '@/services/ordersService';
+import jsQR from 'jsqr';
 import { nextTick } from 'vue';
 
 export default {
@@ -373,12 +373,57 @@ export default {
         if (video) {
           video.srcObject = this.stream
           await video.play()
+
+          this.detectQrCode();
         }
       } catch (error) {
         this.$toast?.error?.(error)
         this.$toast?.error?.('Camera access was denied')
       }
     },
+
+    async detectQrCode() {
+      const video = this.$refs.videoEl;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      const scan = () => {
+        if (!this.stream) return;
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if (code) {
+          this.handleQrScan(code.data);
+        } else {
+          requestAnimationFrame(scan);
+        }
+      };
+
+      requestAnimationFrame(scan);
+    },
+
+    async handleQrScan(qrToken) {
+      this.infoText = 'Processing...';
+
+      try {
+        const response = await ordersService.scanQr({ qr_token: qrToken });
+
+        if (response.data.success) {
+          this.$toast.success(response.data.message);
+          this.closeScanner();
+          this.fetchMyOrders();
+        }
+      } catch (error) {
+        this.$toast.error(error.response?.data?.message || 'Invalid QR code');
+        this.infoText = 'Scan failed. Please try again.';
+      }
+    },
+
     async closeScanner() {
       if (this.stream) {
         this.stream.getTracks().forEach(t => t.stop())

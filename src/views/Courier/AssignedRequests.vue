@@ -69,7 +69,7 @@
                   request.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': request.status === 'completed',
+                'text-green-800 bg-green-100': request.status === 'completed' || request.status === 'collected',
                 'text-red-800 bg-red-100': request.status === 'cancelled',
                 'text-warning bg-yellow-100': request.status === 'pending' || request.status === 'assigned'
               }">
@@ -108,6 +108,9 @@
             </button>
             <div class="p-4 md:p-5 text-center">
               <h3 class="text-xl font-semibold text-[#2C702C] mb-2">{{ $t('common.scanQrToCollect') }}</h3>
+              <p class="text-sm text-gray-600 mb-2">
+                Request: <span class="font-bold">{{ activeRequestNumber }}</span>
+              </p>
               <p class="text-gray-500 mb-4">{{ infoText }}</p>
               <div class="aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center mb-4">
                 <video ref="videoEl" class="w-full h-full object-cover" autoplay playsinline></video>
@@ -260,9 +263,10 @@
 </template>
 
 <script>
-import ordersService from '@/services/ordersService';
 import requestsService from '@/services/requestsService';
+import jsQR from 'jsqr';
 import { nextTick } from 'vue';
+import soundPlayer from '@/utils/sounds';
 
 export default {
   name: 'CourierAssignedRequests',
@@ -287,6 +291,7 @@ export default {
       },
       scannerOpen: false,
       activeRequestId: null,
+      activeRequestNumber: null,
       stream: null,
       infoText: 'Point your camera at the QR code on the request receipt.'
     }
@@ -334,6 +339,7 @@ export default {
     },
     openScanner(req) {
       this.activeRequestId = req.id
+      this.activeRequestNumber = req.request_number
       this.scannerOpen = true
       this.$nextTick(this.startCamera)
     },
@@ -354,7 +360,7 @@ export default {
     },
     async confirmComplete() {
       try {
-        const response = await ordersService.completeOrder(this.selectedRequest);
+        const response = await requestsService.completeOrder(this.selectedRequest);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
@@ -374,10 +380,57 @@ export default {
         if (video) {
           video.srcObject = this.stream
           await video.play()
+
+          this.detectQrCode();
         }
       } catch (error) {
         this.$toast?.error?.(error)
         this.$toast?.error?.('Camera access was denied')
+      }
+    },
+    async detectQrCode() {
+      const video = this.$refs.videoEl;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      const scan = () => {
+        if (!this.stream) return;
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if (code) {
+          this.handleQrScan(code.data);
+        } else {
+          requestAnimationFrame(scan);
+        }
+      };
+
+      requestAnimationFrame(scan);
+    },
+
+    async handleQrScan(qrToken) {
+      this.infoText = 'Processing...';
+
+      try {
+        const response = await requestsService.scanQr({
+          qr_token: qrToken,
+          request_id: this.activeRequestId
+        });
+
+        if (response.data.success) {
+          this.$toast.success(response.data.message);
+          soundPlayer.play('success');
+          this.closeScanner();
+          this.fetchMyRequests();
+        }
+      } catch (error) {
+        this.$toast.error(error.response?.data?.message || 'Invalid QR code');
+        this.infoText = 'Scan failed. Please try again.';
       }
     },
     async closeScanner() {

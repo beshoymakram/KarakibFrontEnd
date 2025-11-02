@@ -304,7 +304,7 @@
     <section class="w-full mx-auto bg-dark shadow p-4 sm:p-6 md:p-8">
       <!-- FAQs -->
       <section
-        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary text-primary rounded-2xl shadow p-4 sm:p-6 md:p-8"
+        class="max-w-6xl mx-auto my-6 sm:my-8 bg-primary rounded-2xl shadow p-4 sm:p-6 md:p-8 text-section"
         id="Faq"
       >
         <h2
@@ -319,11 +319,8 @@
               v-for="(faq, index) in faqs"
               :key="index"
               @click="toggleFaq(index)"
-              class="w-full md:w-2/3 lg:w-1/2 flex justify-between items-center bg-gray-100 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left hover:bg-green-50 transition"
-            >
-              <span class="font-normal text-xs sm:text-sm md:text-base">{{
-                faq.question
-              }}</span>
+class="w-full flex justify-between items-center bg-faq bg-dark px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-left text-section hover:bg-green-50 transition">
+              <span class="font-medium text-sm sm:text-base">{{ faq.question}}</span>
               <svg
                 :class="{ 'rotate-180': openFaq === index }"
                 xmlns="http://www.w3.org/2000/svg"
@@ -623,12 +620,15 @@
       {{ modalContent }}
     </p>
 
-    <button
-      @click="closeModal"
-      class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition mt-6"
-    >
-      {{ $t("common.close") }}
-    </button>
+<div class="flex justify-center">
+  <button
+    @click="closeModal"
+    class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition mt-6"
+  >
+    {{ $t("common.close") }}
+  </button>
+</div>
+
   </div>
 </div>
 <!-- Success Modal -->
@@ -889,5 +889,11 @@ submitForm() {
 }
 [data-theme="forest"] .bg-dark {
   background-color: #252625 !important;
+}
+.bg-faq {
+  background-color: #f1f1f1
+}
+[data-theme="forest"] .bg-faq {
+  background-color: #2c702c !important;
 }
 </style>
