@@ -260,7 +260,6 @@
 </template>
 
 <script>
-import ordersService from '@/services/ordersService';
 import requestsService from '@/services/requestsService';
 import jsQR from 'jsqr';
 import { nextTick } from 'vue';
@@ -355,7 +354,7 @@ export default {
     },
     async confirmComplete() {
       try {
-        const response = await ordersService.completeOrder(this.selectedRequest);
+        const response = await requestsService.completeOrder(this.selectedRequest);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
@@ -412,7 +411,7 @@ export default {
       this.infoText = 'Processing...';
 
       try {
-        const response = await ordersService.scanQr({ qr_token: qrToken });
+        const response = await requestsService.scanQr({ qr_token: qrToken });
 
         if (response.data.success) {
           this.$toast.success(response.data.message);
