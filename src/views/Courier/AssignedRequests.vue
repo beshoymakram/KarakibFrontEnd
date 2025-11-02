@@ -69,7 +69,7 @@
                   request.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': request.status === 'completed',
+                'text-green-800 bg-green-100': request.status === 'completed' || request.status === 'collected',
                 'text-red-800 bg-red-100': request.status === 'cancelled',
                 'text-warning bg-yellow-100': request.status === 'pending' || request.status === 'assigned'
               }">
@@ -108,6 +108,9 @@
             </button>
             <div class="p-4 md:p-5 text-center">
               <h3 class="text-xl font-semibold text-[#2C702C] mb-2">{{ $t('common.scanQrToCollect') }}</h3>
+              <p class="text-sm text-gray-600 mb-2">
+                Request: <span class="font-bold">{{ activeRequestNumber }}</span>
+              </p>
               <p class="text-gray-500 mb-4">{{ infoText }}</p>
               <div class="aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center mb-4">
                 <video ref="videoEl" class="w-full h-full object-cover" autoplay playsinline></video>
@@ -201,7 +204,7 @@
               <!-- Waste Items Section -->
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
-                  }}</h4>
+                }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
@@ -288,6 +291,7 @@ export default {
       },
       scannerOpen: false,
       activeRequestId: null,
+      activeRequestNumber: null,
       stream: null,
       infoText: 'Point your camera at the QR code on the request receipt.'
     }
@@ -335,6 +339,7 @@ export default {
     },
     openScanner(req) {
       this.activeRequestId = req.id
+      this.activeRequestNumber = req.request_number
       this.scannerOpen = true
       this.$nextTick(this.startCamera)
     },
@@ -412,7 +417,10 @@ export default {
       this.infoText = 'Processing...';
 
       try {
-        const response = await requestsService.scanQr({ qr_token: qrToken });
+        const response = await requestsService.scanQr({
+          qr_token: qrToken,
+          request_id: this.activeRequestId
+        });
 
         if (response.data.success) {
           this.$toast.success(response.data.message);

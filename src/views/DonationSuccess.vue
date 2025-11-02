@@ -24,7 +24,8 @@
 
       <div class="bg-[#F7F9FC] rounded-lg p-4 mb-6 text-left text-sm text-gray-700">
         <p><span class="font-semibold text-green-700">{{ $t('common.donationNumber') }}:</span> {{ donationNumber }}</p>
-        <p class="break-all"><span class="font-semibold text-green-700">{{ $t('common.transactionId') }}:</span> {{ transactionId }}</p>
+        <p class="break-all"><span class="font-semibold text-green-700">{{ $t('common.transactionId') }}:</span> {{
+          transactionId }}</p>
       </div>
 
       <router-link to="/shop"
@@ -38,6 +39,7 @@
 <script>
 import apiClient from '@/config/api'
 import { useRoute } from 'vue-router'
+import soundPlayer from '@/utils/sounds';
 
 export default {
   name: 'DonationSuccess',
@@ -51,6 +53,7 @@ export default {
     const route = useRoute()
     this.donationNumber = route.query.donation_number
     this.transactionId = route.query.transaction_id
+    soundPlayer.play('success');
 
     this.verifyPayment()
   },

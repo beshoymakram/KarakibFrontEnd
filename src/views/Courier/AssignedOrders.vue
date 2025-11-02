@@ -69,7 +69,7 @@
                   order.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed',
+                'text-green-800 bg-green-100': order.status === 'completed' || request.status === 'collected',
                 'text-red-800 bg-red-100': order.status === 'cancelled',
                 'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
