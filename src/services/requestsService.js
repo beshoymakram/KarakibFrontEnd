@@ -46,4 +46,12 @@ export default {
   unassign(id) {
     return apiClient.post(`/requests/${id}/unassign`);
   },
+
+  scanQr(data) {
+    return apiClient.post('/requests/scan-qr', data);
+  },
+
+  verifyQr(data) {
+    return apiClient.post('/requests/verify-qr', data);
+  }
 };
