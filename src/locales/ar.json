@@ -404,6 +404,7 @@
         "paid": "تم الدفع",
         "collected": "تم الاستلام",
         "wasteItemsToCollect": "عناصر النفايات المراد جمعها",
+        "welcome_to_karakib": "مرحبًا بك في كراكيب!",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     }
 }

@@ -1,44 +1,31 @@
 <template>
   <div class="relative" ref="dropdownRef">
     <!-- Bell Icon Button -->
-    <button
-      @click="toggleDropdown"
-      class="relative p-2 rounded-lg  transition-colors duration-200  "
-      aria-label="Notifications"
-    >
+    <button @click="toggleDropdown" class="relative p-2 rounded-lg  transition-colors duration-200  "
+      aria-label="Notifications">
       <!-- Bell Icon SVG -->
-      <svg class="size-6 md:size-7 text-primary text-sm font-bold cursor-pointer hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+      <svg class="size-6 md:size-7 text-primary text-sm font-bold cursor-pointer hover:scale-110" fill="none"
+        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+        </path>
       </svg>
 
       <!-- Unread Indicator Dot -->
-      <span
-        v-if="hasUnread"
-        class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#2C702C] rounded-full border-2 border-white"
-      ></span>
+      <span v-if="hasUnread"
+        class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#2C702C] rounded-full border-2 border-white"></span>
     </button>
 
     <!-- Dropdown Panel -->
-    <transition
-      enter-active-class="transition ease-out duration-200"
-      enter-from-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-150"
-      leave-from-class="transform opacity-100 scale-100"
-      leave-to-class="transform opacity-0 scale-95"
-    >
-      <div
-        v-if="isOpen"
-        class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50"
-      >
+    <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95"
+      enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-150"
+      leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+      <div v-if="isOpen" class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50">
         <!-- Header -->
         <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
           <h3 class="text-lg font-semibold text-gray-800">Notifications</h3>
-          <button
-            v-if="hasUnread"
-            @click="markAllAsRead"
-            class="text-sm text-[#2C702C] hover:text-[#235a23] font-medium transition-colors duration-200"
-          >
+          <button v-if="hasUnread" @click="markAllAsRead"
+            class="text-sm text-[#2C702C] hover:text-[#235a23] font-medium transition-colors duration-200">
             Mark all read
           </button>
         </div>
@@ -46,27 +33,24 @@
         <!-- Notifications List -->
         <div class="max-h-80 overflow-y-auto">
           <div v-if="notifications.length === 0" class="px-4 py-8 text-center text-gray-500">
-            <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
             </svg>
             <p>No notifications</p>
           </div>
 
           <div v-else>
-            <div
-              v-for="notification in notifications"
-              :key="notification.id"
-              @click="markAsRead(notification.id)"
+            <div v-for="notification in notifications" :key="notification.id" @click="markAsRead(notification.id)"
               class="px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-[#EAF2EA] transition-colors duration-200 cursor-pointer"
-              :class="{ 'bg-[#F5F9F5]': !notification.read }"
-            >
+              :class="{ 'bg-[#F5F9F5]': !notification.read }">
               <div class="flex items-start gap-3">
                 <!-- Icon -->
-                <div
-                  class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
-                  :class="notification.iconBg"
-                >
-                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <div class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+                  :class="notification.iconBg">
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path :d="notification.iconPath"></path>
                   </svg>
                 </div>
@@ -75,18 +59,12 @@
                 <div class="flex-1 min-w-0">
                   <div class="flex items-start justify-between gap-2">
                     <h4 class="text-sm font-semibold text-gray-800 truncate">
-                      {{ notification.title }}
+                      {{ $t(`common.${notification.content}`) }}
                     </h4>
-                    <span
-                      v-if="!notification.read"
-                      class="shrink-0 w-2 h-2 bg-[#2C702C] rounded-full mt-1"
-                    ></span>
+                    <span v-if="!notification.read" class="shrink-0 w-2 h-2 bg-[#2C702C] rounded-full mt-1"></span>
                   </div>
-                  <p class="text-sm text-gray-600 mt-0.5 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
-                    {{ notification.description }}
-                  </p>
                   <span class="text-xs text-gray-500 mt-1 inline-block">
-                    {{ notification.timestamp }}
+                    {{ notification.created_at_for_humans }}
                   </span>
                 </div>
               </div>
@@ -96,11 +74,10 @@
 
         <!-- Footer -->
         <div class="px-4 py-3 border-t border-gray-200 text-center">
-          <button
-            class="text-sm text-[#2C702C] hover:text-[#235a23] font-medium transition-colors duration-200"
-          >
+          <router-link to="/profile/notifications"
+            class="text-sm text-[#2C702C] hover:text-[#235a23] font-medium transition-colors duration-200">
             View all notifications
-          </button>
+          </router-link>
         </div>
       </div>
     </transition>
@@ -108,13 +85,16 @@
 </template>
 
 <script>
+import profileService from '@/services/profileService';
+
 export default {
   name: 'NotificationDropdown',
 
   data() {
     return {
       isOpen: false,
-      notifications: [
+      notifications: [],
+      notificationss: [
         {
           id: 1,
           title: 'New comment on your post',
@@ -180,21 +160,26 @@ export default {
   },
 
   methods: {
+    async fetchNotifications() {
+      try {
+        const response = await profileService.getNotifications();
+        this.notifications = response.data.notifications || response.data;
+      } catch (error) {
+        this.$toast.error(error?.response?.data.message || 'Failed to fetch notifications.');
+      }
+    },
     toggleDropdown() {
       this.isOpen = !this.isOpen;
     },
 
-    markAsRead(id) {
-      const notification = this.notifications.find(n => n.id === id);
-      if (notification) {
-        notification.read = true;
-      }
+    async markAsRead(id) {
+      await profileService.markNotificationAsRead(id);
+      this.fetchNotifications();
     },
 
-    markAllAsRead() {
-      this.notifications.forEach(n => {
-        n.read = true;
-      });
+    async markAllAsRead() {
+      await profileService.markNotificationsAsRead();
+      this.fetchNotifications();
     },
 
     handleClickOutside(event) {
@@ -206,6 +191,7 @@ export default {
 
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
+    this.fetchNotifications();
   },
 
   beforeUnmount() {
@@ -221,5 +207,4 @@ export default {
 [data-theme="forest"] .text-primary {
   color: #16af3f !important;
 }
-
 </style>
