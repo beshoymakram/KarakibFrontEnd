@@ -44,4 +44,16 @@ export default {
   cancelRequest(id) {
     return apiClient.put('/profile/requests/' + id + '/cancel');
   },
+
+  getNotifications() {
+    return apiClient.get('/profile/notifications');
+  },
+
+  markNotificationsAsRead() {
+    return apiClient.post('/profile/notifications/read');
+  },
+
+  markNotificationAsRead(id) {
+    return apiClient.post('/profile/notifications/' + id + '/read');
+  },
 };

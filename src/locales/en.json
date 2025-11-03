@@ -406,6 +406,7 @@
     "paid": "Paid",
     "collected": "Collected",
     "wasteItemsToCollect": "Waste Items to Collect",
+    "welcome_to_karakib": "Welcome to karakib!",
     "noWasteItems": "No waste items to collect"
   }
 }
