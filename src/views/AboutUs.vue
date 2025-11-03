@@ -340,10 +340,10 @@
           </div>
 
           <div
-            class="bg-green-50 border border-green-100 rounded-lg p-4 sm:p-6 text-gray-700"
+            class="bg-green-50 border border-green-100 rounded-lg p-4 mt-5 sm:p-6 text-gray-700"
             v-if="openFaq !== null"
           >
-            <p class="text-xs sm:text-sm md:text-base font-light">{{ faqs[openFaq].answer }}</p>
+            <p class="text-xs sm:text-sm md:text-base p-4 font-light">{{ faqs[openFaq].answer }}</p>
           </div>
         </div>
       </section>
@@ -380,7 +380,7 @@
 
   <div class="mt-5 sm:mt-6 flex justify-center sm:justify-start">
     <button
-      class="px-4 sm:px-5 py-2 bg-green-600 text-white  font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
+      class="px-4 sm:px-5 py-2 bg-[#2C702C] text-white cursor-pointer font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
       @click="openTermsModal"
     >
       {{ $t("common.readFullPolicy") }}
@@ -492,7 +492,7 @@
           <div class="md:col-span-2 flex justify-center mt-3 sm:mt-4">
             <button
               type="submit"
-              class="px-5 sm:px-6 py-2 font-semibold bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
+              class="px-5 sm:px-6 py-2 font-semibold bg-[#2C702C] text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base cursor-pointer"
             >
               {{ $t("common.sendMessage") }}
             </button>
