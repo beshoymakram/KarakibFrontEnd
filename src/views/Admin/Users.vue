@@ -3,7 +3,7 @@
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.role"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-primary">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allRoles') }}</option>
           <option value="user">{{ $t('common.user') }}</option>
           <option value="courier">{{ $t('common.courier') }}</option>
@@ -14,7 +14,7 @@
 
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-primary">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="active">{{ $t('common.active') }}</option>
           <option value="suspended">{{ $t('common.suspended') }}</option>
