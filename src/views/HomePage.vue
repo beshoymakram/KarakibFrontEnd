@@ -306,7 +306,7 @@
         <p class="text-[#8E98A8] text-xs sm:text-sm md:text-base lg:text-lg mb-4">{{ card.description }}</p>
         <button
           @click="openDonationModal(card.name, card.title)"
-          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition"
+          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition cursor-pointer"
         >
           {{ $t("common.donate") }}
         </button>

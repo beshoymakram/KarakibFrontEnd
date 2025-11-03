@@ -55,7 +55,7 @@
             class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-sm font-bold no-active-style  rounded-lg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="none" stroke="currentColor"
               stroke-width="36" stroke-linecap="round" stroke-linejoin="round"
-              class="cart-icon  size-6 md:size-7 text-primary text-sm font-bold">
+              class="cart-icon  size-6 md:size-7 text-primary text-sm font-bold cursor-pointer">
               <path
                 d="M160 416a48 48 0 1 0 48 48 48 48 0 0 0-48-48Zm288 0a48 48 0 1 0 48 48 48 48 0 0 0-48-48Zm-279.6-96h281.2a32 32 0 0 0 31.1-24.3l47.6-208A16 16 0 0 0 512 80H128L112.5 16.5A16 16 0 0 0 97 8H24A8 8 0 0 0 16 16v16a8 8 0 0 0 8 8h58.8l70.3 281.2A32 32 0 0 0 168.4 320Z" />
             </svg>
@@ -69,7 +69,7 @@
           <!-- Authenticated User Dropdown -->
           <div v-if="auth.isAuthenticated" class="relative hidden lg:block" ref="profileDropdown">
             <button @click="profileDropdownOpen = !profileDropdownOpen"
-              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 cursor-pointer hover:scale-110">
               <img :src="auth.user?.avatar_url ||
                 'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')
                 " alt="Profile" class="size-8 rounded-full bg-base-200" />
