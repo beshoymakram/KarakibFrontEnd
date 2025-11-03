@@ -108,7 +108,17 @@
               {{ $t("common.register") }}
             </router-link>
           </div>
+          <!-- Dashboard (Admin only) -->
+          <router-link v-if="auth.isAuthenticated && auth.isAdmin" to="/admin"
+            class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
+            {{ $t("common.dashboard") }}
+          </router-link>
 
+          <!-- Dashboard (Courier only) -->
+          <router-link v-if="auth.isAuthenticated && auth.isCourier" to="/courier"
+            class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
+            {{ $t("common.courierDashboard") }}
+          </router-link>
           <!-- theme button -->
           <button @click="toggleTheme" class=" rounded-full transition-all duration-300 hover:scale-110"
             aria-label="Toggle theme">
@@ -129,17 +139,7 @@
           <!-- Language (always visible) -->
           <LanguageSwitcher />
 
-          <!-- Dashboard (Admin only) -->
-          <router-link v-if="auth.isAuthenticated && auth.isAdmin" to="/admin"
-            class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
-            {{ $t("common.dashboard") }}
-          </router-link>
 
-          <!-- Dashboard (Courier only) -->
-          <router-link v-if="auth.isAuthenticated && auth.isCourier" to="/courier"
-            class="hidden md:inline-flex items-center rounded-md border border-green-300 px-3 py-2 text-sm font-semibold text-primary hover:bg-green-200 hover:text-primary-content transition-colors">
-            {{ $t("common.courierDashboard") }}
-          </router-link>
         </div>
       </div>
     </div>
