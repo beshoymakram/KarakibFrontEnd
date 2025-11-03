@@ -70,7 +70,7 @@
               <div class="flex justify-between items-center mb-2">
                 <h3 class="font-semibold text-primary">{{ $t('common.deliveryAddress') }}</h3>
                 <button
-                  @click="showAddressModal = true"
+                  @click="openAddressModal"
                   class="bg-green-700 text-white px-4 py-1 rounded-md hover:bg-[#216b21] cursor-pointer"
                 >
                   {{ $t('common.enterNewAddress') }}
@@ -103,7 +103,7 @@
                     </div>
                   </div>
 
-                  <!-- 🗑️ Delete Button -->
+                  <!-- 🗑️ Delete Button — uses modal -->
                   <button
                     @click.stop="openDeleteModal(address.id)"
                     class=" font-bold text-md px-1"
@@ -179,73 +179,94 @@
       </div>
     </div>
 
-    <!-- 🏠 Address Modal -->
+    <!-- 🏠 Address Modal (simple light style + dark override) -->
     <div v-if="showAddressModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg p-6 w-[90%] max-w-md">
-        <h3 class="text-xl font-semibold text-[#2C702C] mb-4">
+      <div
+        :class="[
+          'rounded-lg p-6 w-[90%] max-w-md',
+          isDark ? 'bg-[#1c1c1c] border border-gray-700 shadow-lg' : 'bg-white'
+        ]"
+      >
+        <h3 :class="['text-xl font-semibold mb-4', isDark ? 'text-green-500' : 'text-[#2C702C]']">
           {{ $t('common.enterDeliveryAddress') }}
         </h3>
 
         <form @submit.prevent="confirmCreate" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-[#2C702C] mb-1">
+            <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.fullName') }}
             </label>
             <input
               v-model="createForm.name"
               type="text"
               required
-              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C702C]"
+              placeholder="Full Name"
+              :class="[
+                'w-full rounded-md px-3 py-2 focus:outline-none',
+                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+              ]"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-[#2C702C] mb-1">
+            <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.phoneNumber') }}
             </label>
             <input
               v-model="createForm.phone"
               type="text"
               required
-              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C702C]"
+              placeholder="Phone number"
+              :class="[
+                'w-full rounded-md px-3 py-2 focus:outline-none',
+                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+              ]"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-[#2C702C] mb-1">
+            <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.streetAddress') }}
             </label>
             <input
               v-model="createForm.street_address"
               type="text"
               required
-              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C702C]"
+              placeholder="Street address"
+              :class="[
+                'w-full rounded-md px-3 py-2 focus:outline-none',
+                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+              ]"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-[#2C702C] mb-1">
+            <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.city') }}
             </label>
             <input
               v-model="createForm.city"
               type="text"
               required
-              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2C702C]"
+              placeholder="City"
+              :class="[
+                'w-full rounded-md px-3 py-2 focus:outline-none',
+                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+              ]"
             />
           </div>
 
           <div class="flex justify-end gap-3 pt-4">
             <button
               type="button"
-              @click="showAddressModal = false"
-              class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100"
+              @click="closeAddressModal"
+              :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-700 hover:bg-[#2a2a2a] text-gray-300' : 'border border-gray-300 hover:bg-gray-100']"
             >
               {{ $t('common.cancel') }}
             </button>
             <button
               type="submit"
-              class="px-4 py-2 bg-[#2C702C] text-white rounded-md hover:bg-[#215921]"
+              :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-green-700 hover:bg-green-800' : 'bg-[#2C702C] hover:bg-[#215921]']"
             >
               {{ $t('common.save') }}
             </button>
@@ -254,22 +275,25 @@
       </div>
     </div>
 
-    <!-- 🗑️ Delete Confirmation Modal -->
-    <div v-if="showDeleteModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-xl p-6 w-[90%] max-w-sm text-center shadow-lg">
-        <p class="text-lg font-semibold text-[#2C702C] mb-4">
-          {{ $t('are You Sure To Delete this  Delivery Address') }}
+    <!-- Delete Confirmation Modal (simple style like your second file) -->
+    <div v-if="showDeleteModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+      <div :class="['rounded-lg p-6 w-[90%] max-w-sm text-center shadow-lg', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
+        <h3 :class="['text-xl font-bold mb-3', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+          {{ $t('Delete Address') || $t('are You Sure To Delete this  Delivery Address') }}
+        </h3>
+        <p :class="['mb-6', isDark ? 'text-gray-300' : 'text-gray-700']">
+          {{ $t('Are You Sure To Delete This Address') }}
         </p>
         <div class="flex justify-center gap-4">
           <button
             @click="cancelDelete"
-            class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100"
+            :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-600 text-gray-300 hover:bg-[#2a2a2a]' : 'border border-gray-300 hover:bg-gray-100']"
           >
-            {{ $t('cancel') }}
+            {{ $t('common.cancel') }}
           </button>
           <button
-            @click="confirmDelete"
-            class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+            @click="confirmDeleteAddress"
+            :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-red-600 hover:bg-red-700' : 'bg-red-600 hover:bg-red-700']"
           >
             {{ $t('common.delete') }}
           </button>
@@ -278,21 +302,39 @@
     </div>
 
     <!-- ✅ Order Confirmation Modal -->
-    <div
-      v-if="showConfirmation"
-      class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
-    >
-      <div class="bg-white rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl">
+    <div v-if="showConfirmation" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div :class="['rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
         <img src="/images/delivery.png" alt="Delivery Truck" class="w-48 mx-auto mb-4" />
-        <p class="text-[#2C702C] text-lg font-semibold">
-          {{ $t('thank You For Supporting Karakib') }}
+        <p :class="['text-lg font-semibold', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+          {{ $t('common.thankYouForSupportingKarakib') }}
         </p>
         <button
           @click="closeConfirmation"
-          class="mt-6 px-6 py-2 bg-[#2C702C] text-white rounded-md hover:bg-[#1a4d1a]"
+          :class="['mt-6 px-6 py-2 rounded-md text-white', isDark ? 'bg-green-700 hover:bg-green-800' : 'bg-[#2C702C] hover:bg-[#1a4d1a]']"
         >
-          {{ $t('close') }}
+          {{ $t('common.close') }}
         </button>
+      </div>
+    </div>
+
+    <!-- Redirecting Modal -->
+    <div v-if="isRedirecting" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div :class="['rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
+        <div :class="isDark ? 'text-green-500 text-lg font-semibold' : 'text-[#2C702C] text-lg font-semibold'">
+          <div role="status" class="mx-auto text-center">
+            <svg aria-hidden="true"
+              class="w-8 h-8 text-gray-200 animate-spin fill-current mx-auto my-3"
+              viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor" />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill" />
+            </svg>
+          </div>
+          <small :class="isDark ? 'text-gray-300' : ''">{{ $t('common.youAreBeingRedirectedToCompletePayment') }}</small>
+        </div>
       </div>
     </div>
   </div>
@@ -312,7 +354,7 @@ export default {
       showAddressModal: false,
       showDeleteModal: false,
       showConfirmation: false,
-      addressToDelete: null,
+      isRedirecting: false,
       selectedAddressId: '',
       addresses: [],
       createForm: {
@@ -323,6 +365,8 @@ export default {
       },
       paymentMethod: "",
       deliveryNotes: "",
+      deleteId: null,
+      isDark: false, // tracks current theme for conditional classes
     };
   },
   computed: {
@@ -342,24 +386,16 @@ export default {
         this.$toast.error(error?.response?.data.message || 'Failed to fetch addresses.');
       }
     },
-    openDeleteModal(id) {
-      this.addressToDelete = id;
-      this.showDeleteModal = true;
+
+    openAddressModal() {
+      this.showAddressModal = true;
     },
-    cancelDelete() {
-      this.showDeleteModal = false;
-      this.addressToDelete = null;
+    closeAddressModal() {
+      this.showAddressModal = false;
+      // keep form values or reset depending on desired UX:
+      this.createForm = { name: '', phone: '', street_address: '', city: '' };
     },
-    async confirmDelete() {
-      try {
-        await profileService.deleteAddress(this.addressToDelete);
-        this.$toast.success(this.$t('address Deleted Successfully'));
-        this.showDeleteModal = false;
-        this.fetchAddresses();
-      } catch (error) {
-        this.$toast.error(error?.response?.data?.message || 'Failed to delete address');
-      }
-    },
+
     async confirmCreate() {
       try {
         const response = await profileService.createAddress(this.createForm);
@@ -368,63 +404,158 @@ export default {
         this.createForm = { name: '', phone: '', street_address: '', city: '' };
         this.fetchAddresses();
       } catch (error) {
-        this.$toast.error(error.response.data.message);
+        this.$toast.error(error.response?.data?.message || 'Failed to create address.');
       }
     },
+
+    openDeleteModal(id) {
+      this.deleteId = id;
+      this.showDeleteModal = true;
+    },
+    cancelDelete() {
+      this.deleteId = null;
+      this.showDeleteModal = false;
+    },
+    async confirmDeleteAddress() {
+      try {
+        await profileService.deleteAddress(this.deleteId);
+        this.$toast.success(this.$t('Address Deleted Successfully'));
+        this.showDeleteModal = false;
+        this.deleteId = null;
+        this.fetchAddresses();
+      } catch (error) {
+        this.$toast.error(error?.response?.data?.message || 'Failed to delete address');
+      }
+    },
+
     async placeOrder() {
       if (!this.selectedAddressId) {
         if (this.addresses.length < 1) {
-          this.$toast.error(this.$t('add Delivery Address First'));
+          this.$toast.error(this.$t('Add Delivery Address First'));
           return;
         }
-        this.$toast.error(this.$t('please Select Delivery Address'));
+        this.$toast.error(this.$t('Please Select Delivery Address'));
         return;
       }
+
       if (!this.paymentMethod) {
-        this.$toast.error(this.$t('please Select Payment Method'));
+        this.$toast.error(this.$t('Please Select PaymentMethod'));
         return;
       }
+
+      if (this.paymentMethod === 'card') {
+        this.isRedirecting = true;
+      }
+
       try {
         const response = await checkoutService.checkout({
           user_address_id: this.selectedAddressId,
           payment_method: this.paymentMethod,
           notes: this.deliveryNotes,
         });
-        if (response.data.url) window.location.href = response.data.url;
+
+        if (response.data.url) {
+          window.location.href = response.data.url;
+        }
+
         if (this.paymentMethod === 'cash') {
           this.showConfirmation = true;
           soundPlayer.play('success');
         }
       } catch (error) {
-        this.$toast.error(error.response.data.message);
+        this.$toast.error(error.response?.data?.message || 'Checkout failed.');
+      } finally {
+        this.isRedirecting = false;
       }
     },
+
     closeConfirmation() {
       this.showConfirmation = false;
       this.$router.push("/");
     },
+
+    // Theme helper - uses prefers-color-scheme and listens for changes.
+    applySystemTheme() {
+      const m = window.matchMedia('(prefers-color-scheme: dark)');
+      const update = () => {
+        if (m.matches) {
+          document.documentElement.setAttribute('data-theme', 'forest');
+          this.isDark = true;
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          this.isDark = false;
+        }
+      };
+      update();
+      // listen for changes
+      if (m.addEventListener) {
+        m.addEventListener('change', update);
+      } else if (m.addListener) {
+        m.addListener(update); // for older browsers
+      }
+    },
   },
   async mounted() {
     await this.cartStore.fetchCart();
-    if (this.cartStore.products?.length === 0) this.$router.push("/cart");
+    if (this.cartStore.products?.length === 0) {
+      this.$router.push("/cart");
+    }
     this.fetchAddresses();
+    this.applySystemTheme();
   },
 };
 </script>
 
 <style scoped>
+/* LIGHT MODE (default) colors — match your original first file */
 .text-primary {
   color: #2c702c !important;
 }
+
 .bg-primary {
   background-color: #F5F7F5 !important;
 }
+
 .bg-secondary {
-  background-color: #fff;
+  background-color: #ffffff;
 }
+
 .bg-address {
   background-color: #f6f9f6;
 }
-</style>
 
+.text-section {
+  color: black !important;
+}
+
+/* DARK MODE overrides when DaisyUI data-theme="forest" is set on <html> */
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(66, 66, 66) !important;
+}
+
+[data-theme="forest"] .bg-secondary {
+  background-color: rgb(43, 43, 43) !important;
+}
+
+[data-theme="forest"] .bg-address {
+  background-color: #545554;
+}
+
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+/* small UI niceties */
+.rounded-xl { border-radius: 12px; }
+.rounded-2xl { border-radius: 16px; }
+
+/* ensure modals overlay look consistent */
+.fixed.inset-0 { z-index: 50; }
+
+/* spinner fill for light/dark handled inline by classes, keep fallback */
+</style>
 
