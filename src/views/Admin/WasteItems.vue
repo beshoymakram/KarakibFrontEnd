@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="bg-tabs rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <button @click="openCreateModal()"
@@ -10,7 +10,7 @@
 
       <div class="relative">
         <select v-model="filters.waste_type_id"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allTypes') }}</option>
           <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
         </select>
@@ -19,7 +19,7 @@
 
       <div class="relative">
         <select v-model="filters.unit"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">All Units</option>
           <option value="kg">KG</option>
           <option value="piece">By Piece</option>
@@ -42,10 +42,10 @@
     </div>
   </div>
 
-  <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <div class="bg-tabs rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
-        <thead class="bg-gray-50 border-b border-gray-200">
+        <thead class="bg-tabs border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Name
             </th>
@@ -60,21 +60,21 @@
             </th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-tabs divide-y divide-gray-200">
           <tr v-if="filteredItems.length === 0">
             <td colspan="5" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
 
-          <tr v-for="item in filteredItems" :key="item.id" class="hover:bg-gray-50 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+          <tr v-for="item in filteredItems" :key="item.id" class="transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ item.name }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ item.waste_type?.name }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ item.points_per_unit }}/{{ item.unit }}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-[#2C702C]">
@@ -82,7 +82,7 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openEditModal(item)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 {{ $t('common.edit') }}
               </button>
               <button @click="openDeleteModal(item)"
@@ -504,5 +504,52 @@ export default {
 <style scoped>
 select {
   background-image: none;
+}
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: #BFD6BF !important;
+}
+
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(57, 57, 57) !important;
+}
+
+.text-secondary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+
+.text-section {
+  color: black !important;
+}
+
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+.bg-myprofile {
+  background-color: #BFD6BF;
+}
+
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+
+.bg-tabs {
+  background-color: #ffffff;
+}
+
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
 }
 </style>
