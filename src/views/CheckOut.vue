@@ -475,25 +475,35 @@ export default {
     },
 
     // Theme helper - uses prefers-color-scheme and listens for changes.
-    applySystemTheme() {
-      const m = window.matchMedia('(prefers-color-scheme: dark)');
-      const update = () => {
-        if (m.matches) {
-          document.documentElement.setAttribute('data-theme', 'forest');
-          this.isDark = true;
-        } else {
-          document.documentElement.removeAttribute('data-theme');
-          this.isDark = false;
-        }
-      };
-      update();
-      // listen for changes
-      if (m.addEventListener) {
-        m.addEventListener('change', update);
-      } else if (m.addListener) {
-        m.addListener(update); // for older browsers
-      }
-    },
+applySystemTheme() {
+  // ✅ If a theme is already set (from layout or user toggle), respect it.
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  if (currentTheme) {
+    this.isDark = currentTheme === 'forest';
+    return;
+  }
+
+  // ✅ Otherwise, use system preference
+  const m = window.matchMedia('(prefers-color-scheme: dark)');
+  const update = () => {
+    if (m.matches) {
+      document.documentElement.setAttribute('data-theme', 'forest');
+      this.isDark = true;
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      this.isDark = false;
+    }
+  };
+  update();
+
+  // ✅ Watch for system theme changes
+  if (m.addEventListener) {
+    m.addEventListener('change', update);
+  } else if (m.addListener) {
+    m.addListener(update); // older browsers
+  }
+},
+
   },
   async mounted() {
     await this.cartStore.fetchCart();
