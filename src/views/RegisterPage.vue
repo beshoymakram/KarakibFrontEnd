@@ -61,7 +61,7 @@
   border: 1.5px solid #f44336 !important;
 }
 
-/* 👁️ Eye icon styling */
+/* Eye icon styling */
 .password-wrapper {
   position: relative;
   width: 100%;
@@ -104,8 +104,33 @@
           <div class="w-full max-w-md">
             <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-center mb-6 lg:mb-8">{{ $t('common.register') }}</h1>
 
-            <!-- Google Register Button -->
-            <button @click="handleGoogleRegister" type="button"
+            <!-- User Type Selection -->
+            <div class="mb-6 text-center">
+              <p class="font-semibold text-base mb-3">Are you a user or joining as a Collector?</p>
+              <div class="flex justify-center gap-4">
+                <button
+                  type="button"
+                  @click="form.type = 'user'"
+                  :class="['px-4 py-2 rounded-lg font-medium border transition-all',
+                    form.type === 'user'
+                      ? 'bg-[#317C31] text-white border-[#317C31]'
+                      : 'bg-tabs text-section border-gray-300 hover:border-gray-400']">
+                  User
+                </button>
+                <button
+                  type="button"
+                  @click="form.type = 'collector'"
+                  :class="['px-4 py-2 rounded-lg font-medium border transition-all',
+                    form.type === 'collector'
+                      ? 'bg-[#317C31] text-white border-[#317C31]'
+                      : 'bg-tabs text-section border-gray-300 hover:border-gray-400']">
+                  Collector
+                </button>
+              </div>
+            </div>
+
+            <!-- Google Register Button (Hidden if Collector) -->
+            <button v-if="form.type === 'user'" @click="handleGoogleRegister" type="button"
               class="w-full flex items-center justify-center gap-3 bg-tabs border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all font-medium text-section px-4 py-3 rounded-lg mb-6 shadow-sm">
               <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -117,7 +142,7 @@
             </button>
 
             <!-- Divider -->
-            <div class="relative my-5 lg:my-6">
+            <div v-if="form.type === 'user'" class="relative my-5 lg:my-6">
               <div class="absolute inset-0 flex items-center">
                 <div class="w-full border-t border-gray-300"></div>
               </div>
@@ -144,6 +169,13 @@
                     placeholder="email@gmail.com" required>
                   <span v-if="errors.email" class="error-message">{{ emailErrorMessage }}</span>
                 </div>
+              </div>
+
+              <!-- Personal ID (Only for Collector) -->
+              <div v-if="form.type === 'collector'" class="form-group mb-4 flex flex-col w-full">
+                <label for="id" class="pb-2 font-medium text-sm lg:text-base">Upload Personal ID</label>
+                <input type="file" id="id" accept="image/*,.pdf"
+                  class="bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-2 focus:ring-[#317C31]" required>
               </div>
 
               <!-- Phone -->
@@ -284,3 +316,4 @@ export default {
   },
 };
 </script>
+
