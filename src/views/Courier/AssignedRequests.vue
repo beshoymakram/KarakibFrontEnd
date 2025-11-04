@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="bg-tabs rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
@@ -14,7 +14,7 @@
 
       <div class="relative">
         <select v-model="filters.payout_method"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-white">
+          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allPayoutMethods') }}</option>
           <option value="earn">{{ $t('common.earnedPoints') }}</option>
           <option value="donate">{{ $t('common.donatedPoints') }}</option>
@@ -35,10 +35,10 @@
       </div>
     </div>
   </div>
-  <div class="bg-white rounded-lg shadow-sm overflow-hidden" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="bg-tabs rounded-lg shadow-sm overflow-hidden" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
-        <thead class="bg-gray-50 border-b border-gray-200">
+        <thead class="bg-tabs border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">#</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
@@ -53,18 +53,18 @@
               $t('common.action') }}</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-tabs divide-y divide-gray-200">
           <tr v-if="filteredRequests.length === 0">
             <td colspan="7" class="px-4 py-4 text-center text-gray-500">
               No results match your search
             </td>
           </tr>
 
-          <tr v-for="request, index in filteredRequests" :key="request.id" class="hover:bg-gray-50 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ index + 1 }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ request.request_number }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">{{ request.created_at }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]"><a
+          <tr v-for="request, index in filteredRequests" :key="request.id" class="transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ index + 1 }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ request.request_number }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ request.created_at }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary"><a
                 :href="'tel:+' + request.address?.phone">{{
                   request.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -78,11 +78,11 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button @click="openScanner(request)"
-                class="px-3 py-1 border border-green-300 rounded-md text-[#2C702C] hover:bg-green-50 transition-colors cursor-pointer">
+                class="px-3 py-1 border border-green-300 rounded-md text-primary hover:bg-green-50 transition-colors cursor-pointer">
                 {{ $t('common.collect') }}
               </button>
               <button @click="openDetailsModal(request)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                class="px-3 py-1 border border-gray-300 rounded-md text-section cursor-pointer">
                 {{ $t('common.details') }}
               </button>
             </td>
@@ -457,4 +457,52 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: #BFD6BF !important;
+}
+
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(57, 57, 57) !important;
+}
+
+.text-secondary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+
+.text-section {
+  color: black !important;
+}
+
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+.bg-myprofile {
+  background-color: #BFD6BF;
+}
+
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+
+.bg-tabs {
+  background-color: #ffffff;
+}
+
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
+}
+</style>
