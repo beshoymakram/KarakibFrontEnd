@@ -2,14 +2,14 @@
   <!-- Recycling Waste Types Section -->
   <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative ">
     <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8">
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8 pt-5">
       {{ $t("common.recyclingWasteTypes") }}
     </p>
     <p class="text-sm sm:text-lg md:text-xl text-primary py-4 md:py-5 font-semibold text-center md:text-start">
       {{ $t("common.selectAWasteType") }}
     </p>
     <!-- Carousel Wrapper -->
-    <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0 -mb-10">
+    <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0 md:-mb-5">
       <!-- Left Arrow -->
       <button @click="scrollPrev"
         class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
