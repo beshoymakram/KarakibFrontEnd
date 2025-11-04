@@ -21,7 +21,7 @@
 
     <!-- content -->
     <div
-      class="relative flex flex-col sm:flex-row items-center justify-around text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 z-2"
+      class="relative flex flex-col sm:flex-row items-center justify-center text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 z-2"
     >
       <!-- Logo -->
       <img
@@ -33,7 +33,7 @@
       <!-- Text -->
 
       <p
-        class="max-w-6xl text-base sm:text-lg md:text-2xl lg:text-3xl text-primary font-semibold leading-relaxed text-center lg:max-w-fit"
+        class="max-w-6xl text-base sm:text-lg md:text-2xl lg:text-3xl text-primary font-semibold leading-relaxed  lg:max-w-fit"
       >
         {{ $t("common.supportKarakibMission") }}
       </p>
@@ -79,7 +79,7 @@
   </div>
 
   <div
-    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
   >
     <div
       v-for="(product, index) in filteredProducts"
@@ -92,7 +92,7 @@
           <img
             :src="product.image_url"
             :alt="product.name"
-            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain rounded-t-xl"
+            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain  hover:opacity-90 rounded-t-xl"
           />
         </figure>
 
