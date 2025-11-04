@@ -135,33 +135,102 @@
     </div>
 
     <!-- Address Modal -->
-    <div v-if="showAddressModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg p-6 w-[90%] max-w-md">
-        <h3 class="text-xl font-semibold text-[#2C702C] mb-4">
-          {{ $t('common.enterPickupAddress') }}
-        </h3>
+<!-- 🚚 Pickup Address Modal (styled like delivery modal) -->
+<div v-if="showAddressModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+  <div
+    :class="[
+      'rounded-lg p-6 w-[90%] max-w-md',
+      isDark ? 'bg-[#1c1c1c] border border-gray-700 shadow-lg' : 'bg-white'
+    ]"
+  >
+    <h3 :class="['text-xl font-semibold mb-4', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+      {{ $t('common.enterPickupAddress') }}
+    </h3>
 
-        <form @submit.prevent="confirmCreate" class="space-y-3">
-          <input v-model="createForm.name" type="text" :placeholder="$t('common.fullName')" required
-            class="w-full border border-gray-300 rounded-md px-3 py-2" />
-          <input v-model="createForm.phone" type="text" :placeholder="$t('common.phoneNumber')" required
-            class="w-full border border-gray-300 rounded-md px-3 py-2" />
-          <input v-model="createForm.street_address" type="text" :placeholder="$t('common.streetAddress')" required
-            class="w-full border border-gray-300 rounded-md px-3 py-2" />
-          <input v-model="createForm.city" type="text" :placeholder="$t('common.city')" required
-            class="w-full border border-gray-300 rounded-md px-3 py-2" />
-
-          <div class="flex justify-end gap-3 pt-3">
-            <button type="button" @click="showAddressModal = false" class="px-4 py-2 border border-gray-300 rounded-md">
-              {{ $t('common.cancel') }}
-            </button>
-            <button type="submit" class="px-4 py-2 bg-[#2C702C] text-white rounded-md hover:bg-[#215921]">
-              {{ $t('common.save') }}
-            </button>
-          </div>
-        </form>
+    <form @submit.prevent="confirmCreate" class="space-y-4">
+      <div>
+        <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+          {{ $t('common.fullName') }}
+        </label>
+        <input
+          v-model="createForm.name"
+          type="text"
+          required
+          :placeholder="$t('common.fullName')"
+          :class="[
+            'w-full rounded-md px-3 py-2 focus:outline-none',
+            isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+          ]"
+        />
       </div>
-    </div>
+
+      <div>
+        <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+          {{ $t('common.phoneNumber') }}
+        </label>
+        <input
+          v-model="createForm.phone"
+          type="text"
+          required
+          :placeholder="$t('common.phoneNumber')"
+          :class="[
+            'w-full rounded-md px-3 py-2 focus:outline-none',
+            isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+          ]"
+        />
+      </div>
+
+      <div>
+        <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+          {{ $t('common.streetAddress') }}
+        </label>
+        <input
+          v-model="createForm.street_address"
+          type="text"
+          required
+          :placeholder="$t('common.streetAddress')"
+          :class="[
+            'w-full rounded-md px-3 py-2 focus:outline-none',
+            isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+          ]"
+        />
+      </div>
+
+      <div>
+        <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+          {{ $t('common.city') }}
+        </label>
+        <input
+          v-model="createForm.city"
+          type="text"
+          required
+          :placeholder="$t('common.city')"
+          :class="[
+            'w-full rounded-md px-3 py-2 focus:outline-none',
+            isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+          ]"
+        />
+      </div>
+
+      <div class="flex justify-end gap-3 pt-4">
+        <button
+          type="button"
+          @click="showAddressModal = false"
+          :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-700 hover:bg-[#2a2a2a] text-gray-300' : 'border border-gray-300 hover:bg-gray-100']"
+        >
+          {{ $t('common.cancel') }}
+        </button>
+        <button
+          type="submit"
+          :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-green-700 hover:bg-green-800' : 'bg-[#2C702C] hover:bg-[#215921]']"
+        >
+          {{ $t('common.save') }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
     <!-- ✅ Order Confirmation Modal -->
     <div v-if="showConfirmation" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <div class="bg-white rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl">
@@ -201,6 +270,8 @@ export default {
       },
       payoutMethod: "",
       pickupNotes: "",
+      isDark: false
+
     };
   },
   computed: {
@@ -273,7 +344,20 @@ export default {
     if (this.cartStore.waste?.length === 0) {
       this.$router.push("/cart");
     }
-    this.fetchAddresses();
+  this.fetchAddresses();
+  const setTheme = () => {
+    this.isDark = document.documentElement.dataset.theme === "forest";
+  };
+
+  setTheme();
+
+  // When theme changes manually
+  const observer = new MutationObserver(setTheme);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"]
+  });
+
   },
 };
 </script>

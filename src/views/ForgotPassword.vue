@@ -3,7 +3,8 @@
     <div class="w-full max-w-6xl mx-auto">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
-        <!-- Form -->
+        
+        <!-- Left (Form) -->
         <div
           :class="[
             'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-white', 'flex', 'justify-center', 'items-center', 'rounded-t-xl', 'relative',
@@ -23,8 +24,14 @@
               <div class="form-group mb-6 flex flex-col w-full">
                 <label class="pb-2 font-medium text-base" for="email">{{ $t('common.email') }}</label>
                 <input
-                  class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#317C31]"
-                  placeholder="email@gmail.com" id="email" v-model="email" type="email" required />
+                  v-model="email"
+                  type="email"
+                  id="email"
+                  placeholder="email@gmail.com"
+                  :class="['shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] border-0 px-4 py-3 rounded-lg text-base focus:outline-none focus:ring-2', errorMessage ? 'input-error' : 'focus:ring-[#317C31]']"
+                  required
+                />
+                <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
               </div>
 
               <button type="submit" :disabled="loading"
@@ -34,29 +41,37 @@
             </form>
           </div>
 
-          <!-- Go Back Link -->
+          <!-- Go Back -->
           <router-link to="/login"
             :class="['absolute', 'bottom-8', $i18n.locale === 'ar' ? 'right-8' : 'left-8', 'flex', 'items-center', 'gap-2', 'text-[#317C31]', 'hover:underline', 'font-semibold', 'text-base']">
             {{ $t('common.goBack') }}
           </router-link>
         </div>
 
-        <!-- Right Side - Banner -->
+        <!-- Right (Banner) -->
         <div
           :class="[
             'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-[#EAF2EA]', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-b-xl',
             $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-tl-none'
           ]">
-
           <img class="w-full max-w-md mx-auto mb-8"
             src="../../public/images/young-guy-carrying-bag-with-garbage-trash-bin.png" alt="Recycling illustration">
-
           <h2 class="font-extrabold text-2xl lg:text-3xl text-[#317C31] px-4">
             {{ $t('common.letsGetBackOnJourney') }}
           </h2>
         </div>
       </div>
     </div>
+
+    <!-- ✅ Popup Modal -->
+    <transition name="fade">
+      <div v-if="showPopup" class="popup-overlay">
+        <div class="popup-box">
+          <div class="icon">✅</div>
+          <p>Verification code was sent to your email</p>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -70,32 +85,102 @@ export default {
     return {
       email: '',
       loading: false,
+      errorMessage: '',
+      showPopup: false,
     };
   },
 
   methods: {
     async handleSubmit() {
       this.loading = true;
+      this.errorMessage = '';
 
       try {
         const response = await resetPasswordService.forgotPassword({ email: this.email });
-        this.$toast.success(response.data.message);
 
-        sessionStorage.setItem('reset_email', this.email)
-        sessionStorage.removeItem('reset_token')
+        // ✅ Show popup message
+        this.showPopup = true;
 
+        sessionStorage.setItem('reset_email', this.email);
+        sessionStorage.removeItem('reset_token');
+
+        // Hide popup and redirect
         setTimeout(() => {
-          this.$router.push({ name: 'verify-code' })
-        }, 1500);
-
-      }
+          this.showPopup = false;
+          this.$router.push({ name: 'verify-code' });
+        }, 2000);
+      } 
       catch (error) {
-        this.$toast.error('Failed to send verification code. Please try again.');
         console.error('Error:', error);
-      } finally {
+        if (error.response && error.response.data && error.response.data.message) {
+          this.errorMessage = error.response.data.message;
+        } else {
+          this.errorMessage = 'No account found with this email address';
+        }
+      } 
+      finally {
         this.loading = false;
       }
     },
   },
 };
 </script>
+
+<style scoped>
+.error-message {
+  color: #f44336;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.input-error {
+  border: 1.5px solid #f44336 !important;
+}
+
+/* ✅ Popup styles */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-box {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c702c;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon {
+  font-size: 2.5rem;
+  color: #2c702c;
+  animation: pop 0.4s ease;
+}
+
+/* Simple pop animation */
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Smooth fade animation */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+</style>
+

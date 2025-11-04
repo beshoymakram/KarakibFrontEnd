@@ -1,10 +1,38 @@
 <template>
-  <!-- Recycling Waste Types Section -->
+<section
+  class="relative w-full left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] hero min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden"
+>
+  <img
+    src="/images/wastebg.png"
+    alt="Background"
+    class="absolute inset-0 w-full h-full object-cover -z-10"
+  />
+  <div
+  class="absolute inset-0"
+  :style="{
+    background:
+      currentTheme === 'forest'
+        ? 'linear-gradient(to bottom, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.6) 50%, rgba(17,17,17,0.5) 100%, rgba(17,17,17,0) 100%)'
+        : 'linear-gradient(to bottom, rgba(233,235,248,0.7) 0%, rgba(233,235,248,0.6) 50%, rgba(233,235,248,0.5) 100%, rgba(233,235,248,0) 100%)',
+  }"
+  ></div>
+
+  <!-- Text -->
+  <h2
+    class="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold drop-shadow-xl text-center"
+  >
+    {{ $t("common.recyclingWasteTypes") }}
+  </h2>
+</section>
+
   <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative ">
+<<<<<<< HEAD
     <p
       class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8 pt-5">
       {{ $t("common.recyclingWasteTypes") }}
     </p>
+=======
+>>>>>>> fc544a6b0df0bdb1a643e38483175bb3c4661259
     <p class="text-sm sm:text-lg md:text-xl text-primary py-4 md:py-5 font-semibold text-center md:text-start">
       {{ $t("common.selectAWasteType") }}
     </p>
@@ -128,6 +156,8 @@ export default {
       types: [],
       items: [],
       cartStore: useCartStore(),
+      currentTheme: document.documentElement.getAttribute("data-theme") || "light",
+      _themeObserver: null, // will hold the MutationObserver
     };
   },
 
@@ -210,6 +240,29 @@ export default {
   mounted() {
     this.fetchTypes();
     this.fetchItems();
+        // Observe <html data-theme=""> attribute changes and update currentTheme reactively
+    const setTheme = () => {
+      this.currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+    };
+
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.type === "attributes" && m.attributeName === "data-theme") {
+          setTheme();
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+    // store observer so we can disconnect later
+    this._themeObserver = observer;
+  },
+    beforeUnmount() {
+    if (this._themeObserver) {
+      this._themeObserver.disconnect();
+      this._themeObserver = null;
+    }
   },
 };
 </script>
