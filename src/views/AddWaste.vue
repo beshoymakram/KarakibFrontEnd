@@ -26,14 +26,7 @@
 </section>
 
   <section class="bg-primary px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative ">
-<<<<<<< HEAD
-    <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-2xl mb-6 md:mb-8 pt-5">
-      {{ $t("common.recyclingWasteTypes") }}
-    </p>
-=======
->>>>>>> fc544a6b0df0bdb1a643e38483175bb3c4661259
-    <p class="text-sm sm:text-lg md:text-xl text-primary py-4 md:py-5 font-semibold text-center md:text-start">
+    <p class="text-sm sm:text-lg md:text-xl lg:text-2xl text-primary py-4 md:py-5 font-semibold text-center md:text-start">
       {{ $t("common.selectAWasteType") }}
     </p>
     <!-- Carousel Wrapper -->
