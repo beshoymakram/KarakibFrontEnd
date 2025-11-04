@@ -1,29 +1,29 @@
 <template>
   <div class="min-h-screen bg-prod py-6 md:py-8 px-4">
     <div v-if="product" class="max-w-6xl mx-auto">
-      <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 bg-item rounded-lg shadow-sm">
+      <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-12 bg-item rounded-xl shadow-sm">
         <!-- Product Section -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-4   mx-4 lg:mx-10 md:gap-6 lg:gap-8 mb-10 md:mb-12 lg:mb-16"
+          class="grid grid-cols-1 lg:grid-cols-2 just  mx-6 lg:mx-12 gap-2  md:gap-4 lg:gap-6 mb-1 md:mb-2 lg:mb-16"
         >
           <!-- Image Gallery -->
-          <div class="">
+          <div class="lg:flex-start mx-auto  ">
             <div
-              class="bg-white rounded-2xl overflow-hidden mb-3 md:mb-4 shadow-sm max-w-[80vw] lg:max-w-110"
+              class="bg-white  rounded-2xl overflow-hidden  mb-3 md:mb-4 shadow-sm max-w-[70vw] lg:max-w-100"
             >
               <img
                 :src="selectedImage"
                 alt="Product"
-                class="w-full h-64 sm:h-80 md:h-96 lg:h-100 object-contain"
+                class="w-full h-62 sm:h-76 md:h-94 lg:h-90 object-contain"
               />
             </div>
-            <div class="flex gap-2 md:gap-3">
+            <div class="flex gap-2 md:gap-3 ">
               <button
                 v-for="(image, index) in productImages"
                 :key="index"
                 @click="selectedImage = image"
                 :class="[
-                  'w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden border-2 transition-all',
+                  'w-10 h-10 sm:w-12 sm:h-12  rounded-lg overflow-hidden border-2 transition-all',
                   selectedImage === image ? 'border-[#2C702C]' : 'border-gray-200',
                 ]"
               >
@@ -33,12 +33,12 @@
           </div>
 
           <!-- Product Info -->
-          <div>
-            <div class="flex flex-start justify-between flex-row">
-              <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary lg:pt-4 ">
+          <div class="flex-start">
+            <div class="flex flex-start justify-between flex-row  lg:pt-4">
+              <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary  ">
               {{ product.name }}
             </h1>
-            <p class=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-1 md:mb-2 lg:mb-4">
+            <p class=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-primary mb-1 md:mb-2 lg:mb-4">
               {{ product.price }} {{ $t("common.currency") }}
             </p>
           </div>
@@ -87,7 +87,7 @@
                   :key="color.value"
                   @click="selectedColor = color.value"
                   :class="[
-                    'w-4 h-4 sm:w-8 sm:h-8 rounded-full border  transition-all cursor-pointer',
+                    'w-4 h-4 sm:w-6 sm:h-6 rounded-full border  transition-all cursor-pointer',
                     selectedColor === color.value
                       ? 'border-[#2C702C] ring-1 ring-[#2C702C] ring-offset-2'
                       : 'border-gray-300',
@@ -109,7 +109,7 @@
                   :key="size"
                   @click="selectedSize = size"
                   :class="[
-                    'px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer',
+                    'px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer',
                     selectedSize === size
                       ? 'bg-[#2C702C] text-white'
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-[#2C702C]',
@@ -121,15 +121,15 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+            <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
               <button
                 @click="addToCart(product.id)"
-                class="flex-1 bg-[#2C702C] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#234d23] transition-all shadow-md cursor-pointer"
+                class="flex-2 bg-[#2C702C] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#234d23] transition-all shadow-md cursor-pointer"
               >
                 Add to Cart
               </button>
               <button
-                class="flex-1 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md cursor-pointer"
+                class="flex-2 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md cursor-pointer"
               >
                 Checkout Now
               </button>
@@ -139,7 +139,7 @@
 
         <!-- Reviews Section -->
         <div class="px-2 sm:px-4 md:px-6 lg:px-8">
-          <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-secondary mb-5 md:mb-6 lg:mb-8">
+          <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-secondary mb-2 md:mb-4 lg:mb-6">
             Customer Reviews
           </h2>
 
@@ -174,7 +174,7 @@
             <!-- Rating Bars -->
             <div class="md:col-span-2 space-y-2 md:space-y-3">
               <div v-for="rating in [5, 4, 3, 2, 1]" :key="rating" class="flex items-center gap-4">
-                <span class="text-xs sm:text-sm font-medium text-primary w-6 sm:w-8"
+                <span class="text-xs sm:text-sm font-medium text-primary w-4 h-4 md:w-5 md:h-5"
                   >{{ rating }}★</span
                 >
                 <div class="flex-1 h-2 sm:h-3 bg-gray-200 rounded-full overflow-hidden">
@@ -205,18 +205,18 @@
                 />
                 <div class="flex-1 min-w-0">
                   <div
-                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 mb-2"
+                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 mb-1 md:mb-2"
                   >
-                    <h4 class="text-sm sm:text-base font-semibold text-[#112B11]">
+                    <h4 class="text-xs sm:text-sm md:text-base font-semibold text-[#112B11]">
                       {{ review.name }}
                     </h4>
                     <span class="text-xs sm:text-sm text-gray-500">{{ review.date }}</span>
                   </div>
-                  <div class="flex mb-2 md:mb-3">
+                  <div class="flex mb-1 md:mb-2">
                     <svg
                       v-for="i in 5"
                       :key="i"
-                      class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                      class="w-3 h-3 sm:w-4 sm:h-4"
                       :class="i <= review.rating ? 'text-yellow-400' : 'text-gray-300'"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -227,7 +227,7 @@
                     </svg>
                   </div>
                   <p
-                    class="text-sm sm:text-base text-gray-600 leading-relaxed"
+                    class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed"
                     :class="expandedReviews[review.id] ? '' : 'line-clamp-2'"
                   >
                     {{ review.comment }}
@@ -249,7 +249,7 @@
             <button
               v-if="reviews.length > 3"
               @click="toggleShowAllReviews"
-              class="px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-[#2C702C] text-[#2C702C] rounded-lg text-sm sm:text-base font-semibold hover:bg-[#2C702C] hover:text-white transition-all cursor-pointer"
+              class="px-4 sm:px-6 py-2 sm:py-3 border-2 border-[#2C702C] text-[#2C702C] rounded-lg text-sm sm:text-base font-semibold hover:bg-[#2C702C] hover:text-white transition-all cursor-pointer"
             >
               {{ showAllReviews ? "Show Less Reviews" : "View More Reviews" }}
             </button>
@@ -257,7 +257,7 @@
         </div>
       </div>
     </div>
-    <p v-else class="text-center text-sm sm:text-base text-[#2C702C] mt-16 md:mt-20">Loading product details...</p>
+    <p v-else class="text-center text-sm sm:text-base md:text-lg text-[#2C702C] mt-16 md:mt-20">Loading product details...</p>
   </div>
 </template>
 
