@@ -60,7 +60,7 @@
             </td>
           </tr>
 
-          <tr v-for="order, index in filteredOrders" :key="order.id" class="hover:bg-gray-50 transition-colors">
+          <tr v-for="order, index in filteredOrders" :key="order.id" class="transition-colors">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ index + 1 }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ order.order_number }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ order.created_at }}</td>
