@@ -4,17 +4,17 @@
       <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 bg-item rounded-lg shadow-sm">
         <!-- Product Section -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 mb-10 md:mb-12 lg:mb-16"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-4   mx-4 lg:mx-10 md:gap-6 lg:gap-8 mb-10 md:mb-12 lg:mb-16"
         >
           <!-- Image Gallery -->
-          <div>
+          <div class="">
             <div
-              class="bg-white rounded-2xl overflow-hidden mb-3 md:mb-4 shadow-sm max-w-full lg:max-w-[480px]"
+              class="bg-white rounded-2xl overflow-hidden mb-3 md:mb-4 shadow-sm max-w-[80vw] lg:max-w-110"
             >
               <img
                 :src="selectedImage"
                 alt="Product"
-                class="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] object-contain"
+                class="w-full h-64 sm:h-80 md:h-96 lg:h-100 object-contain"
               />
             </div>
             <div class="flex gap-2 md:gap-3">
@@ -23,7 +23,7 @@
                 :key="index"
                 @click="selectedImage = image"
                 :class="[
-                  'w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all',
+                  'w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden border-2 transition-all',
                   selectedImage === image ? 'border-[#2C702C]' : 'border-gray-200',
                 ]"
               >
@@ -34,16 +34,25 @@
 
           <!-- Product Info -->
           <div>
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-2 md:mb-3">
+            <div class="flex flex-start justify-between flex-row">
+              <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary lg:pt-4 ">
               {{ product.name }}
             </h1>
-            <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+            <p class=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-1 md:mb-2 lg:mb-4">
+              {{ product.price }} {{ $t("common.currency") }}
+            </p>
+          </div>
+            <!-- <h1 class=" hidden md:block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary lg:pt-4 ">
+              {{ product.name }}
+            </h1> -->
+
+            <div class="hidden sm:flex items-center gap-3 md:gap-4 mb-1 md:mb-2 lg:mb-4">
               <div class="flex items-center gap-2">
                 <div class="flex">
                   <svg
                     v-for="i in 5"
                     :key="i"
-                    class="w-4 h-4 sm:w-5 sm:h-5"
+                    class="w-3 h-3 sm:w-4 sm:h-4"
                     :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -53,23 +62,23 @@
                     />
                   </svg>
                 </div>
-                <span class="text-sm sm:text-base text-secondary font-medium"
+                <span class="text-[0.5rem] sm:text-xs text-secondary font-medium"
                   >{{ productRating }}/5</span
                 >
               </div>
-              <span class="text-gray-400">|</span>
-              <span class="text-sm sm:text-base text-secondary">{{ productSold }} Sold</span>
+              <span class="text-gray-400 text-[0.5rem] sm:text-xs">|</span>
+              <span class="text-[0.5rem] sm:text-xs text-secondary">{{ productSold }} Sold</span>
             </div>
-            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 md:mb-6">
+            <!-- <p class="hidden md:block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-1 md:mb-2 lg:mb-4">
               {{ product.price }} {{ $t("common.currency") }}
-            </div>
-            <p class="text-sm sm:text-base text-primary leading-relaxed mb-5 md:mb-6">
+            </p> -->
+            <p class="text-sm sm:text-base text-primary  mb-2 md:mb-4">
               {{ product.description }}
             </p>
 
             <!-- Color Selection -->
-            <div v-if="productColors.length > 0" class="mb-4 md:mb-5">
-              <h3 class="text-base sm:text-lg font-semibold text-secondary mb-2 md:mb-3">
+            <div v-if="productColors.length > 0" class="mb-2 md:mb-4">
+              <h3 class="text-sm sm:text-base font-semibold text-secondary mb-1 ">
                 Select Color
               </h3>
               <div class="flex gap-2 md:gap-3">
@@ -78,9 +87,9 @@
                   :key="color.value"
                   @click="selectedColor = color.value"
                   :class="[
-                    'w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 transition-all cursor-pointer',
+                    'w-4 h-4 sm:w-8 sm:h-8 rounded-full border  transition-all cursor-pointer',
                     selectedColor === color.value
-                      ? 'border-[#2C702C] ring-2 ring-[#2C702C] ring-offset-2'
+                      ? 'border-[#2C702C] ring-1 ring-[#2C702C] ring-offset-2'
                       : 'border-gray-300',
                   ]"
                   :style="{ backgroundColor: color.value }"
@@ -91,7 +100,7 @@
 
             <!-- Size Selection -->
             <div v-if="productSizes.length > 0" class="mb-6">
-              <h3 class="text-base sm:text-lg font-semibold text-secondary mb-2 md:mb-3">
+              <h3 class="text-sm sm:text-base font-semibold text-secondary mb-1 ">
                 Select Size
               </h3>
               <div class="flex flex-wrap gap-2 md:gap-3">
@@ -100,7 +109,7 @@
                   :key="size"
                   @click="selectedSize = size"
                   :class="[
-                    'px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition-all cursor-pointer',
+                    'px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer',
                     selectedSize === size
                       ? 'bg-[#2C702C] text-white'
                       : 'bg-white text-gray-700 border border-gray-300 hover:border-[#2C702C]',
@@ -130,7 +139,7 @@
 
         <!-- Reviews Section -->
         <div class="px-2 sm:px-4 md:px-6 lg:px-8">
-          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-secondary mb-5 md:mb-6 lg:mb-8">
+          <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-secondary mb-5 md:mb-6 lg:mb-8">
             Customer Reviews
           </h2>
 
@@ -140,14 +149,14 @@
           >
             <!-- Average Rating Card -->
             <div class="bg-[#EAF2EA] rounded-2xl p-5 md:p-6 lg:p-8 text-center">
-              <div class="text-4xl sm:text-5xl md:text-6xl font-bold text-[#2C702C] mb-2">
+              <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C702C] mb-2">
                 {{ productRating }}
               </div>
               <div class="flex justify-center mb-2">
                 <svg
                   v-for="i in 5"
                   :key="i"
-                  class="w-6 h-6"
+                  class="w-4 h-4 md:w-5 md:h-5"
                   :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -157,7 +166,7 @@
                   />
                 </svg>
               </div>
-              <div class="text-sm sm:text-base text-gray-600">
+              <div class="text-xs sm:text-sm md:text-base text-gray-600">
                 Based on {{ reviews.length }} reviews
               </div>
             </div>
@@ -192,7 +201,7 @@
                 <img
                   :src="review.avatar"
                   :alt="review.name"
-                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover flex-shrink-0"
+                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover shrink-0"
                 />
                 <div class="flex-1 min-w-0">
                   <div
