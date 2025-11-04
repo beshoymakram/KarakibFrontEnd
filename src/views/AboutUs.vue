@@ -417,7 +417,7 @@
     v-model="form.firstName"
     type="text"
     :placeholder="$t('common.enterFirstName')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
     :class="{ 'border-red-500': formErrors.firstName }"
   />
   <p v-if="formErrors.firstName" class="text-red-500 text-xs  md:text-sm mt-1">
@@ -433,7 +433,7 @@
     v-model="form.lastName"
     type="text"
     :placeholder="$t('common.enterLastName')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
     :class="{ 'border-red-500': formErrors.lastName }"
   />
   <p v-if="formErrors.lastName" class="text-red-500 text-xs  md:text-sm mt-1">
@@ -449,7 +449,7 @@
     v-model="form.email"
     type="email"
     :placeholder="$t('common.enterEmail')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
     :class="{ 'border-red-500': formErrors.email }"
   />
   <p v-if="formErrors.email" class="text-red-500 text-xs md:text-sm mt-1">
@@ -465,7 +465,7 @@
     v-model="form.subject"
     type="text"
     :placeholder="$t('common.enterSubject')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
     :class="{ 'border-red-500': formErrors.subject }"
   />
   <p v-if="formErrors.subject" class="text-red-500 text-xs  md:text-sm mt-1">
@@ -481,7 +481,7 @@
     v-model="form.message"
     rows="4"
     :placeholder="$t('common.enterMessage')"
-    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm md:text-base lg:text-lg"
+    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
     :class="{ 'border-red-500': formErrors.message }"
   ></textarea>
   <p v-if="formErrors.message" class="text-red-500 text-xs  md:text-sm mt-1">
