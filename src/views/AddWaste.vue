@@ -30,7 +30,7 @@
       {{ $t("common.selectAWasteType") }}
     </p>
     <!-- Carousel Wrapper -->
-    <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0 md:-mb-5">
+    <div class="relative max-w-6xl mx-auto flex items-center justify-start px-4 sm:px-0 ">
       <!-- Left Arrow -->
       <button @click="scrollPrev"
         class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
