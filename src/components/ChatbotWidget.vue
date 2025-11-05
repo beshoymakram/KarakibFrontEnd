@@ -12,9 +12,11 @@
         ✕
       </button>
       <div class="pr-6">
-        <h4 class="font-bold text-[#2C702C] text-sm mb-1.5">🌱 Koko AI Powered Helper</h4>
+        <h4 class="font-bold text-[#2C702C] text-sm mb-1.5">
+          🌱 {{ $t('chatbot.tooltipTitle') }}
+        </h4>
         <p class="text-xs text-gray-700 leading-snug">
-          Get instant help with waste sorting, recycling tips, DIY ideas, and collection scheduling. Upload images or ask questions!
+          {{ $t('chatbot.tooltipDescription') }}
         </p>
       </div>
     </div>
@@ -24,7 +26,7 @@
       @click="toggleChat"
       class="bg-[#2C702C] text-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50"
     >
-      <img src="/images/koko.png" alt="koko" class="w-full h-full rounded-full" />
+      <img src="/images/koko.png" :alt="$t('chatbot.kokoAlt')" class="w-full h-full rounded-full" />
     </button>
 
     <!-- Chat Window -->
@@ -38,7 +40,7 @@
       <!-- Left Sidebar - Chat History (only visible in fullscreen) -->
       <div v-if="isFullscreen" class="w-64 bg-[#EAF2EA] border-r border-green-200 flex flex-col">
         <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-13">
-          <span class="font-semibold text-sm">Chat History</span>
+          <span class="font-semibold text-sm">{{ $t('chatbot.chatHistory') }}</span>
         </div>
 
         <!-- New Chat Button -->
@@ -46,10 +48,10 @@
           <button
             @click="startNewChat"
             class="w-full bg-[#E0EBE0] hover:bg-[#265C26] text-[#2C702C] text-sm px-3 py-2 rounded-md transition flex items-center justify-center gap-2"
-            title="Start New Chat"
+            :title="$t('chatbot.startNewChat')"
           >
             <img src="../../public/images/icons8-add-to-chat-50.png" alt="" class="size-6">
-            <span>New Chat</span>
+            <span>{{ $t('chatbot.newChat') }}</span>
           </button>
         </div>
 
@@ -75,7 +77,7 @@
               <button
                 @click.stop="deleteChat(chat.id)"
                 class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition opacity-0 group-hover:opacity-100"
-                title="Delete Chat"
+                :title="$t('chatbot.deleteChat')"
               >
                 🗑️
               </button>
@@ -83,7 +85,7 @@
           </div>
 
           <div v-if="chatList.length === 0" class="p-4 text-center text-gray-400 text-sm">
-            No chat history yet.<br />Start a new conversation!
+            {{ $t('chatbot.noChatHistory') }}
           </div>
         </div>
       </div>
@@ -91,12 +93,12 @@
       <!-- Right Side - Main Chat Area -->
       <div class="flex-1 flex flex-col bg-[#BFD6BF]">
         <div class="bg-[#2C702C] text-white flex justify-between items-center px-4 py-3">
-          <span class="font-semibold tracking-wide block text-center w-full">Koko AI Helper</span>
+          <span class="font-semibold tracking-wide block text-center w-full">{{ $t('chatbot.kokoAIHelper') }}</span>
           <div class="flex items-center gap-2">
             <button 
               class="hover:text-green-200 text-xl" 
               @click="toggleFullscreen" 
-              :title="isFullscreen ? 'Minimize' : 'Fullscreen'"
+              :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
             >
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
@@ -115,7 +117,7 @@
               v-if="msg.sender === 'bot'"
               src="/images/koko.png"
               class="w-8 h-8 rounded-full flex-shrink-0"
-              alt="Koko"
+              :alt="$t('chatbot.kokoAlt')"
             />
 
             <div
@@ -137,7 +139,7 @@
           </div>
 
           <div v-if="isLoading" class="flex items-start gap-2">
-            <img src="/images/koko.png" class="w-8 h-8 rounded-full" alt="Koko" />
+            <img src="/images/koko.png" class="w-8 h-8 rounded-full" :alt="$t('chatbot.kokoAlt')" />
             <div class="bg-[#2C702C] text-white px-3 py-2 rounded-lg text-sm">
               <span class="animate-pulse">{{ loadingText }}</span>
             </div>
@@ -147,7 +149,7 @@
         <!-- Input Area -->
         <div class="border-t border-green-300 px-3 py-2 bg-[#E0EBE0] rounded-b-xl">
           <div v-if="imagePreview" class="mb-2 relative inline-block">
-            <img :src="imagePreview" class="max-w-[100px] rounded border-2 border-[#2C702C]" alt="preview" />
+            <img :src="imagePreview" class="max-w-[100px] rounded border-2 border-[#2C702C]" :alt="$t('chatbot.preview')" />
             <button
               @click="clearImage"
               class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600 font-bold"
@@ -159,7 +161,7 @@
           <div class="flex items-center gap-2 w-full">
             <label
               class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center flex-shrink-0"
-              title="Upload waste image for DIY ideas"
+              :title="$t('chatbot.uploadImageTitle')"
             >
               <img src="../../public/images/icons8-camera-64.png" alt="" class="size-6">
               <input
@@ -176,7 +178,7 @@
               v-model="userInput"
               @keyup.enter="sendMessage"
               type="text"
-              placeholder="Ask about recycling | إسأل عن إعادة التدوير"
+              :placeholder="$t('chatbot.inputPlaceholder')"
               :disabled="isLoading"
               class="flex-1 min-w-0 px-3 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-[#2C702C] outline-none text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
             />
@@ -186,7 +188,7 @@
               :disabled="isLoading || (!userInput.trim() && !selectedImage)"
               class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 whitespace-nowrap"
             >
-              Send
+              {{ $t('chatbot.send') }}
             </button>
           </div>
         </div>
@@ -199,6 +201,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useAuthStore } from '@/stores/auth';
 import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: "ChatbotWidget",
@@ -214,7 +217,7 @@ export default {
       chatList: [],
       currentChatId: null,
       isLoading: false,
-      loadingText: "Thinking...",
+      loadingText: "",
       selectedImage: null,
       imagePreview: null,
       storageKey: "karakib_chat_history",
@@ -436,10 +439,9 @@ export default {
           company_name: this.knowledgeBase.company_info?.name || 'Unknown'
         });
       } catch (error) {
-        console.error("❌ Failed to load knowledge-base.json:", error);
-        console.error("Error details:", error.message);
-        this.$toast?.error("Failed to load chatbot knowledge base. Some features may not work correctly.");
-      }
+      console.error("❌ Failed to load knowledge-base.json:", error);
+      this.$toast?.error(this.$t('chatbot.errors.knowledgeBaseFailed'));
+    }
     },
 
     getSystemPrompt() {
@@ -479,15 +481,15 @@ Answer questions using EXCLUSIVELY the provided context from our knowledge base.
 Before answering, check: "Is this in the CONTEXT below?" If NO → use the professional redirect in the user's language.`;
     },
 
-    getWelcomeMessage() {
-      const bilingualHintEn = "You can chat with me in Arabic too.";
-      const bilingualHintAr = "يمكنك التحدث معي بالعربية أيضًا.";
-      const hint = `${bilingualHintEn} ${bilingualHintAr}`;
-      return {
-        sender: "bot",
-        text: `${this.greetingText} I'm Koko, your assistant for **Karakib** 🌱\n\n**I can help you with:**\n• How our collection service works\n• What materials we accept\n• Scheduling a pickup\n• Creative DIY ideas for small waste items\n• General recycling tips\n\n${hint}\n\nAsk me anything! 💚`
-      };
-    },
+  getWelcomeMessage() {
+    return {
+      sender: "bot",
+      text: this.$t('chatbot.welcomeMessage', { 
+        greeting: this.greetingText,
+        hint: `${this.$t('chatbot.bilingualHintEn')} ${this.$t('chatbot.bilingualHintAr')}`
+      })
+    };
+  },
 
     updateWelcomeMessage() {
       // Update the first message (welcome message) with new greeting
@@ -500,14 +502,18 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
     async sendMessage() {
       if (!this.userInput.trim() && !this.selectedImage) return;
       if (this.isLoading) return;
-      if (!this.genAI) {
-        this.$toast?.error("Chatbot not initialized. Please refresh the page.");
-        return;
-      }
+    if (!this.genAI) {
+      this.$toast?.error(this.$t('chatbot.errors.notInitialized'));
+      return;
+    }
 
       if (!this.currentChatId) this.startNewChat();
 
-      const messageText = this.userInput.trim() || "What can I do with this waste item?";
+      // Use current locale for default question if no user input
+      const defaultQuestion = this.$i18n.locale === 'ar' 
+        ? "ماذا يمكنني أن أفعل بهذا العنصر؟" 
+        : "What can I do with this waste item?";
+      const messageText = this.userInput.trim() || defaultQuestion;
 
       this.messages.push({
         sender: "user",
@@ -520,8 +526,10 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
 
       this.userInput = "";
       this.clearImage();
-      this.isLoading = true;
-      this.loadingText = currentImage ? "Analyzing image... 🔍" : "Thinking... 💭";
+    this.isLoading = true;
+    this.loadingText = currentImage 
+      ? this.$t('chatbot.analyzingImage') 
+      : this.$t('chatbot.thinkingEmoji');
       this.$nextTick(() => this.scrollToBottom());
 
       try {
@@ -787,16 +795,75 @@ ${contextText}
     async analyzeImage(imageFile, userPrompt) {
       const base64Image = await this.fileToBase64(imageFile);
       
-      const userContext = this.userFirstName 
-        ? `Analyzing for ${this.userFirstName}.`
-        : `Analyzing this waste item.`;
+      // Detect language from user prompt
+      const lang = this.detectLanguage(userPrompt);
+      const isArabic = lang === 'ar';
+      const isEnglish = lang === 'en';
       
-      const visionPrompt = `You are Koko 🌱, analyzing a waste item image. ${userContext}
+      // Use appropriate knowledge base based on language
+      const kb = isArabic && this.knowledgeBase.ar ? this.knowledgeBase.ar : this.knowledgeBase;
+      
+      // Handle unsupported languages
+      if (lang === 'other') {
+        return `We currently support assistance in English and Arabic only. Please switch to English or Arabic so I can help you effectively.\nنحن ندعم حاليًا العربية والإنجليزية فقط. يُرجى التحدث بالعربية أو الإنجليزية لكي أساعدك بأفضل شكل.`;
+      }
+      
+      const userContext = this.userFirstName 
+        ? (isArabic ? `تحليل صورة لمستخدم اسمه ${this.userFirstName}.` : `Analyzing for ${this.userFirstName}.`)
+        : (isArabic ? `تحليل صورة لهذا العنصر من المخلفات.` : `Analyzing this waste item.`);
+      
+      const userNamePrefix = this.userFirstName ? (isArabic ? `مرحبًا ${this.userFirstName}! ` : `Hello ${this.userFirstName}! `) : '';
+      
+      // Language-specific instructions
+      const languageInstruction = isArabic
+        ? '⚠️ مهم جدًا: يجب أن ترد باللغة العربية فقط وبأسلوب مهني وودود. لا تستخدم أي كلمات إنجليزية في الرد، باستثناء اسم المستخدم إن وُجد. ترجم جميع المعلومات من قاعدة المعرفة إلى العربية بشكل طبيعي.'
+        : 'Please respond in English only, with a professional and friendly tone.';
+      
+      // Build knowledge base context
+      const wasteTypesInfo = JSON.stringify(kb?.waste_types || [], null, 2);
+      const minCollection = kb?.company_info?.minimum_collection || '';
+      
+      // Build prompt based on language
+      let visionPrompt;
+      
+      if (isArabic) {
+        visionPrompt = `أنت كوكو 🌱، مساعد إعادة التدوير الودود لكراكِب. ${userContext}
+
+${this.getSystemPrompt()}
+
+⚠️ تعليمات اللغة: ${languageInstruction}
+
+=== معلومات قاعدة المعرفة ===
+${wasteTypesInfo}
+
+الحد الأدنى للتجميع: ${minCollection}
+=== نهاية قاعدة المعرفة ===
+
+📸 السؤال من المستخدم: "${userPrompt}"
+
+قم بتحليل الصورة وقدم:
+
+1. **ما هو هذا العنصر؟** 🔍
+2. **فحص الكمية** ⚖️ (عنصر واحد أم كمية كبيرة 1 كجم+؟)
+3. **التوصية** 💡
+   - عنصر واحد: قدم 3-5 أفكار لإعادة الاستخدام (DIY)
+   - كمية كبيرة: اشرح عملية التجميع مع التسعير
+4. **نصيحة بيئية** 🌍
+
+استخدم المعلومات من قاعدة المعرفة. كن ودودًا وعمليًا! 🌱
+
+⚠️ تذكر: يجب أن ترد باللغة العربية فقط.`;
+      } else {
+        visionPrompt = `You are Koko 🌱, analyzing a waste item image. ${userContext}
+
+${this.getSystemPrompt()}
+
+⚠️ LANGUAGE INSTRUCTIONS: ${languageInstruction}
 
 === KNOWLEDGE BASE INFO ===
-${JSON.stringify(this.knowledgeBase?.waste_types, null, 2)}
+${wasteTypesInfo}
 
-Minimum collection: ${this.knowledgeBase?.company_info?.minimum_collection}
+Minimum collection: ${minCollection}
 === END KNOWLEDGE BASE ===
 
 📸 QUESTION: "${userPrompt}"
@@ -811,6 +878,7 @@ Analyze the image and provide:
 4. **Eco Tip** 🌍
 
 Use information from the knowledge base. Be friendly and practical! 🌱`;
+      }
 
       const imagePart = {
         inlineData: {
@@ -832,19 +900,19 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       });
     },
 
-    handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+  async handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
-      if (!file.type.startsWith("image/")) {
-        alert("Please upload an image file");
-        return;
-      }
+    if (!file.type.startsWith("image/")) {
+      alert(this.$t('chatbot.errors.invalidImage'));
+      return;
+    }
 
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Image must be less than 5MB");
-        return;
-      }
+    if (file.size > 5 * 1024 * 1024) {
+      alert(this.$t('chatbot.errors.imageTooLarge'));
+      return;
+    }
 
       this.selectedImage = file;
       const reader = new FileReader();
@@ -957,7 +1025,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
     },
 
     deleteChat(chatId) {
-      if (confirm("Are you sure you want to delete this chat?")) {
+      if (confirm(this.$t('chatbot.confirmDelete'))) {
         const index = this.chatList.findIndex((c) => c.id === chatId);
         if (index !== -1) {
           this.chatList.splice(index, 1);
@@ -969,29 +1037,29 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       }
     },
 
-    getChatTitle(chat) {
-      const firstUserMessage = chat.messages?.find((m) => m.sender === "user");
-      if (firstUserMessage) {
-        const title = firstUserMessage.text.substring(0, 30);
-        return title.length < firstUserMessage.text.length ? title + "..." : title;
-      }
-      return chat.title || "New Chat";
-    },
+  getChatTitle(chat) {
+    const firstUserMessage = chat.messages?.find((m) => m.sender === "user");
+    if (firstUserMessage) {
+      const title = firstUserMessage.text.substring(0, 30);
+      return title.length < firstUserMessage.text.length ? title + "..." : title;
+    }
+    return chat.title || this.$t('chatbot.newChat');
+  },
 
-    formatDate(dateString) {
-      const date = new Date(dateString);
-      const now = new Date();
-      const diffMs = now - date;
-      const diffMins = Math.floor(diffMs / 60000);
-      const diffHours = Math.floor(diffMs / 3600000);
-      const diffDays = Math.floor(diffMs / 86400000);
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
 
-      if (diffMins < 1) return "Just now";
-      if (diffMins < 60) return `${diffMins}m ago`;
-      if (diffHours < 24) return `${diffHours}h ago`;
-      if (diffDays < 7) return `${diffDays}d ago`;
-      return date.toLocaleDateString();
-    },
+    if (diffMins < 1) return this.$t('chatbot.justNow');
+    if (diffMins < 60) return this.$t('chatbot.minutesAgo', { count: diffMins });
+    if (diffHours < 24) return this.$t('chatbot.hoursAgo', { count: diffHours });
+    if (diffDays < 7) return this.$t('chatbot.daysAgo', { count: diffDays });
+    return date.toLocaleDateString(this.$i18n.locale);
+  },
 
     formatMessage(text) {
       if (!text) return "";
