@@ -407,6 +407,8 @@
     "collected": "Collected",
     "wasteItemsToCollect": "Waste Items to Collect",
     "welcome_to_karakib": "Welcome to karakib!",
-    "noWasteItems": "No waste items to collect"
+    "noWasteItems": "No waste items to collect",
+    "orderProductsToDeliver": "Products To Deliver",
+    "noProducts": "No Products"
   }
 }

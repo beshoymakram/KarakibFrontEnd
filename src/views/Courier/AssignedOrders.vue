@@ -201,26 +201,26 @@
                 </div>
               </div>
 
-              <!-- Waste Items Section -->
+              <!-- Products Section -->
               <div class="mb-4">
-                <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
-                  }}</h4>
+                <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{
+                  $t('common.orderProductsToDeliver')
+                }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <!-- Item Image -->
-                    <img :src="item.item?.image_url" :alt="item.item?.name"
+                    <img :src="item.product?.image_url" :alt="item.product?.name"
                       class="w-16 h-16 object-cover rounded-lg bg-white border border-gray-200" />
 
                     <!-- Item Details -->
                     <div class="flex-1">
-                      <h5 class="font-semibold text-[#2C702C]">{{ item.item?.name }}</h5>
+                      <h5 class="font-semibold text-[#2C702C]">{{ item.product?.name }}</h5>
                       <p class="text-sm text-gray-600">
-                        {{ $t('common.quantity') }}: <span class="font-semibold">{{ item.quantity }}</span> {{
-                          item.item?.unit }}
+                        {{ $t('common.quantity') }}: <span class="font-semibold">{{ item.quantity }}</span>
                       </p>
                       <p class="text-sm text-green-600 font-medium">
-                        {{ item.subtotal }} {{ $t('common.points') }}
+                        {{ item.price }} {{ $t('common.currency') }}
                       </p>
                     </div>
                   </div>
@@ -232,7 +232,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                     </svg>
-                    <p>{{ $t('common.noWasteItems') }}</p>
+                    <p>{{ $t('common.noProducts') }}</p>
                   </div>
                 </div>
               </div>
