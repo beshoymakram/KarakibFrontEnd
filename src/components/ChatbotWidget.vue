@@ -176,7 +176,7 @@
               v-model="userInput"
               @keyup.enter="sendMessage"
               type="text"
-              placeholder="Ask about recycling"
+              placeholder="Ask about recycling | إسأل عن إعادة التدوير"
               :disabled="isLoading"
               class="flex-1 min-w-0 px-3 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-[#2C702C] outline-none text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
             />
@@ -270,6 +270,142 @@ export default {
   },
 
   methods: {
+    // Language detection: simple Arabic script check
+    isArabicText(text) {
+      if (!text) return false;
+      return /[\u0600-\u06FF]/.test(text);
+    },
+
+    // Language detection: classify as 'ar', 'en', or 'other'
+    detectLanguage(text) {
+      if (this.isArabicText(text)) return 'ar';
+      // Accented Latin letters or Spanish punctuation -> other
+      if (/[\u00C0-\u024F¿¡]/.test(text)) return 'other';
+      // Heuristic for English (majority basic Latin letters and common words)
+      const letters = (text.match(/[A-Za-z]/g) || []).length;
+      const nonSpace = (text.replace(/\s/g, '').length) || 1;
+      const ratio = letters / nonSpace;
+      const words = text.toLowerCase().split(/[^a-z]+/).filter(Boolean);
+      const commonEn = new Set(['what','how','where','when','why','who','help','please','can','do','does','is','are','i','you','we','recycle','recycling','collection','request','pickup','points','shop','address','profile','account','cart','order','waste']);
+      const enHits = words.filter(w => commonEn.has(w)).length;
+      if (ratio > 0.6 || enHits >= 2) return 'en';
+      return 'other';
+    },
+
+    // Translate known category names to Arabic for Arabic responses
+    toArabicCategory(category) {
+      const map = {
+        'Plastic': 'بلاستيك',
+        'Paper & Cardboard': 'ورق وكرتون',
+        'Metal': 'معادن',
+        'Wood': 'خشب',
+        'Clothes': 'ملابس',
+        'Cooking Oil': 'زيت طهي',
+        'E-Waste': 'نفايات إلكترونية',
+        'Home Appliances': 'أجهزة منزلية'
+      };
+      return map[category] || category;
+    },
+
+    // KB-aware context retrieval (uses provided kb object)
+    retrieveRelevantContextFromKB(query, kb) {
+      if (!kb) return { relevant: [], waste_type: null };
+
+      const lowerQuery = (query || '').toLowerCase();
+      let context = { relevant: [], waste_type: null };
+
+      // Extract meaningful words from query (filter out common words)
+      const stopWords = new Set(['the','a','an','and','or','but','in','on','at','to','for','of','with','by','is','are','was','were','be','been','have','has','had','do','does','did','will','would','can','could','should','may','might','this','that','these','those','i','you','he','she','it','we','they','what','how','when','where','why','who','ما','ماذا','كيف','أين','متى','من','لماذا','هل','هذه','هذا','ذلك']);
+      const queryWords = lowerQuery.split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
+
+      // Detect waste type - more comprehensive matching
+      (kb.waste_types || []).forEach(type => {
+        const categoryLower = (type.category || '').toLowerCase();
+        const matchesCategory = lowerQuery.includes(categoryLower) ||
+          queryWords.some(qw => categoryLower.includes(qw) || qw.includes(categoryLower));
+        const matchesItems = (type.accepted_items || []).some(item => {
+          const itemLower = (item || '').toLowerCase();
+          return lowerQuery.includes(itemLower) || queryWords.some(qw => itemLower.includes(qw) || qw.includes(itemLower));
+        });
+        if (matchesCategory || matchesItems) {
+          context.waste_type = type;
+          context.relevant.push(`WASTE TYPE: ${type.category}`);
+          if (type.description) context.relevant.push(`Description: ${type.description}`);
+          if (type.accepted_items?.length) context.relevant.push(`Accepted items: ${type.accepted_items.join(', ')}`);
+          if (type.points_system) context.relevant.push(`Points: ${type.points_system}`);
+          if (type.unit) context.relevant.push(`Unit: ${type.unit}`);
+          if (type.preparation) context.relevant.push(`Preparation: ${type.preparation}`);
+        }
+      });
+
+      // Pricing/points
+      if (['price','cost','point','earn','reward','redeem','سعر','تكلفة','نقاط','اكسب','أكسب','استبدال'].some(k => lowerQuery.includes(k))) {
+        (kb.waste_types || []).forEach(type => {
+          if (type.points_system) context.relevant.push(`${type.category} points: ${type.points_system}`);
+        });
+        if (kb.rewards_program?.points_system) {
+          const ps = kb.rewards_program.points_system;
+          if (ps.earning) context.relevant.push(`Points earning: ${JSON.stringify(ps.earning, null, 2)}`);
+          if (ps.redemption) context.relevant.push(`Points redemption: ${JSON.stringify(ps.redemption, null, 2)}`);
+        }
+      }
+
+      // Collection process
+      if (['how','process','collect','request','pickup','schedule','order','submit','كيف','عملية','تجميع','طلب','استلام','جدولة'].some(k => lowerQuery.includes(k))) {
+        context.relevant.push('COLLECTION PROCESS:');
+        (kb.collection_process?.steps || []).forEach(step => {
+          context.relevant.push(`${step.step}. ${step.title}: ${step.description}`);
+        });
+      }
+
+      // Service areas/contact
+      if (['area','location','where','serve','available','city','منطقة','مدن','أين','تعملون','تغطية'].some(k => lowerQuery.includes(k))) {
+        if (kb.company_info?.service_areas) context.relevant.push(`Service areas: ${kb.company_info.service_areas.join(', ')}`);
+        if (kb.company_info?.operating_hours) context.relevant.push(`Operating hours: ${kb.company_info.operating_hours}`);
+        if (kb.company_info?.languages) context.relevant.push(`Languages: ${Array.isArray(kb.company_info.languages) ? kb.company_info.languages.join(', ') : kb.company_info.languages}`);
+      }
+      if (['contact','email','phone','support','help','reach','تواصل','بريد','هاتف','دعم','اتصال'].some(k => lowerQuery.includes(k))) {
+        if (kb.company_info?.contact?.email) context.relevant.push(`Contact email: ${kb.company_info.contact.email}`);
+        if (kb.company_info?.contact?.phone) context.relevant.push(`Contact phone: ${kb.company_info.contact.phone}`);
+        if (kb.company_info?.operating_hours) context.relevant.push(`Operating hours: ${kb.company_info.operating_hours}`);
+      }
+
+      // FAQs
+      (kb.faqs || []).forEach(category => {
+        (category.questions || []).forEach(qa => {
+          const qLower = (qa.question || '').toLowerCase();
+          const aLower = (qa.answer || '').toLowerCase();
+          const matchesQuestion = queryWords.some(qw => qLower.includes(qw));
+          const matchesAnswer = queryWords.some(qw => aLower.includes(qw));
+          if (matchesQuestion || matchesAnswer) {
+            context.relevant.push(`FAQ - Q: ${qa.question}\nA: ${qa.answer}`);
+          }
+        });
+      });
+
+      // Base info always
+      const baseInfo = [
+        `Company: ${kb.company_info?.name}`,
+        `Description: ${kb.company_info?.description}`,
+        `Mission: ${kb.company_info?.mission}`
+      ];
+      context.relevant = [...baseInfo, ...context.relevant];
+
+      if (context.relevant.length < 5) {
+        if (kb.company_info?.minimum_collection) context.relevant.push(`Minimum collection: ${kb.company_info.minimum_collection}`);
+        const cats = (kb.waste_types || []).map(t => t.category).join(', ');
+        if (cats) context.relevant.push(`We accept: ${cats}`);
+      }
+
+      const tips = kb.environmental_tips?.recycling_impact || [];
+      if (tips.length > 0) {
+        const randomTip = tips[Math.floor(Math.random() * tips.length)];
+        context.relevant.push(`💡 ECO TIP: ${randomTip}`);
+      }
+
+      return context;
+    },
+
     async initializeGemini() {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       
@@ -306,190 +442,6 @@ export default {
       }
     },
 
-    retrieveRelevantContext(query) {
-      if (!this.knowledgeBase) return { relevant: [], waste_type: null };
-
-      const lowerQuery = query.toLowerCase();
-      let context = { relevant: [], waste_type: null };
-
-      // Extract meaningful words from query (filter out common words)
-      const stopWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'can', 'could', 'should', 'may', 'might', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'what', 'how', 'when', 'where', 'why', 'who']);
-      const queryWords = lowerQuery.split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
-
-      // Detect waste type - more comprehensive matching
-      this.knowledgeBase.waste_types?.forEach(type => {
-        const categoryLower = type.category.toLowerCase();
-        const matchesCategory = lowerQuery.includes(categoryLower) || 
-                                queryWords.some(qw => categoryLower.includes(qw) || qw.includes(categoryLower));
-        const matchesItems = type.accepted_items?.some(item => {
-          const itemLower = item.toLowerCase();
-          return lowerQuery.includes(itemLower) || 
-                 queryWords.some(qw => itemLower.includes(qw) || qw.includes(itemLower));
-        });
-        
-        if (matchesCategory || matchesItems) {
-          context.waste_type = type;
-          context.relevant.push(`WASTE TYPE: ${type.category}`);
-          if (type.description) context.relevant.push(`Description: ${type.description}`);
-          context.relevant.push(`Accepted items: ${type.accepted_items.join(', ')}`);
-          if (type.points_system) context.relevant.push(`Points: ${type.points_system}`);
-          if (type.unit) context.relevant.push(`Unit: ${type.unit}`);
-          if (type.preparation) context.relevant.push(`Preparation: ${type.preparation}`);
-          if (type.diy_suggestions?.single_item) {
-            context.relevant.push(`DIY ideas available for single items: ${type.diy_suggestions.single_item.join('; ')}`);
-          }
-        }
-      });
-
-      // Check for pricing/points keywords
-      if (lowerQuery.includes('price') || lowerQuery.includes('cost') || lowerQuery.includes('point') || 
-          lowerQuery.includes('earn') || lowerQuery.includes('reward') || lowerQuery.includes('redeem')) {
-        this.knowledgeBase.waste_types?.forEach(type => {
-          if (type.points_system) {
-            context.relevant.push(`${type.category} points: ${type.points_system}`);
-          }
-        });
-        // Add points system info from rewards_program
-        if (this.knowledgeBase.rewards_program?.points_system) {
-          const pointsInfo = this.knowledgeBase.rewards_program.points_system;
-          if (pointsInfo.earning) {
-            context.relevant.push(`Points earning: ${JSON.stringify(pointsInfo.earning, null, 2)}`);
-          }
-          if (pointsInfo.redemption) {
-            context.relevant.push(`Points redemption: ${JSON.stringify(pointsInfo.redemption, null, 2)}`);
-          }
-        }
-      }
-
-      // Collection process - more keywords
-      if (lowerQuery.includes('how') || lowerQuery.includes('process') || lowerQuery.includes('collect') ||
-          lowerQuery.includes('request') || lowerQuery.includes('pickup') || lowerQuery.includes('schedule') ||
-          lowerQuery.includes('order') || lowerQuery.includes('submit')) {
-        context.relevant.push("COLLECTION PROCESS:");
-        this.knowledgeBase.collection_process?.steps?.forEach(step => {
-          context.relevant.push(`${step.step}. ${step.title}: ${step.description}`);
-          if (step.details) {
-            step.details.forEach(detail => context.relevant.push(`  - ${detail}`));
-          }
-          if (step.features) {
-            step.features.forEach(feature => context.relevant.push(`  - ${feature}`));
-          }
-        });
-      }
-
-      // Service areas - more keywords
-      if (lowerQuery.includes('area') || lowerQuery.includes('location') || lowerQuery.includes('where') ||
-          lowerQuery.includes('serve') || lowerQuery.includes('available') || lowerQuery.includes('city')) {
-        context.relevant.push(`Service areas: ${this.knowledgeBase.company_info?.service_areas?.join(', ')}`);
-        context.relevant.push(`Operating hours: ${this.knowledgeBase.company_info?.operating_hours}`);
-        context.relevant.push(`Languages: ${this.knowledgeBase.company_info?.languages?.join(', ')}`);
-      }
-
-      // Contact info - more keywords
-      if (lowerQuery.includes('contact') || lowerQuery.includes('email') || lowerQuery.includes('phone') ||
-          lowerQuery.includes('support') || lowerQuery.includes('help') || lowerQuery.includes('reach')) {
-        context.relevant.push(`Contact email: ${this.knowledgeBase.company_info?.contact?.email}`);
-        context.relevant.push(`Contact phone: ${this.knowledgeBase.company_info?.contact?.phone}`);
-        context.relevant.push(`Operating hours: ${this.knowledgeBase.company_info?.operating_hours}`);
-        if (this.knowledgeBase.company_info?.contact?.social_media) {
-          const social = this.knowledgeBase.company_info.contact.social_media;
-          context.relevant.push(`Social media: Facebook ${social.facebook}, Instagram ${social.instagram}, Twitter ${social.twitter}`);
-        }
-      }
-
-      // Donation questions
-      if (lowerQuery.includes('donat') || lowerQuery.includes('charity') || lowerQuery.includes('cause') ||
-          lowerQuery.includes('give') || lowerQuery.includes('contribute')) {
-        this.knowledgeBase.faqs?.forEach(category => {
-          if (category.category === "Donations") {
-            category.questions?.forEach(qa => {
-              context.relevant.push(`FAQ - Q: ${qa.question}\nA: ${qa.answer}`);
-            });
-          }
-        });
-        if (this.knowledgeBase.rewards_program?.points_system?.redemption?.donations) {
-          const donations = this.knowledgeBase.rewards_program.points_system.redemption.donations;
-          context.relevant.push(`Donation options: ${JSON.stringify(donations, null, 2)}`);
-        }
-      }
-
-      // Shop/Products questions
-      if (lowerQuery.includes('shop') || lowerQuery.includes('buy') || lowerQuery.includes('product') ||
-          lowerQuery.includes('merch') || lowerQuery.includes('store') || lowerQuery.includes('purchase')) {
-        this.knowledgeBase.faqs?.forEach(category => {
-          if (category.category === "Shop & Products") {
-            category.questions?.forEach(qa => {
-              context.relevant.push(`FAQ - Q: ${qa.question}\nA: ${qa.answer}`);
-            });
-          }
-        });
-      }
-
-      // Account/Profile questions
-      if (lowerQuery.includes('account') || lowerQuery.includes('profile') || lowerQuery.includes('password') ||
-          lowerQuery.includes('sign up') || lowerQuery.includes('register') || lowerQuery.includes('login') ||
-          lowerQuery.includes('address') || lowerQuery.includes('update')) {
-        this.knowledgeBase.faqs?.forEach(category => {
-          if (category.category === "Account & Profile" || category.category === "Getting Started" || 
-              category.category === "Addresses & Pickup") {
-            category.questions?.forEach(qa => {
-              context.relevant.push(`FAQ - Q: ${qa.question}\nA: ${qa.answer}`);
-            });
-          }
-        });
-      }
-
-      // Comprehensive FAQs matching - check both question and answer
-      this.knowledgeBase.faqs?.forEach(category => {
-        category.questions?.forEach(qa => {
-          const qLower = qa.question.toLowerCase();
-          const aLower = qa.answer.toLowerCase();
-          
-          // Check if query words appear in question or answer
-          const matchesQuestion = queryWords.some(qw => qLower.includes(qw)) || 
-                                 queryWords.some(qw => qLower.split(' ').some(qWord => qWord.includes(qw) || qw.includes(qWord)));
-          const matchesAnswer = queryWords.some(qw => aLower.includes(qw)) ||
-                               queryWords.some(qw => aLower.split(' ').some(aWord => aWord.includes(qw) || qw.includes(aWord)));
-          
-          // Also check if question keywords appear in query
-          const questionWords = qLower.split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
-          const matchesQuestionKeywords = questionWords.some(qWord => lowerQuery.includes(qWord));
-          
-          if (matchesQuestion || matchesAnswer || matchesQuestionKeywords) {
-            context.relevant.push(`FAQ - Q: ${qa.question}\nA: ${qa.answer}`);
-          }
-        });
-      });
-
-      // Always include company basics for context (at the beginning)
-      const baseInfo = [
-        `Company: ${this.knowledgeBase.company_info?.name}`,
-        `Description: ${this.knowledgeBase.company_info?.description}`,
-        `Mission: ${this.knowledgeBase.company_info?.mission}`
-      ];
-      context.relevant = [...baseInfo, ...context.relevant];
-
-      // Add company details if we don't have much context
-      if (context.relevant.length < 5) {
-        context.relevant.push(`Minimum collection: ${this.knowledgeBase.company_info?.minimum_collection}`);
-        context.relevant.push(`Service areas: ${this.knowledgeBase.company_info?.service_areas?.join(', ')}`);
-        context.relevant.push(`Operating hours: ${this.knowledgeBase.company_info?.operating_hours}`);
-        const wasteCategories = this.knowledgeBase.waste_types?.map(type => type.category).join(", ");
-        if (wasteCategories) {
-          context.relevant.push(`We accept: ${wasteCategories}`);
-        }
-      }
-
-      // Always add eco tip if available
-      const tips = this.knowledgeBase.environmental_tips?.recycling_impact || [];
-      if (tips.length > 0) {
-        const randomTip = tips[Math.floor(Math.random() * tips.length)];
-        context.relevant.push(`💡 ECO TIP: ${randomTip}`);
-      }
-
-      return context;
-    },
-
     getSystemPrompt() {
       const userContext = this.userFirstName 
         ? `The user's first name is "${this.userFirstName}". Address them naturally by their first name when appropriate.`
@@ -503,16 +455,19 @@ ${userContext}
 YOU MUST ONLY USE INFORMATION FROM THE CONTEXT PROVIDED BELOW. DO NOT USE ANY OUTSIDE KNOWLEDGE.
 
 🎯 YOUR MISSION:
-Answer questions using EXCLUSIVELY the provided context from our knowledge base. If the answer is not in the context, gracefully redirect to what you CAN help with.
+Answer questions using EXCLUSIVELY the provided context from our knowledge base. Reply in the user's language (Arabic or English) based on their message.
 
 📋 STRICT RULES:
 1. USE ONLY information from the CONTEXT section below
-2. If information is NOT in the context, respond professionally: "I'd be happy to help you with questions about recycling, our waste collection services, accepted materials, the points system, scheduling pickups, or DIY ideas. Could you please rephrase your question, or would you like to know more about any of these topics?"
-3. DO NOT make up prices, points, addresses, or any details not in the context
-4. DO NOT use general recycling knowledge - only use what's in the Karakib knowledge base
-5. Be friendly, concise, and helpful
-6. Use emojis to be engaging 🌿
-7. ${this.userFirstName ? `When appropriate, address the user as "${this.userFirstName}" to personalize responses` : `Do not use any name since the user is not logged in`}
+2. If the user asks a broad/general question (e.g., "what do you know about recycling?"), provide a concise overview from the context (company description, accepted waste types, high-level collection steps, points overview, eco fact)
+3. If the user asks for specifics not present in the context, use a professional redirect IN THE USER'S LANGUAGE:
+   - EN: "This topic is outside Karakib’s assistant scope. I can help with recycling and our services: accepted materials, requesting collections, points and rewards, donations, DIY ideas, and account support. Please ask about one of these areas."
+   - AR: "هذا الموضوع خارج نطاق مساعد كراكِب. يمكنني مساعدتك في كل ما يتعلق بإعادة التدوير وخدماتنا: المواد المقبولة، طلبات التجميع، النقاط والمكافآت، التبرعات، أفكار إعادة الاستخدام، ودعم الحساب. من فضلك اسأل ضمن هذه المجالات."
+4. DO NOT make up prices, points, addresses, or any details not in the context
+5. DO NOT use general recycling knowledge - only use what's in the Karakib knowledge base
+6. Be friendly, concise, and helpful
+7. Use emojis to be engaging 🌿
+8. ${this.userFirstName ? `When appropriate, address the user as "${this.userFirstName}" to personalize responses` : `Do not use any name since the user is not logged in`}
 
 💬 TONE:
 - Warm and encouraging
@@ -521,13 +476,16 @@ Answer questions using EXCLUSIVELY the provided context from our knowledge base.
 - Keep answers concise (3-5 sentences) unless explaining a detailed process
 
 🔒 ENFORCEMENT:
-Before answering, check: "Is this information in the CONTEXT below?" If NO → politely redirect to topics you can help with from the context.`;
+Before answering, check: "Is this in the CONTEXT below?" If NO → use the professional redirect in the user's language.`;
     },
 
     getWelcomeMessage() {
+      const bilingualHintEn = "You can chat with me in Arabic too.";
+      const bilingualHintAr = "يمكنك التحدث معي بالعربية أيضًا.";
+      const hint = `${bilingualHintEn} ${bilingualHintAr}`;
       return {
         sender: "bot",
-        text: `${this.greetingText} I'm Koko, your assistant for **Karakib** 🌱\n\n**I can help you with:**\n• How our collection service works\n• What materials we accept\n• Scheduling a pickup\n• Creative DIY ideas for small waste items\n• General recycling tips\n\nAsk me anything! 💚`
+        text: `${this.greetingText} I'm Koko, your assistant for **Karakib** 🌱\n\n**I can help you with:**\n• How our collection service works\n• What materials we accept\n• Scheduling a pickup\n• Creative DIY ideas for small waste items\n• General recycling tips\n\n${hint}\n\nAsk me anything! 💚`
       };
     },
 
@@ -606,7 +564,172 @@ Before answering, check: "Is this information in the CONTEXT below?" If NO → p
         return "I'm currently initializing. Please try again in a moment. 🌿";
       }
 
-      const retrievedContext = this.retrieveRelevantContext(message);
+      const lowerMsg = message.toLowerCase().trim();
+      const lang = this.detectLanguage(message);
+      const isArabic = lang === 'ar';
+      const isEnglish = lang === 'en';
+      const userNamePrefix = this.userFirstName ? (isArabic ? `مرحبًا ${this.userFirstName}! ` : `Hi ${this.userFirstName}! `) : '';
+
+      // Unsupported languages fallback (only EN/AR supported)
+      if (lang === 'other') {
+        return `We currently support assistance in English and Arabic only. Please switch to English or Arabic so I can help you effectively.\nنحن ندعم حاليًا العربية والإنجليزية فقط. يُرجى التحدث بالعربية أو الإنجليزية لكي أساعدك بأفضل شكل.`;
+      }
+
+      // Language capability intent (EN/AR)
+      const enLangIntent = (
+        lowerMsg.includes('do you understand arabic') ||
+        lowerMsg.includes('do you speak arabic') ||
+        lowerMsg.includes('do you support arabic') ||
+        lowerMsg.includes('what languages') ||
+        lowerMsg.includes('supported languages') ||
+        lowerMsg.includes('do you understand english') ||
+        lowerMsg.includes('do you speak english')
+      );
+      const arLangIntent = (
+        lowerMsg.includes('هل') && (lowerMsg.includes('تفهم') || lowerMsg.includes('تتكلم') || lowerMsg.includes('تتحدث')) && (lowerMsg.includes('العربي') || lowerMsg.includes('العربية'))
+        || lowerMsg.includes('ما اللغات') || lowerMsg.includes('اللغات المدعومة') || lowerMsg.includes('بتفهم عربي')
+      );
+      if (enLangIntent || arLangIntent) {
+        return isArabic
+          ? `${userNamePrefix}نعم — أفهم وأرد بالعربية والإنجليزية. يمكنك السؤال بأي منهما.`
+          : `${userNamePrefix}Yes — I understand and reply in English and Arabic. Feel free to use either language.`;
+      }
+
+      // EN: Generic language capability question about a specific non-EN/AR language
+      if (isEnglish) {
+        const m = lowerMsg.match(/do you\s+(speak|understand|support)\s+([a-z]+)/);
+        if (m && m[2] && !['english','arabic','ar','en'].includes(m[2])) {
+          const askedLang = m[2].charAt(0).toUpperCase() + m[2].slice(1);
+          return `${userNamePrefix}I don’t speak ${askedLang}. I currently support English and Arabic.`;
+        }
+      }
+
+      // Choose KB based on language
+      const kb = isArabic && this.knowledgeBase.ar ? this.knowledgeBase.ar : this.knowledgeBase;
+
+      // Arabic: Website name intent
+      if (isArabic && (
+        (lowerMsg.includes('ما') && lowerMsg.includes('اسم') && (lowerMsg.includes('الموقع') || lowerMsg.includes('الموقع الإلكتروني') || lowerMsg.includes('ويبسايت') || lowerMsg.includes('ويب')))
+        || (lowerMsg.includes('اسم الموقع'))
+        || (lowerMsg.includes('اسم الويبسايت'))
+      )) {
+        const siteName = kb.company_info?.name || 'Karakib';
+        return `${userNamePrefix}اسم موقعنا هو ${siteName}.`;
+      }
+
+      // Arabic: Accepted materials
+      if (isArabic && (
+        lowerMsg.includes('المواد المقبولة') || (lowerMsg.includes('ايه') && lowerMsg.includes('بتاخدوا')) || lowerMsg.includes('بتستقبلوا') || lowerMsg.includes('بتستلموا') || lowerMsg.includes('أنواع المخلفات')
+      )) {
+        const categoriesAr = (kb.waste_types || []).map(t => t.category).join('، ');
+        return `${userNamePrefix}نقبل الأنواع التالية من المخلفات: ${categoriesAr}. لمزيد من التفاصيل، اسألني عن أي نوع بالتحديد.`;
+      }
+
+      // Arabic: Service areas
+      if (isArabic && (
+        lowerMsg.includes('المناطق') || lowerMsg.includes('المدن') || (lowerMsg.includes('فين') && lowerMsg.includes('تشتغلوا')) || lowerMsg.includes('تغطية') || lowerMsg.includes('تعملون أين')
+      )) {
+        const areas = kb.company_info?.service_areas?.join('، ') || 'القاهرة، الجيزة، الإسكندرية';
+        return `${userNamePrefix}نحن نغطي حاليًا: ${areas}. نعمل على التوسع قريبًا.`;
+      }
+
+      // Arabic: Working hours
+      if (isArabic && (
+        lowerMsg.includes('ساعات العمل') || lowerMsg.includes('مواعيد العمل') || (lowerMsg.includes('امتى') && (lowerMsg.includes('تشتغلوا') || lowerMsg.includes('فاتحين')))
+      )) {
+        const hours = kb.company_info?.operating_hours || 'من الأحد إلى الخميس، 9 صباحًا حتى 5 مساءً';
+        return `${userNamePrefix}ساعات العمل: ${hours}.`;
+      }
+
+      // Arabic: Contact info
+      if (isArabic && (
+        lowerMsg.includes('تواصل') || lowerMsg.includes('الدعم') || lowerMsg.includes('الاتصال') || lowerMsg.includes('الايميل') || lowerMsg.includes('البريد') || lowerMsg.includes('رقم')
+      )) {
+        const email = kb.company_info?.contact?.email || 'karakib@gmail.com';
+        const phone = kb.company_info?.contact?.phone || '19123';
+        return `${userNamePrefix}يمكنك التواصل معنا عبر البريد: ${email} أو الهاتف: ${phone}.`;
+      }
+
+      // Arabic: Points system / earnings tracking
+      if (isArabic && (
+        lowerMsg.includes('نقاط') || lowerMsg.includes('أرباحي') || lowerMsg.includes('ارباحي') || (lowerMsg.includes('ازاي') && lowerMsg.includes('اكسب')) || (lowerMsg.includes('كيف') && (lowerMsg.includes('أكسب') || lowerMsg.includes('اكسب'))) 
+      )) {
+        return `${userNamePrefix}لمتابعة أرباحك (نقاطك)، اذهب إلى ملفك الشخصي واضغط على 'نقاطي'. سترى رصيد نقاطك الحالي، وسجل النقاط المكتسبة، وجميع الحركات الخاصة بالنقاط.`;
+      }
+
+      // Arabic: Donations
+      if (isArabic && (
+        lowerMsg.includes('تبرع') || lowerMsg.includes('التبرعات') || (lowerMsg.includes('أسباب') && lowerMsg.includes('تبرع'))
+      )) {
+        return `${userNamePrefix}يمكنك التبرع بنقاطك لعدة مجالات مثل التعليم، إعادة التشجير، والصحة المجتمعية. يمكنك اختيار التبرع أثناء طلب التجميع أو من قسم نقاطي في ملفك.`;
+      }
+
+      // Arabic: Shop/products
+      if (isArabic && (
+        lowerMsg.includes('متجر') || lowerMsg.includes('منتجات') || lowerMsg.includes('تسوق')
+      )) {
+        return `${userNamePrefix}يمكنك استخدام النقاط لشراء منتجات من متجرنا (منتجات صديقة للبيئة وبضائع بعلامة كراكِب). بعض المنتجات يمكن شراؤها بالمال أيضًا.`;
+      }
+
+      // Arabic: Addresses / Account
+      if (isArabic && (
+        lowerMsg.includes('عنوان') || lowerMsg.includes('عناوين') || lowerMsg.includes('حساب') || lowerMsg.includes('ملفي') || lowerMsg.includes('البروفايل')
+      )) {
+        return `${userNamePrefix}من ملفك الشخصي، يمكنك إضافة عناوين متعددة، تحديث بياناتك، ومتابعة طلباتك ونقاطك. ستختار عنوان الاستلام عند طلب التجميع.`;
+      }
+
+      // Arabic: How to request collection intent
+      if (isArabic && (
+        lowerMsg.includes('طلب تجميع') || (lowerMsg.includes('كيف') && (lowerMsg.includes('اطلب') || lowerMsg.includes('أطلب') || lowerMsg.includes('طلب')) && (lowerMsg.includes('تجميع') || lowerMsg.includes('استلام') || lowerMsg.includes('جمع')))
+      )) {
+        const stepsArList = [
+          '1. إنشاء حساب — سجّل باستخدام بريدك الإلكتروني أو حساب جوجل، ثم فعّل رقم هاتفك وأضف عنوان التجميع في ملفك.',
+          "2. إضافة المخلفات — من صفحة 'أضف مخلفاتك' اختر الأنواع المناسبة وأضف العناصر إلى السلة (سترى النقاط لكل عنصر).",
+          '3. مراجعة السلة — راجع العناصر والكميات ويمكنك التعديل قبل المتابعة.',
+          "4. طلب التجميع — انتقل للدفع، اختر عنوان الاستلام وطريقة الاستفادة (نقاط أو تبرع) وأضف ملاحظاتك.",
+          '5. معالجة الطلب — نراجع طلبك ونعين مندوبًا لك، وستصلك إشعارات بالحالة.',
+          '6. استلام المندوب — يصل المندوب، يتحقق من المخلفات ويستلمها (قد تحتاج لمسح QR).',
+          '7. إضافة النقاط — تُضاف نقاطك فور إتمام الاستلام ويمكنك استخدامها مباشرة.'
+        ].join('\n');
+        return `${userNamePrefix}لطلب تجميع المخلفات معنا، اتبع الخطوات التالية:\n${stepsArList}\n\nإن احتجت مساعدة في أي خطوة، أخبرني وسأوضحها لك.`;
+      }
+
+      // Handle broad recycling questions with a direct, deterministic answer
+      const isGeneralRecycling = (
+        lowerMsg === 'what do you know about recycling?' ||
+        lowerMsg === 'what do you know about recycling' ||
+        lowerMsg === 'what is recycling?' ||
+        lowerMsg === 'what is recycling' ||
+        lowerMsg.startsWith('tell me about recycling') ||
+        (lowerMsg.includes('about recycling') && !lowerMsg.includes('price') && !lowerMsg.includes('points')) ||
+        // Arabic variants
+        lowerMsg.includes('اعادة التدوير') || lowerMsg.includes('إعادة التدوير') || lowerMsg.includes('ما هي إعادة التدوير') || lowerMsg.includes('عن إعادة التدوير')
+      );
+
+      if (isGeneralRecycling) {
+        const categoriesRaw = (kb.waste_types || []).map(t => t.category) || [];
+        const categoriesEn = categoriesRaw.join(', ');
+        const categoriesAr = categoriesRaw.join('، ');
+        const steps = kb.collection_process?.steps?.length
+          ? 'Create an account → Add waste to your cart → Review → Request collection → Courier pickup → Points credited'
+          : '';
+        const features = this.knowledgeBase.rewards_program?.features || {};
+        const pointsSummaryEn = [features.point_tracking, features.instant_credit, features.flexible_redemption, features.donation_options]
+          .filter(Boolean)
+          .join(', ');
+        const impact = (kb.environmental_tips?.recycling_impact || [])[0] || '';
+
+        if (isArabic) {
+          const stepsAr = 'أنشئ حسابًا → أضف المخلفات إلى السلة → راجع → اطلب التجميع → استلام من المندوب → تُضاف النقاط';
+          const pointsSummaryAr = 'تتبع النقاط، إضافة فورية، طرق استخدام مرنة، وخيارات التبرع';
+          return `${userNamePrefix}إعادة التدوير هي عملية جمع ومعالجة المواد التي قد تُرمى عادةً، وتحويلها إلى منتجات جديدة للحفاظ على الموارد وتقليل المخلفات.\n\nفي كراكِب، نجعل إعادة التدوير سهلة ومجزية:\n- المواد المقبولة: ${categoriesAr || 'أنواع متعددة من مخلفات المنزل'}\n- كيف تعمل الخدمة: ${steps ? stepsAr : 'اطلب تجميعًا واكسب نقاطًا مقابل المخلفات المقبولة'}\n- النقاط والأثر: ${pointsSummaryEn ? pointsSummaryAr : 'اكسب نقاطًا واستخدمها بمرونة، بما في ذلك التبرعات'}\n\n♻️ ${impact || 'كل خطوة تُحدث فرقًا — إعادة التدوير يوفر الطاقة ويقلل الانبعاثات.'}`;
+        }
+
+        return `${userNamePrefix}Recycling is the process of collecting and processing materials that would otherwise be thrown away, turning them into new products to save resources and reduce waste.\n\nAt Karakib, we make recycling simple and rewarding:\n- Accepted materials: ${categoriesEn || 'Multiple household waste types'}\n- How it works: ${steps || 'Request a collection and earn points for accepted waste'}\n- Points & impact: ${pointsSummaryEn || 'Earn points and use them flexibly, including donations'}\n\n♻️ ${impact || 'Every action counts—recycling helps conserve energy and reduce emissions.'}`;
+      }
+
+      // Retrieve context using language-appropriate KB
+      const retrievedContext = this.retrieveRelevantContextFromKB(message, kb);
       
       // Log context retrieval for debugging
       console.log("📚 Context retrieved:", {
@@ -615,11 +738,28 @@ Before answering, check: "Is this information in the CONTEXT below?" If NO → p
         has_waste_type: !!retrievedContext.waste_type
       });
       
-      // Build comprehensive context - always include some base info
-      const contextText = retrievedContext.relevant.join('\n');
-      
-      let prompt = `${this.getSystemPrompt()}
+      // Relevance & out-of-scope
+      const relevanceKeywordsEn = ['recycle','recycling','collect','collection','pickup','waste','points','donate','shop','address','profile','account','cart','order','request','courier','product'];
+      const relevanceKeywordsAr = ['إعادة','تدوير','تجميع','استلام','مخلفات','نقاط','تبرع','متجر','عنوان','ملف','حساب','سلة','طلب','مندوب','منتج'];
+      const hasRelevantKeyword = (isEnglish ? relevanceKeywordsEn : relevanceKeywordsAr).some(k => lowerMsg.includes(k));
 
+      const BASE_CONTEXT_MIN = 5;
+      const isOutOfScope = !hasRelevantKeyword && retrievedContext.relevant.length < BASE_CONTEXT_MIN;
+      if (isOutOfScope) {
+        return isArabic
+          ? 'هذا الموضوع خارج نطاق مساعد كراكِب. يمكنني مساعدتك في كل ما يتعلق بإعادة التدوير وخدماتنا: المواد المقبولة، طلبات التجميع، النقاط والمكافآت، التبرعات، أفكار إعادة الاستخدام، ودعم الحساب. من فضلك اسأل ضمن هذه المجالات.'
+          : "This topic is outside Karakib’s assistant scope. I can help with recycling and our services: accepted materials, requesting collections, points and rewards, donations, DIY ideas, and account support. Please ask about one of these areas.";
+      }
+
+      // Build context
+      const contextText = retrievedContext.relevant.join('\n');
+
+      // Language steering
+      const languageInstruction = isArabic
+        ? 'الرجاء الرد باللغة العربية فقط وبأسلوب مهني وودود. ترجم أي نص وارد من السياق إلى العربية صياغةً طبيعية، ولا تستخدم كلمات إنجليزية على الإطلاق، باستثناء اسم المستخدم إن وُجد.'
+        : 'Please respond in English only, with a professional and friendly tone.';
+      
+      let prompt = `${this.getSystemPrompt()}\n\nLANGUAGE: ${isArabic ? 'Arabic' : 'English'}\n${languageInstruction}\n
 === CONTEXT FROM KNOWLEDGE BASE (USE ONLY THIS INFORMATION) ===
 ${contextText}
 === END CONTEXT ===
@@ -631,13 +771,13 @@ ${contextText}
       if (recentHistory.length > 0) {
         prompt += "\n=== CONVERSATION HISTORY ===\n";
         recentHistory.forEach(msg => {
-          const userName = this.userFirstName || "User";
+          const userName = this.userFirstName || (isArabic ? 'المستخدم' : 'User');
           prompt += `${msg.role === "ai" ? "Koko" : userName}: ${msg.content}\n`;
         });
         prompt += "=== END HISTORY ===\n\n";
       }
 
-      const userName = this.userFirstName || "User";
+      const userName = this.userFirstName || (isArabic ? 'المستخدم' : 'User');
       prompt += `${userName}: ${message}\n\n⚠️ IMPORTANT: If the user's question refers to something in the conversation history, use that context!\n\nKoko:`;
 
       const result = await this.textModel.generateContent(prompt);
