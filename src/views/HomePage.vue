@@ -114,11 +114,13 @@
           :key="index"
           class="carousel-item flex flex-col items-center shrink-0"
         >
+          <router-link to="/add-waste">
           <img
             :src="item.image_url"
             :alt="item.name"
-            class="w-28 h-28 sm:w-38 sm:h-38 md:w-46 md:h-46 object-cover rounded-full bg-carousel"
+            class="w-28 h-28 sm:w-38 sm:h-38 md:w-46 md:h-46 object-cover rounded-full bg-carousel hover:scale-105"
           />
+          </router-link>
           <p class="mt-3 md:mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary">
             {{ item.name }}
           </p>
@@ -148,7 +150,7 @@
     <div class=" text-center">
       <div class="max-w-3xl">
         <p
-          class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
+          class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#2C702C] font-semibold text-center drop-shadow-lg"
         >
           {{ $t("common.ourExclusiveMerchandise") }}
       </p>

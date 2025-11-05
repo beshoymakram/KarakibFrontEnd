@@ -120,7 +120,7 @@
             {{ $t("common.courierDashboard") }}
           </router-link>
           <!-- theme button -->
-          <button @click="toggleTheme" class=" rounded-full transition-all duration-300 hover:scale-110"
+          <button @click="toggleTheme" class=" rounded-full transition-all duration-300 cursor-pointer hover:scale-110"
             aria-label="Toggle theme">
             <!-- Light Mode Icon -->
             <svg v-if="currentTheme === 'forest'" xmlns="http://www.w3.org/2000/svg"
