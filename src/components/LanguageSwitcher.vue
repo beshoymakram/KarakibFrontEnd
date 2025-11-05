@@ -1,8 +1,8 @@
 <template>
   <div class="language-switcher" ref="langDropdown">
     <!-- Current Language Button -->
-    <button @click="dropdownOpen = !dropdownOpen" class="lang-current-btn transition-transform duration-100 hover:scale-120 drop-shadow-green-100 drop-shadow-sm ">
-      <img :src="currentLanguage.flag" :alt="currentLanguage.name" class="flag-img" />
+    <button @click="dropdownOpen = !dropdownOpen" class=" size-5 sm:size-6 md:size-7  lang-current-btn transition-transform duration-100 hover:scale-120 drop-shadow-green-100 drop-shadow-sm ">
+      <img :src="currentLanguage.flag" :alt="currentLanguage.name" class="  size-4.5 sm:size-5.5 md:size-6.5  flag-img" />
       <!-- <span class="lang-code text-[#16af3f]">{{ currentLanguage.code }}</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -36,14 +36,14 @@
           class="lang-option"
           :class="{ active: $i18n.locale === lang.locale }"
         >
-          <img :src="lang.flag" :alt="lang.name" class="flag-img" />
-          <span class="lang-name">{{ lang.name }}</span>
+          <img :src="lang.flag" :alt="lang.name" class="flag-img size-4.5 sm:size-5.5 md:size-6.5" />
+          <span class="lang-name text-xs sm:text-sm">{{ lang.name }}</span>
           <svg
             v-if="$i18n.locale === lang.locale"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            class="check-icon"
+            class="check-icon size-4 sm:size-5 md:size-6"
           >
             <path
               fill-rule="evenodd"
@@ -132,8 +132,8 @@ export default {
   border-radius: 0.5rem; */
   cursor: pointer;
   /* transition: all 0.2s ease; */
-  font-size: 0.875rem;
-  font-weight: 600;
+
+
   color: #2c702c;
 
 }
@@ -144,8 +144,8 @@ export default {
 } */
 
 .flag-img {
-  width: 1.2rem;
-  height: 1.2rem;
+ /*  width: 1.2rem;
+  height: 1.2rem; */
   object-fit: cover;
   border-radius: 100%;
 
@@ -172,7 +172,7 @@ export default {
 .lang-dropdown {
   position: absolute;
   right: 0;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 0.6rem);
   min-width: 160px;
   background: white;
   border-radius: 0.5rem;
@@ -199,10 +199,10 @@ export default {
     height: 32px;
   } */
 
-  .flag-img {
-    width: 1.5rem;
+ /* .flag-img {
+     width: 1.5rem;
     height: 1.5rem;
-  }
+  }*/
 
  /*  .lang-code {
     font-size: 1.25rem;
@@ -258,8 +258,8 @@ export default {
 }
 
 .check-icon {
-  width: 18px;
-  height: 18px;
+  /* width: 18px;
+  height: 18px; */
   color: #2c702c;
   flex-shrink: 0;
 }

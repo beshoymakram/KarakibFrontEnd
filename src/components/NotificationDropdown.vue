@@ -1,10 +1,10 @@
 <template>
   <div class="relative" ref="dropdownRef">
     <!-- Bell Icon Button -->
-    <button @click="toggleDropdown" class="relative p-2 rounded-lg  transition-colors duration-200  "
+    <button @click="toggleDropdown" class="relative py-2 rounded-lg    transition-transform duration-100 hover:scale-120  "
       aria-label="Notifications">
       <!-- Bell Icon SVG -->
-      <svg class="size-6 md:size-7 text-primary text-sm font-bold cursor-pointer hover:scale-110" fill="none"
+      <svg class="w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary  cursor-pointer hover:scale-110" fill="none"
         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
@@ -13,14 +13,14 @@
 
       <!-- Unread Indicator Dot -->
       <span v-if="hasUnread"
-        class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#2C702C] rounded-full border-2 border-white"></span>
+        class="absolute top-1.5 right-1.2 w-2 h-2 md:w-2.5 md:h-2.5 bg-[#2C702C] rounded-full border border-white"></span>
     </button>
 
     <!-- Dropdown Panel -->
     <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95"
       enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-150"
       leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-      <div v-if="isOpen" class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50">
+      <div v-if="isOpen" class="absolute -right-39 sm:-right-2 mt-2 w-80 sm:w-90 md:w-110 bg-white rounded-xl shadow-lg border border-gray-200 z-50">
         <!-- Header -->
         <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
           <h3 class="text-lg font-semibold text-gray-800">Notifications</h3>

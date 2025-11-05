@@ -1,11 +1,11 @@
 <template>
-  <nav class="relative bg-base-100 shadow-sm">
+  <nav class=" bg-base-100 shadow-sm  sticky top-0 z-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-20 justify-between items-center">
+      <div class="flex h-14 sm:h-16 md:h-18 justify-between items-center">
         <!-- Left Section -->
         <div class="flex items-center">
           <!-- Mobile Menu Button -->
-          <div class="mr-2 -ml-2 flex items-center lg:hidden">
+          <div class="mx-1 flex items-center lg:hidden">
             <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
               class="relative inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-green-100 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer">
               <svg v-if="!mobileMenuOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -21,7 +21,7 @@
           <!-- Logo -->
           <div class="flex shrink-0 items-center">
             <router-link to="/" class="logo-link">
-              <img src="/public/logos/logo_horizontal.svg" alt="Karakib" class="h-20 w-auto cursor-pointer" />
+              <img src="/public/logos/logo_horizontal.svg" alt="Karakib" class="h-14 sm:h-16 md:h-18 w-auto cursor-pointer" />
             </router-link>
           </div>
 
@@ -52,22 +52,29 @@
 
           <NotificationDropdown />
           <router-link to="/cart"
-            class="relative inline-flex items-center justify-center px-2 pr-2 my-4 text-sm font-bold no-active-style  rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="none" stroke="currentColor"
-              stroke-width="36" stroke-linecap="round" stroke-linejoin="round"
-              class="cart-icon  size-6 md:size-7 text-primary text-sm font-bold cursor-pointer">
-              <path
-                d="M160 416a48 48 0 1 0 48 48 48 48 0 0 0-48-48Zm288 0a48 48 0 1 0 48 48 48 48 0 0 0-48-48Zm-279.6-96h281.2a32 32 0 0 0 31.1-24.3l47.6-208A16 16 0 0 0 512 80H128L112.5 16.5A16 16 0 0 0 97 8H24A8 8 0 0 0 16 16v16a8 8 0 0 0 8 8h58.8l70.3 281.2A32 32 0 0 0 168.4 320Z" />
+            class="relative inline-flex items-center justify-center px-2 pr-2 my-4  no-active-style  cursor-pointer rounded-lg ">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"
+               role="img"
+               aria-labelledby="cartTitle cartDesc"
+
+              class="cart-icon  w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary  transition-transform duration-100 hover:scale-120 ">
+              <title id="cartTitle">Shopping cart</title>
+             <desc id="cartDesc">Outline icon of a shopping cart with two wheels</desc>
+              <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3h2l1.6 9.6A2 2 0 0 0 8.5 15h8.9a2 2 0 0 0 1.9-1.5L21 6H6" />
+              <circle cx="9" cy="20" r="1.6" />
+              <circle cx="18" cy="20" r="1.6" />
+              </g>
             </svg>
 
             <span v-if="cartStore.count > 0"
-              class="absolute -top-3 right-0 bg-green-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+              class="absolute -top-1.5  right-0 bg-green-600 text-white text-[0.4rem] sm:text-xs font-semibold rounded-full w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 flex items-center justify-center">
               {{ cartStore.count }}
             </span>
           </router-link>
 
           <!-- Authenticated User Dropdown -->
-          <div v-if="auth.isAuthenticated" class="relative hidden lg:block" ref="profileDropdown">
+          <div v-if="auth.isAuthenticated" class="relative " ref="profileDropdown">
             <button @click="profileDropdownOpen = !profileDropdownOpen"
               class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 cursor-pointer hover:scale-110">
               <img :src="auth.user?.avatar_url ||
@@ -120,18 +127,18 @@
             {{ $t("common.courierDashboard") }}
           </router-link>
           <!-- theme button -->
-          <button @click="toggleTheme" class=" rounded-full transition-all duration-300 cursor-pointer hover:scale-110"
+          <button @click="toggleTheme" class=" rounded-full transition-all duration-300 cursor-pointer hover:scale-120"
             aria-label="Toggle theme">
             <!-- Light Mode Icon -->
             <svg v-if="currentTheme === 'forest'" xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6 md:w-7 md:h-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
               stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M12 3v1m0 16v1m8.485-8.485l-.707.707M4.222 4.222l.707.707M21 12h1M2 12H1m16.97 6.97l.707.707M4.222 19.778l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
             </svg>
 
             <!-- Dark Mode Icon -->
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:w-7 md:h-7 text-primary " fill="none"
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class=" w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary " fill="none"
               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
             </svg>
@@ -278,7 +285,7 @@ export default {
 
 <style scoped>
 .router-link-exact-active:not(.no-active-style) {
-  padding: 10px;
+  /*padding: 10px;*/
   background-color: #e0ebe0;
 }
 
@@ -306,10 +313,10 @@ export default {
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.cart-icon:hover {
+/* .cart-icon:hover {
   color: hsl(var(--p) / 0.8);
   transform: scale(1.1);
-}
+} */
 
 /* Force override DaisyUI primary colors */
 .text-primary {
