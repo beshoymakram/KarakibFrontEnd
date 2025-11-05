@@ -21,7 +21,7 @@
             <RouterLink to="/about" class="hover:text-green-700">{{ $t('common.aboutUs') }}</RouterLink>
           </li>
           <li>
-            <RouterLink to="/about" class="hover:text-green-700">{{ $t('common.privacyPolicy') }}</RouterLink>
+            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">{{ $t('common.privacyPolicy') }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -30,7 +30,7 @@
         <h3 class="font-semibold text-primary mb-3">{{ $t('common.areYouACollector') }}</h3>
         <ul class="space-y-1 text-sm text-secondary">
           <li>
-            <RouterLink to="/join" class="hover:text-green-700">{{ $t('common.joinKarakibCollectors') }}</RouterLink>
+            <RouterLink to="/register" class="hover:text-green-700">{{ $t('common.joinKarakibCollectors') }}</RouterLink>
           </li>
         </ul>
       </div>
