@@ -15,9 +15,9 @@
       <div class="relative">
         <select v-model="filters.payment_method"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
-          <option value="">{{ $t('common.allPayoutMethods') }}</option>
-          <option value="earn">{{ $t('common.earnedPoints') }}</option>
-          <option value="donate">{{ $t('common.donatedPoints') }}</option>
+          <option value="">{{ $t('common.allPaymentMethods') }}</option>
+          <option value="card">{{ $t('common.card') }}</option>
+          <option value="cash">{{ $t('common.cash') }}</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
@@ -42,7 +42,7 @@
           <tr>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">#</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
-              $t('common.requestNumber') }}</th>
+              $t('common.orderNumber') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
               $t('common.createdAt') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
@@ -69,7 +69,7 @@
                   order.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed' || request.status === 'collected',
+                'text-green-800 bg-green-100': order.status === 'completed' || order.status === 'collected',
                 'text-red-800 bg-red-100': order.status === 'cancelled',
                 'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
@@ -77,12 +77,12 @@
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              <button @click="openScanner(order)"
+              <button v-if="order.status == 'pending' || order.status == 'assigned'" @click="openScanner(order)"
                 class="px-3 py-1 border border-green-300 rounded-md text-primary hover:bg-green-50 transition-colors cursor-pointer">
                 {{ $t('common.collect') }}
               </button>
               <button @click="openDetailsModal(order)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-section">
+                class="px-3 py-1 border border-gray-300 rounded-md text-section cursor-pointer">
                 {{ $t('common.details') }}
               </button>
             </td>
@@ -108,6 +108,9 @@
             </button>
             <div class="p-4 md:p-5 text-center">
               <h3 class="text-xl font-semibold text-[#2C702C] mb-2">{{ $t('common.scanQrToCollect') }}</h3>
+              <p class="text-sm text-gray-600 mb-2">
+                order: <span class="font-bold">{{ activeOrderNumber }}</span>
+              </p>
               <p class="text-gray-500 mb-4">{{ infoText }}</p>
               <div class="aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center mb-4">
                 <video ref="videoEl" class="w-full h-full object-cover" autoplay playsinline></video>
@@ -201,22 +204,23 @@
               <!-- Waste Items Section -->
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
-                }}</h4>
+                  }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <!-- Item Image -->
-                    <img :src="item.product?.image_url" :alt="item.product?.name"
+                    <img :src="item.item?.image_url" :alt="item.item?.name"
                       class="w-16 h-16 object-cover rounded-lg bg-white border border-gray-200" />
 
                     <!-- Item Details -->
                     <div class="flex-1">
-                      <h5 class="font-semibold text-[#2C702C]">{{ item.product?.name }}</h5>
+                      <h5 class="font-semibold text-[#2C702C]">{{ item.item?.name }}</h5>
                       <p class="text-sm text-gray-600">
-                        {{ $t('common.quantity') }}: <span class="font-semibold">{{ item.quantity }}</span>
+                        {{ $t('common.quantity') }}: <span class="font-semibold">{{ item.quantity }}</span> {{
+                          item.item?.unit }}
                       </p>
                       <p class="text-sm text-green-600 font-medium">
-                        {{ item.price }} {{ $t('common.currency') }}
+                        {{ item.subtotal }} {{ $t('common.points') }}
                       </p>
                     </div>
                   </div>
@@ -238,7 +242,7 @@
                 <div class="flex justify-between items-center">
                   <h4 class="text-sm font-medium text-gray-700">{{ $t('common.totalPoints') }}</h4>
                   <p class="text-2xl font-bold text-green-600">
-                    {{ details.total }} {{ $t('common.currency') }}
+                    {{ details.total }} {{ $t('common.points') }}
                   </p>
                 </div>
               </div>
@@ -262,6 +266,7 @@
 import ordersService from '@/services/ordersService';
 import jsQR from 'jsqr';
 import { nextTick } from 'vue';
+import soundPlayer from '@/utils/sounds';
 
 export default {
   name: 'CourierAssignedOrders',
@@ -285,7 +290,8 @@ export default {
         status: '',
       },
       scannerOpen: false,
-      activeRequestId: null,
+      activeOrderId: null,
+      activeOrderNumber: null,
       stream: null,
       infoText: 'Point your camera at the QR code on the order receipt.'
     }
@@ -296,14 +302,14 @@ export default {
       let filtered = this.orders;
 
       if (this.filters.payment_method) {
-        filtered = filtered.filter(order =>
-          order.payment_method === this.filters.payment_method
+        filtered = filtered.filter(item =>
+          item.payment_method === this.filters.payment_method
         );
       }
 
       if (this.filters.status) {
-        filtered = filtered.filter(order =>
-          order.status === this.filters.status
+        filtered = filtered.filter(item =>
+          item.status === this.filters.status
         );
       }
 
@@ -332,7 +338,8 @@ export default {
       this.showCompleteModal = true;
     },
     openScanner(req) {
-      this.activeRequestId = req.id
+      this.activeOrderId = req.id
+      this.activeOrderNumber = req.order_number
       this.scannerOpen = true
       this.$nextTick(this.startCamera)
     },
@@ -381,7 +388,6 @@ export default {
         this.$toast?.error?.('Camera access was denied')
       }
     },
-
     async detectQrCode() {
       const video = this.$refs.videoEl;
       const canvas = document.createElement('canvas');
@@ -411,10 +417,14 @@ export default {
       this.infoText = 'Processing...';
 
       try {
-        const response = await ordersService.scanQr({ qr_token: qrToken });
+        const response = await ordersService.scanQr({
+          qr_token: qrToken,
+          order_id: this.activeOrderId
+        });
 
         if (response.data.success) {
           this.$toast.success(response.data.message);
+          soundPlayer.play('success');
           this.closeScanner();
           this.fetchMyOrders();
         }
@@ -423,14 +433,13 @@ export default {
         this.infoText = 'Scan failed. Please try again.';
       }
     },
-
     async closeScanner() {
       if (this.stream) {
         this.stream.getTracks().forEach(t => t.stop())
         this.stream = null
       }
       this.scannerOpen = false
-      this.activeRequestId = null
+      this.activeOrderId = null
     },
 
     async fetchMyOrders() {
@@ -438,7 +447,7 @@ export default {
         const user = await ordersService.getMyOrders();
         this.orders = user.data.orders || user.data;
       } catch (error) {
-        this.$toast.error(error?.response?.data.message || 'Failed to fetch orders.');
+        this.$toast.error(error?.response?.data.message || 'Failed to fetch order.');
       }
     },
   },

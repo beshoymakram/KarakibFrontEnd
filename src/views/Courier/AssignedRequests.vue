@@ -77,7 +77,7 @@
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              <button @click="openScanner(request)"
+              <button v-if="request.status == 'pending' || request.status == 'assigned'" @click="openScanner(request)"
                 class="px-3 py-1 border border-green-300 rounded-md text-primary hover:bg-green-50 transition-colors cursor-pointer">
                 {{ $t('common.collect') }}
               </button>
