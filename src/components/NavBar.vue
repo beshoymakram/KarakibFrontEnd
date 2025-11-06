@@ -75,10 +75,11 @@
           <!-- Authenticated User Dropdown -->
           <div v-if="auth.isAuthenticated" class="relative " ref="profileDropdown">
             <button @click="profileDropdownOpen = !profileDropdownOpen"
-              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 cursor-pointer hover:scale-110">
+              class="flex rounded-full    focus:ring-[#2c702c] forest-ring  forest-offset-ring  cursor-pointer hover:scale-110 focus:outline-none focus:ring-1
+         focus:ring-offset-1 focus:ring-offset-[#e8f5e9]">
               <img :src="auth.user?.avatar_url ||
                 'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')
-                " alt="Profile" class="size-8 rounded-full bg-base-200" />
+                " alt="Profile" class="size-6 sm:size-7 md:size-8 rounded-full " />
             </button>
 
             <Transition enter-active-class="transition ease-out duration-200"
@@ -283,6 +284,13 @@ export default {
 </script>
 
 <style scoped>
+
+[data-theme="forest"] .forest-ring {
+  --tw-ring-color: #16af3f !important;
+}
+[data-theme="forest"] .forest-offset-ring {
+  --tw-ring-offset-color: rgb(62, 62, 62) !important;
+}
 .router-link-exact-active:not(.no-active-style) {
   /*padding: 10px;*/
   background-color: #e0ebe0;
