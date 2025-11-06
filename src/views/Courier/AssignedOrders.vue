@@ -214,7 +214,7 @@
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{
                   $t('common.orderProductsToDeliver')
-                  }}</h4>
+                }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
@@ -272,7 +272,7 @@
 </template>
 
 <script>
-import ordersService from '@/services/ordersService';
+import requestsService from '@/services/requestsService';
 import jsQR from 'jsqr';
 import { nextTick } from 'vue';
 import soundPlayer from '@/utils/sounds';
@@ -346,9 +346,9 @@ export default {
       this.selectedOrder = order.id;
       this.showCompleteModal = true;
     },
-    openScanner(req) {
-      this.activeOrderId = req.id
-      this.activeOrderNumber = req.order_number
+    openScanner(order) {
+      this.activeOrderId = order.id
+      this.activeOrderNumber = order.order_number
       this.scannerOpen = true
       this.$nextTick(this.startCamera)
     },
@@ -369,7 +369,7 @@ export default {
     },
     async confirmComplete() {
       try {
-        const response = await ordersService.completeOrder(this.selectedOrder);
+        const response = await requestsService.completeOrder(this.selectedOrder);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
@@ -426,7 +426,7 @@ export default {
       this.infoText = 'Processing...';
 
       try {
-        const response = await ordersService.scanQr({
+        const response = await requestsService.scanQr({
           qr_token: qrToken,
           order_id: this.activeOrderId
         });
@@ -453,7 +453,7 @@ export default {
 
     async fetchMyOrders() {
       try {
-        const user = await ordersService.getMyOrders();
+        const user = await requestsService.getMyOrders();
         this.orders = user.data.orders || user.data;
       } catch (error) {
         this.$toast.error(error?.response?.data.message || 'Failed to fetch order.');
