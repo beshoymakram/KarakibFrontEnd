@@ -124,7 +124,7 @@
 
             <!-- Add Button -->
             <button v-else @click.stop="addWasteToCart(item)"
-              class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
+              class="btn border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
               {{ $t("common.addAndEarn") }}
             </button>
 
