@@ -35,8 +35,8 @@
             <div class="hidden md:flex items-center gap-2 sm:gap-3 shrink-0 mr-3">
               <button @click="decrementQuantity(item.id, item.quantity)"
                 class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4"
+                  stroke="#2C702C" class="w-3 h-3 sm:w-4 sm:h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                 </svg>
               </button>
@@ -155,8 +155,8 @@
             <div class=" hidden md:flex items-center gap-2 sm:gap-3 shrink-0 mr-3">
               <button @click="decrementQuantity(item.id, item.quantity)"
                 class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4"
+                  stroke="#2C702C" class="w-3 h-3 sm:w-4 sm:h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                 </svg>
               </button>
