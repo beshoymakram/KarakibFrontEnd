@@ -5,7 +5,7 @@
     style="background-image: url('/images/Homebg.png')"
   >
     <div class="hero-overlay bg-base-100/50 dark:bg-base-200/50"></div>
-    <div class="hero-content text-center items-start justify-start pt-12 md:pt-16 lg:pt-20 px-4">
+    <div class="hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
       <div class="max-w-3xl">
         <h1
           class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl text-primary font-bold drop-shadow-lg"
@@ -170,7 +170,7 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
   >
     <div
       v-for="(product, index) in products"

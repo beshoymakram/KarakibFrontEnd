@@ -2,7 +2,7 @@
   <div class="language-switcher" ref="langDropdown">
     <!-- Current Language Button -->
     <button @click="dropdownOpen = !dropdownOpen" class=" size-5 sm:size-6 md:size-7  lang-current-btn transition-transform duration-100 hover:scale-120 drop-shadow-green-100 drop-shadow-sm ">
-      <img :src="currentLanguage.flag" :alt="currentLanguage.name" class="  size-4.5 sm:size-5.5 md:size-6.5  flag-img" />
+      <img :src="currentLanguage.flag" :alt="currentLanguage.name" class="  size-4 sm:size-5 md:size-6  flag-img" />
       <!-- <span class="lang-code text-[#16af3f]">{{ currentLanguage.code }}</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@
           class="lang-option"
           :class="{ active: $i18n.locale === lang.locale }"
         >
-          <img :src="lang.flag" :alt="lang.name" class="flag-img size-4.5 sm:size-5.5 md:size-6.5" />
+          <img :src="lang.flag" :alt="lang.name" class="flag-img size-4 sm:size-5 md:size-6" />
           <span class="lang-name text-xs sm:text-sm">{{ lang.name }}</span>
           <svg
             v-if="$i18n.locale === lang.locale"
@@ -172,7 +172,7 @@ export default {
 .lang-dropdown {
   position: absolute;
   right: 0;
-  top: calc(100% + 0.6rem);
+  top: calc(100% + 1rem);
   min-width: 160px;
   background: white;
   border-radius: 0.5rem;

@@ -405,6 +405,10 @@
         "collected": "تم الاستلام",
         "wasteItemsToCollect": "عناصر النفايات المراد جمعها",
         "welcome_to_karakib": "مرحبًا بك في كراكيب!",
-        "noWasteItems": "لا توجد عناصر نفايات للجمع"
+        "noWasteItems": "لا توجد عناصر نفايات للجمع",
+        "orderProductsToDeliver": "المنتجات المطلوب توصيلها",
+        "deliver": "تسليم",
+        "delivered": "تم التسليم",
+        "noProducts": "لا منتجات"
     }
 }
