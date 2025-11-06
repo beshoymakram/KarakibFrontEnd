@@ -21,7 +21,8 @@
 
     <!-- content -->
     <div
-      class="relative flex flex-col sm:flex-row items-center justify-center text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 z-2"
+      class="relative flex flex-col sm:flex-row items-center justify-center text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 pt-16 sm:pt-18  md:pt-22 lg:pt-28
+      pb-10 sm:pb-12 md:pb-16 lg:pb-20 z-2"
     >
       <!-- Logo -->
       <img

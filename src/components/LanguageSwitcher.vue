@@ -172,7 +172,7 @@ export default {
 .lang-dropdown {
   position: absolute;
   right: 0;
-  top: calc(100% + 0.6rem);
+  top: calc(100% + 1rem);
   min-width: 160px;
   background: white;
   border-radius: 0.5rem;

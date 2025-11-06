@@ -1,13 +1,17 @@
 <template>
-  <nav class=" bg-base-100 shadow-sm  sticky top-0 z-50">
+  <nav  ref="navbar" class=" fixed top-1 left-1/2 -translate-x-1/2 w-[98vw]
+      bg-transparent shadow-sm z-50
+           transition-transform duration-500 ease-in-out
+           ring-1 ring-[#2c702c] forest-ring rounded-4xl"
+    :class="{ '-translate-y-full': isHidden }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-14 sm:h-16 md:h-18 justify-between items-center">
+      <div class="flex h-10 sm:h-12 md:h-14 justify-between items-center ">
         <!-- Left Section -->
         <div class="flex items-center">
           <!-- Mobile Menu Button -->
           <div class="mx-1 flex items-center lg:hidden">
             <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
-              class="relative inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-green-100 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer">
+              class="relative inline-flex items-center justify-center rounded-md p-1 text-primary hover:bg-green-100 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer">
               <svg v-if="!mobileMenuOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                 class="size-6">
                 <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -22,7 +26,7 @@
           <div class="flex shrink-0 items-center">
             <router-link to="/" class="logo-link">
               <img src="/public/logos/logo_horizontal.svg" alt="Karakib"
-                class="h-14 sm:h-16 md:h-18 w-auto cursor-pointer" />
+                class="h-12 sm:h-14 md:h-16 w-auto cursor-pointer px-2" />
             </router-link>
           </div>
 
@@ -229,6 +233,8 @@ export default {
       mobileMenuOpen: false,
       profileDropdownOpen: false,
       currentTheme: "light",
+      isHidden: false,
+      lastScrollTop: 0,
 
     };
   },
@@ -267,6 +273,21 @@ export default {
       this.currentTheme = newTheme;
       localStorage.setItem("theme", newTheme);
     },
+
+
+    handleScroll() {
+      const currentScroll =
+        window.scrollY || document.documentElement.scrollTop
+
+      // Hide when scrolling down, show when scrolling up
+      if (currentScroll > this.lastScrollTop && currentScroll > 100) {
+        this.isHidden = true
+      } else {
+        this.isHidden = false
+      }
+
+      this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
+    },
   },
 
   mounted() {
@@ -274,10 +295,13 @@ export default {
     const savedTheme = localStorage.getItem("theme") || "light";
     this.currentTheme = savedTheme;
     document.documentElement.dataset.theme = savedTheme;
+     window.addEventListener('scroll', this.handleScroll)
   },
 
   beforeUnmount() {
     document.removeEventListener("click", this.handleClickOutside);
+
+    window.removeEventListener('scroll', this.handleScroll);
 
   },
 };
@@ -369,4 +393,19 @@ export default {
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
+
+
+
+nav {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Forest theme override */
+[data-theme='forest'] nav {
+  background-color: rgba(28, 48, 28, 0.7);
+}
+
+
 </style>

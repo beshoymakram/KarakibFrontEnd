@@ -5,7 +5,7 @@
     style="background-image: url('/images/Homebg.png')"
   >
     <div class="hero-overlay bg-base-100/50 dark:bg-base-200/50"></div>
-    <div class="hero-content text-center items-start justify-start pt-12 md:pt-16 lg:pt-20 px-4">
+    <div class="hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
       <div class="max-w-3xl">
         <h1
           class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl text-primary font-bold drop-shadow-lg"
