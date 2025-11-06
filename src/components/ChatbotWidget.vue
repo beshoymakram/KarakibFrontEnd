@@ -114,13 +114,13 @@
             <img
               v-if="msg.sender === 'bot'"
               src="/images/koko.png"
-              class="w-8 h-8 rounded-full flex-shrink-0"
+              class="w-8 h-8 rounded-full shrink-0"
               alt="Koko"
             />
 
             <div
               :class="[
-                'px-3 py-2 rounded-lg text-sm max-w-[75%] break-words',
+                'px-3 py-2 rounded-lg text-sm max-w-[75%] wrap-break-word',
                 msg.sender === 'bot'
                   ? 'bg-[#2C702C] text-white'
                   : 'bg-[#E0EBE0] border border-green-300 text-gray-800'
@@ -158,7 +158,7 @@
 
           <div class="flex items-center gap-2 w-full">
             <label
-              class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center flex-shrink-0"
+              class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center shrink-0"
               title="Upload waste image for DIY ideas"
             >
               <img src="../../public/images/icons8-camera-64.png" alt="" class="size-6">
@@ -184,7 +184,7 @@
             <button
               @click="sendMessage"
               :disabled="isLoading || (!userInput.trim() && !selectedImage)"
-              class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 whitespace-nowrap"
+              class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap"
             >
               Send
             </button>
