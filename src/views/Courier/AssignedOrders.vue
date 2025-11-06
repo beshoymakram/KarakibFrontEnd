@@ -272,7 +272,7 @@
 </template>
 
 <script>
-import requestsService from '@/services/requestsService';
+import ordersService from '@/services/ordersService';
 import jsQR from 'jsqr';
 import { nextTick } from 'vue';
 import soundPlayer from '@/utils/sounds';
@@ -369,7 +369,7 @@ export default {
     },
     async confirmComplete() {
       try {
-        const response = await requestsService.completeOrder(this.selectedOrder);
+        const response = await ordersService.completeOrder(this.selectedOrder);
         nextTick(() => {
           this.$toast.success(response.data.message);
         });
@@ -426,7 +426,7 @@ export default {
       this.infoText = 'Processing...';
 
       try {
-        const response = await requestsService.scanQr({
+        const response = await ordersService.scanQr({
           qr_token: qrToken,
           order_id: this.activeOrderId
         });
@@ -453,7 +453,7 @@ export default {
 
     async fetchMyOrders() {
       try {
-        const user = await requestsService.getMyOrders();
+        const user = await ordersService.getMyOrders();
         this.orders = user.data.orders || user.data;
       } catch (error) {
         this.$toast.error(error?.response?.data.message || 'Failed to fetch order.');
