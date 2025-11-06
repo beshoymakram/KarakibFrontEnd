@@ -17,7 +17,7 @@
         </p>
         <button
           @click="scrollToHowItWorks"
-          class="btn rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+          class="btn border-0 rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
           text-lg
         >
           {{ $t("common.getStarted") }}
@@ -78,7 +78,7 @@
     <div class="text-center mt-4 mb-6 md:mb-10">
       <router-link to="/add-waste">
         <button
-          class="btn rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
+          class="btn border-0 rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
         >
           {{ $t("common.recycleNow") }}
         </button>
@@ -159,7 +159,7 @@
         </p>
         <router-link to="/shop">
           <button
-            class="btn rounded-md cursor-pointer bg-[#2C702C]  text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+            class="btn border-0 rounded-md cursor-pointer bg-[#2C702C]  text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
           >
             {{ $t("common.shopNow") }}
           </button>
@@ -260,7 +260,7 @@
         <button
           v-else-if="product.stock > 0"
           @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md border-0 bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
         >
           {{ $t("common.addToCart") }}
         </button>
