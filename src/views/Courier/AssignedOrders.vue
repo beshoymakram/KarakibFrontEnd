@@ -6,6 +6,8 @@
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
+          <option value="assigned">{{ $t('common.assigned') }}</option>
+          <option value="delivered">{{ $t('common.delivered') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
@@ -69,7 +71,7 @@
                   order.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed' || order.status === 'collected',
+                'text-green-800 bg-green-100': order.status === 'completed' || order.status === 'delivered',
                 'text-red-800 bg-red-100': order.status === 'cancelled',
                 'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
@@ -79,7 +81,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
               <button v-if="order.status == 'pending' || order.status == 'assigned'" @click="openScanner(order)"
                 class="px-3 py-1 border border-green-300 rounded-md text-primary hover:bg-green-50 transition-colors cursor-pointer">
-                {{ $t('common.collect') }}
+                {{ $t('common.deliver') }}
               </button>
               <button @click="openDetailsModal(order)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-section cursor-pointer">
@@ -156,28 +158,28 @@
               <div class="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     {{ details.name }}
                   </p>
                 </div>
 
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     <a :href="'tel:+' + details.address?.phone">{{ details.address?.phone }}</a>
                   </p>
                 </div>
 
                 <div class="sm:col-span-2">
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     {{ details.address?.street_address }}
                   </p>
                 </div>
 
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.city') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     {{ details.address?.city }}
                   </p>
                 </div>
@@ -185,8 +187,8 @@
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.orderStatus') }}</h4>
                   <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
-                    'bg-green-100 text-green-800': details.status === 'completed',
-                    'bg-yellow-100 text-yellow-800': details.status === 'pending',
+                    'bg-green-100 text-green-800': details.status === 'completed' || details.status === 'delivered',
+                    'bg-yellow-100 text-yellow-800': details.status === 'pending' || details.status === 'assigned',
                     'bg-red-100 text-red-800': details.status === 'cancelled'
                   }">
                     {{ $t(`common.${details.status}`) }}
@@ -199,13 +201,20 @@
                     {{ details.created_at }}
                   </p>
                 </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.paymentMethod') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                    {{ $t(`common.${details.payment_method}`) }}
+                  </p>
+                </div>
+
               </div>
 
               <!-- Products Section -->
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{
                   $t('common.orderProductsToDeliver')
-                }}</h4>
+                  }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
@@ -240,9 +249,9 @@
               <!-- Total Points -->
               <div class="bg-green-50 rounded-lg p-4 mb-4">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-sm font-medium text-gray-700">{{ $t('common.totalPoints') }}</h4>
+                  <h4 class="text-sm font-medium text-gray-700">{{ $t('common.total') }}</h4>
                   <p class="text-2xl font-bold text-green-600">
-                    {{ details.total }} {{ $t('common.points') }}
+                    {{ details.total }} {{ $t('common.currency') }}
                   </p>
                 </div>
               </div>

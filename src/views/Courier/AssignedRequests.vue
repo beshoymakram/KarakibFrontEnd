@@ -6,6 +6,8 @@
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
+          <option value="assigned">{{ $t('common.assigned') }}</option>
+          <option value="collected">{{ $t('common.collected') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
@@ -156,28 +158,28 @@
               <div class="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     {{ details.name }}
                   </p>
                 </div>
 
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     <a :href="'tel:+' + details.address?.phone">{{ details.address?.phone }}</a>
                   </p>
                 </div>
 
                 <div class="sm:col-span-2">
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     {{ details.address?.street_address }}
                   </p>
                 </div>
 
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.city') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-words">
                     {{ details.address?.city }}
                   </p>
                 </div>
@@ -185,8 +187,8 @@
                 <div>
                   <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.orderStatus') }}</h4>
                   <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
-                    'bg-green-100 text-green-800': details.status === 'completed',
-                    'bg-yellow-100 text-yellow-800': details.status === 'pending',
+                    'bg-green-100 text-green-800': details.status === 'completed' || details.status === 'collected',
+                    'bg-yellow-100 text-yellow-800': details.status === 'pending' || details.status === 'assigned',
                     'bg-red-100 text-red-800': details.status === 'cancelled'
                   }">
                     {{ $t(`common.${details.status}`) }}
@@ -204,7 +206,7 @@
               <!-- Waste Items Section -->
               <div class="mb-4">
                 <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
-                }}</h4>
+                  }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">

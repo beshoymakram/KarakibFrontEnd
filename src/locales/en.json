@@ -409,6 +409,8 @@
     "welcome_to_karakib": "Welcome to karakib!",
     "noWasteItems": "No waste items to collect",
     "orderProductsToDeliver": "Products To Deliver",
+    "deliver": "Deliver",
+    "delivered": "Delivered",
     "noProducts": "No Products"
   }
 }
