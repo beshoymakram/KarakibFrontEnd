@@ -55,7 +55,7 @@
         <p class="card-title text-sm sm:text-base md:text-lg mx-auto font-semibold ">
           {{ step.title }}
         </p>
-        <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
+        <p class="text-xs sm:text-sm  text-gray-600 leading-relaxed">
           {{ step.description }}
         </p>
       </div>
