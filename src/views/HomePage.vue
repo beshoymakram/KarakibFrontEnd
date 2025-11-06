@@ -630,7 +630,7 @@ export default {
   background-color: #3a3a3a !important;
 }
 .bg-donate {
-  background-color: #FFFFFF !important;
+  background-color: #f2f2f2 !important;
 }
 [data-theme="forest"] .bg-donate {
   background-color: #201e1e !important;
