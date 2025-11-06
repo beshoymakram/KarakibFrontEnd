@@ -295,7 +295,7 @@
       <div
         v-for="(card, index) in infoCards"
         :key="index"
-        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full sm:w-6/10 md:w-7/10 xl:w-full mx-auto"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full sm:w-6/10 md:w-7/10 xl:w-full mx-auto flex flex-col"
       >
         <img
           :src="card.image"
@@ -308,7 +308,7 @@
         <p class="text-[#8E98A8] text-xs sm:text-sm md:text-base lg:text-lg mb-4">{{ card.description }}</p>
         <button
           @click="openDonationModal(card.name, card.title)"
-          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition cursor-pointer"
+          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition cursor-pointer mt-auto w-fit mx-auto"
         >
           {{ $t("common.donate") }}
         </button>
