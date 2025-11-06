@@ -53,10 +53,10 @@
 
           <NotificationDropdown v-if="auth.isAuthenticated" />
           <router-link to="/cart"
-            class="relative inline-flex items-center justify-center px-2 pr-2 my-4  no-active-style  cursor-pointer rounded-lg ">
+            class="relative inline-flex items-center justify-center px-2 pr-2 my-4  no-active-style  cursor-pointer rounded-lg  transition-transform duration-100 hover:scale-120">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" role="img"
               aria-labelledby="cartTitle cartDesc"
-              class="cart-icon  w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary  transition-transform duration-100 hover:scale-120 ">
+              class="cart-icon  w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary   ">
               <title id="cartTitle">Shopping cart</title>
               <desc id="cartDesc">Outline icon of a shopping cart with two wheels</desc>
               <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -67,7 +67,7 @@
             </svg>
 
             <span v-if="cartStore.count > 0"
-              class="absolute -top-1.5  right-0 bg-green-600 text-white text-[0.4rem] sm:text-xs font-semibold rounded-full w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 flex items-center justify-center">
+              class="absolute -top-1.5 right-0.5 md:right-0 bg-green-600 text-white text-[0.4rem] sm:text-[0.5rem] md:text-[0.6rem] font-semibold rounded-full w-3.5 h-3.5 sm:w-4 sm:h-4 md:size-4.5 flex items-center justify-center ">
               {{ cartStore.count }}
             </span>
           </router-link>
@@ -76,7 +76,7 @@
           <div v-if="auth.isAuthenticated" class="relative " ref="profileDropdown">
             <button @click="profileDropdownOpen = !profileDropdownOpen"
               class="flex rounded-full    focus:ring-[#2c702c] forest-ring  forest-offset-ring  cursor-pointer hover:scale-110 focus:outline-none focus:ring-1
-         focus:ring-offset-1 focus:ring-offset-[#e8f5e9]">
+              focus:ring-offset-1 focus:ring-offset-[#e8f5e9]">
               <img :src="auth.user?.avatar_url ||
                 'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')
                 " alt="Profile" class="size-6 sm:size-7 md:size-8 rounded-full " />
