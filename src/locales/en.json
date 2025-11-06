@@ -411,6 +411,21 @@
     "orderProductsToDeliver": "Products To Deliver",
     "deliver": "Deliver",
     "delivered": "Delivered",
+    "new_user": "New user just registered",
+    "order_delivered_successfully": "Order delivered successfully!",
+    "order_completed_successfully": "Order completed successfully!",
+    "order_cancelled_successfully": "Order cancelled successfully!",
+    "order_placed_successfully": "Order placed successfully!",
+    "account_restored": "Account restored",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
     "noProducts": "No Products"
   }
 }

@@ -409,6 +409,20 @@
         "orderProductsToDeliver": "المنتجات المطلوب توصيلها",
         "deliver": "تسليم",
         "delivered": "تم التسليم",
+        "new_user": "مستخدم جديد سجل للتو",
+        "order_delivered_successfully": "تم تسليم الطلب بنجاح",
+        "order_completed_successfully": "تم اكمال الطلب بنجاح",
+        "order_cancelled_successfully": "تم الغاء الطلب بنجاح",
+        "order_placed_successfully": "تم انشاء الطلب بنجاح",
+        "account_restored": "تم اعادة تفعيل الحساب",
+        "points_donated_successfully": "تم التبرع بالنقاط بنجاح",
+        "points_converted_successfully": "تم تحويل النقاط الي رصيد بنجاح",
+        "": "",
+        "": "",
+        "": "",
+        "": "",
+        "": "",
+        "": "",
         "noProducts": "لا منتجات"
     }
 }
