@@ -1,5 +1,8 @@
 <template>
-  <div class="fixed bottom-5 right-5 z-50">
+  <div 
+    class="fixed z-50"
+    :style="buttonPosition"
+  >
     <!-- Tooltip (shows before opening chatbot) -->
     <div
       v-if="!isOpen && showTooltip"
@@ -25,10 +28,13 @@
 
     <!-- Floating Button (always visible) -->
     <button
-      @click="toggleChat"
-      class="bg-[#2C702C] text-white rounded-full w-10 h-10 md:w-14 md:h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50"
+      @mousedown="startDrag"
+      @touchstart="startDrag"
+      @click="handleClick"
+      class="bg-[#2C702C] text-white rounded-full w-10 h-10 md:w-14 md:h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50 cursor-move touch-none select-none"
+      :class="{ 'opacity-80': isDragging }"
     >
-      <img src="/images/koko.png" :alt="$t('chatbot.kokoAlt')" class="w-full h-full rounded-full" />
+      <img src="/images/koko.png" :alt="$t('chatbot.kokoAlt')" class="w-full h-full rounded-full pointer-events-none" />
     </button>
 
     <!-- Chat Window -->
@@ -239,6 +245,18 @@ export default {
 
       // Auth store reference
       authStore: null,
+
+      // Dragging state
+      isDragging: false,
+      dragStartX: 0,
+      dragStartY: 0,
+      initialButtonX: 0,
+      initialButtonY: 0,
+      buttonX: null,
+      buttonY: null,
+      hasMoved: false,
+      isTouchDevice: false,
+      touchToggleHandled: false,
     };
   },
 
@@ -256,6 +274,15 @@ export default {
       },
       { deep: true }
     );
+
+    // Load saved button position
+    this.loadButtonPosition();
+
+    // Add global event listeners for dragging
+    document.addEventListener('mousemove', this.onDrag);
+    document.addEventListener('mouseup', this.endDrag);
+    document.addEventListener('touchmove', this.onDrag, { passive: false });
+    document.addEventListener('touchend', this.endDrag);
 
     await this.initializeGemini();
     await this.loadKnowledgeBase();
@@ -276,6 +303,19 @@ export default {
       // If logged in: "Hello [FirstName]!"
       // If logged out: "Hello!"
       return this.userFirstName ? `Hello ${this.userFirstName}!` : "Hello!";
+    },
+
+    buttonPosition() {
+      if (this.buttonX !== null && this.buttonY !== null) {
+        return {
+          bottom: `${this.buttonY}px`,
+          right: `${this.buttonX}px`,
+        };
+      }
+      return {
+        bottom: '20px',
+        right: '20px',
+      };
     }
   },
 
@@ -1086,10 +1126,157 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
         }, 100);
       }
     },
+
+    // Dragging methods
+    getEventCoordinates(e) {
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+      return { x: e.clientX, y: e.clientY };
+    },
+
+    startDrag(e) {
+      // Don't prevent default on mousedown to allow text selection elsewhere
+      if (e.type === 'touchstart') {
+        e.preventDefault();
+        this.isTouchDevice = true;
+        this.touchToggleHandled = false;
+      } else {
+        this.isTouchDevice = false;
+      }
+      this.isDragging = true;
+      this.hasMoved = false;
+      
+      const coords = this.getEventCoordinates(e);
+      this.dragStartX = coords.x;
+      this.dragStartY = coords.y;
+
+      // Get current button position and store as initial position
+      if (this.buttonX === null || this.buttonY === null) {
+        this.buttonX = 20;
+        this.buttonY = 20;
+      }
+      this.initialButtonX = this.buttonX;
+      this.initialButtonY = this.buttonY;
+    },
+
+    onDrag(e) {
+      if (!this.isDragging) return;
+      
+      e.preventDefault();
+      const coords = this.getEventCoordinates(e);
+      
+      // Calculate delta from initial drag start position
+      const deltaX = this.dragStartX - coords.x;
+      const deltaY = coords.y - this.dragStartY; // Y increases downward, but bottom increases upward
+      
+      // Check if user has moved enough to consider it a drag
+      const moveThreshold = 5;
+      if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
+        this.hasMoved = true;
+      }
+
+      // Calculate new position based on initial button position + delta
+      // For X: moving left (decreasing clientX) should increase right value
+      // For Y: moving down (increasing clientY) should decrease bottom value
+      const newX = this.initialButtonX + deltaX;
+      const newY = this.initialButtonY - deltaY;
+
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Button dimensions (use larger size for mobile)
+      const buttonSize = window.innerWidth >= 768 ? 56 : 40; // md:w-14 = 56px, w-10 = 40px
+
+      // Constrain to viewport bounds
+      const maxX = viewportWidth - buttonSize - 10;
+      const maxY = viewportHeight - buttonSize - 10;
+      const minX = 10;
+      const minY = 10;
+
+      this.buttonX = Math.max(minX, Math.min(maxX, newX));
+      this.buttonY = Math.max(minY, Math.min(maxY, newY));
+    },
+
+    endDrag(e) {
+      if (!this.isDragging) return;
+      
+      const wasDragging = this.hasMoved;
+      this.isDragging = false;
+      
+      // Save position to localStorage
+      this.saveButtonPosition();
+      
+      // If no movement, toggle chat
+      if (!wasDragging) {
+        if (this.isTouchDevice) {
+          // For touch, handle toggle here and mark it as handled
+          this.touchToggleHandled = true;
+          setTimeout(() => {
+            this.toggleChat();
+          }, 10);
+        } else {
+          // For mouse, let the click handler handle it
+          // But set a flag to prevent double-toggle
+          this.touchToggleHandled = false;
+        }
+      } else {
+        this.touchToggleHandled = true; // Prevent click after drag
+      }
+      
+      // Reset hasMoved for next interaction
+      setTimeout(() => {
+        this.hasMoved = false;
+        this.touchToggleHandled = false;
+      }, 150);
+    },
+
+    handleClick(e) {
+      // Prevent click handler on touch devices (handled in endDrag)
+      if (this.touchToggleHandled) {
+        return;
+      }
+      // Only handle click if we haven't dragged (for mouse clicks)
+      if (!this.hasMoved && !this.isDragging) {
+        this.toggleChat();
+      }
+    },
+
+    loadButtonPosition() {
+      try {
+        const saved = localStorage.getItem('karakib_chatbot_position');
+        if (saved) {
+          const position = JSON.parse(saved);
+          this.buttonX = position.x;
+          this.buttonY = position.y;
+        }
+      } catch (error) {
+        console.error('Error loading button position:', error);
+      }
+    },
+
+    saveButtonPosition() {
+      try {
+        if (this.buttonX !== null && this.buttonY !== null) {
+          localStorage.setItem('karakib_chatbot_position', JSON.stringify({
+            x: this.buttonX,
+            y: this.buttonY
+          }));
+        }
+      } catch (error) {
+        console.error('Error saving button position:', error);
+      }
+    },
   },
 
   beforeUnmount() {
     this.saveCurrentChat();
+    // Remove global event listeners
+    document.removeEventListener('mousemove', this.onDrag);
+    document.removeEventListener('mouseup', this.endDrag);
+    document.removeEventListener('touchmove', this.onDrag);
+    document.removeEventListener('touchend', this.endDrag);
   },
 };
 </script>
