@@ -192,7 +192,7 @@ export default {
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
     this.fetchNotifications();
-    this.intervalId = setInterval(this.fetchNotifications, 3000);
+    this.intervalId = setInterval(this.fetchNotifications, 30000);
 
   },
 

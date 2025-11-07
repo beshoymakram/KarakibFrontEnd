@@ -37,7 +37,7 @@
         </thead>
         <tbody class="bg-myprofile divide-y divide-gray-200">
           <tr v-if="filteredOrders.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+            <td colspan="6" class="px-4 py-4 text-center text-gray-500">
               {{ $t('common.noResultsMatchSearch') }}
             </td>
           </tr>

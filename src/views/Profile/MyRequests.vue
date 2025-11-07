@@ -60,7 +60,7 @@
         </thead>
         <tbody class="bg-myprofile divide-y divide-gray-200">
           <tr v-if="filteredRequests.length === 0">
-            <td colspan="5" class="px-4 py-4 text-center text-section">
+            <td colspan="6" class="px-4 py-4 text-center text-section">
               {{ $t('common.noResultsMatchSearch') }}
             </td>
           </tr>
@@ -181,7 +181,7 @@
 
               <div class="sm:col-span-2">
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress')
-                }}</h4>
+                  }}</h4>
                 <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
                   {{ details.address?.street_address }}
                 </p>
