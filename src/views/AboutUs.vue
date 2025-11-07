@@ -2,7 +2,8 @@
   <div class="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
     <!-- Hero Section -->
     <section
-      class="relative flex flex-col items-center justify-center text-center  p-12  md:py-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-0 bg-base-100"
+      class="relative flex flex-col items-center justify-center text-center  pt-16 sm:pt-18  md:pt-22 lg:pt-28
+      pb-10 sm:pb-12 md:pb-16 lg:pb-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-0 bg-base-100"
       style="background-image: url('/images/abouthero.jpg'); background-size: cover; background-position: center;"
     >
       <div class="absolute inset-0 bg-base-100/80 dark:bg-base-300/50"></div>
@@ -380,7 +381,7 @@
 
   <div class="mt-5 sm:mt-6 flex justify-center sm:justify-start">
     <button
-      class="px-4 sm:px-5 py-2 bg-[#2C702C] text-white cursor-pointer font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
+      class="px-4 sm:px-5 py-2 bg-[#2C702C] text-white cursor-pointer font-semibold rounded-lg hover:bg-[#265C26] transition text-xs sm:text-sm md:text-base "
       @click="openTermsModal"
     >
       {{ $t("common.readFullPolicy") }}
@@ -492,7 +493,7 @@
           <div class="md:col-span-2 flex justify-center mt-3 sm:mt-4">
             <button
               type="submit"
-              class="px-5 sm:px-6 py-2 font-semibold bg-[#2C702C] text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base cursor-pointer"
+              class="px-5 sm:px-6 py-2 font-semibold bg-[#2C702C] text-white rounded-lg hover:bg-[#265C26] transition text-xs sm:text-sm md:text-base cursor-pointer"
             >
               {{ $t("common.sendMessage") }}
             </button>

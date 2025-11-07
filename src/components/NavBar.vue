@@ -1,13 +1,17 @@
 <template>
-  <nav class=" bg-base-100 shadow-sm  sticky top-0 z-50">
+  <nav  ref="navbar" class=" fixed  w-full
+       shadow-sm z-50
+           transition-transform duration-500 ease-in-out
+           "
+    :class="{ '-translate-y-full': isHidden }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-14 sm:h-16 md:h-18 justify-between items-center">
+      <div class="flex h-12 sm:h-14 md:h-16 justify-between items-center ">
         <!-- Left Section -->
         <div class="flex items-center">
           <!-- Mobile Menu Button -->
           <div class="mx-1 flex items-center lg:hidden">
             <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
-              class="relative inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-green-100 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer">
+              class="relative inline-flex items-center justify-center rounded-md p-1 text-primary hover:bg-green-100 hover:text-primary focus:ring-primary focus:outline-hidden focus:ring-inset cursor-pointer">
               <svg v-if="!mobileMenuOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                 class="size-6">
                 <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -21,7 +25,8 @@
           <!-- Logo -->
           <div class="flex shrink-0 items-center">
             <router-link to="/" class="logo-link">
-              <img src="/public/logos/logo_horizontal.svg" alt="Karakib" class="h-14 sm:h-16 md:h-18 w-auto cursor-pointer" />
+              <img src="/public/logos/logo_horizontal.svg" alt="Karakib"
+                class="h-12 sm:h-14 md:h-16 w-auto cursor-pointer px-2" />
             </router-link>
           </div>
 
@@ -50,25 +55,23 @@
         <div class="flex items-center space-x-2 md:space-x-4">
           <!-- Cart (Always visible) -->
 
-          <NotificationDropdown />
+          <NotificationDropdown v-if="auth.isAuthenticated" />
           <router-link to="/cart"
-            class="relative inline-flex items-center justify-center px-2 pr-2 my-4  no-active-style  cursor-pointer rounded-lg ">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"
-               role="img"
-               aria-labelledby="cartTitle cartDesc"
-
-              class="cart-icon  w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary  transition-transform duration-100 hover:scale-120 ">
+            class="relative inline-flex items-center justify-center px-2 pr-2 my-4  no-active-style  cursor-pointer rounded-lg  transition-transform duration-100 hover:scale-120">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" role="img"
+              aria-labelledby="cartTitle cartDesc"
+              class="cart-icon  w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary   ">
               <title id="cartTitle">Shopping cart</title>
-             <desc id="cartDesc">Outline icon of a shopping cart with two wheels</desc>
+              <desc id="cartDesc">Outline icon of a shopping cart with two wheels</desc>
               <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 3h2l1.6 9.6A2 2 0 0 0 8.5 15h8.9a2 2 0 0 0 1.9-1.5L21 6H6" />
-              <circle cx="9" cy="20" r="1.6" />
-              <circle cx="18" cy="20" r="1.6" />
+                <path d="M3 3h2l1.6 9.6A2 2 0 0 0 8.5 15h8.9a2 2 0 0 0 1.9-1.5L21 6H6" />
+                <circle cx="9" cy="20" r="1.6" />
+                <circle cx="18" cy="20" r="1.6" />
               </g>
             </svg>
 
             <span v-if="cartStore.count > 0"
-              class="absolute -top-1.5  right-0 bg-green-600 text-white text-[0.4rem] sm:text-xs font-semibold rounded-full w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 flex items-center justify-center">
+              class="absolute -top-1.5 right-0.5 md:right-0 bg-green-600 text-white text-[0.4rem] sm:text-[0.5rem] md:text-[0.6rem] font-semibold rounded-full w-3.5 h-3.5 sm:w-4 sm:h-4 md:size-4.5 flex items-center justify-center ">
               {{ cartStore.count }}
             </span>
           </router-link>
@@ -76,10 +79,11 @@
           <!-- Authenticated User Dropdown -->
           <div v-if="auth.isAuthenticated" class="relative " ref="profileDropdown">
             <button @click="profileDropdownOpen = !profileDropdownOpen"
-              class="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 cursor-pointer hover:scale-110">
+              class="flex rounded-full    focus:ring-[#2c702c] forest-ring  forest-offset-ring  cursor-pointer hover:scale-110 focus:outline-none focus:ring-1
+              focus:ring-offset-1 focus:ring-offset-[#e8f5e9]">
               <img :src="auth.user?.avatar_url ||
                 'https://ui-avatars.com/api/?name=' + (auth.user?.name || 'User')
-                " alt="Profile" class="size-8 rounded-full bg-base-200" />
+                " alt="Profile" class="size-6 sm:size-7 md:size-8 rounded-full " />
             </button>
 
             <Transition enter-active-class="transition ease-out duration-200"
@@ -131,15 +135,15 @@
             aria-label="Toggle theme">
             <!-- Light Mode Icon -->
             <svg v-if="currentTheme === 'forest'" xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-              stroke-width="2">
+              class="w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-yellow-400" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M12 3v1m0 16v1m8.485-8.485l-.707.707M4.222 4.222l.707.707M21 12h1M2 12H1m16.97 6.97l.707.707M4.222 19.778l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
             </svg>
 
             <!-- Dark Mode Icon -->
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class=" w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary " fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class=" w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary "
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
             </svg>
           </button>
@@ -229,6 +233,8 @@ export default {
       mobileMenuOpen: false,
       profileDropdownOpen: false,
       currentTheme: "light",
+      isHidden: false,
+      lastScrollTop: 0,
 
     };
   },
@@ -267,6 +273,21 @@ export default {
       this.currentTheme = newTheme;
       localStorage.setItem("theme", newTheme);
     },
+
+
+    handleScroll() {
+      const currentScroll =
+        window.scrollY || document.documentElement.scrollTop
+
+      // Hide when scrolling down, show when scrolling up
+      if (currentScroll > this.lastScrollTop && currentScroll > 100) {
+        this.isHidden = true
+      } else {
+        this.isHidden = false
+      }
+
+      this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
+    },
   },
 
   mounted() {
@@ -274,16 +295,26 @@ export default {
     const savedTheme = localStorage.getItem("theme") || "light";
     this.currentTheme = savedTheme;
     document.documentElement.dataset.theme = savedTheme;
+     window.addEventListener('scroll', this.handleScroll)
   },
 
   beforeUnmount() {
     document.removeEventListener("click", this.handleClickOutside);
+
+    window.removeEventListener('scroll', this.handleScroll);
 
   },
 };
 </script>
 
 <style scoped>
+
+[data-theme="forest"] .forest-ring {
+  --tw-ring-color: #16af3f !important;
+}
+[data-theme="forest"] .forest-offset-ring {
+  --tw-ring-offset-color: rgb(62, 62, 62) !important;
+}
 .router-link-exact-active:not(.no-active-style) {
   /*padding: 10px;*/
   background-color: #e0ebe0;
@@ -362,4 +393,19 @@ export default {
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
+
+
+
+nav {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Forest theme override */
+[data-theme='forest'] nav {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
 </style>

@@ -409,7 +409,7 @@
     "welcome_to_karakib": "Welcome to karakib!",
     "noWasteItems": "No waste items to collect"
   },
-  "chatbot": {
+"chatbot": {
     "tooltipTitle": "Koko AI Powered Helper",
     "tooltipDescription": "Get instant help with waste sorting, recycling tips, DIY ideas, and collection scheduling. Upload images or ask questions!",
     "kokoAlt": "koko",

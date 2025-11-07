@@ -3,28 +3,30 @@
     <!-- Tooltip (shows before opening chatbot) -->
     <div
       v-if="!isOpen && showTooltip"
-      class="absolute bottom-16 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-lg shadow-lg p-3 mb-2 w-[320px] animate-fadeIn"
+      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-lg shadow-lg p-3 mb-2 w-[320px] animate-fadeIn"
     >
       <button
         @click="showTooltip = false"
-        class="absolute top-1 right-1 text-gray-500 hover:text-gray-700 text-sm leading-none w-5 h-5 flex items-center justify-center"
+        class="absolute top-1 right-1 text-gray-500 hover:text-gray-700 text-xs md:text-sm leading-none w-5 h-5 flex items-center justify-center"
       >
         ✕
       </button>
       <div class="pr-6">
-        <h4 class="font-bold text-[#2C702C] text-sm mb-1.5">
-          🌱 {{ $t('chatbot.tooltipTitle') }}
-        </h4>
-        <p class="text-xs text-gray-700 leading-snug">
-          {{ $t('chatbot.tooltipDescription') }}
-        </p>
+
+<h4 class="font-bold text-[#2C702C] text-sm mb-1.5">
+  🌱 {{ $t('chatbot.tooltipTitle') }}
+</h4>
+<p class="text-xs text-gray-700 leading-snug">
+  {{ $t('chatbot.tooltipDescription') }}
+</p>
+
       </div>
     </div>
 
     <!-- Floating Button (always visible) -->
     <button
       @click="toggleChat"
-      class="bg-[#2C702C] text-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50"
+      class="bg-[#2C702C] text-white rounded-full w-10 h-10 md:w-14 md:h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50"
     >
       <img src="/images/koko.png" :alt="$t('chatbot.kokoAlt')" class="w-full h-full rounded-full" />
     </button>
@@ -95,11 +97,12 @@
         <div class="bg-[#2C702C] text-white flex justify-between items-center px-4 py-3">
           <span class="font-semibold tracking-wide block text-center w-full">{{ $t('chatbot.kokoAIHelper') }}</span>
           <div class="flex items-center gap-2">
-            <button 
-              class="hover:text-green-200 text-xl" 
-              @click="toggleFullscreen" 
-              :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
-            >
+<button 
+  class="hover:text-green-200 text-xl" 
+  @click="toggleFullscreen" 
+  :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
+>
+            
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
           </div>
@@ -113,16 +116,17 @@
             class="flex items-start gap-2"
             :class="msg.sender === 'user' ? 'justify-end' : ''"
           >
-            <img
-              v-if="msg.sender === 'bot'"
-              src="/images/koko.png"
-              class="w-8 h-8 rounded-full flex-shrink-0"
-              :alt="$t('chatbot.kokoAlt')"
-            />
+<img
+  v-if="msg.sender === 'bot'"
+  src="/images/koko.png"
+  class="w-8 h-8 rounded-full flex-shrink-0"
+  :alt="$t('chatbot.kokoAlt')"
+/>
+
 
             <div
               :class="[
-                'px-3 py-2 rounded-lg text-sm max-w-[75%] break-words',
+                'px-3 py-2 rounded-lg text-sm max-w-[75%] wrap-break-word',
                 msg.sender === 'bot'
                   ? 'bg-[#2C702C] text-white'
                   : 'bg-[#E0EBE0] border border-green-300 text-gray-800'
@@ -160,8 +164,11 @@
 
           <div class="flex items-center gap-2 w-full">
             <label
-              class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center flex-shrink-0"
-              :title="$t('chatbot.uploadImageTitle')"
+
+class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center shrink-0"
+:title="$t('chatbot.uploadImageTitle')"
+
+
             >
               <img src="../../public/images/icons8-camera-64.png" alt="" class="size-6">
               <input
@@ -186,7 +193,7 @@
             <button
               @click="sendMessage"
               :disabled="isLoading || (!userInput.trim() && !selectedImage)"
-              class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 whitespace-nowrap"
+              class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap"
             >
               {{ $t('chatbot.send') }}
             </button>
@@ -205,7 +212,7 @@ import { useI18n } from 'vue-i18n';
 
 export default {
   name: "ChatbotWidget",
-  
+
   data() {
     return {
       isOpen: false,
@@ -221,15 +228,15 @@ export default {
       selectedImage: null,
       imagePreview: null,
       storageKey: "karakib_chat_history",
-      
+
       // RAG data
       knowledgeBase: null,
-      
+
       // Gemini AI
       genAI: null,
       textModel: null,
       visionModel: null,
-      
+
       // Auth store reference
       authStore: null,
     };
@@ -237,7 +244,7 @@ export default {
 
   async mounted() {
     this.authStore = useAuthStore();
-    
+
     // Watch for auth state changes (login/logout)
     watch(
       () => this.authStore.user,
@@ -249,7 +256,7 @@ export default {
       },
       { deep: true }
     );
-    
+
     await this.initializeGemini();
     await this.loadKnowledgeBase();
     this.loadChatList();
@@ -259,12 +266,12 @@ export default {
     userFirstName() {
       const fullName = this.authStore?.user?.name || "";
       if (!fullName) return ""; // Return empty string when logged out
-      
+
       // Extract first name (text before first space)
       const firstName = fullName.trim().split(' ')[0];
       return firstName;
     },
-    
+
     greetingText() {
       // If logged in: "Hello [FirstName]!"
       // If logged out: "Hello!"
@@ -411,7 +418,7 @@ export default {
 
     async initializeGemini() {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      
+
       if (!apiKey) {
         console.error("❌ GEMINI_API_KEY not found in .env file!");
         this.$toast?.error("Chatbot configuration error. Please contact support.");
@@ -421,7 +428,7 @@ export default {
       this.genAI = new GoogleGenerativeAI(apiKey);
       this.textModel = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
       this.visionModel = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-      
+
       console.log("✅ Gemini API configured");
     },
 
@@ -429,7 +436,7 @@ export default {
       try {
         const response = await fetch('/knowledge-base.json');
         if (!response.ok) throw new Error(`Failed to load knowledge base: ${response.status} ${response.statusText}`);
-        
+
         this.knowledgeBase = await response.json();
         const totalFaqs = this.knowledgeBase.faqs?.reduce((sum, cat) => sum + (cat.questions?.length || 0), 0) || 0;
         console.log("✅ Knowledge base loaded successfully:", {
@@ -445,10 +452,10 @@ export default {
     },
 
     getSystemPrompt() {
-      const userContext = this.userFirstName 
+      const userContext = this.userFirstName
         ? `The user's first name is "${this.userFirstName}". Address them naturally by their first name when appropriate.`
         : `The user is not logged in, so do not use any name to address them.`;
-      
+
       return `You are Koko 🌱, a friendly recycling assistant for Karakib Waste Collection.
 
 ${userContext}
@@ -660,7 +667,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
 
       // Arabic: Points system / earnings tracking
       if (isArabic && (
-        lowerMsg.includes('نقاط') || lowerMsg.includes('أرباحي') || lowerMsg.includes('ارباحي') || (lowerMsg.includes('ازاي') && lowerMsg.includes('اكسب')) || (lowerMsg.includes('كيف') && (lowerMsg.includes('أكسب') || lowerMsg.includes('اكسب'))) 
+        lowerMsg.includes('نقاط') || lowerMsg.includes('أرباحي') || lowerMsg.includes('ارباحي') || (lowerMsg.includes('ازاي') && lowerMsg.includes('اكسب')) || (lowerMsg.includes('كيف') && (lowerMsg.includes('أكسب') || lowerMsg.includes('اكسب')))
       )) {
         return `${userNamePrefix}لمتابعة أرباحك (نقاطك)، اذهب إلى ملفك الشخصي واضغط على 'نقاطي'. سترى رصيد نقاطك الحالي، وسجل النقاط المكتسبة، وجميع الحركات الخاصة بالنقاط.`;
       }
@@ -738,14 +745,14 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
 
       // Retrieve context using language-appropriate KB
       const retrievedContext = this.retrieveRelevantContextFromKB(message, kb);
-      
+
       // Log context retrieval for debugging
       console.log("📚 Context retrieved:", {
         query: message.substring(0, 50),
         context_items: retrievedContext.relevant.length,
         has_waste_type: !!retrievedContext.waste_type
       });
-      
+
       // Relevance & out-of-scope
       const relevanceKeywordsEn = ['recycle','recycling','collect','collection','pickup','waste','points','donate','shop','address','profile','account','cart','order','request','courier','product'];
       const relevanceKeywordsAr = ['إعادة','تدوير','تجميع','استلام','مخلفات','نقاط','تبرع','متجر','عنوان','ملف','حساب','سلة','طلب','مندوب','منتج'];
@@ -766,7 +773,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       const languageInstruction = isArabic
         ? 'الرجاء الرد باللغة العربية فقط وبأسلوب مهني وودود. ترجم أي نص وارد من السياق إلى العربية صياغةً طبيعية، ولا تستخدم كلمات إنجليزية على الإطلاق، باستثناء اسم المستخدم إن وُجد.'
         : 'Please respond in English only, with a professional and friendly tone.';
-      
+
       let prompt = `${this.getSystemPrompt()}\n\nLANGUAGE: ${isArabic ? 'Arabic' : 'English'}\n${languageInstruction}\n
 === CONTEXT FROM KNOWLEDGE BASE (USE ONLY THIS INFORMATION) ===
 ${contextText}
@@ -948,7 +955,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
 
       const newChatId = Date.now().toString();
       this.currentChatId = newChatId;
-      
+
       // Use computed greeting message
       this.messages = [this.getWelcomeMessage()];
       this.chatHistory = [];

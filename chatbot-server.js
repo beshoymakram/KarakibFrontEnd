@@ -37,17 +37,17 @@ try {
 // ==================== CORS MIDDLEWARE ====================
 app.use((req, res, next) => {
   console.log(`📨 ${req.method} ${req.url}`);
-  
+
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
+
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
   }
-  
+
   next();
 });
 
@@ -55,7 +55,7 @@ app.use(express.json({ limit: '10mb' }));
 
 // ==================== FILE UPLOAD SETUP ====================
 const uploadsDir = path.join(__dirname, 'uploads');
-const upload = multer({ 
+const upload = multer({
   dest: uploadsDir,
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
@@ -91,8 +91,8 @@ function retrieveRelevantContext(query) {
   // Detect waste type from query
   knowledgeBase.waste_types.forEach(type => {
     const categoryLower = type.category.toLowerCase();
-    if (lowerQuery.includes(categoryLower) || 
-        type.accepted_items.some(item => lowerQuery.includes(item.toLowerCase()))) {
+    if (lowerQuery.includes(categoryLower) ||
+      type.accepted_items.some(item => lowerQuery.includes(item.toLowerCase()))) {
       context.waste_type = type;
       context.relevant.push(`WASTE TYPE: ${type.category}`);
       if (type.description) {
@@ -136,14 +136,14 @@ function retrieveRelevantContext(query) {
     context.relevant.push(`Service areas: ${knowledgeBase.company_info.service_areas.join(', ')}`);
     context.relevant.push(`Operating hours: ${knowledgeBase.company_info.operating_hours}`);
   }
-  
+
   // Contact information
   if (lowerQuery.includes('contact') || lowerQuery.includes('email') || lowerQuery.includes('phone') || lowerQuery.includes('support')) {
     context.relevant.push(`Contact email: ${knowledgeBase.company_info.contact.email}`);
     context.relevant.push(`Contact phone: ${knowledgeBase.company_info.contact.phone}`);
     context.relevant.push(`Operating hours: ${knowledgeBase.company_info.operating_hours}`);
   }
-  
+
   // Donation questions
   if (lowerQuery.includes('donat') || lowerQuery.includes('charity') || lowerQuery.includes('cause')) {
     if (knowledgeBase.rewards_program && knowledgeBase.rewards_program.points_system) {
@@ -161,7 +161,7 @@ function retrieveRelevantContext(query) {
       }
     });
   }
-  
+
   // Shop/Products questions
   if (lowerQuery.includes('shop') || lowerQuery.includes('buy') || lowerQuery.includes('product') || lowerQuery.includes('merch')) {
     knowledgeBase.faqs.forEach(category => {
@@ -172,7 +172,7 @@ function retrieveRelevantContext(query) {
       }
     });
   }
-  
+
   // Account/Profile questions
   if (lowerQuery.includes('account') || lowerQuery.includes('profile') || lowerQuery.includes('password') || lowerQuery.includes('sign up') || lowerQuery.includes('register')) {
     knowledgeBase.faqs.forEach(category => {
@@ -189,18 +189,18 @@ function retrieveRelevantContext(query) {
     category.questions.forEach(qa => {
       const qLower = qa.question.toLowerCase();
       const aLower = qa.answer.toLowerCase();
-      
+
       // Match if any question words appear in query, or if query matches question keywords
       const qWords = qLower.split(/\s+/).filter(w => w.length > 2); // Filter out short words
       const queryWords = lowerQuery.split(/\s+/).filter(w => w.length > 2);
-      
+
       // Check if significant words from question appear in query
-      const hasCommonWords = qWords.some(qWord => lowerQuery.includes(qWord)) || 
-                             queryWords.some(qw => qLower.includes(qw));
-      
+      const hasCommonWords = qWords.some(qWord => lowerQuery.includes(qWord)) ||
+        queryWords.some(qw => qLower.includes(qw));
+
       // Check if answer contains keywords from query
       const answerMatches = queryWords.some(qw => aLower.includes(qw));
-      
+
       if (hasCommonWords || answerMatches) {
         context.relevant.push(`FAQ - Q: ${qa.question}\nA: ${qa.answer}`);
       }
@@ -265,7 +265,7 @@ app.post("/api/chat", async (req, res) => {
 
     // STEP 1: RETRIEVE relevant context from knowledge base
     const retrievedContext = retrieveRelevantContext(message);
-    
+
     console.log("📚 Retrieved context:", retrievedContext.relevant.length, "items");
     if (retrievedContext.relevant.length > 0) {
       console.log("   First context item:", retrievedContext.relevant[0].substring(0, 80) + "...");
@@ -274,10 +274,10 @@ app.post("/api/chat", async (req, res) => {
     }
 
     // STEP 2: Build prompt with retrieved context
-    const contextText = retrievedContext.relevant.length > 0 
+    const contextText = retrievedContext.relevant.length > 0
       ? retrievedContext.relevant.join('\n')
       : `Company: ${knowledgeBase.company_info.name}\nDescription: ${knowledgeBase.company_info.description}\nContact: ${knowledgeBase.company_info.contact.email}`;
-    
+
     let prompt = `${RAG_SYSTEM_PROMPT}
 
 === CONTEXT FROM KNOWLEDGE BASE (USE ONLY THIS INFORMATION) ===
@@ -296,7 +296,7 @@ ${contextText}
         prompt += `${msg.role === "ai" ? "Koko" : "User"}: ${msg.content}\n`;
       });
       prompt += "=== END HISTORY ===\n\n";
-      
+
       // Extract context from recent conversation
       const conversationText = recentHistory.map(msg => msg.content).join(' ');
       const historyContext = retrieveRelevantContext(conversationText);
@@ -320,17 +320,17 @@ ${contextText}
     // STEP 3: GENERATE response using Gemini
     const result = await textModel.generateContent(prompt);
     const response = result.response.text();
-    
+
     console.log("✅ Response generated (length:", response.length, "chars)");
     console.log("   Response preview:", response.substring(0, 100) + "...");
-    
+
     res.json({ response });
 
   } catch (error) {
     console.error("❌ Chat error:", error.message);
-    
+
     let errorMessage = "Sorry, I'm having trouble right now. Please try again! 🌿";
-    
+
     if (error.message?.includes('API_KEY')) {
       errorMessage = "API key issue. Please check configuration.";
     } else if (error.message?.includes('quota') || error.message?.includes('429')) {
@@ -409,7 +409,7 @@ Use information from the knowledge base above. Be friendly and practical! 🌱`;
     }
 
     let errorMessage = "Sorry, couldn't analyze that image. Try again! 📷";
-    
+
     if (error.message?.includes('quota') || error.message?.includes('429')) {
       errorMessage = "Too many requests! Please wait a moment. ⏰";
     }
@@ -439,7 +439,7 @@ app.get("/api/health", (req, res) => {
 app.get("/api/test-context", (req, res) => {
   const testQuery = req.query.q || "How do I collect waste?";
   const context = retrieveRelevantContext(testQuery);
-  
+
   res.json({
     query: testQuery,
     context_items_count: context.relevant.length,

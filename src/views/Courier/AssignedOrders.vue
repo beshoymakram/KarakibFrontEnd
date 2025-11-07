@@ -6,6 +6,8 @@
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
+          <option value="assigned">{{ $t('common.assigned') }}</option>
+          <option value="delivered">{{ $t('common.delivered') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
@@ -15,9 +17,9 @@
       <div class="relative">
         <select v-model="filters.payment_method"
           class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
-          <option value="">{{ $t('common.allPayoutMethods') }}</option>
-          <option value="earn">{{ $t('common.earnedPoints') }}</option>
-          <option value="donate">{{ $t('common.donatedPoints') }}</option>
+          <option value="">{{ $t('common.allPaymentMethods') }}</option>
+          <option value="card">{{ $t('common.card') }}</option>
+          <option value="cash">{{ $t('common.cash') }}</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
@@ -42,7 +44,7 @@
           <tr>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">#</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
-              $t('common.requestNumber') }}</th>
+              $t('common.orderNumber') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
               $t('common.createdAt') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
@@ -69,7 +71,7 @@
                   order.address?.phone }}</a></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
               <span class="px-2 py-1 rounded-full text-xs font-medium capitalize" :class="{
-                'text-green-800 bg-green-100': order.status === 'completed' || request.status === 'collected',
+                'text-green-800 bg-green-100': order.status === 'completed' || order.status === 'delivered',
                 'text-red-800 bg-red-100': order.status === 'cancelled',
                 'text-warning bg-yellow-100': order.status === 'pending' || order.status === 'assigned'
               }">
@@ -77,12 +79,12 @@
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              <button @click="openScanner(order)"
+              <button v-if="order.status == 'pending' || order.status == 'assigned'" @click="openScanner(order)"
                 class="px-3 py-1 border border-green-300 rounded-md text-primary hover:bg-green-50 transition-colors cursor-pointer">
-                {{ $t('common.collect') }}
+                {{ $t('common.deliver') }}
               </button>
               <button @click="openDetailsModal(order)"
-                class="px-3 py-1 border border-gray-300 rounded-md text-section">
+                class="px-3 py-1 border border-gray-300 rounded-md text-section cursor-pointer">
                 {{ $t('common.details') }}
               </button>
             </td>
@@ -93,12 +95,12 @@
 
     <Teleport to="body">
       <div v-if="scannerOpen"
-        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
+        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-myprofile"
         @click="closeScanner">
         <div class="relative p-4 w-full max-w-md" @click.stop>
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div class="relative bg-tabs rounded-lg shadow">
             <button type="button" @click="closeScanner"
-              class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -107,14 +109,17 @@
               <span class="sr-only">Close modal</span>
             </button>
             <div class="p-4 md:p-5 text-center">
-              <h3 class="text-xl font-semibold text-[#2C702C] mb-2">{{ $t('common.scanQrToCollect') }}</h3>
-              <p class="text-gray-500 mb-4">{{ infoText }}</p>
-              <div class="aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center mb-4">
+              <h3 class="text-xl font-semibold text-primary mb-2">{{ $t('common.scanQrToCollect') }}</h3>
+              <p class="text-sm text-gray-600 mb-2">
+                order: <span class="font-bold">{{ activeOrderNumber }}</span>
+              </p>
+              <p class="text-section mb-4">{{ infoText }}</p>
+              <div class="aspect-video bg-tabs rounded-lg overflow-hidden flex items-center justify-center mb-4">
                 <video ref="videoEl" class="w-full h-full object-cover" autoplay playsinline></video>
               </div>
               <div class="flex justify-center gap-3">
                 <button @click="closeScanner" type="button"
-                  class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C]">
+                  class="py-2.5 px-5 text-sm font-medium text-section cursor-pointer focus:outline-none bg-tabs rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C]">
                   {{ $t('common.closeScanner') }}
                 </button>
                 <button @click="startCamera" type="button"
@@ -127,17 +132,17 @@
         </div>
       </div>
       <div v-if="showDetailsModal"
-        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/30"
+        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-myprofile"
         @click="showDetailsModal = false">
         <div class="relative p-4 w-full max-w-2xl" @click.stop>
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div class="relative bg-tabs rounded-lg shadow">
             <!-- Header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+              <h3 class="text-xl font-semibold text-primary">
                 {{ $t('common.orderDetails') }} | {{ details.order_number }}
               </h3>
               <button type="button" @click="showDetailsModal = false"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                class="text-section bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                   viewBox="0 0 14 14">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -152,38 +157,38 @@
             <div class="p-4 md:p-5">
               <div class="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
-                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.fullName') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-primary wrap-break-words">
                     {{ details.name }}
                   </p>
                 </div>
 
                 <div>
-                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.phone') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-primary dark:text-white wrap-break-words">
                     <a :href="'tel:+' + details.address?.phone">{{ details.address?.phone }}</a>
                   </p>
                 </div>
 
                 <div class="sm:col-span-2">
-                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.streetAddress') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-primary dark:text-white wrap-break-words">
                     {{ details.address?.street_address }}
                   </p>
                 </div>
 
                 <div>
-                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.city') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.city') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-primary dark:text-white wrap-break-words">
                     {{ details.address?.city }}
                   </p>
                 </div>
 
                 <div>
-                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.orderStatus') }}</h4>
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.orderStatus') }}</h4>
                   <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
-                    'bg-green-100 text-green-800': details.status === 'completed',
-                    'bg-yellow-100 text-yellow-800': details.status === 'pending',
+                    'bg-green-100 text-green-800': details.status === 'completed' || details.status === 'delivered',
+                    'bg-yellow-100 text-yellow-800': details.status === 'pending' || details.status === 'assigned',
                     'bg-red-100 text-red-800': details.status === 'cancelled'
                   }">
                     {{ $t(`common.${details.status}`) }}
@@ -191,23 +196,31 @@
                 </div>
 
                 <div>
-                  <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.createdAt') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.createdAt') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-primary dark:text-white">
                     {{ details.created_at }}
                   </p>
                 </div>
+                <div>
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.paymentMethod') }}</h4>
+                  <p class="mt-1 text-base font-semibold text-primary dark:text-white">
+                    {{ $t(`common.${details.payment_method}`) }}
+                  </p>
+                </div>
+
               </div>
 
-              <!-- Waste Items Section -->
+              <!-- Products Section -->
               <div class="mb-4">
-                <h4 class="text-lg font-semibold text-[#2C702C] mb-3 border-b pb-2">{{ $t('common.wasteItemsToCollect')
+                <h4 class="text-lg font-semibold text-primary mb-3 border-b pb-2">{{
+                  $t('common.orderProductsToDeliver')
                 }}</h4>
                 <div class="space-y-3 max-h-64 overflow-y-auto">
                   <div v-for="item in details.items" :key="item.id"
                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <!-- Item Image -->
                     <img :src="item.product?.image_url" :alt="item.product?.name"
-                      class="w-16 h-16 object-cover rounded-lg bg-white border border-gray-200" />
+                      class="w-16 h-16 object-cover rounded-lg bg-tabs border border-gray-200" />
 
                     <!-- Item Details -->
                     <div class="flex-1">
@@ -228,15 +241,15 @@
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                     </svg>
-                    <p>{{ $t('common.noWasteItems') }}</p>
+                    <p>{{ $t('common.noProducts') }}</p>
                   </div>
                 </div>
               </div>
 
               <!-- Total Points -->
-              <div class="bg-green-50 rounded-lg p-4 mb-4">
+              <div class="bg-myprofile rounded-lg p-4 mb-4">
                 <div class="flex justify-between items-center">
-                  <h4 class="text-sm font-medium text-gray-700">{{ $t('common.totalPoints') }}</h4>
+                  <h4 class="text-sm font-medium text-section">{{ $t('common.total') }}</h4>
                   <p class="text-2xl font-bold text-green-600">
                     {{ details.total }} {{ $t('common.currency') }}
                   </p>
@@ -262,6 +275,7 @@
 import ordersService from '@/services/ordersService';
 import jsQR from 'jsqr';
 import { nextTick } from 'vue';
+import soundPlayer from '@/utils/sounds';
 
 export default {
   name: 'CourierAssignedOrders',
@@ -285,7 +299,8 @@ export default {
         status: '',
       },
       scannerOpen: false,
-      activeRequestId: null,
+      activeOrderId: null,
+      activeOrderNumber: null,
       stream: null,
       infoText: 'Point your camera at the QR code on the order receipt.'
     }
@@ -296,14 +311,14 @@ export default {
       let filtered = this.orders;
 
       if (this.filters.payment_method) {
-        filtered = filtered.filter(order =>
-          order.payment_method === this.filters.payment_method
+        filtered = filtered.filter(item =>
+          item.payment_method === this.filters.payment_method
         );
       }
 
       if (this.filters.status) {
-        filtered = filtered.filter(order =>
-          order.status === this.filters.status
+        filtered = filtered.filter(item =>
+          item.status === this.filters.status
         );
       }
 
@@ -331,8 +346,9 @@ export default {
       this.selectedOrder = order.id;
       this.showCompleteModal = true;
     },
-    openScanner(req) {
-      this.activeRequestId = req.id
+    openScanner(order) {
+      this.activeOrderId = order.id
+      this.activeOrderNumber = order.order_number
       this.scannerOpen = true
       this.$nextTick(this.startCamera)
     },
@@ -381,7 +397,6 @@ export default {
         this.$toast?.error?.('Camera access was denied')
       }
     },
-
     async detectQrCode() {
       const video = this.$refs.videoEl;
       const canvas = document.createElement('canvas');
@@ -411,10 +426,14 @@ export default {
       this.infoText = 'Processing...';
 
       try {
-        const response = await ordersService.scanQr({ qr_token: qrToken });
+        const response = await ordersService.scanQr({
+          qr_token: qrToken,
+          order_id: this.activeOrderId
+        });
 
         if (response.data.success) {
           this.$toast.success(response.data.message);
+          soundPlayer.play('success');
           this.closeScanner();
           this.fetchMyOrders();
         }
@@ -423,14 +442,13 @@ export default {
         this.infoText = 'Scan failed. Please try again.';
       }
     },
-
     async closeScanner() {
       if (this.stream) {
         this.stream.getTracks().forEach(t => t.stop())
         this.stream = null
       }
       this.scannerOpen = false
-      this.activeRequestId = null
+      this.activeOrderId = null
     },
 
     async fetchMyOrders() {
@@ -438,7 +456,7 @@ export default {
         const user = await ordersService.getMyOrders();
         this.orders = user.data.orders || user.data;
       } catch (error) {
-        this.$toast.error(error?.response?.data.message || 'Failed to fetch orders.');
+        this.$toast.error(error?.response?.data.message || 'Failed to fetch order.');
       }
     },
   },

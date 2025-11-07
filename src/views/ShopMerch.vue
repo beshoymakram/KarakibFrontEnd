@@ -21,7 +21,8 @@
 
     <!-- content -->
     <div
-      class="relative flex flex-col sm:flex-row items-center justify-center text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 z-2"
+      class="relative flex flex-col sm:flex-row items-center justify-center text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 pt-16 sm:pt-18  md:pt-22 lg:pt-28
+      pb-10 sm:pb-12 md:pb-16 lg:pb-20 z-2"
     >
       <!-- Logo -->
       <img
@@ -79,7 +80,7 @@
   </div>
 
   <div
-    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
   >
     <div
       v-for="(product, index) in filteredProducts"
@@ -169,7 +170,7 @@
         <button
           v-else-if="product.stock > 0"
           @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
+          class="btn  border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
         >
           {{ $t("common.addToCart") }}
         </button>
@@ -177,7 +178,7 @@
         <!-- Out of stock button -->
         <button
           v-else
-          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
+          class="btn border-0 rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
           disabled
         >
           {{ $t("common.outOfStock") }}
