@@ -134,6 +134,6 @@ export default {
   color: #2c702c !important;
 }
 [data-theme="forest"] .text-about {
-  color: #40cd89 !important;
+  color: #c1d9b7 !important;
 }
 </style>

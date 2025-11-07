@@ -12,7 +12,7 @@
   :style="{
     background:
       currentTheme === 'forest'
-        ? 'linear-gradient(to bottom, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.6) 50%, rgba(17,17,17,0.5) 100%, rgba(17,17,17,0) 100%)'
+        ? 'linear-gradient(to bottom, rgba(17,17,17,0.9) 0%, rgba(17,17,17,0.8) 50%, rgba(17,17,17,0.7) 100%, rgba(17,17,17,0) 100%)'
         : 'linear-gradient(to bottom, rgba(233,235,248,0.7) 0%, rgba(233,235,248,0.6) 50%, rgba(233,235,248,0.5) 100%, rgba(233,235,248,0) 100%)',
   }"
   ></div>
