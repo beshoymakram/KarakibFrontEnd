@@ -17,7 +17,7 @@
         </p>
         <button
           @click="scrollToHowItWorks"
-          class="btn rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+          class="btn border-0 rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
           text-lg
         >
           {{ $t("common.getStarted") }}
@@ -55,7 +55,7 @@
         <p class="card-title text-sm sm:text-base md:text-lg mx-auto font-semibold ">
           {{ step.title }}
         </p>
-        <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
+        <p class="text-xs sm:text-sm  text-gray-600 leading-relaxed">
           {{ step.description }}
         </p>
       </div>
@@ -78,7 +78,7 @@
     <div class="text-center mt-4 mb-6 md:mb-10">
       <router-link to="/add-waste">
         <button
-          class="btn rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
+          class="btn border-0 rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
         >
           {{ $t("common.recycleNow") }}
         </button>
@@ -159,7 +159,7 @@
         </p>
         <router-link to="/shop">
           <button
-            class="btn rounded-md cursor-pointer bg-[#2C702C]  text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
+            class="btn border-0 rounded-md cursor-pointer bg-[#2C702C]  text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
           >
             {{ $t("common.shopNow") }}
           </button>
@@ -260,7 +260,7 @@
         <button
           v-else-if="product.stock > 0"
           @click.stop="addToCart(product.id)"
-          class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
+          class="btn rounded-md border-0 bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
         >
           {{ $t("common.addToCart") }}
         </button>
@@ -295,7 +295,7 @@
       <div
         v-for="(card, index) in infoCards"
         :key="index"
-        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full sm:w-6/10 md:w-7/10 xl:w-full mx-auto"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full sm:w-6/10 md:w-7/10 xl:w-full mx-auto flex flex-col"
       >
         <img
           :src="card.image"
@@ -308,7 +308,7 @@
         <p class="text-[#8E98A8] text-xs sm:text-sm md:text-base lg:text-lg mb-4">{{ card.description }}</p>
         <button
           @click="openDonationModal(card.name, card.title)"
-          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition cursor-pointer"
+          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition cursor-pointer mt-auto w-fit mx-auto"
         >
           {{ $t("common.donate") }}
         </button>
@@ -630,7 +630,7 @@ export default {
   background-color: #3a3a3a !important;
 }
 .bg-donate {
-  background-color: #FFFFFF !important;
+  background-color: #f2f2f2 !important;
 }
 [data-theme="forest"] .bg-donate {
   background-color: #201e1e !important;

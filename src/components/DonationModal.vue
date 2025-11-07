@@ -5,7 +5,7 @@
       style="border-radius: 1.25rem">
       <!-- Close button -->
       <button @click="closeModal"
-        class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 text-gray-500 hover:bg-gray-200 z-10">
+        class="btn  border-0 btn-sm btn-circle btn-ghost absolute right-3 top-3 text-gray-500 hover:bg-gray-200 z-10">
         ✕
       </button>
 
@@ -69,7 +69,7 @@
 
         <!-- Complete Donation Button -->
         <button @click="completeDonation"
-          class="btn w-full bg-[#2C702C] hover:bg-[#265C26] text-white border-0 rounded-lg py-3.5 text-base font-semibold mb-3 flex items-center justify-center gap-2">
+          class="btn   w-full bg-[#2C702C] hover:bg-[#265C26] text-white border-0 rounded-lg py-3.5 text-base font-semibold mb-3 flex items-center justify-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>

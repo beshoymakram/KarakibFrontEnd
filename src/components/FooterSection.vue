@@ -10,13 +10,13 @@
         </p>
         <p class="text-sm font-semibold text-primary">
           {{ $t('common.emailLabel') }}
-          <span class="font-normal text-secondary">karakib@gmail.com</span>
+          <span class="font-normal text-about">karakib@gmail.com</span>
         </p>
       </div>
 
       <div>
         <h3 class="font-semibold text-primary mb-3">{{ $t('common.karakib') }}</h3>
-        <ul class="space-y-1 text-sm text-secondary">
+        <ul class="space-y-1 text-sm text-about">
           <li>
             <RouterLink to="/about" class="hover:text-green-700">{{ $t('common.aboutUs') }}</RouterLink>
           </li>
@@ -28,7 +28,7 @@
 
       <div>
         <h3 class="font-semibold text-primary mb-3">{{ $t('common.areYouACollector') }}</h3>
-        <ul class="space-y-1 text-sm text-secondary">
+        <ul class="space-y-1 text-sm text-about">
           <li>
             <RouterLink to="/register" class="hover:text-green-700">{{ $t('common.joinKarakibCollectors') }}</RouterLink>
           </li>
@@ -37,9 +37,10 @@
 
       <div>
         <h3 class="font-semibold text-primary mb-3">{{ $t('common.supportHelp') }}</h3>
-        <ul class="space-y-1 text-sm text-secondary">
+        <ul class="space-y-1 text-sm text-about">
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">{{ $t('common.faq') }}
+            <RouterLink :to="{ path: '/about', hash: '#Faq' }" class="hover:text-green-700">
+              {{ $t('common.faq') }}
             </RouterLink>
           </li>
           <li>
@@ -62,17 +63,17 @@
     </div>
 
     <div
-      class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-green-200 pt-6 text-sm text-primary">
+      class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-green-200 pt-6 text-sm text-about">
       <p class="mb-4 md:mb-0">
         &copy; {{ currentYear }} {{ $t('common.karakib') }}. {{ $t('common.allRightsReserved') }}
       </p>
       <div class="flex items-center space-x-4">
         <p class="font-semibold">{{ $t('common.followKarakibOnSocialMedia') }}</p>
-        <div class="flex space-x-3 text-green-800 text-xl">
+        <div class="flex space-x-3 text-about text-xl">
           <a href="#" target="_blank" aria-label="Facebook" class="hover:text-green-600 transition">
             <font-awesome-icon :icon="['fab', 'facebook']" />
           </a>
-          <a href="#" target="_blank" aria-label="Instagram" class="hover:text-green-600 transition">
+          <a href="https://instagram.com/karakib_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-green-600 transition">
             <font-awesome-icon :icon="['fab', 'instagram']" />
           </a>
           <a href="#" target="_blank" aria-label="LinkedIn" class="hover:text-green-600 transition">
@@ -129,5 +130,10 @@ export default {
 [data-theme="forest"] .text-section {
   color: white !important;
 }
-
+.text-about {
+  color: #2c702c !important;
+}
+[data-theme="forest"] .text-about {
+  color: #c1d9b7 !important;
+}
 </style>

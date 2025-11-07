@@ -1,11 +1,11 @@
 <template>
-  <nav  ref="navbar" class=" fixed top-1 left-1/2 -translate-x-1/2 w-[98vw]
-      bg-transparent shadow-sm z-50
+  <nav  ref="navbar" class=" fixed  w-full
+       shadow-sm z-50
            transition-transform duration-500 ease-in-out
-           ring-1 ring-[#2c702c] forest-ring rounded-4xl"
+           "
     :class="{ '-translate-y-full': isHidden }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-10 sm:h-12 md:h-14 justify-between items-center ">
+      <div class="flex h-12 sm:h-14 md:h-16 justify-between items-center ">
         <!-- Left Section -->
         <div class="flex items-center">
           <!-- Mobile Menu Button -->
@@ -399,12 +399,12 @@ export default {
 
 nav {
   backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Forest theme override */
 [data-theme='forest'] nav {
-  background-color: rgba(28, 48, 28, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 

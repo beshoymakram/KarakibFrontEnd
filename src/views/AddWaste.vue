@@ -12,7 +12,7 @@
   :style="{
     background:
       currentTheme === 'forest'
-        ? 'linear-gradient(to bottom, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.6) 50%, rgba(17,17,17,0.5) 100%, rgba(17,17,17,0) 100%)'
+        ? 'linear-gradient(to bottom, rgba(17,17,17,0.9) 0%, rgba(17,17,17,0.8) 50%, rgba(17,17,17,0.7) 100%, rgba(17,17,17,0) 100%)'
         : 'linear-gradient(to bottom, rgba(233,235,248,0.7) 0%, rgba(233,235,248,0.6) 50%, rgba(233,235,248,0.5) 100%, rgba(233,235,248,0) 100%)',
   }"
   ></div>
@@ -124,7 +124,7 @@
 
             <!-- Add Button -->
             <button v-else @click.stop="addWasteToCart(item)"
-              class="btn rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
+              class="btn border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
               {{ $t("common.addAndEarn") }}
             </button>
 

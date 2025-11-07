@@ -1,7 +1,8 @@
 <template>
   <div class="relative" ref="dropdownRef">
     <!-- Bell Icon Button -->
-    <button @click="toggleDropdown" class="hidden md:block relative py-2 rounded-lg    transition-transform duration-100 hover:scale-120  "
+    <button @click="toggleDropdown"
+      class="hidden md:block relative py-2 rounded-lg    transition-transform duration-100 hover:scale-120  "
       aria-label="Notifications">
       <!-- Bell Icon SVG -->
       <svg class="w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-primary  cursor-pointer hover:scale-110" fill="none"
@@ -20,7 +21,8 @@
     <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95"
       enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-150"
       leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-      <div v-if="isOpen" class=" hidden md:block absolute -right-39 sm:-right-2 mt-2  w-82 xl:w-85  bg-white rounded-xl shadow-lg border border-gray-200 z-50">
+      <div v-if="isOpen"
+        class=" hidden md:block absolute -right-39 sm:-right-2 mt-2  w-82 xl:w-85  bg-white rounded-xl shadow-lg border border-gray-200 z-50">
         <!-- Header -->
         <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
           <h3 class="text-text-base lg:text-lg font-semibold text-gray-800">Notifications</h3>
@@ -47,12 +49,9 @@
               :class="{ 'bg-[#F5F9F5]': !notification.read }">
               <div class="flex items-start gap-3">
                 <!-- Icon -->
-                <div class="shrink-0  w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center"
-                  :class="notification.iconBg">
-                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path :d="notification.iconPath"></path>
-                  </svg>
+                <div
+                  class="shrink-0  w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center bg-[#2C702C]">
+                  <img :src="notification.icon" alt="Notification Icon" class="w-5 h-5 text-white">
                 </div>
 
                 <!-- Content -->
@@ -94,6 +93,7 @@ export default {
     return {
       isOpen: false,
       notifications: [],
+      intervalId: null,
       notificationss: [
         {
           id: 1,
@@ -192,11 +192,15 @@ export default {
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
     this.fetchNotifications();
+    this.intervalId = setInterval(this.fetchNotifications, 30000);
+
   },
 
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
+    clearInterval(this.intervalId);
   }
+
 };
 </script>
 <style scoped>

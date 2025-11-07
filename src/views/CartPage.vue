@@ -35,8 +35,8 @@
             <div class="hidden md:flex items-center gap-2 sm:gap-3 shrink-0 mr-3">
               <button @click="decrementQuantity(item.id, item.quantity)"
                 class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4"
+                  stroke="#2C702C" class="w-3 h-3 sm:w-4 sm:h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                 </svg>
               </button>
@@ -96,7 +96,7 @@
                 }}</span>
             </div>
             <button @click="checkoutProducts"
-              class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+              class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -155,8 +155,8 @@
             <div class=" hidden md:flex items-center gap-2 sm:gap-3 shrink-0 mr-3">
               <button @click="decrementQuantity(item.id, item.quantity)"
                 class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4"
+                  stroke="#2C702C" class="w-3 h-3 sm:w-4 sm:h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                 </svg>
               </button>
@@ -215,7 +215,7 @@
               <span class="text-base sm:text-lg md:text-xl  lg:text-2xl font-bold text-primary">+{{ cartStore.totalPoints }}</span>
             </div>
             <button @click="requestCollection"
-              class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+              class="w-full bg-[#2C702C] hover:bg-green-900 cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -234,7 +234,7 @@
           </svg>
           <p class="text-gray-500 text-base sm:text-lg mb-3 sm:mb-4">{{ $t('common.noWasteCollectionRequestsYet') }}</p>
           <router-link to="/add-waste"
-            class="inline-block bg-green-600 text-white px-5 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base">
+            class="inline-block bg-[#2C702C] text-white px-5 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-green-900 transition-colors text-sm sm:text-base">
             {{ $t('common.addWasteItems') }}
           </router-link>
         </div>

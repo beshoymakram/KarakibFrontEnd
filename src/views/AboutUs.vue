@@ -2,11 +2,23 @@
   <div class="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
     <!-- Hero Section -->
     <section
-      class="relative flex flex-col items-center justify-center text-center  pt-16 sm:pt-18  md:pt-22 lg:pt-28
+      class="relative flex flex-col items-center justify-center text-center pt-16 sm:pt-18 md:pt-22 lg:pt-28
       pb-10 sm:pb-12 md:pb-16 lg:pb-20 px-4 sm:px-6 md:px-10 overflow-hidden mt-0 bg-base-100"
       style="background-image: url('/images/abouthero.jpg'); background-size: cover; background-position: center;"
     >
-      <div class="absolute inset-0 bg-base-100/80 dark:bg-base-300/50"></div>
+      <!-- GRADIENT OVERLAY -->
+      <div
+        class="absolute inset-0"
+        :style="{
+          background:
+            currentTheme === 'forest'
+              ? 'linear-gradient(to bottom, rgba(17,17,17,0.8) 0%, rgba(17,17,17,0.7) 50%, rgba(17,17,17,0.6) 100%, rgba(17,17,17,0.4) 100%)'
+              : 'linear-gradient(to bottom, rgba(233,235,248,0.7) 0%, rgba(233,235,248,0.6) 50%, rgba(233,235,248,0.5) 100%, rgba(233,235,248,0) 100%)',
+        }"
+      ></div>
+
+  <!-- Your hero content here -->
+
 
       <!-- Doodles in Hero Section -->
       <div
@@ -49,7 +61,7 @@
           {{ $t("common.aboutUs") }}
         </h1>
         <p
-          class=" text-sm sm:text-base md:text-lg  font-normal leading-relaxed px-2 text-secondary"
+          class=" text-sm sm:text-base md:text-lg  font-medium leading-relaxed px-2 text-secondary"
         >
           {{ $t("common.karakibIsEcoFriendlyPlatform") }}
         </p>
@@ -381,7 +393,7 @@
 
   <div class="mt-5 sm:mt-6 flex justify-center sm:justify-start">
     <button
-      class="px-4 sm:px-5 py-2 bg-[#2C702C] text-white cursor-pointer font-semibold rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base "
+      class="px-4 sm:px-5 py-2 bg-[#2C702C] text-white cursor-pointer font-semibold rounded-lg hover:bg-[#265C26] transition text-xs sm:text-sm md:text-base "
       @click="openTermsModal"
     >
       {{ $t("common.readFullPolicy") }}
@@ -493,7 +505,7 @@
           <div class="md:col-span-2 flex justify-center mt-3 sm:mt-4">
             <button
               type="submit"
-              class="px-5 sm:px-6 py-2 font-semibold bg-[#2C702C] text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm md:text-base cursor-pointer"
+              class="px-5 sm:px-6 py-2 font-semibold bg-[#2C702C] text-white rounded-lg hover:bg-[#265C26] transition text-xs sm:text-sm md:text-base cursor-pointer"
             >
               {{ $t("common.sendMessage") }}
             </button>
@@ -559,7 +571,7 @@
                 <font-awesome-icon :icon="['fab', 'facebook']" /> @Karakib
               </li>
               <li>
-                <font-awesome-icon :icon="['fab', 'instagram']" /> @Karakib
+                <font-awesome-icon :icon="['fab', 'instagram']" /> @karakib_official
               </li>
             </ul>
           </div>
@@ -680,6 +692,7 @@ export default {
 
   data() {
     return {
+      currentTheme: localStorage.getItem("theme") || "light",
       openFaq: null,
       faqs: [
         {
@@ -743,6 +756,31 @@ export default {
       return phone;
     },
   },
+  mounted() {
+  const html = document.documentElement;
+
+  // Set the initial theme from attribute
+  this.currentTheme = html.getAttribute("data-theme") || "light";
+
+  // Create MutationObserver
+  this.themeObserver = new MutationObserver(() => {
+    const theme = html.getAttribute("data-theme");
+    if (theme && theme !== this.currentTheme) {
+      this.currentTheme = theme;
+    }
+  });
+
+  // Start observing attribute changes
+  this.themeObserver.observe(html, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+},
+beforeUnmount() {
+  if (this.themeObserver) {
+    this.themeObserver.disconnect();
+  }
+},
 
   methods: {
     toggleFaq(index) {
@@ -877,7 +915,7 @@ submitForm() {
   color: #2c702c !important;
 }
 [data-theme="forest"] .text-secondary {
-  color: rgb(9, 228, 75) !important;
+  color: #b7d8a9 !important;
 }
 .text-section {
   color: black !important;

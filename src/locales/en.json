@@ -407,10 +407,41 @@
     "collected": "Collected",
     "wasteItemsToCollect": "Waste Items to Collect",
     "welcome_to_karakib": "Welcome to karakib!",
-    "noWasteItems": "No waste items to collect",
-    "orderProductsToDeliver": "Products To Deliver",
-    "deliver": "Deliver",
-    "delivered": "Delivered",
-    "noProducts": "No Products"
+    "noWasteItems": "No waste items to collect"
+  },
+"chatbot": {
+    "tooltipTitle": "Koko AI Powered Helper",
+    "tooltipDescription": "Get instant help with waste sorting, recycling tips, DIY ideas, and collection scheduling. Upload images or ask questions!",
+    "kokoAlt": "koko",
+    "chatHistory": "Chat History",
+    "startNewChat": "Start New Chat",
+    "newChat": "New Chat",
+    "deleteChat": "Delete Chat",
+    "noChatHistory": "No chat history yet.\nStart a new conversation!",
+    "kokoAIHelper": "Koko AI Helper",
+    "minimize": "Minimize",
+    "fullscreen": "Fullscreen",
+    "preview": "preview",
+    "uploadImageTitle": "Upload waste image for DIY ideas",
+    "inputPlaceholder": "Ask about recycling | إسأل عن إعادة التدوير",
+    "send": "Send",
+    "justNow": "Just now",
+    "minutesAgo": "{count}m ago",
+    "hoursAgo": "{count}h ago",
+    "daysAgo": "{count}d ago",
+    "thinking": "Thinking...",
+    "analyzingImage": "Analyzing image... 🔍",
+    "thinkingEmoji": "Thinking... 💭",
+    "bilingualHintEn": "You can chat with me in Arabic too.",
+    "bilingualHintAr": "يمكنك التحدث معي بالعربية أيضًا.",
+    "welcomeMessage": "{greeting} I'm Koko, your assistant for **Karakib** 🌱\n\n**I can help you with:**\n• How our collection service works\n• What materials we accept\n• Scheduling a pickup\n• Creative DIY ideas for small waste items\n• General recycling tips\n\n{hint}\n\nAsk me anything! 💚",
+    "confirmDelete": "Are you sure you want to delete this chat?",
+    "errors": {
+      "notInitialized": "Chatbot not initialized. Please refresh the page.",
+      "knowledgeBaseFailed": "Failed to load chatbot knowledge base. Some features may not work correctly.",
+      "invalidImage": "Please upload an image file",
+      "imageTooLarge": "Image must be less than 5MB",
+      "generalError": "I encountered an error.\n\nPlease try again! 🌿"
+    }
   }
 }

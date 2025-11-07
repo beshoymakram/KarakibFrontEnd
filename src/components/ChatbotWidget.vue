@@ -1,30 +1,40 @@
 <template>
-  <div class="fixed bottom-5 right-5 z-50">
+  <div 
+    class="fixed z-50"
+    :style="buttonPosition"
+  >
     <!-- Tooltip (shows before opening chatbot) -->
     <div
       v-if="!isOpen && showTooltip"
-      class="absolute bottom-16 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-lg shadow-lg p-3 mb-2 w-[320px] animate-fadeIn"
+      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-lg shadow-lg p-3 mb-2 w-[320px] animate-fadeIn"
     >
       <button
         @click="showTooltip = false"
-        class="absolute top-1 right-1 text-gray-500 hover:text-gray-700 text-sm leading-none w-5 h-5 flex items-center justify-center"
+        class="absolute top-1 right-1 text-gray-500 hover:text-gray-700 text-xs md:text-sm leading-none w-5 h-5 flex items-center justify-center"
       >
         ✕
       </button>
       <div class="pr-6">
-        <h4 class="font-bold text-[#2C702C] text-sm mb-1.5">🌱 Koko AI Powered Helper</h4>
-        <p class="text-xs text-gray-700 leading-snug">
-          Get instant help with waste sorting, recycling tips, DIY ideas, and collection scheduling. Upload images or ask questions!
-        </p>
+
+<h4 class="font-bold text-[#2C702C] text-sm mb-1.5">
+  🌱 {{ $t('chatbot.tooltipTitle') }}
+</h4>
+<p class="text-xs text-gray-700 leading-snug">
+  {{ $t('chatbot.tooltipDescription') }}
+</p>
+
       </div>
     </div>
 
     <!-- Floating Button (always visible) -->
     <button
-      @click="toggleChat"
-      class="bg-[#2C702C] text-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50"
+      @mousedown="startDrag"
+      @touchstart="startDrag"
+      @click="handleClick"
+      class="bg-[#2C702C] text-white rounded-full w-10 h-10 md:w-14 md:h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50 cursor-move touch-none select-none"
+      :class="{ 'opacity-80': isDragging }"
     >
-      <img src="/images/koko.png" alt="koko" class="w-full h-full rounded-full" />
+      <img src="/images/koko.png" :alt="$t('chatbot.kokoAlt')" class="w-full h-full rounded-full pointer-events-none" />
     </button>
 
     <!-- Chat Window -->
@@ -38,7 +48,7 @@
       <!-- Left Sidebar - Chat History (only visible in fullscreen) -->
       <div v-if="isFullscreen" class="w-64 bg-[#EAF2EA] border-r border-green-200 flex flex-col">
         <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-13">
-          <span class="font-semibold text-sm">Chat History</span>
+          <span class="font-semibold text-sm">{{ $t('chatbot.chatHistory') }}</span>
         </div>
 
         <!-- New Chat Button -->
@@ -46,10 +56,10 @@
           <button
             @click="startNewChat"
             class="w-full bg-[#E0EBE0] hover:bg-[#265C26] text-[#2C702C] text-sm px-3 py-2 rounded-md transition flex items-center justify-center gap-2"
-            title="Start New Chat"
+            :title="$t('chatbot.startNewChat')"
           >
             <img src="../../public/images/icons8-add-to-chat-50.png" alt="" class="size-6">
-            <span>New Chat</span>
+            <span>{{ $t('chatbot.newChat') }}</span>
           </button>
         </div>
 
@@ -75,7 +85,7 @@
               <button
                 @click.stop="deleteChat(chat.id)"
                 class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition opacity-0 group-hover:opacity-100"
-                title="Delete Chat"
+                :title="$t('chatbot.deleteChat')"
               >
                 🗑️
               </button>
@@ -83,7 +93,7 @@
           </div>
 
           <div v-if="chatList.length === 0" class="p-4 text-center text-gray-400 text-sm">
-            No chat history yet.<br />Start a new conversation!
+            {{ $t('chatbot.noChatHistory') }}
           </div>
         </div>
       </div>
@@ -91,13 +101,14 @@
       <!-- Right Side - Main Chat Area -->
       <div class="flex-1 flex flex-col bg-[#BFD6BF]">
         <div class="bg-[#2C702C] text-white flex justify-between items-center px-4 py-3">
-          <span class="font-semibold tracking-wide block text-center w-full">Koko AI Helper</span>
+          <span class="font-semibold tracking-wide block text-center w-full">{{ $t('chatbot.kokoAIHelper') }}</span>
           <div class="flex items-center gap-2">
-            <button 
-              class="hover:text-green-200 text-xl" 
-              @click="toggleFullscreen" 
-              :title="isFullscreen ? 'Minimize' : 'Fullscreen'"
-            >
+<button 
+  class="hover:text-green-200 text-xl" 
+  @click="toggleFullscreen" 
+  :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
+>
+            
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
           </div>
@@ -111,16 +122,17 @@
             class="flex items-start gap-2"
             :class="msg.sender === 'user' ? 'justify-end' : ''"
           >
-            <img
-              v-if="msg.sender === 'bot'"
-              src="/images/koko.png"
-              class="w-8 h-8 rounded-full flex-shrink-0"
-              alt="Koko"
-            />
+<img
+  v-if="msg.sender === 'bot'"
+  src="/images/koko.png"
+  class="w-8 h-8 rounded-full flex-shrink-0"
+  :alt="$t('chatbot.kokoAlt')"
+/>
+
 
             <div
               :class="[
-                'px-3 py-2 rounded-lg text-sm max-w-[75%] break-words',
+                'px-3 py-2 rounded-lg text-sm max-w-[75%] wrap-break-word',
                 msg.sender === 'bot'
                   ? 'bg-[#2C702C] text-white'
                   : 'bg-[#E0EBE0] border border-green-300 text-gray-800'
@@ -137,7 +149,7 @@
           </div>
 
           <div v-if="isLoading" class="flex items-start gap-2">
-            <img src="/images/koko.png" class="w-8 h-8 rounded-full" alt="Koko" />
+            <img src="/images/koko.png" class="w-8 h-8 rounded-full" :alt="$t('chatbot.kokoAlt')" />
             <div class="bg-[#2C702C] text-white px-3 py-2 rounded-lg text-sm">
               <span class="animate-pulse">{{ loadingText }}</span>
             </div>
@@ -147,7 +159,7 @@
         <!-- Input Area -->
         <div class="border-t border-green-300 px-3 py-2 bg-[#E0EBE0] rounded-b-xl">
           <div v-if="imagePreview" class="mb-2 relative inline-block">
-            <img :src="imagePreview" class="max-w-[100px] rounded border-2 border-[#2C702C]" alt="preview" />
+            <img :src="imagePreview" class="max-w-[100px] rounded border-2 border-[#2C702C]" :alt="$t('chatbot.preview')" />
             <button
               @click="clearImage"
               class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600 font-bold"
@@ -158,8 +170,11 @@
 
           <div class="flex items-center gap-2 w-full">
             <label
-              class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center flex-shrink-0"
-              title="Upload waste image for DIY ideas"
+
+class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center shrink-0"
+:title="$t('chatbot.uploadImageTitle')"
+
+
             >
               <img src="../../public/images/icons8-camera-64.png" alt="" class="size-6">
               <input
@@ -176,7 +191,7 @@
               v-model="userInput"
               @keyup.enter="sendMessage"
               type="text"
-              placeholder="Ask about recycling | إسأل عن إعادة التدوير"
+              :placeholder="$t('chatbot.inputPlaceholder')"
               :disabled="isLoading"
               class="flex-1 min-w-0 px-3 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-[#2C702C] outline-none text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
             />
@@ -184,9 +199,9 @@
             <button
               @click="sendMessage"
               :disabled="isLoading || (!userInput.trim() && !selectedImage)"
-              class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 whitespace-nowrap"
+              class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap"
             >
-              Send
+              {{ $t('chatbot.send') }}
             </button>
           </div>
         </div>
@@ -199,10 +214,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useAuthStore } from '@/stores/auth';
 import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: "ChatbotWidget",
-  
+
   data() {
     return {
       isOpen: false,
@@ -214,27 +230,39 @@ export default {
       chatList: [],
       currentChatId: null,
       isLoading: false,
-      loadingText: "Thinking...",
+      loadingText: "",
       selectedImage: null,
       imagePreview: null,
       storageKey: "karakib_chat_history",
-      
+
       // RAG data
       knowledgeBase: null,
-      
+
       // Gemini AI
       genAI: null,
       textModel: null,
       visionModel: null,
-      
+
       // Auth store reference
       authStore: null,
+
+      // Dragging state
+      isDragging: false,
+      dragStartX: 0,
+      dragStartY: 0,
+      initialButtonX: 0,
+      initialButtonY: 0,
+      buttonX: null,
+      buttonY: null,
+      hasMoved: false,
+      isTouchDevice: false,
+      touchToggleHandled: false,
     };
   },
 
   async mounted() {
     this.authStore = useAuthStore();
-    
+
     // Watch for auth state changes (login/logout)
     watch(
       () => this.authStore.user,
@@ -246,7 +274,16 @@ export default {
       },
       { deep: true }
     );
-    
+
+    // Load saved button position
+    this.loadButtonPosition();
+
+    // Add global event listeners for dragging
+    document.addEventListener('mousemove', this.onDrag);
+    document.addEventListener('mouseup', this.endDrag);
+    document.addEventListener('touchmove', this.onDrag, { passive: false });
+    document.addEventListener('touchend', this.endDrag);
+
     await this.initializeGemini();
     await this.loadKnowledgeBase();
     this.loadChatList();
@@ -256,16 +293,29 @@ export default {
     userFirstName() {
       const fullName = this.authStore?.user?.name || "";
       if (!fullName) return ""; // Return empty string when logged out
-      
+
       // Extract first name (text before first space)
       const firstName = fullName.trim().split(' ')[0];
       return firstName;
     },
-    
+
     greetingText() {
       // If logged in: "Hello [FirstName]!"
       // If logged out: "Hello!"
       return this.userFirstName ? `Hello ${this.userFirstName}!` : "Hello!";
+    },
+
+    buttonPosition() {
+      if (this.buttonX !== null && this.buttonY !== null) {
+        return {
+          bottom: `${this.buttonY}px`,
+          right: `${this.buttonX}px`,
+        };
+      }
+      return {
+        bottom: '20px',
+        right: '20px',
+      };
     }
   },
 
@@ -408,7 +458,7 @@ export default {
 
     async initializeGemini() {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      
+
       if (!apiKey) {
         console.error("❌ GEMINI_API_KEY not found in .env file!");
         this.$toast?.error("Chatbot configuration error. Please contact support.");
@@ -418,7 +468,7 @@ export default {
       this.genAI = new GoogleGenerativeAI(apiKey);
       this.textModel = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
       this.visionModel = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-      
+
       console.log("✅ Gemini API configured");
     },
 
@@ -426,7 +476,7 @@ export default {
       try {
         const response = await fetch('/knowledge-base.json');
         if (!response.ok) throw new Error(`Failed to load knowledge base: ${response.status} ${response.statusText}`);
-        
+
         this.knowledgeBase = await response.json();
         const totalFaqs = this.knowledgeBase.faqs?.reduce((sum, cat) => sum + (cat.questions?.length || 0), 0) || 0;
         console.log("✅ Knowledge base loaded successfully:", {
@@ -436,17 +486,16 @@ export default {
           company_name: this.knowledgeBase.company_info?.name || 'Unknown'
         });
       } catch (error) {
-        console.error("❌ Failed to load knowledge-base.json:", error);
-        console.error("Error details:", error.message);
-        this.$toast?.error("Failed to load chatbot knowledge base. Some features may not work correctly.");
-      }
+      console.error("❌ Failed to load knowledge-base.json:", error);
+      this.$toast?.error(this.$t('chatbot.errors.knowledgeBaseFailed'));
+    }
     },
 
     getSystemPrompt() {
-      const userContext = this.userFirstName 
+      const userContext = this.userFirstName
         ? `The user's first name is "${this.userFirstName}". Address them naturally by their first name when appropriate.`
         : `The user is not logged in, so do not use any name to address them.`;
-      
+
       return `You are Koko 🌱, a friendly recycling assistant for Karakib Waste Collection.
 
 ${userContext}
@@ -479,15 +528,15 @@ Answer questions using EXCLUSIVELY the provided context from our knowledge base.
 Before answering, check: "Is this in the CONTEXT below?" If NO → use the professional redirect in the user's language.`;
     },
 
-    getWelcomeMessage() {
-      const bilingualHintEn = "You can chat with me in Arabic too.";
-      const bilingualHintAr = "يمكنك التحدث معي بالعربية أيضًا.";
-      const hint = `${bilingualHintEn} ${bilingualHintAr}`;
-      return {
-        sender: "bot",
-        text: `${this.greetingText} I'm Koko, your assistant for **Karakib** 🌱\n\n**I can help you with:**\n• How our collection service works\n• What materials we accept\n• Scheduling a pickup\n• Creative DIY ideas for small waste items\n• General recycling tips\n\n${hint}\n\nAsk me anything! 💚`
-      };
-    },
+  getWelcomeMessage() {
+    return {
+      sender: "bot",
+      text: this.$t('chatbot.welcomeMessage', { 
+        greeting: this.greetingText,
+        hint: `${this.$t('chatbot.bilingualHintEn')} ${this.$t('chatbot.bilingualHintAr')}`
+      })
+    };
+  },
 
     updateWelcomeMessage() {
       // Update the first message (welcome message) with new greeting
@@ -500,14 +549,18 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
     async sendMessage() {
       if (!this.userInput.trim() && !this.selectedImage) return;
       if (this.isLoading) return;
-      if (!this.genAI) {
-        this.$toast?.error("Chatbot not initialized. Please refresh the page.");
-        return;
-      }
+    if (!this.genAI) {
+      this.$toast?.error(this.$t('chatbot.errors.notInitialized'));
+      return;
+    }
 
       if (!this.currentChatId) this.startNewChat();
 
-      const messageText = this.userInput.trim() || "What can I do with this waste item?";
+      // Use current locale for default question if no user input
+      const defaultQuestion = this.$i18n.locale === 'ar' 
+        ? "ماذا يمكنني أن أفعل بهذا العنصر؟" 
+        : "What can I do with this waste item?";
+      const messageText = this.userInput.trim() || defaultQuestion;
 
       this.messages.push({
         sender: "user",
@@ -520,8 +573,10 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
 
       this.userInput = "";
       this.clearImage();
-      this.isLoading = true;
-      this.loadingText = currentImage ? "Analyzing image... 🔍" : "Thinking... 💭";
+    this.isLoading = true;
+    this.loadingText = currentImage 
+      ? this.$t('chatbot.analyzingImage') 
+      : this.$t('chatbot.thinkingEmoji');
       this.$nextTick(() => this.scrollToBottom());
 
       try {
@@ -652,7 +707,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
 
       // Arabic: Points system / earnings tracking
       if (isArabic && (
-        lowerMsg.includes('نقاط') || lowerMsg.includes('أرباحي') || lowerMsg.includes('ارباحي') || (lowerMsg.includes('ازاي') && lowerMsg.includes('اكسب')) || (lowerMsg.includes('كيف') && (lowerMsg.includes('أكسب') || lowerMsg.includes('اكسب'))) 
+        lowerMsg.includes('نقاط') || lowerMsg.includes('أرباحي') || lowerMsg.includes('ارباحي') || (lowerMsg.includes('ازاي') && lowerMsg.includes('اكسب')) || (lowerMsg.includes('كيف') && (lowerMsg.includes('أكسب') || lowerMsg.includes('اكسب')))
       )) {
         return `${userNamePrefix}لمتابعة أرباحك (نقاطك)، اذهب إلى ملفك الشخصي واضغط على 'نقاطي'. سترى رصيد نقاطك الحالي، وسجل النقاط المكتسبة، وجميع الحركات الخاصة بالنقاط.`;
       }
@@ -730,14 +785,14 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
 
       // Retrieve context using language-appropriate KB
       const retrievedContext = this.retrieveRelevantContextFromKB(message, kb);
-      
+
       // Log context retrieval for debugging
       console.log("📚 Context retrieved:", {
         query: message.substring(0, 50),
         context_items: retrievedContext.relevant.length,
         has_waste_type: !!retrievedContext.waste_type
       });
-      
+
       // Relevance & out-of-scope
       const relevanceKeywordsEn = ['recycle','recycling','collect','collection','pickup','waste','points','donate','shop','address','profile','account','cart','order','request','courier','product'];
       const relevanceKeywordsAr = ['إعادة','تدوير','تجميع','استلام','مخلفات','نقاط','تبرع','متجر','عنوان','ملف','حساب','سلة','طلب','مندوب','منتج'];
@@ -758,7 +813,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       const languageInstruction = isArabic
         ? 'الرجاء الرد باللغة العربية فقط وبأسلوب مهني وودود. ترجم أي نص وارد من السياق إلى العربية صياغةً طبيعية، ولا تستخدم كلمات إنجليزية على الإطلاق، باستثناء اسم المستخدم إن وُجد.'
         : 'Please respond in English only, with a professional and friendly tone.';
-      
+
       let prompt = `${this.getSystemPrompt()}\n\nLANGUAGE: ${isArabic ? 'Arabic' : 'English'}\n${languageInstruction}\n
 === CONTEXT FROM KNOWLEDGE BASE (USE ONLY THIS INFORMATION) ===
 ${contextText}
@@ -787,16 +842,75 @@ ${contextText}
     async analyzeImage(imageFile, userPrompt) {
       const base64Image = await this.fileToBase64(imageFile);
       
-      const userContext = this.userFirstName 
-        ? `Analyzing for ${this.userFirstName}.`
-        : `Analyzing this waste item.`;
+      // Detect language from user prompt
+      const lang = this.detectLanguage(userPrompt);
+      const isArabic = lang === 'ar';
+      const isEnglish = lang === 'en';
       
-      const visionPrompt = `You are Koko 🌱, analyzing a waste item image. ${userContext}
+      // Use appropriate knowledge base based on language
+      const kb = isArabic && this.knowledgeBase.ar ? this.knowledgeBase.ar : this.knowledgeBase;
+      
+      // Handle unsupported languages
+      if (lang === 'other') {
+        return `We currently support assistance in English and Arabic only. Please switch to English or Arabic so I can help you effectively.\nنحن ندعم حاليًا العربية والإنجليزية فقط. يُرجى التحدث بالعربية أو الإنجليزية لكي أساعدك بأفضل شكل.`;
+      }
+      
+      const userContext = this.userFirstName 
+        ? (isArabic ? `تحليل صورة لمستخدم اسمه ${this.userFirstName}.` : `Analyzing for ${this.userFirstName}.`)
+        : (isArabic ? `تحليل صورة لهذا العنصر من المخلفات.` : `Analyzing this waste item.`);
+      
+      const userNamePrefix = this.userFirstName ? (isArabic ? `مرحبًا ${this.userFirstName}! ` : `Hello ${this.userFirstName}! `) : '';
+      
+      // Language-specific instructions
+      const languageInstruction = isArabic
+        ? '⚠️ مهم جدًا: يجب أن ترد باللغة العربية فقط وبأسلوب مهني وودود. لا تستخدم أي كلمات إنجليزية في الرد، باستثناء اسم المستخدم إن وُجد. ترجم جميع المعلومات من قاعدة المعرفة إلى العربية بشكل طبيعي.'
+        : 'Please respond in English only, with a professional and friendly tone.';
+      
+      // Build knowledge base context
+      const wasteTypesInfo = JSON.stringify(kb?.waste_types || [], null, 2);
+      const minCollection = kb?.company_info?.minimum_collection || '';
+      
+      // Build prompt based on language
+      let visionPrompt;
+      
+      if (isArabic) {
+        visionPrompt = `أنت كوكو 🌱، مساعد إعادة التدوير الودود لكراكِب. ${userContext}
+
+${this.getSystemPrompt()}
+
+⚠️ تعليمات اللغة: ${languageInstruction}
+
+=== معلومات قاعدة المعرفة ===
+${wasteTypesInfo}
+
+الحد الأدنى للتجميع: ${minCollection}
+=== نهاية قاعدة المعرفة ===
+
+📸 السؤال من المستخدم: "${userPrompt}"
+
+قم بتحليل الصورة وقدم:
+
+1. **ما هو هذا العنصر؟** 🔍
+2. **فحص الكمية** ⚖️ (عنصر واحد أم كمية كبيرة 1 كجم+؟)
+3. **التوصية** 💡
+   - عنصر واحد: قدم 3-5 أفكار لإعادة الاستخدام (DIY)
+   - كمية كبيرة: اشرح عملية التجميع مع التسعير
+4. **نصيحة بيئية** 🌍
+
+استخدم المعلومات من قاعدة المعرفة. كن ودودًا وعمليًا! 🌱
+
+⚠️ تذكر: يجب أن ترد باللغة العربية فقط.`;
+      } else {
+        visionPrompt = `You are Koko 🌱, analyzing a waste item image. ${userContext}
+
+${this.getSystemPrompt()}
+
+⚠️ LANGUAGE INSTRUCTIONS: ${languageInstruction}
 
 === KNOWLEDGE BASE INFO ===
-${JSON.stringify(this.knowledgeBase?.waste_types, null, 2)}
+${wasteTypesInfo}
 
-Minimum collection: ${this.knowledgeBase?.company_info?.minimum_collection}
+Minimum collection: ${minCollection}
 === END KNOWLEDGE BASE ===
 
 📸 QUESTION: "${userPrompt}"
@@ -811,6 +925,7 @@ Analyze the image and provide:
 4. **Eco Tip** 🌍
 
 Use information from the knowledge base. Be friendly and practical! 🌱`;
+      }
 
       const imagePart = {
         inlineData: {
@@ -832,19 +947,19 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       });
     },
 
-    handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+  async handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
-      if (!file.type.startsWith("image/")) {
-        alert("Please upload an image file");
-        return;
-      }
+    if (!file.type.startsWith("image/")) {
+      alert(this.$t('chatbot.errors.invalidImage'));
+      return;
+    }
 
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Image must be less than 5MB");
-        return;
-      }
+    if (file.size > 5 * 1024 * 1024) {
+      alert(this.$t('chatbot.errors.imageTooLarge'));
+      return;
+    }
 
       this.selectedImage = file;
       const reader = new FileReader();
@@ -880,7 +995,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
 
       const newChatId = Date.now().toString();
       this.currentChatId = newChatId;
-      
+
       // Use computed greeting message
       this.messages = [this.getWelcomeMessage()];
       this.chatHistory = [];
@@ -957,7 +1072,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
     },
 
     deleteChat(chatId) {
-      if (confirm("Are you sure you want to delete this chat?")) {
+      if (confirm(this.$t('chatbot.confirmDelete'))) {
         const index = this.chatList.findIndex((c) => c.id === chatId);
         if (index !== -1) {
           this.chatList.splice(index, 1);
@@ -969,29 +1084,29 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       }
     },
 
-    getChatTitle(chat) {
-      const firstUserMessage = chat.messages?.find((m) => m.sender === "user");
-      if (firstUserMessage) {
-        const title = firstUserMessage.text.substring(0, 30);
-        return title.length < firstUserMessage.text.length ? title + "..." : title;
-      }
-      return chat.title || "New Chat";
-    },
+  getChatTitle(chat) {
+    const firstUserMessage = chat.messages?.find((m) => m.sender === "user");
+    if (firstUserMessage) {
+      const title = firstUserMessage.text.substring(0, 30);
+      return title.length < firstUserMessage.text.length ? title + "..." : title;
+    }
+    return chat.title || this.$t('chatbot.newChat');
+  },
 
-    formatDate(dateString) {
-      const date = new Date(dateString);
-      const now = new Date();
-      const diffMs = now - date;
-      const diffMins = Math.floor(diffMs / 60000);
-      const diffHours = Math.floor(diffMs / 3600000);
-      const diffDays = Math.floor(diffMs / 86400000);
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
 
-      if (diffMins < 1) return "Just now";
-      if (diffMins < 60) return `${diffMins}m ago`;
-      if (diffHours < 24) return `${diffHours}h ago`;
-      if (diffDays < 7) return `${diffDays}d ago`;
-      return date.toLocaleDateString();
-    },
+    if (diffMins < 1) return this.$t('chatbot.justNow');
+    if (diffMins < 60) return this.$t('chatbot.minutesAgo', { count: diffMins });
+    if (diffHours < 24) return this.$t('chatbot.hoursAgo', { count: diffHours });
+    if (diffDays < 7) return this.$t('chatbot.daysAgo', { count: diffDays });
+    return date.toLocaleDateString(this.$i18n.locale);
+  },
 
     formatMessage(text) {
       if (!text) return "";
@@ -1011,10 +1126,157 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
         }, 100);
       }
     },
+
+    // Dragging methods
+    getEventCoordinates(e) {
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+      return { x: e.clientX, y: e.clientY };
+    },
+
+    startDrag(e) {
+      // Don't prevent default on mousedown to allow text selection elsewhere
+      if (e.type === 'touchstart') {
+        e.preventDefault();
+        this.isTouchDevice = true;
+        this.touchToggleHandled = false;
+      } else {
+        this.isTouchDevice = false;
+      }
+      this.isDragging = true;
+      this.hasMoved = false;
+      
+      const coords = this.getEventCoordinates(e);
+      this.dragStartX = coords.x;
+      this.dragStartY = coords.y;
+
+      // Get current button position and store as initial position
+      if (this.buttonX === null || this.buttonY === null) {
+        this.buttonX = 20;
+        this.buttonY = 20;
+      }
+      this.initialButtonX = this.buttonX;
+      this.initialButtonY = this.buttonY;
+    },
+
+    onDrag(e) {
+      if (!this.isDragging) return;
+      
+      e.preventDefault();
+      const coords = this.getEventCoordinates(e);
+      
+      // Calculate delta from initial drag start position
+      const deltaX = this.dragStartX - coords.x;
+      const deltaY = coords.y - this.dragStartY; // Y increases downward, but bottom increases upward
+      
+      // Check if user has moved enough to consider it a drag
+      const moveThreshold = 5;
+      if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
+        this.hasMoved = true;
+      }
+
+      // Calculate new position based on initial button position + delta
+      // For X: moving left (decreasing clientX) should increase right value
+      // For Y: moving down (increasing clientY) should decrease bottom value
+      const newX = this.initialButtonX + deltaX;
+      const newY = this.initialButtonY - deltaY;
+
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Button dimensions (use larger size for mobile)
+      const buttonSize = window.innerWidth >= 768 ? 56 : 40; // md:w-14 = 56px, w-10 = 40px
+
+      // Constrain to viewport bounds
+      const maxX = viewportWidth - buttonSize - 10;
+      const maxY = viewportHeight - buttonSize - 10;
+      const minX = 10;
+      const minY = 10;
+
+      this.buttonX = Math.max(minX, Math.min(maxX, newX));
+      this.buttonY = Math.max(minY, Math.min(maxY, newY));
+    },
+
+    endDrag(e) {
+      if (!this.isDragging) return;
+      
+      const wasDragging = this.hasMoved;
+      this.isDragging = false;
+      
+      // Save position to localStorage
+      this.saveButtonPosition();
+      
+      // If no movement, toggle chat
+      if (!wasDragging) {
+        if (this.isTouchDevice) {
+          // For touch, handle toggle here and mark it as handled
+          this.touchToggleHandled = true;
+          setTimeout(() => {
+            this.toggleChat();
+          }, 10);
+        } else {
+          // For mouse, let the click handler handle it
+          // But set a flag to prevent double-toggle
+          this.touchToggleHandled = false;
+        }
+      } else {
+        this.touchToggleHandled = true; // Prevent click after drag
+      }
+      
+      // Reset hasMoved for next interaction
+      setTimeout(() => {
+        this.hasMoved = false;
+        this.touchToggleHandled = false;
+      }, 150);
+    },
+
+    handleClick(e) {
+      // Prevent click handler on touch devices (handled in endDrag)
+      if (this.touchToggleHandled) {
+        return;
+      }
+      // Only handle click if we haven't dragged (for mouse clicks)
+      if (!this.hasMoved && !this.isDragging) {
+        this.toggleChat();
+      }
+    },
+
+    loadButtonPosition() {
+      try {
+        const saved = localStorage.getItem('karakib_chatbot_position');
+        if (saved) {
+          const position = JSON.parse(saved);
+          this.buttonX = position.x;
+          this.buttonY = position.y;
+        }
+      } catch (error) {
+        console.error('Error loading button position:', error);
+      }
+    },
+
+    saveButtonPosition() {
+      try {
+        if (this.buttonX !== null && this.buttonY !== null) {
+          localStorage.setItem('karakib_chatbot_position', JSON.stringify({
+            x: this.buttonX,
+            y: this.buttonY
+          }));
+        }
+      } catch (error) {
+        console.error('Error saving button position:', error);
+      }
+    },
   },
 
   beforeUnmount() {
     this.saveCurrentChat();
+    // Remove global event listeners
+    document.removeEventListener('mousemove', this.onDrag);
+    document.removeEventListener('mouseup', this.endDrag);
+    document.removeEventListener('touchmove', this.onDrag);
+    document.removeEventListener('touchend', this.endDrag);
   },
 };
 </script>
