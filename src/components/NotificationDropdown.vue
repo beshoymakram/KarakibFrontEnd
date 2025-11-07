@@ -93,6 +93,7 @@ export default {
     return {
       isOpen: false,
       notifications: [],
+      intervalId: null,
       notificationss: [
         {
           id: 1,
@@ -191,11 +192,15 @@ export default {
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
     this.fetchNotifications();
+    this.intervalId = setInterval(this.fetchNotifications, 3000);
+
   },
 
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
+    clearInterval(this.intervalId);
   }
+
 };
 </script>
 <style scoped>

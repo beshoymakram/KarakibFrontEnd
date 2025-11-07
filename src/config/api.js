@@ -20,7 +20,7 @@ apiClient.interceptors.request.use(
 
     // ✅ Only show loader for GET requests
     if (config.method?.toLowerCase() === 'get') {
-      loading.show()
+      // loading.show()
     }
 
     const locale = localStorage.getItem('locale') || 'en'
@@ -35,7 +35,7 @@ apiClient.interceptors.request.use(
   },
   (error) => {
     const loading = useLoadingStore()
-    loading.hide()
+    // loading.hide()
     return Promise.reject(error)
   }
 )
@@ -47,7 +47,7 @@ apiClient.interceptors.response.use(
 
     // ✅ Hide loader only if it was triggered by GET
     if (response.config.method?.toLowerCase() === 'get') {
-      loading.hide()
+      // loading.hide()
     }
 
     return response
@@ -57,7 +57,7 @@ apiClient.interceptors.response.use(
 
     // ✅ Hide loader only if it was triggered by GET
     if (error.config?.method?.toLowerCase() === 'get') {
-      loading.hide()
+      // loading.hide()
     }
 
     // Handle unauthorized user (401)
