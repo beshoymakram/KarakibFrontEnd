@@ -6,7 +6,7 @@
     <!-- Tooltip (shows before opening chatbot) -->
     <div
       v-if="!isOpen && showTooltip"
-      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-xl shadow-lg p-3 mb-2 w-64 animate-fadeIn"
+      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-xl shadow-lg p-3 mb-2 w-74 animate-fadeIn"
     >
       <button
         @click="showTooltip = false"
@@ -103,7 +103,6 @@
       </div>
 
       <!-- Right Side - Main Chat Area -->
-<<<<<<< HEAD
       <div class="flex-1 flex flex-col bg-[#BFD6BF] rounded-r-xl overflow-hidden w-full transition-all duration-300">
         <div class="bg-[#2C702C] text-white flex justify-between items-center px-3 py-2 sm:px-5 h-12 md:h-14">
           <span class="font-semibold tracking-wide text-sm sm:text-base flex-1 text-center">{{ $t('chatbot.kokoAIHelper') }}</span>
@@ -113,17 +112,6 @@
             @click="toggleFullscreen"
             :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
         >
-=======
-      <div class="flex-1 flex flex-col bg-[#BFD6BF]">
-        <div class="bg-[#2C702C] text-white flex justify-between items-center px-4 py-3">
-          <span class="font-semibold tracking-wide block text-center w-full">{{ $t('chatbot.kokoAIHelper') }}</span>
-          <div class="flex items-center gap-2">
-<button
-  class="hover:text-green-200 text-xl"
-  @click="toggleFullscreen"
-  :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
->
->>>>>>> 3c860f2a44158f9979f655d42dd6d5e07edc6a30
 
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
@@ -1186,14 +1174,9 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       const coords = this.getEventCoordinates(e);
 
       // Calculate delta from initial drag start position
-<<<<<<< HEAD
-      const deltaX = this.dragStartX - coords.x;
-      const deltaY = coords.y - this.dragStartY; // Y increases downward, but bottom increases upward
-=======
 const deltaX = coords.x - this.dragStartX;  // positive when dragging right
 const deltaY = coords.y - this.dragStartY;  // positive when dragging down
  // Y increases downward, but bottom increases upward
->>>>>>> 3c860f2a44158f9979f655d42dd6d5e07edc6a30
 
       // Check if user has moved enough to consider it a drag
       const moveThreshold = 0;
