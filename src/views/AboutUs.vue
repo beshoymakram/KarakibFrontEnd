@@ -571,7 +571,7 @@
                 <font-awesome-icon :icon="['fab', 'facebook']" /> @Karakib
               </li>
               <li>
-                <font-awesome-icon :icon="['fab', 'instagram']" /> @karakib_official
+                <font-awesome-icon :icon="['fab', 'instagram']" /> @karakib.eg
               </li>
             </ul>
           </div>

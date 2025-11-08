@@ -73,7 +73,7 @@
           <a href="#" target="_blank" aria-label="Facebook" class="hover:text-green-600 transition">
             <font-awesome-icon :icon="['fab', 'facebook']" />
           </a>
-          <a href="https://instagram.com/karakib_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-green-600 transition">
+          <a href="https://instagram.com/karakib.eg" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-green-600 transition">
             <font-awesome-icon :icon="['fab', 'instagram']" />
           </a>
           <a href="#" target="_blank" aria-label="LinkedIn" class="hover:text-green-600 transition">
