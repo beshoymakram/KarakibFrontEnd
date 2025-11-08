@@ -1,25 +1,25 @@
 <template>
-  <div 
+  <div
     class="fixed z-50"
     :style="buttonPosition"
   >
     <!-- Tooltip (shows before opening chatbot) -->
     <div
       v-if="!isOpen && showTooltip"
-      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-lg shadow-lg p-3 mb-2 w-[320px] animate-fadeIn"
+      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-xl shadow-lg p-3 mb-2 w-64 animate-fadeIn"
     >
       <button
         @click="showTooltip = false"
-        class="absolute top-1 right-1 text-gray-500 hover:text-gray-700 text-xs md:text-sm leading-none w-5 h-5 flex items-center justify-center"
+        class="absolute top-1.5 right-1.5 text-gray-500 hover:text-gray-700 text-xs md:text-sm leading-none w-5 h-5 flex items-center justify-center"
       >
         ✕
       </button>
-      <div class="pr-6">
+      <div class="pr-5">
 
-<h4 class="font-bold text-[#2C702C] text-sm mb-1.5">
+<h4 class="font-bold text-[#2C702C] text-sm md:text-base mb-1.5">
   🌱 {{ $t('chatbot.tooltipTitle') }}
 </h4>
-<p class="text-xs text-gray-700 leading-snug">
+<p class="text-[0.67rem] md:text-xs text-gray-700 leading-snug">
   {{ $t('chatbot.tooltipDescription') }}
 </p>
 
@@ -41,53 +41,57 @@
     <div
       v-if="isOpen"
       :class="[
-        'absolute bottom-16 right-0 bg-green-50 border-2 border-[#2C702C] rounded-xl flex shadow-xl animate-fadeIn overflow-hidden',
-        isFullscreen ? 'w-[900px] h-[600px]' : 'w-[400px] h-[600px]'
-      ]"
+        'absolute right-0 md:right-8 bottom-4 md:bottom-6 bg-green-50 border-2 border-[#2C702C] rounded-2xl flex shadow-xl animate-fadeIn overflow-hidden backdrop-blur-md',
+       isFullscreen
+      ? 'w-[90vw] h-[90vh] md:w-[85vw] md:h-[88vh] lg:w-[80vw] lg:h-[85vh] xl:w-[75vw] xl:h-[85vh]'
+      : 'w-[90vw] h-[70vh] sm:w-[70vw] sm:h-[65vh] md:w-[45vw] md:h-[70vh] lg:w-[34vw] lg:h-[80vh] '
+  ]"
     >
       <!-- Left Sidebar - Chat History (only visible in fullscreen) -->
-      <div v-if="isFullscreen" class="w-64 bg-[#EAF2EA] border-r border-green-200 flex flex-col">
-        <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-13">
-          <span class="font-semibold text-sm">{{ $t('chatbot.chatHistory') }}</span>
-        </div>
+      <div v-if="isFullscreen" class="hidden md:flex w-[26vw] lg:w-[20vw] bg-[#EAF2EA] border-r border-green-200 flex-col"
+    >
+      <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-12 md:h-14">
+        <span class="font-semibold text-sm tracking-wide">{{ $t('chatbot.chatHistory') }}</span>
+      </div>
 
         <!-- New Chat Button -->
         <div class="px-3 py-2 border-b border-green-200">
           <button
             @click="startNewChat"
-            class="w-full bg-[#E0EBE0] hover:bg-[#265C26] text-[#2C702C] text-sm px-3 py-2 rounded-md transition flex items-center justify-center gap-2"
+            class="w-full  bg-[#E0EBE0] text-[#2C702C] md:text-base font-medium px-3 py-2 rounded-md transition flex items-center justify-center gap-2"
             :title="$t('chatbot.startNewChat')"
           >
-            <img src="../../public/images/icons8-add-to-chat-50.png" alt="" class="size-6">
+            <img src="../../public/images/icons8-add-to-chat-50.png" alt="" class="size-5 md:size-6">
             <span>{{ $t('chatbot.newChat') }}</span>
           </button>
         </div>
 
-        <div class="flex-1 overflow-y-auto">
+        <div class="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-green-100">
           <div
             v-for="chat in chatList"
             :key="chat.id"
             @click="loadChat(chat.id)"
             :class="[
-              'px-4 py-3 border-b border-green-100 cursor-pointer transition-colors hover:bg-[#BFD6BF] group',
+              'px-4 py-3 border-b border-green-100 cursor-pointer transition-colors hover:bg-[#BFD6BF] group flex flex-col gap-1',
               currentChatId === chat.id ? 'bg-[#BFD6BF] border-l-4 border-l-[#2C702C]' : ''
             ]"
           >
             <div class="flex items-start justify-between gap-2">
               <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-800 truncate">
+                <p class="text-sm md:text-base font-semibold text-gray-800 truncate">
                   {{ getChatTitle(chat) }}
                 </p>
-                <p class="text-xs text-gray-500 mt-1">
+                <p class="text-xs text-gray-500 ">
                   {{ formatDate(chat.createdAt) }}
                 </p>
               </div>
               <button
-                @click.stop="deleteChat(chat.id)"
-                class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition opacity-0 group-hover:opacity-100"
-                :title="$t('chatbot.deleteChat')"
-              >
-                🗑️
+                 @click.stop="deleteChat(chat.id)"
+                 class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition
+                 opacity-0 group-hover:opacity-100"
+                 :title="$t('chatbot.deleteChat')"
+                >
+                  🗑️
               </button>
             </div>
           </div>
@@ -99,110 +103,113 @@
       </div>
 
       <!-- Right Side - Main Chat Area -->
-      <div class="flex-1 flex flex-col bg-[#BFD6BF]">
-        <div class="bg-[#2C702C] text-white flex justify-between items-center px-4 py-3">
-          <span class="font-semibold tracking-wide block text-center w-full">{{ $t('chatbot.kokoAIHelper') }}</span>
-          <div class="flex items-center gap-2">
-<button 
-  class="hover:text-green-200 text-xl" 
-  @click="toggleFullscreen" 
-  :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
->
-            
+      <div class="flex-1 flex flex-col bg-[#BFD6BF] rounded-r-xl overflow-hidden w-full transition-all duration-300">
+        <div class="bg-[#2C702C] text-white flex justify-between items-center px-3 py-2 sm:px-5 h-12 md:h-14">
+          <span class="font-semibold tracking-wide text-sm sm:text-base flex-1 text-center">{{ $t('chatbot.kokoAIHelper') }}</span>
+
+          <button
+           class="hover:text-green-200 text-base sm:text-lg transition ml-2"
+            @click="toggleFullscreen"
+            :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
+        >
+
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
-          </div>
+
         </div>
 
         <!-- Messages -->
-        <div ref="chatBody" class="flex-1 overflow-y-auto p-3 space-y-3">
+        <div ref="chatBody" class="flex-1 overflow-y-auto p-2 sm:p-3 md:p-5 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-400 scrollbar-track-green-100">
           <div
             v-for="(msg, i) in messages"
             :key="i"
-            class="flex items-start gap-2"
-            :class="msg.sender === 'user' ? 'justify-end' : ''"
+            :class="['flex items-start gap-2 sm:gap-3', msg.sender === 'user' ? 'justify-end' : '']"
           >
 <img
   v-if="msg.sender === 'bot'"
   src="/images/koko.png"
-  class="w-8 h-8 rounded-full flex-shrink-0"
+  class="w-7 h-7 sm:w-8 sm:h-8 rounded-full shrink-0"
   :alt="$t('chatbot.kokoAlt')"
 />
 
 
             <div
               :class="[
-                'px-3 py-2 rounded-lg text-sm max-w-[75%] wrap-break-word',
-                msg.sender === 'bot'
-                  ? 'bg-[#2C702C] text-white'
-                  : 'bg-[#E0EBE0] border border-green-300 text-gray-800'
-              ]"
+                'px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm max-w-[82%] wrap-break-word leading-relaxed',
+          msg.sender === 'bot'
+            ? 'bg-[#2C702C] text-white shadow-sm'
+            : 'bg-[#E0EBE0] border border-green-300 text-gray-800'
+        ]"
             >
               <img
                 v-if="msg.image"
                 :src="msg.image"
                 class="max-w-full rounded mb-2 border border-green-700"
-                alt="uploaded waste item"
+          alt="uploaded waste item"
               />
               <div v-html="formatMessage(msg.text)" class="whitespace-pre-wrap"></div>
             </div>
           </div>
 
-          <div v-if="isLoading" class="flex items-start gap-2">
-            <img src="/images/koko.png" class="w-8 h-8 rounded-full" :alt="$t('chatbot.kokoAlt')" />
-            <div class="bg-[#2C702C] text-white px-3 py-2 rounded-lg text-sm">
-              <span class="animate-pulse">{{ loadingText }}</span>
-            </div>
-          </div>
+          <div v-if="isLoading" class="flex items-start gap-2 sm:gap-3">
+      <img src="/images/koko.png" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full" :alt="$t('chatbot.kokoAlt')" />
+      <div class="bg-[#2C702C] text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm sm:text-base">
+        <span class="animate-pulse">{{ loadingText }}</span>
+      </div>
+    </div>
+  </div>
+
+       <!-- Input Area -->
+      <div class="border-t border-green-300 px-2 sm:px-4 py-2 sm:py-3 bg-[#E0EBE0] rounded-b-xl">
+        <div v-if="imagePreview" class="mb-2 relative inline-block">
+          <img
+            :src="imagePreview"
+            class="max-w-[100px] rounded border-2 border-[#2C702C]"
+            :alt="$t('chatbot.preview')"
+          />
+          <button
+            @click="clearImage"
+            class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs hover:bg-red-600 font-bold"
+          >
+            ✕
+          </button>
         </div>
 
-        <!-- Input Area -->
-        <div class="border-t border-green-300 px-3 py-2 bg-[#E0EBE0] rounded-b-xl">
-          <div v-if="imagePreview" class="mb-2 relative inline-block">
-            <img :src="imagePreview" class="max-w-[100px] rounded border-2 border-[#2C702C]" :alt="$t('chatbot.preview')" />
-            <button
-              @click="clearImage"
-              class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600 font-bold"
-            >
-              ✕
-            </button>
-          </div>
-
-          <div class="flex items-center gap-2 w-full">
-            <label
-
-class="cursor-pointer bg-[#2C702C] text-white px-3 py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center shrink-0"
-:title="$t('chatbot.uploadImageTitle')"
-
-
-            >
-              <img src="../../public/images/icons8-camera-64.png" alt="" class="size-6">
-              <input
-                type="file"
-                ref="fileInput"
-                @change="handleImageUpload"
-                accept="image/*"
-                class="hidden"
-                :disabled="isLoading"
-              />
-            </label>
-
+        <div class="flex items-center gap-2 sm:gap-3 w-full">
+          <!-- Upload -->
+          <label
+            class="cursor-pointer bg-[#2C702C] text-white p-2 sm:px-3 sm:py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center shrink-0"
+            :title="$t('chatbot.uploadImageTitle')"
+          >
+            <img src="/images/icons8-camera-64.png" alt="Upload" class="w-4 h-4 sm:w-5 sm:h-5" />
             <input
-              v-model="userInput"
-              @keyup.enter="sendMessage"
-              type="text"
-              :placeholder="$t('chatbot.inputPlaceholder')"
+              type="file"
+              ref="fileInput"
+              @change="handleImageUpload"
+              accept="image/*"
+              class="hidden"
               :disabled="isLoading"
-              class="flex-1 min-w-0 px-3 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-[#2C702C] outline-none text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
             />
+          </label>
 
-            <button
-              @click="sendMessage"
-              :disabled="isLoading || (!userInput.trim() && !selectedImage)"
-              class="bg-[#2C702C] text-white px-4 py-2 rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap"
-            >
-              {{ $t('chatbot.send') }}
-            </button>
+          <!-- Input -->
+          <input
+            v-model="userInput"
+            @keyup.enter="sendMessage"
+            type="text"
+            :placeholder="$t('chatbot.inputPlaceholder')"
+            :disabled="isLoading"
+            class="flex-1 min-w-0 px-3 sm:px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-[#2C702C] outline-none text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          />
+
+          <!-- Send -->
+          <button
+            @click="sendMessage"
+            :disabled="isLoading || (!userInput.trim() && !selectedImage)"
+            class="bg-[#2C702C] text-white px-3 sm:px-4 py-1.5  rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap text-sm sm:text-base"
+          >
+            {{ $t('chatbot.send') }}
+          </button>
           </div>
         </div>
       </div>
@@ -531,7 +538,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
   getWelcomeMessage() {
     return {
       sender: "bot",
-      text: this.$t('chatbot.welcomeMessage', { 
+      text: this.$t('chatbot.welcomeMessage', {
         greeting: this.greetingText,
         hint: `${this.$t('chatbot.bilingualHintEn')} ${this.$t('chatbot.bilingualHintAr')}`
       })
@@ -557,8 +564,8 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       if (!this.currentChatId) this.startNewChat();
 
       // Use current locale for default question if no user input
-      const defaultQuestion = this.$i18n.locale === 'ar' 
-        ? "ماذا يمكنني أن أفعل بهذا العنصر؟" 
+      const defaultQuestion = this.$i18n.locale === 'ar'
+        ? "ماذا يمكنني أن أفعل بهذا العنصر؟"
         : "What can I do with this waste item?";
       const messageText = this.userInput.trim() || defaultQuestion;
 
@@ -574,8 +581,8 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       this.userInput = "";
       this.clearImage();
     this.isLoading = true;
-    this.loadingText = currentImage 
-      ? this.$t('chatbot.analyzingImage') 
+    this.loadingText = currentImage
+      ? this.$t('chatbot.analyzingImage')
       : this.$t('chatbot.thinkingEmoji');
       this.$nextTick(() => this.scrollToBottom());
 
@@ -841,38 +848,38 @@ ${contextText}
 
     async analyzeImage(imageFile, userPrompt) {
       const base64Image = await this.fileToBase64(imageFile);
-      
+
       // Detect language from user prompt
       const lang = this.detectLanguage(userPrompt);
       const isArabic = lang === 'ar';
       const isEnglish = lang === 'en';
-      
+
       // Use appropriate knowledge base based on language
       const kb = isArabic && this.knowledgeBase.ar ? this.knowledgeBase.ar : this.knowledgeBase;
-      
+
       // Handle unsupported languages
       if (lang === 'other') {
         return `We currently support assistance in English and Arabic only. Please switch to English or Arabic so I can help you effectively.\nنحن ندعم حاليًا العربية والإنجليزية فقط. يُرجى التحدث بالعربية أو الإنجليزية لكي أساعدك بأفضل شكل.`;
       }
-      
-      const userContext = this.userFirstName 
+
+      const userContext = this.userFirstName
         ? (isArabic ? `تحليل صورة لمستخدم اسمه ${this.userFirstName}.` : `Analyzing for ${this.userFirstName}.`)
         : (isArabic ? `تحليل صورة لهذا العنصر من المخلفات.` : `Analyzing this waste item.`);
-      
+
       const userNamePrefix = this.userFirstName ? (isArabic ? `مرحبًا ${this.userFirstName}! ` : `Hello ${this.userFirstName}! `) : '';
-      
+
       // Language-specific instructions
       const languageInstruction = isArabic
         ? '⚠️ مهم جدًا: يجب أن ترد باللغة العربية فقط وبأسلوب مهني وودود. لا تستخدم أي كلمات إنجليزية في الرد، باستثناء اسم المستخدم إن وُجد. ترجم جميع المعلومات من قاعدة المعرفة إلى العربية بشكل طبيعي.'
         : 'Please respond in English only, with a professional and friendly tone.';
-      
+
       // Build knowledge base context
       const wasteTypesInfo = JSON.stringify(kb?.waste_types || [], null, 2);
       const minCollection = kb?.company_info?.minimum_collection || '';
-      
+
       // Build prompt based on language
       let visionPrompt;
-      
+
       if (isArabic) {
         visionPrompt = `أنت كوكو 🌱، مساعد إعادة التدوير الودود لكراكِب. ${userContext}
 
@@ -1146,7 +1153,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       }
       this.isDragging = true;
       this.hasMoved = false;
-      
+
       const coords = this.getEventCoordinates(e);
       this.dragStartX = coords.x;
       this.dragStartY = coords.y;
@@ -1162,14 +1169,14 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
 
     onDrag(e) {
       if (!this.isDragging) return;
-      
+
       e.preventDefault();
       const coords = this.getEventCoordinates(e);
-      
+
       // Calculate delta from initial drag start position
       const deltaX = this.dragStartX - coords.x;
       const deltaY = coords.y - this.dragStartY; // Y increases downward, but bottom increases upward
-      
+
       // Check if user has moved enough to consider it a drag
       const moveThreshold = 5;
       if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
@@ -1201,13 +1208,13 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
 
     endDrag(e) {
       if (!this.isDragging) return;
-      
+
       const wasDragging = this.hasMoved;
       this.isDragging = false;
-      
+
       // Save position to localStorage
       this.saveButtonPosition();
-      
+
       // If no movement, toggle chat
       if (!wasDragging) {
         if (this.isTouchDevice) {
@@ -1224,7 +1231,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       } else {
         this.touchToggleHandled = true; // Prevent click after drag
       }
-      
+
       // Reset hasMoved for next interaction
       setTimeout(() => {
         this.hasMoved = false;
@@ -1304,4 +1311,15 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
 .overflow-y-auto::-webkit-scrollbar-track { background: #f1f1f1; }
 .overflow-y-auto::-webkit-scrollbar-thumb { background: #2C702C; border-radius: 3px; }
 .overflow-y-auto::-webkit-scrollbar-thumb:hover { background: #265C26; }
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #9ec79e;
+  border-radius: 9999px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #eaf2ea;
+}
 </style>
