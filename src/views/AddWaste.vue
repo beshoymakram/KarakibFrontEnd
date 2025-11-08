@@ -19,7 +19,7 @@
 
   <!-- Text -->
   <h2
-    class="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold drop-shadow-xl text-center"
+    class="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl pt-10 sm:pt-12 md:pt-14 lg:pt-16  text-primary font-semibold drop-shadow-xl text-center"
   >
     {{ $t("common.recyclingWasteTypes") }}
   </h2>

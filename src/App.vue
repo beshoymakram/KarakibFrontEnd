@@ -1,6 +1,6 @@
 <template>
   <NavBar />
-  <router-view />
+  <router-view  class="pt-12 lg:pt-16"/>
   <ChatbotWidget/>
   <FooterSection />
   <SkeletonLoader v-if="loadingStore.isLoading" />

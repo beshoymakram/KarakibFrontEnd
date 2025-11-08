@@ -1,7 +1,7 @@
 <template>
-  <div class="checkout-page bg-primary min-h-screen py-10">
+  <div class="checkout-page bg-primary min-h-screen  py-6 sm:py-8 md:py-10 lg:py-12">
     <div class="container mx-auto px-4 max-w-6xl">
-      <h1 class="text-3xl font-bold text-primary mb-8">{{ $t('common.checkoutOrders') }}</h1>
+      <h1 class="text-3xl font-bold text-primary pt-4 sm:pt-8 md:pt-10 lg:pt-12 mb-8">{{ $t('common.checkoutOrders') }}</h1>
 
       <div class="grid md:grid-cols-2 gap-6 bg-secondary p-6 rounded-2xl shadow-lg">
         <!-- LEFT SIDE - ORDER DETAILS -->

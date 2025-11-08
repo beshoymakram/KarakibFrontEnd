@@ -1,7 +1,7 @@
 <template>
   <div class="cart-page bg-primary min-h-screen py-6 md:py-10 lg:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
     <div class="container mx-auto px-3 sm:px-4 max-w-6xl">
-      <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-4 sm:mb-6">{{ $t('common.yourCart') }}
+      <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary pt-4 sm:pt-8 md:pt-10 lg:pt-12 mb-4 sm:mb-6">{{ $t('common.yourCart') }}
       </h1>
 
       <div class="bg-cart rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">

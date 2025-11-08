@@ -6,7 +6,7 @@
     <!-- Tooltip (shows before opening chatbot) -->
     <div
       v-if="!isOpen && showTooltip"
-      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-xl shadow-lg p-3 mb-2 w-74 animate-fadeIn"
+      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-xl shadow-lg p-3 mb-2 w-76 animate-fadeIn"
     >
       <button
         @click="showTooltip = false"
