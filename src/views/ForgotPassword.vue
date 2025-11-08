@@ -68,7 +68,7 @@
       <div v-if="showPopup" class="popup-overlay">
         <div class="popup-box">
           <div class="icon">✅</div>
-          <p>Verification code was sent to your email</p>
+          <p>{{ $t('common.codeSentSuccess') }}</p>
         </div>
       </div>
     </transition>

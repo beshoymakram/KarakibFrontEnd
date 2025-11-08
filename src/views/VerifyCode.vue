@@ -122,7 +122,7 @@
       <div class="bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6 text-center relative">
         <button @click="closePopup" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
         <h2 class="text-2xl font-bold text-[#317C31] mb-4">✔</h2>
-        <p class="text-gray-600">Code sent to your email.</p>
+        <p class="text-gray-600">{{ $t('common.codeSentSuccess') }}</p>
       </div>
     </div>
   </div>
@@ -172,9 +172,10 @@ export default {
         this.$toast.success(response.data.message);
         setTimeout(() => this.$router.push({ name: 'reset-password' }), 1500);
       } catch (error) {
-        console.error('Error:', error);
-        this.errorMessage = 'Invalid verification code. Please try again.';
-      } finally {
+  console.error('Error:', error);
+  this.errorMessage = this.$t('common.invalidVerificationCode');
+}
+ finally {
         this.loading = false;
       }
     },
@@ -188,9 +189,9 @@ export default {
         this.errorMessage = '';
         this.showResendPopup = true;
         setTimeout(() => (this.showResendPopup = false), 3000);
-      } catch (error) {
-        this.$toast.error('Failed to resend code. Please try again.');
-      } finally {
+      }catch (error) {
+  this.$toast.error(this.$t('common.failedToResendCode'));
+} finally {
         this.resendLoading = false;
       }
     },
