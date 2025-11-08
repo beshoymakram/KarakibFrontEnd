@@ -103,6 +103,7 @@
       </div>
 
       <!-- Right Side - Main Chat Area -->
+<<<<<<< HEAD
       <div class="flex-1 flex flex-col bg-[#BFD6BF] rounded-r-xl overflow-hidden w-full transition-all duration-300">
         <div class="bg-[#2C702C] text-white flex justify-between items-center px-3 py-2 sm:px-5 h-12 md:h-14">
           <span class="font-semibold tracking-wide text-sm sm:text-base flex-1 text-center">{{ $t('chatbot.kokoAIHelper') }}</span>
@@ -112,6 +113,17 @@
             @click="toggleFullscreen"
             :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
         >
+=======
+      <div class="flex-1 flex flex-col bg-[#BFD6BF]">
+        <div class="bg-[#2C702C] text-white flex justify-between items-center px-4 py-3">
+          <span class="font-semibold tracking-wide block text-center w-full">{{ $t('chatbot.kokoAIHelper') }}</span>
+          <div class="flex items-center gap-2">
+<button
+  class="hover:text-green-200 text-xl"
+  @click="toggleFullscreen"
+  :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
+>
+>>>>>>> 3c860f2a44158f9979f655d42dd6d5e07edc6a30
 
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
@@ -1174,11 +1186,17 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       const coords = this.getEventCoordinates(e);
 
       // Calculate delta from initial drag start position
+<<<<<<< HEAD
       const deltaX = this.dragStartX - coords.x;
       const deltaY = coords.y - this.dragStartY; // Y increases downward, but bottom increases upward
+=======
+const deltaX = coords.x - this.dragStartX;  // positive when dragging right
+const deltaY = coords.y - this.dragStartY;  // positive when dragging down
+ // Y increases downward, but bottom increases upward
+>>>>>>> 3c860f2a44158f9979f655d42dd6d5e07edc6a30
 
       // Check if user has moved enough to consider it a drag
-      const moveThreshold = 5;
+      const moveThreshold = 0;
       if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
         this.hasMoved = true;
       }
@@ -1186,8 +1204,13 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       // Calculate new position based on initial button position + delta
       // For X: moving left (decreasing clientX) should increase right value
       // For Y: moving down (increasing clientY) should decrease bottom value
-      const newX = this.initialButtonX + deltaX;
-      const newY = this.initialButtonY - deltaY;
+      const speed = 1.4;
+      this.buttonX -= deltaX * speed;
+      this.buttonY -= deltaY * speed;
+
+
+      this.dragStartX = coords.x;
+      this.dragStartY = coords.y;
 
       // Get viewport dimensions
       const viewportWidth = window.innerWidth;
@@ -1202,8 +1225,9 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       const minX = 10;
       const minY = 10;
 
-      this.buttonX = Math.max(minX, Math.min(maxX, newX));
-      this.buttonY = Math.max(minY, Math.min(maxY, newY));
+      this.buttonX = Math.max(minX, Math.min(maxX, this.buttonX));
+      this.buttonY = Math.max(minY, Math.min(maxY, this.buttonY));
+
     },
 
     endDrag(e) {
