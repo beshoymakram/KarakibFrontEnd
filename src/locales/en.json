@@ -235,6 +235,8 @@
     "streetAddress": "Street Address",
     "city": "City",
     "save": "Save",
+    "deleteAddressTitle": "Delete Address",
+    "deleteAddressConfirm": "Are you sure you want to delete this delivery address?",
     "thankYouForSupportingKarakib": "Thank you for supporting Karakib 🌱 Your order helps make the world cleaner.",
     "youAreBeingRedirectedToCompletePayment": "Your are being redirected to complete your payment.",
     "wasteCollectionRequest": "Waste Collection Request",

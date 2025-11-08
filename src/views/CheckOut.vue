@@ -279,10 +279,10 @@
     <div v-if="showDeleteModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
       <div :class="['rounded-lg p-6 w-[90%] max-w-sm text-center shadow-lg', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
         <h3 :class="['text-xl font-bold mb-3', isDark ? 'text-green-500' : 'text-[#2C702C]']">
-          {{ $t('Delete Address') || $t('are You Sure To Delete this  Delivery Address') }}
+          {{ $t('common.deleteAddressTitle') || $t('are You Sure To Delete this  Delivery Address') }}
         </h3>
         <p :class="['mb-6', isDark ? 'text-gray-300' : 'text-gray-700']">
-          {{ $t('Are You Sure To Delete This Address') }}
+          {{ $t('common.deleteAddressConfirm') }}
         </p>
         <div class="flex justify-center gap-4">
           <button

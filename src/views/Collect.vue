@@ -63,31 +63,51 @@
               </div>
 
               <div v-if="addresses.length > 0">
-                <div v-for="address in addresses" :key="address.id" @click="selectedAddressId = address.id"
-                  class="flex items-start gap-3 p-3 rounded-md text-sm my-2 cursor-pointer border transition-all duration-200"
-                  :class="selectedAddressId === address.id
-                    ? 'bg-[#E9F7E9] border-green-400 text-primary'
-                    : 'bg-address text-primary border-transparent hover:border-gray-300'">
-                  <!-- Radio circle -->
-                  <input type="radio" name="pickupAddress" :value="address.id" v-model="selectedAddressId" required
-                    class="accent-[#2C702C] h-4 w-4 cursor-pointer mt-1 text-[#2C702C] focus:ring-[#2C702C] border-gray-300" />
+  <div
+    v-for="address in addresses"
+    :key="address.id"
+    @click="selectedAddressId = address.id"
+    class="flex justify-between items-start gap-3 p-3 rounded-md text-sm my-2 cursor-pointer border transition-all duration-200"
+    :class="selectedAddressId === address.id
+      ? 'bg-[#E9F7E9] border-green-400 text-primary'
+      : 'bg-address text-primary border-transparent hover:border-gray-300'"
+  >
+    <div class="flex items-start gap-3">
+      <!-- Radio circle -->
+      <input
+        type="radio"
+        name="pickupAddress"
+        :value="address.id"
+        v-model="selectedAddressId"
+        required
+        class="accent-[#2C702C] h-4 w-4 cursor-pointer mt-1 text-[#2C702C] focus:ring-[#2C702C] border-gray-300"
+      />
 
-                  <!-- Address info -->
-                  <div>
-                    <span class="font-bold">Full Name:</span> {{ address.name }}<br />
-                    <span class="font-bold">Phone:</span> {{ address.phone }}<br />
-                    <span class="font-bold">Street Address:</span> {{ address.street_address }}<br />
-                    <span class="font-bold">City:</span> {{ address.city }}
-                  </div>
-                </div>
-              </div>
+      <!-- Address info -->
+      <div>
+        <span class="font-bold">Full Name:</span> {{ address.name }}<br />
+        <span class="font-bold">Phone:</span> {{ address.phone }}<br />
+        <span class="font-bold">Street Address:</span> {{ address.street_address }}<br />
+        <span class="font-bold">City:</span> {{ address.city }}
+      </div>
+    </div>
+
+    <!-- 🗑️ Delete Button -->
+    <button
+      @click.stop="openDeleteModal(address.id)"
+      class="font-bold text-md"
+      title="Delete this address"
+    >
+      ✕
+    </button>
+  </div>
+</div>
+
 
               <div v-else class="text-gray-400 text-sm">
                 {{ $t('common.noAddressAddedYet') }}
               </div>
             </div>
-
-
 
             <!-- Payment Section -->
             <div class="mb-6">
@@ -230,6 +250,31 @@
     </form>
   </div>
 </div>
+<!-- Delete Confirmation Modal (simple style like your second file) -->
+    <div v-if="showDeleteModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+      <div :class="['rounded-lg p-6 w-[90%] max-w-sm text-center shadow-lg', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
+        <h3 :class="['text-xl font-bold mb-3', isDark ? 'text-green-500' : 'text-[#2C702C]']">
+          {{ $t('common.deleteAddressTitle') || $t('are You Sure To Delete this  Delivery Address') }}
+        </h3>
+        <p :class="['mb-6', isDark ? 'text-gray-300' : 'text-gray-700']">
+          {{ $t('common.deleteAddressConfirm') }}
+        </p>
+        <div class="flex justify-center gap-4">
+          <button
+            @click="cancelDelete"
+            :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-600 text-gray-300 hover:bg-[#2a2a2a]' : 'border border-gray-300 hover:bg-gray-100']"
+          >
+            {{ $t('common.cancel') }}
+          </button>
+          <button
+            @click="confirmDeleteAddress"
+            :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-red-600 hover:bg-red-700' : 'bg-red-600 hover:bg-red-700']"
+          >
+            {{ $t('common.delete') }}
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- ✅ Order Confirmation Modal -->
     <div v-if="showConfirmation" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
@@ -258,6 +303,7 @@ export default {
   data() {
     return {
       showAddressModal: false,
+      showDeleteModal: false,
       showConfirmation: false,
       selectedAddressId: '',
       addresses: [],
@@ -270,6 +316,7 @@ export default {
       },
       payoutMethod: "",
       pickupNotes: "",
+      deleteId: null,
       isDark: false
 
     };
@@ -304,6 +351,26 @@ export default {
         this.fetchAddresses();
       } catch (error) {
         this.$toast.error(error.response.data.message);
+      }
+    },
+    
+    openDeleteModal(id) {
+      this.deleteId = id;
+      this.showDeleteModal = true;
+    },
+    cancelDelete() {
+      this.deleteId = null;
+      this.showDeleteModal = false;
+    },
+    async confirmDeleteAddress() {
+      try {
+        await profileService.deleteAddress(this.deleteId);
+        this.$toast.success(this.$t('Address Deleted Successfully'));
+        this.showDeleteModal = false;
+        this.deleteId = null;
+        this.fetchAddresses();
+      } catch (error) {
+        this.$toast.error(error?.response?.data?.message || 'Failed to delete address');
       }
     },
     async placeOrder() {
@@ -410,4 +477,12 @@ export default {
 [data-theme="forest"] .bg-address {
   background-color: #545554;
 }
+/* small UI niceties */
+.rounded-xl { border-radius: 12px; }
+.rounded-2xl { border-radius: 16px; }
+
+/* ensure modals overlay look consistent */
+.fixed.inset-0 { z-index: 50; }
+
+/* spinner fill for light/dark handled inline by classes, keep fallback */
 </style>

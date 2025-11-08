@@ -236,6 +236,8 @@
         "streetAddress": "عنوان الشارع",
         "city": "المدينة",
         "save": "حفظ",
+        "deleteAddressTitle": "حذف العنوان",
+        "deleteAddressConfirm": "هل أنت متأكد أنك تريد حذف هذا العنوان؟",
         "thankYouForSupportingKarakib": "شكراً لدعمك كراكيب 🌱 طلبك يساعد في جعل العالم أنظف.",
         "youAreBeingRedirectedToCompletePayment": "يتم توجيهك لإكمال الدفع.",
         "wasteCollectionRequest": "طلب جمع النفايات",
