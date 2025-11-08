@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     class="fixed z-50"
     :style="buttonPosition"
   >
@@ -103,12 +103,12 @@
         <div class="bg-[#2C702C] text-white flex justify-between items-center px-4 py-3">
           <span class="font-semibold tracking-wide block text-center w-full">{{ $t('chatbot.kokoAIHelper') }}</span>
           <div class="flex items-center gap-2">
-<button 
-  class="hover:text-green-200 text-xl" 
-  @click="toggleFullscreen" 
+<button
+  class="hover:text-green-200 text-xl"
+  @click="toggleFullscreen"
   :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
 >
-            
+
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
           </div>
@@ -531,7 +531,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
   getWelcomeMessage() {
     return {
       sender: "bot",
-      text: this.$t('chatbot.welcomeMessage', { 
+      text: this.$t('chatbot.welcomeMessage', {
         greeting: this.greetingText,
         hint: `${this.$t('chatbot.bilingualHintEn')} ${this.$t('chatbot.bilingualHintAr')}`
       })
@@ -557,8 +557,8 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       if (!this.currentChatId) this.startNewChat();
 
       // Use current locale for default question if no user input
-      const defaultQuestion = this.$i18n.locale === 'ar' 
-        ? "ماذا يمكنني أن أفعل بهذا العنصر؟" 
+      const defaultQuestion = this.$i18n.locale === 'ar'
+        ? "ماذا يمكنني أن أفعل بهذا العنصر؟"
         : "What can I do with this waste item?";
       const messageText = this.userInput.trim() || defaultQuestion;
 
@@ -574,8 +574,8 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       this.userInput = "";
       this.clearImage();
     this.isLoading = true;
-    this.loadingText = currentImage 
-      ? this.$t('chatbot.analyzingImage') 
+    this.loadingText = currentImage
+      ? this.$t('chatbot.analyzingImage')
       : this.$t('chatbot.thinkingEmoji');
       this.$nextTick(() => this.scrollToBottom());
 
@@ -841,38 +841,38 @@ ${contextText}
 
     async analyzeImage(imageFile, userPrompt) {
       const base64Image = await this.fileToBase64(imageFile);
-      
+
       // Detect language from user prompt
       const lang = this.detectLanguage(userPrompt);
       const isArabic = lang === 'ar';
       const isEnglish = lang === 'en';
-      
+
       // Use appropriate knowledge base based on language
       const kb = isArabic && this.knowledgeBase.ar ? this.knowledgeBase.ar : this.knowledgeBase;
-      
+
       // Handle unsupported languages
       if (lang === 'other') {
         return `We currently support assistance in English and Arabic only. Please switch to English or Arabic so I can help you effectively.\nنحن ندعم حاليًا العربية والإنجليزية فقط. يُرجى التحدث بالعربية أو الإنجليزية لكي أساعدك بأفضل شكل.`;
       }
-      
-      const userContext = this.userFirstName 
+
+      const userContext = this.userFirstName
         ? (isArabic ? `تحليل صورة لمستخدم اسمه ${this.userFirstName}.` : `Analyzing for ${this.userFirstName}.`)
         : (isArabic ? `تحليل صورة لهذا العنصر من المخلفات.` : `Analyzing this waste item.`);
-      
+
       const userNamePrefix = this.userFirstName ? (isArabic ? `مرحبًا ${this.userFirstName}! ` : `Hello ${this.userFirstName}! `) : '';
-      
+
       // Language-specific instructions
       const languageInstruction = isArabic
         ? '⚠️ مهم جدًا: يجب أن ترد باللغة العربية فقط وبأسلوب مهني وودود. لا تستخدم أي كلمات إنجليزية في الرد، باستثناء اسم المستخدم إن وُجد. ترجم جميع المعلومات من قاعدة المعرفة إلى العربية بشكل طبيعي.'
         : 'Please respond in English only, with a professional and friendly tone.';
-      
+
       // Build knowledge base context
       const wasteTypesInfo = JSON.stringify(kb?.waste_types || [], null, 2);
       const minCollection = kb?.company_info?.minimum_collection || '';
-      
+
       // Build prompt based on language
       let visionPrompt;
-      
+
       if (isArabic) {
         visionPrompt = `أنت كوكو 🌱، مساعد إعادة التدوير الودود لكراكِب. ${userContext}
 
@@ -1146,7 +1146,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       }
       this.isDragging = true;
       this.hasMoved = false;
-      
+
       const coords = this.getEventCoordinates(e);
       this.dragStartX = coords.x;
       this.dragStartY = coords.y;
@@ -1162,16 +1162,17 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
 
     onDrag(e) {
       if (!this.isDragging) return;
-      
+
       e.preventDefault();
       const coords = this.getEventCoordinates(e);
-      
+
       // Calculate delta from initial drag start position
-      const deltaX = this.dragStartX - coords.x;
-      const deltaY = coords.y - this.dragStartY; // Y increases downward, but bottom increases upward
-      
+const deltaX = coords.x - this.dragStartX;  // positive when dragging right
+const deltaY = coords.y - this.dragStartY;  // positive when dragging down
+ // Y increases downward, but bottom increases upward
+
       // Check if user has moved enough to consider it a drag
-      const moveThreshold = 5;
+      const moveThreshold = 0;
       if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
         this.hasMoved = true;
       }
@@ -1179,8 +1180,13 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       // Calculate new position based on initial button position + delta
       // For X: moving left (decreasing clientX) should increase right value
       // For Y: moving down (increasing clientY) should decrease bottom value
-      const newX = this.initialButtonX + deltaX;
-      const newY = this.initialButtonY - deltaY;
+      const speed = 1.4;
+      this.buttonX -= deltaX * speed;
+      this.buttonY -= deltaY * speed;
+
+
+      this.dragStartX = coords.x;
+      this.dragStartY = coords.y;
 
       // Get viewport dimensions
       const viewportWidth = window.innerWidth;
@@ -1195,19 +1201,20 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       const minX = 10;
       const minY = 10;
 
-      this.buttonX = Math.max(minX, Math.min(maxX, newX));
-      this.buttonY = Math.max(minY, Math.min(maxY, newY));
+      this.buttonX = Math.max(minX, Math.min(maxX, this.buttonX));
+      this.buttonY = Math.max(minY, Math.min(maxY, this.buttonY));
+
     },
 
     endDrag(e) {
       if (!this.isDragging) return;
-      
+
       const wasDragging = this.hasMoved;
       this.isDragging = false;
-      
+
       // Save position to localStorage
       this.saveButtonPosition();
-      
+
       // If no movement, toggle chat
       if (!wasDragging) {
         if (this.isTouchDevice) {
@@ -1224,7 +1231,7 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       } else {
         this.touchToggleHandled = true; // Prevent click after drag
       }
-      
+
       // Reset hasMoved for next interaction
       setTimeout(() => {
         this.hasMoved = false;
