@@ -439,31 +439,15 @@ export default {
 }
 
 .bg-primary {
-  background-color: #F5F7F5 !important;
+  background-color: #ffffff !important; /* original light background */
 }
 
 [data-theme="forest"] .bg-primary {
   background-color: rgb(66, 66, 66) !important;
 }
 
-.text-secondary {
-  color: #2c702c !important;
-}
-
-[data-theme="forest"] .text-secondary {
-  color: rgb(9, 228, 75) !important;
-}
-
-.text-section {
-  color: black !important;
-}
-
-[data-theme="forest"] .text-section {
-  color: white !important;
-}
-
 .bg-secondary {
-  background-color: #ffff;
+  background-color: #f5f7f5; /* original light secondary background */
 }
 
 [data-theme="forest"] .bg-secondary {
@@ -471,12 +455,13 @@ export default {
 }
 
 .bg-address {
-  background-color: #f6f9f6
+  background-color: #ffffff; /* original address card bg */
 }
 
 [data-theme="forest"] .bg-address {
   background-color: #545554;
 }
+
 /* small UI niceties */
 .rounded-xl { border-radius: 12px; }
 .rounded-2xl { border-radius: 16px; }
