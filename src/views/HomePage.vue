@@ -1,11 +1,20 @@
 <template>
   <!-- Hero Section -->
+<div
+  class="hero h-screen w-full bg-center bg-no-repeat bg-hero items-start mx-auto bg-cover relative"
+  style="background-image: url('/images/Homebg.png')"
+>
+  <!-- ✅ Custom gradient overlay -->
   <div
-    class="hero h-screen w-full  bg-center bg-no-repeat bg-hero items-start mx-auto bg-cover"
-    style="background-image: url('/images/Homebg.png')"
-  >
-    <div class="hero-overlay bg-base-100/50 dark:bg-base-200/50"></div>
-    <div class="hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
+    class="absolute inset-0 pointer-events-none"
+    :style="{
+      background:
+        currentTheme === 'forest'
+          ? 'linear-gradient(to bottom, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.5) 40%, rgba(17,17,17,0.2) 90%, rgba(17,17,17,0) 100%)'
+          : 'linear-gradient(to bottom, rgba(233,235,248,0.10) 0%, rgba(233,235,248,0.9) 10%, rgba(233,235,248,0) 90%, rgba(233,235,248,0) 100%)'
+    }"
+  ></div>
+    <div class="hero-content text-center items-start relative justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
       <div class="max-w-3xl">
         <h1
           class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl text-primary font-bold drop-shadow-lg"
@@ -370,6 +379,8 @@ export default {
     return {
       isRedirecting: false,
       wasteItems: [],
+       currentTheme: document.documentElement.getAttribute("data-theme") || "light",
+      _themeObserver: null,
       infoCards: [
         {
           image: "/images/Graduation Cap.png",
@@ -567,7 +578,25 @@ export default {
     this.fetchWasteItems();
     this.fetchProducts();
     this.cartStore.fetchCart(); // Add this line
+    this.currentTheme = document.documentElement.getAttribute("data-theme");
+
+    // Create MutationObserver
+    this._themeObserver = new MutationObserver(() => {
+      this.currentTheme = document.documentElement.getAttribute("data-theme");
+    });
+
+    // Observe data-theme attribute
+    this._themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+  });
   },
+    beforeUnmount() {
+    if (this._themeObserver) {
+      this._themeObserver.disconnect();
+      this._themeObserver = null;
+    }
+    },
 };
 </script>
 
