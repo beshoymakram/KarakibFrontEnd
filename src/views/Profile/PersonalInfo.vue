@@ -30,10 +30,9 @@
     <!-- Personal Info Section -->
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-primary">Personal Info</h2>
-        <h2 class="text-xl font-semibold text-primary">{{ $t('common.personalInfo') }}</h2>
+        <h2 class=" text-lg md:text-xl font-semibold text-primary">{{ $t('common.personalInfo') }}</h2>
         <button @click="editMode = !editMode"
-          class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition-colors">
+          class="flex items-center text-sm  md:text-base gap-2 px-4 py-2 border border-gray-300 rounded-lg text-primary hover:bg-gray-50 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -46,35 +45,35 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <!-- Full Name -->
         <div>
-          <label class="block text-sm font-medium text-section mb-2">{{ $t('common.fullName') }}</label>
+          <label class="block text-xs sm:text-sm font-medium text-section mb-2">{{ $t('common.fullName') }}</label>
           <input v-if="editMode" v-model="newInfo.name" type="text"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <p v-else class="text-lg font-semibold text-primary">{{ newInfo.name }}</p>
+          <p v-else class=" text-base sm:text-lg font-semibold text-primary">{{ newInfo.name }}</p>
         </div>
 
         <!-- Email -->
         <div>
-          <label class="block text-sm font-medium text-section mb-2">{{ $t('common.email') }}</label>
+          <label class="block text-xs sm:text-sm font-medium text-section mb-2">{{ $t('common.email') }}</label>
           <input v-if="editMode" v-model="newInfo.email" type="email"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <p v-else class="text-lg font-semibold text-primary">{{ newInfo.email }}</p>
+          <p v-else class="text-base sm:text-lg font-semibold text-primary">{{ newInfo.email }}</p>
         </div>
 
         <!-- Phone -->
         <div>
-          <label class="block text-sm font-medium text-section mb-2">{{ $t('common.phone') }}</label>
+          <label class="block text-xs sm:text-sm font-medium text-section mb-2">{{ $t('common.phone') }}</label>
           <input v-if="editMode" v-model="newInfo.phone" type="tel"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <p v-else class="text-lg font-semibold text-primary">{{ newInfo.phone }}</p>
+          <p v-else class="text-base sm:text-lg font-semibold text-primary">{{ newInfo.phone }}</p>
         </div>
       </div>
 
       <!-- Save/Cancel Buttons -->
       <div v-if="editMode" class="flex justify-end gap-3 mb-6">
-        <button @click="cancelEdit" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-50">
+        <button @click="cancelEdit" class="px-4 md:px-6 py-2 text-sm  md:text-base border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-50">
           {{ $t('common.Cancel') }}
         </button>
-        <button @click="confirmEdit" class="px-6 py-2 bg-[#2C702C] text-white rounded-lg hover:bg-[#1a4d1a]">
+        <button @click="confirmEdit" class="px-4 md:px-6 py-2 text-sm  md:text-base bg-[#2C702C] text-white rounded-lg hover:bg-[#1a4d1a]">
           {{ $t('common.Save Changes') }}
         </button>
       </div>
@@ -82,7 +81,7 @@
       <!-- Delete Account Button -->
       <div class="flex justify-end pt-6 border-t">
         <button @click="showDeleteModal = true"
-          class="flex items-center gap-2 px-6 py-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+          class="flex items-center gap-2 p-4 md:px-6 py-2  text-sm  md:text-base border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round"
