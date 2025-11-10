@@ -1,13 +1,13 @@
 <template>
-  <div class="bg-[#BFD6BF] min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="bg-myprofile min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="w-full max-w-6xl mx-auto">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
-        
+
         <!-- Left (Form) -->
         <div
           :class="[
-            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-white', 'flex', 'justify-center', 'items-center', 'rounded-t-xl', 'relative',
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-tabs', 'flex', 'justify-center', 'items-center', 'rounded-t-xl', 'relative',
             $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none'
           ]">
           <div class="w-full max-w-md">
@@ -51,7 +51,7 @@
         <!-- Right (Banner) -->
         <div
           :class="[
-            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-[#EAF2EA]', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-b-xl',
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-img', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-b-xl',
             $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-tl-none'
           ]">
           <img class="w-full max-w-md mx-auto mb-8"
@@ -109,7 +109,7 @@ export default {
           this.showPopup = false;
           this.$router.push({ name: 'verify-code' });
         }, 2000);
-      } 
+      }
       catch (error) {
         console.error('Error:', error);
         if (error.response && error.response.data && error.response.data.message) {
@@ -117,7 +117,7 @@ export default {
         } else {
           this.errorMessage = 'No account found with this email address';
         }
-      } 
+      }
       finally {
         this.loading = false;
       }
@@ -181,6 +181,60 @@ export default {
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41) !important;
+}
+
+.text-secondary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+
+.text-section {
+  color: black !important;
+}
+
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+.bg-myprofile {
+  background-color: #BFD6BF;
+}
+
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+
+.bg-tabs {
+  background-color: #ffffff;
+}
+
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
+}
+.bg-img {
+  background-color: #EAF2EA;
+}
+[data-theme="forest"] .bg-img {
+  background-color: #353535;
 }
 </style>
 
