@@ -232,11 +232,15 @@ export default {
   text-align: left;
   font-size: 0.875rem;
 }
-
+[data-theme="forest"] .lang-option {
+  background-color: rgb(62, 62, 62) !important;
+}
 .lang-option:hover {
   background: #e0ebe0;
 }
-
+[data-theme="forest"] .lang-option:hover {
+  background-color: rgb(117, 117, 117) !important;
+}
 .lang-option.active {
   background: #f0f9f0;
 }
@@ -251,7 +255,9 @@ export default {
   color: #374151;
   line-height: 1;
 }
-
+[data-theme="forest"] .lang-name {
+  color: #16af3f !important;
+}
 .lang-option.active .lang-name {
   color: #2c702c;
   font-weight: 600;
@@ -263,7 +269,9 @@ export default {
   color: #2c702c;
   flex-shrink: 0;
 }
-
+[data-theme="forest"] .check-icon {
+  color: #16af3f !important;
+}
 /* RTL Support */
 html[dir="rtl"] .lang-dropdown {
   left: 0;

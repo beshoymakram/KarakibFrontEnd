@@ -1,9 +1,9 @@
 <template>
   <div class="bg-myprofile min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
-    <div class="w-full max-w-6xl mx-auto">
+    <div class="w-full max-w-6xl mx-auto pt-4 sm:pt-6 md:pt-8 lg:pt-10 ">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
-        
+
         <!-- Left Side - Banner -->
         <div
           :class="[
@@ -25,7 +25,7 @@
             'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-primary', 'flex', 'justify-center', 'items-center', 'rounded-b-xl',
             $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-bl-none'
           ]">
-          
+
           <div class="w-full max-w-md" v-if="!authStore.isAuthenticated">
             <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-shadow-lg text-center mb-8">
               {{ $t('common.login') }}

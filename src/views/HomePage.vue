@@ -1,14 +1,22 @@
 <template>
   <!-- Hero Section -->
   <div
-    class="hero h-screen w-full  bg-center bg-no-repeat bg-hero items-start mx-auto bg-cover"
-    style="background-image: url('/images/Homebg.png')"
+    class="hero h-screen  w-full items-start   mx-auto "
   >
-    <div class="hero-overlay bg-base-100/50 dark:bg-base-200/50"></div>
-    <div class="hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
-      <div class="max-w-3xl">
+
+    <!-- Background Image Layer -->
+  <div
+    class="  absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style="background-image: url('/images/Homebg.png');"
+  ></div>
+
+  <!-- Overlay -->
+  <div class=" hero-overlay absolute inset-0 bg-base-100/50 "></div>
+
+    <div class="   hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
+      <div class="max-w-3xl items-start">
         <h1
-          class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl text-primary font-bold drop-shadow-lg"
+          class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl pt-10 md:pt-12 lg:pt-14 text-primary font-bold drop-shadow-lg"
         >
           {{ $t("common.turnYourWasteIntoWorth") }}
         </h1>
@@ -175,7 +183,7 @@
     <div
       v-for="(product, index) in products"
       :key="index"
-      class="card bg-cards w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block  rounded-t-xl">
@@ -634,11 +642,5 @@ export default {
 }
 [data-theme="forest"] .bg-donate {
   background-color: #201e1e !important;
-}
-.bg-cards {
-  background-color: #ffffff !important;
-}
-[data-theme="forest"] .bg-cards {
-  background-color: #2c2c2c !important;
 }
 </style>

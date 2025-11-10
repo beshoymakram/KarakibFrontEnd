@@ -91,7 +91,7 @@
               leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
               leave-to-class="transform opacity-0 scale-95">
               <div v-if="profileDropdownOpen" @click="profileDropdownOpen = false"
-                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-base-100 py-1 shadow-lg ring-1 ring-base-content/10 focus:outline-none">
+                class="absolute right-0 prof-dropdown z-10 mt-2 w-44 origin-top-right rounded-md bg-base-100 py-1 shadow-lg ring-1 ring-base-content/10 focus:outline-none">
                 <router-link to="/profile" class="block px-3 py-2 text-sm text-primary  dark:hover:bg-gray-300">
                   {{ $t("common.profile") }}
                 </router-link>
@@ -407,5 +407,10 @@ nav {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* RTL Support */
+html[dir="rtl"] .prof-dropdown {
+  left: 0;
+  right: auto;
+}
 
 </style>
