@@ -1,6 +1,6 @@
 <template>
-    <div class="profile-layout py-5 bg-myprofile" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
-      <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5">
+    <div class="profile-layout py-5 bg-myprofile " :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+      <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5 pt-4 sm:pt-6 md:pt-8 lg:mt-10">
         <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
           <div class="card-body flex flex-col justify-evenly">
             <h3 class="text-lg font-semibold">{{ $t('common.myPoints') }}</h3>
