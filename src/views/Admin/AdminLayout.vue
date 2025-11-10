@@ -105,6 +105,7 @@ export default {
         { id: 'requests', labelKey: 'common.allRequests' },
         { id: 'orders', labelKey: 'common.orders' },
         { id: 'donations', labelKey: 'common.donations' },
+        { id: 'inquiries', labelKey: 'common.inquiries' },
       ],
     }
   },
@@ -132,6 +133,7 @@ export default {
 .router-link-exact-active {
   background-color: #e0ebe0;
 }
+
 .text-primary {
   color: #2c702c !important;
 }

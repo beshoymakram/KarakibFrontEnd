@@ -327,6 +327,8 @@
         "enterCourierName": "أدخل اسم المندوب",
         "userAtExampleCom": "user@example.com",
         "enterPoints": "0",
+        "editInquiry": "تعديل استفسار",
+        "inquiryDetails": "تفاصيل الاستفسار",
         "selectStatus": "اختر الحالة",
         "addAdmin": "إضافة مدير",
         "addCourier": "إضافة مندوب",
@@ -362,6 +364,7 @@
         "stock": "المخزون",
         "image": "الصورة",
         "areYouSureDeleteProduct": "هل أنت متأكد أنك تريد حذف هذا المنتج؟",
+        "areYouSureDeleteInquiry": "هل أنت متأكد أنك تريد حذف هذا الاستعلام؟",
         "createProduct": "إنشاء منتج",
         "selectCategory": "اختر الفئة",
         "description": "الوصف",
@@ -422,6 +425,7 @@
         "wasteItemsToCollect": "عناصر النفايات المراد جمعها",
         "welcome_to_karakib": "مرحبًا بك في كراكيب!",
         "new_user": "مستخدم جديد سجل للتو!",
+        "inquiries": "الاستفسارات",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     },
     "chatbot": {

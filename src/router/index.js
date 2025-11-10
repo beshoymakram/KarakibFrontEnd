@@ -43,6 +43,7 @@ import AssignedRequests from '@/views/Courier/AssignedRequests.vue'
 import Donations from '@/views/Admin/Donations.vue'
 import DonationFailure from '@/views/DonationFailure.vue'
 import AssignedOrders from '@/views/Courier/AssignedOrders.vue'
+import Inquiries from '@/views/Admin/Inquiries.vue'
 
 // Define routes
 const routes = [
@@ -105,6 +106,11 @@ const routes = [
         path: 'donations',
         name: 'AdminDonations',
         component: Donations
+      },
+      {
+        path: 'inquiries',
+        name: 'AdminInquiries',
+        component: Inquiries
       },
       {
         path: 'requests',
