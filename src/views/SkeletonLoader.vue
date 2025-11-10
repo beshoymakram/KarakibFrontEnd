@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="loading" class="fixed inset-0 flex flex-col items-center justify-center bg-white z-[9999]">
+    <div v-if="loading" class="fixed inset-0 flex flex-col items-center justify-center bg-white z-9999">
       <!-- Bouncing Logo -->
       <img src="/public/logos/K.png" alt="Logo" class="w-28 h-28 animate-bounce mb-6" />
 
