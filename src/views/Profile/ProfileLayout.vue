@@ -1,13 +1,15 @@
 <template>
     <div class="profile-layout py-5 bg-myprofile " :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
-      <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5 pt-4 sm:pt-6 md:pt-8 lg:mt-10">
-        <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
+
+      <div class="cards flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mx-4 sm:mx-10 md:mx-20 pb-5 pt-4 sm:mt-6 md:mt-8 lg:mt-10">
+
+        <div class="card bg-base-100  w-[80vw] sm:w-70 md:w-80 shadow-sm">
           <div class="card-body flex flex-col justify-evenly">
-            <h3 class="text-lg font-semibold">{{ $t('common.myPoints') }}</h3>
+            <h3 class="  text-base md:text-lg font-semibold">{{ $t('common.myPoints') }}</h3>
             <div class="numbers flex items-center">
-              <p class="text-3xl font-bold text-[#2C702C]">{{ auth.user.points }}</p>
+              <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ auth.user.points }}</p>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                class="size-6 text-[#2C702C]">
+                class="size-5  md:size-6 text-[#2C702C]">
                 <path fill-rule="evenodd"
                   d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
                   clip-rule="evenodd" />
@@ -15,12 +17,13 @@
             </div>
           </div>
         </div>
-        <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
+
+        <div class="card bg-base-100 w-[80vw] sm:w-70 md:w-80  shadow-sm">
           <div class="card-body flex flex-col justify-evenly">
-            <h3 class="text-lg font-semibold">{{ $t('common.myBalance') }}</h3>
+            <h3 class="text-base md:text-lg font-semibold">{{ $t('common.myBalance') }}</h3>
             <div class="numbers flex items-center">
-              <p class="text-3xl font-bold text-[#2C702C]">{{ auth.user.balance + ' ' + $t('common.currency') }}</p>
-              <svg class="size-6 text-[#2C702C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ auth.user.balance + ' ' + $t('common.currency') }}</p>
+              <svg class="size-5  md:size-6 text-[#2C702C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11.25 7.84748C10.3141 8.10339 9.75 8.82154 9.75 9.5C9.75 10.1785 10.3141 10.8966 11.25 11.1525V7.84748Z"
                   fill="#2C702C" />
@@ -34,13 +37,14 @@
             </div>
           </div>
         </div>
-        <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
+
+        <div class="card bg-base-100  w-[80vw] sm:w-70 md:w-80 shadow-sm">
           <div class="card-body flex flex-col justify-evenly">
-            <h3 class="text-lg font-semibold">{{ $t('common.myOrders') }}</h3>
+            <h3 class=" text-base md:text-lg font-semibold">{{ $t('common.myOrders') }}</h3>
             <div class="numbers flex items-center">
-              <p class="text-3xl font-bold text-[#2C702C]">{{ auth.user.orders?.length || 0 }}</p>
+              <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ auth.user.orders?.length || 0 }}</p>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                class="size-6 text-[#2C702C]">
+                class="size-5  md:size-6 text-[#2C702C]">
                 <path
                   d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 0 1 3.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0 1 21 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 0 1 7.5 16.125V3.375Z" />
                 <path
@@ -51,11 +55,11 @@
         </div>
       </div>
 
-      <div class="bg-tabs rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
+      <div class="bg-tabs rounded-t-lg shadow-sm mb-6 mx-4  sm:mx-10 md:mx-20">
           <nav
             :class="['flex', 'flex-wrap', 'p-2', 'border-b', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
             <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
-              class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
+              class="px-2 sm:px-4 py-2 sm:py-3 mb-1 cursor-pointer   text-xs sm:text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
                 ? 'bg-[#E0EBE0] text-[#2C702C]'
                 : 'text-primary hover:bg-gray-100'">
               {{ $t(tab.labelKey) }}
