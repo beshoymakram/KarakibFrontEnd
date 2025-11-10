@@ -7,7 +7,7 @@
         <!-- Left (Form) -->
         <div
           :class="[
-            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-white', 'flex', 'justify-center', 'items-center', 'rounded-t-xl', 'relative',
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-tabs', 'flex', 'justify-center', 'items-center', 'rounded-t-xl', 'relative',
             $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none'
           ]">
           <div class="w-full max-w-md">
@@ -51,7 +51,7 @@
         <!-- Right (Banner) -->
         <div
           :class="[
-            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-[#EAF2EA]', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-b-xl',
+            'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-img', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-b-xl',
             $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-tl-none'
           ]">
           <img class="w-full max-w-md mx-auto mb-8"
@@ -68,7 +68,7 @@
       <div v-if="showPopup" class="popup-overlay">
         <div class="popup-box">
           <div class="icon">✅</div>
-          <p>Verification code was sent to your email</p>
+          <p>{{ $t('common.codeSentSuccess') }}</p>
         </div>
       </div>
     </transition>
@@ -181,6 +181,60 @@ export default {
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+.text-primary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-primary {
+  color: #16af3f !important;
+}
+
+.bg-primary {
+  background-color: rgb(235, 255, 235) !important;
+}
+
+[data-theme="forest"] .bg-primary {
+  background-color: rgb(41, 41, 41) !important;
+}
+
+.text-secondary {
+  color: #2c702c !important;
+}
+
+[data-theme="forest"] .text-secondary {
+  color: rgb(9, 228, 75) !important;
+}
+
+.text-section {
+  color: black !important;
+}
+
+[data-theme="forest"] .text-section {
+  color: white !important;
+}
+
+.bg-myprofile {
+  background-color: #BFD6BF;
+}
+
+[data-theme="forest"] .bg-myprofile {
+  background-color: #424141;
+}
+
+.bg-tabs {
+  background-color: #ffffff;
+}
+
+[data-theme="forest"] .bg-tabs {
+  background-color: #2C2C2C;
+}
+.bg-img {
+  background-color: #EAF2EA;
+}
+[data-theme="forest"] .bg-img {
+  background-color: #353535;
 }
 </style>
 

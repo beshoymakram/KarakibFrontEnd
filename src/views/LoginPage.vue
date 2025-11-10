@@ -151,29 +151,35 @@ export default {
       this.errorMessage = '';
     },
 
-    async handleLogin() {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+async handleLogin() {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      // Validate email and password
-      if (!emailRegex.test(this.form.email) || this.form.password.length < 3) {
-        this.errorMessage = 'Wrong email or password';
-        return;
-      }
+  // Validate email and password
+  if (!emailRegex.test(this.form.email) || this.form.password.length < 3) {
+    this.errorMessage = this.$t('common.invalidEmailOrPassword');
+    return;
+  }
 
-      try {
-        await this.authStore.login(this.form);
+  try {
+    await this.authStore.login(this.form);
 
-        const cartStore = useCartStore();
-        await cartStore.mergeOnLogin();
+    const cartStore = useCartStore();
+    await cartStore.mergeOnLogin();
 
-        await this.$router.push('/');
-        nextTick(() => {
-          this.$toast.success(this.$t('common.loggedInSuccessfully'));
-        });
-      } catch (error) {
-        this.errorMessage = 'Wrong email or password';
-      }
-    },
+    await this.$router.push('/');
+    nextTick(() => {
+      this.$toast.success(this.$t('common.loggedInSuccessfully'));
+    });
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      this.errorMessage = error.response.data.message;
+    } else if (error.message) {
+      this.errorMessage = error.message;
+    } else {
+      this.errorMessage = this.$t('common.somethingWentWrong');
+    }
+  }
+},
 
     async handleGoogleLogin() {
       window.location.href = `${import.meta.env.VITE_URL}/auth/google/redirect`;

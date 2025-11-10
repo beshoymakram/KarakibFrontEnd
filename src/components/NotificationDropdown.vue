@@ -27,7 +27,7 @@
         <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
           <h3 class="text-text-base lg:text-lg font-semibold text-gray-800">Notifications</h3>
           <button v-if="hasUnread" @click="markAllAsRead"
-            class="text-sm text-[#2C702C] hover:text-[#235a23] font-medium transition-colors duration-200">
+            class="text-sm text-[#2C702C] hover:text-[#235a23] font-medium transition-colors duration-200 cursor-pointer">
             Mark all read
           </button>
         </div>

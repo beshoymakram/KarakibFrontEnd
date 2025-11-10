@@ -1,6 +1,6 @@
 <template>
 <section
-  class="relative w-full left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] hero min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden"
+  class="relative w-full hero min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden"
 >
   <img
     src="/images/wastebg.png"

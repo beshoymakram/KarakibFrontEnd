@@ -2,7 +2,6 @@
   <!-- Hero Section -->
   <div
     class="hero h-screen  w-full items-start   mx-auto "
-    style="background-image: url('/images/Homebg.png')"
   >
 
     <!-- Background Image Layer -->
@@ -13,6 +12,7 @@
 
   <!-- Overlay -->
   <div class=" hero-overlay absolute inset-0 bg-base-100/50 "></div>
+
     <div class="   hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
       <div class="max-w-3xl items-start">
         <h1

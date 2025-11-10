@@ -149,7 +149,7 @@ export default {
       showPassword: false,
       showConfirm: false,
       loading: false,
-      passwordError: "", // 👈 added
+      passwordError: "", 
     };
   },
   mounted() {
@@ -171,15 +171,16 @@ export default {
     async handleSetPassword() {
       this.passwordError = "";
 
-      if (this.password.length < 8) {
-        this.passwordError = "Password must be at least 8 characters.";
-        return;
-      }
+   if (this.password.length < 8) {
+  this.passwordError = this.$t('common.passwordTooShort');
+  return;
+}
 
-      if (this.passwordMismatch) {
-        this.$toast.error("Passwords do not match.");
-        return;
-      }
+if (this.passwordMismatch) {
+  this.$toast.error(this.$t('common.passwordsDoNotMatch'));
+  return;
+}
+
 
       this.loading = true;
       try {
@@ -198,9 +199,10 @@ export default {
           this.$router.push('/login');
         }, 1500);
       } catch (error) {
-        console.error(error);
-        this.$toast.error("Failed to set password. Try again.");
-      } finally {
+  console.error(error);
+  this.$toast.error(this.$t('common.failedSetPassword'));
+}
+ finally {
         this.loading = false;
       }
     },

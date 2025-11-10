@@ -47,7 +47,7 @@
       : 'w-[90vw] h-[70vh] sm:w-[70vw] sm:h-[65vh] md:w-[45vw] md:h-[70vh] lg:w-[34vw] lg:h-[80vh] '
   ]"
     >
-      <!-- Left Sidebar - Chat History (only visible in fullscreen) -->
+      <!-- Left Sidebar  -->
       <div v-if="isFullscreen" class="hidden md:flex w-[26vw] lg:w-[20vw] bg-[#EAF2EA] border-r border-green-200 flex-col"
     >
       <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-12 md:h-14">
@@ -104,22 +104,108 @@
 
       <!-- Right Side - Main Chat Area -->
       <div class="flex-1 flex flex-col bg-[#BFD6BF] rounded-r-xl overflow-hidden w-full transition-all duration-300">
-        <div class="bg-[#2C702C] text-white flex justify-between items-center px-3 py-2 sm:px-5 h-12 md:h-14">
-          <span class="font-semibold tracking-wide text-sm sm:text-base flex-1 text-center">{{ $t('chatbot.kokoAIHelper') }}</span>
+        <div class="bg-[#2C702C] text-white grid grid-cols-3 items-center px-3 py-2 sm:px-5 h-12 md:h-14">
+          <!-- Left: Chat History Button (Mobile Only) -->
+          <div class="flex justify-start">
+            <button
+              v-if="isOpen"
+              class="md:hidden border-green-200 bg-[#EAF2EA] bg-opacity-20 hover:bg-opacity-30 hover:bg-[#BFD6BF] text-[#2C702C] text-xs font-medium px-2.5 py-1 rounded-md border border-opacity-30 transition-all"
+              @click="showMobileChatHistory = true"
+              :title="$t('chatbot.chatHistory')"
+            >
+              {{ $t('chatbot.chatHistory') }}
+            </button>
+          </div>
+          
+          <!-- Center: Title -->
+          <span class="font-semibold tracking-wide text-sm sm:text-base text-center">{{ $t('chatbot.kokoAIHelper') }}</span>
 
-          <button
-           class="hover:text-green-200 text-base sm:text-lg transition ml-2"
-            @click="toggleFullscreen"
-            :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
-        >
-
+          <!-- Right: Fullscreen Button -->
+          <div class="flex justify-end">
+            <button
+              class="hover:text-green-200 text-base sm:text-lg transition"
+              @click="toggleFullscreen"
+              :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
+            >
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
+          </div>
 
         </div>
 
-        <!-- Messages -->
-        <div ref="chatBody" class="flex-1 overflow-y-auto p-2 sm:p-3 md:p-5 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-400 scrollbar-track-green-100">
+        <!-- Messages Area Container (relative positioning for overlay) -->
+        <div class="flex-1 relative min-h-0">
+          <!-- Mobile Chat History Overlay (inside chatbot, covers messages area) -->
+          <div
+            v-if="showMobileChatHistory"
+            class="md:hidden absolute inset-0 bg-[#EAF2EA] z-10 flex flex-col"
+          >
+            <!-- Sticky Header with Close Button -->
+            <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-12 shrink-0">
+              <span class="font-semibold text-sm tracking-wide">{{ $t('chatbot.chatHistory') }}</span>
+              <button
+                @click="showMobileChatHistory = false"
+                class="hover:text-green-200 text-lg transition shrink-0"
+                :title="$t('common.close')"
+              >
+                ✕
+              </button>
+            </div>
+
+            <!-- New Chat Button -->
+            <div class="px-3 py-2 border-b border-green-200 shrink-0 bg-[#EAF2EA]">
+              <button
+                @click="startNewChatFromMobile"
+                class="w-full bg-[#E0EBE0] text-[#2C702C] text-sm font-medium px-3 py-2 rounded-md transition flex items-center justify-center gap-2"
+                :title="$t('chatbot.startNewChat')"
+              >
+                <img src="../../public/images/icons8-add-to-chat-50.png" alt="" class="size-5">
+                <span>{{ $t('chatbot.newChat') }}</span>
+              </button>
+            </div>
+
+            <!-- Scrollable Chat History List -->
+            <div class="flex-1 overflow-y-auto min-h-0 chat-history-scroll">
+              <div
+                v-for="chat in chatList"
+                :key="chat.id"
+                @click="loadChatFromMobile(chat.id)"
+                :class="[
+                  'px-4 py-3 border-b border-green-100 cursor-pointer transition-colors hover:bg-[#BFD6BF] group flex flex-col gap-1',
+                  currentChatId === chat.id ? 'bg-[#BFD6BF] border-l-4 border-l-[#2C702C]' : ''
+                ]"
+              >
+                <div class="flex items-start justify-between gap-2">
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 truncate">
+                      {{ getChatTitle(chat) }}
+                    </p>
+                    <p class="text-xs text-gray-500">
+                      {{ formatDate(chat.createdAt) }}
+                    </p>
+                  </div>
+                  <button
+                    @click.stop="deleteChat(chat.id)"
+                    class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition opacity-0 group-hover:opacity-100"
+                    :title="$t('chatbot.deleteChat')"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </div>
+
+              <div v-if="chatList.length === 0" class="p-4 text-center text-gray-400 text-sm">
+                {{ $t('chatbot.noChatHistory') }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div 
+            ref="chatBody" 
+            class="absolute inset-0 overflow-y-auto p-2 sm:p-3 md:p-5 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-400 scrollbar-track-green-100"
+            :class="{ 'hidden md:block': showMobileChatHistory }"
+          >
           <div
             v-for="(msg, i) in messages"
             :key="i"
@@ -157,7 +243,8 @@
         <span class="animate-pulse">{{ loadingText }}</span>
       </div>
     </div>
-  </div>
+          </div>
+        </div>
 
        <!-- Input Area -->
       <div class="border-t border-green-300 px-2 sm:px-4 py-2 sm:py-3 bg-[#E0EBE0] rounded-b-xl">
@@ -231,6 +318,7 @@ export default {
       isOpen: false,
       isFullscreen: false,
       showTooltip: true,
+      showMobileChatHistory: false,
       userInput: "",
       messages: [],
       chatHistory: [],
@@ -987,6 +1075,9 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       if (this.isOpen) {
         if (!this.currentChatId) this.startNewChat();
         this.$nextTick(() => this.scrollToBottom());
+      } else {
+        // Close mobile chat history when closing chatbot
+        this.showMobileChatHistory = false;
       }
     },
 
@@ -1063,6 +1154,16 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       }
     },
 
+    startNewChatFromMobile() {
+      this.startNewChat();
+      this.showMobileChatHistory = false;
+    },
+
+    loadChatFromMobile(chatId) {
+      this.loadChat(chatId);
+      this.showMobileChatHistory = false;
+    },
+
     saveCurrentChat() {
       if (!this.currentChatId) return;
 
@@ -1086,6 +1187,8 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
           this.saveChatList();
           if (this.currentChatId === chatId) {
             this.startNewChat();
+            // Close mobile overlay if open so user can see the new chat
+            this.showMobileChatHistory = false;
           }
         }
       }
@@ -1328,5 +1431,16 @@ const deltaY = coords.y - this.dragStartY;  // positive when dragging down
 }
 .scrollbar-thin::-webkit-scrollbar-track {
   background: #eaf2ea;
+}
+
+/* Hide scrollbar on mobile for chat history */
+.chat-history-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.chat-history-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 </style>

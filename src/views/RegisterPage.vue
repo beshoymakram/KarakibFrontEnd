@@ -104,30 +104,40 @@
           <div class="w-full max-w-md">
             <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-center mb-6 lg:mb-8">{{ $t('common.register') }}</h1>
 
-            <!-- User Type Selection -->
-            <div class="mb-6 text-center">
-              <p class="font-semibold text-base mb-3">Are you a user or joining as a Collector?</p>
-              <div class="flex justify-center gap-4">
-                <button
-                  type="button"
-                  @click="form.type = 'user'"
-                  :class="['px-4 py-2 rounded-lg font-medium border transition-all',
-                    form.type === 'user'
-                      ? 'bg-[#317C31] text-white border-[#317C31]'
-                      : 'bg-tabs text-section border-gray-300 hover:border-gray-400']">
-                  User
-                </button>
-                <button
-                  type="button"
-                  @click="form.type = 'collector'"
-                  :class="['px-4 py-2 rounded-lg font-medium border transition-all',
-                    form.type === 'collector'
-                      ? 'bg-[#317C31] text-white border-[#317C31]'
-                      : 'bg-tabs text-section border-gray-300 hover:border-gray-400']">
-                  Collector
-                </button>
-              </div>
-            </div>
+<!-- User Type Selection -->
+<div class="mb-6 text-center">
+  <p class="font-semibold text-base mb-3">
+    {{ $t('common.areYouUserOrCollector') }}
+  </p>
+  <div class="flex justify-center gap-4">
+    <button
+      type="button"
+      @click="form.type = 'user'"
+      :class="[
+        'px-4 py-2 rounded-lg font-medium border transition-all',
+        form.type === 'user'
+          ? 'bg-[#317C31] text-white border-[#317C31]'
+          : 'bg-tabs text-section border-gray-300 hover:border-gray-400'
+      ]"
+    >
+      {{ $t('common.userButton') }}
+    </button>
+
+    <button
+      type="button"
+      @click="form.type = 'collector'"
+      :class="[
+        'px-4 py-2 rounded-lg font-medium border transition-all',
+        form.type === 'collector'
+          ? 'bg-[#317C31] text-white border-[#317C31]'
+          : 'bg-tabs text-section border-gray-300 hover:border-gray-400'
+      ]"
+    >
+      {{ $t('common.collectorButton') }}
+    </button>
+  </div>
+</div>
+
 
             <!-- Google Register Button (Hidden if Collector) -->
             <button v-if="form.type === 'user'" @click="handleGoogleRegister" type="button"
@@ -158,7 +168,7 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div class="form-group flex flex-col w-full">
                   <label for="name" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.name') }}</label>
-                  <input v-model="form.name" type="text" id="name" placeholder="Full Name"
+                  <input v-model="form.name" type="text" id="name" :placeholder="$t('common.fullName')"
                     class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]" required>
                 </div>
 
@@ -166,14 +176,14 @@
                   <label for="email" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.email') }}</label>
                   <input v-model="form.email" type="email" id="email"
                     :class="['shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2', errors.email ? 'input-error' : 'focus:ring-[#317C31]']"
-                    placeholder="email@gmail.com" required>
+                    :placeholder="$t('common.emailPlaceholder')" required>
                   <span v-if="errors.email" class="error-message">{{ emailErrorMessage }}</span>
                 </div>
               </div>
 
               <!-- Personal ID (Only for Collector) -->
               <div v-if="form.type === 'collector'" class="form-group mb-4 flex flex-col w-full">
-                <label for="id" class="pb-2 font-medium text-sm lg:text-base">Upload Personal ID</label>
+                <label for="id" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.uploadPersonalId') }}</label>
                 <input type="file" id="id" accept="image/*,.pdf"
                   class="bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-2 focus:ring-[#317C31]" required>
               </div>
@@ -199,7 +209,7 @@
                       <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                     </span>
                   </div>
-                  <span v-if="errors.password" class="error-message">Password must be at least 8 characters</span>
+                  <span v-if="errors.password" class="error-message">{{ $t('common.passwordTooShort') }}</span>
                 </div>
 
                 <div class="form-group flex flex-col w-full">
@@ -212,7 +222,7 @@
                       <i :class="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                     </span>
                   </div>
-                  <span v-if="errors.confirmPassword" class="error-message">Passwords do not match</span>
+                 <span v-if="errors.confirmPassword" class="error-message">{{ $t('common.passwordsNotMatch') }}</span>
                 </div>
               </div>
 
@@ -271,44 +281,64 @@ export default {
   },
 
   methods: {
-    async handleRegister() {
-      this.errors = { email: false, phone: false, password: false, confirmPassword: false };
-      this.emailErrorMessage = '';
-      this.phoneErrorMessage = '';
+async handleRegister() {
+  this.errors = {
+    email: false,
+    phone: false,
+    password: false,
+    confirmPassword: false,
+  };
+  this.emailErrorMessage = '';
+  this.phoneErrorMessage = '';
+  if (this.form.password !== this.form.password_confirmation) {
+    this.errors.confirmPassword = true;
+  }
 
-      if (this.form.password.length < 8) this.errors.password = true;
-      if (this.form.password !== this.form.password_confirmation) this.errors.confirmPassword = true;
-      if (!this.form.email.includes('@')) {
+  try {
+    await this.authStore.register(this.form);
+
+    const cartStore = useCartStore();
+    await cartStore.mergeOnLogin();
+
+    await this.$router.push('/');
+    nextTick(() => {
+      this.$toast.success(this.$t('common.registeredSuccessfully'));
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+
+    // backend validation errors
+    if (error.response && error.response.data && error.response.data.errors) {
+      const backendErrors = error.response.data.errors;
+
+      // Email
+      if (backendErrors.email) {
         this.errors.email = true;
-        this.emailErrorMessage = 'Please enter a valid email address';
+        this.emailErrorMessage = backendErrors.email[0];
       }
-      if (this.form.phone.length < 8) {
+      // Phone
+      if (backendErrors.phone) {
         this.errors.phone = true;
-        this.phoneErrorMessage = 'Please enter a valid phone number';
+        this.phoneErrorMessage = backendErrors.phone[0];
+      }
+      // Password
+      if (backendErrors.password) {
+        this.errors.password = true;
+        this.passwordErrorMessage = backendErrors.password.join(', ');
       }
 
-      if (Object.values(this.errors).includes(true)) return;
-
-      try {
-        await this.authStore.register(this.form);
-        const cartStore = useCartStore();
-        await cartStore.mergeOnLogin();
-        await this.$router.push('/');
-        nextTick(() => {
-          this.$toast.success(this.$t('common.registeredSuccessfully'));
-        });
-      } catch (error) {
-        console.error('Registration error:', error);
-        if (this.authStore.error?.includes('email')) {
-          this.errors.email = true;
-          this.emailErrorMessage = 'Email already used';
-        }
-        if (this.authStore.error?.includes('phone')) {
-          this.errors.phone = true;
-          this.phoneErrorMessage = 'Phone already used';
-        }
+      if (backendErrors.password_confirmation) {
+        this.errors.confirmPassword = true;
+        this.confirmPasswordErrorMessage = backendErrors.password_confirmation[0];
       }
-    },
+
+    } else {
+      this.$toast.error(
+        error.response?.data?.message || this.$t('common.somethingWentWrong')
+      );
+    }
+  }
+},
 
     handleGoogleRegister() {
       window.location.href = `${import.meta.env.VITE_URL}/auth/google/redirect`;

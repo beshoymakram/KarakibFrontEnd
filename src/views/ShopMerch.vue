@@ -235,7 +235,7 @@ export default {
 }
 
 .bg-primary {
-  background-color: rgb(235, 255, 235) !important;
+  background-color: rgb(255, 255, 255) !important;
 }
 
 [data-theme="forest"] .bg-primary {
