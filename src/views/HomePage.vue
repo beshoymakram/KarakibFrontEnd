@@ -190,7 +190,7 @@
     <div
       v-for="(product, index) in products"
       :key="index"
-      class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
+      class="card bg-tabs w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
     >
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block  rounded-t-xl">
@@ -669,5 +669,12 @@ export default {
 }
 [data-theme="forest"] .bg-donate {
   background-color: #201e1e !important;
+}
+
+.bg-tabs {
+  background-color: #FFFFFF !important;
+}
+[data-theme="forest"] .bg-tabs {
+  background-color: rgb(41, 41, 41) !important;
 }
 </style>
