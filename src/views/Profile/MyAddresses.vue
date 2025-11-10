@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-item rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+    <div class="bg-item rounded-t-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
       <div class="flex flex-wrap items-center gap-4">
         <div class="relative">
           <button @click="openCreateModal()"
-            class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+            class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm md:text-base font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
             {{ $t('common.createNewAddress') }}
           </button>
         </div>
@@ -11,7 +11,7 @@
         <div class="flex-1 max-w-md ml-auto">
           <div class="relative">
             <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
-              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+              class="w-full pl-10 pr-10 py-2 border text-sm md:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
             <svg
               :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
               fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,21 +23,21 @@
       </div>
     </div>
 
-    <div class="bg-item rounded-lg shadow-sm overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="w-full table-auto">
-          <thead class="bg-item border-b border-gray-200">
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+    <div class="bg-item  shadow-sm overflow-hidden rounded-lg">
+      <div class="overflow-x-auto ">
+        <table class="w-full table-auto mx-auto ">
+          <thead class="bg-item border-b border-gray-200 ">
+            <tr class="">
+              <th class="px-6 md:px:8 py-3  text-xs text-center font-medium text-section uppercase tracking-wider">{{
                 $t('common.name') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              <th class="px-6 md:px:8 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.phone') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              <th class="px-6 md:px:8 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.streetAddress') }}
               </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              <th class="px-6 md:px:8 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.city') }}</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{
+              <th class="px-6 md:px:8 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{
                 $t('common.action') }}</th>
             </tr>
           </thead>
@@ -48,22 +48,22 @@
               </td>
             </tr>
 
-            <tr v-for="address in filteredAddresses" :key="address.id" class="transition-colors">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+            <tr v-for="address in filteredAddresses" :key="address.id" class="transition-colors ">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center font-medium text-primary">
                 {{ address.name }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center font-medium text-primary">
                 {{ address.phone }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center font-medium text-primary">
                 {{ address.street_address }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center font-medium text-primary">
                 {{ address.city }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+              <td class=" px-6 py-4 whitespace-nowrap text-sm space-x-2 mx-auto items-center justify-center flex">
                 <button @click="openEditModal(address)"
-                  class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
+                  class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors cursor-pointer">
                   {{ $t('common.edit') }}
                 </button>
                 <button @click="openDeleteModal(address)"
