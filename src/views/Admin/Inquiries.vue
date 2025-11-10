@@ -283,6 +283,15 @@ export default {
       showDeleteModal: false,
       showEditModal: false,
       showDetailsModal: false,
+      editForm: {
+        id: null,
+        first_name: '',
+        last_name: '',
+        email: '',
+        subject: '',
+        message: '',
+        created_at: '',
+      },
       details: {
         first_name: '',
         last_name: '',
@@ -363,6 +372,19 @@ export default {
         this.selectedInquiry = '';
         this.fetchInquiries();
         this.showDeleteModal = false;
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
+    },
+
+    async confirmEdit() {
+      try {
+        const response = await inquiriesService.updateInquiry(this.editForm.id, this.editForm);
+        nextTick(() => {
+          this.$toast.success(response.data.message);
+        });
+        this.showEditModal = false;
+        this.fetchInquiries();
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }

@@ -121,12 +121,7 @@ export default {
       if (this.searchQuery) {
         filtered = filtered.filter(donation =>
           donation.donation_number.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          donation.user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          donation.address.street_address.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          donation.address.phone.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          donation.address.city.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          donation.status.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          donation.payment_method.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          donation.fund_name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           donation.amount.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           donation.created_at.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
@@ -158,6 +153,7 @@ export default {
 select {
   background-image: none;
 }
+
 .text-primary {
   color: #2c702c !important;
 }
