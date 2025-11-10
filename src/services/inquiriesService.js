@@ -6,7 +6,7 @@ export default {
   },
 
   updateInquiry(id, data) {
-    return apiClient.put('/inquiries' + id, data);
+    return apiClient.put('/inquiries/' + id, data);
   },
 
   getInquiries() {
