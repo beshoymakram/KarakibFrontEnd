@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-prod py-6 md:py-8 px-4">
-    <div v-if="product" class="max-w-6xl mx-auto">
+    <div v-if="product" class="max-w-6xl mx-auto pt-4 sm:pt-6 md:pt-8 lg:pt-10">
       <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-12 bg-item rounded-xl shadow-sm">
         <!-- Product Section -->
         <div

@@ -1,14 +1,22 @@
 <template>
   <!-- Hero Section -->
   <div
-    class="hero h-screen w-full  bg-center bg-no-repeat bg-hero items-start mx-auto bg-cover"
+    class="hero h-screen  w-full items-start   mx-auto "
     style="background-image: url('/images/Homebg.png')"
   >
-    <div class="hero-overlay bg-base-100/50 dark:bg-base-200/50"></div>
-    <div class="hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
-      <div class="max-w-3xl">
+
+    <!-- Background Image Layer -->
+  <div
+    class="  absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style="background-image: url('/images/Homebg.png');"
+  ></div>
+
+  <!-- Overlay -->
+  <div class=" hero-overlay absolute inset-0 bg-base-100/50 "></div>
+    <div class="   hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
+      <div class="max-w-3xl items-start">
         <h1
-          class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl text-primary font-bold drop-shadow-lg"
+          class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl pt-10 md:pt-12 lg:pt-14 text-primary font-bold drop-shadow-lg"
         >
           {{ $t("common.turnYourWasteIntoWorth") }}
         </h1>

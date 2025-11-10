@@ -1,6 +1,6 @@
 <template>
   <!-- head shop section -->
-  <div class="relative px-4 sm:px-6 md:px-8 pb-2 sm:pb-12  l  ">
+  <div class="relative px-4 sm:px-6 md:px-8 pb-2 sm:pb-12    ">
     <!-- Custom layered gradient overlay -->
     <div class="absolute inset-0" :style="{
       background:
@@ -11,7 +11,7 @@
 
     <!-- Background image -->
     <img src="/images/Shop Page Background.png" alt="Background"
-      class="absolute inset-0 w-xs sm:w-sm md:w-md lg:w-lg object-cover -z-10 mx-auto" />
+      class="absolute inset-0 w-xs sm:w-sm md:w-md lg:w-lg object-cover -z-10 mt-10 md:mt-12 lg:mt-14 mx-auto" />
 
     <!-- content -->
     <div class="relative flex flex-col sm:flex-row items-center justify-center text-center lg:text-left gap-6 md:gap-8 px-4 sm:px-6 md:px-10 pt-16 sm:pt-18  md:pt-22 lg:pt-28

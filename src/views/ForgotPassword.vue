@@ -1,9 +1,9 @@
 <template>
   <div class="bg-[#BFD6BF] min-h-screen py-8 px-4" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
-    <div class="w-full max-w-6xl mx-auto">
+    <div class="w-full max-w-6xl mx-auto pt-4 sm:pt-6 md:pt-8 lg:pt-10">
       <div
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
-        
+
         <!-- Left (Form) -->
         <div
           :class="[
@@ -109,7 +109,7 @@ export default {
           this.showPopup = false;
           this.$router.push({ name: 'verify-code' });
         }, 2000);
-      } 
+      }
       catch (error) {
         console.error('Error:', error);
         if (error.response && error.response.data && error.response.data.message) {
@@ -117,7 +117,7 @@ export default {
         } else {
           this.errorMessage = 'No account found with this email address';
         }
-      } 
+      }
       finally {
         this.loading = false;
       }
