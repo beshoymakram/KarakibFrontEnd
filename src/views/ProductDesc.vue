@@ -128,11 +128,11 @@
               >
                 Add to Cart
               </button>
-              <button
+              <!-- <button
                 class="flex-2 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md cursor-pointer"
               >
                 Checkout Now
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
