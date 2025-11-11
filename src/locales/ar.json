@@ -437,6 +437,10 @@
         "welcome_to_karakib": "مرحبًا بك في كراكيب!",
         "new_user": "مستخدم جديد سجل للتو!",
         "inquiries": "الاستفسارات",
+        "new_request_assigned": "تم تعيين طلب جمع جديد عليك",
+        "new_order_assigned": "تم تعيين طلب جديد عليك",
+        "deliver": "تسليم",
+        "delivered": "تم التسليم",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     },
     "chatbot": {

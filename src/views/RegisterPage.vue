@@ -88,65 +88,66 @@
         class="overflow-hidden flex flex-col lg:flex-row rounded-xl shadow-lg dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
 
         <!-- Left Section -->
-        <div
-          :class="[ 'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-tabs', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-t-xl', 'order-1', 'lg:order-1',
-            $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none']">
+        <div :class="['w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-tabs', 'text-center', 'flex', 'flex-col', 'items-center', 'justify-center', 'rounded-t-xl', 'order-1', 'lg:order-1',
+          $i18n.locale === 'ar' ? 'lg:rounded-r-xl lg:rounded-tl-none' : 'lg:rounded-l-xl lg:rounded-tr-none']">
           <img class="w-full max-w-xs lg:max-w-md mx-auto mb-6" src="/public/images/register.png" alt="Register Banner">
-          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main mb-3">{{ $t('common.welcomeToKarakib') }}</h1>
-          <p class="font-semibold text-base lg:text-xl px-4">{{ $t('common.everySmallActOfRecyclingCreatesCleanerTomorrow') }}</p>
+          <h1 class="font-extrabold text-2xl lg:text-3xl xl:text-4xl text-main mb-3">{{ $t('common.welcomeToKarakib') }}
+          </h1>
+          <p class="font-semibold text-base lg:text-xl px-4">{{
+            $t('common.everySmallActOfRecyclingCreatesCleanerTomorrow') }}</p>
         </div>
 
         <!-- Right Section -->
-        <div
-          :class="[ 'w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-primary', 'flex', 'justify-center', 'items-center', 'rounded-b-xl', 'order-2', 'lg:order-2',
-            $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-bl-none']">
+        <div :class="['w-full', 'lg:w-1/2', 'px-6', 'py-8', 'lg:py-12', 'bg-primary', 'flex', 'justify-center', 'items-center', 'rounded-b-xl', 'order-2', 'lg:order-2',
+          $i18n.locale === 'ar' ? 'lg:rounded-l-xl lg:rounded-br-none' : 'lg:rounded-r-xl lg:rounded-bl-none']">
 
           <div class="w-full max-w-md">
-            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-center mb-6 lg:mb-8">{{ $t('common.register') }}</h1>
+            <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-center mb-6 lg:mb-8">{{ $t('common.register')
+              }}</h1>
 
-<!-- User Type Selection -->
-<div class="mb-6 text-center">
-  <p class="font-semibold text-base mb-3">
-    {{ $t('common.areYouUserOrCollector') }}
-  </p>
-  <div class="flex justify-center gap-4">
-    <button
-      type="button"
-      @click="form.type = 'user'"
-      :class="[
-        'px-4 py-2 rounded-lg font-medium border transition-all',
-        form.type === 'user'
-          ? 'bg-[#317C31] text-white border-[#317C31]'
-          : 'bg-tabs text-section border-gray-300 hover:border-gray-400'
-      ]"
-    >
-      {{ $t('common.userButton') }}
-    </button>
+            <!-- User Type Selection -->
+            <div class="mb-6 text-center">
+              <p class="font-semibold text-base mb-3">
+                {{ $t('common.areYouUserOrCollector') }}
+              </p>
+              <div class="flex justify-center gap-4">
+                <button type="button" @click="form.type = 'user'" :class="[
+                  'px-4 py-2 rounded-lg font-medium border transition-all',
+                  form.type === 'user'
+                    ? 'bg-[#317C31] text-white border-[#317C31]'
+                    : 'bg-tabs text-section border-gray-300 hover:border-gray-400'
+                ]">
+                  {{ $t('common.userButton') }}
+                </button>
 
-    <button
-      type="button"
-      @click="form.type = 'collector'"
-      :class="[
-        'px-4 py-2 rounded-lg font-medium border transition-all',
-        form.type === 'collector'
-          ? 'bg-[#317C31] text-white border-[#317C31]'
-          : 'bg-tabs text-section border-gray-300 hover:border-gray-400'
-      ]"
-    >
-      {{ $t('common.collectorButton') }}
-    </button>
-  </div>
-</div>
+                <button type="button" @click="form.type = 'courier'" :class="[
+                  'px-4 py-2 rounded-lg font-medium border transition-all',
+                  form.type === 'courier'
+                    ? 'bg-[#317C31] text-white border-[#317C31]'
+                    : 'bg-tabs text-section border-gray-300 hover:border-gray-400'
+                ]">
+                  {{ $t('common.collectorButton') }}
+                </button>
+              </div>
+            </div>
 
 
             <!-- Google Register Button (Hidden if Collector) -->
             <button v-if="form.type === 'user'" @click="handleGoogleRegister" type="button"
               class="w-full flex items-center justify-center gap-3 bg-tabs border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all font-medium text-section px-4 py-3 rounded-lg mb-6 shadow-sm">
               <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4" />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853" />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05" />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335" />
               </svg>
               <span class="text-sm lg:text-base">{{ $t('common.signUpWithGoogle') }}</span>
             </button>
@@ -169,7 +170,8 @@
                 <div class="form-group flex flex-col w-full">
                   <label for="name" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.name') }}</label>
                   <input v-model="form.name" type="text" id="name" :placeholder="$t('common.fullName')"
-                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]" required>
+                    class="shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-[#317C31]"
+                    required>
                 </div>
 
                 <div class="form-group flex flex-col w-full">
@@ -182,10 +184,12 @@
               </div>
 
               <!-- Personal ID (Only for Collector) -->
-              <div v-if="form.type === 'collector'" class="form-group mb-4 flex flex-col w-full">
-                <label for="id" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.uploadPersonalId') }}</label>
+              <div v-if="form.type === 'courier'" class="form-group mb-4 flex flex-col w-full">
+                <label for="id" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.uploadPersonalId')
+                  }}</label>
                 <input type="file" id="id" accept="image/*,.pdf"
-                  class="bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-2 focus:ring-[#317C31]" required>
+                  class="bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-2 focus:ring-[#317C31]"
+                  required>
               </div>
 
               <!-- Phone -->
@@ -200,7 +204,8 @@
               <!-- Password + Confirm -->
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div class="form-group flex flex-col w-full">
-                  <label for="password" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.password') }}</label>
+                  <label for="password" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.password')
+                    }}</label>
                   <div class="password-wrapper">
                     <input :type="showPassword ? 'text' : 'password'" v-model="form.password" id="password"
                       :class="['shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg w-full text-sm lg:text-base focus:outline-none focus:ring-2', errors.password ? 'input-error' : 'focus:ring-[#317C31]']"
@@ -213,16 +218,18 @@
                 </div>
 
                 <div class="form-group flex flex-col w-full">
-                  <label for="password_confirmation" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.confirmPassword') }}</label>
+                  <label for="password_confirmation" class="pb-2 font-medium text-sm lg:text-base">{{
+                    $t('common.confirmPassword') }}</label>
                   <div class="password-wrapper">
-                    <input :type="showConfirmPassword ? 'text' : 'password'" v-model="form.password_confirmation" id="password_confirmation"
+                    <input :type="showConfirmPassword ? 'text' : 'password'" v-model="form.password_confirmation"
+                      id="password_confirmation"
                       :class="['shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg w-full text-sm lg:text-base focus:outline-none focus:ring-2', errors.confirmPassword ? 'input-error' : 'focus:ring-[#317C31]']"
                       :placeholder="$t('common.confirmPasswordPlaceholder')" required>
                     <span class="eye-icon" @click="showConfirmPassword = !showConfirmPassword">
                       <i :class="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                     </span>
                   </div>
-                 <span v-if="errors.confirmPassword" class="error-message">{{ $t('common.passwordsNotMatch') }}</span>
+                  <span v-if="errors.confirmPassword" class="error-message">{{ $t('common.passwordsNotMatch') }}</span>
                 </div>
               </div>
 
@@ -235,7 +242,8 @@
 
             <p class="text-center font-medium text-xs lg:text-base mt-4">
               {{ $t('common.alreadyHaveAnAccount') }}
-              <router-link to="/login" class="text-[#317C31] hover:underline font-semibold">{{ $t('common.loginHere') }}</router-link>
+              <router-link to="/login" class="text-[#317C31] hover:underline font-semibold">{{ $t('common.loginHere')
+                }}</router-link>
             </p>
           </div>
         </div>
@@ -281,64 +289,64 @@ export default {
   },
 
   methods: {
-async handleRegister() {
-  this.errors = {
-    email: false,
-    phone: false,
-    password: false,
-    confirmPassword: false,
-  };
-  this.emailErrorMessage = '';
-  this.phoneErrorMessage = '';
-  if (this.form.password !== this.form.password_confirmation) {
-    this.errors.confirmPassword = true;
-  }
-
-  try {
-    await this.authStore.register(this.form);
-
-    const cartStore = useCartStore();
-    await cartStore.mergeOnLogin();
-
-    await this.$router.push('/');
-    nextTick(() => {
-      this.$toast.success(this.$t('common.registeredSuccessfully'));
-    });
-  } catch (error) {
-    console.error('Registration error:', error);
-
-    // backend validation errors
-    if (error.response && error.response.data && error.response.data.errors) {
-      const backendErrors = error.response.data.errors;
-
-      // Email
-      if (backendErrors.email) {
-        this.errors.email = true;
-        this.emailErrorMessage = backendErrors.email[0];
-      }
-      // Phone
-      if (backendErrors.phone) {
-        this.errors.phone = true;
-        this.phoneErrorMessage = backendErrors.phone[0];
-      }
-      // Password
-      if (backendErrors.password) {
-        this.errors.password = true;
-        this.passwordErrorMessage = backendErrors.password.join(', ');
-      }
-
-      if (backendErrors.password_confirmation) {
+    async handleRegister() {
+      this.errors = {
+        email: false,
+        phone: false,
+        password: false,
+        confirmPassword: false,
+      };
+      this.emailErrorMessage = '';
+      this.phoneErrorMessage = '';
+      if (this.form.password !== this.form.password_confirmation) {
         this.errors.confirmPassword = true;
-        this.confirmPasswordErrorMessage = backendErrors.password_confirmation[0];
       }
 
-    } else {
-      this.$toast.error(
-        error.response?.data?.message || this.$t('common.somethingWentWrong')
-      );
-    }
-  }
-},
+      try {
+        await this.authStore.register(this.form);
+
+        const cartStore = useCartStore();
+        await cartStore.mergeOnLogin();
+
+        await this.$router.push('/');
+        nextTick(() => {
+          this.$toast.success(this.$t('common.registeredSuccessfully'));
+        });
+      } catch (error) {
+        console.error('Registration error:', error);
+
+        // backend validation errors
+        if (error.response && error.response.data && error.response.data.errors) {
+          const backendErrors = error.response.data.errors;
+
+          // Email
+          if (backendErrors.email) {
+            this.errors.email = true;
+            this.emailErrorMessage = backendErrors.email[0];
+          }
+          // Phone
+          if (backendErrors.phone) {
+            this.errors.phone = true;
+            this.phoneErrorMessage = backendErrors.phone[0];
+          }
+          // Password
+          if (backendErrors.password) {
+            this.errors.password = true;
+            this.passwordErrorMessage = backendErrors.password.join(', ');
+          }
+
+          if (backendErrors.password_confirmation) {
+            this.errors.confirmPassword = true;
+            this.confirmPasswordErrorMessage = backendErrors.password_confirmation[0];
+          }
+
+        } else {
+          this.$toast.error(
+            error.response?.data?.message || this.$t('common.somethingWentWrong')
+          );
+        }
+      }
+    },
 
     handleGoogleRegister() {
       window.location.href = `${import.meta.env.VITE_URL}/auth/google/redirect`;
@@ -346,4 +354,3 @@ async handleRegister() {
   },
 };
 </script>
-

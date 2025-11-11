@@ -36,6 +36,7 @@ export const useAuthStore = defineStore('auth', {
         authService.saveAuthData(this.token, this.user);
         return response.data;
       } catch (error) {
+        error.response?.data?.status == 'onhold' ? router.push('/pending-verification') : ''
         this.error = error.response?.data?.message || 'Registration failed';
         throw error;
       } finally {

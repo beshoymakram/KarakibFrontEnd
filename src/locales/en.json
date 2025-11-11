@@ -439,6 +439,10 @@
     "welcome_to_karakib": "Welcome to karakib!",
     "new_user": "New user just registered!",
     "inquiries": "Inquiries",
+    "new_request_assigned": "New request assigned",
+    "new_order_assigned": "New request assigned",
+    "deliver": "Deliver",
+    "delivered": "Delivered",
     "noWasteItems": "No waste items to collect"
   },
   "chatbot": {
