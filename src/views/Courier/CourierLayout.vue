@@ -1,31 +1,31 @@
 <template>
   <div class="admin-layout py-5 bg-myprofile" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
-    <div class="cards flex flex-wrap justify-center gap-8 mx-4 pb-5 pt-4 sm:pt-6 md:pt-8 lg:mt-10">
-      <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
-        <div class="card-body">
-          <h3 class="text-lg font-semibold">{{ $t('common.assignedRequests') }}</h3>
-          <p class="text-3xl font-bold text-[#2C702C]">{{ requests.total }}</p>
+    <div class="cards flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mx-4 sm:mx-10 md:mx-20 pb-5 pt-4 sm:mt-6 md:mt-8 lg:mt-10">
+      <div class="card bg-base-100 w-[80vw] sm:w-[70vw] md:w-[60vw] lg:w-90 shadow-sm">
+        <div class="card-body flex flex-col justify-evenly">
+          <h3 class="text-base md:text-lg font-semibold">{{ $t('common.assignedRequests') }}</h3>
+          <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ requests.total }}</p>
           <div class="numbers flex items-center gap-2 text-gray-500">
-            <p class="text-xl font-bold">{{ requests.pending }} {{ $t('common.pending') }}</p>
+            <p class="text-base md:text-lg font-semibold">{{ requests.pending }} {{ $t('common.pending') }}</p>
           </div>
         </div>
       </div>
-      <div class="card bg-base-100 md:w-75 xs:w-50 shadow-sm">
-        <div class="card-body">
-          <h3 class="text-lg font-semibold">{{ $t('common.assignedOrders') }}</h3>
-          <p class="text-3xl font-bold text-[#2C702C]">{{ orders.total }}</p>
+      <div class="card bg-base-100 w-[80vw] sm:w-[70vw] md:md:w-[60vw] lg:w-90 shadow-sm">
+        <div class="card-body flex flex-col justify-evenly">
+          <h3 class="text-base md:text-lg font-semibold">{{ $t('common.assignedOrders') }}</h3>
+          <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ orders.total }}</p>
           <div class="numbers flex items-center gap-2 text-gray-500">
-            <p class="text-xl font-bold">{{ orders.new }} {{ $t('common.today') || 'today' }}</p>
+            <p class="text-base md:text-lg font-semibold">{{ orders.new }} {{ $t('common.today') || 'today' }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="bg-tabs rounded-t-lg shadow-sm mb-6 mx-4 md:mx-20 sm:mx-10">
+    <div class="bg-tabs rounded-lg shadow-sm mb-6 mx-4  sm:mx-10 md:mx-20">
       <nav
         :class="['flex', 'flex-wrap', 'p-2', 'border-b', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
         <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
-          class="px-4 py-3 cursor-pointer text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
+          class="px-2 sm:px-4 py-2 sm:py-3 mb-1 mx-1 cursor-pointer   text-xs sm:text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
             ? 'bg-[#E0EBE0] text-[#2C702C]'
             : 'text-primary hover:bg-gray-100'">
           {{ $t(tab.labelKey) }}
