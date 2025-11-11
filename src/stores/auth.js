@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import authService from '../services/authService';
+import router from '@/router';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -47,10 +48,14 @@ export const useAuthStore = defineStore('auth', {
       this.error = null;
       try {
         const response = await authService.login(userData);
-        this.token = response.data.token;
-        this.user = response.data.user;
-        authService.saveAuthData(this.token, this.user);
-        return response.data;
+        if (response.data.status != 'onhold') {
+          this.token = response.data.token;
+          this.user = response.data.user;
+          authService.saveAuthData(this.token, this.user);
+          return response.data;
+        } else {
+          router.push('/pending-verification')
+        }
       } catch (error) {
         this.error = error.response?.data?.message || 'Login failed';
         throw error;
