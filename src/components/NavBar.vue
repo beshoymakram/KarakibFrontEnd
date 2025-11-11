@@ -95,10 +95,10 @@
                 <router-link to="/profile" class="block px-3 py-2 text-sm text-primary  dark:hover:bg-gray-300">
                   {{ $t("common.profile") }}
                 </router-link>
-                <router-link to="/settings"
+                <!-- <router-link to="/settings"
                   class="block px-3 py-2 text-sm text-primary dark:text-gray-200 dark:hover:bg-gray-300">
                   {{ $t("common.settings") }}
-                </router-link>
+                </router-link> -->
                 <button @click="handleLogout"
                   class="block px-3 py-2 text-sm text-primary dark:text-gray-200 dark:hover:bg-gray-300">
                   {{ $t("common.signOut") }}
@@ -196,10 +196,10 @@
               class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100">
               {{ $t("common.profile") }}
             </router-link>
-            <router-link to="/settings" @click="mobileMenuOpen = false"
+            <!-- <router-link to="/settings" @click="mobileMenuOpen = false"
               class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100">
               {{ $t("common.settings") }}
-            </router-link>
+            </router-link> -->
             <router-link v-if="auth.isAdmin" to="/admin" @click="mobileMenuOpen = false"
               class="block py-2 pl-3 pr-4 text-base font-medium text-base-content hover:bg-green-100">
               {{ $t("common.dashboard") }}

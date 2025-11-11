@@ -42,9 +42,6 @@
               {{ product.price }} {{ $t("common.currency") }}
             </p>
           </div>
-            <!-- <h1 class=" hidden md:block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary lg:pt-4 ">
-              {{ product.name }}
-            </h1> -->
 
             <div class="hidden sm:flex items-center gap-3 md:gap-4 mb-1 md:mb-2 lg:mb-4">
               <div class="flex items-center gap-2">
@@ -77,7 +74,7 @@
             </p>
 
             <!-- Color Selection -->
-            <div v-if="productColors.length > 0" class="mb-2 md:mb-4">
+           <!--  <div v-if="productColors.length > 0" class="mb-2 md:mb-4">
               <h3 class="text-sm sm:text-base font-semibold text-secondary mb-1 ">
                 Select Color
               </h3>
@@ -96,7 +93,7 @@
                   :title="color.name"
                 ></button>
               </div>
-            </div>
+            </div> -->
 
             <!-- Size Selection -->
             <div v-if="productSizes.length > 0" class="mb-6">
@@ -128,11 +125,11 @@
               >
                 Add to Cart
               </button>
-              <button
+              <!-- <button
                 class="flex-2 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md cursor-pointer"
               >
                 Checkout Now
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
