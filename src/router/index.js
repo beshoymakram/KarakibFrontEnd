@@ -44,6 +44,7 @@ import Donations from '@/views/Admin/Donations.vue'
 import DonationFailure from '@/views/DonationFailure.vue'
 import AssignedOrders from '@/views/Courier/AssignedOrders.vue'
 import Inquiries from '@/views/Admin/Inquiries.vue'
+import PendingVerification from '@/views/PendingVerification.vue'
 
 // Define routes
 const routes = [
@@ -58,6 +59,7 @@ const routes = [
   { path: '/courier', redirect: '/courier/assigned-requests' },
   { path: '/profile', redirect: '/profile/personal-info' },
   { path: '/test-payment', component: TestPayment },
+  { path: '/pending-verification', component: PendingVerification },
 
   {
     path: '/profile',
