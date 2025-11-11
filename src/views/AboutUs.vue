@@ -390,9 +390,9 @@
     <!-- Modal -->
     <div v-if="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
       @click.self="closeModal">
-      <div class="bg-white rounded-2xl shadow-lg p-8 w-full relative animate-fadeIn max-h-[90vh] overflow-y-auto"
-        :class="[isTermsModal ? 'max-w-6xl' : 'max-w-lg']" :dir="isRTL ? 'rtl' : 'ltr'">
-        <button @click="closeModal" class="absolute top-3 text-gray-500 hover:text-gray-800 text-xl"
+      <div class="bg-white rounded-2xl shadow-lg p-6 w-[90%] sm:w-full relative animate-fadeIn max-h-[80vh] overflow-y-auto"
+        :class="[isTermsModal ? 'sm:max-w-4xl md:max-w-5xl' : 'sm:max-w-md md:max-w-lg']" :dir="isRTL ? 'rtl' : 'ltr'">
+        <button @click="closeModal" class="absolute top-3 text-gray-500 hover:text-gray-800 text-xl cursor-pointer"
           :class="isRTL ? 'left-3' : 'right-3'">
           ✕
         </button>
@@ -433,7 +433,7 @@
 
         <div class="flex justify-center">
           <button @click="closeModal"
-            class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition mt-6">
+            class="bg-[#2C702C] hover:bg-[#265C26] text-white px-6 py-2 rounded-md font-medium transition mt-6 cursor-pointer">
             {{ $t("common.close") }}
           </button>
         </div>
