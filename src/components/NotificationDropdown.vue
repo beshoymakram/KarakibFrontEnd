@@ -22,7 +22,7 @@
       enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-150"
       leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
       <div v-if="isOpen"
-        class=" hidden md:block absolute -right-39 sm:-right-2 mt-2  w-82 xl:w-85  bg-white rounded-xl shadow-lg border border-gray-200 z-50">
+        class=" hidden md:block absolute -right-39 sm:-right-2 mt-2  w-82 xl:w-85  bg-white rounded-xl shadow-lg border border-gray-200 z-50 ">
         <!-- Header -->
         <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
           <h3 class="text-text-base lg:text-lg font-semibold text-gray-800">Notifications</h3>
@@ -33,7 +33,7 @@
         </div>
 
         <!-- Notifications List -->
-        <div class="max-h-80 overflow-y-auto">
+        <div class="max-h-80 overflow-y-auto rounded-b-xl">
           <div v-if="notifications.length === 0" class="px-4 py-8 text-center text-gray-500">
             <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@
 
           <div v-else>
             <div v-for="notification in notifications" :key="notification.id" @click="markAsRead(notification.id)"
-              class="px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-[#EAF2EA] transition-colors duration-200 cursor-pointer"
+              class="px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-[#EAF2EA] transition-colors duration-200 "
               :class="{ 'bg-[#F5F9F5]': !notification.read }">
               <div class="flex items-start gap-3">
                 <!-- Icon -->
@@ -72,12 +72,12 @@
         </div>
 
         <!-- Footer -->
-        <div class="px-4 py-2 border-t border-gray-200 text-center">
+        <!-- <div class="px-4 py-2 border-t border-gray-200 text-center">
           <router-link to="/profile/notifications"
             class="text-xs lg:text-sm text-[#2C702C] hover:text-[#235a23] font-medium transition-colors duration-200">
             View all notifications
           </router-link>
-        </div>
+        </div> -->
       </div>
     </transition>
   </div>
