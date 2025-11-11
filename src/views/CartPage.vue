@@ -1,7 +1,9 @@
 <template>
   <div class="cart-page bg-primary min-h-screen py-6 md:py-10 lg:py-12 px-2 sm:px-4 md:px-6 lg:px-8">
     <div class="container mx-auto px-3 sm:px-4 max-w-6xl">
-      <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary pt-4 sm:pt-8 md:pt-10 lg:pt-12 mb-4 sm:mb-6">{{ $t('common.yourCart') }}
+      <h1
+        class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary pt-4 sm:pt-8 md:pt-10 lg:pt-12 mb-4 sm:mb-6">
+        {{ $t('common.yourCart') }}
       </h1>
 
       <div class="bg-cart rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
@@ -11,7 +13,8 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
           </svg>
-          <h2 class=" text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary truncate">{{ $t('common.shopProducts') }}</h2>
+          <h2 class=" text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary truncate">{{
+            $t('common.shopProducts') }}</h2>
           <span
             class="ml-auto bg-primary text-section px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold shrink-0">
             {{ cartStore.products?.length }} {{ $t('common.items') }}
@@ -57,25 +60,25 @@
                 {{ (item.cartable?.price * item.quantity).toFixed(2) }} {{ $t('common.currency') }}
               </p>
 
-            <div class=" md:hidden flex items-center gap-2 sm:gap-3 shrink-0 ">
-              <button @click="decrementQuantity(item.id, item.quantity)"
-                class="w-5 h-5  sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-                </svg>
-              </button>
+              <div class=" md:hidden flex items-center gap-2 sm:gap-3 shrink-0 ">
+                <button @click="decrementQuantity(item.id, item.quantity)"
+                  class="w-5 h-5  sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                  </svg>
+                </button>
 
-              <span class="w-4 sm:w-8 text-center font-bold text-primary">{{ item.quantity }}</span>
+                <span class="w-4 sm:w-8 text-center font-bold text-primary">{{ item.quantity }}</span>
 
-              <button @click="incrementQuantity(item.id, item.quantity)"
-                class="w-5 h-5  sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-green-600 hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-              </button>
-            </div>
+                <button @click="incrementQuantity(item.id, item.quantity)"
+                  class="w-5 h-5  sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-green-600 hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </button>
+              </div>
 
               <button @click="removeItem(item.id)"
                 class="text-red-600 hover:text-red-800 text-xs sm:text-sm font-semibold flex items-center gap-1 ">
@@ -91,9 +94,11 @@
 
           <div class="bg-primary rounded-lg p-4 sm:p-6 mt-4 sm:mt-6">
             <div class="flex justify-between items-center mb-3 sm:mb-4">
-              <span class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary">{{ $t('common.subtotal') }}</span>
-              <span class='text-base sm:text-lg md:text-xl  lg:text-2xl font-bold text-primary'>{{ cartStore.total }} {{ $t('common.currency')
-                }}</span>
+              <span class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary">{{
+                $t('common.subtotal') }}</span>
+              <span class='text-base sm:text-lg md:text-xl  lg:text-2xl font-bold text-primary'>{{ cartStore.total }} {{
+                $t('common.currency')
+              }}</span>
             </div>
             <button @click="checkoutProducts"
               class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
@@ -128,7 +133,8 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
           </svg>
-          <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary truncate">{{ $t('common.wasteCollectionRequest') }}
+          <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary truncate">{{
+            $t('common.wasteCollectionRequest') }}
           </h2>
           <span
             class="ml-auto bg-primary text-section px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold shrink-0">
@@ -176,25 +182,25 @@
               <p class="text-xs sm:text-sm text-gray-500 mb-1">{{ $t('common.estimatedPoints') }}</p>
               <p class="font-bold text-lg sm:text-xl md:text-2xl text-green-600 mb-1 sm:mb-2">+{{ item.points }}</p>
 
-            <div class=" md:hidden  flex items-center gap-2 sm:gap-3 shrink-0">
-              <button @click="decrementQuantity(item.id, item.quantity)"
-                class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-                </svg>
-              </button>
+              <div class=" md:hidden  flex items-center gap-2 sm:gap-3 shrink-0">
+                <button @click="decrementQuantity(item.id, item.quantity)"
+                  class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                  </svg>
+                </button>
 
-              <span class="w-4 sm:w-8 text-center font-bold text-primary">{{ item.quantity }}</span>
+                <span class="w-4 sm:w-8 text-center font-bold text-primary">{{ item.quantity }}</span>
 
-              <button @click="incrementQuantity(item.id, item.quantity)"
-                class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-green-600 hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-              </button>
-            </div>
+                <button @click="incrementQuantity(item.id, item.quantity)"
+                  class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 flex items-center justify-center bg-green-600 hover:bg-[#1a4d1a] text-white rounded-full transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </button>
+              </div>
 
               <button @click="removeItem(item.id)"
                 class="text-red-600 hover:text-red-800 text-xs sm:text-sm font-semibold flex items-center gap-1 md:ml-auto pt-1">
@@ -209,10 +215,14 @@
           </div>
 
           <div class="bg-primary rounded-lg p-4 sm:p-6 mt-4 sm:mt-6">
-            <div class="flex justify-between items-center mb-3 sm:mb-4">
-              <span class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary">{{ $t('common.totalEstimatedPoints')
-                }}</span>
-              <span class="text-base sm:text-lg md:text-xl  lg:text-2xl font-bold text-primary">+{{ cartStore.totalPoints }}</span>
+            <div class="flex justify-between items-center mb-3 sm:mb-4 text-center">
+              <span class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-primary">{{
+                $t('common.totalEstimatedPoints')
+              }}</span>
+              <span class="text-base sm:text-lg md:text-xl  lg:text-2xl font-bold text-primary">+{{
+                cartStore.totalPoints }} <small class="block">({{
+                  $t('common.equivalentTo') + ' ' +
+                  (cartStore.totalPoints / 19).toFixed(2) + ' ' + $t('common.currency') }})</small></span>
             </div>
             <button @click="requestCollection"
               class="w-full bg-[#2C702C] hover:bg-green-900 cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
@@ -310,24 +320,31 @@ export default {
 .bg-primary {
   background-color: rgb(236, 240, 236) !important;
 }
+
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(61, 60, 60)!important;
+  background-color: rgb(61, 60, 60) !important;
 }
+
 .bg-cart {
   background-color: #ffffff !important;
 }
+
 [data-theme="forest"] .bg-cart {
   background-color: #242323 !important;
 }
+
 .text-secondary {
   color: #2c702c !important;
 }
+
 [data-theme="forest"] .text-secondary {
   color: rgb(9, 228, 75) !important;
 }
+
 .text-section {
   color: black !important;
 }
+
 [data-theme="forest"] .text-section {
   color: white !important;
 }
