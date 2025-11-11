@@ -1,9 +1,20 @@
 <template>
   <div class="bg-tabs rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
+
+      <div class="relative">
+        <select v-model="filters.payout_method"
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
+          <option value="">{{ $t('common.allPayoutMethods') }}</option>
+          <option value="earn">{{ $t('common.earnedPoints') }}</option>
+          <option value="donate">{{ $t('common.donatedPoints') }}</option>
+        </select>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
+      </div>
+
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
           <option value="assigned">{{ $t('common.assigned') }}</option>
@@ -11,24 +22,16 @@
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
 
-      <div class="relative">
-        <select v-model="filters.payout_method"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
-          <option value="">{{ $t('common.allPayoutMethods') }}</option>
-          <option value="earn">{{ $t('common.earnedPoints') }}</option>
-          <option value="donate">{{ $t('common.donatedPoints') }}</option>
-        </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
-      </div>
+
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
           <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
-            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+            class="w-full px-8 md:px-10 py-1.5 md:py-2  text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <svg
-            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
+            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-4', 'h-4','md:w-5', 'md:h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
             fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -42,16 +45,16 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">#</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">#</th>
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.requestNumber') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.createdAt') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.phone') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.status') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.action') }}</th>
           </tr>
         </thead>
@@ -62,7 +65,7 @@
             </td>
           </tr>
 
-          <tr v-for="request, index in filteredRequests" :key="request.id" class="transition-colors">
+          <tr v-for="request, index in filteredRequests" :key="request.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ index + 1 }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ request.request_number }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">{{ request.created_at }}</td>
@@ -78,7 +81,7 @@
                 {{ $t(`common.${request.status}`) }}
               </span>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2 mx-auto items-center justify-center fle">
               <button v-if="request.status == 'pending' || request.status == 'assigned'" @click="openScanner(request)"
                 class="px-3 py-1 border border-green-300 rounded-md text-primary hover:bg-green-50 transition-colors cursor-pointer">
                 {{ $t('common.collect') }}
