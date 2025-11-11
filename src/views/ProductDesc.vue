@@ -34,7 +34,7 @@
 
           <!-- Product Info -->
           <div class="flex-start">
-            <div class="flex flex-start justify-between flex-row  lg:pt-4">
+            <div class="flex flex-start justify-between flex-row  lg:pt-12">
               <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary  ">
               {{ product.name }}
             </h1>
@@ -66,9 +66,6 @@
               <span class="text-gray-400 text-[0.5rem] sm:text-xs">|</span>
               <span class="text-[0.5rem] sm:text-xs text-secondary">{{ productSold }} Sold</span>
             </div>
-            <!-- <p class="hidden md:block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-1 md:mb-2 lg:mb-4">
-              {{ product.price }} {{ $t("common.currency") }}
-            </p> -->
             <p class="text-sm sm:text-base text-primary  mb-2 md:mb-4">
               {{ product.description }}
             </p>
