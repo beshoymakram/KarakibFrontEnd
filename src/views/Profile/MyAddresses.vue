@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-item rounded-t-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+    <div class="bg-item rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
       <div class="flex flex-wrap items-center gap-4">
         <div class="relative">
           <button @click="openCreateModal()"
-            class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm md:text-base font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+            class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-sm md:text-base font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
             {{ $t('common.createNewAddress') }}
           </button>
         </div>
@@ -11,9 +11,9 @@
         <div class="flex-1 max-w-md ml-auto">
           <div class="relative">
             <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
-              class="w-full pl-10 pr-10 py-2 border text-sm md:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+              class="w-full p-8 md:px-10  py-2 border text-sm md:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
             <svg
-              :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
+              :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-4', 'h-4','md:w-5', 'md:h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
               fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -23,10 +23,10 @@
       </div>
     </div>
 
-    <div class="bg-item  shadow-sm overflow-hidden rounded-lg">
-      <div class="overflow-x-auto ">
-        <table class="w-full table-auto mx-auto ">
-          <thead class="bg-item border-b border-gray-200 ">
+    <div class="bg-item shadow-sm overflow-hidden  rounded-lg">
+      <div class="bg-item overflow-x-auto ">
+        <table class=" bg-item w-full table-auto  mx-auto  ">
+          <thead class=" border-b border-gray-200 ">
             <tr class="">
               <th class="px-6 md:px:8 py-3  text-xs text-center font-medium text-section uppercase tracking-wider">{{
                 $t('common.name') }}</th>
@@ -41,7 +41,7 @@
                 $t('common.action') }}</th>
             </tr>
           </thead>
-          <tbody class="bg-item divide-y divide-gray-200">
+          <tbody class=" divide-y divide-gray-200 rounded-b-lg">
             <tr v-if="filteredAddresses.length === 0">
               <td colspan="5" class="px-4 py-4 text-center text-section">
                 {{ $t('common.noResultsMatchSearch') }}

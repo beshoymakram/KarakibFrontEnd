@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <div class="bg-tabs rounded-t-lg shadow-sm mb-6 mx-4  sm:mx-10 md:mx-20">
+      <div class="bg-tabs rounded-lg shadow-sm mb-6 mx-4  sm:mx-10 md:mx-20">
           <nav
             :class="['flex', 'flex-wrap', 'p-2', 'border-b', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
             <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
