@@ -3,29 +3,29 @@
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
-        <span class="absolute right-3 top-[55%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
 
       <div class="relative">
         <select v-model="filters.payout_method"
-          class="px-4 py-2 pr-8   text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
-          <option value="">{{ $t('common.allPayoutMethods') }}</option>
-          <option value="earn">{{ $t('common.earnedPoints') }}</option>
-          <option value="donate">{{ $t('common.donatedPoints') }}</option>
+          class=" px-4 py-1.5 md:py-2 pr-8  text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
+          <option value="" class="text-sm md:text-base">{{ $t('common.allPayoutMethods') }}</option>
+          <option value="earn" class="text-sm md:text-base">{{ $t('common.earnedPoints') }}</option>
+          <option value="donate" class="text-sm md:text-base">{{ $t('common.donatedPoints') }}</option>
         </select>
-        <span class="absolute right-3 top-[55%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
           <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
-            class="w-full p-8 md:px-10  py-2 border text-sm md:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <svg
+           class="w-full px-8 md:px-10 py-1.5 md:py-2 border text-sm md:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+           <svg
             :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-4', 'h-4','md:w-5', 'md:h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
             fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -3,31 +3,34 @@
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.type"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile">
-          <option value="">{{ $t('common.allTypes') }}</option>
-          <option value="earn">{{ $t('common.earnedPoints') }}</option>
-          <option value="convert">{{ $t('common.convertedPoints') }}</option>
-          <option value="donate">{{ $t('common.donatedPoints') }}</option>
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-myprofile ">
+          <option value="" class="text-sm md:text-base ">{{ $t('common.allTypes') }}</option>
+          <option value="earn" class="text-sm md:text-base">{{ $t('common.earnedPoints') }}</option>
+          <option value="convert" class="text-sm md:text-base">{{ $t('common.convertedPoints') }}</option>
+          <option value="donate" class="text-sm md:text-base">{{ $t('common.donatedPoints') }}</option>
         </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
 
-      <div class="relative">
+      <div class="relative ">
         <button @click="openCreateModal()"
-          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+          class="relative inline-flex items-center gap-x-1.5 md:mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2  text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
           {{ $t('common.Convert points to balance') }}
         </button>
-        <button @click="openDonateModal()"
-          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          {{ $t('common.donatePoints') }}
-        </button>
       </div>
+      <div class="relative ">
+        <button @click="openDonateModal()"
+          class="relative inline-flex items-center gap-x-1.5 md:mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+          {{ $t('common.donatePoints') }}
+      </button>
+    </div>
+
 
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
           <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
-            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-          <svg :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']" fill="none" stroke="currentColor"
+            class="w-full px-8 md:px-10 py-1.5 md:py-2 border text-sm md:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
+            <svg :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-5', 'h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -359,4 +362,5 @@ select {
 [data-theme="forest"] .bg-tabs {
   background-color: #2C2C2C;
 }
+
 </style>
