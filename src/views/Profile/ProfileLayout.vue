@@ -59,7 +59,7 @@
           <nav
             :class="['flex', 'flex-wrap', 'p-2', 'border-b', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
             <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
-              class="px-2 sm:px-4 py-2 sm:py-3 mb-1 cursor-pointer   text-xs sm:text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
+              class="px-2 sm:px-4 py-2 sm:py-3 mb-1 mx-1 cursor-pointer   text-xs sm:text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
                 ? 'bg-[#E0EBE0] text-[#2C702C]'
                 : 'text-primary hover:bg-gray-100'">
               {{ $t(tab.labelKey) }}
