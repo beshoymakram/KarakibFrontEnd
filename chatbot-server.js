@@ -75,10 +75,62 @@ if (!process.env.GEMINI_API_KEY) {
 }
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const textModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-const visionModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-console.log("✅ Gemini API configured");
+// List of model names to try in order of preference
+// Based on available models: Gemini Flash (Latest), Gemini Pro (Latest), etc.
+const textModels = [
+  "gemini-1.5-flash-latest",  // Matches "Gemini Flash (Latest)" in dropdown
+  "gemini-1.5-flash",         // Alternative name
+  "gemini-flash-latest",      // Another alias
+  "gemini-pro-latest",        // Matches "Gemini Pro (Latest)" in dropdown
+  "gemini-1.5-pro-latest",    // Alternative name
+  "gemini-pro",               // Fallback to standard name
+];
+
+const visionModels = [
+  "gemini-1.5-flash-latest",  // Flash models support multimodal
+  "gemini-1.5-flash",
+  "gemini-flash-latest",
+  "gemini-1.5-pro-latest",    // Pro models also support vision
+  "gemini-pro-latest",
+  "gemini-pro-vision",        // Legacy vision model
+  "gemini-pro",               // Fallback
+];
+
+// Initialize text model
+let textModel;
+for (const modelName of textModels) {
+  try {
+    textModel = genAI.getGenerativeModel({ model: modelName });
+    console.log(`✅ Text model initialized: ${modelName}`);
+    break;
+  } catch (error) {
+    console.warn(`⚠️ Failed to initialize text model ${modelName}:`, error.message);
+  }
+}
+
+if (!textModel) {
+  console.error("❌ Failed to initialize any text model");
+  process.exit(1);
+}
+
+// Initialize vision model
+let visionModel;
+for (const modelName of visionModels) {
+  try {
+    visionModel = genAI.getGenerativeModel({ model: modelName });
+    console.log(`✅ Vision model initialized: ${modelName}`);
+    break;
+  } catch (error) {
+    console.warn(`⚠️ Failed to initialize vision model ${modelName}:`, error.message);
+  }
+}
+
+if (!visionModel) {
+  // Use text model as fallback for vision
+  console.warn("⚠️ Vision model not available, using text model for images");
+  visionModel = textModel;
+}
 
 // ==================== RAG: RETRIEVE RELEVANT CONTEXT ====================
 function retrieveRelevantContext(query) {

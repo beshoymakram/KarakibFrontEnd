@@ -42,11 +42,11 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.points') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.type') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.description') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.date') }}</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.action') }}</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.points') }}</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.type') }}</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.description') }}</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.date') }}</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{ $t('common.action') }}</th>
           </tr>
         </thead>
         <tbody class="bg-tabs divide-y divide-gray-200">
@@ -56,7 +56,7 @@
             </td>
           </tr>
 
-          <tr v-for="point in filteredPoints" :key="point.id" class="hover:bg-gray-50 transition-colors">
+          <tr v-for="point in filteredPoints" :key="point.id" class="hover:bg-gray-50 transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
               {{ point.points }}
             </td>
