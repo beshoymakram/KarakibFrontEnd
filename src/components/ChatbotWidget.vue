@@ -337,6 +337,10 @@ export default {
       genAI: null,
       textModel: null,
       visionModel: null,
+      textModelCandidates: [],
+      visionModelCandidates: [],
+      textModelIndex: 0,
+      visionModelIndex: 0,
 
       // Auth store reference
       authStore: null,
@@ -561,10 +565,119 @@ export default {
       }
 
       this.genAI = new GoogleGenerativeAI(apiKey);
-      this.textModel = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-      this.visionModel = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+      
+      // List of model names to try in order of preference
+      // Based on the dropdown showing: Gemini Flash (Latest), Gemini Pro (Latest), etc.
+      this.textModelCandidates = [
+        "gemini-1.5-flash-latest",  // Matches "Gemini Flash (Latest)" in dropdown
+        "gemini-1.5-flash",         // Alternative name
+        "gemini-flash-latest",      // Another alias
+        "gemini-1.5-pro-latest",    // Matches "Gemini Pro (Latest)" in dropdown
+        "gemini-pro-latest",        // Alternative name
+        "gemini-pro",               // Fallback to standard name
+      ];
 
-      console.log("✅ Gemini API configured");
+      this.visionModelCandidates = [
+        "gemini-1.5-flash-latest",  // Flash models support multimodal
+        "gemini-1.5-flash",
+        "gemini-flash-latest",
+        "gemini-1.5-pro-latest",    // Pro models also support vision
+        "gemini-pro-latest",
+        "gemini-pro-vision",        // Legacy vision model
+        "gemini-pro",               // Fallback
+      ];
+
+      // Initialize with first model (will auto-fallback if it doesn't work)
+      this.textModelIndex = 0;
+      this.visionModelIndex = 0;
+      this.textModel = this.genAI.getGenerativeModel({ model: this.textModelCandidates[0] });
+      this.visionModel = this.genAI.getGenerativeModel({ model: this.visionModelCandidates[0] });
+
+      console.log(`✅ Gemini API initialized. Will try models: ${this.textModelCandidates[0]} (text), ${this.visionModelCandidates[0]} (vision)`);
+    },
+
+    // Helper function to retry API calls with exponential backoff and model fallback
+    async retryApiCall(apiCall, modelType = 'text', maxRetries = 3, baseDelay = 1000) {
+      for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+          return await apiCall();
+        } catch (error) {
+          // Extract error message from various error formats
+          const errorStr = error?.message || error?.toString() || JSON.stringify(error) || '';
+          const errorStrLower = errorStr.toLowerCase();
+          
+          // Check if it's a model not found error (404)
+          const isModelNotFound = errorStrLower.includes('404') || 
+                                 errorStrLower.includes('not found') || 
+                                 errorStrLower.includes('not supported') ||
+                                 errorStrLower.includes('is not found for api version');
+          
+          // If model not found, try next model in the list
+          if (isModelNotFound) {
+            const candidates = modelType === 'text' ? this.textModelCandidates : this.visionModelCandidates;
+            const currentIndex = modelType === 'text' ? this.textModelIndex : this.visionModelIndex;
+            
+            if (currentIndex < candidates.length - 1) {
+              // Try next model
+              const nextIndex = currentIndex + 1;
+              const nextModelName = candidates[nextIndex];
+              console.warn(`⚠️ Model ${candidates[currentIndex]} not available, trying ${nextModelName}...`);
+              
+              // Update model
+              if (modelType === 'text') {
+                this.textModelIndex = nextIndex;
+                this.textModel = this.genAI.getGenerativeModel({ model: nextModelName });
+                console.log(`✅ Switched to text model: ${nextModelName}`);
+              } else {
+                this.visionModelIndex = nextIndex;
+                this.visionModel = this.genAI.getGenerativeModel({ model: nextModelName });
+                console.log(`✅ Switched to vision model: ${nextModelName}`);
+              }
+              
+              // Retry with new model (don't count this as a retry attempt)
+              try {
+                return await apiCall();
+              } catch (newError) {
+                // If new model also fails, continue to next iteration
+                continue;
+              }
+            } else {
+              // No more models to try
+              throw new Error(`No working ${modelType} model found. Tried: ${candidates.join(', ')}`);
+            }
+          }
+          
+          const isRateLimit = errorStrLower.includes('429') || 
+                            errorStrLower.includes('rate limit') ||
+                            errorStrLower.includes('quota exceeded') ||
+                            errorStrLower.includes('retry');
+          
+          // Extract retry delay from error if available (e.g., "Please retry in 42.355703629s")
+          let retryDelay = baseDelay * Math.pow(2, attempt);
+          if (errorStrLower.includes('retry') || errorStrLower.includes('retrydelay')) {
+            const retryMatch = errorStr.match(/(\d+(?:\.\d+)?)\s*s/);
+            if (retryMatch) {
+              retryDelay = Math.min(parseFloat(retryMatch[1]) * 1000 + 1000, 60000); // Max 60 seconds
+            }
+          }
+
+          // Check for quota limit: 0 (no free tier available)
+          const isQuotaZero = errorStrLower.includes('limit: 0') || 
+                             (errorStrLower.includes('free_tier') && errorStrLower.includes('limit: 0'));
+          
+          // Only retry on rate limit errors (not quota: 0) and if we have retries left
+          if (isRateLimit && !isQuotaZero && attempt < maxRetries - 1) {
+            console.warn(`⚠️ Rate limit hit, retrying in ${(retryDelay / 1000).toFixed(1)}s... (attempt ${attempt + 1}/${maxRetries})`);
+            await new Promise(resolve => setTimeout(resolve, retryDelay));
+            continue;
+          }
+          
+          // If it's a quota error (limit: 0) or last attempt, throw the error
+          if (isQuotaZero || attempt === maxRetries - 1) {
+            throw error;
+          }
+        }
+      }
     },
 
     async loadKnowledgeBase() {
@@ -698,9 +811,38 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       } catch (error) {
         console.error("Chatbot error:", error);
         const errorGreeting = this.userFirstName ? `Sorry ${this.userFirstName}` : "Sorry";
+        let errorMessage = `${errorGreeting}, I encountered an error.\n\nPlease try again! 🌿`;
+        
+        // Extract error message from various error formats
+        const errorStr = error?.message || error?.toString() || JSON.stringify(error) || '';
+        const errorStrLower = errorStr.toLowerCase();
+        
+        // Handle specific error types
+        if (errorStrLower.includes('quota') || errorStrLower.includes('quota exceeded') || errorStrLower.includes('limit: 0')) {
+          const isArabic = this.$i18n.locale === 'ar';
+          errorMessage = isArabic
+            ? `${errorGreeting}، لقد تم تجاوز الحد المسموح للاستخدام المجاني.\n\nيرجى التحقق من:\n1. تم تفعيل Gemini API في Google Cloud Console\n2. تم تفعيل الفاتورة (حتى للاستخدام المجاني)\n3. الانتظار قليلاً ثم المحاولة مرة أخرى\n\nأو اتصل بالدعم الفني للحصول على المساعدة. 🌿`
+            : `${errorGreeting}, the free tier quota has been exceeded.\n\nPlease check:\n1. Gemini API is enabled in Google Cloud Console\n2. Billing is enabled (even for free tier)\n3. Wait a moment and try again\n\nOr contact support for assistance. 🌿`;
+        } else if (errorStrLower.includes('404') || errorStrLower.includes('not found') || errorStrLower.includes('not supported')) {
+          const isArabic = this.$i18n.locale === 'ar';
+          errorMessage = isArabic
+            ? `${errorGreeting}، النموذج المحدد غير متاح.\n\nيرجى التحقق من أن Gemini API مفعل بشكل صحيح في Google Cloud Console أو اتصل بالدعم. 🌿`
+            : `${errorGreeting}, the specified model is not available.\n\nPlease verify that Gemini API is properly enabled in Google Cloud Console or contact support. 🌿`;
+        } else if (errorStrLower.includes('429') || errorStrLower.includes('rate limit') || errorStrLower.includes('retry')) {
+          const isArabic = this.$i18n.locale === 'ar';
+          errorMessage = isArabic
+            ? `${errorGreeting}، تم تجاوز معدل الطلبات المسموح به.\n\nيرجى الانتظار قليلاً ثم المحاولة مرة أخرى. 🌿`
+            : `${errorGreeting}, the request rate limit has been exceeded.\n\nPlease wait a moment and try again. 🌿`;
+        } else if (errorStrLower.includes('api key') || errorStrLower.includes('authentication') || errorStrLower.includes('invalid api key')) {
+          const isArabic = this.$i18n.locale === 'ar';
+          errorMessage = isArabic
+            ? `${errorGreeting}، هناك مشكلة في مصادقة API.\n\nيرجى التحقق من مفتاح API أو الاتصال بالدعم. 🌿`
+            : `${errorGreeting}, there's an API authentication issue.\n\nPlease check the API key or contact support. 🌿`;
+        }
+        
         this.messages.push({
           sender: "bot",
-          text: `${errorGreeting}, I encountered an error.\n\nPlease try again! 🌿`,
+          text: errorMessage,
         });
       } finally {
         this.isLoading = false;
@@ -713,6 +855,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
         console.warn("⚠️ Knowledge base not loaded yet, using fallback");
         return "I'm currently initializing. Please try again in a moment. 🌿";
       }
+
 
       const lowerMsg = message.toLowerCase().trim();
       const lang = this.detectLanguage(message);
@@ -930,7 +1073,8 @@ ${contextText}
       const userName = this.userFirstName || (isArabic ? 'المستخدم' : 'User');
       prompt += `${userName}: ${message}\n\n⚠️ IMPORTANT: If the user's question refers to something in the conversation history, use that context!\n\nKoko:`;
 
-      const result = await this.textModel.generateContent(prompt);
+      // Use retry mechanism for API calls (with automatic model fallback)
+      const result = await this.retryApiCall(() => this.textModel.generateContent(prompt), 'text');
       return result.response.text();
     },
 
@@ -1029,7 +1173,8 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
         },
       };
 
-      const result = await this.visionModel.generateContent([visionPrompt, imagePart]);
+      // Use retry mechanism for API calls (with automatic model fallback)
+      const result = await this.retryApiCall(() => this.visionModel.generateContent([visionPrompt, imagePart]), 'vision');
       return result.response.text();
     },
 
