@@ -474,6 +474,8 @@ export default {
       try {
         const response = await productsService.getProducts();
         this.products = response.data.data || response.data;
+        const data = (response && response.data && (response.data.data || response.data)) || [];
+        this.products = Array.isArray(data) ? data.slice(0, 8) : [];
       } catch (error) {
         this.$toast.error(error.response.data.message);
       }
