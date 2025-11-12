@@ -1,40 +1,31 @@
 <template>
   <!-- Hero Section -->
-  <div
-    class="hero h-screen  w-full items-start   mx-auto "
-  >
+  <div class="hero h-screen  w-full items-start   mx-auto ">
 
     <!-- Background Image Layer -->
-  <div
-    class="  absolute inset-0 bg-cover bg-center bg-no-repeat"
-    style="background-image: url('/images/Homebg.png');"
-  ></div>
+    <div class="  absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style="background-image: url('/images/Homebg.png');"></div>
 
-  <!-- Overlay -->
-  <div  class="absolute inset-0 pointer-events-none"
-    :style="{
+    <!-- Overlay -->
+    <div class="absolute inset-0 pointer-events-none" :style="{
       background:
         currentTheme === 'forest'
           ? 'linear-gradient(to bottom, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.5) 40%, rgba(17,17,17,0.2) 90%, rgba(17,17,17,0) 100%)'
           : 'linear-gradient(to bottom, rgba(233,235,248,0.10) 0%, rgba(233,235,248,0.9) 10%, rgba(233,235,248,0) 90%, rgba(233,235,248,0) 100%)'
-    }"
-  ></div>
+    }"></div>
 
     <div class="   hero-content text-center items-start justify-start pt-16 sm:pt-18 md:pt-22 lg:pt-28 px-4">
       <div class="max-w-3xl items-start">
         <h1
-          class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl pt-10 md:pt-12 lg:pt-14 text-primary font-bold drop-shadow-lg"
-        >
+          class="text-2xl mt-1 sm:text-3xl md:text-4xl lg:text-5xl pt-10 md:pt-12 lg:pt-14 text-primary font-bold drop-shadow-lg">
           {{ $t("common.turnYourWasteIntoWorth") }}
         </h1>
         <p class="py-4 mt-2 md:py-6 text-sm sm:text-base md:text-lg font-medium text-hero">
           {{ $t("common.karakibMakesItEasyToCollectWaste") }}
         </p>
-        <button
-          @click="scrollToHowItWorks"
+        <button @click="scrollToHowItWorks"
           class="btn border-0 rounded-md cursor-pointer bg-[#2C702C] px-4 md:px-6 py-2 md:py-3 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
-          text-lg
-        >
+          text-lg>
           {{ $t("common.getStarted") }}
         </button>
       </div>
@@ -43,58 +34,45 @@
 
   <!-- Steps Section -->
 
-<section class="px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 bg-steps" ref="howItWorksSection">
-  <p
-    class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold drop-shadow-lg text-center mb-6 md:mb-8 lg:mb-10 pt-0"
-  >
-    {{ $t("common.howItWorks") }}
-  </p>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
-    <div
-      v-for="(step, index) in steps"
-      :key="index"
-      class="card bg-base-100 shadow-sm  w-68  md:w-74 lg:w-54 xl:w-64  rounded-3xl cursor-pointer hover:shadow-lg transition-all duration-300 mx-auto "
-      @click="handleStepClick(step)"
-    >
-      <figure class="p-4 lg:p-2 xl:p-4 md:p-5">
-        <img
-          :src="step.image"
-          :alt="step.title"
-          class="object-cover rounded-3xl size-40   sm:size-48   mt-2"
-        />
-      </figure>
-      <div class="card-body text-center px-4 py-4">
-        <h2 class="text-xs sm:text-sm md:text-base font-semibold text-primary -mt-4">
-          {{ step.number }}
-        </h2>
-        <p class="card-title text-sm sm:text-base md:text-lg mx-auto font-semibold ">
-          {{ step.title }}
-        </p>
-        <p class="text-xs sm:text-sm  text-gray-600 leading-relaxed">
-          {{ step.description }}
-        </p>
+  <section class="px-4 sm:px-6 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 bg-steps" ref="howItWorksSection">
+    <p
+      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold drop-shadow-lg text-center mb-6 md:mb-8 lg:mb-10 pt-0">
+      {{ $t("common.howItWorks") }}
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+      <div v-for="(step, index) in steps" :key="index"
+        class="card bg-base-100 shadow-sm  w-68  md:w-74 lg:w-54 xl:w-64  rounded-3xl cursor-pointer hover:shadow-lg transition-all duration-300 mx-auto "
+        @click="handleStepClick(step)">
+        <figure class="p-4 lg:p-2 xl:p-4 md:p-5">
+          <img :src="step.image" :alt="step.title" class="object-cover rounded-3xl size-40   sm:size-48   mt-2" />
+        </figure>
+        <div class="card-body text-center px-4 py-4">
+          <h2 class="text-xs sm:text-sm md:text-base font-semibold text-primary -mt-4">
+            {{ step.number }}
+          </h2>
+          <p class="card-title text-sm sm:text-base md:text-lg mx-auto font-semibold ">
+            {{ step.title }}
+          </p>
+          <p class="text-xs sm:text-sm  text-gray-600 leading-relaxed">
+            {{ step.description }}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Waste Carousel Section -->
   <section class="px-4 md:px-12 py-6 md:py-10 lg:py-12 relative bg-hero">
-    <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
-    >
+    <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg">
       {{ $t("common.discoverWasteTypes") }}
     </p>
-    <p
-      class="text-sm sm:text-base md:text-lg lg:text-xl text-secondary text-center pt-5 pb-10 font-normal"
-    >
+    <p class="text-sm sm:text-base md:text-lg lg:text-xl text-secondary text-center pt-5 pb-10 font-normal">
       {{ $t("common.learnAboutDifferentKindsOfWaste") }}
     </p>
     <div class="text-center mt-4 mb-6 md:mb-10">
       <router-link to="/add-waste">
         <button
-          class="btn border-0 rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition"
-        >
+          class="btn border-0 rounded-lg cursor-pointer bg-[#2C702C] px-4 md:px-6 py-3 md:py-4 text-base md:text-lg lg:text-xl font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26] transition">
           {{ $t("common.recycleNow") }}
         </button>
       </router-link>
@@ -103,38 +81,21 @@
     <!-- Carousel Wrapper -->
     <div class="relative max-w-6xl mx-auto flex items-center justify-center px-4 sm:px-0">
       <!-- Left Arrow -->
-      <button
-        @click="scrollPrev"
-        class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-4 h-4 xl:w-5 xl:h-5  "
-        >
+      <button @click="scrollPrev"
+        class="hidden md:block absolute left-0 md:-left-10 xl:left-[-50px] top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="w-4 h-4 xl:w-5 xl:h-5  ">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
       </button>
 
       <!-- Carousel (Scrollable Container) -->
-      <div
-        ref="carousel"
-        class="carousel carousel-center bg-hero rounded-box space-x-4 sm:space-x-6 pt-6 sm:pt-8 md:pt-10 flex overflow-x-auto scroll-smooth"
-      >
-        <div
-          v-for="(item, index) in wasteItems"
-          :key="index"
-          class="carousel-item flex flex-col items-center shrink-0"
-        >
+      <div ref="carousel"
+        class="carousel carousel-center bg-hero rounded-box space-x-4 sm:space-x-6 pt-6 sm:pt-8 md:pt-10 flex overflow-x-auto scroll-smooth">
+        <div v-for="(item, index) in wasteItems" :key="index" class="carousel-item flex flex-col items-center shrink-0">
           <router-link to="/add-waste">
-          <img
-            :src="item.image_url"
-            :alt="item.name"
-            class="w-28 h-28 sm:w-38 sm:h-38 md:w-46 md:h-46 object-cover rounded-full bg-carousel hover:scale-105"
-          />
+            <img :src="item.image_url" :alt="item.name"
+              class="w-28 h-28 sm:w-38 sm:h-38 md:w-46 md:h-46 object-cover rounded-full bg-carousel hover:scale-105" />
           </router-link>
           <p class="mt-3 md:mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary">
             {{ item.name }}
@@ -143,18 +104,10 @@
       </div>
 
       <!-- Right Arrow -->
-      <button
-        @click="scrollNext"
-        class="hidden md:block absolute right-0 md:-right-10 xl:right-[-50px]  top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="w-4 h-4 xl:w-5 xl:h-5"
-        >
+      <button @click="scrollNext"
+        class="hidden md:block absolute right-0 md:-right-10 xl:right-[-50px]  top-1/2 -translate-y-1/2 bg-[#EAF2EA] hover:bg-[#d6e7d6] text-[#2C702C] rounded-full p-2 shadow-md z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="w-4 h-4 xl:w-5 xl:h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
       </button>
@@ -164,18 +117,15 @@
   <div class="hero  bg-merch min-h-[30vh] sm:min-h-[35vh]  py-6 md:py-10 lg:py-12">
     <div class=" text-center">
       <div class="max-w-3xl">
-        <p
-          class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#2C702C] font-semibold text-center drop-shadow-lg"
-        >
+        <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#2C702C] font-semibold text-center drop-shadow-lg">
           {{ $t("common.ourExclusiveMerchandise") }}
-      </p>
+        </p>
         <p class="py-4 md:py-6 text-sm sm:text-base md:text-lg text-[#163816]">
           {{ $t("common.showYourSupportWithPremiumCollection") }}
         </p>
         <router-link to="/shop">
           <button
-            class="btn border-0 rounded-md cursor-pointer bg-[#2C702C]  text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]"
-          >
+            class="btn border-0 rounded-md cursor-pointer bg-[#2C702C]  text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C] hover:bg-[#265C26]">
             {{ $t("common.shopNow") }}
           </button>
         </router-link>
@@ -185,21 +135,14 @@
 
   <!-- merch -->
   <div
-    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-steps gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12"
-  >
-    <div
-      v-for="(product, index) in products"
-      :key="index"
-      class="card bg-tabs w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300"
-    >
+    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-steps gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12">
+    <div v-for="(product, index) in products" :key="index"
+      class="card bg-tabs w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300">
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block  rounded-t-xl">
         <figure>
-          <img
-            :src="product.image_url"
-            :alt="product.name"
-            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain hover:opacity-90 rounded-t-xl"
-          />
+          <img :src="product.image_url" :alt="product.name"
+            class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain hover:opacity-90 rounded-t-xl" />
         </figure>
 
         <div class="px-3 pt-3 pb-2">
@@ -220,18 +163,10 @@
       <div class="flex items-center mt-2 justify-end px-3 pb-3">
         <!-- Show quantity controls if item is in cart -->
         <div v-if="getCartItem(product.id)" class="flex items-center gap-2">
-          <button
-            @click.stop="decrementCartItem(product.id)"
-            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-4 h-4 sm:w-5 sm:h-5 text-primary"
-            >
+          <button @click.stop="decrementCartItem(product.id)"
+            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5 text-primary">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
             </svg>
           </button>
@@ -240,31 +175,17 @@
             {{ getCartItem(product.id).quantity }}
           </span>
 
-          <button
-            @click.stop="incrementCartItem(product.id)"
-            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-4 h-4 sm:w-5 sm:h-5"
-            >
+          <button @click.stop="incrementCartItem(product.id)"
+            class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-[#2C702C] hover:bg-[#265C26] text-white rounded-full transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </button>
 
           <div class="flex items-center gap-1 ml-2 text-primary text-xs font-semibold">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2.5"
-              stroke="currentColor"
-              class="w-3 h-3 sm:w-4 sm:h-4"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+              stroke="currentColor" class="w-3 h-3 sm:w-4 sm:h-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
             </svg>
             <span class="text-[8px] sm:text-xs">{{ $t("common.inCart") }}</span>
@@ -272,20 +193,20 @@
         </div>
 
         <!-- Show add to cart button if not in cart -->
-        <button
-          v-else-if="product.stock > 0"
-          @click.stop="addToCart(product.id)"
-          class="btn rounded-md border-0 bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
-        >
+        <button v-else-if="product.stock > 0 && !product.has_sizes" @click.stop="addToCart(product.id)"
+          class="btn rounded-md border-0 bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
           {{ $t("common.addToCart") }}
         </button>
 
+        <router-link v-else-if="product.has_sizes" :to="{ name: 'product-desc', params: { id: product.id } }"
+          class="btn  border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
+          {{ $t("common.selectSizeFirst") }}
+        </router-link>
+
         <!-- Out of stock button -->
-        <button
-          v-else
+        <button v-else
           class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
-          disabled
-        >
+          disabled>
           {{ $t("common.outOfStock") }}
         </button>
       </div>
@@ -294,37 +215,24 @@
 
   <!-- make differance section -->
   <section class="bg-donate px-4 sm:px-8 md:px-12 lg:px-16 py-6 md:py-10 lg:py-12 relative">
-    <p
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg"
-    >
+    <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary font-semibold text-center drop-shadow-lg">
       {{ $t("common.makeADifference") }}
     </p>
-    <p
-      class="text-sm sm:text-base md:text-lg text-secondary text-center pt-4 md:pt-5 pb-8 md:pb-10 "
-    >
+    <p class="text-sm sm:text-base md:text-lg text-secondary text-center pt-4 md:pt-5 pb-8 md:pb-10 ">
       {{ $t("common.convertRecyclingPointsIntoDonations") }}
     </p>
     <div
-      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 justify-center items-stretch gap-6 md:gap-8 px-4 sm:px-6 md:px-8"
-    >
-      <div
-        v-for="(card, index) in infoCards"
-        :key="index"
-        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full sm:w-6/10 md:w-7/10 xl:w-full mx-auto flex flex-col"
-      >
-        <img
-          :src="card.image"
-          :alt="card.title"
-          class="mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-[#E9EBF8] rounded-full p-3"
-        />
+      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 justify-center items-stretch gap-6 md:gap-8 px-4 sm:px-6 md:px-8">
+      <div v-for="(card, index) in infoCards" :key="index"
+        class="border-2 border-[#BFD6BF] rounded-xl p-6 md:p-8 text-center bg-base-200 w-full sm:w-6/10 md:w-7/10 xl:w-full mx-auto flex flex-col">
+        <img :src="card.image" :alt="card.title"
+          class="mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 bg-[#E9EBF8] rounded-full p-3" />
         <h3 class="text-primary font-semibold text-base sm:text-lg md:text-xl mb-2 md:mb-3">
           {{ card.title }}
         </h3>
         <p class="text-[#8E98A8] text-xs sm:text-sm md:text-base lg:text-lg mb-4">{{ card.description }}</p>
-        <button
-          @click="openDonationModal(card.name, card.title)"
-          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition cursor-pointer mt-auto w-fit mx-auto"
-        >
+        <button @click="openDonationModal(card.name, card.title)"
+          class="bg-[#2C702C] text-white px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-md hover:bg-[#1D4A1D] transition cursor-pointer mt-auto w-fit mx-auto">
           {{ $t("common.donate") }}
         </button>
       </div>
@@ -332,34 +240,23 @@
   </section>
 
   <!-- Donation Modal -->
-  <DonationModal
-    :isOpen="isModalOpen"
-    :fundName="selectedFund"
-    :fundTitle="selectedFundTitle"
-    @close="closeModal"
-    @donate="handleDonation"
-  />
+  <DonationModal :isOpen="isModalOpen" :fundName="selectedFund" :fundTitle="selectedFundTitle" @close="closeModal"
+    @donate="handleDonation" />
 
   <div v-if="isRedirecting" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
     <div class="bg-white rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl">
       <!-- <img src="/images/delivery.png" alt="Delivery Truck" class="w-48 mx-auto mb-4" /> -->
       <div class="text-[#2C702C] text-lg font-semibold">
         <div role="status" class="mx-auto text-center">
-          <svg
-            aria-hidden="true"
+          <svg aria-hidden="true"
             class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-[#2C702C] mx-auto my-3"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="currentColor"
-            />
+              fill="currentColor" />
             <path
               d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentFill"
-            />
+              fill="currentFill" />
           </svg>
           <span class="sr-only">Loading...</span>
         </div>
@@ -597,14 +494,14 @@ export default {
     this._themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["data-theme"],
-  });
+    });
   },
-   beforeUnmount() {
+  beforeUnmount() {
     if (this._themeObserver) {
       this._themeObserver.disconnect();
       this._themeObserver = null;
     }
-    },
+  },
 };
 </script>
 
@@ -620,42 +517,55 @@ export default {
 .bg-primary {
   background-color: rgb(235, 255, 235) !important;
 }
+
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(41, 41, 41)!important;
+  background-color: rgb(41, 41, 41) !important;
 }
+
 .text-secondary {
   color: #2c702c !important;
 }
+
 [data-theme="forest"] .text-secondary {
   color: rgb(9, 228, 75) !important;
 }
+
 .text-section {
   color: black !important;
 }
+
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
 .text-hero {
   color: #2C702C !important;
 }
+
 [data-theme="forest"] .text-hero {
   color: #b4f7b5 !important;
 }
+
 .bg-merch {
   background-color: #BFD6BF !important;
 }
+
 [data-theme="forest"] .bg-merch {
   background-color: #5fc285 !important;
 }
+
 .bg-carousel {
   background-color: #EAF2EA !important;
 }
+
 [data-theme="forest"] .bg-carousel {
   background-color: #748c74 !important;
 }
+
 .bg-hero {
   background-color: #f5faf3 !important;
 }
+
 [data-theme="forest"] .bg-hero {
   background-color: #2d2d2d !important;
 }
@@ -663,12 +573,15 @@ export default {
 .bg-steps {
   background-color: #EAF2EA !important;
 }
+
 [data-theme="forest"] .bg-steps {
   background-color: #3a3a3a !important;
 }
+
 .bg-donate {
   background-color: #f2f2f2 !important;
 }
+
 [data-theme="forest"] .bg-donate {
   background-color: #201e1e !important;
 }
@@ -676,6 +589,7 @@ export default {
 .bg-tabs {
   background-color: #FFFFFF !important;
 }
+
 [data-theme="forest"] .bg-tabs {
   background-color: rgb(41, 41, 41) !important;
 }

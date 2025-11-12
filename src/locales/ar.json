@@ -447,6 +447,7 @@
         "has_sizes?": "متوفر بأحجام؟",
         "yes": "نعم",
         "order_cancelled_successfully": "تم الغاء الطلب بنجاح",
+        "selectSizeFirst": "قم باختيار الحجم اولًا",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     },
     "chatbot": {

@@ -449,6 +449,7 @@
     "has_sizes?": "Has sizes?",
     "yes": "Yes",
     "order_cancelled_successfully": "Order cancelled successfully",
+    "selectSizeFirst": "Select Size First",
     "noWasteItems": "No waste items to collect"
   },
   "chatbot": {

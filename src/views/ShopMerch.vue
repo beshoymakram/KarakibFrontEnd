@@ -115,10 +115,15 @@
         </div>
 
         <!-- Show add to cart button if not in cart -->
-        <button v-else-if="product.stock > 0" @click.stop="addToCart(product.id)"
+        <button v-else-if="product.stock > 0 && !product.has_sizes" @click.stop="addToCart(product.id)"
           class="btn  border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
           {{ $t("common.addToCart") }}
         </button>
+
+        <router-link v-else-if="product.has_sizes" :to="{ name: 'product-desc', params: { id: product.id } }"
+          class="btn  border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
+          {{ $t("common.selectSizeFirst") }}
+        </router-link>
 
         <!-- Out of stock button -->
         <button v-else
