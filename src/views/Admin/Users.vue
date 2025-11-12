@@ -58,17 +58,17 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.name') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.email') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.role') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.status') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.points') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.action') }}</th>
           </tr>
         </thead>
@@ -79,7 +79,7 @@
             </td>
           </tr>
 
-          <tr v-for="user in filteredUsers" :key="user.id" class="transition-colors">
+          <tr v-for="user in filteredUsers" :key="user.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ user.name }}
             </td>
@@ -99,7 +99,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-yellow-600">
               {{ user.points || '--' }}
             </td>
-            <td v-if="user.status !== 'deleted'" class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+            <td v-if="user.status !== 'deleted'" class="px-6 py-4 whitespace-nowrap text-sm space-x-2 mx-auto items-center justify-center flex">
               <button @click="openEditModal(user)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 {{ $t('common.edit') }}

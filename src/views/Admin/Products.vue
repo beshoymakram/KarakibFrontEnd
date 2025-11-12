@@ -37,17 +37,17 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.name') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.category') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.price') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.stock') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.image') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.action') }}</th>
           </tr>
         </thead>
@@ -58,7 +58,7 @@
             </td>
           </tr>
 
-          <tr v-for="product in filteredProducts" :key="product.id" class="transition-colors">
+          <tr v-for="product in filteredProducts" :key="product.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ product.name }}
             </td>
@@ -74,7 +74,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm text-[#2C702C]">
               <img class="w-10 h-10 rounded-full" :src="product.image_url" :alt="product.name">
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2 mx-auto items-center justify-center flex">
               <button @click="openEditModal(product)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 {{ $t('common.edit') }}

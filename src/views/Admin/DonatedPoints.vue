@@ -32,16 +32,16 @@
       <table class="w-full table-auto">
         <thead class="bg-gray-50 border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Points
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Points
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Type
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Type
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
               Desccription
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Date
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Date
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Action
             </th>
           </tr>
         </thead>
@@ -52,7 +52,7 @@
             </td>
           </tr>
 
-          <tr v-for="point in filteredPoints" :key="point.id" class="hover:bg-gray-50 transition-colors">
+          <tr v-for="point in filteredPoints" :key="point.id" class="hover:bg-gray-50 transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#2C702C]">
               {{ point.points }}
             </td>

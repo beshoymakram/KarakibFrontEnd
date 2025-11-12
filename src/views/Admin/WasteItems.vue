@@ -47,16 +47,16 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Name
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Name
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Type
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Type
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Points
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Points
               per unit
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Image
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Image
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Action
             </th>
           </tr>
         </thead>
@@ -67,7 +67,7 @@
             </td>
           </tr>
 
-          <tr v-for="item in filteredItems" :key="item.id" class="transition-colors">
+          <tr v-for="item in filteredItems" :key="item.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ item.name }}
             </td>

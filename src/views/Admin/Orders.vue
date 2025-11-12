@@ -42,19 +42,19 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.orderNumber') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.orderedDate') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.total') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.paymentMethod') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.courier') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.status') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.action') }}</th>
           </tr>
         </thead>
@@ -65,7 +65,7 @@
             </td>
           </tr>
 
-          <tr v-for="order in filteredOrders" :key="order.id" class="transition-colors">
+          <tr v-for="order in filteredOrders" :key="order.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ order.order_number }}
             </td>
@@ -78,7 +78,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ order.payment_method }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary mx-auto items-center justify-center flex flex-col">
               {{ order.courier?.name }}
               <button v-if="order.courier" @click="unassign(order)" class="text-orange-700 cursor-pointer block">
                 {{ $t('common.unassign') }}
@@ -97,7 +97,7 @@
                 {{ $t(`common.${order.status}`) }}
               </span>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2 mx-auto items-center justify-center flex gap-2">
               <button v-if="order.status !== 'cancelled' && order.status !== 'completed'"
                 @click="openCompleteModal(order)"
                 class="px-3 py-1 border border-green-300 rounded-md text-primary hover:bg-green-50 transition-colors cursor-pointer">
@@ -109,7 +109,7 @@
               </button>
               <button v-if="order.status !== 'cancelled' && order.status !== 'completed'"
                 @click="openCancelModal(order)"
-                class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
+                class="  px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                 {{ $t('common.Cancel') }}
               </button>
             </td>

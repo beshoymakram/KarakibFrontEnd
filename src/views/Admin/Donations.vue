@@ -9,7 +9,7 @@
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
 
       <div class="flex-1 max-w-md ml-auto">
@@ -32,17 +32,17 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.donationNumber') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.orderedDate') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.amount') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.fundName') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.status') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.action') }}</th>
           </tr>
         </thead>
@@ -53,7 +53,7 @@
             </td>
           </tr>
 
-          <tr v-for="donation in filteredDonations" :key="donation.id" class="transition-colors">
+          <tr v-for="donation in filteredDonations" :key="donation.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ donation.donation_number }}
             </td>

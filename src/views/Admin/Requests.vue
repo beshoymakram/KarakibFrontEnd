@@ -45,16 +45,16 @@
               $t('common.orderNumber') }}</th>
             <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
               $t('common.orderedDate') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.total') }}
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.payoutMethod') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.courier') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.status') }}</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">{{
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">{{
               $t('common.action') }}</th>
           </tr>
         </thead>
@@ -65,7 +65,7 @@
             </td>
           </tr>
 
-          <tr v-for="request in filteredRequests" :key="request.id" class="transition-colors">
+          <tr v-for="request in filteredRequests" :key="request.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ request.request_number }}
             </td>

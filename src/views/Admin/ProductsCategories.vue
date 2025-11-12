@@ -28,9 +28,9 @@
       <table class="w-full table-auto">
         <thead class="bg-tabs border-b border-gray-200">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Name
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Name
             </th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-start">Action
+            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Action
             </th>
           </tr>
         </thead>
@@ -41,11 +41,11 @@
             </td>
           </tr>
 
-          <tr v-for="category in filteredCategories" :key="category.id" class="transition-colors">
+          <tr v-for="category in filteredCategories" :key="category.id" class="transition-colors text-center">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
               {{ category.name }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+            <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2 mx-auto items-center justify-center flex">
               <button @click="openEditModal(category)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 {{ $t('common.edit') }}
