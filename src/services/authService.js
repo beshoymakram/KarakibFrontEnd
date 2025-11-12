@@ -2,7 +2,11 @@ import apiClient from '../config/api';
 
 export default {
   register(userData) {
-    return apiClient.post('/register', userData);
+    return apiClient.post('/register', userData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   },
 
   login(userData) {

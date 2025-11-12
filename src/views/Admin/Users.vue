@@ -26,15 +26,15 @@
 
       <div class="relative">
         <button @click="openCreateAdminModal()"
-           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-           {{ $t('common.addNewAdmin') }}
+          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+          {{ $t('common.addNewAdmin') }}
         </button>
       </div>
 
       <div class="relative">
         <button @click="openCreateCourierModal()"
-           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-           {{ $t('common.addNewCourier') }}
+          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+          {{ $t('common.addNewCourier') }}
         </button>
       </div>
 
@@ -43,7 +43,7 @@
           <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
             class="w-full px-8 md:px-10 py-1.5 md:py-2  text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
           <svg
-            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-4', 'h-4','md:w-5', 'md:h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
+            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-4', 'h-4', 'md:w-5', 'md:h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
             fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -99,7 +99,11 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-yellow-600">
               {{ user.points || '--' }}
             </td>
-            <td v-if="user.status !== 'deleted'" class="px-6 py-4 whitespace-nowrap text-sm space-x-2 mx-auto items-center justify-center flex">
+            <td v-if="user.status !== 'deleted'" class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+              <button @click="openDetailsModal(user)"
+                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-green-100 transition-colors">
+                {{ $t('common.details') }}
+              </button>
               <button @click="openEditModal(user)"
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
                 {{ $t('common.edit') }}
@@ -423,6 +427,90 @@
         </div>
       </div>
     </div>
+
+
+    <div v-if="showDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/30"
+      @click="showDetailsModal = false">
+      <div class="relative p-4 w-full max-w-2xl" @click.stop>
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+              {{ $t('common.requestDetails') }} | {{ details.name }}
+            </h3>
+            <button type="button" @click="showDetailsModal = false"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+
+          <!-- Details Content -->
+          <div class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 sm:grid-cols-2">
+              <div>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
+                  {{ details.name }}
+                </p>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.email') }}</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
+                  {{ details.email }}
+                </p>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.role') }}</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
+                  {{ details.type }}
+                </p>
+              </div>
+
+
+              <div>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">User Status</h4>
+                <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
+                  'bg-green-100 text-green-800': details.status === 'active',
+                  'bg-yellow-100 text-yellow-800': details.status === 'onhold',
+                  'bg-red-100 text-red-800': details.status === 'suspended' || details.status === 'deleted'
+                }">
+                  {{ $t(`common.${details.status}`) }}
+                </p>
+              </div>
+
+              <div v-if="details.personal_id">
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.personalId') }}</h4>
+                <a :href="details.personal_id_url" target="_blank"
+                  class="mt-1 text-sm font-semibold px-2 py-1 dark:text-white wrap-break-word rounded-full bg-gray-500 text-white">
+                  {{ $t('common.showPersonalId') }}
+                </a>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Created At</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                  {{ details.created_at }}
+                </p>
+              </div>
+            </div>
+            <!-- Footer -->
+            <div class="flex justify-end">
+              <button @click="showDetailsModal = false" type="button"
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C]">
+                {{ $t('common.close') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </Teleport>
 
 </template>
@@ -444,6 +532,7 @@ export default {
       showEditModal: false,
       showCreateAdminModal: false,
       showCreateCourierModal: false,
+      showDetailsModal: false,
       createAdminForm: {
         name: '',
         email: '',
@@ -466,6 +555,17 @@ export default {
         status: '',
         type: 'user',
         points: 0
+      },
+
+      details: {
+        name: '',
+        email: '',
+        phone: '',
+        status: '',
+        type: 'user',
+        points: 0,
+        personal_id: '',
+        personal_id_url: ''
       },
 
       filters: {
@@ -594,6 +694,21 @@ export default {
       } catch (error) {
         console.error("Error deleting user:", error);
       }
+    },
+
+    openDetailsModal(user) {
+      this.details = {
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        type: user.type,
+        status: user.status,
+        points: user.points || 0,
+        personal_id: user.personal_id,
+        personal_id_url: user.personal_id_url,
+        created_at: user.created_at,
+      };
+      this.showDetailsModal = true;
     },
   },
   mounted() {

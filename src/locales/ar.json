@@ -448,6 +448,9 @@
         "yes": "نعم",
         "order_cancelled_successfully": "تم الغاء الطلب بنجاح",
         "selectSizeFirst": "قم باختيار الحجم اولًا",
+        "personalId": "الهوية الشخصية",
+        "downloadPersonalId": "تحميل الهوية الشخصية",
+        "showPersonalId": "عرض الهوية الشخصية",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     },
     "chatbot": {

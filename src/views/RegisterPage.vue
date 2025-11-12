@@ -187,7 +187,7 @@
               <div v-if="form.type === 'courier'" class="form-group mb-4 flex flex-col w-full">
                 <label for="id" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.uploadPersonalId')
                 }}</label>
-                <input type="file" id="id" accept="image/*,.pdf"
+                <input type="file" id="id" accept="image/*,.pdf" @change="handleFileChoose"
                   class="bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                   required>
               </div>
@@ -269,6 +269,7 @@ export default {
         type: 'user',
         password: '',
         password_confirmation: '',
+        personal_id: '',
       },
       errors: {
         email: false,
@@ -278,6 +279,7 @@ export default {
       },
       emailErrorMessage: '',
       phoneErrorMessage: '',
+      imageFile: '',
       showPassword: false,
       showConfirmPassword: false,
     };
@@ -303,7 +305,18 @@ export default {
       }
 
       try {
-        await this.authStore.register(this.form);
+        const formData = new FormData();
+        formData.append('name', this.form.name);
+        formData.append('email', this.form.email);
+        formData.append('phone', this.form.phone);
+        formData.append('type', this.form.type);
+        formData.append('password', this.form.password);
+        formData.append('password_confirmation', this.form.password_confirmation);
+
+        if (this.imageFile) {
+          formData.append('personal_id', this.imageFile);
+        }
+        await this.authStore.register(formData);
 
         const cartStore = useCartStore();
         await cartStore.mergeOnLogin();
@@ -340,12 +353,18 @@ export default {
             this.confirmPasswordErrorMessage = backendErrors.password_confirmation[0];
           }
 
-        } else {
-          this.$toast.error(
-            error.response?.data?.message || this.$t('common.somethingWentWrong')
-          );
+          else {
+            this.$toast.error(
+              error.response?.data?.message || this.$t('common.somethingWentWrong')
+            );
+          }
+
         }
       }
+    },
+
+    handleFileChoose(event) {
+      this.imageFile = event.target.files[0];
     },
 
     handleGoogleRegister() {

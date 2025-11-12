@@ -450,6 +450,9 @@
     "yes": "Yes",
     "order_cancelled_successfully": "Order cancelled successfully",
     "selectSizeFirst": "Select Size First",
+    "personalId": "Personal Id",
+    "downloadPersonalId": "Download Personal ID",
+    "showPersonalId": "Show Personal ID",
     "noWasteItems": "No waste items to collect"
   },
   "chatbot": {
