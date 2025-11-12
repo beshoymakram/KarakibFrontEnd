@@ -192,6 +192,13 @@
           </div>
         </div>
 
+        <!-- Out of stock button -->
+        <button v-if="product.stock < 1"
+          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
+          disabled>
+          {{ $t("common.outOfStock") }}
+        </button>
+
         <!-- Show add to cart button if not in cart -->
         <button v-else-if="product.stock > 0 && !product.has_sizes" @click.stop="addToCart(product.id)"
           class="btn rounded-md border-0 bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
@@ -203,12 +210,7 @@
           {{ $t("common.selectSizeFirst") }}
         </router-link>
 
-        <!-- Out of stock button -->
-        <button v-else
-          class="btn rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
-          disabled>
-          {{ $t("common.outOfStock") }}
-        </button>
+
       </div>
     </div>
   </div>

@@ -5,6 +5,10 @@ export default {
     return apiClient.post('/forgot-password', data);
   },
 
+  resendCode(data) {
+    return apiClient.post('/forgot-password/resend', data);
+  },
+
   verifyCode(data) {
     return apiClient.post('/verify-code', data);
   },
