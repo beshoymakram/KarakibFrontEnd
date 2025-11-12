@@ -26,15 +26,15 @@
 
       <div class="relative">
         <button @click="openCreateAdminModal()"
-          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          {{ $t('common.addNewAdmin') }}
+           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+           {{ $t('common.addNewAdmin') }}
         </button>
       </div>
 
       <div class="relative">
         <button @click="openCreateCourierModal()"
-          class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] px-3 py-2 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
-          {{ $t('common.addNewCourier') }}
+           class="relative inline-flex items-center gap-x-1.5 mx-3 rounded-md cursor-pointer bg-[#2C702C] p-2 md:px-3 py-2 text-xs md:text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C702C]">
+           {{ $t('common.addNewCourier') }}
         </button>
       </div>
 
