@@ -165,7 +165,7 @@ export default {
         const response = await profileService.getNotifications();
         this.notifications = response.data.notifications || response.data;
       } catch (error) {
-        this.$toast.error(error?.response?.data.message || 'Failed to fetch notifications.');
+        error?.response?.data.message ? this.$toast.error(error?.response?.data.message) : '';
       }
     },
     toggleDropdown() {
