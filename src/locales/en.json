@@ -443,6 +443,12 @@
     "new_order_assigned": "New request assigned",
     "deliver": "Deliver",
     "delivered": "Delivered",
+    "onhold": "On hold",
+    "size": "Size",
+    "has_sizes": "Has sizes",
+    "has_sizes?": "Has sizes?",
+    "yes": "Yes",
+    "order_cancelled_successfully": "Order cancelled successfully",
     "noWasteItems": "No waste items to collect"
   },
   "chatbot": {

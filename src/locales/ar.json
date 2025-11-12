@@ -441,6 +441,12 @@
         "new_order_assigned": "تم تعيين طلب جديد عليك",
         "deliver": "تسليم",
         "delivered": "تم التسليم",
+        "onhold": "معلق",
+        "size": "الحجم",
+        "has_sizes": "متوفر بأحجام",
+        "has_sizes?": "متوفر بأحجام؟",
+        "yes": "نعم",
+        "order_cancelled_successfully": "تم الغاء الطلب بنجاح",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     },
     "chatbot": {

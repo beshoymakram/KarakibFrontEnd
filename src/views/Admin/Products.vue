@@ -208,6 +208,18 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
                   required />
               </div>
+
+              <div>
+                <label for="has_sizes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  {{ $t('common.has_sizes?') }}
+                </label>
+                <div class="flex">
+
+                  <input type="checkbox" id="has_sizes" v-model="createForm.has_sizes" :true-value="1" :false-value="0"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block p-2.5" /><small
+                    class="px-2">{{ $t('common.yes') }}</small>
+                </div>
+              </div>
             </div>
 
             <!-- Footer Buttons -->
@@ -311,6 +323,18 @@
                 </label>
                 <img :src="editForm.image" class="w-20 h-20 rounded-lg object-cover mb-2" alt="Current image" />
               </div>
+
+              <div>
+                <label for="has_sizes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  {{ $t('common.has_sizes?') }}
+                </label>
+                <div class="flex">
+
+                  <input type="checkbox" id="has_sizes" v-model="editForm.has_sizes" :true-value="1" :ffalse-value="0"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block p-2.5" /><small
+                    class="px-2">{{ $t('common.yes') }}</small>
+                </div>
+              </div>
             </div>
 
             <!-- Footer Buttons -->
@@ -358,6 +382,7 @@ export default {
         description: '',
         price: '',
         stock: '',
+        has_sizes: false,
         image: '',
       },
       editForm: {
@@ -367,6 +392,7 @@ export default {
         description: '',
         price: '',
         stock: '',
+        has_sizes: false,
         image: '',
       },
       products: [],
@@ -413,6 +439,7 @@ export default {
         description: product.description,
         price: product.price,
         stock: product.stock,
+        has_sizes: product.has_sizes,
         image: product.image_url,
       };
       this.showEditModal = true;
@@ -430,6 +457,7 @@ export default {
         formData.append('description', this.createForm.description);
         formData.append('price', this.createForm.price);
         formData.append('stock', this.createForm.stock);
+        formData.append('has_sizes', this.createForm.has_sizes);
 
         if (this.imageFile) {
           formData.append('image', this.imageFile);
@@ -456,6 +484,7 @@ export default {
         formData.append('description', this.editForm.description);
         formData.append('price', this.editForm.price);
         formData.append('stock', this.editForm.stock);
+        formData.append('has_sizes', this.editForm.has_sizes);
 
         if (this.imageFile) {
           formData.append('image', this.imageFile);
@@ -519,6 +548,14 @@ export default {
   mounted() {
     this.fetchProducts();
     this.fetchCategories();
+  },
+  watch: {
+    'createForm.has_sizes'(val) {
+      this.createForm.has_sizes = val ? 1 : 0;
+    },
+    'editForm.has_sizes'(val) {
+      this.editForm.has_sizes = val ? 1 : 0;
+    }
   }
 }
 </script>
@@ -527,6 +564,7 @@ export default {
 select {
   background-image: none;
 }
+
 .text-primary {
   color: #2c702c !important;
 }

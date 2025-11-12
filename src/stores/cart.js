@@ -51,12 +51,13 @@ export const useCartStore = defineStore('cart', {
       }
     },
 
-    async addToCart(itemId, quantity = 1, type) {
+    async addToCart(itemId, quantity = 1, type, size) {
       try {
         await apiClient.post('/cart', {
           item_id: itemId,
           quantity,
-          type
+          type,
+          size
         }, {
           headers: {
             'X-Cart-Session': this.getSessionId()

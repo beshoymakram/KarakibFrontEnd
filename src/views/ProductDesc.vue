@@ -3,30 +3,17 @@
     <div v-if="product" class="max-w-6xl mx-auto pt-4 sm:pt-6 md:pt-8 lg:pt-10">
       <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-12 bg-item rounded-xl shadow-sm">
         <!-- Product Section -->
-        <div
-          class="grid grid-cols-1 lg:grid-cols-2 just  mx-6 lg:mx-12 gap-2  md:gap-4 lg:gap-6 mb-1 md:mb-2 lg:mb-16"
-        >
+        <div class="grid grid-cols-1 lg:grid-cols-2 just  mx-6 lg:mx-12 gap-2  md:gap-4 lg:gap-6 mb-1 md:mb-2 lg:mb-16">
           <!-- Image Gallery -->
           <div class="lg:flex-start mx-auto  ">
-            <div
-              class="bg-white  rounded-2xl overflow-hidden  mb-3 md:mb-4 shadow-sm max-w-[70vw] lg:max-w-100"
-            >
-              <img
-                :src="selectedImage"
-                alt="Product"
-                class="w-full h-62 sm:h-76 md:h-94 lg:h-90 object-contain"
-              />
+            <div class="bg-white  rounded-2xl overflow-hidden  mb-3 md:mb-4 shadow-sm max-w-[70vw] lg:max-w-100">
+              <img :src="selectedImage" alt="Product" class="w-full h-62 sm:h-76 md:h-94 lg:h-90 object-contain" />
             </div>
             <div class="flex gap-2 md:gap-3 ">
-              <button
-                v-for="(image, index) in productImages"
-                :key="index"
-                @click="selectedImage = image"
-                :class="[
-                  'w-10 h-10 sm:w-12 sm:h-12  rounded-lg overflow-hidden border-2 transition-all',
-                  selectedImage === image ? 'border-[#2C702C]' : 'border-gray-200',
-                ]"
-              >
+              <button v-for="(image, index) in productImages" :key="index" @click="selectedImage = image" :class="[
+                'w-10 h-10 sm:w-12 sm:h-12  rounded-lg overflow-hidden border-2 transition-all',
+                selectedImage === image ? 'border-[#2C702C]' : 'border-gray-200',
+              ]">
                 <img :src="image" alt="Thumbnail" class="w-full h-full object-cover" />
               </button>
             </div>
@@ -36,32 +23,24 @@
           <div class="flex-start">
             <div class="flex flex-start justify-between flex-row  lg:pt-12">
               <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary  ">
-              {{ product.name }}
-            </h1>
-            <p class=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-primary mb-1 md:mb-2 lg:mb-4">
-              {{ product.price }} {{ $t("common.currency") }}
-            </p>
-          </div>
+                {{ product.name }}
+              </h1>
+              <p class=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-primary mb-1 md:mb-2 lg:mb-4">
+                {{ product.price }} {{ $t("common.currency") }}
+              </p>
+            </div>
 
             <div class="hidden sm:flex items-center gap-3 md:gap-4 mb-1 md:mb-2 lg:mb-4">
               <div class="flex items-center gap-2">
                 <div class="flex">
-                  <svg
-                    v-for="i in 5"
-                    :key="i"
-                    class="w-3 h-3 sm:w-4 sm:h-4"
-                    :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
+                  <svg v-for="i in 5" :key="i" class="w-3 h-3 sm:w-4 sm:h-4"
+                    :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'" fill="currentColor"
+                    viewBox="0 0 20 20">
                     <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    />
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 </div>
-                <span class="text-[0.5rem] sm:text-xs text-secondary font-medium"
-                  >{{ productRating }}/5</span
-                >
+                <span class="text-[0.5rem] sm:text-xs text-secondary font-medium">{{ productRating }}/5</span>
               </div>
               <span class="text-gray-400 text-[0.5rem] sm:text-xs">|</span>
               <span class="text-[0.5rem] sm:text-xs text-secondary">{{ productSold }} Sold</span>
@@ -71,7 +50,7 @@
             </p>
 
             <!-- Color Selection -->
-           <!--  <div v-if="productColors.length > 0" class="mb-2 md:mb-4">
+            <!--  <div v-if="productColors.length > 0" class="mb-2 md:mb-4">
               <h3 class="text-sm sm:text-base font-semibold text-secondary mb-1 ">
                 Select Color
               </h3>
@@ -93,22 +72,17 @@
             </div> -->
 
             <!-- Size Selection -->
-            <div v-if="productSizes.length > 0" class="mb-6">
+            <div v-if="productSizes.length > 0 && product.has_sizes" class="mb-6">
               <h3 class="text-sm sm:text-base font-semibold text-secondary mb-1 ">
                 Select Size
               </h3>
               <div class="flex flex-wrap gap-2 md:gap-3">
-                <button
-                  v-for="size in productSizes"
-                  :key="size"
-                  @click="selectedSize = size"
-                  :class="[
-                    'px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer',
-                    selectedSize === size
-                      ? 'bg-[#2C702C] text-white'
-                      : 'bg-white text-gray-700 border border-gray-300 hover:border-[#2C702C]',
-                  ]"
-                >
+                <button v-for="size in productSizes" :key="size" @click="selectedSize = size" :class="[
+                  'px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer uppercase',
+                  selectedSize === size
+                    ? 'bg-[#2C702C] text-white'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:border-[#2C702C]',
+                ]">
                   {{ size }}
                 </button>
               </div>
@@ -116,11 +90,14 @@
 
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
-              <button
-                @click="addToCart(product.id)"
-                class="flex-2 bg-[#2C702C] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#234d23] transition-all shadow-md cursor-pointer"
-              >
+              <button v-if="product.stock > 0" @click="addToCart(product.id)"
+                class="flex-2 bg-[#2C702C] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#234d23] transition-all shadow-md cursor-pointer">
                 Add to Cart
+              </button>
+              <button v-else
+                class="btn border-0 rounded-md bg-gray-500 text-white cursor-not-allowed px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold"
+                disabled>
+                {{ $t("common.outOfStock") }}
               </button>
               <!-- <button
                 class="flex-2 bg-[#536d53] text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#0a1a0a] transition-all shadow-md cursor-pointer"
@@ -138,26 +115,18 @@
           </h2>
 
           <!-- Rating Overview -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 lg:gap-8 mb-6 md:mb-8 lg:mb-10"
-          >
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 lg:gap-8 mb-6 md:mb-8 lg:mb-10">
             <!-- Average Rating Card -->
             <div class="bg-[#EAF2EA] rounded-2xl p-5 md:p-6 lg:p-8 text-center">
               <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C702C] mb-2">
                 {{ productRating }}
               </div>
               <div class="flex justify-center mb-2">
-                <svg
-                  v-for="i in 5"
-                  :key="i"
-                  class="w-4 h-4 md:w-5 md:h-5"
-                  :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
+                <svg v-for="i in 5" :key="i" class="w-4 h-4 md:w-5 md:h-5"
+                  :class="i <= Math.floor(productRating) ? 'text-yellow-400' : 'text-gray-300'" fill="currentColor"
+                  viewBox="0 0 20 20">
                   <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  />
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
               <div class="text-xs sm:text-sm md:text-base text-gray-600">
@@ -168,14 +137,10 @@
             <!-- Rating Bars -->
             <div class="md:col-span-2 space-y-2 md:space-y-3">
               <div v-for="rating in [5, 4, 3, 2, 1]" :key="rating" class="flex items-center gap-4">
-                <span class="text-xs sm:text-sm font-medium text-primary w-4 h-4 md:w-5 md:h-5"
-                  >{{ rating }}★</span
-                >
+                <span class="text-xs sm:text-sm font-medium text-primary w-4 h-4 md:w-5 md:h-5">{{ rating }}★</span>
                 <div class="flex-1 h-2 sm:h-3 bg-gray-200 rounded-full overflow-hidden">
-                  <div
-                    class="h-full bg-[#2C702C] transition-all"
-                    :style="{ width: getRatingPercentage(rating) + '%' }"
-                  ></div>
+                  <div class="h-full bg-[#2C702C] transition-all" :style="{ width: getRatingPercentage(rating) + '%' }">
+                  </div>
                 </div>
                 <span class="text-xs sm:text-sm text-primary w-8 sm:w-12 text-right">{{
                   getRatingCount(rating)
@@ -186,51 +151,32 @@
 
           <!-- Review List -->
           <div class="space-y-4 md:space-y-6">
-            <div
-              v-for="review in displayedReviews"
-              :key="review.id"
-              class="bg-[#f5f1e0] rounded-xl p-4 md:p-6 shadow-sm"
-            >
+            <div v-for="review in displayedReviews" :key="review.id"
+              class="bg-[#f5f1e0] rounded-xl p-4 md:p-6 shadow-sm">
               <div class="flex items-start gap-3 md:gap-4">
-                <img
-                  :src="review.avatar"
-                  :alt="review.name"
-                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover shrink-0"
-                />
+                <img :src="review.avatar" :alt="review.name"
+                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover shrink-0" />
                 <div class="flex-1 min-w-0">
-                  <div
-                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 mb-1 md:mb-2"
-                  >
+                  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 mb-1 md:mb-2">
                     <h4 class="text-xs sm:text-sm md:text-base font-semibold text-[#112B11]">
                       {{ review.name }}
                     </h4>
                     <span class="text-xs sm:text-sm text-gray-500">{{ review.date }}</span>
                   </div>
                   <div class="flex mb-1 md:mb-2">
-                    <svg
-                      v-for="i in 5"
-                      :key="i"
-                      class="w-3 h-3 sm:w-4 sm:h-4"
-                      :class="i <= review.rating ? 'text-yellow-400' : 'text-gray-300'"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
+                    <svg v-for="i in 5" :key="i" class="w-3 h-3 sm:w-4 sm:h-4"
+                      :class="i <= review.rating ? 'text-yellow-400' : 'text-gray-300'" fill="currentColor"
+                      viewBox="0 0 20 20">
                       <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      />
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   </div>
-                  <p
-                    class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed"
-                    :class="expandedReviews[review.id] ? '' : 'line-clamp-2'"
-                  >
+                  <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed"
+                    :class="expandedReviews[review.id] ? '' : 'line-clamp-2'">
                     {{ review.comment }}
                   </p>
-                  <button
-                    v-if="review.comment.length > 100"
-                    @click="toggleReviewExpansion(review.id)"
-                    class="text-[#2C702C] text-xs sm:text-sm font-medium mt-1.5 md:mt-2 hover:underline"
-                  >
+                  <button v-if="review.comment.length > 100" @click="toggleReviewExpansion(review.id)"
+                    class="text-[#2C702C] text-xs sm:text-sm font-medium mt-1.5 md:mt-2 hover:underline">
                     {{ expandedReviews[review.id] ? "See less" : "See more" }}
                   </button>
                 </div>
@@ -240,18 +186,16 @@
 
           <!-- View More Button -->
           <div class="text-center mt-6 md:mt-8">
-            <button
-              v-if="reviews.length > 3"
-              @click="toggleShowAllReviews"
-              class="px-4 sm:px-6 py-2 sm:py-3 border-2 border-[#2C702C] text-[#2C702C] rounded-lg text-sm sm:text-base font-semibold hover:bg-[#2C702C] hover:text-white transition-all cursor-pointer"
-            >
+            <button v-if="reviews.length > 3" @click="toggleShowAllReviews"
+              class="px-4 sm:px-6 py-2 sm:py-3 border-2 border-[#2C702C] text-[#2C702C] rounded-lg text-sm sm:text-base font-semibold hover:bg-[#2C702C] hover:text-white transition-all cursor-pointer">
               {{ showAllReviews ? "Show Less Reviews" : "View More Reviews" }}
             </button>
           </div>
         </div>
       </div>
     </div>
-    <p v-else class="text-center text-sm sm:text-base md:text-lg text-[#2C702C] mt-16 md:mt-20">Loading product details...</p>
+    <p v-else class="text-center text-sm sm:text-base md:text-lg text-[#2C702C] mt-16 md:mt-20">Loading product
+      details...</p>
   </div>
 </template>
 
@@ -323,7 +267,7 @@ export default {
       ],
       selectedImage: "",
       selectedColor: "",
-      selectedSize: "M",
+      selectedSize: "",
       showAllReviews: false,
       expandedReviews: {},
     };
@@ -355,10 +299,10 @@ export default {
     },
     productSizes() {
       // Use sizes from API if available, otherwise use default sizes
-      if (this.product.sizes && this.product.sizes.length > 0) {
-        return this.product.sizes;
-      }
-      return ["XS", "S", "M", "L", "XL", "XXL"];
+      // if (this.product.sizes && this.product.sizes.length > 0) {
+      //   return this.product.sizes;
+      // }
+      return ["xs", "s", "m", "l", "xl", "xxl"];
     },
     productRating() {
       return this.product.rating || 4.8;
@@ -392,7 +336,7 @@ export default {
       }
     },
     async addToCart(productId) {
-      const success = await this.cartStore.addToCart(productId, 1, "product");
+      const success = await this.cartStore.addToCart(productId, 1, "product", this.selectedSize);
       success
         ? this.$toast.success(this.$t("common.addedToCart"))
         : this.$toast.error(this.$t("common.failedToAddToCart"));
@@ -425,6 +369,7 @@ export default {
   line-clamp: 2;
   /* Standard property for future compatibility */
 }
+
 .text-primary {
   color: #2c702c !important;
 }
@@ -436,30 +381,39 @@ export default {
 .bg-primary {
   background-color: rgb(235, 255, 235) !important;
 }
+
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(41, 41, 41)!important;
+  background-color: rgb(41, 41, 41) !important;
 }
+
 .text-secondary {
   color: #1d491d !important;
 }
+
 [data-theme="forest"] .text-secondary {
   color: rgb(9, 228, 75) !important;
 }
+
 .text-section {
   color: black !important;
 }
+
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
 .bg-prod {
   background-color: #BFD6BF;
 }
+
 [data-theme="forest"] .bg-prod {
   background-color: #4b4a4a;
 }
+
 .bg-item {
   background-color: #FFFFFF;
 }
+
 [data-theme="forest"] .bg-item {
   background-color: #393636;
 }

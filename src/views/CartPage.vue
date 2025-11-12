@@ -33,6 +33,8 @@
               <p class="text-gray-600 text-xs sm:text-sm line-clamp-1">{{ item.cartable?.description }}</p>
               <p class='text-primary font-semibold text-xs sm:text-sm md:text-base mt-1'>{{ item.cartable?.price }} {{
                 $t('common.currency') }}</p>
+              <p v-if="item.size" class='text-primary font-semibold text-xs sm:text-sm md:text-base mt-1 uppercase'>{{
+                $t('common.size') + ' : ' + (item.size ? item.size : '-') }}</p>
             </div>
 
             <div class="hidden md:flex items-center gap-2 sm:gap-3 shrink-0 mr-3">

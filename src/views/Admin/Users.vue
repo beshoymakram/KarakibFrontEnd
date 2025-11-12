@@ -19,6 +19,7 @@
           <option value="active">{{ $t('common.active') }}</option>
           <option value="suspended">{{ $t('common.suspended') }}</option>
           <option value="deleted">{{ $t('common.deleted') }}</option>
+          <option value="onhold">{{ $t('common.onhold') }}</option>
         </select>
         <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
       </div>
@@ -232,6 +233,7 @@
                   <option value="">{{ $t('common.selectStatus') }}</option>
                   <option value="active">{{ $t('common.active') }}</option>
                   <option value="suspended">{{ $t('common.suspended') }}</option>
+                  <option value="onhold">{{ $t('common.onhold') }}</option>
                 </select>
               </div>
 
@@ -604,6 +606,7 @@ export default {
 select {
   background-image: none;
 }
+
 .text-primary {
   color: #2c702c !important;
 }
