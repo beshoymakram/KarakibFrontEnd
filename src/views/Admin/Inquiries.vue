@@ -136,31 +136,31 @@
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.firstName') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.first_name }}
                 </p>
               </div>
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.lastName') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.last_name }}
                 </p>
               </div>
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.email') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.email }}
                 </p>
               </div>
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.subject') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.subject }}
                 </p>
               </div>
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.message') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.message }}
                 </p>
               </div>

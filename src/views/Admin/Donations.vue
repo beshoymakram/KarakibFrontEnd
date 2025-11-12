@@ -3,7 +3,7 @@
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>

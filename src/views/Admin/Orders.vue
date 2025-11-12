@@ -3,23 +3,23 @@
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
 
       <div class="relative">
         <select v-model="filters.payment_method"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allPaymentMethods') }}</option>
           <option value="cash">{{ $t('common.cash') }}</option>
           <option value="card">{{ $t('common.card') }}</option>
         </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
 
       <div class="flex-1 max-w-md ml-auto">

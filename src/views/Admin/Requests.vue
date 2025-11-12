@@ -3,23 +3,23 @@
     <div class="flex flex-wrap items-center gap-4">
       <div class="relative">
         <select v-model="filters.status"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allStatuses') }}</option>
           <option value="pending">{{ $t('common.pending') }}</option>
           <option value="completed">{{ $t('common.completed') }}</option>
           <option value="cancelled">{{ $t('common.cancelled') }}</option>
         </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
 
       <div class="relative">
         <select v-model="filters.payout_method"
-          class="px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
+          class="px-4 py-1.5 md:py-2 pr-8 text-sm md:text-base  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent appearance-none bg-tabs">
           <option value="">{{ $t('common.allPayoutMethods') }}</option>
           <option value="earn">{{ $t('common.earnedPoints') }}</option>
           <option value="donate">{{ $t('common.donatedPoints') }}</option>
         </select>
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">▼</span>
+        <span class="absolute right-3 top-[52%] -translate-y-1/2 pointer-events-none text-xs">▼</span>
       </div>
       <div class="flex-1 max-w-md ml-auto">
         <div class="relative">
@@ -272,14 +272,14 @@
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.name }}
                 </p>
               </div>
 
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   <a :href="'tel:+' + details.address?.phone">{{
                     details.address?.phone }}</a>
                 </p>
@@ -287,14 +287,14 @@
 
               <div class="sm:col-span-2">
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.address?.street_address }}
                 </p>
               </div>
 
               <div>
                 <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">City</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white break-words">
+                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
                   {{ details.address?.city }}
                 </p>
               </div>
