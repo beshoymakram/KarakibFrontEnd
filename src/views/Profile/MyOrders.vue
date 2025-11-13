@@ -19,7 +19,7 @@
   <div class="bg-myprofile rounded-lg shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
       <table class="w-full table-auto">
-        <thead class="bg-item border-b border-gray-200">
+        <thead class="bg-myprofile border-b border-gray-200">
           <tr>
             <th class="px-6 py-3 text-center text-xs font-medium text-section uppercase tracking-wider">{{
               $t('common.orderNumber') }}</th>
@@ -35,7 +35,7 @@
               $t('common.action') }}</th>
           </tr>
         </thead>
-        <tbody class="bg-myprofile divide-y divide-gray-200">
+        <tbody class=" divide-y divide-gray-200">
           <tr v-if="filteredOrders.length === 0">
             <td colspan="6" class="px-4 py-4 text-center text-gray-500">
               {{ $t('common.noResultsMatchSearch') }}
