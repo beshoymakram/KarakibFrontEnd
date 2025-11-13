@@ -42,8 +42,6 @@
                 </div>
                 <span class="text-[0.5rem] sm:text-xs text-secondary font-medium">{{ productRating }}/5</span>
               </div>
-              <span class="text-gray-400 text-[0.5rem] sm:text-xs">|</span>
-              <span class="text-[0.5rem] sm:text-xs text-secondary">{{ productSold }} Sold</span>
             </div>
             <p class="text-sm sm:text-base text-primary  mb-2 md:mb-4">
               {{ product.description }}
@@ -108,6 +106,9 @@
           </div>
         </div>
 
+        <ProductReview :productId="product.id" />
+
+
         <!-- Reviews Section -->
         <div class="px-2 sm:px-4 md:px-6 lg:px-8">
           <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-secondary mb-2 md:mb-4 lg:mb-6">
@@ -144,7 +145,7 @@
                 </div>
                 <span class="text-xs sm:text-sm text-primary w-8 sm:w-12 text-right">{{
                   getRatingCount(rating)
-                }}</span>
+                  }}</span>
               </div>
             </div>
           </div>
@@ -154,14 +155,14 @@
             <div v-for="review in displayedReviews" :key="review.id"
               class="bg-[#f5f1e0] rounded-xl p-4 md:p-6 shadow-sm">
               <div class="flex items-start gap-3 md:gap-4">
-                <img :src="review.avatar" :alt="review.name"
+                <img :src="review.user?.avatar_url ?? '/images/user.png'" :alt="review.user?.name"
                   class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover shrink-0" />
                 <div class="flex-1 min-w-0">
                   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 mb-1 md:mb-2">
                     <h4 class="text-xs sm:text-sm md:text-base font-semibold text-[#112B11]">
-                      {{ review.name }}
+                      {{ review.user?.name }}
                     </h4>
-                    <span class="text-xs sm:text-sm text-gray-500">{{ review.date }}</span>
+                    <span class="text-xs sm:text-sm text-gray-500">{{ review.created_at }}</span>
                   </div>
                   <div class="flex mb-1 md:mb-2">
                     <svg v-for="i in 5" :key="i" class="w-3 h-3 sm:w-4 sm:h-4"
@@ -175,7 +176,7 @@
                     :class="expandedReviews[review.id] ? '' : 'line-clamp-2'">
                     {{ review.comment }}
                   </p>
-                  <button v-if="review.comment.length > 100" @click="toggleReviewExpansion(review.id)"
+                  <button v-if="review.comment && review.comment.length > 100" @click="toggleReviewExpansion(review.id)"
                     class="text-[#2C702C] text-xs sm:text-sm font-medium mt-1.5 md:mt-2 hover:underline">
                     {{ expandedReviews[review.id] ? "See less" : "See more" }}
                   </button>
@@ -200,71 +201,76 @@
 </template>
 
 <script>
+import ProductReview from "@/components/ProductReview.vue";
 import productsService from "@/services/productsService";
 import { useCartStore } from "@/stores/cart";
 
 export default {
   name: "ProductDetails",
   props: ["id"],
+  components: {
+    ProductReview
+  },
   data() {
     return {
       product: null,
-      reviews: [
-        {
-          id: 1,
-          name: "Sarah Mitchell",
-          avatar: "https://i.pravatar.cc/150?img=1",
-          rating: 5,
-          comment:
-            "Absolutely love this t-shirt! The fabric is incredibly soft and the fit is perfect. I've washed it several times and it still looks brand new. Definitely worth the price.",
-          date: "2 days ago",
-        },
-        {
-          id: 2,
-          name: "James Chen",
-          avatar: "https://i.pravatar.cc/150?img=13",
-          rating: 5,
-          comment:
-            "Best quality t-shirt I've owned. The organic cotton feels amazing against the skin and the construction is top-notch. Fast shipping too!",
-          date: "1 week ago",
-        },
-        {
-          id: 3,
-          name: "Emily Rodriguez",
-          avatar: "https://i.pravatar.cc/150?img=5",
-          rating: 4,
-          comment:
-            "Really comfortable and well-made. The only reason I'm not giving 5 stars is that I wish there were more color options. Otherwise, it's perfect!",
-          date: "2 weeks ago",
-        },
-        {
-          id: 4,
-          name: "Michael Thompson",
-          avatar: "https://i.pravatar.cc/150?img=12",
-          rating: 5,
-          comment:
-            "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
-          date: "3 weeks ago",
-        },
-        {
-          id: 5,
-          name: "Michael Thompson",
-          avatar: "https://i.pravatar.cc/150?img=12",
-          rating: 5,
-          comment:
-            "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
-          date: "3 weeks ago",
-        },
-        {
-          id: 6,
-          name: "Michael Thompson",
-          avatar: "https://i.pravatar.cc/150?img=12",
-          rating: 5,
-          comment:
-            "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
-          date: "3 weeks ago",
-        },
-      ],
+      reviews: [],
+      // reviews: [
+      //   {
+      //     id: 1,
+      //     name: "Sarah Mitchell",
+      //     avatar: "https://i.pravatar.cc/150?img=1",
+      //     rating: 5,
+      //     comment:
+      //       "Absolutely love this t-shirt! The fabric is incredibly soft and the fit is perfect. I've washed it several times and it still looks brand new. Definitely worth the price.",
+      //     date: "2 days ago",
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "James Chen",
+      //     avatar: "https://i.pravatar.cc/150?img=13",
+      //     rating: 5,
+      //     comment:
+      //       "Best quality t-shirt I've owned. The organic cotton feels amazing against the skin and the construction is top-notch. Fast shipping too!",
+      //     date: "1 week ago",
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "Emily Rodriguez",
+      //     avatar: "https://i.pravatar.cc/150?img=5",
+      //     rating: 4,
+      //     comment:
+      //       "Really comfortable and well-made. The only reason I'm not giving 5 stars is that I wish there were more color options. Otherwise, it's perfect!",
+      //     date: "2 weeks ago",
+      //   },
+      //   {
+      //     id: 4,
+      //     name: "Michael Thompson",
+      //     avatar: "https://i.pravatar.cc/150?img=12",
+      //     rating: 5,
+      //     comment:
+      //       "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
+      //     date: "3 weeks ago",
+      //   },
+      //   {
+      //     id: 5,
+      //     name: "Michael Thompson",
+      //     avatar: "https://i.pravatar.cc/150?img=12",
+      //     rating: 5,
+      //     comment:
+      //       "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
+      //     date: "3 weeks ago",
+      //   },
+      //   {
+      //     id: 6,
+      //     name: "Michael Thompson",
+      //     avatar: "https://i.pravatar.cc/150?img=12",
+      //     rating: 5,
+      //     comment:
+      //       "Exceeded my expectations! The fit is true to size and the quality is outstanding. I'll definitely be ordering more in different colors.",
+      //     date: "3 weeks ago",
+      //   },
+      // ],
       selectedImage: "",
       selectedColor: "",
       selectedSize: "",
@@ -305,7 +311,7 @@ export default {
       return ["xs", "s", "m", "l", "xl", "xxl"];
     },
     productRating() {
-      return this.product.rating || 4.8;
+      return Number(this.product.average_rating).toFixed(1)
     },
     productSold() {
       return this.product.sold || 0;
@@ -322,6 +328,7 @@ export default {
       try {
         const response = await productsService.getProduct(this.id);
         this.product = response.data.data || response.data;
+        this.reviews = this.product.reviews;
 
         // Initialize selected values after product is loaded
         if (this.productImages.length > 0) {
@@ -342,6 +349,7 @@ export default {
         : this.$toast.error(this.$t("common.failedToAddToCart"));
     },
     getRatingPercentage(rating) {
+      if (this.reviews.length === 0) return 0;
       const count = this.reviews.filter((r) => Math.floor(r.rating) === rating).length;
       return (count / this.reviews.length) * 100;
     },
