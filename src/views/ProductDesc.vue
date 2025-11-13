@@ -145,7 +145,7 @@
                 </div>
                 <span class="text-xs sm:text-sm text-primary w-8 sm:w-12 text-right">{{
                   getRatingCount(rating)
-                  }}</span>
+                }}</span>
               </div>
             </div>
           </div>
@@ -343,6 +343,9 @@ export default {
       }
     },
     async addToCart(productId) {
+      if (!this.selectedSize && this.product.has_sizes) {
+        return this.$toast.error(this.$t("common.selectSizeFirst"))
+      }
       const success = await this.cartStore.addToCart(productId, 1, "product", this.selectedSize);
       success
         ? this.$toast.success(this.$t("common.addedToCart"))
