@@ -83,9 +83,9 @@
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showDeleteModal = false">
       <div class="relative p-4 w-full max-w-md" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow ">
           <button type="button" @click="showDeleteModal = false"
-            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center ">
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -106,7 +106,7 @@
               {{ $t("common.YesSure") }}
             </button>
             <button @click="showDeleteModal = false" type="button"
-              class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+              class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-100 ">
               {{ $t('common.No, Cancel') }}
             </button>
           </div>
@@ -118,14 +118,14 @@
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showCreateModal = false">
       <div class="relative p-4 w-full max-w-2xl" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow ">
           <!-- Header -->
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+            <h3 class="text-xl font-semibold text-[#2C702C] ">
               {{ $t('common.createAddress') }}
             </h3>
             <button type="button" @click="showCreateModal = false"
-              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center ">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -140,35 +140,35 @@
             <div class="grid gap-4 mb-4 grid-cols-2">
               <!-- Name -->
               <div class="col-span-2">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.fullName') }}
                 </label>
                 <input type="text" id="name" v-model="createForm.name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user name" required />
               </div>
               <div class="col-span-2">
-                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.phone') }}
                 </label>
                 <input type="text" id="phone" v-model="createForm.phone"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user phone" required />
               </div>
               <div class="col-span-2">
-                <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.streetAddress') }}
                 </label>
                 <input type="text" id="street_address" v-model="createForm.street_address"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user street_address" required />
               </div>
               <div class="col-span-2">
-                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 ">
                   City
                 </label>
                 <input type="text" id="city" v-model="createForm.city"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user city" required />
               </div>
             </div>
@@ -176,7 +176,7 @@
             <!-- Footer Buttons -->
             <div class="flex justify-end space-x-3">
               <button @click="showCreateModal = false" type="button"
-                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 ">
                 {{ $t('common.Cancel') }}
               </button>
               <button type="submit"
@@ -193,14 +193,14 @@
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showEditModal = false">
       <div class="relative p-4 w-full max-w-2xl" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow ">
           <!-- Header -->
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+            <h3 class="text-xl font-semibold text-[#2C702C] ">
               {{ $t('common.editAddress') }}
             </h3>
             <button type="button" @click="showEditModal = false"
-              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center ">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -214,35 +214,35 @@
             <div class="grid gap-4 mb-4">
               <!-- Name -->
               <div class="col-span-2">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.fullName') }}
                 </label>
                 <input type="text" id="name" v-model="editForm.name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user name" required />
               </div>
               <div class="col-span-2">
-                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.phone') }}
                 </label>
                 <input type="text" id="phone" v-model="editForm.phone"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user phone" required />
               </div>
               <div class="col-span-2">
-                <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="street_address" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.streetAddress') }}
                 </label>
                 <input type="text" id="street_address" v-model="editForm.street_address"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user street_address" required />
               </div>
               <div class="col-span-2">
-                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 ">
                   City
                 </label>
                 <input type="text" id="city" v-model="editForm.city"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user city" required />
               </div>
             </div>

@@ -106,9 +106,9 @@
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showCancelModal = false">
       <div class="relative p-4 w-full max-w-md" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow ">
           <button type="button" @click="showCancelModal = false"
-            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -116,12 +116,12 @@
             <span class="sr-only">Close modal</span>
           </button>
           <div class="p-4 md:p-5 text-center">
-            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            <h3 class="mb-5 text-lg font-normal text-gray-500">
               Are you sure you want to cancel this request?
             </h3>
             <button @click="confirmCancel" type="button"
@@ -129,7 +129,7 @@
               {{ $t("common.YesSure") }}
             </button>
             <button @click="showCancelModal = false" type="button"
-              class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+              class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-100 ">
               {{ $t('common.No, Cancel') }}
             </button>
           </div>
@@ -140,14 +140,14 @@
     <div v-if="showDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/30"
       @click="showDetailsModal = false">
       <div class="relative p-4 w-full max-w-2xl" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow ">
           <!-- Header -->
           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+            <h3 class="text-xl font-semibold text-[#2C702C] ">
               {{ $t('common.requestDetails') }} | {{ details.request_number }}
             </h3>
             <button type="button" @click="showDetailsModal = false"
-              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -161,38 +161,38 @@
           <div class="p-4 md:p-5">
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.fullName') }}
+                <h4 class="text-sm font-medium text-gray-500 ">{{ $t('common.fullName') }}
                 </h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
+                <p class="mt-1 text-base font-semibold text-[#2C702C]  wrap-break-word">
                   {{ details.name }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.phone') }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
+                <h4 class="text-sm font-medium text-gray-500 ">{{ $t('common.phone') }}</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C]  wrap-break-word">
                   <a :href="'tel:+' + details.address?.phone">{{
                     details.address?.phone }}</a>
                 </p>
               </div>
 
               <div class="sm:col-span-2">
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">{{ $t('common.streetAddress')
+                <h4 class="text-sm font-medium text-gray-500 ">{{ $t('common.streetAddress')
                   }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
+                <p class="mt-1 text-base font-semibold text-[#2C702C]  wrap-break-word">
                   {{ details.address?.street_address }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">City</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white wrap-break-word">
+                <h4 class="text-sm font-medium text-gray-500 ">City</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C]  wrap-break-word">
                   {{ details.address?.city }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Request Status</h4>
+                <h4 class="text-sm font-medium text-gray-500 ">Request Status</h4>
                 <p class="mt-1 text-sm font-semibold px-2 py-1 rounded-full inline-block" :class="{
                   'bg-green-100 text-green-800': details.status === 'completed',
                   'bg-yellow-100 text-yellow-800': details.status === 'pending',
@@ -203,15 +203,15 @@
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Created At</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                <h4 class="text-sm font-medium text-gray-500 ">Created At</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C] ">
                   {{ details.created_at }}
                 </p>
               </div>
 
               <div>
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Total</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                <h4 class="text-sm font-medium text-gray-500 ">Total</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C] ">
                   {{ details.total }} {{ $t('common.currency') }}
                 </p>
               </div>
@@ -220,8 +220,8 @@
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
               <div v-for="item, index in details.items" :key="item.id"
                 class="hover:bg-gray-50 transition-colors col-span-1">
-                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-300">Item {{ index + 1 }}</h4>
-                <p class="mt-1 text-base font-semibold text-[#2C702C] dark:text-white">
+                <h4 class="text-sm font-medium text-gray-500 ">Item {{ index + 1 }}</h4>
+                <p class="mt-1 text-base font-semibold text-[#2C702C] ">
                   {{ item.item?.name }}<br />
                   {{ $t('common.quantity') }} = {{ item.quantity }}<br />
                   {{ $t('common.totalPoints') }}= {{ item.subtotal }} {{ $t('common.points') }}
