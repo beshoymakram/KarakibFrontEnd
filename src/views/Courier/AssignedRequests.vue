@@ -98,7 +98,7 @@
 
     <Teleport to="body">
       <div v-if="scannerOpen"
-        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-myprofile"
+        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
         @click="closeScanner">
         <div class="relative p-4 w-full max-w-md" @click.stop>
           <div class="relative bg-tabs rounded-lg shadow">
@@ -135,10 +135,10 @@
         </div>
       </div>
       <div v-if="showDetailsModal"
-        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-myprofile"
+        class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/30 px-4 sm:px-6 overflow-hidden"
         @click="showDetailsModal = false">
-        <div class="relative p-4 w-full max-w-2xl" @click.stop>
-          <div class="relative bg-tabs rounded-lg shadow">
+        <div class="relative w-full max-w-2xl mx-auto" @click.stop>
+          <div class="relative bg-tabs rounded-lg shadow max-h-[90vh] overflow-y-auto">
             <!-- Header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 class="text-xl font-semibold text-primary">

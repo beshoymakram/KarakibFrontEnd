@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-tabs rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
+  <div class="space-y-6">
+    <div class="bg-tabs rounded-lg shadow-sm p-4 mb-6" :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
     <div class="flex flex-wrap items-center gap-4">
 
       <div class="relative">
@@ -98,10 +99,10 @@
 
     <Teleport to="body">
       <div v-if="scannerOpen"
-        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-myprofile"
+        class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/30 px-4 sm:px-6 overflow-hidden"
         @click="closeScanner">
-        <div class="relative p-4 w-full max-w-md" @click.stop>
-          <div class="relative bg-tabs rounded-lg shadow">
+        <div class="relative p-4 w-full max-w-md mx-auto" @click.stop>
+          <div class="relative bg-tabs rounded-lg shadow max-h-[90vh] overflow-y-auto">
             <button type="button" @click="closeScanner"
               class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -135,10 +136,10 @@
         </div>
       </div>
       <div v-if="showDetailsModal"
-        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-myprofile"
+        class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/30 px-4 sm:px-6 overflow-hidden"
         @click="showDetailsModal = false">
-        <div class="relative p-4 w-full max-w-2xl" @click.stop>
-          <div class="relative bg-tabs rounded-lg shadow">
+        <div class="relative p-4 w-full max-w-2xl mx-auto" @click.stop>
+          <div class="relative bg-tabs rounded-lg shadow max-h-[90vh] overflow-y-auto">
             <!-- Header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 class="text-xl font-semibold text-primary">
@@ -168,21 +169,21 @@
 
                 <div>
                   <h4 class="text-sm font-medium text-section">{{ $t('common.phone') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-primary dark:text-white wrap-break-words">
+                  <p class="mt-1 text-base font-semibold text-primary wrap-break-words">
                     <a :href="'tel:+' + details.address?.phone">{{ details.address?.phone }}</a>
                   </p>
                 </div>
 
                 <div class="sm:col-span-2">
                   <h4 class="text-sm font-medium text-section">{{ $t('common.streetAddress') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-primary dark:text-white wrap-break-words">
+                  <p class="mt-1 text-base font-semibold text-primary wrap-break-words">
                     {{ details.address?.street_address }}
                   </p>
                 </div>
 
                 <div>
                   <h4 class="text-sm font-medium text-section">{{ $t('common.city') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-primary dark:text-white wrap-break-words">
+                  <p class="mt-1 text-base font-semibold text-primary wrap-break-words">
                     {{ details.address?.city }}
                   </p>
                 </div>
@@ -200,13 +201,13 @@
 
                 <div>
                   <h4 class="text-sm font-medium text-section">{{ $t('common.createdAt') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-primary dark:text-white">
+                  <p class="mt-1 text-base font-semibold text-primary">
                     {{ details.created_at }}
                   </p>
                 </div>
                 <div>
                   <h4 class="text-sm font-medium text-section">{{ $t('common.paymentMethod') }}</h4>
-                  <p class="mt-1 text-base font-semibold text-primary dark:text-white">
+                  <p class="mt-1 text-base font-semibold text-primary">
                     {{ $t(`common.${details.payment_method}`) }}
                   </p>
                 </div>
@@ -271,6 +272,7 @@
         </div>
       </div>
     </Teleport>
+  </div>
   </div>
 </template>
 
