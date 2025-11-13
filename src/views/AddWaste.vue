@@ -84,7 +84,7 @@
 
         <div class="px-3 pt-3 pb-3">
           <!-- Title -->
-          <h2 class="text-primary font-semibold sm:text-base md:text-lg lg:text-xl mb-1 text-start">
+          <h2 class="text-primary font-semibold text-sm sm:text-base md:text-lg lg:text-xl mb-1 text-start">
             {{ item.name }}
           </h2>
 

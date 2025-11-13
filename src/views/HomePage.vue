@@ -147,10 +147,10 @@
 
         <div class="px-3 pt-3 pb-2">
           <div class="flex justify-between flex-col  md:flex-row md:items-center w-full md:mb-1">
-            <h2 class="text-primary font-semibold sm:text-base md:text-lg lg:text-xl">
+            <h2 class="text-primary font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
               {{ product.name }}
             </h2>
-            <p class="text-primary font-semibold text-sm sm:text-sm md:text-base  lg:text-lg">
+            <p class="text-primary font-semibold text-xs sm:text-sm md:text-base  lg:text-lg">
               {{ product.price }} {{ $t("common.currency") }}
             </p>
           </div>
