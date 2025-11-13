@@ -11,6 +11,7 @@
         max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl
         bg-white rounded-2xl shadow-lg flex flex-col p-0
         transform mobile-scale
+        overflow-hidden
       "
       style="border-radius: 1.25rem"
     >
@@ -174,6 +175,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Custom focus styles */
