@@ -76,7 +76,7 @@
     <div
       class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 md:gap-6 justify-items-center py-6 md:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 overflow-auto scroll-smooth ">
       <div v-for="(item, index) in filteredItems" :key="index"
-        class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300">
+        class="card bg-primary w-full  max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300 rounded-t-xl">
         <figure>
           <img :src="item.image_url" :alt="item.name"
             class="w-full h-56 sm:h-62 md:h-74 bg-[#E0EBE0] object-contain  hover:opacity-90 transition rounded-t-xl" />

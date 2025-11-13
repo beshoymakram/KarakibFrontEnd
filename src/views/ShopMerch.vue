@@ -59,7 +59,7 @@
   <div
     class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 md:gap-6 justify-items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12">
     <div v-for="(product, index) in filteredProducts" :key="index"
-      class="card bg-primary w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300">
+      class="card bg-primary w-full max-w-xs shadow-sm hover:shadow-lg transition-transform duration-300 rounded-t-xl">
       <!-- ROUTER LINK - navigate to product description -->
       <router-link :to="{ name: 'product-desc', params: { id: product.id } }" class="block rounded-t-xl">
         <figure>

@@ -6,7 +6,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 just  mx-6 lg:mx-12 gap-2  md:gap-4 lg:gap-6 mb-1 md:mb-2 lg:mb-16">
           <!-- Image Gallery -->
           <div class="lg:flex-start mx-auto  ">
-            <div class="bg-white  rounded-2xl overflow-hidden  mb-3 md:mb-4 shadow-sm max-w-[70vw] lg:max-w-100">
+            <div class="bg-[#E0EBE0]  rounded-2xl overflow-hidden  mb-3 md:mb-4 shadow-sm max-w-[70vw] lg:max-w-100">
               <img :src="selectedImage" alt="Product" class="w-full h-62 sm:h-76 md:h-94 lg:h-90 object-contain" />
             </div>
             <div class="flex gap-2 md:gap-3 ">
