@@ -96,9 +96,9 @@
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showDeleteModal = false">
       <div class="relative p-4 w-full max-w-md" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow">
           <button type="button" @click="showDeleteModal = false"
-            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -106,20 +106,20 @@
             <span class="sr-only">Close modal</span>
           </button>
           <div class="p-4 md:p-5 text-center">
-            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            <h3 class="mb-5 text-lg font-normal text-gray-500">
               {{ $t('common.areYouSureDeleteProduct') }}
             </h3>
             <button @click="confirmDelete" type="button"
-              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
               {{ $t("common.YesSure") }}
             </button>
             <button @click="showDeleteModal = false" type="button"
-              class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+              class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-100">
               {{ $t('common.No, Cancel') }}
             </button>
           </div>
@@ -131,14 +131,14 @@
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showCreateModal = false">
       <div class="relative p-4 w-full max-w-2xl" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow">
           <!-- Header -->
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+            <h3 class="text-xl font-semibold text-[#2C702C] ">
               {{ $t('common.createProduct') }}
             </h3>
             <button type="button" @click="showCreateModal = false"
-              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -153,15 +153,15 @@
             <div class="grid gap-4 mb-4 grid-cols-2">
               <!-- Name -->
               <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.name') }}
                 </label>
                 <input type="text" id="name" v-model="createForm.name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   :placeholder="$t('common.enterUserName')" required />
               </div>
               <div>
-                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 ">{{
                   $t('common.category') }}</label>
                 <select id="type" v-model="createForm.category_id"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
@@ -173,16 +173,16 @@
               </div>
 
               <div class="col-span-2">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.description') }}
                 </label>
                 <textarea type="text" id="description" v-model="createForm.description"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   :placeholder="$t('common.enterDescription')" required></textarea>
               </div>
 
               <div>
-                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.price') }}
                 </label>
                 <input type="number" id="price" v-model="createForm.price"
@@ -191,7 +191,7 @@
               </div>
 
               <div>
-                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.stock') }}
                 </label>
                 <input type="number" id="stock" v-model="createForm.stock"
@@ -201,7 +201,7 @@
 
               <!-- Image -->
               <div class="col-span-2">
-                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.image') }}
                 </label>
                 <input type="file" id="image" @change="handleImageUpload" accept="image/*"
@@ -210,7 +210,7 @@
               </div>
 
               <div>
-                <label for="has_sizes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="has_sizes" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.has_sizes?') }}
                 </label>
                 <div class="flex">
@@ -225,11 +225,11 @@
             <!-- Footer Buttons -->
             <div class="flex justify-end space-x-3">
               <button @click="showCreateModal = false" type="button"
-                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#2C702C] focus:z-10 focus:ring-4 focus:ring-gray-100">
                 {{ $t('common.Cancel') }}
               </button>
               <button type="submit"
-                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 {{ $t('common.createProduct') }}
               </button>
             </div>
@@ -242,14 +242,14 @@
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/30"
       @click="showEditModal = false">
       <div class="relative p-4 w-full max-w-2xl" @click.stop>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow">
           <!-- Header -->
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-[#2C702C] dark:text-white">
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+            <h3 class="text-xl font-semibold text-[#2C702C] ">
               {{ $t('common.editProduct') }}
             </h3>
             <button type="button" @click="showEditModal = false"
-              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -263,15 +263,15 @@
             <div class="grid gap-4 mb-4">
               <!-- Name -->
               <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">
                   Name
                 </label>
                 <input type="text" id="name" v-model="editForm.name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter user name" required />
               </div>
               <div>
-                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
                 <select id="type" v-model="editForm.category_id"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
                   required>
@@ -282,16 +282,16 @@
               </div>
 
               <div class="col-span-2">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">
                   Description
                 </label>
                 <textarea type="text" id="description" v-model="editForm.description"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5 "
                   placeholder="Enter description" required></textarea>
               </div>
 
               <div>
-                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">
                   Price
                 </label>
                 <input type="number" id="price" v-model="editForm.price"
@@ -300,7 +300,7 @@
               </div>
 
               <div>
-                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 ">
                   Stock
                 </label>
                 <input type="number" id="stock" v-model="editForm.stock"
@@ -310,7 +310,7 @@
 
 
               <div class="col-span-2">
-                <label for="edit-image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="edit-image" class="block mb-2 text-sm font-medium text-gray-900 ">
                   Change Image (optional)
                 </label>
                 <input type="file" id="edit-image" @change="handleImageUpload" accept="image/*"
@@ -318,14 +318,14 @@
               </div>
 
               <div v-if="editForm.image">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label class="block mb-2 text-sm font-medium text-gray-900 ">
                   Current Image
                 </label>
                 <img :src="editForm.image" class="w-20 h-20 rounded-lg object-cover mb-2" alt="Current image" />
               </div>
 
               <div>
-                <label for="has_sizes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="has_sizes" class="block mb-2 text-sm font-medium text-gray-900 ">
                   {{ $t('common.has_sizes?') }}
                 </label>
                 <div class="flex">
