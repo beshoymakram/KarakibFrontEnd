@@ -68,16 +68,16 @@
         </figure>
 
         <div class="px-3 pt-3 pb-2">
-          <div class="flex justify-between flex-col  md:flex-row md:items-center w-full md:mb-1">
+          <div class="flex justify-between flex-col   w-full md:mb-1">
             <h2 class="text-primary font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
               {{ product.name }}
             </h2>
-            <p class="text-primary font-semibold text-xs sm:text-sm md:text-base  lg:text-lg">
+            <p class="hidden md:block text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
+          </div>
+            <p class="text-primary font-semibold text-xs sm:text-sm md:text-base lg:text-lg " >
               {{ product.price }} {{ $t("common.currency") }}
             </p>
-          </div>
 
-          <p class="hidden md:block text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
         </div>
       </router-link>
 
