@@ -472,6 +472,10 @@
         "reviewDeletedSuccessfully": "تم حذف المراجعة بنجاح",
         "failedToDeleteReview": "فشل في حذف المراجعة",
         "optional": "اختياري",
+        "withdrawBalance": "سحب الرصيد",
+        "withdrawnBalance": "رصيد مسحوب",
+        "refundedBalance": "رصيد مرتجع",
+        "withdrawals": "التحويلات",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     },
     "chatbot": {

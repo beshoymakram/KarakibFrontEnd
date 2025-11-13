@@ -45,6 +45,7 @@ import DonationFailure from '@/views/DonationFailure.vue'
 import AssignedOrders from '@/views/Courier/AssignedOrders.vue'
 import Inquiries from '@/views/Admin/Inquiries.vue'
 import PendingVerification from '@/views/PendingVerification.vue'
+import MyBalance from '@/views/Profile/MyBalance.vue'
 
 // Define routes
 const routes = [
@@ -71,6 +72,7 @@ const routes = [
       { path: 'my-orders', name: 'MyOrders', component: MyOrders },
       { path: 'my-requests', name: 'MyRequests', component: MyRequests },
       { path: 'my-points', name: 'MyPoints', component: MyPoints },
+      { path: 'my-balance', name: 'MyBalance', component: MyBalance },
     ],
   },
 
@@ -112,6 +114,11 @@ const routes = [
       {
         path: 'inquiries',
         name: 'AdminInquiries',
+        component: Inquiries
+      },
+      {
+        path: 'withdrawals',
+        name: 'Adminwithdrawals',
         component: Inquiries
       },
       {

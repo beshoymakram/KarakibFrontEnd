@@ -1,14 +1,16 @@
 <template>
   <div class="admin-layout py-5 bg-primary " :dir="$i18n.locale === 'ar' ? 'rtl' : 'ltr'">
 
-    <div class="cards flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mx-2 sm:mx-4 md:mx-6 pb-5 pt-4 sm:mt-6 md:mt-8 lg:mt-10">
+    <div
+      class="cards flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mx-2 sm:mx-4 md:mx-6 pb-5 pt-4 sm:mt-6 md:mt-8 lg:mt-10">
 
       <div class="card bg-base-100 w-[80vw] sm:w-70 md:w-80 lg:w-70 shadow-sm">
         <div class="card-body">
           <h3 class="text-base md:text-lg font-semibold">{{ $t('common.totalUsers') }}</h3>
           <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ users.total }}</p>
           <div class="numbers flex">
-            <p class=" text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ users.new }} {{ $t('common.joinedLast24') }}</p>
+            <p class=" text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ users.new }} {{
+              $t('common.joinedLast24') }}</p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-5  md:size-6 text-[#2C702C]">
               <path fill-rule="evenodd"
@@ -23,7 +25,8 @@
           <h3 class="text-base md:text-lg font-semibold">{{ $t('common.totalOrders') }}</h3>
           <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ orders.total }}</p>
           <div class="numbers flex">
-            <p class="text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ orders.new }} {{ $t('common.new') }}</p>
+            <p class="text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ orders.new }} {{ $t('common.new')
+            }}</p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-5  md:size-6 text-[#2C702C]">
               <path
@@ -39,7 +42,8 @@
           <h3 class="text-base md:text-lg font-semibold">{{ $t('common.collectRequests') }}</h3>
           <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ requests.total }}</p>
           <div class="numbers flex">
-            <p class="text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ requests.pending }} {{ $t('common.pending') }}</p>
+            <p class="text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ requests.pending }} {{
+              $t('common.pending') }}</p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-5  md:size-6 text-[#2C702C]">
               <path fill-rule="evenodd"
@@ -54,8 +58,9 @@
           <h3 class="text-base md:text-lg font-semibold">{{ $t('common.donatedPoints') }}</h3>
           <p class="text-2xl md:text-3xl font-bold text-[#2C702C]">{{ Math.abs(donatedPoints) }}</p>
           <div class="numbers flex">
-            <p class="text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ $t('common.equivalentTo') }} {{ Math.abs(donatedPoints /
-              19).toFixed() }} {{ $t('common.currency') }}
+            <p class="text-sm sm:text-base md:text-lg font-semibold text-gray-500">{{ $t('common.equivalentTo') }} {{
+              Math.abs(donatedPoints /
+                19).toFixed() }} {{ $t('common.currency') }}
             </p>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="size-5  md:size-6 text-[#2C702C]">
@@ -72,7 +77,8 @@
       <nav
         :class="['flex', 'flex-wrap', 'p-2', 'border-b', $i18n.locale === 'ar' ? 'space-x-reverse space-x-1' : 'space-x-1']">
         <router-link v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :to="tab.id"
-          class="px-2 sm:px-4 py-2 sm:py-3 mb-1 mx-1 cursor-pointer   text-xs sm:text-sm font-medium rounded-lg transition-all duration-200" :class="activeTab === tab.id
+          class="px-2 sm:px-4 py-2 sm:py-3 mb-1 mx-1 cursor-pointer   text-xs sm:text-sm font-medium rounded-lg transition-all duration-200"
+          :class="activeTab === tab.id
             ? 'bg-[#E0EBE0] text-[#2C702C]'
             : 'text-primary hover:bg-gray-100'">
           {{ $t(tab.labelKey) }}
@@ -108,6 +114,7 @@ export default {
         { id: 'orders', labelKey: 'common.orders' },
         { id: 'donations', labelKey: 'common.donations' },
         { id: 'inquiries', labelKey: 'common.inquiries' },
+        { id: 'withdrawals', labelKey: 'common.withdrawals' },
       ],
     }
   },

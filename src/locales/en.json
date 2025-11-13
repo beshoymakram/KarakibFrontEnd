@@ -474,6 +474,10 @@
     "reviewDeletedSuccessfully": "Review deleted successfully",
     "failedToDeleteReview": "Failed to delete review",
     "optional": "Optional",
+    "withdrawBalance": "Withdraw Balance",
+    "withdrawnBalance": "Withdrawn Balance",
+    "refundedBalance": "Refunded Balance",
+    "withdrawals": "Withdrawals",
     "noWasteItems": "No waste items to collect"
   },
   "chatbot": {
