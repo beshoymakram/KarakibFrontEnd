@@ -476,6 +476,7 @@
         "withdrawnBalance": "رصيد مسحوب",
         "refundedBalance": "رصيد مرتجع",
         "withdrawals": "التحويلات",
+        "Insufficient balance to withdraw": "رصيد غير كافي للسحب",
         "noWasteItems": "لا توجد عناصر نفايات للجمع"
     },
     "chatbot": {

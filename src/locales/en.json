@@ -478,6 +478,7 @@
     "withdrawnBalance": "Withdrawn Balance",
     "refundedBalance": "Refunded Balance",
     "withdrawals": "Withdrawals",
+    "Insufficient balance to withdraw": "Insufficient balance to withdraw",
     "noWasteItems": "No waste items to collect"
   },
   "chatbot": {
