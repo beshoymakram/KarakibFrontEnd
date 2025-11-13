@@ -3,7 +3,7 @@
     <div v-if="product" class="max-w-6xl mx-auto pt-4 sm:pt-6 md:pt-8 lg:pt-10">
       <div class="px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-12 bg-item rounded-xl shadow-sm">
         <!-- Product Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 just  mx-6 lg:mx-12 gap-2  md:gap-4 lg:gap-6 mb-1 md:mb-2 lg:mb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 just  gap-2  md:gap-4 lg:gap-6 mb-1 md:mb-2 lg:mb-16  items-center">
           <!-- Image Gallery -->
           <div class="lg:flex-start mx-auto  ">
             <div class="bg-[#E0EBE0]  rounded-2xl overflow-hidden  mb-3 md:mb-4 shadow-sm max-w-[70vw] lg:max-w-100">
@@ -20,8 +20,8 @@
           </div>
 
           <!-- Product Info -->
-          <div class="flex-start">
-            <div class="flex flex-start justify-between flex-row  lg:pt-12">
+          <div class="flex-start max-w-[70vw] lg:max-w-120">
+            <div class="flex flex-start justify-between flex-row  gap-4 ">
               <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary  ">
                 {{ product.name }}
               </h1>
