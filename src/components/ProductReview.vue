@@ -1,5 +1,5 @@
 <template>
-  <div class="px-2 sm:px-4 md:px-6 lg:px-8 mb-8">
+  <div class="px-2 sm:px-4 md:px-6 lg:px-8 mb-8 mt-4 sm:mt-6 md:mt-8  ">
     <!-- Review Form (only if eligible) -->
     <div v-if="isAuthenticated && canReview && !hasReviewed"
       class="bg-green-50 border border-green-200 rounded-xl shadow-sm p-6 mb-6">
@@ -70,7 +70,7 @@
       class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-6">
       <div class="flex items-start gap-3">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-          class="w-6 h-6 text-yellow-600 flex-shrink-0">
+          class="w-6 h-6 text-yellow-600 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round"
             d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
         </svg>
@@ -89,7 +89,7 @@
     <div v-else-if="!isAuthenticated" class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-6">
       <div class="flex items-start gap-3">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-          class="w-6 h-6 text-gray-600 flex-shrink-0">
+          class="w-6 h-6 text-gray-600 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round"
             d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
         </svg>
