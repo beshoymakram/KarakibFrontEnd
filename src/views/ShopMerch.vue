@@ -84,7 +84,7 @@
       <!-- ADD TO CART / QUANTITY CONTROLS -->
       <div class="flex items-center mt-2 justify-end px-3 pb-3">
         <!-- Show quantity controls if item is in cart -->
-        <div v-if="getCartItem(product.id)" class="flex items-center gap-2">
+        <div v-if="cartMap[product.id]" class="flex items-center gap-2">
           <button @click.stop="decrementCartItem(product.id)"
             class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
@@ -94,7 +94,7 @@
           </button>
 
           <span class="w-4 sm:w-8 text-center font-bold text-primary">
-            {{ getCartItem(product.id).quantity }}
+            {{ cartMap[product.id].quantity }}
           </span>
 
           <button @click.stop="incrementCartItem(product.id)"
@@ -122,7 +122,7 @@
         </button>
 
         <!-- Show add to cart button if not in cart -->
-        <button v-else-if="product.stock > 0 && !product.has_sizes && !getCartItem(product.id)"
+        <button v-else-if="product.stock > 0 && !product.has_sizes && !cartMap[product.id]"
           @click.stop="addToCart(product.id)"
           class="btn  border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
           {{ $t("common.addToCart") }}
@@ -167,6 +167,14 @@ export default {
 
       return filtered;
     },
+  cartMap() {
+  const map = {};
+  this.cartStore.products.forEach(item => {
+    map[item.cartable_id] = item;
+  });
+  return map;
+}
+
   },
   methods: {
     getCartItem(productId) {
