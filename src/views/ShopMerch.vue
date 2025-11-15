@@ -84,7 +84,7 @@
       <!-- ADD TO CART / QUANTITY CONTROLS -->
       <div class="flex items-center mt-2 justify-end px-3 pb-3">
         <!-- Show quantity controls if item is in cart -->
-        <div v-if="cartMap[product.id]" class="flex items-center gap-2">
+        <div v-if="cartMap[product.id] && !product.has_sizes" class="flex items-center gap-2">
           <button @click.stop="decrementCartItem(product.id)"
             class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
