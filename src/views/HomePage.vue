@@ -163,7 +163,7 @@
       <!-- ADD TO CART / QUANTITY CONTROLS -->
       <div class="flex items-center mt-2 justify-end px-3 pb-3">
         <!-- Show quantity controls if item is in cart -->
-        <div v-if="cartMap[product.id]" class="flex items-center gap-2">
+        <div v-if="cartMap[product.id] && !product.has_sizes" class="flex items-center gap-2">
           <button @click.stop="decrementCartItem(product.id)"
             class="w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -207,7 +207,7 @@
           {{ $t("common.addToCart") }}
         </button>
 
-        <router-link v-else-if="product.has_sizes" :to="{ name: 'product-desc', params: { id: product.id } }"
+        <router-link v-else-if="product.has_sizes " :to="{ name: 'product-desc', params: { id: product.id } }"
           class="btn  border-0 rounded-md bg-[#2C702C] text-white hover:bg-[#265C26] px-2 md:px-4  md:py-2 text-xs sm:text-sm font-semibold">
           {{ $t("common.selectSizeFirst") }}
         </router-link>
