@@ -46,6 +46,7 @@ import AssignedOrders from '@/views/Courier/AssignedOrders.vue'
 import Inquiries from '@/views/Admin/Inquiries.vue'
 import PendingVerification from '@/views/PendingVerification.vue'
 import MyBalance from '@/views/Profile/MyBalance.vue'
+import Withdrawals from '@/views/Admin/Withdrawals.vue'
 
 // Define routes
 const routes = [
@@ -119,7 +120,7 @@ const routes = [
       {
         path: 'withdrawals',
         name: 'Adminwithdrawals',
-        component: Inquiries
+        component: Withdrawals
       },
       {
         path: 'requests',
