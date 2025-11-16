@@ -150,12 +150,12 @@
             <h2 class="text-primary font-semibold text-sm sm:text-base md:text-lg lg:text-xl">
               {{ product.name }}
             </h2>
-             <p class="hidden md:block text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
+            <p class="hidden md:block text-gray-500 text-xs sm:text-sm">{{ product.description }}</p>
 
           </div>
           <p class="text-primary font-semibold text-xs sm:text-sm md:text-base  lg:text-lg">
-              {{ product.price }} {{ $t("common.currency") }}
-            </p>
+            {{ product.price }} {{ $t("common.currency") }}
+          </p>
 
         </div>
       </router-link>
