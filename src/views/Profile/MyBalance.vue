@@ -85,7 +85,11 @@
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-              -
+              <a v-if="transaction.proof_url" :href="transaction.proof_url" target="_blank"
+                class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-100 transition-colors">
+                {{ $t('common.showProof') }}
+              </a>
+              <span v-else>-</span>
             </td>
           </tr>
         </tbody>
