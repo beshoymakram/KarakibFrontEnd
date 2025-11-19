@@ -344,6 +344,7 @@
     "points_converted_successfully": "Points converted to points successfully",
     "request_completed_successfully": "Request completed successfully",
     "order_completed_successfully": "Order completed successfully",
+    "order_delivered_successfully": "Order delivered successfully",
     "points_added_successfully": "Points added successfully",
     "order_placed_successfully": "Order placed successfully",
     "accountPendingVerification": "Account Pending Verification",

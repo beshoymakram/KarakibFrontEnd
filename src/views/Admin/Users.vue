@@ -135,8 +135,8 @@
             <span class="sr-only">Close modal</span>
           </button>
           <div class="p-4 md:p-5 text-center">
-            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
@@ -237,18 +237,8 @@
                   <option value="">{{ $t('common.selectStatus') }}</option>
                   <option value="active">{{ $t('common.active') }}</option>
                   <option value="suspended">{{ $t('common.suspended') }}</option>
-                  <option value="onhold">{{ $t('common.onhold') }}</option>
+                  <option value="onhold" v-if="editForm.type === 'courier'">{{ $t('common.onhold') }}</option>
                 </select>
-              </div>
-
-              <!-- Points (if user) -->
-              <div class="col-span-2 sm:col-span-1" v-if="editForm.type === 'user'">
-                <label for="points" class="block mb-2 text-sm font-medium text-gray-900 ">
-                  {{ $t('common.points') }}
-                </label>
-                <input type="number" id="points" v-model.number="editForm.points"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#2C702C] focus:border-[#2C702C] block w-full p-2.5"
-                  :placeholder="$t('common.enterPoints')" min="0" />
               </div>
             </div>
 
@@ -340,7 +330,7 @@
               </button>
               <button type="submit"
                 class="text-white bg-[#2C702C] hover:bg-[#1a4d1a] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                {{ $t('common.Save Changes') }}
+                {{ $t('common.addAdmin') }}
               </button>
             </div>
           </form>
