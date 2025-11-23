@@ -138,7 +138,7 @@
               class="w-5 h-5 m:w-6 sm:h-6 md:w-7 md:h-7 text-yellow-400" fill="none" viewBox="0 0 24 24"
               stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 3v1m0 16v1m8.485-8.485l-.707.707M4.222 4.222l.707.707M21 12h1M2 12H1m16.97 6.97l.707.707M4.222 19.778l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                d="M12 3v1m0 16v1M18.66 6.34 L19.76 5.34M4.222 4.222l.707.707M21 12h1M2 12H1m16.97 6.97l.707.707M4.222 19.778l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
             </svg>
 
             <!-- Dark Mode Icon -->
