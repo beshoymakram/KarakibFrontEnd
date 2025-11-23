@@ -146,7 +146,7 @@
               class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] text-white font-bold py-3 rounded-md transition-all">
               {{ $t('common.confirmOrder') }}
             </button>
-            <router-link to="/cart" class="block mt-3 btn  border-0 text-center text-[#2C702C] hover:underline text-sm">
+            <router-link to="/cart" class="block mt-3 btn pt-1.5  border-0 text-center text-[#2C702C] hover:bg-gray-950 text-lg">
               {{ $t('common.goBack') }}
             </router-link>
           </div>
@@ -353,7 +353,7 @@ export default {
         this.$toast.error(error.response.data.message);
       }
     },
-    
+
     openDeleteModal(id) {
       this.deleteId = id;
       this.showDeleteModal = true;

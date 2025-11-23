@@ -170,7 +170,7 @@
             </button>
             <router-link
               to="/cart"
-              class="block border-0 mt-3 btn text-center text-[#2C702C] hover:underline text-sm"
+              class="block border-0 mt-3 btn pt-1.5 text-center text-[#2C702C] hover:bg-gray-950 text-lg"
             >
               {{ $t('common.goBack') }}
             </router-link>
