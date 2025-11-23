@@ -103,7 +103,7 @@
               }}</span>
             </div>
             <button @click="checkoutProducts"
-              class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+              class="w-54 lg:w-65 mx-auto bg-[#2C702C] hover:bg-[#1a4d1a] cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -227,7 +227,7 @@
                   (cartStore.totalPoints / 19).toFixed(2) + ' ' + $t('common.currency') }})</small></span>
             </div>
             <button @click="requestCollection"
-              class="w-full bg-[#2C702C] hover:bg-green-900 cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+              class="w-50 lg:w-65 mx-auto bg-[#2C702C] hover:bg-green-900 cursor-pointer text-white font-bold py-3 sm:py-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
