@@ -104,30 +104,37 @@
 
       <!-- Right Side - Main Chat Area -->
       <div class="flex-1 flex flex-col bg-[#BFD6BF] rounded-r-xl overflow-hidden w-full transition-all duration-300">
-        <div class="bg-[#2C702C] text-white grid grid-cols-3 items-center px-3 py-2 sm:px-5 h-12 md:h-14">
-          <!-- Left: Chat History Button (Mobile Only) -->
-          <div class="flex justify-start">
+        <div class="bg-[#2C702C] text-white grid grid-cols-[auto_1fr_auto] items-center px-2 sm:px-3 md:px-5 py-2 h-12 md:h-14 gap-2">
+          <!-- Left: Fullscreen Button and Chat History Icon (Mobile Only) -->
+          <div class="flex justify-start items-center gap-1.5 sm:gap-2 shrink-0">
             <button
-              v-if="isOpen"
-              class="md:hidden border-green-200 bg-[#EAF2EA] bg-opacity-20 hover:bg-opacity-30 hover:bg-[#BFD6BF] text-[#2C702C] text-xs font-medium px-2.5 py-1 rounded-md border border-opacity-30 transition-all"
-              @click="showMobileChatHistory = true"
-              :title="$t('chatbot.chatHistory')"
-            >
-              {{ $t('chatbot.chatHistory') }}
-            </button>
-          </div>
-          
-          <!-- Center: Title -->
-          <span class="font-semibold tracking-wide text-sm sm:text-base text-center">{{ $t('chatbot.kokoAIHelper') }}</span>
-
-          <!-- Right: Fullscreen Button -->
-          <div class="flex justify-end">
-            <button
-              class="hover:text-green-200 text-base sm:text-lg transition"
+              class="hover:text-green-200 text-base sm:text-lg transition shrink-0"
               @click="toggleFullscreen"
               :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
             >
               {{ isFullscreen ? '⤡' : '⤢' }}
+            </button>
+            <button
+              v-if="isOpen"
+              class="md:hidden hover:opacity-80 transition shrink-0 flex items-center justify-center"
+              @click="showMobileChatHistory = true"
+              :title="$t('chatbot.chatHistory')"
+            >
+              <img src="/images/fluent_chat-history-20-filled.svg" :alt="$t('chatbot.chatHistory')" class="w-4 h-4 sm:w-5 sm:h-5 filter brightness-0 invert" />
+            </button>
+          </div>
+          
+          <!-- Center: Title -->
+          <span class="font-semibold tracking-wide text-[10px] sm:text-xs md:text-sm lg:text-base text-center whitespace-nowrap min-w-0">{{ $t('chatbot.kokoAIHelper') }}</span>
+
+          <!-- Right: Close Button -->
+          <div class="flex justify-end">
+            <button
+              class="hover:text-green-200 text-base sm:text-lg transition"
+              @click="toggleChat"
+              :title="$t('common.close')"
+            >
+              ✕
             </button>
           </div>
 
