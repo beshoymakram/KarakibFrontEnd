@@ -4,7 +4,7 @@
 
     <!-- Background Image Layer -->
     <div class="  absolute inset-0 bg-cover bg-center bg-no-repeat"
-      style="background-image: url('/images/Homebg.png');"></div>
+      style="background-image: url('/images/compressed-Homebg.webp');"></div>
 
     <!-- Overlay -->
     <div class="absolute inset-0 pointer-events-none" :style="{

@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <section class="relative flex flex-col items-center justify-center text-center pt-10 sm:pt-12 md:pt-14 lg:pt-16
       pb-10 sm:pb-12 md:pb-14 lg:pb-16 px-4 sm:px-6 md:px-10 overflow-hidden bg-base-100"
-      style="background-image: url('/images/abouthero.jpg'); background-size: cover; background-position: center;">
+      style="background-image: url('/images/abouthero.jpgg'); background-size: cover; background-position: center;">
       <!-- GRADIENT OVERLAY -->
       <div class="absolute inset-0" :style="{
         background:

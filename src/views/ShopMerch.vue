@@ -10,7 +10,7 @@
     }"></div>
 
     <!-- Background image -->
-    <img src="/images/Shop Page Background.png" alt="Background"
+    <img src="/images/compressedshopbg.webp" alt="Background"
       class="absolute inset-0 w-xs sm:w-sm md:w-md lg:w-lg object-cover -z-10 mt-10 md:mt-12 lg:mt-14 mx-auto" />
 
     <!-- content -->

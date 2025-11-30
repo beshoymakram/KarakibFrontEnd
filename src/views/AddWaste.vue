@@ -3,7 +3,7 @@
   class="relative w-full hero min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden"
 >
   <img
-    src="/images/wastebg.png"
+    src="/images/compressedwastebg.webp"
     alt="Background"
     class="absolute inset-0 w-full h-full object-cover -z-10"
   />
