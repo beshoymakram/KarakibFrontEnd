@@ -1,7 +1,8 @@
 <template>
   <div class="checkout-page bg-primary min-h-screen  py-6 sm:py-8 md:py-10 lg:py-12">
     <div class="container mx-auto px-4 max-w-6xl">
-      <h1 class="text-3xl font-bold text-primary pt-4 sm:pt-8 md:pt-10 lg:pt-12 mb-8">{{ $t('common.checkoutOrders') }}</h1>
+      <h1 class="text-3xl font-bold text-primary pt-4 sm:pt-8 md:pt-10 lg:pt-12 mb-8">{{ $t('common.checkoutOrders') }}
+      </h1>
 
       <div class="grid md:grid-cols-2 gap-6 bg-secondary p-6 rounded-2xl shadow-lg">
         <!-- LEFT SIDE - ORDER DETAILS -->
@@ -11,17 +12,10 @@
           </h2>
 
           <div v-if="cartStore.products?.length > 0" class="space-y-4">
-            <div
-              v-for="item in cartStore.products"
-              :key="item.id"
-              class="flex justify-between items-center border-t pb-3"
-            >
+            <div v-for="item in cartStore.products" :key="item.id"
+              class="flex justify-between items-center border-t pb-3">
               <div class="flex items-center gap-4">
-                <img
-                  :src="item.cartable.image_url"
-                  alt="Product"
-                  class="w-14 h-14 rounded-md object-cover"
-                />
+                <img :src="item.cartable.image_url" alt="Product" class="w-14 h-14 rounded-md object-cover" />
                 <div>
                   <p class="font-semibold text-primary">
                     {{ item.cartable.name }}
@@ -43,13 +37,13 @@
                 <span>{{ cartStore.products?.length }} {{ $t('common.items') }}</span>
                 <span>{{ cartStore.total }} {{ $t('common.currency') }}</span>
               </div>
-              <div class="flex justify-between mb-2">
+              <!-- <div class="flex justify-between mb-2">
                 <span>{{ $t('common.deliveryFee') }}</span>
                 <span>20 {{ $t('common.currency') }}</span>
-              </div>
+              </div> -->
               <div class="flex justify-between text-xl font-bold text-primary">
                 <span>{{ $t('common.totalAmount') }}</span>
-                <span>{{ cartStore.total + 20 }} {{ $t('common.currency') }}</span>
+                <span>{{ cartStore.total }} {{ $t('common.currency') }}</span>
               </div>
             </div>
           </div>
@@ -69,32 +63,21 @@
             <div class="mb-6">
               <div class="flex justify-between items-center mb-2">
                 <h3 class="font-semibold text-primary">{{ $t('common.deliveryAddress') }}</h3>
-                <button
-                  @click="openAddressModal"
-                  class="bg-green-700 text-white px-4 py-1 rounded-md hover:bg-[#216b21] cursor-pointer"
-                >
+                <button @click="openAddressModal"
+                  class="bg-green-700 text-white px-4 py-1 rounded-md hover:bg-[#216b21] cursor-pointer">
                   {{ $t('common.enterNewAddress') }}
                 </button>
               </div>
 
               <div v-if="addresses.length > 0">
-                <div
-                  v-for="address in addresses"
-                  :key="address.id"
+                <div v-for="address in addresses" :key="address.id"
                   class="flex justify-between items-start gap-3 p-3 rounded-md text-sm my-2 border transition-all duration-200"
                   :class="selectedAddressId === address.id
                     ? 'bg-[#E9F7E9] border-[#E9F7E9]'
-                    : 'bg-address text-section border-gray-300 hover:border-gray-300'"
-                >
+                    : 'bg-address text-section border-gray-300 hover:border-gray-300'">
                   <div class="flex items-start gap-3 w-full cursor-pointer" @click="selectedAddressId = address.id">
-                    <input
-                      type="radio"
-                      name="deliveryAddress"
-                      :value="address.id"
-                      v-model="selectedAddressId"
-                      required
-                      class="accent-[#16af3f] h-4 w-4 cursor-pointer mt-1 text-primary focus:ring-[#16af3f] border-gray-300"
-                    />
+                    <input type="radio" name="deliveryAddress" :value="address.id" v-model="selectedAddressId" required
+                      class="accent-[#16af3f] h-4 w-4 cursor-pointer mt-1 text-primary focus:ring-[#16af3f] border-gray-300" />
                     <div class="text-primary">
                       <span class="font-bold">Full Name:</span> {{ address.name }}<br />
                       <span class="font-bold">Phone:</span> {{ address.phone }}<br />
@@ -104,11 +87,8 @@
                   </div>
 
                   <!-- 🗑️ Delete Button — uses modal -->
-                  <button
-                    @click.stop="openDeleteModal(address.id)"
-                    class=" font-bold text-md px-1"
-                    title="Delete this address"
-                  >
+                  <button @click.stop="openDeleteModal(address.id)" class=" font-bold text-md px-1"
+                    title="Delete this address">
                     ✕
                   </button>
                 </div>
@@ -123,26 +103,20 @@
             <div class="mb-6">
               <h3 class="font-semibold text-primary mb-2">{{ $t('common.paymentMethod') }}</h3>
               <div class="flex gap-3">
-                <button
-                  @click="paymentMethod = 'cash'"
-                  :class="[
-                    'px-4 py-2 rounded-md border cursor-pointer',
-                    paymentMethod === 'cash'
-                      ? 'bg-[#2C702C] text-white border-[#2C702C]'
-                      : 'border-gray-300 text-primary',
-                  ]"
-                >
+                <button @click="paymentMethod = 'cash'" :class="[
+                  'px-4 py-2 rounded-md border cursor-pointer',
+                  paymentMethod === 'cash'
+                    ? 'bg-[#2C702C] text-white border-[#2C702C]'
+                    : 'border-gray-300 text-primary',
+                ]">
                   {{ $t('common.cashOnDelivery') }}
                 </button>
-                <button
-                  @click="paymentMethod = 'card'"
-                  :class="[
-                    'px-4 py-2 rounded-md border cursor-pointer',
-                    paymentMethod === 'card'
-                      ? 'bg-[#2C702C] text-white border-[#2C702C]'
-                      : 'border-gray-300 text-primary',
-                  ]"
-                >
+                <button @click="paymentMethod = 'card'" :class="[
+                  'px-4 py-2 rounded-md border cursor-pointer',
+                  paymentMethod === 'card'
+                    ? 'bg-[#2C702C] text-white border-[#2C702C]'
+                    : 'border-gray-300 text-primary',
+                ]">
                   {{ $t('common.card') }}
                 </button>
               </div>
@@ -151,27 +125,19 @@
             <!-- Notes -->
             <div class="mb-6">
               <h3 class="font-semibold text-primary mb-2">{{ $t('common.deliveryNotes') }}</h3>
-              <textarea
-                v-model="deliveryNotes"
-                :placeholder="$t('common.addDeliveryNotes')"
-                class="w-full border border-gray-300 rounded-md p-2 text-sm"
-                rows="3"
-              ></textarea>
+              <textarea v-model="deliveryNotes" :placeholder="$t('common.addDeliveryNotes')"
+                class="w-full border border-gray-300 rounded-md p-2 text-sm" rows="3"></textarea>
             </div>
           </div>
 
           <!-- Confirm Button -->
           <div class="mt-4">
-            <button
-              @click="placeOrder"
-              class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] text-white font-bold py-3 rounded-md transition-all"
-            >
+            <button @click="placeOrder"
+              class="w-full bg-[#2C702C] hover:bg-[#1a4d1a] text-white font-bold py-3 rounded-md transition-all">
               {{ $t('common.confirmOrder') }}
             </button>
-            <router-link
-              to="/cart"
-              class="block border-0 mt-3 btn pt-1.5 text-center text-[#2C702C] hover:bg-gray-950 text-lg"
-            >
+            <router-link to="/cart"
+              class="block border-0 mt-3 btn pt-1.5 text-center text-[#2C702C] hover:bg-gray-950 text-lg">
               {{ $t('common.goBack') }}
             </router-link>
           </div>
@@ -181,12 +147,10 @@
 
     <!-- 🏠 Address Modal (simple light style + dark override) -->
     <div v-if="showAddressModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div
-        :class="[
-          'rounded-lg p-6 w-[90%] max-w-md',
-          isDark ? 'bg-[#1c1c1c] border border-gray-700 shadow-lg' : 'bg-white'
-        ]"
-      >
+      <div :class="[
+        'rounded-lg p-6 w-[90%] max-w-md',
+        isDark ? 'bg-[#1c1c1c] border border-gray-700 shadow-lg' : 'bg-white'
+      ]">
         <h3 :class="['text-xl font-semibold mb-4', isDark ? 'text-green-500' : 'text-[#2C702C]']">
           {{ $t('common.enterDeliveryAddress') }}
         </h3>
@@ -196,78 +160,49 @@
             <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.fullName') }}
             </label>
-            <input
-              v-model="createForm.name"
-              type="text"
-              required
-              placeholder="Full Name"
-              :class="[
-                'w-full rounded-md px-3 py-2 focus:outline-none',
-                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
-              ]"
-            />
+            <input v-model="createForm.name" type="text" required placeholder="Full Name" :class="[
+              'w-full rounded-md px-3 py-2 focus:outline-none',
+              isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+            ]" />
           </div>
 
           <div>
             <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.phoneNumber') }}
             </label>
-            <input
-              v-model="createForm.phone"
-              type="text"
-              required
-              placeholder="Phone number"
-              :class="[
-                'w-full rounded-md px-3 py-2 focus:outline-none',
-                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
-              ]"
-            />
+            <input v-model="createForm.phone" type="text" required placeholder="Phone number" :class="[
+              'w-full rounded-md px-3 py-2 focus:outline-none',
+              isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+            ]" />
           </div>
 
           <div>
             <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.streetAddress') }}
             </label>
-            <input
-              v-model="createForm.street_address"
-              type="text"
-              required
-              placeholder="Street address"
-              :class="[
-                'w-full rounded-md px-3 py-2 focus:outline-none',
-                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
-              ]"
-            />
+            <input v-model="createForm.street_address" type="text" required placeholder="Street address" :class="[
+              'w-full rounded-md px-3 py-2 focus:outline-none',
+              isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+            ]" />
           </div>
 
           <div>
             <label :class="['block text-sm font-medium mb-1', isDark ? 'text-green-500' : 'text-[#2C702C]']">
               {{ $t('common.city') }}
             </label>
-            <input
-              v-model="createForm.city"
-              type="text"
-              required
-              placeholder="City"
-              :class="[
-                'w-full rounded-md px-3 py-2 focus:outline-none',
-                isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
-              ]"
-            />
+            <input v-model="createForm.city" type="text" required placeholder="City" :class="[
+              'w-full rounded-md px-3 py-2 focus:outline-none',
+              isDark ? 'bg-[#0f0f0f] border border-gray-700 text-gray-200 focus:ring-2 focus:ring-green-600' : 'border border-gray-300'
+            ]" />
           </div>
 
           <div class="flex justify-end gap-3 pt-4">
-            <button
-              type="button"
-              @click="closeAddressModal"
-              :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-700 hover:bg-[#2a2a2a] text-gray-300' : 'border border-gray-300 hover:bg-gray-100']"
-            >
+            <button type="button" @click="closeAddressModal"
+              :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-700 hover:bg-[#2a2a2a] text-gray-300' : 'border border-gray-300 hover:bg-gray-100']">
               {{ $t('common.cancel') }}
             </button>
-            <button
-              type="submit"
-              :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-green-700 hover:bg-green-800' : 'bg-[#2C702C] hover:bg-[#215921]']"
-            >
+            <button type="submit"
+              :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-green-700 hover:bg-green-800' : 'bg-[#2C702C] hover:bg-[#215921]']">
               {{ $t('common.save') }}
             </button>
           </div>
@@ -277,24 +212,21 @@
 
     <!-- Delete Confirmation Modal (simple style like your second file) -->
     <div v-if="showDeleteModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-      <div :class="['rounded-lg p-6 w-[90%] max-w-sm text-center shadow-lg', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
+      <div
+        :class="['rounded-lg p-6 w-[90%] max-w-sm text-center shadow-lg', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
         <h3 :class="['text-xl font-bold mb-3', isDark ? 'text-green-500' : 'text-[#2C702C]']">
-          {{ $t('common.deleteAddressTitle') || $t('are You Sure To Delete this  Delivery Address') }}
+          {{ $t('common.deleteAddressTitle') || $t('are You Sure To Delete this Delivery Address') }}
         </h3>
         <p :class="['mb-6', isDark ? 'text-gray-300' : 'text-gray-700']">
           {{ $t('common.deleteAddressConfirm') }}
         </p>
         <div class="flex justify-center gap-4">
-          <button
-            @click="cancelDelete"
-            :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-600 text-gray-300 hover:bg-[#2a2a2a]' : 'border border-gray-300 hover:bg-gray-100']"
-          >
+          <button @click="cancelDelete"
+            :class="['px-4 py-2 rounded-md', isDark ? 'border border-gray-600 text-gray-300 hover:bg-[#2a2a2a]' : 'border border-gray-300 hover:bg-gray-100']">
             {{ $t('common.cancel') }}
           </button>
-          <button
-            @click="confirmDeleteAddress"
-            :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-red-600 hover:bg-red-700' : 'bg-red-600 hover:bg-red-700']"
-          >
+          <button @click="confirmDeleteAddress"
+            :class="['px-4 py-2 rounded-md text-white', isDark ? 'bg-red-600 hover:bg-red-700' : 'bg-red-600 hover:bg-red-700']">
             {{ $t('common.delete') }}
           </button>
         </div>
@@ -303,15 +235,14 @@
 
     <!-- ✅ Order Confirmation Modal -->
     <div v-if="showConfirmation" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div :class="['rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
+      <div
+        :class="['rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
         <img src="/images/delivery.png" alt="Delivery Truck" class="w-48 mx-auto mb-4" />
         <p :class="['text-lg font-semibold', isDark ? 'text-green-500' : 'text-[#2C702C]']">
           {{ $t('common.thankYouForSupportingKarakib') }}
         </p>
-        <button
-          @click="closeConfirmation"
-          :class="['mt-6 px-6 py-2 rounded-md text-white', isDark ? 'bg-green-700 hover:bg-green-800' : 'bg-[#2C702C] hover:bg-[#1a4d1a]']"
-        >
+        <button @click="closeConfirmation"
+          :class="['mt-6 px-6 py-2 rounded-md text-white', isDark ? 'bg-green-700 hover:bg-green-800' : 'bg-[#2C702C] hover:bg-[#1a4d1a]']">
           {{ $t('common.close') }}
         </button>
       </div>
@@ -319,11 +250,11 @@
 
     <!-- Redirecting Modal -->
     <div v-if="isRedirecting" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div :class="['rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
+      <div
+        :class="['rounded-2xl p-8 w-[90%] max-w-md text-center shadow-xl', isDark ? 'bg-[#1c1c1c] border border-gray-700' : 'bg-white']">
         <div :class="isDark ? 'text-green-500 text-lg font-semibold' : 'text-[#2C702C] text-lg font-semibold'">
           <div role="status" class="mx-auto text-center">
-            <svg aria-hidden="true"
-              class="w-8 h-8 text-gray-200 animate-spin fill-current mx-auto my-3"
+            <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin fill-current mx-auto my-3"
               viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
@@ -333,7 +264,8 @@
                 fill="currentFill" />
             </svg>
           </div>
-          <small :class="isDark ? 'text-gray-300' : ''">{{ $t('common.youAreBeingRedirectedToCompletePayment') }}</small>
+          <small :class="isDark ? 'text-gray-300' : ''">{{ $t('common.youAreBeingRedirectedToCompletePayment')
+          }}</small>
         </div>
       </div>
     </div>
@@ -475,34 +407,34 @@ export default {
     },
 
     // Theme helper - uses prefers-color-scheme and listens for changes.
-applySystemTheme() {
-  // ✅ If a theme is already set (from layout or user toggle), respect it.
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  if (currentTheme) {
-    this.isDark = currentTheme === 'forest';
-    return;
-  }
+    applySystemTheme() {
+      // ✅ If a theme is already set (from layout or user toggle), respect it.
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme) {
+        this.isDark = currentTheme === 'forest';
+        return;
+      }
 
-  // ✅ Otherwise, use system preference
-  const m = window.matchMedia('(prefers-color-scheme: dark)');
-  const update = () => {
-    if (m.matches) {
-      document.documentElement.setAttribute('data-theme', 'forest');
-      this.isDark = true;
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      this.isDark = false;
-    }
-  };
-  update();
+      // ✅ Otherwise, use system preference
+      const m = window.matchMedia('(prefers-color-scheme: dark)');
+      const update = () => {
+        if (m.matches) {
+          document.documentElement.setAttribute('data-theme', 'forest');
+          this.isDark = true;
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          this.isDark = false;
+        }
+      };
+      update();
 
-  // ✅ Watch for system theme changes
-  if (m.addEventListener) {
-    m.addEventListener('change', update);
-  } else if (m.addListener) {
-    m.addListener(update); // older browsers
-  }
-},
+      // ✅ Watch for system theme changes
+      if (m.addEventListener) {
+        m.addEventListener('change', update);
+      } else if (m.addListener) {
+        m.addListener(update); // older browsers
+      }
+    },
 
   },
   async mounted() {
@@ -560,12 +492,18 @@ applySystemTheme() {
 }
 
 /* small UI niceties */
-.rounded-xl { border-radius: 12px; }
-.rounded-2xl { border-radius: 16px; }
+.rounded-xl {
+  border-radius: 12px;
+}
+
+.rounded-2xl {
+  border-radius: 16px;
+}
 
 /* ensure modals overlay look consistent */
-.fixed.inset-0 { z-index: 50; }
+.fixed.inset-0 {
+  z-index: 50;
+}
 
 /* spinner fill for light/dark handled inline by classes, keep fallback */
 </style>
-
