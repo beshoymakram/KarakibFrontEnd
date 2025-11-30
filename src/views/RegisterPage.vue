@@ -103,7 +103,7 @@
 
           <div class="w-full max-w-md">
             <h1 class="font-extrabold text-2xl lg:text-3xl text-main text-center mb-6 lg:mb-8">{{ $t('common.register')
-            }}</h1>
+              }}</h1>
 
             <!-- User Type Selection -->
             <div class="mb-6 text-center">
@@ -178,7 +178,7 @@
                   <label for="email" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.email') }}</label>
                   <input v-model="form.email" type="email" id="email"
                     :class="['shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2', errors.email ? 'input-error' : 'focus:ring-[#317C31]']"
-                    placeholder="karakib@gmail.com" required>
+                    placeholder="karakibt@gmail.com" required>
                   <span v-if="errors.email" class="error-message">{{ emailErrorMessage }}</span>
                 </div>
               </div>
@@ -186,7 +186,7 @@
               <!-- Personal ID (Only for Collector) -->
               <div v-if="form.type === 'courier'" class="form-group mb-4 flex flex-col w-full">
                 <label for="id" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.uploadPersonalId')
-                }}</label>
+                  }}</label>
                 <input type="file" id="id" accept="image/*,.pdf" @change="handleFileChoose"
                   class="bg-tabs border-0 px-3 py-3 rounded-lg text-sm lg:text-base shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-2 focus:ring-[#317C31]"
                   required>
@@ -205,7 +205,7 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div class="form-group flex flex-col w-full">
                   <label for="password" class="pb-2 font-medium text-sm lg:text-base">{{ $t('common.password')
-                  }}</label>
+                    }}</label>
                   <div class="password-wrapper">
                     <input :type="showPassword ? 'text' : 'password'" v-model="form.password" id="password"
                       :class="['shadow-[0_10px_20px_5px_rgba(0,0,0,0.1)] bg-tabs border-0 px-3 py-3 rounded-lg w-full text-sm lg:text-base focus:outline-none focus:ring-2', errors.password ? 'input-error' : 'focus:ring-[#317C31]']"
@@ -243,7 +243,7 @@
             <p class="text-center font-medium text-xs lg:text-base mt-4">
               {{ $t('common.alreadyHaveAnAccount') }}
               <router-link to="/login" class="text-[#317C31] hover:underline font-semibold">{{ $t('common.loginHere')
-              }}</router-link>
+                }}</router-link>
             </p>
           </div>
         </div>

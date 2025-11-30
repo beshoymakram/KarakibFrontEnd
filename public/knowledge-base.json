@@ -5,11 +5,18 @@
     "mission": "Making recycling accessible, rewarding, and impactful for everyone",
     "vision": "Creating a cleaner, greener future through community-driven recycling initiatives",
     "minimum_collection": "No minimum - collect any quantity of waste items",
-    "service_areas": ["Cairo", "Giza", "Alexandria"],
+    "service_areas": [
+      "Cairo",
+      "Giza",
+      "Alexandria"
+    ],
     "operating_hours": "Sunday-Thursday, 9 AM - 5 PM",
-    "languages": ["Arabic", "English"],
+    "languages": [
+      "Arabic",
+      "English"
+    ],
     "contact": {
-      "email": "karakib@gmail.com",
+      "email": "karakibt@gmail.com",
       "phone": "19123",
       "social_media": {
         "facebook": "@Karakib",
@@ -18,7 +25,6 @@
       }
     }
   },
-  
   "waste_types": [
     {
       "category": "Plastic",
@@ -181,14 +187,17 @@
       "note": "Appliances are properly dismantled and recycled for their metal and plastic components"
     }
   ],
-
   "collection_process": {
     "steps": [
       {
         "step": 1,
         "title": "Create Account",
         "description": "Sign up on Karakib using your email or Google account. Verify your phone number and add your collection address in your profile.",
-        "tips": ["Keep your contact information updated", "Add multiple addresses if needed", "Enable notifications for updates"]
+        "tips": [
+          "Keep your contact information updated",
+          "Add multiple addresses if needed",
+          "Enable notifications for updates"
+        ]
       },
       {
         "step": 2,
@@ -309,7 +318,6 @@
       ]
     }
   },
-
   "faqs": [
     {
       "category": "Getting Started",
@@ -490,7 +498,7 @@
         },
         {
           "question": "How do I contact support?",
-          "answer": "You can reach us through: Email at karakib@gmail.com, Phone at 19123, Social media (@Karakib), or use our chatbot Koko on the website for immediate assistance. Our support operates during business hours: Sunday-Thursday, 9 AM - 5 PM."
+          "answer": "You can reach us through: Email at karakibt@gmail.com, Phone at 19123, Social media (@Karakib), or use our chatbot Koko on the website for immediate assistance. Our support operates during business hours: Sunday-Thursday, 9 AM - 5 PM."
         }
       ]
     },
@@ -553,12 +561,11 @@
         },
         {
           "question": "What should I do if I encounter a technical issue?",
-          "answer": "If you experience any technical problems, try refreshing the page or clearing your browser cache. If the issue persists, contact our support team at karakib@gmail.com or use the chatbot for assistance."
+          "answer": "If you experience any technical problems, try refreshing the page or clearing your browser cache. If the issue persists, contact our support team at karakibt@gmail.com or use the chatbot for assistance."
         }
       ]
     }
   ],
-
   "environmental_tips": {
     "recycling_impact": [
       "One recycled plastic bottle saves enough energy to power a laptop for 3 hours",
@@ -629,7 +636,6 @@
       }
     ]
   },
-  
   "rewards_program": {
     "points_system": {
       "earning": {
@@ -693,7 +699,6 @@
       "shop_integration": "Seamless shopping experience with points"
     }
   },
-
   "courier_system": {
     "how_it_works": [
       "Admin reviews and approves collection requests",
@@ -717,7 +722,6 @@
       "Collection confirmation and receipt"
     ]
   },
-
   "additional_resources": {
     "preparation_guides": {
       "plastic": "Clean and dry. Remove labels. Flatten to save space. Separate by type if possible.",
@@ -740,13 +744,12 @@
       "Comprehensive tracking system"
     ],
     "support_channels": [
-      "Email: karakib@gmail.com",
+      "Email: karakibt@gmail.com",
       "Phone: 19123",
       "Chatbot: Koko (available on website)",
       "Social Media: @Karakib (Facebook, Instagram, Twitter)"
     ]
-  }
-  ,
+  },
   "ar": {
     "company_info": {
       "name": "Karakib",
@@ -754,11 +757,18 @@
       "mission": "نجعل إعادة التدوير متاحة وسهلة ومجزية وذات أثر للجميع",
       "vision": "مستقبل أنظف وأكثر خضرة عبر مبادرات مجتمعية لإعادة التدوير",
       "minimum_collection": "لا يوجد حد أدنى – يمكنك تجميع أي كمية",
-      "service_areas": ["القاهرة", "الجيزة", "الإسكندرية"],
+      "service_areas": [
+        "القاهرة",
+        "الجيزة",
+        "الإسكندرية"
+      ],
       "operating_hours": "من الأحد إلى الخميس، 9 صباحًا حتى 5 مساءً",
-      "languages": ["العربية", "الإنجليزية"],
+      "languages": [
+        "العربية",
+        "الإنجليزية"
+      ],
       "contact": {
-        "email": "karakib@gmail.com",
+        "email": "karakibt@gmail.com",
         "phone": "19123",
         "social_media": {
           "facebook": "@Karakib",
@@ -844,25 +854,54 @@
       {
         "category": "خشب",
         "description": "عناصر ومخلفات خشبية",
-        "accepted_items": ["قطع خشب", "أجزاء أثاث خشبية", "قصاصات خشب"],
+        "accepted_items": [
+          "قطع خشب",
+          "أجزاء أثاث خشبية",
+          "قصاصات خشب"
+        ],
         "points_system": "نقاط لكل وحدة",
         "unit": "كجم أو قطعة",
         "preparation": "إزالة المسامير والقطع المعدنية. الحفاظ على الجفاف.",
-        "diy_suggestions": {"single_item": ["علامات نباتات", "فن جداري", "بيت طيور", "حواف للحديقة", "مواد إشعال (بأمان)"]}
+        "diy_suggestions": {
+          "single_item": [
+            "علامات نباتات",
+            "فن جداري",
+            "بيت طيور",
+            "حواف للحديقة",
+            "مواد إشعال (بأمان)"
+          ]
+        }
       },
       {
         "category": "ملابس",
         "description": "منسوجات وملابس",
-        "accepted_items": ["تيشيرتات قديمة", "جاكيتات", "ملابس", "مخلفات منسوجات"],
+        "accepted_items": [
+          "تيشيرتات قديمة",
+          "جاكيتات",
+          "ملابس",
+          "مخلفات منسوجات"
+        ],
         "points_system": "نقاط لكل وحدة",
         "unit": "كجم أو قطعة",
         "preparation": "تنظيف وتجفيف. إزالة الأزرار والسحابات إن أمكن.",
-        "diy_suggestions": {"single_item": ["حقيبة من تيشيرت", "سجادة قماش", "أقمشة تنظيف", "غطاء وسادة", "لحاف رقع"]}
+        "diy_suggestions": {
+          "single_item": [
+            "حقيبة من تيشيرت",
+            "سجادة قماش",
+            "أقمشة تنظيف",
+            "غطاء وسادة",
+            "لحاف رقع"
+          ]
+        }
       },
       {
         "category": "زيت طهي",
         "description": "زيت طهي مستخدم",
-        "accepted_items": ["زيت طهي مستخدم", "مخلفات زيت نباتي", "زيت قلي"],
+        "accepted_items": [
+          "زيت طهي مستخدم",
+          "مخلفات زيت نباتي",
+          "زيت قلي"
+        ],
         "points_system": "نقاط لكل وحدة",
         "unit": "كجم أو لتر",
         "preparation": "تخزين في عبوة نظيفة محكمة. عدم الخلط مع سوائل أخرى.",
@@ -871,7 +910,15 @@
       {
         "category": "نفايات إلكترونية",
         "description": "أجهزة ومكونات إلكترونية",
-        "accepted_items": ["هواتف", "أجهزة لوحية", "حاسبات محمولة", "قطع حواسيب", "لوحات مفاتيح", "كوابل وشواحن", "أجهزة صغيرة"],
+        "accepted_items": [
+          "هواتف",
+          "أجهزة لوحية",
+          "حاسبات محمولة",
+          "قطع حواسيب",
+          "لوحات مفاتيح",
+          "كوابل وشواحن",
+          "أجهزة صغيرة"
+        ],
         "points_system": "نقاط لكل وحدة",
         "unit": "كجم أو قطعة",
         "preparation": "إزالة البطاريات ومسح البيانات. تضمين جميع الأجزاء إن أمكن.",
@@ -880,7 +927,12 @@
       {
         "category": "أجهزة منزلية",
         "description": "أجهزة ومعدات منزلية",
-        "accepted_items": ["مراوح", "محمصات خبز", "أجهزة منزلية صغيرة", "أجهزة مطبخ"],
+        "accepted_items": [
+          "مراوح",
+          "محمصات خبز",
+          "أجهزة منزلية صغيرة",
+          "أجهزة مطبخ"
+        ],
         "points_system": "نقاط لكل وحدة",
         "unit": "كجم أو قطعة",
         "preparation": "فصل الكهرباء والتأكد من السلامة. تنظيف إن أمكن.",
@@ -889,43 +941,134 @@
     ],
     "collection_process": {
       "steps": [
-        {"step": 1, "title": "إنشاء حساب", "description": "سجّل عبر البريد أو جوجل، فعّل رقمك وأضف عنوان التجميع في ملفك."},
-        {"step": 2, "title": "إضافة المخلفات إلى السلة", "description": "تصفح الأنواع واختر العناصر وأضفها إلى السلة (سترى النقاط لكل عنصر)."},
-        {"step": 3, "title": "مراجعة السلة", "description": "راجع العناصر والكميات وعدّلها قبل المتابعة."},
-        {"step": 4, "title": "طلب التجميع", "description": "انتقل للدفع، اختر عنوان الاستلام وطريقة الاستفادة (نقاط أو تبرع) وأضف ملاحظاتك."},
-        {"step": 5, "title": "معالجة الطلب", "description": "نراجع طلبك ونعين مندوبًا وستصلك إشعارات بالحالة."},
-        {"step": 6, "title": "استلام المندوب", "description": "يزورك المندوب، يتحقق من المخلفات ويستلمها (قد نستخدم QR)."},
-        {"step": 7, "title": "إضافة النقاط", "description": "تُضاف نقاطك وفق العناصر المستلمة ويمكنك استخدامها فورًا."}
+        {
+          "step": 1,
+          "title": "إنشاء حساب",
+          "description": "سجّل عبر البريد أو جوجل، فعّل رقمك وأضف عنوان التجميع في ملفك."
+        },
+        {
+          "step": 2,
+          "title": "إضافة المخلفات إلى السلة",
+          "description": "تصفح الأنواع واختر العناصر وأضفها إلى السلة (سترى النقاط لكل عنصر)."
+        },
+        {
+          "step": 3,
+          "title": "مراجعة السلة",
+          "description": "راجع العناصر والكميات وعدّلها قبل المتابعة."
+        },
+        {
+          "step": 4,
+          "title": "طلب التجميع",
+          "description": "انتقل للدفع، اختر عنوان الاستلام وطريقة الاستفادة (نقاط أو تبرع) وأضف ملاحظاتك."
+        },
+        {
+          "step": 5,
+          "title": "معالجة الطلب",
+          "description": "نراجع طلبك ونعين مندوبًا وستصلك إشعارات بالحالة."
+        },
+        {
+          "step": 6,
+          "title": "استلام المندوب",
+          "description": "يزورك المندوب، يتحقق من المخلفات ويستلمها (قد نستخدم QR)."
+        },
+        {
+          "step": 7,
+          "title": "إضافة النقاط",
+          "description": "تُضاف نقاطك وفق العناصر المستلمة ويمكنك استخدامها فورًا."
+        }
       ]
     },
     "faqs": [
-      {"category": "البدء", "questions": [
-        {"question": "كيف أبدأ مع كراكِب؟", "answer": "أنشئ حسابًا، فعّل رقم هاتفك وأضف عنوانك، ثم تصفح صفحة 'أضف مخلفاتك' لإضافة العناصر إلى السلة."},
-        {"question": "هل يجب إنشاء حساب؟", "answer": "نعم، طلب التجميع يتطلب حسابًا. التسجيل سريع ومجاني عبر البريد أو جوجل."},
-        {"question": "ما هي المناطق التي نخدمها؟", "answer": "نخدم القاهرة والجيزة والإسكندرية ونعمل على التوسع."},
-        {"question": "هل هناك حد أدنى للتجميع؟", "answer": "لا يوجد حد أدنى. يمكنك تجميع أي كمية وستحصل على نقاط حسب النوع والوحدة."}
-      ]},
-      {"category": "عملية التجميع", "questions": [
-        {"question": "كيف تعمل عملية التجميع؟", "answer": "أضف العناصر للسلة ثم اطلب التجميع واختر العنوان وطريقة الاستفادة. نعيّن مندوبًا يتواصل معك للاستلام ثم تُضاف النقاط."},
-        {"question": "كيف أضيف مخلفات للسلة؟", "answer": "من صفحة 'أضف مخلفاتك' اختر الأنواع (بلاستيك، ورق، معادن، خشب، ملابس، زيت طهي، نفايات إلكترونية، أجهزة منزلية) وأضف الكميات."},
-        {"question": "هل يمكن طلب مخلفات مختلفة معًا؟", "answer": "نعم، يمكنك دمج أنواع متعددة في طلب واحد."},
-        {"question": "كم يستغرق معالجة الطلب؟", "answer": "عادةً خلال 1-2 يوم عمل لمراجعة وتعيين مندوب، ثم يحدد المندوب موعد الاستلام."}
-      ]},
-      {"category": "الأنواع والعناصر", "questions": [
-        {"question": "ما الأنواع التي تقبلونها؟", "answer": "نقبل: بلاستيك، ورق وكرتون، معادن، خشب، ملابس، زيت طهي، نفايات إلكترونية، أجهزة منزلية."},
-        {"question": "هل يجب تجهيز العناصر؟", "answer": "يفضل تنظيف وتجفيف البلاستيك والعلب، إزالة الشوائب من الورق، شطف المعادن... حسب الإرشادات."}
-      ]},
-      {"category": "النقاط والمكافآت", "questions": [
-        {"question": "كيف يعمل نظام النقاط؟", "answer": "تحصل على نقاط لكل عنصر حسب النوع والوحدة (كجم أو قطعة). تُضاف النقاط بعد الاستلام."},
-        {"question": "كيف أتتبع أرباحي؟", "answer": "من ملفك الشخصي، اضغط على 'نقاطي' لرؤية رصيد نقاطك وسجل النقاط وجميع معاملات النقاط."},
-        {"question": "ماذا أفعل بالنقاط؟", "answer": "يمكنك التسوق في المتجر، أو (حسب المتاح) التحويل النقدي، أو التبرع بها."}
-      ]},
-      {"category": "المتجر والمنتجات", "questions": [
-        {"question": "ماذا أستطيع شراءه؟", "answer": "منتجات صديقة للبيئة وبضائع بعلامة كراكِب. بعض المنتجات قابلة للشراء بالنقاط أو بالمال."}
-      ]},
-      {"category": "العناوين والاستلام", "questions": [
-        {"question": "كيف أضيف عنوانًا؟", "answer": "من ملفك الشخصي (عناويني) أضف عنوانك بالتفاصيل لتختاره عند الطلب."}
-      ]}
+      {
+        "category": "البدء",
+        "questions": [
+          {
+            "question": "كيف أبدأ مع كراكِب؟",
+            "answer": "أنشئ حسابًا، فعّل رقم هاتفك وأضف عنوانك، ثم تصفح صفحة 'أضف مخلفاتك' لإضافة العناصر إلى السلة."
+          },
+          {
+            "question": "هل يجب إنشاء حساب؟",
+            "answer": "نعم، طلب التجميع يتطلب حسابًا. التسجيل سريع ومجاني عبر البريد أو جوجل."
+          },
+          {
+            "question": "ما هي المناطق التي نخدمها؟",
+            "answer": "نخدم القاهرة والجيزة والإسكندرية ونعمل على التوسع."
+          },
+          {
+            "question": "هل هناك حد أدنى للتجميع؟",
+            "answer": "لا يوجد حد أدنى. يمكنك تجميع أي كمية وستحصل على نقاط حسب النوع والوحدة."
+          }
+        ]
+      },
+      {
+        "category": "عملية التجميع",
+        "questions": [
+          {
+            "question": "كيف تعمل عملية التجميع؟",
+            "answer": "أضف العناصر للسلة ثم اطلب التجميع واختر العنوان وطريقة الاستفادة. نعيّن مندوبًا يتواصل معك للاستلام ثم تُضاف النقاط."
+          },
+          {
+            "question": "كيف أضيف مخلفات للسلة؟",
+            "answer": "من صفحة 'أضف مخلفاتك' اختر الأنواع (بلاستيك، ورق، معادن، خشب، ملابس، زيت طهي، نفايات إلكترونية، أجهزة منزلية) وأضف الكميات."
+          },
+          {
+            "question": "هل يمكن طلب مخلفات مختلفة معًا؟",
+            "answer": "نعم، يمكنك دمج أنواع متعددة في طلب واحد."
+          },
+          {
+            "question": "كم يستغرق معالجة الطلب؟",
+            "answer": "عادةً خلال 1-2 يوم عمل لمراجعة وتعيين مندوب، ثم يحدد المندوب موعد الاستلام."
+          }
+        ]
+      },
+      {
+        "category": "الأنواع والعناصر",
+        "questions": [
+          {
+            "question": "ما الأنواع التي تقبلونها؟",
+            "answer": "نقبل: بلاستيك، ورق وكرتون، معادن، خشب، ملابس، زيت طهي، نفايات إلكترونية، أجهزة منزلية."
+          },
+          {
+            "question": "هل يجب تجهيز العناصر؟",
+            "answer": "يفضل تنظيف وتجفيف البلاستيك والعلب، إزالة الشوائب من الورق، شطف المعادن... حسب الإرشادات."
+          }
+        ]
+      },
+      {
+        "category": "النقاط والمكافآت",
+        "questions": [
+          {
+            "question": "كيف يعمل نظام النقاط؟",
+            "answer": "تحصل على نقاط لكل عنصر حسب النوع والوحدة (كجم أو قطعة). تُضاف النقاط بعد الاستلام."
+          },
+          {
+            "question": "كيف أتتبع أرباحي؟",
+            "answer": "من ملفك الشخصي، اضغط على 'نقاطي' لرؤية رصيد نقاطك وسجل النقاط وجميع معاملات النقاط."
+          },
+          {
+            "question": "ماذا أفعل بالنقاط؟",
+            "answer": "يمكنك التسوق في المتجر، أو (حسب المتاح) التحويل النقدي، أو التبرع بها."
+          }
+        ]
+      },
+      {
+        "category": "المتجر والمنتجات",
+        "questions": [
+          {
+            "question": "ماذا أستطيع شراءه؟",
+            "answer": "منتجات صديقة للبيئة وبضائع بعلامة كراكِب. بعض المنتجات قابلة للشراء بالنقاط أو بالمال."
+          }
+        ]
+      },
+      {
+        "category": "العناوين والاستلام",
+        "questions": [
+          {
+            "question": "كيف أضيف عنوانًا؟",
+            "answer": "من ملفك الشخصي (عناويني) أضف عنوانك بالتفاصيل لتختاره عند الطلب."
+          }
+        ]
+      }
     ],
     "environmental_tips": {
       "recycling_impact": [

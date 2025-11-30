@@ -10,7 +10,7 @@
         </p>
         <p class="text-sm font-semibold text-primary">
           {{ $t('common.emailLabel') }}
-          <span class="font-normal text-about">karakib@gmail.com</span>
+          <span class="font-normal text-about">karakibt@gmail.com</span>
         </p>
       </div>
 
@@ -21,7 +21,8 @@
             <RouterLink to="/about" class="hover:text-green-700">{{ $t('common.aboutUs') }}</RouterLink>
           </li>
           <li>
-            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">{{ $t('common.privacyPolicy') }}</RouterLink>
+            <RouterLink :to="{ path: '/about', hash: '#terms' }" class="hover:text-green-700">{{
+              $t('common.privacyPolicy') }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -30,7 +31,8 @@
         <h3 class="font-semibold text-primary mb-3">{{ $t('common.areYouACollector') }}</h3>
         <ul class="space-y-1 text-sm text-about">
           <li>
-            <RouterLink to="/register" class="hover:text-green-700">{{ $t('common.joinKarakibCollectors') }}</RouterLink>
+            <RouterLink to="/register" class="hover:text-green-700">{{ $t('common.joinKarakibCollectors') }}
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -73,7 +75,8 @@
           <a href="#" target="_blank" aria-label="Facebook" class="hover:text-green-600 transition">
             <font-awesome-icon :icon="['fab', 'facebook']" />
           </a>
-          <a href="https://instagram.com/karakib.eg" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-green-600 transition">
+          <a href="https://instagram.com/karakib.eg" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+            class="hover:text-green-600 transition">
             <font-awesome-icon :icon="['fab', 'instagram']" />
           </a>
           <a href="#" target="_blank" aria-label="LinkedIn" class="hover:text-green-600 transition">
@@ -115,24 +118,31 @@ export default {
 .bg-primary {
   background-color: rgb(235, 255, 235) !important;
 }
+
 [data-theme="forest"] .bg-primary {
-  background-color: rgb(41, 41, 41)!important;
+  background-color: rgb(41, 41, 41) !important;
 }
+
 .text-secondary {
   color: #2c702c !important;
 }
+
 [data-theme="forest"] .text-secondary {
   color: rgb(9, 228, 75) !important;
 }
+
 .text-section {
   color: black !important;
 }
+
 [data-theme="forest"] .text-section {
   color: white !important;
 }
+
 .text-about {
   color: #2c702c !important;
 }
+
 [data-theme="forest"] .text-about {
   color: #c1d9b7 !important;
 }

@@ -5,8 +5,8 @@
         <div class="relative">
           <input v-model="searchQuery" type="text" :placeholder="$t('common.searchByNameOrEmail')"
             class="w-full px-8 md:px-10 py-1.5 md:py-2 border text-sm md:text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C702C] focus:border-transparent" />
-             <svg
-            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-4', 'h-4','md:w-5', 'md:h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
+          <svg
+            :class="['absolute', 'top-1/2', '-translate-y-1/2', 'w-4', 'h-4', 'md:w-5', 'md:h-5', 'text-gray-400', $i18n.locale === 'ar' ? 'right-3' : 'left-3']"
             fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -69,7 +69,8 @@
                 class="px-3 py-1 border border-gray-300 rounded-md text-primary hover:bg-gray-200 transition-colors">
                 Details
               </button>
-              <button v-if="order.status !== 'cancelled' && order.status !== 'completed'"
+              <button
+                v-if="order.status !== 'cancelled' && order.status !== 'completed' && order.status !== 'delivered'"
                 @click="openCancelModal(order)"
                 class="px-3 py-1 border border-red-300 rounded-md text-red-600 hover:bg-red-50 transition-colors cursor-pointer">
                 {{ $t('common.Cancel') }}
@@ -97,8 +98,8 @@
             <span class="sr-only">Close modal</span>
           </button>
           <div class="p-4 md:p-5 text-center">
-            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>

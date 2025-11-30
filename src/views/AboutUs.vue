@@ -269,7 +269,7 @@
           <div>
             <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
               $t("common.firstName")
-              }}</label>
+            }}</label>
             <input v-model="form.firstName" type="text" :placeholder="$t('common.enterFirstName')"
               class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
               :class="{ 'border-red-500': formErrors.firstName }" />
@@ -281,7 +281,7 @@
           <div>
             <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
               $t("common.lastName")
-              }}</label>
+            }}</label>
             <input v-model="form.lastName" type="text" :placeholder="$t('common.enterLastName')"
               class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
               :class="{ 'border-red-500': formErrors.lastName }" />
@@ -293,7 +293,7 @@
           <div>
             <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
               $t("common.email")
-              }}</label>
+            }}</label>
             <input v-model="form.email" type="email" :placeholder="$t('common.enterEmail')"
               class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
               :class="{ 'border-red-500': formErrors.email }" />
@@ -305,7 +305,7 @@
           <div>
             <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
               $t("common.subject")
-              }}</label>
+            }}</label>
             <input v-model="form.subject" type="text" :placeholder="$t('common.enterSubject')"
               class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
               :class="{ 'border-red-500': formErrors.subject }" />
@@ -317,7 +317,7 @@
           <div class="md:col-span-2">
             <label class="block mb-1 font-medium text-sm md:text-base lg:text-lg">{{
               $t("common.message")
-              }}</label>
+            }}</label>
             <textarea v-model="form.message" rows="4" :placeholder="$t('common.enterMessage')"
               class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-xs md:text-sm lg:text-base"
               :class="{ 'border-red-500': formErrors.message }"></textarea>
@@ -363,7 +363,7 @@
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'envelope']" />
-                karakib@gmail.com
+                karakibt@gmail.com
               </li>
             </ul>
           </div>
@@ -390,7 +390,8 @@
     <!-- Modal -->
     <div v-if="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
       @click.self="closeModal">
-      <div class="bg-white rounded-2xl shadow-lg p-6 w-[90%] sm:w-full relative animate-fadeIn max-h-[80vh] overflow-y-auto"
+      <div
+        class="bg-white rounded-2xl shadow-lg p-6 w-[90%] sm:w-full relative animate-fadeIn max-h-[80vh] overflow-y-auto"
         :class="[isTermsModal ? 'sm:max-w-4xl md:max-w-5xl' : 'sm:max-w-md md:max-w-lg']" :dir="isRTL ? 'rtl' : 'ltr'">
         <button @click="closeModal" class="absolute top-3 text-gray-500 hover:text-gray-800 text-xl cursor-pointer"
           :class="isRTL ? 'left-3' : 'right-3'">
