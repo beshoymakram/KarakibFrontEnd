@@ -1,81 +1,60 @@
 <template>
-  <div
-    class="fixed z-50"
-    :style="buttonPosition"
-  >
+  <div class="fixed z-50" :style="buttonPosition">
     <!-- Tooltip (shows before opening chatbot) -->
-    <div
-      v-if="!isOpen && showTooltip"
-      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-xl shadow-lg p-3 mb-2 w-76 animate-fadeIn"
-    >
-      <button
-        @click="showTooltip = false"
-        class="absolute top-1.5 right-1.5 text-gray-500 hover:text-gray-700 text-xs md:text-sm leading-none w-5 h-5 flex items-center justify-center"
-      >
+    <div v-if="!isOpen && showTooltip"
+      class="absolute bottom-10 md:bottom-14 right-0 bg-[#D4E7D4] border-2 border-[#2C702C] rounded-xl shadow-lg p-3 mb-2 w-76 animate-fadeIn">
+      <button @click="showTooltip = false"
+        class="absolute top-1.5 right-1.5 text-gray-500 hover:text-gray-700 text-xs md:text-sm leading-none w-5 h-5 flex items-center justify-center">
         ✕
       </button>
       <div class="pr-5">
 
-<h4 class="font-bold text-[#2C702C] text-sm md:text-base mb-1.5">
-  🌱 {{ $t('chatbot.tooltipTitle') }}
-</h4>
-<p class="text-[0.67rem] md:text-xs text-gray-700 leading-snug">
-  {{ $t('chatbot.tooltipDescription') }}
-</p>
+        <h4 class="font-bold text-[#2C702C] text-sm md:text-base mb-1.5">
+          🌱 {{ $t('chatbot.tooltipTitle') }}
+        </h4>
+        <p class="text-[0.67rem] md:text-xs text-gray-700 leading-snug">
+          {{ $t('chatbot.tooltipDescription') }}
+        </p>
 
       </div>
     </div>
 
     <!-- Floating Button (always visible) -->
-    <button
-      @mousedown="startDrag"
-      @touchstart="startDrag"
-      @click="handleClick"
+    <button @mousedown="startDrag" @touchstart="startDrag" @click="handleClick"
       class="bg-[#2C702C] text-white rounded-full w-10 h-10 md:w-14 md:h-14 shadow-lg flex items-center justify-center hover:bg-[#265C26] transition relative z-50 cursor-move touch-none select-none"
-      :class="{ 'opacity-80': isDragging }"
-    >
+      :class="{ 'opacity-80': isDragging }">
       <img src="/images/koko.png" :alt="$t('chatbot.kokoAlt')" class="w-full h-full rounded-full pointer-events-none" />
     </button>
 
     <!-- Chat Window -->
-    <div
-      v-if="isOpen"
-      :class="[
-        'absolute right-0 md:right-8 bottom-4 md:bottom-6 bg-green-50 border-2 border-[#2C702C] rounded-2xl flex shadow-xl animate-fadeIn overflow-hidden backdrop-blur-md',
-       isFullscreen
-      ? 'w-[90vw] h-[90vh] md:w-[85vw] md:h-[88vh] lg:w-[80vw] lg:h-[85vh] xl:w-[75vw] xl:h-[85vh]'
-      : 'w-[90vw] h-[70vh] sm:w-[70vw] sm:h-[65vh] md:w-[45vw] md:h-[70vh] lg:w-[34vw] lg:h-[80vh] '
-  ]"
-    >
+    <div v-if="isOpen" :class="[
+      'absolute right-0 md:right-8 bottom-4 md:bottom-6 bg-green-50 border-2 border-[#2C702C] rounded-2xl flex shadow-xl animate-fadeIn overflow-hidden backdrop-blur-md',
+      isFullscreen
+        ? 'w-[90vw] h-[90vh] md:w-[85vw] md:h-[88vh] lg:w-[80vw] lg:h-[85vh] xl:w-[75vw] xl:h-[85vh]'
+        : 'w-[90vw] h-[70vh] sm:w-[70vw] sm:h-[65vh] md:w-[45vw] md:h-[70vh] lg:w-[34vw] lg:h-[80vh] '
+    ]">
       <!-- Left Sidebar  -->
-      <div v-if="isFullscreen" class="hidden md:flex w-[26vw] lg:w-[20vw] bg-[#EAF2EA] border-r border-green-200 flex-col"
-    >
-      <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-12 md:h-14">
-        <span class="font-semibold text-sm tracking-wide">{{ $t('chatbot.chatHistory') }}</span>
-      </div>
+      <div v-if="isFullscreen"
+        class="hidden md:flex w-[26vw] lg:w-[20vw] bg-[#EAF2EA] border-r border-green-200 flex-col">
+        <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-12 md:h-14">
+          <span class="font-semibold text-sm tracking-wide">{{ $t('chatbot.chatHistory') }}</span>
+        </div>
 
         <!-- New Chat Button -->
         <div class="px-3 py-2 border-b border-green-200">
-          <button
-            @click="startNewChat"
+          <button @click="startNewChat"
             class="w-full  bg-[#E0EBE0] text-[#2C702C] md:text-base font-medium px-3 py-2 rounded-md transition flex items-center justify-center gap-2"
-            :title="$t('chatbot.startNewChat')"
-          >
+            :title="$t('chatbot.startNewChat')">
             <img src="../../public/images/icons8-add-to-chat-50.png" alt="" class="size-5 md:size-6">
             <span>{{ $t('chatbot.newChat') }}</span>
           </button>
         </div>
 
         <div class="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-green-100">
-          <div
-            v-for="chat in chatList"
-            :key="chat.id"
-            @click="loadChat(chat.id)"
-            :class="[
-              'px-4 py-3 border-b border-green-100 cursor-pointer transition-colors hover:bg-[#BFD6BF] group flex flex-col gap-1',
-              currentChatId === chat.id ? 'bg-[#BFD6BF] border-l-4 border-l-[#2C702C]' : ''
-            ]"
-          >
+          <div v-for="chat in chatList" :key="chat.id" @click="loadChat(chat.id)" :class="[
+            'px-4 py-3 border-b border-green-100 cursor-pointer transition-colors hover:bg-[#BFD6BF] group flex flex-col gap-1',
+            currentChatId === chat.id ? 'bg-[#BFD6BF] border-l-4 border-l-[#2C702C]' : ''
+          ]">
             <div class="flex items-start justify-between gap-2">
               <div class="flex-1 min-w-0">
                 <p class="text-sm md:text-base font-semibold text-gray-800 truncate">
@@ -85,13 +64,9 @@
                   {{ formatDate(chat.createdAt) }}
                 </p>
               </div>
-              <button
-                 @click.stop="deleteChat(chat.id)"
-                 class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition
-                 opacity-0 group-hover:opacity-100"
-                 :title="$t('chatbot.deleteChat')"
-                >
-                  🗑️
+              <button @click.stop="deleteChat(chat.id)" class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition
+                 opacity-0 group-hover:opacity-100" :title="$t('chatbot.deleteChat')">
+                🗑️
               </button>
             </div>
           </div>
@@ -104,36 +79,31 @@
 
       <!-- Right Side - Main Chat Area -->
       <div class="flex-1 flex flex-col bg-[#BFD6BF] rounded-r-xl overflow-hidden w-full transition-all duration-300">
-        <div class="bg-[#2C702C] text-white grid grid-cols-[auto_1fr_auto] items-center px-2 sm:px-3 md:px-5 py-2 h-12 md:h-14 gap-2">
+        <div
+          class="bg-[#2C702C] text-white grid grid-cols-[auto_1fr_auto] items-center px-2 sm:px-3 md:px-5 py-2 h-12 md:h-14 gap-2">
           <!-- Left: Fullscreen Button and Chat History Icon (Mobile Only) -->
           <div class="flex justify-start items-center gap-1.5 sm:gap-2 shrink-0">
-            <button
-              class="hover:text-green-200 text-base sm:text-lg transition shrink-0"
-              @click="toggleFullscreen"
-              :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')"
-            >
+            <button class="hover:text-green-200 text-base sm:text-lg transition shrink-0" @click="toggleFullscreen"
+              :title="isFullscreen ? $t('chatbot.minimize') : $t('chatbot.fullscreen')">
               {{ isFullscreen ? '⤡' : '⤢' }}
             </button>
-            <button
-              v-if="isOpen"
+            <button v-if="isOpen"
               class="md:hidden hover:opacity-80 transition shrink-0 flex items-center justify-center"
-              @click="showMobileChatHistory = true"
-              :title="$t('chatbot.chatHistory')"
-            >
-              <img src="/images/fluent_chat-history-20-filled.svg" :alt="$t('chatbot.chatHistory')" class="w-4 h-4 sm:w-5 sm:h-5 filter brightness-0 invert" />
+              @click="showMobileChatHistory = true" :title="$t('chatbot.chatHistory')">
+              <img src="/images/fluent_chat-history-20-filled.svg" :alt="$t('chatbot.chatHistory')"
+                class="w-4 h-4 sm:w-5 sm:h-5 filter brightness-0 invert" />
             </button>
           </div>
-          
+
           <!-- Center: Title -->
-          <span class="font-semibold tracking-wide text-[10px] sm:text-xs md:text-sm lg:text-base text-center whitespace-nowrap min-w-0">{{ $t('chatbot.kokoAIHelper') }}</span>
+          <span
+            class="font-semibold tracking-wide text-[10px] sm:text-xs md:text-sm lg:text-base text-center whitespace-nowrap min-w-0">{{
+              $t('chatbot.kokoAIHelper') }}</span>
 
           <!-- Right: Close Button -->
           <div class="flex justify-end">
-            <button
-              class="hover:text-green-200 text-base sm:text-lg transition"
-              @click="toggleChat"
-              :title="$t('common.close')"
-            >
+            <button class="hover:text-green-200 text-base sm:text-lg transition" @click="toggleChat"
+              :title="$t('common.close')">
               ✕
             </button>
           </div>
@@ -143,29 +113,21 @@
         <!-- Messages Area Container (relative positioning for overlay) -->
         <div class="flex-1 relative min-h-0">
           <!-- Mobile Chat History Overlay (inside chatbot, covers messages area) -->
-          <div
-            v-if="showMobileChatHistory"
-            class="md:hidden absolute inset-0 bg-[#EAF2EA] z-10 flex flex-col"
-          >
+          <div v-if="showMobileChatHistory" class="md:hidden absolute inset-0 bg-[#EAF2EA] z-10 flex flex-col">
             <!-- Sticky Header with Close Button -->
             <div class="bg-[#235723] text-white px-4 py-3 flex items-center justify-between h-12 shrink-0">
               <span class="font-semibold text-sm tracking-wide">{{ $t('chatbot.chatHistory') }}</span>
-              <button
-                @click="showMobileChatHistory = false"
-                class="hover:text-green-200 text-lg transition shrink-0"
-                :title="$t('common.close')"
-              >
+              <button @click="showMobileChatHistory = false" class="hover:text-green-200 text-lg transition shrink-0"
+                :title="$t('common.close')">
                 ✕
               </button>
             </div>
 
             <!-- New Chat Button -->
             <div class="px-3 py-2 border-b border-green-200 shrink-0 bg-[#EAF2EA]">
-              <button
-                @click="startNewChatFromMobile"
+              <button @click="startNewChatFromMobile"
                 class="w-full bg-[#E0EBE0] text-[#2C702C] text-sm font-medium px-3 py-2 rounded-md transition flex items-center justify-center gap-2"
-                :title="$t('chatbot.startNewChat')"
-              >
+                :title="$t('chatbot.startNewChat')">
                 <img src="../../public/images/icons8-add-to-chat-50.png" alt="" class="size-5">
                 <span>{{ $t('chatbot.newChat') }}</span>
               </button>
@@ -173,15 +135,10 @@
 
             <!-- Scrollable Chat History List -->
             <div class="flex-1 overflow-y-auto min-h-0 chat-history-scroll">
-              <div
-                v-for="chat in chatList"
-                :key="chat.id"
-                @click="loadChatFromMobile(chat.id)"
-                :class="[
-                  'px-4 py-3 border-b border-green-100 cursor-pointer transition-colors hover:bg-[#BFD6BF] group flex flex-col gap-1',
-                  currentChatId === chat.id ? 'bg-[#BFD6BF] border-l-4 border-l-[#2C702C]' : ''
-                ]"
-              >
+              <div v-for="chat in chatList" :key="chat.id" @click="loadChatFromMobile(chat.id)" :class="[
+                'px-4 py-3 border-b border-green-100 cursor-pointer transition-colors hover:bg-[#BFD6BF] group flex flex-col gap-1',
+                currentChatId === chat.id ? 'bg-[#BFD6BF] border-l-4 border-l-[#2C702C]' : ''
+              ]">
                 <div class="flex items-start justify-between gap-2">
                   <div class="flex-1 min-w-0">
                     <p class="text-sm font-semibold text-gray-800 truncate">
@@ -191,11 +148,9 @@
                       {{ formatDate(chat.createdAt) }}
                     </p>
                   </div>
-                  <button
-                    @click.stop="deleteChat(chat.id)"
+                  <button @click.stop="deleteChat(chat.id)"
                     class="text-red-500 hover:text-red-700 hover:bg-red-50 text-xs p-1.5 rounded transition opacity-0 group-hover:opacity-100"
-                    :title="$t('chatbot.deleteChat')"
-                  >
+                    :title="$t('chatbot.deleteChat')">
                     🗑️
                   </button>
                 </div>
@@ -208,102 +163,67 @@
           </div>
 
           <!-- Messages -->
-          <div 
-            ref="chatBody" 
+          <div ref="chatBody"
             class="absolute inset-0 overflow-y-auto p-2 sm:p-3 md:p-5 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-400 scrollbar-track-green-100"
-            :class="{ 'hidden md:block': showMobileChatHistory }"
-          >
-          <div
-            v-for="(msg, i) in messages"
-            :key="i"
-            :class="['flex items-start gap-2 sm:gap-3', msg.sender === 'user' ? 'justify-end' : '']"
-          >
-<img
-  v-if="msg.sender === 'bot'"
-  src="/images/koko.png"
-  class="w-7 h-7 sm:w-8 sm:h-8 rounded-full shrink-0"
-  :alt="$t('chatbot.kokoAlt')"
-/>
+            :class="{ 'hidden md:block': showMobileChatHistory }">
+            <div v-for="(msg, i) in messages" :key="i"
+              :class="['flex items-start gap-2 sm:gap-3', msg.sender === 'user' ? 'justify-end' : '']">
+              <img v-if="msg.sender === 'bot'" src="/images/koko.png"
+                class="w-7 h-7 sm:w-8 sm:h-8 rounded-full shrink-0" :alt="$t('chatbot.kokoAlt')" />
 
 
-            <div
-              :class="[
+              <div :class="[
                 'px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm max-w-[82%] wrap-break-word leading-relaxed',
-          msg.sender === 'bot'
-            ? 'bg-[#2C702C] text-white shadow-sm'
-            : 'bg-[#E0EBE0] border border-green-300 text-gray-800'
-        ]"
-            >
-              <img
-                v-if="msg.image"
-                :src="msg.image"
-                class="max-w-full rounded mb-2 border border-green-700"
-          alt="uploaded waste item"
-              />
-              <div v-html="formatMessage(msg.text)" class="whitespace-pre-wrap"></div>
+                msg.sender === 'bot'
+                  ? 'bg-[#2C702C] text-white shadow-sm'
+                  : 'bg-[#E0EBE0] border border-green-300 text-gray-800'
+              ]">
+                <img v-if="msg.image" :src="msg.image" class="max-w-full rounded mb-2 border border-green-700"
+                  alt="uploaded waste item" />
+                <div v-html="formatMessage(msg.text)" class="whitespace-pre-wrap"></div>
+              </div>
+            </div>
+
+            <div v-if="isLoading" class="flex items-start gap-2 sm:gap-3">
+              <img src="/images/koko.png" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full" :alt="$t('chatbot.kokoAlt')" />
+              <div class="bg-[#2C702C] text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm sm:text-base">
+                <span class="animate-pulse">{{ loadingText }}</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div v-if="isLoading" class="flex items-start gap-2 sm:gap-3">
-      <img src="/images/koko.png" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full" :alt="$t('chatbot.kokoAlt')" />
-      <div class="bg-[#2C702C] text-white px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm sm:text-base">
-        <span class="animate-pulse">{{ loadingText }}</span>
-      </div>
-    </div>
+        <!-- Input Area -->
+        <div class="border-t border-green-300 px-2 sm:px-4 py-2 sm:py-3 bg-[#E0EBE0] rounded-b-xl">
+          <div v-if="imagePreview" class="mb-2 relative inline-block">
+            <img :src="imagePreview" class="max-w-[100px] rounded border-2 border-[#2C702C]"
+              :alt="$t('chatbot.preview')" />
+            <button @click="clearImage"
+              class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs hover:bg-red-600 font-bold">
+              ✕
+            </button>
           </div>
-        </div>
 
-       <!-- Input Area -->
-      <div class="border-t border-green-300 px-2 sm:px-4 py-2 sm:py-3 bg-[#E0EBE0] rounded-b-xl">
-        <div v-if="imagePreview" class="mb-2 relative inline-block">
-          <img
-            :src="imagePreview"
-            class="max-w-[100px] rounded border-2 border-[#2C702C]"
-            :alt="$t('chatbot.preview')"
-          />
-          <button
-            @click="clearImage"
-            class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs hover:bg-red-600 font-bold"
-          >
-            ✕
-          </button>
-        </div>
+          <div class="flex items-center gap-2 sm:gap-3 w-full">
+            <!-- Upload -->
+            <label
+              class="cursor-pointer bg-[#2C702C] text-white p-2 sm:px-3 sm:py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center shrink-0"
+              :title="$t('chatbot.uploadImageTitle')">
+              <img src="/images/icons8-camera-64.png" alt="Upload" class="w-4 h-4 sm:w-5 sm:h-5" />
+              <input type="file" ref="fileInput" @change="handleImageUpload" accept="image/*" class="hidden"
+                :disabled="isLoading" />
+            </label>
 
-        <div class="flex items-center gap-2 sm:gap-3 w-full">
-          <!-- Upload -->
-          <label
-            class="cursor-pointer bg-[#2C702C] text-white p-2 sm:px-3 sm:py-2 rounded-lg hover:bg-[#265C26] transition flex items-center justify-center shrink-0"
-            :title="$t('chatbot.uploadImageTitle')"
-          >
-            <img src="/images/icons8-camera-64.png" alt="Upload" class="w-4 h-4 sm:w-5 sm:h-5" />
-            <input
-              type="file"
-              ref="fileInput"
-              @change="handleImageUpload"
-              accept="image/*"
-              class="hidden"
-              :disabled="isLoading"
-            />
-          </label>
+            <!-- Input -->
+            <input v-model="userInput" @keyup.enter="sendMessage" type="text"
+              :placeholder="$t('chatbot.inputPlaceholder')" :disabled="isLoading"
+              class="flex-1 min-w-0 px-3 sm:px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-[#2C702C] outline-none text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed" />
 
-          <!-- Input -->
-          <input
-            v-model="userInput"
-            @keyup.enter="sendMessage"
-            type="text"
-            :placeholder="$t('chatbot.inputPlaceholder')"
-            :disabled="isLoading"
-            class="flex-1 min-w-0 px-3 sm:px-4 py-2 rounded-lg border border-green-300 focus:ring-2 focus:ring-[#2C702C] outline-none text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
-          />
-
-          <!-- Send -->
-          <button
-            @click="sendMessage"
-            :disabled="isLoading || (!userInput.trim() && !selectedImage)"
-            class="bg-[#2C702C] text-white px-3 sm:px-4 py-1.5  rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap text-sm sm:text-base"
-          >
-            {{ $t('chatbot.send') }}
-          </button>
+            <!-- Send -->
+            <button @click="sendMessage" :disabled="isLoading || (!userInput.trim() && !selectedImage)"
+              class="bg-[#2C702C] text-white px-3 sm:px-4 py-1.5  rounded-lg hover:bg-[#265C26] transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 whitespace-nowrap text-sm sm:text-base">
+              {{ $t('chatbot.send') }}
+            </button>
           </div>
         </div>
       </div>
@@ -442,7 +362,7 @@ export default {
       const nonSpace = (text.replace(/\s/g, '').length) || 1;
       const ratio = letters / nonSpace;
       const words = text.toLowerCase().split(/[^a-z]+/).filter(Boolean);
-      const commonEn = new Set(['what','how','where','when','why','who','help','please','can','do','does','is','are','i','you','we','recycle','recycling','collection','request','pickup','points','shop','address','profile','account','cart','order','waste']);
+      const commonEn = new Set(['what', 'how', 'where', 'when', 'why', 'who', 'help', 'please', 'can', 'do', 'does', 'is', 'are', 'i', 'you', 'we', 'recycle', 'recycling', 'collection', 'request', 'pickup', 'points', 'shop', 'address', 'profile', 'account', 'cart', 'order', 'waste']);
       const enHits = words.filter(w => commonEn.has(w)).length;
       if (ratio > 0.6 || enHits >= 2) return 'en';
       return 'other';
@@ -471,7 +391,7 @@ export default {
       let context = { relevant: [], waste_type: null };
 
       // Extract meaningful words from query (filter out common words)
-      const stopWords = new Set(['the','a','an','and','or','but','in','on','at','to','for','of','with','by','is','are','was','were','be','been','have','has','had','do','does','did','will','would','can','could','should','may','might','this','that','these','those','i','you','he','she','it','we','they','what','how','when','where','why','who','ما','ماذا','كيف','أين','متى','من','لماذا','هل','هذه','هذا','ذلك']);
+      const stopWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'can', 'could', 'should', 'may', 'might', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'what', 'how', 'when', 'where', 'why', 'who', 'ما', 'ماذا', 'كيف', 'أين', 'متى', 'من', 'لماذا', 'هل', 'هذه', 'هذا', 'ذلك']);
       const queryWords = lowerQuery.split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
 
       // Detect waste type - more comprehensive matching
@@ -495,7 +415,7 @@ export default {
       });
 
       // Pricing/points
-      if (['price','cost','point','earn','reward','redeem','سعر','تكلفة','نقاط','اكسب','أكسب','استبدال'].some(k => lowerQuery.includes(k))) {
+      if (['price', 'cost', 'point', 'earn', 'reward', 'redeem', 'سعر', 'تكلفة', 'نقاط', 'اكسب', 'أكسب', 'استبدال'].some(k => lowerQuery.includes(k))) {
         (kb.waste_types || []).forEach(type => {
           if (type.points_system) context.relevant.push(`${type.category} points: ${type.points_system}`);
         });
@@ -507,7 +427,7 @@ export default {
       }
 
       // Collection process
-      if (['how','process','collect','request','pickup','schedule','order','submit','كيف','عملية','تجميع','طلب','استلام','جدولة'].some(k => lowerQuery.includes(k))) {
+      if (['how', 'process', 'collect', 'request', 'pickup', 'schedule', 'order', 'submit', 'كيف', 'عملية', 'تجميع', 'طلب', 'استلام', 'جدولة'].some(k => lowerQuery.includes(k))) {
         context.relevant.push('COLLECTION PROCESS:');
         (kb.collection_process?.steps || []).forEach(step => {
           context.relevant.push(`${step.step}. ${step.title}: ${step.description}`);
@@ -515,12 +435,12 @@ export default {
       }
 
       // Service areas/contact
-      if (['area','location','where','serve','available','city','منطقة','مدن','أين','تعملون','تغطية'].some(k => lowerQuery.includes(k))) {
+      if (['area', 'location', 'where', 'serve', 'available', 'city', 'منطقة', 'مدن', 'أين', 'تعملون', 'تغطية'].some(k => lowerQuery.includes(k))) {
         if (kb.company_info?.service_areas) context.relevant.push(`Service areas: ${kb.company_info.service_areas.join(', ')}`);
         if (kb.company_info?.operating_hours) context.relevant.push(`Operating hours: ${kb.company_info.operating_hours}`);
         if (kb.company_info?.languages) context.relevant.push(`Languages: ${Array.isArray(kb.company_info.languages) ? kb.company_info.languages.join(', ') : kb.company_info.languages}`);
       }
-      if (['contact','email','phone','support','help','reach','تواصل','بريد','هاتف','دعم','اتصال'].some(k => lowerQuery.includes(k))) {
+      if (['contact', 'email', 'phone', 'support', 'help', 'reach', 'تواصل', 'بريد', 'هاتف', 'دعم', 'اتصال'].some(k => lowerQuery.includes(k))) {
         if (kb.company_info?.contact?.email) context.relevant.push(`Contact email: ${kb.company_info.contact.email}`);
         if (kb.company_info?.contact?.phone) context.relevant.push(`Contact phone: ${kb.company_info.contact.phone}`);
         if (kb.company_info?.operating_hours) context.relevant.push(`Operating hours: ${kb.company_info.operating_hours}`);
@@ -572,7 +492,7 @@ export default {
       }
 
       this.genAI = new GoogleGenerativeAI(apiKey);
-      
+
       // List of model names to try in order of preference
       // Based on the dropdown showing: Gemini Flash (Latest), Gemini Pro (Latest), etc.
       this.textModelCandidates = [
@@ -612,24 +532,24 @@ export default {
           // Extract error message from various error formats
           const errorStr = error?.message || error?.toString() || JSON.stringify(error) || '';
           const errorStrLower = errorStr.toLowerCase();
-          
+
           // Check if it's a model not found error (404)
-          const isModelNotFound = errorStrLower.includes('404') || 
-                                 errorStrLower.includes('not found') || 
-                                 errorStrLower.includes('not supported') ||
-                                 errorStrLower.includes('is not found for api version');
-          
+          const isModelNotFound = errorStrLower.includes('404') ||
+            errorStrLower.includes('not found') ||
+            errorStrLower.includes('not supported') ||
+            errorStrLower.includes('is not found for api version');
+
           // If model not found, try next model in the list
           if (isModelNotFound) {
             const candidates = modelType === 'text' ? this.textModelCandidates : this.visionModelCandidates;
             const currentIndex = modelType === 'text' ? this.textModelIndex : this.visionModelIndex;
-            
+
             if (currentIndex < candidates.length - 1) {
               // Try next model
               const nextIndex = currentIndex + 1;
               const nextModelName = candidates[nextIndex];
               console.warn(`⚠️ Model ${candidates[currentIndex]} not available, trying ${nextModelName}...`);
-              
+
               // Update model
               if (modelType === 'text') {
                 this.textModelIndex = nextIndex;
@@ -640,7 +560,7 @@ export default {
                 this.visionModel = this.genAI.getGenerativeModel({ model: nextModelName });
                 console.log(`✅ Switched to vision model: ${nextModelName}`);
               }
-              
+
               // Retry with new model (don't count this as a retry attempt)
               try {
                 return await apiCall();
@@ -653,12 +573,12 @@ export default {
               throw new Error(`No working ${modelType} model found. Tried: ${candidates.join(', ')}`);
             }
           }
-          
-          const isRateLimit = errorStrLower.includes('429') || 
-                            errorStrLower.includes('rate limit') ||
-                            errorStrLower.includes('quota exceeded') ||
-                            errorStrLower.includes('retry');
-          
+
+          const isRateLimit = errorStrLower.includes('429') ||
+            errorStrLower.includes('rate limit') ||
+            errorStrLower.includes('quota exceeded') ||
+            errorStrLower.includes('retry');
+
           // Extract retry delay from error if available (e.g., "Please retry in 42.355703629s")
           let retryDelay = baseDelay * Math.pow(2, attempt);
           if (errorStrLower.includes('retry') || errorStrLower.includes('retrydelay')) {
@@ -669,16 +589,16 @@ export default {
           }
 
           // Check for quota limit: 0 (no free tier available)
-          const isQuotaZero = errorStrLower.includes('limit: 0') || 
-                             (errorStrLower.includes('free_tier') && errorStrLower.includes('limit: 0'));
-          
+          const isQuotaZero = errorStrLower.includes('limit: 0') ||
+            (errorStrLower.includes('free_tier') && errorStrLower.includes('limit: 0'));
+
           // Only retry on rate limit errors (not quota: 0) and if we have retries left
           if (isRateLimit && !isQuotaZero && attempt < maxRetries - 1) {
             console.warn(`⚠️ Rate limit hit, retrying in ${(retryDelay / 1000).toFixed(1)}s... (attempt ${attempt + 1}/${maxRetries})`);
             await new Promise(resolve => setTimeout(resolve, retryDelay));
             continue;
           }
-          
+
           // If it's a quota error (limit: 0) or last attempt, throw the error
           if (isQuotaZero || attempt === maxRetries - 1) {
             throw error;
@@ -701,9 +621,9 @@ export default {
           company_name: this.knowledgeBase.company_info?.name || 'Unknown'
         });
       } catch (error) {
-      console.error("❌ Failed to load knowledge-base.json:", error);
-      this.$toast?.error(this.$t('chatbot.errors.knowledgeBaseFailed'));
-    }
+        console.error("❌ Failed to load knowledge-base.json:", error);
+        this.$toast?.error(this.$t('chatbot.errors.knowledgeBaseFailed'));
+      }
     },
 
     getSystemPrompt() {
@@ -743,15 +663,15 @@ Answer questions using EXCLUSIVELY the provided context from our knowledge base.
 Before answering, check: "Is this in the CONTEXT below?" If NO → use the professional redirect in the user's language.`;
     },
 
-  getWelcomeMessage() {
-    return {
-      sender: "bot",
-      text: this.$t('chatbot.welcomeMessage', {
-        greeting: this.greetingText,
-        hint: `${this.$t('chatbot.bilingualHintEn')} ${this.$t('chatbot.bilingualHintAr')}`
-      })
-    };
-  },
+    getWelcomeMessage() {
+      return {
+        sender: "bot",
+        text: this.$t('chatbot.welcomeMessage', {
+          greeting: this.greetingText,
+          hint: `${this.$t('chatbot.bilingualHintEn')} ${this.$t('chatbot.bilingualHintAr')}`
+        })
+      };
+    },
 
     updateWelcomeMessage() {
       // Update the first message (welcome message) with new greeting
@@ -764,10 +684,10 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
     async sendMessage() {
       if (!this.userInput.trim() && !this.selectedImage) return;
       if (this.isLoading) return;
-    if (!this.genAI) {
-      this.$toast?.error(this.$t('chatbot.errors.notInitialized'));
-      return;
-    }
+      if (!this.genAI) {
+        this.$toast?.error(this.$t('chatbot.errors.notInitialized'));
+        return;
+      }
 
       if (!this.currentChatId) this.startNewChat();
 
@@ -788,10 +708,10 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
 
       this.userInput = "";
       this.clearImage();
-    this.isLoading = true;
-    this.loadingText = currentImage
-      ? this.$t('chatbot.analyzingImage')
-      : this.$t('chatbot.thinkingEmoji');
+      this.isLoading = true;
+      this.loadingText = currentImage
+        ? this.$t('chatbot.analyzingImage')
+        : this.$t('chatbot.thinkingEmoji');
       this.$nextTick(() => this.scrollToBottom());
 
       try {
@@ -819,11 +739,11 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
         console.error("Chatbot error:", error);
         const errorGreeting = this.userFirstName ? `Sorry ${this.userFirstName}` : "Sorry";
         let errorMessage = `${errorGreeting}, I encountered an error.\n\nPlease try again! 🌿`;
-        
+
         // Extract error message from various error formats
         const errorStr = error?.message || error?.toString() || JSON.stringify(error) || '';
         const errorStrLower = errorStr.toLowerCase();
-        
+
         // Handle specific error types
         if (errorStrLower.includes('quota') || errorStrLower.includes('quota exceeded') || errorStrLower.includes('limit: 0')) {
           const isArabic = this.$i18n.locale === 'ar';
@@ -846,7 +766,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
             ? `${errorGreeting}، هناك مشكلة في مصادقة API.\n\nيرجى التحقق من مفتاح API أو الاتصال بالدعم. 🌿`
             : `${errorGreeting}, there's an API authentication issue.\n\nPlease check the API key or contact support. 🌿`;
         }
-        
+
         this.messages.push({
           sender: "bot",
           text: errorMessage,
@@ -898,7 +818,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       // EN: Generic language capability question about a specific non-EN/AR language
       if (isEnglish) {
         const m = lowerMsg.match(/do you\s+(speak|understand|support)\s+([a-z]+)/);
-        if (m && m[2] && !['english','arabic','ar','en'].includes(m[2])) {
+        if (m && m[2] && !['english', 'arabic', 'ar', 'en'].includes(m[2])) {
           const askedLang = m[2].charAt(0).toUpperCase() + m[2].slice(1);
           return `${userNamePrefix}I don’t speak ${askedLang}. I currently support English and Arabic.`;
         }
@@ -945,7 +865,7 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       if (isArabic && (
         lowerMsg.includes('تواصل') || lowerMsg.includes('الدعم') || lowerMsg.includes('الاتصال') || lowerMsg.includes('الايميل') || lowerMsg.includes('البريد') || lowerMsg.includes('رقم')
       )) {
-        const email = kb.company_info?.contact?.email || 'karakib@gmail.com';
+        const email = kb.company_info?.contact?.email || 'karakibt@gmail.com';
         const phone = kb.company_info?.contact?.phone || '19123';
         return `${userNamePrefix}يمكنك التواصل معنا عبر البريد: ${email} أو الهاتف: ${phone}.`;
       }
@@ -1039,8 +959,8 @@ Before answering, check: "Is this in the CONTEXT below?" If NO → use the profe
       });
 
       // Relevance & out-of-scope
-      const relevanceKeywordsEn = ['recycle','recycling','collect','collection','pickup','waste','points','donate','shop','address','profile','account','cart','order','request','courier','product'];
-      const relevanceKeywordsAr = ['إعادة','تدوير','تجميع','استلام','مخلفات','نقاط','تبرع','متجر','عنوان','ملف','حساب','سلة','طلب','مندوب','منتج'];
+      const relevanceKeywordsEn = ['recycle', 'recycling', 'collect', 'collection', 'pickup', 'waste', 'points', 'donate', 'shop', 'address', 'profile', 'account', 'cart', 'order', 'request', 'courier', 'product'];
+      const relevanceKeywordsAr = ['إعادة', 'تدوير', 'تجميع', 'استلام', 'مخلفات', 'نقاط', 'تبرع', 'متجر', 'عنوان', 'ملف', 'حساب', 'سلة', 'طلب', 'مندوب', 'منتج'];
       const hasRelevantKeyword = (isEnglish ? relevanceKeywordsEn : relevanceKeywordsAr).some(k => lowerMsg.includes(k));
 
       const BASE_CONTEXT_MIN = 5;
@@ -1194,19 +1114,19 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       });
     },
 
-  async handleImageUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+    async handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
 
-    if (!file.type.startsWith("image/")) {
-      alert(this.$t('chatbot.errors.invalidImage'));
-      return;
-    }
+      if (!file.type.startsWith("image/")) {
+        alert(this.$t('chatbot.errors.invalidImage'));
+        return;
+      }
 
-    if (file.size > 5 * 1024 * 1024) {
-      alert(this.$t('chatbot.errors.imageTooLarge'));
-      return;
-    }
+      if (file.size > 5 * 1024 * 1024) {
+        alert(this.$t('chatbot.errors.imageTooLarge'));
+        return;
+      }
 
       this.selectedImage = file;
       const reader = new FileReader();
@@ -1346,29 +1266,29 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       }
     },
 
-  getChatTitle(chat) {
-    const firstUserMessage = chat.messages?.find((m) => m.sender === "user");
-    if (firstUserMessage) {
-      const title = firstUserMessage.text.substring(0, 30);
-      return title.length < firstUserMessage.text.length ? title + "..." : title;
-    }
-    return chat.title || this.$t('chatbot.newChat');
-  },
+    getChatTitle(chat) {
+      const firstUserMessage = chat.messages?.find((m) => m.sender === "user");
+      if (firstUserMessage) {
+        const title = firstUserMessage.text.substring(0, 30);
+        return title.length < firstUserMessage.text.length ? title + "..." : title;
+      }
+      return chat.title || this.$t('chatbot.newChat');
+    },
 
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffMs = now - date;
-    const diffMins = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMs / 3600000);
-    const diffDays = Math.floor(diffMs / 86400000);
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffMs = now - date;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMs / 3600000);
+      const diffDays = Math.floor(diffMs / 86400000);
 
-    if (diffMins < 1) return this.$t('chatbot.justNow');
-    if (diffMins < 60) return this.$t('chatbot.minutesAgo', { count: diffMins });
-    if (diffHours < 24) return this.$t('chatbot.hoursAgo', { count: diffHours });
-    if (diffDays < 7) return this.$t('chatbot.daysAgo', { count: diffDays });
-    return date.toLocaleDateString(this.$i18n.locale);
-  },
+      if (diffMins < 1) return this.$t('chatbot.justNow');
+      if (diffMins < 60) return this.$t('chatbot.minutesAgo', { count: diffMins });
+      if (diffHours < 24) return this.$t('chatbot.hoursAgo', { count: diffHours });
+      if (diffDays < 7) return this.$t('chatbot.daysAgo', { count: diffDays });
+      return date.toLocaleDateString(this.$i18n.locale);
+    },
 
     formatMessage(text) {
       if (!text) return "";
@@ -1429,9 +1349,9 @@ Use information from the knowledge base. Be friendly and practical! 🌱`;
       const coords = this.getEventCoordinates(e);
 
       // Calculate delta from initial drag start position
-const deltaX = coords.x - this.dragStartX;  // positive when dragging right
-const deltaY = coords.y - this.dragStartY;  // positive when dragging down
- // Y increases downward, but bottom increases upward
+      const deltaX = coords.x - this.dragStartX;  // positive when dragging right
+      const deltaY = coords.y - this.dragStartY;  // positive when dragging down
+      // Y increases downward, but bottom increases upward
 
       // Check if user has moved enough to consider it a drag
       const moveThreshold = 0;
@@ -1552,8 +1472,15 @@ const deltaY = coords.y - this.dragStartY;  // positive when dragging down
 
 <style scoped>
 @keyframes fadeIn {
-  0% { opacity: 0; transform: scale(0.97); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-fadeIn {
@@ -1561,38 +1488,63 @@ const deltaY = coords.y - this.dragStartY;  // positive when dragging down
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .animate-pulse {
   animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.overflow-y-auto::-webkit-scrollbar { width: 6px; }
-.overflow-y-auto::-webkit-scrollbar-track { background: #f1f1f1; }
-.overflow-y-auto::-webkit-scrollbar-thumb { background: #2C702C; border-radius: 3px; }
-.overflow-y-auto::-webkit-scrollbar-thumb:hover { background: #265C26; }
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #2C702C;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #265C26;
+}
 
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;
 }
+
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background-color: #9ec79e;
   border-radius: 9999px;
 }
+
 .scrollbar-thin::-webkit-scrollbar-track {
   background: #eaf2ea;
 }
 
 /* Hide scrollbar on mobile for chat history */
 .chat-history-scroll {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
 }
 
 .chat-history-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 </style>
